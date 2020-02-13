@@ -2,22 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="89122b2d-da83-4c57-9f37-5ae61c34cf8b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CASprzak.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/CASprzak/Function.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/CASprzak/Parser.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/CASprzak/Preprocessor.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/CASprzak/hello.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/CASprzak/main.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Function.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/FunctionTester.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Parser.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Preprocessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Function.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Function.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Preprocessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PreProcessor.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

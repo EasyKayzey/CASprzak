@@ -1,25 +1,12 @@
+import org.jetbrains.annotations.NotNull;
+
 import java.util.*;
 
-public class Preprocessor {
-  public String infix = new String();
-  public ArrayList<String> postfix = new ArrayList<String>();
-  public String[] operations = {"^", "*", "/", "+", "-", "logb", "log", "ln", "sqrt", "exp", "sinh", "cosh", "tanh"};
-  public String[] operationsTrig = {"sin", "cos", "tan", "csc", "sec", "cot", "asin", "acos", "atan"};
+public class PreProcessor {
+  public static final String[] operations = {"^", "*", "/", "+", "-", "logb", "log", "ln", "sqrt", "exp", "sinh", "cosh", "tanh"};
+  public static final String[] operationsTrig = {"sin", "cos", "tan", "csc", "sec", "cot", "asin", "acos", "atan"};
 
-  Preprocessor(){
-
-  }
-
-  public void setInfix(String input){
-    infix = new String(input);
-  }
-
-  Preprocessor(String input){
-    infix = new String(input);
-    toPostfix();
-  }
-
-  private int getPrecedence(String input){
+  private int getPrecedence(@NotNull String input){
     if(input.equals("^")) return 4;
     if(input.equals("*") || input.equals("/")) return 3;
     if(input.equals("+") || input.equals("-")) return 2;
@@ -37,15 +24,12 @@ public class Preprocessor {
     return false;
   }
 
-  private void toPostfix() {
+  private String[] toPostfix(@NotNull String infix) {
     String[] tokens = infix.split("\\s+");
+    ArrayList<String> postfix = new ArrayList<String>();
     Stack<String> operators = new Stack<String>();
 
       for (String i : tokens) {
-//
-// System.out.println();
-// System.out.println(operators);
-// System.out.println(postfix);
 
         if(isAnOperator(i)) {
           if(operators.empty()) {
@@ -60,7 +44,7 @@ public class Preprocessor {
           operators.push(i);
         } else if (i.equals(")")) {
 
-          while (operators.peek().equals("(") == false) {
+          while (!operators.peek().equals("(")) {
             postfix.add(operators.pop());
           }
           operators.pop();
@@ -72,5 +56,7 @@ public class Preprocessor {
     while (operators.size() != 0) {
       postfix.add(operators.pop());
     }
+
+    return (String[]) postfix.toArray();
   }
 }

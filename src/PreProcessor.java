@@ -1,12 +1,10 @@
-import org.jetbrains.annotations.NotNull;
-
 import java.util.*;
 
 public class PreProcessor {
   public static final String[] operations = {"^", "*", "/", "+", "-", "logb", "log", "ln", "sqrt", "exp", "sinh", "cosh", "tanh"};
   public static final String[] operationsTrig = {"sin", "cos", "tan", "csc", "sec", "cot", "asin", "acos", "atan"};
 
-  private int getPrecedence(@NotNull String input){
+  private int getPrecedence(String input){
     if(input.equals("^")) return 4;
     if(input.equals("*") || input.equals("/")) return 3;
     if(input.equals("+") || input.equals("-")) return 2;
@@ -24,7 +22,7 @@ public class PreProcessor {
     return false;
   }
 
-  private String[] toPostfix(@NotNull String infix) {
+  public String[] toPostfix(String infix) {
     String[] tokens = infix.split("\\s+");
     ArrayList<String> postfix = new ArrayList<String>();
     Stack<String> operators = new Stack<String>();

@@ -8,9 +8,9 @@ public class Function {
   private static String[] operations2 = Parser.operations2;
 
   public static Function makeFunction(String input){
-    PreProcessor preprocessor = new PreProcessor(input);
-    Parser parser = new Parser(preprocessor.postfix);
-    return parser.finalFunction;
+    PreProcessor preprocessor = new PreProcessor();
+    Parser parser = new Parser();
+    return parser.parse(preprocessor.toPostfix(input));
   }
 
   private boolean isAVariable(String input, String[] variables) {

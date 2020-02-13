@@ -1,5 +1,3 @@
-import org.jetbrains.annotations.NotNull;
-
 import java.util.*;
 
 public class Parser {
@@ -20,9 +18,8 @@ public class Parser {
     return false;
   }
 
-  public Function parse(@NotNull ArrayList<String> input) throws IndexOutOfBoundsException {
+  public Function parse(String[] postfix) throws IndexOutOfBoundsException {
     Stack<Function> functionStack = new Stack<Function>();
-    String[] postfix = input.toArray(new String[input.size()]);
     for (String i : postfix) {
       if (!isAnOperator1(i) && !isAnOperator2(i)) {
         functionStack.push(new Function(i));

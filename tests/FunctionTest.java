@@ -6,37 +6,35 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
 public class FunctionTest {
+	Parser parserX = new Parser(new char[]{'x'});
+	Parser parserXY = new Parser(new char[]{'x','y'});
+
 	@Test void fxReturnsX() throws Exception {
-	    Parser parser = new Parser(new char[]{'x'});
-		Function test = parser.parse("x");
+		Function test = parserX.parse("x");
 		double b = test.evaluate(new double[]{2});
 		assertEquals(2, b);
 	}
 
 	@Test void basicFunctionsWithX() throws Exception {
-        Parser parser = new Parser(new char[]{'x'});
-        Function test = parser.parse("x ^ x + 2 + 5 * x");
+		Function test = parserX.parse("x ^ x + 2 + 5 * x");
 		double b = test.evaluate(new double[]{3});
 		assertEquals(44, b);
 	}
 
 	@Test void multipleVariablesWorks() throws Exception {
-        Parser parser = new Parser(new char[]{'x', 'y'});
-        Function test = parser.parse("x + y + y");
+        Function test = parserXY.parse("x + y + y");
 		double b = test.evaluate(new double[]{3, 4});
 		assertEquals(11, b);
 	}
 
 	@Test void logbWorks() throws Exception {
-        Parser parser = new Parser(new char[]{'x'});
-        Function test = parser.parse("logb 3 x");
+		Function test = parserX.parse("logb 3 x");
 		double b = test.evaluate(new double[]{81});
 		assertEquals(4, b);
 	}
 
 	@Test void trigWorks() throws Exception {
-        Parser parser = new Parser(new char[]{'x'});
-        Function test = parser.parse("( sin x ) ^ 2 + ( cos x ) ^ 2");
+		Function test = parserX.parse("( sin x ) ^ 2 + ( cos x ) ^ 2");
 		double b = test.evaluate(new double[]{81});
 		assertEquals(1, b);
 	}

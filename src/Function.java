@@ -48,7 +48,7 @@ public class Function {
   public double evaluate(String[] variables, double[] values) {
     if (isNum) {
       if(isAVariable(num, variables)) return values[indexOf(num, variables)];
-      return Double.valueOf(num);
+      return Double.parseDouble(num);
     } else {
       if(operation.equals("+")) return fun2.evaluate(variables, values) + fun1.evaluate(variables, values);
       if(operation.equals("-")) return fun2.evaluate(variables, values) - fun1.evaluate(variables, values);

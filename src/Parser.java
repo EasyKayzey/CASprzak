@@ -22,7 +22,11 @@ public class Parser {
     Stack<Function> functionStack = new Stack<Function>();
     for (String i : postfix) {
       if (!isAnOperator1(i) && !isAnOperator2(i)) {
-        functionStack.push(new Function(i));
+        try {
+          functionStack.push(new Function(Double.parseDouble(i)));
+        } catch (Exception e) {
+          functionStack.push(new Function(i));
+        }
       } else if (isAnOperator2(i)) {
         Function a = functionStack.pop();
         Function b = functionStack.pop();

@@ -1,9 +1,11 @@
 public class Function {
-  private String num;
+  private double num;
   private String operation;
   private Function fun1;
   private Function fun2;
   private boolean isNum;
+  private boolean isVar;
+  private String variable;
   private static String[] operations1 = Parser.operations1;
   private static String[] operations2 = Parser.operations2;
 
@@ -40,15 +42,20 @@ public class Function {
     isNum = false;
   }
 
-  Function (String num){
+  Function (double num){
     this.num = num;
     isNum = true;
   }
 
+  Function (String variable) {
+    this.variable = variable;
+    isVar = true;
+  }
+
   public double evaluate(String[] variables, double[] values) {
     if (isNum) {
-      if(isAVariable(num, variables)) return values[indexOf(num, variables)];
-      return Double.parseDouble(num);
+      if (isVar) return values[indexOf(variable, variables)];
+      return num;
     } else {
       if(operation.equals("+")) return fun2.evaluate(variables, values) + fun1.evaluate(variables, values);
       if(operation.equals("-")) return fun2.evaluate(variables, values) - fun1.evaluate(variables, values);
@@ -108,36 +115,34 @@ public class Function {
   }
 
   public Function derivative(String variable) {
-    if (isNum) {
-      if(num.equals(variable)) return new Function("1");
-      return new Function("0");
+    if (isNum || isVar) {
+      if(this.variable.equals(variable)) return new Function(1);
+      return new Function(0);
     } else {
       if(operation.equals("+")) return add(fun2.derivative(variable), fun1.derivative(variable));
       if(operation.equals("-")) return sub(fun2.derivative(variable), fun1.derivative(variable));
       if(operation.equals("*")) return add(mul(fun1, fun2.derivative(variable)), mul(fun1.derivative(variable), fun2));
-      if(operation.equals("/")) return div(sub(mul(fun1, fun2.derivative(variable)), mul(fun1.derivative(variable), fun2)), pow(fun1, new Function("2")));
+      if(operation.equals("/")) return div(sub(mul(fun1, fun2.derivative(variable)), mul(fun1.derivative(variable), fun2)), pow(fun1, new Function(2)));
       if(operation.equals("^")) return mul(pow(fun1, fun2), add(mul(fun1.derivative(variable), ln(fun2)), div(mul(fun1, fun2.derivative(variable)), fun2)));
-      if(operation.equals("logb")) return div(sub(div(mul(fun1.derivative(variable), ln(fun2)), fun1), div(mul(fun2.derivative(variable), ln(fun1)), fun2)), pow(ln(fun2), new Function("2")));
+      if(operation.equals("logb")) return div(sub(div(mul(fun1.derivative(variable), ln(fun2)), fun1), div(mul(fun2.derivative(variable), ln(fun1)), fun2)), pow(ln(fun2), new Function(2)));
       if(operation.equals("sin")) return mul(cos(fun1), fun1.derivative(variable));
-      if(operation.equals("cos")) return mul(mul(sin(fun1), new Function("-1")), fun1.derivative(variable));
-      if(operation.equals("tan")) return mul(pow(sec(fun1), new Function("2")), fun1.derivative(variable));
-      if(operation.equals("csc")) return mul(mul(mul(cot(fun1), csc(fun1)), new Function("-1")), fun1.derivative(variable));
+      if(operation.equals("cos")) return mul(mul(sin(fun1), new Function(-1)), fun1.derivative(variable));
+      if(operation.equals("tan")) return mul(pow(sec(fun1), new Function(2)), fun1.derivative(variable));
+      if(operation.equals("csc")) return mul(mul(mul(cot(fun1), csc(fun1)), new Function(-1)), fun1.derivative(variable));
       if(operation.equals("sec")) return mul(mul(tan(fun1), sec(fun1)), fun1.derivative(variable));
-      if(operation.equals("cot")) return mul(mul(pow(csc(fun1), new Function("2")), new Function("-1")), fun1.derivative(variable));
+      if(operation.equals("cot")) return mul(mul(pow(csc(fun1), new Function(2)), new Function(-1)), fun1.derivative(variable));
       if(operation.equals("sinh")) return mul(cosh(fun1), fun1.derivative(variable));
       if(operation.equals("cosh")) return mul(sinh(fun1), fun1.derivative(variable));
-      if(operation.equals("tanh")) return div(fun1.derivative(variable), pow(cosh(fun1), new Function("2")));
-      if(operation.equals("asin")) return div(fun1.derivative(variable), sqrt(sub(pow(fun1, new Function("2")), new Function("1"))));
-      if(operation.equals("acos")) return div(mul(fun1.derivative(variable), new Function("-1")), sqrt(sub(new Function("1"), pow(fun1, new Function("2")))));
-      if(operation.equals("atan")) return div(fun1.derivative(variable), add(new Function("1"), pow(fun1, new Function("2"))));
-      if(operation.equals("log")) return div(fun1.derivative(variable), mul(new Function("ln", new Function("10")), fun1));
+      if(operation.equals("tanh")) return div(fun1.derivative(variable), pow(cosh(fun1), new Function(2)));
+      if(operation.equals("asin")) return div(fun1.derivative(variable), sqrt(sub(pow(fun1, new Function(2)), new Function(1))));
+      if(operation.equals("acos")) return div(mul(fun1.derivative(variable), new Function(-1)), sqrt(sub(new Function(1), pow(fun1, new Function(2)))));
+      if(operation.equals("atan")) return div(fun1.derivative(variable), add(new Function(1), pow(fun1, new Function(2))));
+      if(operation.equals("log")) return div(fun1.derivative(variable), mul(new Function("ln", new Function(10)), fun1));
       if(operation.equals("ln")) return div(fun1.derivative(variable), fun1);
-      if(operation.equals("sqrt")) return div(fun1.derivative(variable), mul(sqrt(fun1), new Function("2")));
+      if(operation.equals("sqrt")) return div(fun1.derivative(variable), mul(sqrt(fun1), new Function(2)));
       if(operation.equals("exp")) return mul(exp(fun1), fun1.derivative(variable));
     }
-    System.out.println("Oh no");
-    // throw new IndexOutOfBoundsExpection("This function does not exist");
-    return new Function("You messed up");
+    throw new IndexOutOfBoundsException("This function "+operation+" does not exist");
   }
 
   static Function mul(Function a, Function b) {
@@ -171,16 +176,16 @@ public class Function {
     return new Function("tan", a);
   }
   static Function csc(Function a){
-    return div(new Function("1"), sin(a));
+    return div(new Function(1), sin(a));
   }
   static Function sec(Function a){
-    return div(new Function("1"), cos(a));
+    return div(new Function(1), cos(a));
   }
   static Function cot(Function a){
-    return div(new Function("1"), tan(a));
+    return div(new Function(1), tan(a));
   }
   static Function sqrt(Function a){
-    return new Function("^", a, new Function(".5"));
+    return new Function("^", a, new Function(.5));
   }
   static Function sinh(Function a){
     return new Function("sinh", a);

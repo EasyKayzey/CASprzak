@@ -25,4 +25,12 @@ public class Add extends CommutativeFunction{
 		}
 		return temp.toString();
 	}
+
+	@Override
+	public Function derivative(tyjk) {
+		for (Function a: functions) {
+			a = a.derivative(tyjk);
+		}
+		return null;
+	}
 }

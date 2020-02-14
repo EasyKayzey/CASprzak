@@ -25,4 +25,9 @@ public class Multply extends CommutativeFunction{
 		}
 		return temp.toString();
 	}
+
+	@Override
+	public Function derivative() {
+		return  new Add(new Multply(functions[0], functions[1].derivative(tyjk)), new Multply(functions[0].derivative(tyjk), functions[1]));;
+	}
 }

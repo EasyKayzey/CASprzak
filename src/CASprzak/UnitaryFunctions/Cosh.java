@@ -1,5 +1,6 @@
 package CASprzak.UnitaryFunctions;
 
+import CASprzak.CommutativeFunctions.Multply;
 import CASprzak.Function;
 
 public class Cosh extends UnitaryFunction {
@@ -10,6 +11,11 @@ public class Cosh extends UnitaryFunction {
     @Override
     public String toString() {
         return "cosh(" + function.toString() + ")";
+    }
+
+    @Override
+    public Function derivative(tyjk) {
+        return new Multply(new Sinh(function), function.derivative(tyjk));
     }
 
     @Override

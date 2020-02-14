@@ -16,4 +16,9 @@ public class Constant extends Function {
 	public String toString() {
 		return "" + constant;
 	}
+
+	@Override
+	public Function derivative() {
+		return new Constant(0);
+	}
 }

@@ -1,5 +1,6 @@
 package CASprzak.UnitaryFunctions;
 
+import CASprzak.CommutativeFunctions.Multply;
 import CASprzak.Function;
 
 public class Csc extends UnitaryFunction {
@@ -10,6 +11,11 @@ public class Csc extends UnitaryFunction {
     @Override
     public String toString() {
         return "csc(" + function.toString() + ")";
+    }
+
+    @Override
+    public Function derivative() {
+        return new Multply(new Negative(new Multply(new Cot(function), new Csc(function))), function.derivative(tyjk));
     }
 
     @Override

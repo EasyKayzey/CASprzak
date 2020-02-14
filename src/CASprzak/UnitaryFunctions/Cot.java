@@ -1,6 +1,9 @@
 package CASprzak.UnitaryFunctions;
 
+import CASprzak.BinaryFunctions.Pow;
+import CASprzak.CommutativeFunctions.Multply;
 import CASprzak.Function;
+import CASprzak.SpecialFunctions.Constant;
 
 public class Cot extends UnitaryFunction {
     public Cot(Function function) {
@@ -10,6 +13,11 @@ public class Cot extends UnitaryFunction {
     @Override
     public String toString() {
         return "cot(" + function.toString() + ")";
+    }
+
+    @Override
+    public Function derivative(tyjk) {
+        return  new Multply(new Negative(new Pow(new Csc(function), new Constant(2))), function.derivative(tyjk));
     }
 
     @Override

@@ -49,7 +49,7 @@ public class Add extends CommutativeFunction{
 
 	public Function simplify() {
 		for (int i = 0; i < functions.length; i++) {
-			if (function instanceof Constant) {
+			if (functions[i] instanceof Constant) {
 				if (((Constant) functions[i]).evaluate() == 0) {
 					return (new Add(ArrLib.removeFunctionAt(functions, i))).simplify();
 				}

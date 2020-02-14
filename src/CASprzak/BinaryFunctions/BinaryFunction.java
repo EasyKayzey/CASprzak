@@ -9,8 +9,4 @@ public abstract class BinaryFunction extends Function {
         this.function1 = function1;
         this.function2 = function2;
     }
-
-    public BinaryFunction() throws Exception{
-        throw new Exception("Cannot instantiate empty function");
-    }
 }

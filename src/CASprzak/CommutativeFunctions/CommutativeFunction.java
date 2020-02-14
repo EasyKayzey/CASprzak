@@ -13,8 +13,4 @@ public abstract class CommutativeFunction extends Function {
     public CommutativeFunction(Function f1, Function f2) {
         this.functions = new Function[] {f1, f2};
     }
-
-    public CommutativeFunction() throws Exception{
-        throw new Exception("Cannot instantiate empty function");
-    }
 }

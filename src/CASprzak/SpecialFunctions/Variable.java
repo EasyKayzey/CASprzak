@@ -18,7 +18,7 @@ public class Variable extends Function {
 	}
 
 
-	public Function derivative(int varID) {
+	public Function getDerivative(int varID) {
 		return new Constant(1);
 	}
 

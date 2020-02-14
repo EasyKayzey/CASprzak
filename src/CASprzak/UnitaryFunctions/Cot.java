@@ -1,7 +1,7 @@
 package CASprzak.UnitaryFunctions;
 
 import CASprzak.BinaryFunctions.Pow;
-import CASprzak.CommutativeFunctions.Multply;
+import CASprzak.CommutativeFunctions.Multiply;
 import CASprzak.Function;
 import CASprzak.SpecialFunctions.Constant;
 
@@ -16,8 +16,8 @@ public class Cot extends UnitaryFunction {
     }
 
     @Override
-    public Function derivative(int varID) {
-        return  new Multply(new Negative(new Pow(new Csc(function), new Constant(2))), function.derivative(varID));
+    public Function getDerivative(int varID) {
+        return  new Multiply(new Negative(new Pow(new Csc(function), new Constant(2))), function.getDerivative(varID));
     }
 
     @Override

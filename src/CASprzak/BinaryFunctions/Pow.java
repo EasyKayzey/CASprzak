@@ -1,7 +1,7 @@
 package CASprzak.BinaryFunctions;
 
 import CASprzak.CommutativeFunctions.Add;
-import CASprzak.CommutativeFunctions.Multply;
+import CASprzak.CommutativeFunctions.Multiply;
 import CASprzak.Function;
 import CASprzak.UnitaryFunctions.Ln;
 import CASprzak.UnitaryFunctions.Reciprocal;
@@ -18,8 +18,8 @@ public class Pow extends BinaryFunction {
 	}
 
 	@Override
-	public Function derivative(int varID) {
-		return  new Multply(new Pow(function1, function2), new Add( new Multply(function1.derivative(varID), new Ln(function2)), new Multply(new Multply(function1, function2.derivative(varID)), new Reciprocal(function2))));
+	public Function getDerivative(int varID) {
+		return  new Multiply(new Pow(function1, function2), new Add( new Multiply(function1.getDerivative(varID), new Ln(function2)), new Multiply(new Multiply(function1, function2.getDerivative(varID)), new Reciprocal(function2))));
 	}
 
 	@Override

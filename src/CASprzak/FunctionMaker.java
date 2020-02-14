@@ -41,7 +41,7 @@ public class FunctionMaker {
 			case "+":
 				return new Add(a, b);
 			case "*":
-				return new Multply(a, b);
+				return new Multiply(a, b);
 			case "^":
 				return new Pow(a, b);
 			case "logb":

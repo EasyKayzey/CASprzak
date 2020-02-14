@@ -1,7 +1,7 @@
 package CASprzak.UnitaryFunctions;
 
 import CASprzak.BinaryFunctions.Pow;
-import CASprzak.CommutativeFunctions.Multply;
+import CASprzak.CommutativeFunctions.Multiply;
 import CASprzak.Function;
 import CASprzak.SpecialFunctions.Constant;
 
@@ -18,7 +18,7 @@ public class Reciprocal extends UnitaryFunction{
 	}
 
 	@Override
-	public Function derivative(int varID) {
-		return new Multply(new Negative(function.derivative(varID)), new Reciprocal(new Pow(new Constant(2), function)));
+	public Function getDerivative(int varID) {
+		return new Multiply(new Negative(function.getDerivative(varID)), new Reciprocal(new Pow(new Constant(2), function)));
 	}
 }

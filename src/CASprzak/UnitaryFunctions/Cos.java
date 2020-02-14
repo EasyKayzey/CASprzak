@@ -1,6 +1,6 @@
 package CASprzak.UnitaryFunctions;
 
-import CASprzak.CommutativeFunctions.Multply;
+import CASprzak.CommutativeFunctions.Multiply;
 import CASprzak.Function;
 import CASprzak.SpecialFunctions.Constant;
 
@@ -15,8 +15,8 @@ public class Cos extends UnitaryFunction {
     }
 
     @Override
-    public Function derivative(int varID) {
-        return  new Multply(new Multply(new Sin(function), new Constant(-1)), function.derivative(varID));
+    public Function getDerivative(int varID) {
+        return  new Multiply(new Multiply(new Sin(function), new Constant(-1)), function.getDerivative(varID));
     }
 
     @Override

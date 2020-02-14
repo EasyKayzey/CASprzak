@@ -1,9 +1,8 @@
 package CASprzak.BinaryFunctions;
 
 import CASprzak.CommutativeFunctions.Add;
-import CASprzak.CommutativeFunctions.Multply;
+import CASprzak.CommutativeFunctions.Multiply;
 import CASprzak.Function;
-import CASprzak.FunctionMaker;
 import CASprzak.SpecialFunctions.Constant;
 import CASprzak.UnitaryFunctions.Ln;
 import CASprzak.UnitaryFunctions.Negative;
@@ -20,8 +19,8 @@ public class Logb extends BinaryFunction {
     }
 
     @Override
-    public Function derivative(int varID) {
-        return new Multply( new Add(new Multply( new Multply(function1.derivative(varID), new Ln(function2)), new Reciprocal(function1)), new Negative(new Multply( new Multply(function2.derivative(varID), new Ln(function1)), new Reciprocal(function2)))), new Reciprocal( new Pow(new Constant(2), new Ln( function2 ))));
+    public Function getDerivative(int varID) {
+        return new Multiply( new Add(new Multiply( new Multiply(function1.getDerivative(varID), new Ln(function2)), new Reciprocal(function1)), new Negative(new Multiply( new Multiply(function2.getDerivative(varID), new Ln(function1)), new Reciprocal(function2)))), new Reciprocal( new Pow(new Constant(2), new Ln( function2 ))));
     }
 
     @Override

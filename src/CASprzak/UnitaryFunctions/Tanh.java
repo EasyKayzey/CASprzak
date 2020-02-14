@@ -1,7 +1,7 @@
 package CASprzak.UnitaryFunctions;
 
 import CASprzak.BinaryFunctions.Pow;
-import CASprzak.CommutativeFunctions.Multply;
+import CASprzak.CommutativeFunctions.Multiply;
 import CASprzak.Function;
 import CASprzak.SpecialFunctions.Constant;
 
@@ -21,7 +21,7 @@ public class Tanh extends UnitaryFunction {
     }
 
     @Override
-    public Function derivative(int varID) {
-        return new Multply(function.derivative(varID), new Pow(new Constant(2), new Cosh(function)));
+    public Function getDerivative(int varID) {
+        return new Multiply(function.getDerivative(varID), new Pow(new Constant(2), new Cosh(function)));
     }
 }

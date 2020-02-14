@@ -1,6 +1,6 @@
 package CASprzak.UnitaryFunctions;
 
-import CASprzak.CommutativeFunctions.Multply;
+import CASprzak.CommutativeFunctions.Multiply;
 import CASprzak.Function;
 
 public class Cosh extends UnitaryFunction {
@@ -14,8 +14,8 @@ public class Cosh extends UnitaryFunction {
     }
 
     @Override
-    public Function derivative(int varID) {
-        return new Multply(new Sinh(function), function.derivative(varID));
+    public Function getDerivative(int varID) {
+        return new Multiply(new Sinh(function), function.getDerivative(varID));
     }
 
     @Override

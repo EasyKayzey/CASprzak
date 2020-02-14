@@ -2,7 +2,7 @@ package CASprzak.UnitaryFunctions;
 
 import CASprzak.BinaryFunctions.Pow;
 import CASprzak.CommutativeFunctions.Add;
-import CASprzak.CommutativeFunctions.Multply;
+import CASprzak.CommutativeFunctions.Multiply;
 import CASprzak.Function;
 import CASprzak.SpecialFunctions.Constant;
 
@@ -17,8 +17,8 @@ public class Atan extends UnitaryFunction {
     }
 
     @Override
-    public Function derivative(int varID) {
-        return new Multply(function.derivative(varID), new Add(new Constant(1), new Reciprocal(new Pow(new Constant(2), function))));
+    public Function getDerivative(int varID) {
+        return new Multiply(function.getDerivative(varID), new Add(new Constant(1), new Reciprocal(new Pow(new Constant(2), function))));
     }
 
     @Override

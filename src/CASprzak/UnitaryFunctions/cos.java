@@ -1,4 +1,6 @@
-public class log extends UnitaryFunctions {
+package CASprzak.UnitaryFunctions;
+
+public class cos extends UnitaryFunction {
     @Override
     public String toString() {
         return null;

@@ -1,8 +1,10 @@
+package CASprzak;
+
 import java.util.*;
 
 public class Parser {
   public static final String[] operations2 = {"^", "*", "/", "+", "-", "logb"};
-  public static final String[] operations1 = {"sin", "cos", "tan", "log", "ln", "sqrt", "exp", "sinh", "cosh", "tanh", "csc", "sec", "cot", "asin", "acos", "atan"};
+  public static final String[] operations1 = {"CASprzak.CASprzak.UnitaryFunctions.CASprzak.UnitaryFunctions.sin", "CASprzak.CASprzak.UnitaryFunctions.CASprzak.UnitaryFunctions.cos", "CASprzak.CASprzak.UnitaryFunctions.CASprzak.UnitaryFunctions.tan", "log", "CASprzak.CASprzak.UnitaryFunctions.CASprzak.UnitaryFunctions.ln", "sqrt", "exp", "sinh", "cosh", "tanh", "CASprzak.CASprzak.UnitaryFunctions.CASprzak.UnitaryFunctions.csc", "CASprzak.CASprzak.UnitaryFunctions.CASprzak.UnitaryFunctions.sec", "CASprzak.CASprzak.UnitaryFunctions.CASprzak.UnitaryFunctions.cot", "CASprzak.CASprzak.UnitaryFunctions.CASprzak.UnitaryFunctions.asin", "CASprzak.CASprzak.UnitaryFunctions.CASprzak.UnitaryFunctions.acos", "CASprzak.CASprzak.UnitaryFunctions.CASprzak.UnitaryFunctions.atan"};
 
   public boolean isAnOperator1(String input) {
     for (String x : operations1) {

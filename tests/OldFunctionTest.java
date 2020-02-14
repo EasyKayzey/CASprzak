@@ -1,3 +1,4 @@
+import CASprzak.OldFunction;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -29,7 +30,7 @@ public class OldFunctionTest {
 	}
 
 	@Test void trigWorks() {
-		OldFunction test = OldFunction.makeFunction("( sin x ) ^ 2 + ( cos x ) ^ 2");
+		OldFunction test = OldFunction.makeFunction("( CASprzak.CASprzak.UnitaryFunctions.CASprzak.UnitaryFunctions.sin x ) ^ 2 + ( CASprzak.CASprzak.UnitaryFunctions.CASprzak.UnitaryFunctions.cos x ) ^ 2");
 		double b = test.evaluate(new String[]{"x"}, new double[]{81});
 		assertEquals(1, b);
 	}

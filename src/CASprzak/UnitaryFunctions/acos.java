@@ -1,4 +1,6 @@
-public class atan extends UnitaryFunctions {
+package CASprzak.UnitaryFunctions;
+
+public class acos extends UnitaryFunction {
     @Override
     public String toString() {
         return null;

@@ -1,4 +1,6 @@
-public class cos extends UnitaryFunctions {
+package CASprzak.UnitaryFunctions;
+
+public class sin extends UnitaryFunction {
     @Override
     public String toString() {
         return null;

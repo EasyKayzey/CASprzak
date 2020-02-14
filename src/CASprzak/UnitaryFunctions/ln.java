@@ -1,4 +1,6 @@
-public class sec extends UnitaryFunctions {
+package CASprzak.UnitaryFunctions;
+
+public class ln extends UnitaryFunction {
     @Override
     public String toString() {
         return null;

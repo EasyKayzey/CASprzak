@@ -1,8 +1,10 @@
+package CASprzak;
+
 import java.util.*;
 
 public class PreProcessor {
-  public static final String[] operations = {"^", "*", "/", "+", "-", "logb", "log", "ln", "sqrt", "exp", "sinh", "cosh", "tanh"};
-  public static final String[] operationsTrig = {"sin", "cos", "tan", "csc", "sec", "cot", "asin", "acos", "atan"};
+  public static final String[] operations = {"^", "*", "/", "+", "-", "logb", "log", "CASprzak.CASprzak.UnitaryFunctions.CASprzak.UnitaryFunctions.ln", "sqrt", "exp", "sinh", "cosh", "tanh"};
+  public static final String[] operationsTrig = {"CASprzak.CASprzak.UnitaryFunctions.CASprzak.UnitaryFunctions.sin", "CASprzak.CASprzak.UnitaryFunctions.CASprzak.UnitaryFunctions.cos", "CASprzak.CASprzak.UnitaryFunctions.CASprzak.UnitaryFunctions.tan", "CASprzak.CASprzak.UnitaryFunctions.CASprzak.UnitaryFunctions.csc", "CASprzak.CASprzak.UnitaryFunctions.CASprzak.UnitaryFunctions.sec", "CASprzak.CASprzak.UnitaryFunctions.CASprzak.UnitaryFunctions.cot", "CASprzak.CASprzak.UnitaryFunctions.CASprzak.UnitaryFunctions.asin", "CASprzak.CASprzak.UnitaryFunctions.CASprzak.UnitaryFunctions.acos", "CASprzak.CASprzak.UnitaryFunctions.CASprzak.UnitaryFunctions.atan"};
 
   private int getPrecedence(String input){
     if(input.equals("^")) return 4;

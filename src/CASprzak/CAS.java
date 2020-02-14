@@ -26,7 +26,7 @@ public class CAS {
 		PreProcessor preProcessor = new PreProcessor();
 		Parser parser = new Parser(vars);
 		Function curFun = parser.parse(preProcessor.toPostfix(raw));
-		System.out.println(curFun.evaluate(new double[]{2}));
+		System.out.println("Here is your output: " + curFun.evaluate(vis));
 
 		// System.out.println(fun.toString());
 //		System.out.println("Function val: "+fun.eval(vis));

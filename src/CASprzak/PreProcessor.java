@@ -6,6 +6,12 @@ public class PreProcessor {
   public static final String[] operations = {"^", "*", "/", "+", "-", "logb", "log", "ln", "sqrt", "exp", "sinh", "cosh", "tanh"};
   public static final String[] operationsTrig = {"sin", "cos", "tan", "csc", "sec", "cot", "asin", "acos", "atan"};
 
+
+
+  public PreProcessor() {
+  }
+
+
   private int getPrecedence(String input){
     if(input.equals("^")) return 4;
     if(input.equals("*") || input.equals("/")) return 3;

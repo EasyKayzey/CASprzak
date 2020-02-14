@@ -37,8 +37,16 @@ public class FunctionMaker {
 	}
 
 	public Function find2(String i, Function a, Function b) throws Exception {
-		if (i.equals("+")) return new Add(a, b);
-		else if(i.equals("*")) return new Multply(a, b);
+		switch (i) {
+			case "+":
+				return new Add(a, b);
+			case "*":
+				return new Multply(a, b);
+			case "^":
+				return new Pow(a, b);
+			case "logb":
+				return new Logb(a, b);
+		}
 		throw new Exception("Function "+i+" does not exist");
 	}
 }

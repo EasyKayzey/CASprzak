@@ -19,6 +19,6 @@ public class SingleVariableSolver {
     public double[] getSolutionsRange(Function expression, double a, double b) {
         ArrayList<Double> tempSolutions = new ArrayList<>();
         ArrayList<Double> finalSolutions = new ArrayList<>();
-
+        return null;
     }
 }

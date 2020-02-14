@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Parser {
   public static final String[] operations2 = {"^", "*", "/", "+", "-", "logb"};
-  public static final String[] operations1 = {"CASprzak.CASprzak.UnitaryFunctions.CASprzak.UnitaryFunctions.sin", "CASprzak.CASprzak.UnitaryFunctions.CASprzak.UnitaryFunctions.cos", "CASprzak.CASprzak.UnitaryFunctions.CASprzak.UnitaryFunctions.tan", "log", "CASprzak.CASprzak.UnitaryFunctions.CASprzak.UnitaryFunctions.ln", "sqrt", "exp", "sinh", "cosh", "tanh", "CASprzak.CASprzak.UnitaryFunctions.CASprzak.UnitaryFunctions.csc", "CASprzak.CASprzak.UnitaryFunctions.CASprzak.UnitaryFunctions.sec", "CASprzak.CASprzak.UnitaryFunctions.CASprzak.UnitaryFunctions.cot", "CASprzak.CASprzak.UnitaryFunctions.CASprzak.UnitaryFunctions.asin", "CASprzak.CASprzak.UnitaryFunctions.CASprzak.UnitaryFunctions.acos", "CASprzak.CASprzak.UnitaryFunctions.CASprzak.UnitaryFunctions.atan"};
+  public static final String[] operations1 = {"sin", "cos", "tan", "log", "ln", "sqrt", "exp", "sinh", "cosh", "tanh", "csc", "sec", "cot", "asin", "acos", "atan"};
 
   public boolean isAnOperator1(String input) {
     for (String x : operations1) {
@@ -20,22 +20,24 @@ public class Parser {
     return false;
   }
 
-  public OldFunction parse(String[] postfix) throws IndexOutOfBoundsException {
-    Stack<OldFunction> functionStack = new Stack<OldFunction>();
+  public Function parse(String[] postfix) throws IndexOutOfBoundsException {
+    FunctionMaker functionMaker = new FunctionMaker();
+    Stack<Function> functionStack = new Stack<Function>();
     for (String i : postfix) {
       if (!isAnOperator1(i) && !isAnOperator2(i)) {
         try {
-          functionStack.push(new OldFunction(Double.parseDouble(i)));
+          functionStack.push(functionMaker.constant(Double.parseDouble(i)));
         } catch (Exception e) {
-          functionStack.push(new OldFunction(i));
+          if (i.length() > 1) System.out.println(i + " is not a valid function.");
+          functionStack.push(functionMaker.variable(i.charAt(0)));
         }
       } else if (isAnOperator2(i)) {
-        OldFunction a = functionStack.pop();
-        OldFunction b = functionStack.pop();
-        functionStack.push(new OldFunction(i, a, b));
+        Function a = functionStack.pop();
+        Function b = functionStack.pop();
+        functionStack.push(functionMaker.find2(i, a, b));
       } else if (isAnOperator1(i)) {
-        OldFunction c = functionStack.pop();
-        functionStack.push(new OldFunction(i, c));
+        Function c = functionStack.pop();
+        functionStack.push(functionMaker.find1(i, c));
       }
     }
     if (functionStack.size() != 1) throw new IndexOutOfBoundsException("functionStack size is " + functionStack.size());

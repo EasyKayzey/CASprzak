@@ -25,4 +25,12 @@ public class Asin extends UnitaryFunction {
     public double evaluate(double[] variableValues) {
         return Math.asin(function.evaluate(variableValues));
     }
+
+    public Function clone() {
+        return new Asin(function.clone());
+    }
+
+    public Function simplify() {
+        return new Asin(function.simplify());
+    }
 }

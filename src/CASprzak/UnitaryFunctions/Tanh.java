@@ -24,4 +24,12 @@ public class Tanh extends UnitaryFunction {
     public Function getDerivative(int varID) {
         return new Multiply(function.getDerivative(varID), new Pow(new Constant(2), new Cosh(function)));
     }
+
+    public Function clone() {
+        return new Tanh(function.clone());
+    }
+
+    public Function simplify() {
+        return new Tanh(function.simplify());
+    }
 }

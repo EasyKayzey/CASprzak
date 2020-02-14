@@ -22,4 +22,12 @@ public class Cosh extends UnitaryFunction {
     public double evaluate(double[] variableValues) {
         return Math.cosh(function.evaluate(variableValues));
     }
+
+    public Function clone() {
+        return new Cosh(function.clone());
+    }
+
+    public Function simplify() {
+        return new Cosh(function.simplify());
+    }
 }

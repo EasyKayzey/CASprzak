@@ -44,4 +44,14 @@ public class Multiply extends CommutativeFunction{
 
 		return new Add(toAdd);
 	}
+
+	public Function clone() {
+		Function[] toMultiply = new Function[functions.length];
+		for (int i = 0; i < functions.length; i++) toMultiply[i] = functions[i].clone();
+		return new Multiply(toMultiply);
+	}
+
+	public Function simplify() {
+		return clone();
+	}
 }

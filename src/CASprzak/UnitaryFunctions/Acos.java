@@ -25,4 +25,12 @@ public class Acos extends UnitaryFunction {
     public double evaluate(double[] variableValues) {
         return Math.acos(function.evaluate(variableValues));
     }
+
+    public Function clone() {
+        return new Acos(function.clone());
+    }
+
+    public Function simplify() {
+        return new Acos(function.simplify());
+    }
 }

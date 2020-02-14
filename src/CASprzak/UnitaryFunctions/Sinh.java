@@ -22,6 +22,13 @@ public class Sinh extends UnitaryFunction {
     @Override
     public Function getDerivative(int varID) {
         return new Multiply(new Cosh(function), function.getDerivative(varID));
+    }
 
+    public Function clone() {
+        return new Sinh(function.clone());
+    }
+
+    public Function simplify() {
+        return new Sinh(function.simplify());
     }
 }

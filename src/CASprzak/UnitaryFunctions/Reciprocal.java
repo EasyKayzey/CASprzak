@@ -21,4 +21,12 @@ public class Reciprocal extends UnitaryFunction{
 	public Function getDerivative(int varID) {
 		return new Multiply(new Negative(function.getDerivative(varID)), new Reciprocal(new Pow(new Constant(2), function)));
 	}
+
+	public Function clone() {
+		return new Reciprocal(function.clone());
+	}
+
+	public Function simplify() {
+		return new Reciprocal(function.simplify());
+	}
 }

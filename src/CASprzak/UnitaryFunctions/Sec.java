@@ -22,4 +22,12 @@ public class Sec extends UnitaryFunction {
     public Function getDerivative(int varID) {
         return new Multiply(new Multiply(new Tan(function), new Sec(function)), function.getDerivative(varID));
     }
+
+    public Function clone() {
+        return new Sec(function.clone());
+    }
+
+    public Function simplify() {
+        return new Sec(function.simplify());
+    }
 }

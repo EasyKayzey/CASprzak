@@ -22,4 +22,12 @@ public class Ln extends UnitaryFunction {
     public Function getDerivative(int varID) {
         return new Multiply(function.getDerivative(varID), new Reciprocal(function));
     }
+
+    public Function clone() {
+        return new Ln(function.clone());
+    }
+
+    public Function simplify() {
+        return new Ln(function.simplify());
+    }
 }

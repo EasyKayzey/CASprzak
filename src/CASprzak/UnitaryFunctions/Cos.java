@@ -23,4 +23,12 @@ public class Cos extends UnitaryFunction {
     public double evaluate(double[] variableValues) {
         return Math.cos(function.evaluate(variableValues));
     }
+
+    public Function clone() {
+        return new Cos(function.clone());
+    }
+
+    public Function simplify() {
+        return new Cos(function.simplify());
+    }
 }

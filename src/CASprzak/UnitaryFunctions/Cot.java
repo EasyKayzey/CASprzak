@@ -24,4 +24,12 @@ public class Cot extends UnitaryFunction {
     public double evaluate(double[] variableValues) {
         return 1 / Math.tan(function.evaluate(variableValues));
     }
+
+    public Function clone() {
+        return new Cot(function.clone());
+    }
+
+    public Function simplify() {
+        return new Cot(function.simplify());
+    }
 }

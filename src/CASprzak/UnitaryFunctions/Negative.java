@@ -20,4 +20,12 @@ public class Negative extends UnitaryFunction{
 	public Function getDerivative(int varID) {
 		return new Multiply(new Constant(-1), function.getDerivative(varID));
 	}
+
+	public Function clone() {
+		return new Negative(function.clone());
+	}
+
+	public Function simplify() {
+		return new Negative(function.simplify());
+	}
 }

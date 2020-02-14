@@ -22,4 +22,12 @@ public class Csc extends UnitaryFunction {
     public double evaluate(double[] variableValues) {
         return 1 / Math.sin(function.evaluate(variableValues));
     }
+
+    public Function clone() {
+        return new Csc(function.clone());
+    }
+
+    public Function simplify() {
+        return new Csc(function.simplify());
+    }
 }

@@ -24,4 +24,12 @@ public class Tan extends UnitaryFunction {
     public Function getDerivative(int varID) {
         return new Multiply(new Pow(new Constant(2), new Sec(function)), function.getDerivative(varID));
     }
+
+    public Function clone() {
+        return new Tan(function.clone());
+    }
+
+    public Function simplify() {
+        return new Tan(function.simplify());
+    }
 }

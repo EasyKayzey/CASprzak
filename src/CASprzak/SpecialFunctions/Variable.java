@@ -25,4 +25,12 @@ public class Variable extends Function {
 	public double evaluate(double[] variableValues) {
 		return variableValues[varID];
 	}
+
+	public Function clone() {
+		return new Variable(varID, varNames);
+	}
+
+	public Function simplify() {
+		return clone();
+	}
 }

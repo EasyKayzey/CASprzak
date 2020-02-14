@@ -43,4 +43,13 @@ public class Constant extends Function {
 	public Function getDerivative(int varID) {
 		return new Constant(0);
 	}
+
+	public Function clone() {
+		if (constantID == -1) return new Constant(constant);
+		else return new Constant(specialConstants[constantID]);
+	}
+
+	public Function simplify() {
+		return clone();
+	}
 }

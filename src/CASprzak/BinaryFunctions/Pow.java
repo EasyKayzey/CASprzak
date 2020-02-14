@@ -26,4 +26,12 @@ public class Pow extends BinaryFunction {
 	public double evaluate(double[] variableValues) {
 		return Math.pow(function2.evaluate(variableValues), function1.evaluate(variableValues));
 	}
+
+	public Function clone() {
+		return new Pow(function1.clone(), function2.clone());
+	}
+
+	public Function simplify() {
+		return new Pow(function1.simplify(), function2.simplify());
+	}
 }

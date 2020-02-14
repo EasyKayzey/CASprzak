@@ -25,4 +25,12 @@ public class Atan extends UnitaryFunction {
     public double evaluate(double[] variableValues) {
         return Math.atan(function.evaluate(variableValues));
     }
+
+    public Function clone() {
+        return new Atan(function.clone());
+    }
+
+    public Function simplify() {
+        return new Atan(function.simplify());
+    }
 }

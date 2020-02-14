@@ -4,6 +4,7 @@ import CASprzak.CommutativeFunctions.Add;
 import CASprzak.CommutativeFunctions.Multiply;
 import CASprzak.Function;
 import CASprzak.SpecialFunctions.Constant;
+import CASprzak.UnitaryFunctions.Acos;
 import CASprzak.UnitaryFunctions.Ln;
 import CASprzak.UnitaryFunctions.Negative;
 import CASprzak.UnitaryFunctions.Reciprocal;
@@ -26,5 +27,13 @@ public class Logb extends BinaryFunction {
     @Override
     public double evaluate(double[] variableValues) {
         return Math.log(function1.evaluate(variableValues)) / Math.log(function2.evaluate(variableValues));
+    }
+
+    public Function clone() {
+        return new Logb(function1.clone(), function2.clone());
+    }
+
+    public Function simplify() {
+        return new Logb(function1.simplify(), function2.simplify());
     }
 }

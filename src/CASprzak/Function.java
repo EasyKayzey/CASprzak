@@ -1,6 +1,7 @@
 package CASprzak;
 
-public abstract class Function implements Evaluatable, Differentiable {
+public abstract class Function implements Evaluatable, Differentiable, Simplifiable {
 	protected String functionName;
 	public abstract String toString();
+	public abstract Function clone();
 }

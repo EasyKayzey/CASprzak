@@ -23,5 +23,11 @@ public class Sin extends UnitaryFunction {
         return new Multiply(new Cos(function), function.getDerivative(varID));
     }
 
+    public Function clone() {
+        return new Sin(function.clone());
+    }
 
+    public Function simplify() {
+        return new Sin(function.simplify());
+    }
 }

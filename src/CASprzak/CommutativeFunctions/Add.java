@@ -37,4 +37,14 @@ public class Add extends CommutativeFunction{
 		}
 		return new Add(toAdd);
 	}
+
+	public Function clone() {
+		Function[] toAdd = new Function[functions.length];
+		for (int i = 0; i < functions.length; i++) toAdd[i] = functions[i].clone();
+		return new Add(toAdd);
+	}
+
+	public Function simplify() {
+		return clone();
+	}
 }

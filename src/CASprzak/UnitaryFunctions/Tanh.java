@@ -3,7 +3,7 @@ package CASprzak.UnitaryFunctions;
 public class Tanh extends UnitaryFunction {
     @Override
     public String toString() {
-        return null;
+        return "tanh(" + function.toString() + ")";
     }
 
     @Override

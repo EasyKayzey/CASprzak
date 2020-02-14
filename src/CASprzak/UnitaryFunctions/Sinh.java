@@ -3,7 +3,7 @@ package CASprzak.UnitaryFunctions;
 public class Sinh extends UnitaryFunction {
     @Override
     public String toString() {
-        return null;
+        return "sinh(" + function.toString() + ")";
     }
 
     @Override

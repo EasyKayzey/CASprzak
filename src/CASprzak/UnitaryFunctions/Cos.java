@@ -3,7 +3,7 @@ package CASprzak.UnitaryFunctions;
 public class Cos extends UnitaryFunction {
     @Override
     public String toString() {
-        return null;
+        return "cos(" + function.toString() + ")";
     }
 
     @Override

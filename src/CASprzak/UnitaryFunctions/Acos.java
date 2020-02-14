@@ -3,7 +3,7 @@ package CASprzak.UnitaryFunctions;
 public class Acos extends UnitaryFunction {
     @Override
     public String toString() {
-        return null;
+        return "acos(" + function.toString() + ")";
     }
 
     @Override

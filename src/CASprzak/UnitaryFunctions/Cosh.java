@@ -3,7 +3,7 @@ package CASprzak.UnitaryFunctions;
 public class Cosh extends UnitaryFunction {
     @Override
     public String toString() {
-        return null;
+        return "cosh(" + function.toString() + ")";
     }
 
     @Override

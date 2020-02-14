@@ -3,7 +3,7 @@ package CASprzak.UnitaryFunctions;
 public class Cot extends UnitaryFunction {
     @Override
     public String toString() {
-        return null;
+        return "cot(" + function.toString() + ")";
     }
 
     @Override

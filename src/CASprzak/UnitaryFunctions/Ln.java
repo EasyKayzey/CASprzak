@@ -3,7 +3,7 @@ package CASprzak.UnitaryFunctions;
 public class Ln extends UnitaryFunction {
     @Override
     public String toString() {
-        return null;
+        return "ln(" + function.toString() + ")";
     }
 
     @Override

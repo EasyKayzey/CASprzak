@@ -3,7 +3,7 @@ package CASprzak.UnitaryFunctions;
 public class Csc extends UnitaryFunction {
     @Override
     public String toString() {
-        return null;
+        return "csc(" + function.toString() + ")";
     }
 
     @Override

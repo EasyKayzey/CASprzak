@@ -3,7 +3,7 @@ package CASprzak.UnitaryFunctions;
 public class Sec extends UnitaryFunction {
     @Override
     public String toString() {
-        return null;
+        return "sec(" + function.toString() + ")";
     }
 
     @Override

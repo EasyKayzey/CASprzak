@@ -3,7 +3,7 @@ package CASprzak.UnitaryFunctions;
 public class Atan extends UnitaryFunction {
     @Override
     public String toString() {
-        return null;
+        return "atan(" + function.toString() + ")";
     }
 
     @Override

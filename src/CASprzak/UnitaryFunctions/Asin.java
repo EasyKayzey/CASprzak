@@ -3,7 +3,7 @@ package CASprzak.UnitaryFunctions;
 public class Asin extends UnitaryFunction {
     @Override
     public String toString() {
-        return null;
+        return "asin(" + function.toString() + ")";
     }
 
     @Override

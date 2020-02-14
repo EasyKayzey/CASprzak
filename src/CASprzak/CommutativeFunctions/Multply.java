@@ -27,7 +27,7 @@ public class Multply extends CommutativeFunction{
 	}
 
 	@Override
-	public Function derivative() {
-		return  new Add(new Multply(functions[0], functions[1].derivative(tyjk)), new Multply(functions[0].derivative(tyjk), functions[1]));;
+	public Function derivative(int varID) {
+		return  new Add(new Multply(functions[0], functions[1].derivative(varID)), new Multply(functions[0].derivative(varID), functions[1]));
 	}
 }

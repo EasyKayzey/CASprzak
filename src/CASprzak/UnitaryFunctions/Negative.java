@@ -1,6 +1,8 @@
 package CASprzak.UnitaryFunctions;
 
+import CASprzak.CommutativeFunctions.Multply;
 import CASprzak.Function;
+import CASprzak.SpecialFunctions.Constant;
 
 public class Negative extends UnitaryFunction{
 	public Negative(Function function) {
@@ -12,5 +14,10 @@ public class Negative extends UnitaryFunction{
 	}
 	public String toString() {
 		return "-" + function.toString();
+	}
+
+	@Override
+	public Function derivative(int varID) {
+		return new Multply(new Constant(-1), function.derivative(varID));
 	}
 }

@@ -14,8 +14,8 @@ public class Csc extends UnitaryFunction {
     }
 
     @Override
-    public Function derivative() {
-        return new Multply(new Negative(new Multply(new Cot(function), new Csc(function))), function.derivative(tyjk));
+    public Function derivative(int varID) {
+        return new Multply(new Negative(new Multply(new Cot(function), new Csc(function))), function.derivative(varID));
     }
 
     @Override

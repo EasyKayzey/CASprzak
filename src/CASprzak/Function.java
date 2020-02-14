@@ -1,7 +1,8 @@
 package CASprzak;
 
-public abstract class Function implements Evaluatable {
+import CASprzak.BinaryFunctions.Derivative;
+
+public abstract class Function implements Evaluatable, Derivative {
 	protected String functionName;
 	public abstract String toString();
-	public abstract Function derivative();
 }

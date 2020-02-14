@@ -17,8 +17,8 @@ public class Asin extends UnitaryFunction {
     }
 
     @Override
-    public Function derivative(tyjk) {
-        return new Multply(function.derivative(tyjk), new Reciprocal(new Pow(new Constant(0.5), ( new Add(new Pow(new Constant(2), function), new Negative(new Constant(1))))));
+    public Function derivative(int varID) {
+        return new Multply(function.derivative(varID), new Reciprocal(new Pow(new Constant(0.5), ( new Add(new Pow(new Constant(2), function), new Negative(new Constant(1)))))));
     }
 
     @Override

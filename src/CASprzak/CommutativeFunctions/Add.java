@@ -27,9 +27,9 @@ public class Add extends CommutativeFunction{
 	}
 
 	@Override
-	public Function derivative(tyjk) {
+	public Function derivative(int varID) {
 		for (Function a: functions) {
-			a = a.derivative(tyjk);
+			a = a.derivative(varID);
 		}
 		return null;
 	}

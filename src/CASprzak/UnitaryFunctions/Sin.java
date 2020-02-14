@@ -1,5 +1,6 @@
 package CASprzak.UnitaryFunctions;
 
+import CASprzak.CommutativeFunctions.Multply;
 import CASprzak.Function;
 
 public class Sin extends UnitaryFunction {
@@ -16,4 +17,11 @@ public class Sin extends UnitaryFunction {
     public double evaluate(double[] variableValues) {
         return Math.sin(function.evaluate(variableValues));
     }
+
+    @Override
+    public Function derivative(int varID) {
+        return new Multply(new Cos(function), function.derivative(varID));
+    }
+
+
 }

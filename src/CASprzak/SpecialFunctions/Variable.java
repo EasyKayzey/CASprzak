@@ -17,8 +17,8 @@ public class Variable extends Function {
 		return "" + varNames[varID];
 	}
 
-	@Override
-	public Function derivative() {
+
+	public Function derivative(int varID) {
 		return new Constant(1);
 	}
 

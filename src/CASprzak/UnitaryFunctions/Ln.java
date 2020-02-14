@@ -1,5 +1,6 @@
 package CASprzak.UnitaryFunctions;
 
+import CASprzak.CommutativeFunctions.Multply;
 import CASprzak.Function;
 
 public class Ln extends UnitaryFunction {
@@ -15,5 +16,10 @@ public class Ln extends UnitaryFunction {
     @Override
     public double evaluate(double[] variableValues) {
         return Math.log(function.evaluate(variableValues));
+    }
+
+    @Override
+    public Function derivative(int varID) {
+        return new Multply(function.derivative(varID), new Reciprocal(function));
     }
 }

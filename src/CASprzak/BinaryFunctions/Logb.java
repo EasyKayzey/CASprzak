@@ -20,8 +20,8 @@ public class Logb extends BinaryFunction {
     }
 
     @Override
-    public Function derivative(tyjk) {
-        return new Multply( new Add(new Multply( new Multply(function1.derivative(tyjk), new Ln(function2)), new Reciprocal(function1)), new Negative(new Multply( new Multply(function2.derivative(tyjk), new Ln(function1)), new Reciprocal(function2)))), new Reciprocal( new Pow(new Constant(2), new Ln( function2 ))));
+    public Function derivative(int varID) {
+        return new Multply( new Add(new Multply( new Multply(function1.derivative(varID), new Ln(function2)), new Reciprocal(function1)), new Negative(new Multply( new Multply(function2.derivative(varID), new Ln(function1)), new Reciprocal(function2)))), new Reciprocal( new Pow(new Constant(2), new Ln( function2 ))));
     }
 
     @Override

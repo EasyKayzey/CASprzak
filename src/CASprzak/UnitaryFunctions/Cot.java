@@ -16,8 +16,8 @@ public class Cot extends UnitaryFunction {
     }
 
     @Override
-    public Function derivative(tyjk) {
-        return  new Multply(new Negative(new Pow(new Csc(function), new Constant(2))), function.derivative(tyjk));
+    public Function derivative(int varID) {
+        return  new Multply(new Negative(new Pow(new Csc(function), new Constant(2))), function.derivative(varID));
     }
 
     @Override

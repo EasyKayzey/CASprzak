@@ -14,8 +14,8 @@ public class Cosh extends UnitaryFunction {
     }
 
     @Override
-    public Function derivative(tyjk) {
-        return new Multply(new Sinh(function), function.derivative(tyjk));
+    public Function derivative(int varID) {
+        return new Multply(new Sinh(function), function.derivative(varID));
     }
 
     @Override

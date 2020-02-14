@@ -18,8 +18,8 @@ public class Pow extends BinaryFunction {
 	}
 
 	@Override
-	public Function derivative(tyjk) {
-		return  new Multply(new Pow(function1, function2), new Add( new Multply(function1.derivative(tyjk), new Ln(function2)), new Multply(new Multply(function1, function2.derivative(tyjk)), new Reciprocal(function2)));;
+	public Function derivative(int varID) {
+		return  new Multply(new Pow(function1, function2), new Add( new Multply(function1.derivative(varID), new Ln(function2)), new Multply(new Multply(function1, function2.derivative(varID)), new Reciprocal(function2))));
 	}
 
 	@Override

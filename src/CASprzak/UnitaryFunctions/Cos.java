@@ -15,8 +15,8 @@ public class Cos extends UnitaryFunction {
     }
 
     @Override
-    public Function derivative(tyjk) {
-        return  new Multply(new Multply(new Sin(function), new Constant(-1)), function.derivative(tyjk));
+    public Function derivative(int varID) {
+        return  new Multply(new Multply(new Sin(function), new Constant(-1)), function.derivative(varID));
     }
 
     @Override

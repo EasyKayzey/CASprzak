@@ -17,8 +17,8 @@ public class Acos extends UnitaryFunction {
     }
 
     @Override
-    public Function derivative(tyjk) {
-        return new Multply(new Multply(function.derivative(tyjk), new Constant(-1)), new Reciprocal(new Pow(new Constant(0.5), ( new Add(new Constant(1), new Negative(new Pow(new Constant(2), function)))))));
+    public Function derivative(int varID) {
+        return new Multply(new Multply(function.derivative(varID), new Constant(-1)), new Reciprocal(new Pow(new Constant(0.5), ( new Add(new Constant(1), new Negative(new Pow(new Constant(2), function)))))));
     }
 
     @Override

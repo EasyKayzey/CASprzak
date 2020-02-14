@@ -2,6 +2,15 @@ package CASprzak.BinaryFunctions;
 import CASprzak.Function;
 
 public abstract class BinaryFunction extends Function {
-    private Function function1;
-    private Function function2;
+    protected Function function1;
+    protected Function function2;
+
+    public BinaryFunction(Function function1, Function function2) {
+        this.function1 = function1;
+        this.function2 = function2;
+    }
+
+    public BinaryFunction() throws Exception{
+        throw new Exception("Cannot instantiate empty function");
+    }
 }

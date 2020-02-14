@@ -1,6 +1,7 @@
 package CASprzak;
 
 import java.security.Signature;
+import java.util.ArrayList;
 
 public class SingleVariableSolver {
 
@@ -13,5 +14,11 @@ public class SingleVariableSolver {
             initialPoint = newtonsMethod(expression, initialPoint);
         }
         return initialPoint;
+    }
+
+    public double[] getSolutionsRange(Function expression, double a, double b) {
+        ArrayList<Double> tempSolutions = new ArrayList<>();
+        ArrayList<Double> finalSolutions = new ArrayList<>();
+
     }
 }

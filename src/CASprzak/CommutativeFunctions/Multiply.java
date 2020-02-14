@@ -1,6 +1,8 @@
 package CASprzak.CommutativeFunctions;
 
+import CASprzak.ArrLib;
 import CASprzak.Function;
+import CASprzak.SpecialFunctions.Constant;
 import org.jetbrains.annotations.NotNull;
 
 public class Multiply extends CommutativeFunction{
@@ -53,7 +55,26 @@ public class Multiply extends CommutativeFunction{
 	}
 
 	public Function simplify() {
-		return clone();
+		if (functions.length == 1) return functions[0].simplify();
+
+		for (Function function : functions) {
+			if (function instanceof Constant) {
+				if (((Constant) function).evaluate() == 0) {
+					return new Constant(0);
+				}
+			}
+		}
+		for (int i = 0; i < functions.length; i++) {
+			if (functions[i] instanceof Constant) {
+				if (((Constant) functions[i]).evaluate() == 1) {
+					return (new Add(ArrLib.removeFunctionAt(functions, i))).simplify();
+				}
+			}
+		}
+
+		Function[] toMultiply = new Function[functions.length];
+		for (int i = 0; i < functions.length; i++) toMultiply[i] = functions[i].simplify();
+		return new Multiply(toMultiply);
 	}
 
 	public int compareTo(@NotNull Function f) {

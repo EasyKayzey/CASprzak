@@ -48,6 +48,8 @@ public class Add extends CommutativeFunction{
 	}
 
 	public Function simplify() {
+		if (functions.length == 1) return functions[0].simplify();
+
 		for (int i = 0; i < functions.length; i++) {
 			if (functions[i] instanceof Constant) {
 				if (((Constant) functions[i]).evaluate() == 0) {
@@ -55,7 +57,20 @@ public class Add extends CommutativeFunction{
 				}
 			}
 		}
-		return clone();
+		for (int i = 0; i < functions.length; i++){
+			for (int j = i + 1; j < functions.length; j++){
+				if (functions[i] instanceof Constant && functions[j] instanceof Constant) {
+					Constant c = new Constant(((Constant) functions[i]).evaluate() + ((Constant) functions[j]).evaluate());
+					Function[] toAdd = ArrLib.removeFunctionAt(functions, j);
+					toAdd[i] = c;
+					return (new Add(toAdd)).simplify();
+				}
+			}
+		}
+
+		Function[] toAdd = new Function[functions.length];
+		for (int i = 0; i < functions.length; i++) toAdd[i] = functions[i].simplify();
+		return new Add(toAdd);
 	}
 
 	public int compareTo(@NotNull Function f) {

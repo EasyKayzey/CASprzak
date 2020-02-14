@@ -27,8 +27,12 @@ public class CAS {
 		Parser parser = new Parser(vars);
 		Function curFun = parser.parse(preProcessor.toPostfix(raw));
 		System.out.println("Here is your output: " + curFun.evaluate(vis));
-		System.out.println(curFun.toString());
+		System.out.println("Here is the derivative, unsimplified:");
+//		System.out.println(curFun.toString());
 		System.out.println(curFun.getDerivative(0).toString());
+		System.out.println("Here is the derivative, simplified:");
+		System.out.println(curFun.getDerivative(0).simplifyTimes(10).toString());
+
 
 		// System.out.println(fun.toString());
 //		System.out.println("Function val: "+fun.eval(vis));

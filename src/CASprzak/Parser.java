@@ -6,7 +6,11 @@ public class Parser {
   public static final String[] operations2 = {"^", "*", "/", "+", "-", "logb"};
   public static final String[] operations1 = {"sin", "cos", "tan", "log", "ln", "sqrt", "exp", "sinh", "cosh", "tanh", "csc", "sec", "cot", "asin", "acos", "atan"};
 
-  private char[] variables = {};
+  private char[] variables;
+
+  public Parser(char[] variables) {
+    this.variables = variables;
+  }
 
   public boolean isAnOperator1(String input) {
     for (String x : operations1) {
@@ -26,10 +30,11 @@ public class Parser {
     this.variables = variables;
   }
 
-  public int getVarID(char variable) {
-    for (int i = 0; i < variables.length; i++) if (variables[i] == v) {
+  public int getVarID(char variable) throws IndexOutOfBoundsException{
+    for (int i = 0; i < variables.length; i++) if (variables[i] == variable) {
       return i;
     }
+    throw new IndexOutOfBoundsException("No variable "+variable+" found.");
   }
 
   public Function parse(String[] postfix) throws Exception {
@@ -48,10 +53,10 @@ public class Parser {
       } else if (isAnOperator2(token)) {
         Function a = functionStack.pop();
         Function b = functionStack.pop();
-        functionStack.push(functionMaker.find2(i, a, b));
+        functionStack.push(functionMaker.find2(token, a, b));
       } else if (isAnOperator1(token)) {
         Function c = functionStack.pop();
-        functionStack.push(functionMaker.find1(i, c));
+        functionStack.push(functionMaker.find1(token, c));
       }
     }
     if (functionStack.size() != 1) throw new IndexOutOfBoundsException("functionStack size is " + functionStack.size());

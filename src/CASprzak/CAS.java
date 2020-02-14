@@ -2,30 +2,31 @@ package CASprzak;
 
 import java.util.*;
 import java.io.*;
+import java.util.stream.Collectors;
+
 public class CAS {
 	public static void main(String[] args) throws Exception {
 		Scanner in = new Scanner(System.in);
 		in.useDelimiter("\n");
 
 		System.out.println("What are your variables? Separate with spaces.");
-		String[] vars = in.next().split("\\s+");
+		String[] varss = in.next().split("\\s+");
+		char[] vars = new char[varss.length];
+		for (int i = 0; i < vars.length; i++) vars[i] = varss[i].charAt(0);
+
 		System.out.println("Enter your function to be stored:");
 		String raw = in.next();
 
 		raw = raw.replace("{","(").replace("}",")").replace("ln","log e").replace("\\","").replace("_"," ");
 
-		System.out.println("What are your inputs? Separate with spaces.");
+		System.out.println("What are your inputs? Separate with spaces, and order them with your variables.");
 		String[] viss = in.next().split("\\s+");
 		double[] vis = Arrays.stream(viss).mapToDouble(Double::parseDouble).toArray();
-		// System.out.println(fun.toString());
-		boolean[] bov = new boolean[vis.length];
-		for (int i = 0; i < bov.length; i++) if (vis[i]!=0) bov[i]=true;
 
-		PreProcessor test1 = new PreProcessor();
-		String[] postfix = test1.toPostfix(raw);
-		Parser test2 = new Parser();
-		Function test3 = test2.parse(postfix);
-		System.out.println(test3.evaluate(new double[]{2}));
+		PreProcessor preProcessor = new PreProcessor();
+		Parser parser = new Parser(vars);
+		Function curFun = parser.parse(preProcessor.toPostfix(raw));
+		System.out.println(curFun.evaluate(new double[]{2}));
 
 		// System.out.println(fun.toString());
 //		System.out.println("Function val: "+fun.eval(vis));

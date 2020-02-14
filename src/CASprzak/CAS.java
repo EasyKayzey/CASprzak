@@ -24,6 +24,7 @@ public class CAS {
 		double[] vis = Arrays.stream(viss).mapToDouble(Double::parseDouble).toArray();
 
 		PreProcessor preProcessor = new PreProcessor();
+		SingleVariableSolver solver = new SingleVariableSolver();
 		Parser parser = new Parser(vars);
 		Function curFun = parser.parse(preProcessor.toPostfix(raw));
 		System.out.println("Here is your output: " + curFun.evaluate(vis));
@@ -34,6 +35,10 @@ public class CAS {
 		System.out.println(curFun.getDerivative(0).simplifyTimes(10).toString());
 		System.out.println("Here is the derivative, evaluated:");
 		System.out.println(curFun.getDerivative(0).simplifyTimes(10).evaluate(vis));
+		System.out.println("Here is a zero for the expression");
+		System.out.println(solver.getSolutionPoint(curFun, 10));
+
+
 
 
 		// System.out.println(fun.toString());

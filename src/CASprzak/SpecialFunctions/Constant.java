@@ -58,6 +58,9 @@ public class Constant extends Function {
 	}
 
 	public int compareTo(@NotNull Function f) {
+		if (f instanceof Constant) {
+			return (int)Math.signum(((Constant)f).evaluate()-evaluate());
+		}
 		return 0;
 	}
 }

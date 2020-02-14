@@ -10,11 +10,11 @@ public class Pow extends BinaryFunction {
 
 	@Override
 	public String toString() {
-		return null;
+		return "(" + function2.toString() + ")^(" + function1.toString() + ")";
 	}
 
 	@Override
 	public double evaluate(double[] variableValues) {
-		return 0;
+		return Math.pow(function2.evaluate(variableValues), function1.evaluate(variableValues));
 	}
 }

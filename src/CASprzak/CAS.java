@@ -21,9 +21,9 @@ public class CAS {
 		boolean[] bov = new boolean[vis.length];
 		for (int i = 0; i < bov.length; i++) if (vis[i]!=0) bov[i]=true;
 		// System.out.println(fun.toString());
-		System.out.println("Function val: "+fun.eval(vis));
-		// System.out.println(FunctionEvaluator.df(fun,bov).toString());
-		System.out.println("Derivative val: "+FunctionEvaluator.df(fun,bov).eval(vis));
+//		System.out.println("Function val: "+fun.eval(vis));
+//		// System.out.println(FunctionEvaluator.df(fun,bov).toString());
+//		System.out.println("Derivative val: "+FunctionEvaluator.df(fun,bov).eval(vis));
 	}
 }
 

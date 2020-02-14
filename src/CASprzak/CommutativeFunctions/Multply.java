@@ -19,6 +19,10 @@ public class Multply extends CommutativeFunction{
 	}
 
 	public String toString() {
-		return "";
+		StringBuilder temp = new StringBuilder();
+		for (Function i : functions) {
+			temp.append(i.toString() + " * ");
+		}
+		return temp.toString();
 	}
 }

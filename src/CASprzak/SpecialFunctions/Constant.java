@@ -19,7 +19,7 @@ public class Constant extends Function {
 		constant = specialConstants[constantID];
 	}
 
-	public static boolean isConstant(String s) {
+	public static boolean isSpecialConstant(String s) {
 		for (String specialConstantString : specialConstantStrings) {
 			if (specialConstantString.equals(s)) return true;
 		}

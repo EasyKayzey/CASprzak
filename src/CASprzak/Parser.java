@@ -1,5 +1,7 @@
 package CASprzak;
 
+import CASprzak.SpecialFunctions.Constant;
+
 import java.util.*;
 
 public class Parser {
@@ -47,6 +49,7 @@ public class Parser {
     Stack<Function> functionStack = new Stack<>();
     for (String token : postfix) {
       if (!isAnOperator1(token) && !isAnOperator2(token)) {
+        if (Constant.isSpecialConstant(token)) return functionMaker.specialConstant(token);
         try {
           functionStack.push(functionMaker.constant(Double.parseDouble(token)));
         } catch (Exception e) {

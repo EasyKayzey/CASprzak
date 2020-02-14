@@ -9,6 +9,9 @@ public class FunctionMaker {
 	public Function constant(double constant) {
 		return new Constant(constant);
 	}
+	public Function specialConstant(String constantString) {
+		return new Constant(constantString);
+	}
 
 	public Function variable(int varID, char[] varNames) {
 		return new Variable(varID, varNames);

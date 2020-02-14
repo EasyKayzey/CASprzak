@@ -36,5 +36,4 @@ public class Parser {
     return functionStack.pop();
   }
 
-
 }

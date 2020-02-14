@@ -18,22 +18,22 @@ public class Parser {
     return false;
   }
 
-  public Function parse(String[] postfix) throws IndexOutOfBoundsException {
-    Stack<Function> functionStack = new Stack<Function>();
+  public OldFunction parse(String[] postfix) throws IndexOutOfBoundsException {
+    Stack<OldFunction> functionStack = new Stack<OldFunction>();
     for (String i : postfix) {
       if (!isAnOperator1(i) && !isAnOperator2(i)) {
         try {
-          functionStack.push(new Function(Double.parseDouble(i)));
+          functionStack.push(new OldFunction(Double.parseDouble(i)));
         } catch (Exception e) {
-          functionStack.push(new Function(i));
+          functionStack.push(new OldFunction(i));
         }
       } else if (isAnOperator2(i)) {
-        Function a = functionStack.pop();
-        Function b = functionStack.pop();
-        functionStack.push(new Function(i, a, b));
+        OldFunction a = functionStack.pop();
+        OldFunction b = functionStack.pop();
+        functionStack.push(new OldFunction(i, a, b));
       } else if (isAnOperator1(i)) {
-        Function c = functionStack.pop();
-        functionStack.push(new Function(i, c));
+        OldFunction c = functionStack.pop();
+        functionStack.push(new OldFunction(i, c));
       }
     }
     if (functionStack.size() != 1) throw new IndexOutOfBoundsException("functionStack size is " + functionStack.size());

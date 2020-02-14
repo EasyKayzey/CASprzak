@@ -1,15 +1,15 @@
-public class Function {
+public class OldFunction {
   private double num;
   private String operation;
-  private Function fun1;
-  private Function fun2;
+  private OldFunction fun1;
+  private OldFunction fun2;
   private boolean isNum;
   private boolean isVar;
   private String variable;
   private static String[] operations1 = Parser.operations1;
   private static String[] operations2 = Parser.operations2;
 
-  public static Function makeFunction(String input){
+  public static OldFunction makeFunction(String input){
     PreProcessor preprocessor = new PreProcessor();
     Parser parser = new Parser();
     return parser.parse(preprocessor.toPostfix(input));
@@ -29,25 +29,25 @@ public class Function {
     return -1;
   }
 
-  Function (String operation, Function fun1, Function fun2){
+  OldFunction(String operation, OldFunction fun1, OldFunction fun2){
     this.operation = operation;
     this.fun1 = fun1;
     this.fun2 = fun2;
     isNum = false;
   }
 
-  Function (String operation, Function fun1){
+  OldFunction(String operation, OldFunction fun1){
     this.operation = operation;
     this.fun1 = fun1;
     isNum = false;
   }
 
-  Function (double num){
+  OldFunction(double num){
     this.num = num;
     isNum = true;
   }
 
-  Function (String variable) {
+  OldFunction(String variable) {
     this.variable = variable;
     isVar = true;
   }
@@ -113,99 +113,99 @@ public class Function {
     return temp1.toString();
   }
 
-  public Function derivative(String variable) {
+  public OldFunction derivative(String variable) {
     if (isNum || isVar) {
-      if (isVar && this.variable.equals(variable)) return new Function(1);
-      return new Function(0);
+      if (isVar && this.variable.equals(variable)) return new OldFunction(1);
+      return new OldFunction(0);
     } else {
       if(operation.equals("+")) return add(fun2.derivative(variable), fun1.derivative(variable));
       if(operation.equals("-")) return sub(fun2.derivative(variable), fun1.derivative(variable));
       if(operation.equals("*")) return add(mul(fun1, fun2.derivative(variable)), mul(fun1.derivative(variable), fun2));
-      if(operation.equals("/")) return div(sub(mul(fun1, fun2.derivative(variable)), mul(fun1.derivative(variable), fun2)), pow(fun1, new Function(2)));
+      if(operation.equals("/")) return div(sub(mul(fun1, fun2.derivative(variable)), mul(fun1.derivative(variable), fun2)), pow(fun1, new OldFunction(2)));
       if(operation.equals("^")) return mul(pow(fun1, fun2), add(mul(fun1.derivative(variable), ln(fun2)), div(mul(fun1, fun2.derivative(variable)), fun2)));
-      if(operation.equals("logb")) return div(sub(div(mul(fun1.derivative(variable), ln(fun2)), fun1), div(mul(fun2.derivative(variable), ln(fun1)), fun2)), pow(ln(fun2), new Function(2)));
+      if(operation.equals("logb")) return div(sub(div(mul(fun1.derivative(variable), ln(fun2)), fun1), div(mul(fun2.derivative(variable), ln(fun1)), fun2)), pow(ln(fun2), new OldFunction(2)));
       if(operation.equals("sin")) return mul(cos(fun1), fun1.derivative(variable));
-      if(operation.equals("cos")) return mul(mul(sin(fun1), new Function(-1)), fun1.derivative(variable));
-      if(operation.equals("tan")) return mul(pow(sec(fun1), new Function(2)), fun1.derivative(variable));
-      if(operation.equals("csc")) return mul(mul(mul(cot(fun1), csc(fun1)), new Function(-1)), fun1.derivative(variable));
+      if(operation.equals("cos")) return mul(mul(sin(fun1), new OldFunction(-1)), fun1.derivative(variable));
+      if(operation.equals("tan")) return mul(pow(sec(fun1), new OldFunction(2)), fun1.derivative(variable));
+      if(operation.equals("csc")) return mul(mul(mul(cot(fun1), csc(fun1)), new OldFunction(-1)), fun1.derivative(variable));
       if(operation.equals("sec")) return mul(mul(tan(fun1), sec(fun1)), fun1.derivative(variable));
-      if(operation.equals("cot")) return mul(mul(pow(csc(fun1), new Function(2)), new Function(-1)), fun1.derivative(variable));
+      if(operation.equals("cot")) return mul(mul(pow(csc(fun1), new OldFunction(2)), new OldFunction(-1)), fun1.derivative(variable));
       if(operation.equals("sinh")) return mul(cosh(fun1), fun1.derivative(variable));
       if(operation.equals("cosh")) return mul(sinh(fun1), fun1.derivative(variable));
-      if(operation.equals("tanh")) return div(fun1.derivative(variable), pow(cosh(fun1), new Function(2)));
-      if(operation.equals("asin")) return div(fun1.derivative(variable), sqrt(sub(pow(fun1, new Function(2)), new Function(1))));
-      if(operation.equals("acos")) return div(mul(fun1.derivative(variable), new Function(-1)), sqrt(sub(new Function(1), pow(fun1, new Function(2)))));
-      if(operation.equals("atan")) return div(fun1.derivative(variable), add(new Function(1), pow(fun1, new Function(2))));
-      if(operation.equals("log")) return div(fun1.derivative(variable), mul(new Function("ln", new Function(10)), fun1));
+      if(operation.equals("tanh")) return div(fun1.derivative(variable), pow(cosh(fun1), new OldFunction(2)));
+      if(operation.equals("asin")) return div(fun1.derivative(variable), sqrt(sub(pow(fun1, new OldFunction(2)), new OldFunction(1))));
+      if(operation.equals("acos")) return div(mul(fun1.derivative(variable), new OldFunction(-1)), sqrt(sub(new OldFunction(1), pow(fun1, new OldFunction(2)))));
+      if(operation.equals("atan")) return div(fun1.derivative(variable), add(new OldFunction(1), pow(fun1, new OldFunction(2))));
+      if(operation.equals("log")) return div(fun1.derivative(variable), mul(new OldFunction("ln", new OldFunction(10)), fun1));
       if(operation.equals("ln")) return div(fun1.derivative(variable), fun1);
-      if(operation.equals("sqrt")) return div(fun1.derivative(variable), mul(sqrt(fun1), new Function(2)));
+      if(operation.equals("sqrt")) return div(fun1.derivative(variable), mul(sqrt(fun1), new OldFunction(2)));
       if(operation.equals("exp")) return mul(exp(fun1), fun1.derivative(variable));
     }
     throw new IndexOutOfBoundsException("This function "+operation+" does not exist");
   }
 
-  static Function mul(Function a, Function b) {
-     return new Function("*", b, a);
+  static OldFunction mul(OldFunction a, OldFunction b) {
+     return new OldFunction("*", b, a);
    }
-  static Function div(Function a, Function b) {
-    return new Function("/", b, a);
+  static OldFunction div(OldFunction a, OldFunction b) {
+    return new OldFunction("/", b, a);
   }
-  static Function add(Function a, Function b){
-    return new Function("+", b, a);
+  static OldFunction add(OldFunction a, OldFunction b){
+    return new OldFunction("+", b, a);
   }
-  static Function sub(Function a, Function b){
-    return new Function("-", b, a);
+  static OldFunction sub(OldFunction a, OldFunction b){
+    return new OldFunction("-", b, a);
   }
-  static Function pow(Function a, Function b){
-    return new Function("^", b, a);
+  static OldFunction pow(OldFunction a, OldFunction b){
+    return new OldFunction("^", b, a);
   }
-  static Function ln(Function a){
-    return new Function("ln", a);
+  static OldFunction ln(OldFunction a){
+    return new OldFunction("ln", a);
   }
-  static Function log(Function a){
-    return new Function("log", a);  
+  static OldFunction log(OldFunction a){
+    return new OldFunction("log", a);
   }
-  static Function sin(Function a){
-    return new Function("sin", a);
+  static OldFunction sin(OldFunction a){
+    return new OldFunction("sin", a);
   }
-  static Function cos(Function a){
-    return new Function("cos", a);
+  static OldFunction cos(OldFunction a){
+    return new OldFunction("cos", a);
   }
-  static Function tan(Function a){
-    return new Function("tan", a);
+  static OldFunction tan(OldFunction a){
+    return new OldFunction("tan", a);
   }
-  static Function csc(Function a){
-    return div(new Function(1), sin(a));
+  static OldFunction csc(OldFunction a){
+    return div(new OldFunction(1), sin(a));
   }
-  static Function sec(Function a){
-    return div(new Function(1), cos(a));
+  static OldFunction sec(OldFunction a){
+    return div(new OldFunction(1), cos(a));
   }
-  static Function cot(Function a){
-    return div(new Function(1), tan(a));
+  static OldFunction cot(OldFunction a){
+    return div(new OldFunction(1), tan(a));
   }
-  static Function sqrt(Function a){
-    return new Function("^", a, new Function(.5));
+  static OldFunction sqrt(OldFunction a){
+    return new OldFunction("^", a, new OldFunction(.5));
   }
-  static Function sinh(Function a){
-    return new Function("sinh", a);
+  static OldFunction sinh(OldFunction a){
+    return new OldFunction("sinh", a);
   }
-  static Function cosh(Function a){
-    return new Function("cosh", a);
+  static OldFunction cosh(OldFunction a){
+    return new OldFunction("cosh", a);
   }
-  static Function tanh(Function a){
-    return new Function("tanh", a);
+  static OldFunction tanh(OldFunction a){
+    return new OldFunction("tanh", a);
   }
-  static Function asin(Function a){
-    return new Function("asin", a);
+  static OldFunction asin(OldFunction a){
+    return new OldFunction("asin", a);
   }
-  static Function acos(Function a){
-    return new Function("acos", a);
+  static OldFunction acos(OldFunction a){
+    return new OldFunction("acos", a);
   }
-  static Function atan(Function a){
-    return new Function("atan", a);
+  static OldFunction atan(OldFunction a){
+    return new OldFunction("atan", a);
   }
-  static Function exp(Function a){
-    return new Function("exp", a);
+  static OldFunction exp(OldFunction a){
+    return new OldFunction("exp", a);
   }
 
 

@@ -30,7 +30,8 @@ public class Parser {
           functionStack.push(functionMaker.constant(Double.parseDouble(i)));
         } catch (Exception e) {
           if (i.length() > 1) System.out.println(i + " is not a valid function.");
-          functionStack.push(functionMaker.variable(i.charAt(0)));
+          functionStack.push(functionMaker.variable(0, new char[]{'x'}));
+
         }
       } else if (isAnOperator2(i)) {
         Function a = functionStack.pop();

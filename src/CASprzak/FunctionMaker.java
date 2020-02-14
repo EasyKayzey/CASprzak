@@ -10,8 +10,8 @@ public class FunctionMaker {
 		return new Constant(constant);
 	}
 
-	public Function variable(char variable) {
-		return new Variable(variable);
+	public Function variable(int varID, char[] varNames) {
+		return new Variable(varID, varNames);
 	}
 
 	public Function find1(String i, Function c) {

@@ -20,6 +20,8 @@ public class CAS {
 		// System.out.println(fun.toString());
 		boolean[] bov = new boolean[vis.length];
 		for (int i = 0; i < bov.length; i++) if (vis[i]!=0) bov[i]=true;
+		PreProcessor test1 = new PreProcessor(raw);
+
 		// System.out.println(fun.toString());
 //		System.out.println("Function val: "+fun.eval(vis));
 //		// System.out.println(FunctionEvaluator.df(fun,bov).toString());

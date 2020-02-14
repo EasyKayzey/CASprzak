@@ -53,10 +53,9 @@ public class Function {
   }
 
   public double evaluate(String[] variables, double[] values) {
-    if (isNum) {
-      if (isVar) return values[indexOf(variable, variables)];
-      return num;
-    } else {
+    if (isVar) return values[indexOf(variable, variables)];
+    else if (isNum) return num;
+    else {
       if(operation.equals("+")) return fun2.evaluate(variables, values) + fun1.evaluate(variables, values);
       if(operation.equals("-")) return fun2.evaluate(variables, values) - fun1.evaluate(variables, values);
       if(operation.equals("*")) return fun2.evaluate(variables, values) * fun1.evaluate(variables, values);

@@ -1,6 +1,12 @@
 package CASprzak.UnitaryFunctions;
 
+import CASprzak.Function;
+
 public class Tanh extends UnitaryFunction {
+    public Tanh(Function function) {
+        super(function);
+    }
+
     @Override
     public String toString() {
         return "tanh(" + function.toString() + ")";

@@ -22,5 +22,17 @@ public class FunctionTest {
 		assertEquals(11, b);
 	}
 
+	@Test void logbWorks() {
+		Function test = Function.makeFunction("logb 3 x");
+		double b = test.evaluate(new String[]{"x"}, new double[]{81});
+		assertEquals(4, b);
+	}
+
+	@Test void trigWorks() {
+		Function test = Function.makeFunction("( sin x ) ^ 2 + ( cos x ) ^ 2");
+		double b = test.evaluate(new String[]{"x"}, new double[]{81});
+		assertEquals(1, b);
+	}
+
 
 }

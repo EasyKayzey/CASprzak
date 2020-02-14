@@ -115,7 +115,7 @@ public class Function {
 
   public Function derivative(String variable) {
     if (isNum || isVar) {
-      if(this.variable.equals(variable)) return new Function(1);
+      if (isVar && this.variable.equals(variable)) return new Function(1);
       return new Function(0);
     } else {
       if(operation.equals("+")) return add(fun2.derivative(variable), fun1.derivative(variable));

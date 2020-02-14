@@ -21,6 +21,7 @@ public class Parser {
   }
 
   public Function parse(String[] postfix) throws IndexOutOfBoundsException {
+
     FunctionMaker functionMaker = new FunctionMaker();
     Stack<Function> functionStack = new Stack<Function>();
     for (String i : postfix) {

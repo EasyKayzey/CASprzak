@@ -1,13 +1,23 @@
 package CASprzak.SpecialFunctions;
 
-public class Variable {
-	private char varName;
+import CASprzak.CAS;
+import CASprzak.Function;
 
-	public Variable(char name) {
-		this.varName = name;
+public class Variable extends Function {
+	protected char[] varNames;
+
+	private int varID;
+
+	public Variable(int varID, char[] varNames) {
+		this.varID = varID;
+		this.varNames = varNames;
 	}
 
 	public String toString() {
-		return "" + varName;
+		return "" + varNames[varID];
+	}
+
+	public double evaluate(double[] variableValues) {
+		return variableValues[varID];
 	}
 }

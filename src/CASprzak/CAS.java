@@ -32,6 +32,8 @@ public class CAS {
 		System.out.println(curFun.getDerivative(0).toString());
 		System.out.println("Here is the derivative, simplified:");
 		System.out.println(curFun.getDerivative(0).simplifyTimes(10).toString());
+		System.out.println("Here is the derivative, evaluated:");
+		System.out.println(curFun.getDerivative(0).simplifyTimes(10).evaluate(vis));
 
 
 		// System.out.println(fun.toString());

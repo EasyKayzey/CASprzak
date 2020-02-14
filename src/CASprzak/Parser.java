@@ -37,11 +37,15 @@ public class Parser {
     throw new IndexOutOfBoundsException("No variable "+variable+" found.");
   }
 
+  public Function parse(String infix) throws Exception {
+    return parse((new PreProcessor()).toPostfix(infix));
+  }
+
   public Function parse(String[] postfix) throws Exception {
 
     FunctionMaker functionMaker = new FunctionMaker();
-    Stack<Function> functionStack = new Stack<Function>();
-    outer: for (String token : postfix) {
+    Stack<Function> functionStack = new Stack<>();
+    for (String token : postfix) {
       if (!isAnOperator1(token) && !isAnOperator2(token)) {
         try {
           functionStack.push(functionMaker.constant(Double.parseDouble(token)));

@@ -15,4 +15,12 @@ public abstract class BinaryFunction extends Function {
     public int compareTo(@NotNull Function f) {
         return 0;
     }
+
+    public Function getFunction1() {
+        return function1;
+    }
+
+    public Function getFunction2() {
+        return function2;
+    }
 }

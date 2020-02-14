@@ -9,6 +9,10 @@ public abstract class UnitaryFunction extends Function {
         this.function = function;
     }
 
+    public Function getOperand() {
+        return function;
+    }
+
     public int compareTo(@NotNull Function f) {
         return 0;
     }

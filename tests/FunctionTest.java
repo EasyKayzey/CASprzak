@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
-public class OldFunctionTest {
+public class FunctionTest {
 	@Test void fxReturnsX() throws Exception {
 	    Parser parser = new Parser(new char[]{'x'});
 		Function test = parser.parse("x");

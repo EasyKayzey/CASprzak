@@ -8,6 +8,7 @@ import CASprzak.UnitaryFunctions.Acos;
 import CASprzak.UnitaryFunctions.Ln;
 import CASprzak.UnitaryFunctions.Negative;
 import CASprzak.UnitaryFunctions.Reciprocal;
+import org.jetbrains.annotations.NotNull;
 
 public class Logb extends BinaryFunction {
     public Logb(Function function1, Function function2) {
@@ -35,5 +36,9 @@ public class Logb extends BinaryFunction {
 
     public Function simplify() {
         return new Logb(function1.simplify(), function2.simplify());
+    }
+
+    public int compareTo(@NotNull Function f) {
+        return 0;
     }
 }

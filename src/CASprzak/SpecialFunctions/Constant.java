@@ -1,6 +1,7 @@
 package CASprzak.SpecialFunctions;
 
 import CASprzak.Function;
+import org.jetbrains.annotations.NotNull;
 
 public class Constant extends Function {
 	protected double constant;
@@ -35,6 +36,9 @@ public class Constant extends Function {
 	public double evaluate(double[] variableValues) {
 		return constant;
 	}
+	public double evaluate() {
+		return constant;
+	}
 
 	public String toString() {
 		return "" + constant;
@@ -51,5 +55,9 @@ public class Constant extends Function {
 
 	public Function simplify() {
 		return clone();
+	}
+
+	public int compareTo(@NotNull Function f) {
+		return 0;
 	}
 }

@@ -5,6 +5,7 @@ import CASprzak.CommutativeFunctions.Add;
 import CASprzak.CommutativeFunctions.Multiply;
 import CASprzak.Function;
 import CASprzak.SpecialFunctions.Constant;
+import org.jetbrains.annotations.NotNull;
 
 public class Asin extends UnitaryFunction {
     public Asin(Function function) {
@@ -32,5 +33,9 @@ public class Asin extends UnitaryFunction {
 
     public Function simplify() {
         return new Asin(function.simplify());
+    }
+
+    public int compareTo(@NotNull Function f) {
+        return 0;
     }
 }

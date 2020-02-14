@@ -1,6 +1,7 @@
 package CASprzak.CommutativeFunctions;
 
 import CASprzak.Function;
+import org.jetbrains.annotations.NotNull;
 
 public class Add extends CommutativeFunction{
 
@@ -46,5 +47,9 @@ public class Add extends CommutativeFunction{
 
 	public Function simplify() {
 		return clone();
+	}
+
+	public int compareTo(@NotNull Function f) {
+		return 0;
 	}
 }

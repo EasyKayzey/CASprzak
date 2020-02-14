@@ -5,6 +5,7 @@ import CASprzak.CommutativeFunctions.Multiply;
 import CASprzak.Function;
 import CASprzak.UnitaryFunctions.Ln;
 import CASprzak.UnitaryFunctions.Reciprocal;
+import org.jetbrains.annotations.NotNull;
 
 public class Pow extends BinaryFunction {
 
@@ -33,5 +34,9 @@ public class Pow extends BinaryFunction {
 
 	public Function simplify() {
 		return new Pow(function1.simplify(), function2.simplify());
+	}
+
+	public int compareTo(@NotNull Function f) {
+		return 0;
 	}
 }

@@ -4,6 +4,7 @@ import CASprzak.BinaryFunctions.Pow;
 import CASprzak.CommutativeFunctions.Multiply;
 import CASprzak.Function;
 import CASprzak.SpecialFunctions.Constant;
+import org.jetbrains.annotations.NotNull;
 
 public class Cot extends UnitaryFunction {
     public Cot(Function function) {
@@ -31,5 +32,9 @@ public class Cot extends UnitaryFunction {
 
     public Function simplify() {
         return new Cot(function.simplify());
+    }
+
+    public int compareTo(@NotNull Function f) {
+        return 0;
     }
 }

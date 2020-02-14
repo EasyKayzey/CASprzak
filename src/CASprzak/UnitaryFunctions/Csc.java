@@ -2,6 +2,7 @@ package CASprzak.UnitaryFunctions;
 
 import CASprzak.CommutativeFunctions.Multiply;
 import CASprzak.Function;
+import org.jetbrains.annotations.NotNull;
 
 public class Csc extends UnitaryFunction {
     public Csc(Function function) {
@@ -29,5 +30,9 @@ public class Csc extends UnitaryFunction {
 
     public Function simplify() {
         return new Csc(function.simplify());
+    }
+
+    public int compareTo(@NotNull Function f) {
+        return 0;
     }
 }

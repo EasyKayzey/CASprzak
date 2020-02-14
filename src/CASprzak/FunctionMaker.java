@@ -6,22 +6,39 @@ import CASprzak.CommutativeFunctions.*;
 import CASprzak.SpecialFunctions.*;
 
 public class FunctionMaker {
-	public Function constant(double parseDouble) {
-		return new Constant(0);
+	public Function constant(double constant) {
+		return new Constant(constant);
 	}
 
-	public Function variable(char charAt) {
-		return new Constant(0);
+	public Function variable(char variable) {
+		return new Variable(variable);
 	}
 
 	public Function find1(String i, Function c) {
 		switch (i) {
 			case "sin": return new Sin(c);
+			case "cos": return new Cos(c);
+			case "tan": return new Tan(c);
+			case "csc": return new Csc(c);
+			case "sec": return new Sec(c);
+			case "cot": return new Cot(c);
+			case "asin": return new Asin(c);
+			case "acos": return new Acos(c);
+			case "atan": return new Atan(c);
+			case "sinh": return new Sinh(c);
+			case "cosh": return new Cosh(c);
+			case "tanh": return new Tanh(c);
+			case "ln": return new Ln(c);
+			case "negative": return new Negative(c);
+			case "reciprocal": return new Reciprocal(c);
+
 		}
-		return new Constant(0);
+		return c;
 	}
 
-	public Function find2(String i, Function a, Function b) {
-		return new Constant(0);
+	public Function find2(String i, Function a, Function b) throws Exception {
+		if (i.equals("+")) return new Add(a, b);
+		else if(i.equals("*")) return new Multply(a, b);
+		throw new Exception("Function "+i+" does not exist");
 	}
 }

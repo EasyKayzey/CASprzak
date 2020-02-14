@@ -14,6 +14,6 @@ public class Sin extends UnitaryFunction {
 
     @Override
     public double evaluate(double[] variableValues) {
-        return 0;
+        return Math.sin(function.evaluate(variableValues));
     }
 }

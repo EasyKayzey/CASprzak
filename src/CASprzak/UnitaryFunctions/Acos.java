@@ -14,6 +14,6 @@ public class Acos extends UnitaryFunction {
 
     @Override
     public double evaluate(double[] variableValues) {
-        return 0;
+        return Math.acos(function.evaluate(variableValues));
     }
 }

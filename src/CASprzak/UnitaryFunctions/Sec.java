@@ -14,6 +14,6 @@ public class Sec extends UnitaryFunction {
 
     @Override
     public double evaluate(double[] variableValues) {
-        return 0;
+        return 1 / Math.cos(function.evaluate(variableValues));
     }
 }

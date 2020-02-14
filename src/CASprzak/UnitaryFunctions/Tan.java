@@ -14,6 +14,6 @@ public class Tan extends UnitaryFunction {
 
     @Override
     public double evaluate(double[] variableValues) {
-        return 0;
+        return Math.tan(function.evaluate(variableValues));
     }
 }

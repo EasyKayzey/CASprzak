@@ -14,6 +14,6 @@ public class Asin extends UnitaryFunction {
 
     @Override
     public double evaluate(double[] variableValues) {
-        return 0;
+        return Math.asin(function.evaluate(variableValues));
     }
 }

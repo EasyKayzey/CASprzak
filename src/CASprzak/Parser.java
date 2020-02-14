@@ -20,7 +20,7 @@ public class Parser {
     return false;
   }
 
-  public Function parse(String[] postfix) throws IndexOutOfBoundsException {
+  public Function parse(String[] postfix) throws Exception {
 
     FunctionMaker functionMaker = new FunctionMaker();
     Stack<Function> functionStack = new Stack<Function>();

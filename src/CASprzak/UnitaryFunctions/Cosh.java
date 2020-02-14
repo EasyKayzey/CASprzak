@@ -14,6 +14,6 @@ public class Cosh extends UnitaryFunction {
 
     @Override
     public double evaluate(double[] variableValues) {
-        return 0;
+        return Math.cosh(function.evaluate(variableValues));
     }
 }

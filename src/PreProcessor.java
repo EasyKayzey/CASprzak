@@ -55,6 +55,6 @@ public class PreProcessor {
       postfix.add(operators.pop());
     }
 
-    return (String[]) postfix.toArray();
+    return (String[]) postfix.toArray(new String[postfix.size()]);
   }
 }

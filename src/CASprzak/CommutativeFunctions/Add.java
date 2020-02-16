@@ -32,7 +32,6 @@ public class Add extends CommutativeFunction{
 		return temp.toString();
 	}
 
-	@Override
 	public Function getDerivative(int varID) {
 		Function[] toAdd = new Function[functions.length];
 		for (int i = 0; i < functions.length; i++) {

@@ -18,12 +18,10 @@ public class Pow extends BinaryFunction {
 		return "(" + function2.toString() + ")^(" + function1.toString() + ")";
 	}
 
-	@Override
 	public Function getDerivative(int varID) {
 		return  new Multiply(new Pow(function1, function2), new Add( new Multiply(function1.getDerivative(varID), new Ln(function2)), new Multiply(new Multiply(function1, function2.getDerivative(varID)), new Reciprocal(function2))));
 	}
 
-	@Override
 	public double evaluate(double[] variableValues) {
 		return Math.pow(function2.evaluate(variableValues), function1.evaluate(variableValues));
 	}

@@ -15,14 +15,17 @@ public class Logb extends BinaryFunction {
         super(function1, function2);
     }
 
+    @Override
     public String toString() {
         return "log_(" + function2.toString() + ")(" + function1.toString() + ")";
     }
 
+    @Override
     public Function getDerivative(int varID) {
         return new Multiply( new Add(new Multiply( new Multiply(function1.getDerivative(varID), new Ln(function2)), new Reciprocal(function1)), new Negative(new Multiply( new Multiply(function2.getDerivative(varID), new Ln(function1)), new Reciprocal(function2)))), new Reciprocal( new Pow(new Constant(2), new Ln( function2 ))));
     }
 
+    @Override
     public double evaluate(double[] variableValues) {
         return Math.log(function1.evaluate(variableValues)) / Math.log(function2.evaluate(variableValues));
     }

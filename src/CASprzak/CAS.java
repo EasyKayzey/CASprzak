@@ -36,7 +36,7 @@ public class CAS {
 		System.out.println("Here is the derivative, evaluated:");
 		System.out.println(curFun.getDerivative(0).simplifyTimes(10).evaluate(vis));
 		System.out.println("Here is a zero for the expression");
-		System.out.println(solver.getSolutionPoint(curFun, 10));
+		System.out.println(solver.getSolutionPoint( curFun, 10));
 
 
 

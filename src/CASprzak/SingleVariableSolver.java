@@ -10,7 +10,7 @@ public class SingleVariableSolver {
     }
 
     public double getSolutionPoint(Function expression, double initialPoint) {
-        for (int i = 0; i < 100; i++){
+        for (int i = 0; i < 1000; i++){
             initialPoint = newtonsMethod(expression, initialPoint);
         }
         return initialPoint;

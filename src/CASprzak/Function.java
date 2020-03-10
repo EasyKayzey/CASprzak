@@ -1,6 +1,13 @@
 package CASprzak;
 
+import CASprzak.SpecialFunctions.*;
+import CASprzak.CommutativeFunctions.*;
+import CASprzak.BinaryFunctions.*;
+import CASprzak.UnitaryFunctions.*;
+
 public abstract class Function implements Evaluatable, Differentiable, Simplifiable, Comparable<Function> {
+	protected Class[] sortOrder = {Negative.class, Constant.class, Variable.class, Pow.class, Logb.class, Multiply.class, UnitaryFunction.class, Add.class, Reciprocal.class};
+
 	protected String functionName;
 
 	public abstract String toString();

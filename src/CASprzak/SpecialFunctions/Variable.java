@@ -2,8 +2,6 @@ package CASprzak.SpecialFunctions;
 
 import CASprzak.CAS;
 import CASprzak.Function;
-import org.jetbrains.annotations.NotNull;
-
 public class Variable extends Function {
 	protected char[] varNames;
 
@@ -35,7 +33,7 @@ public class Variable extends Function {
 		return clone();
 	}
 
-	public int compareTo(@NotNull Function f) {
+	public int compareTo( Function f) {
 		return 0;
 	}
 }

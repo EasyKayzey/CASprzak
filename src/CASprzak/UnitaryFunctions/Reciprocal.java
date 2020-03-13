@@ -4,8 +4,6 @@ import CASprzak.BinaryFunctions.Pow;
 import CASprzak.CommutativeFunctions.Multiply;
 import CASprzak.Function;
 import CASprzak.SpecialFunctions.Constant;
-import org.jetbrains.annotations.NotNull;
-
 public class Reciprocal extends UnitaryFunction{
 	public Reciprocal(Function function) {
 		super(function);
@@ -31,7 +29,7 @@ public class Reciprocal extends UnitaryFunction{
 		return new Reciprocal(function.simplify());
 	}
 
-	public int compareTo(@NotNull Function f) {
+	public int compareTo( Function f) {
 		return 0;
 	}
 }

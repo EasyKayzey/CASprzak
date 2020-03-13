@@ -3,8 +3,6 @@ package CASprzak.CommutativeFunctions;
 import CASprzak.ArrLib;
 import CASprzak.Function;
 import CASprzak.SpecialFunctions.Constant;
-import org.jetbrains.annotations.NotNull;
-
 public class Add extends CommutativeFunction{
 
 	public Add(Function[] functions) {
@@ -73,7 +71,7 @@ public class Add extends CommutativeFunction{
 		return new Add(toAdd);
 	}
 
-	public int compareTo(@NotNull Function f) {
+	public int compareTo( Function f) {
 		return 0;
 	}
 }

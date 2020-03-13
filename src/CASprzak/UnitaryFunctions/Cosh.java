@@ -2,8 +2,6 @@ package CASprzak.UnitaryFunctions;
 
 import CASprzak.CommutativeFunctions.Multiply;
 import CASprzak.Function;
-import org.jetbrains.annotations.NotNull;
-
 public class Cosh extends UnitaryFunction {
     public Cosh(Function function) {
         super(function);
@@ -32,7 +30,7 @@ public class Cosh extends UnitaryFunction {
         return new Cosh(function.simplify());
     }
 
-    public int compareTo(@NotNull Function f) {
+    public int compareTo( Function f) {
         return 0;
     }
 }

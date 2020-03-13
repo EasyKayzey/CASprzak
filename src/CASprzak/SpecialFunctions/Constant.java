@@ -1,8 +1,6 @@
 package CASprzak.SpecialFunctions;
 
 import CASprzak.Function;
-import org.jetbrains.annotations.NotNull;
-
 public class Constant extends Function {
 	protected double constant;
 	protected int constantID;
@@ -57,7 +55,7 @@ public class Constant extends Function {
 		return clone();
 	}
 
-	public int compareTo(@NotNull Function f) {
+	public int compareTo( Function f) {
 		if (f instanceof Constant) {
 			return (int)Math.signum(((Constant)f).evaluate()-evaluate());
 		}

@@ -3,8 +3,6 @@ package CASprzak.UnitaryFunctions;
 import CASprzak.CommutativeFunctions.Multiply;
 import CASprzak.Function;
 import CASprzak.SpecialFunctions.Constant;
-import org.jetbrains.annotations.NotNull;
-
 public class Cos extends UnitaryFunction {
     public Cos(Function function) {
         super(function);
@@ -33,7 +31,7 @@ public class Cos extends UnitaryFunction {
         return new Cos(function.simplify());
     }
 
-    public int compareTo(@NotNull Function f) {
+    public int compareTo( Function f) {
         return 0;
     }
 }

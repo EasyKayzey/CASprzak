@@ -3,8 +3,6 @@ package CASprzak.CommutativeFunctions;
 import CASprzak.ArrLib;
 import CASprzak.Function;
 import CASprzak.SpecialFunctions.Constant;
-import org.jetbrains.annotations.NotNull;
-
 public class Multiply extends CommutativeFunction{
 
 	public Multiply(Function[] functions) {
@@ -77,7 +75,7 @@ public class Multiply extends CommutativeFunction{
 		return new Multiply(toMultiply);
 	}
 
-	public int compareTo(@NotNull Function f) {
+	public int compareTo( Function f) {
 		return 0;
 	}
 }

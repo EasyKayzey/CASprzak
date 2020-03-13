@@ -1,7 +1,5 @@
 package CASprzak.UnitaryFunctions;
 import CASprzak.Function;
-import org.jetbrains.annotations.NotNull;
-
 public abstract class UnitaryFunction extends Function {
     protected Function function;
 
@@ -13,7 +11,7 @@ public abstract class UnitaryFunction extends Function {
         return function;
     }
 
-    public int compareTo(@NotNull Function f) {
+    public int compareTo( Function f) {
         return 0;
     }
 }

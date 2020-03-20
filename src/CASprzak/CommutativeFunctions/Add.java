@@ -4,6 +4,7 @@ import CASprzak.ArrLib;
 import CASprzak.Function;
 import CASprzak.SpecialFunctions.Constant;
 public class Add extends CommutativeFunction{
+	double identity = 0;
 
 	public Add(Function[] functions) {
 		super(functions);
@@ -45,33 +46,46 @@ public class Add extends CommutativeFunction{
 		return new Add(toAdd);
 	}
 
-	public Function simplify() {
-		if (functions.length == 1) return functions[0].simplify();
 
+	@Override
+	protected CommutativeFunction simplifyElements() {
+		Function[] toAdd = new Function[functions.length];
+		for (int i = 0; i < functions.length; i++) toAdd[i] = functions[i].simplify();
+		return new Add(toAdd);
+	}
+
+	@Override
+	protected CommutativeFunction simplifyIdentity() {
 		for (int i = 0; i < functions.length; i++) {
 			if (functions[i] instanceof Constant) {
 				if (((Constant) functions[i]).evaluate() == 0) {
-					return (new Add(ArrLib.removeFunctionAt(functions, i))).simplify();
+					return (new Add(ArrLib.removeFunctionAt(functions, i))).simplifyIdentity();
 				}
 			}
 		}
+		return this;
+	}
+
+	protected CommutativeFunction simplifyConstants() {
 		for (int i = 0; i < functions.length; i++){
 			for (int j = i + 1; j < functions.length; j++){
 				if (functions[i] instanceof Constant && functions[j] instanceof Constant) {
 					Constant c = new Constant(((Constant) functions[i]).evaluate() + ((Constant) functions[j]).evaluate());
 					Function[] toAdd = ArrLib.removeFunctionAt(functions, j);
 					toAdd[i] = c;
-					return (new Add(toAdd)).simplify();
+					return (new Add(toAdd)).simplifyConstants();
 				}
 			}
 		}
-
-		Function[] toAdd = new Function[functions.length];
-		for (int i = 0; i < functions.length; i++) toAdd[i] = functions[i].simplify();
-		return new Add(toAdd);
+		return this;
 	}
 
-	public int compareTo( Function f) {
+	protected Function simplifyOneElement() {
+		if (functions.length == 1) return functions[0].simplify();
+		return this;
+	}
+
+	public int compareTo(Function f) {
 		return 0;
 	}
 }

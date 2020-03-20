@@ -4,6 +4,7 @@ import CASprzak.ArrLib;
 import CASprzak.Function;
 import CASprzak.SpecialFunctions.Constant;
 public class Multiply extends CommutativeFunction{
+	double identity  = 1;
 
 	public Multiply(Function[] functions) {
 		super(functions);
@@ -53,8 +54,6 @@ public class Multiply extends CommutativeFunction{
 	}
 
 	public Function simplify() {
-		if (functions.length == 1) return functions[0].simplify();
-
 		for (Function function : functions) {
 			if (function instanceof Constant) {
 				if (((Constant) function).evaluate() == 0) {
@@ -62,20 +61,34 @@ public class Multiply extends CommutativeFunction{
 				}
 			}
 		}
-		for (int i = 0; i < functions.length; i++) {
-			if (functions[i] instanceof Constant) {
-				if (((Constant) functions[i]).evaluate() == 1) {
-					return (new Add(ArrLib.removeFunctionAt(functions, i))).simplify();
-				}
-			}
-		}
+		return super.simplify();
+	}
 
+	@Override
+	protected CommutativeFunction simplifyElements() {
 		Function[] toMultiply = new Function[functions.length];
 		for (int i = 0; i < functions.length; i++) toMultiply[i] = functions[i].simplify();
 		return new Multiply(toMultiply);
 	}
 
-	public int compareTo( Function f) {
+	@Override
+	protected CommutativeFunction simplifyIdentity() {
+		for (int i = 0; i < functions.length; i++) {
+			if (functions[i] instanceof Constant) {
+				if (((Constant) functions[i]).evaluate() == 1) {
+					return (new Add(ArrLib.removeFunctionAt(functions, i))).simplifyIdentity();
+				}
+			}
+		}
+		return this;
+	}
+
+	@Override
+	protected CommutativeFunction simplifyConstants() {
+		return this;
+	}
+
+	public int compareTo(Function f) {
 		return 0;
 	}
 }

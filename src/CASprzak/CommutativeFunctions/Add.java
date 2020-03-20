@@ -46,6 +46,9 @@ public class Add extends CommutativeFunction{
 		return new Add(toAdd);
 	}
 
+	public Function simplify() {
+		return super.simplify();
+	}
 
 	@Override
 	protected CommutativeFunction simplifyElements() {

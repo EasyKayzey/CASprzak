@@ -33,4 +33,9 @@ public abstract class CommutativeFunction extends Function {
             return functions[0].simplify();
         return this;
     }
+
+
+    public Function[] getFunctions() {
+        return functions.clone();
+    }
 }

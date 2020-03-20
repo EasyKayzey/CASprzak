@@ -53,6 +53,7 @@ public class Multiply extends CommutativeFunction{
 		return new Multiply(toMultiply);
 	}
 
+
 	public Function simplify() {
 		for (Function function : functions) {
 			if (function instanceof Constant) {
@@ -61,7 +62,7 @@ public class Multiply extends CommutativeFunction{
 				}
 			}
 		}
-		return super.simplify();
+		return super.simplifyInternal().simplifyOneElement();
 	}
 
 	@Override

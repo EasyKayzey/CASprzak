@@ -16,8 +16,8 @@ public abstract class CommutativeFunction extends Function {
     }
 
 
-    public Function simplify() {
-        return this.simplifyElements().simplifyIdentity().simplifyConstants().simplifyOneElement();
+    public CommutativeFunction simplifyInternal() {
+        return this.simplifyElements().simplifyIdentity().simplifyConstants();
     }
 
     protected abstract CommutativeFunction simplifyElements();

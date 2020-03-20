@@ -71,8 +71,8 @@ public class Add extends CommutativeFunction{
 	}
 
 	protected CommutativeFunction simplifyConstants() {
-		for (int i = 0; i < functions.length; i++){
-			for (int j = i + 1; j < functions.length; j++){
+		for (int i = 1; i < functions.length; i++){
+			for (int j = 0; j < i; j++){
 				if (functions[i] instanceof Constant && functions[j] instanceof Constant) {
 					Constant c = new Constant(((Constant) functions[i]).evaluate() + ((Constant) functions[j]).evaluate());
 					Function[] toAdd = ArrLib.removeFunctionAt(functions, j);

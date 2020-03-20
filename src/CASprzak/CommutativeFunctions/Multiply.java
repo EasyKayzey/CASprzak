@@ -56,10 +56,10 @@ public class Multiply extends CommutativeFunction{
 
 	public Function simplify() {
 		Multiply init = (Multiply) simplifyInternal();
-		if (isTimesZero())
+		if (init.isTimesZero())
 			return new Constant((0));
 		else
-			return simplifyOneElement();
+			return init.simplifyOneElement();
 	}
 
 	@Override

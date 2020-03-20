@@ -3,6 +3,8 @@ package CASprzak.CommutativeFunctions;
 import CASprzak.ArrLib;
 import CASprzak.Function;
 import CASprzak.SpecialFunctions.Constant;
+import CASprzak.SpecialFunctions.Variable;
+
 public class Add extends CommutativeFunction{
 	double identity = 0;
 
@@ -52,17 +54,17 @@ public class Add extends CommutativeFunction{
 
 
 	@Override
-	protected CommutativeFunction simplifyElements() {
+	protected Add simplifyElements() {
 		Function[] toAdd = new Function[functions.length];
 		for (int i = 0; i < functions.length; i++) toAdd[i] = functions[i].simplify();
 		return new Add(toAdd);
 	}
 
 	@Override
-	protected CommutativeFunction simplifyIdentity() {
+	protected Add simplifyIdentity() {
 		for (int i = 0; i < functions.length; i++) {
 			if (functions[i] instanceof Constant) {
-				if (((Constant) functions[i]).evaluate() == 0) {
+				if (((Constant) functions[i]).getConstant() == 0) {
 					return (new Add(ArrLib.removeFunctionAt(functions, i))).simplifyIdentity();
 				}
 			}
@@ -70,9 +72,9 @@ public class Add extends CommutativeFunction{
 		return this;
 	}
 
-	protected CommutativeFunction simplifyConstants() {
-		for (int i = 0; i < functions.length; i++){
-			for (int j = i + 1; j < functions.length; j++){
+	protected Add simplifyConstants() {
+		for (int i = 1; i < functions.length; i++){
+			for (int j = 0; j < i; j++){
 				if (functions[i] instanceof Constant && functions[j] instanceof Constant) {
 					Constant c = new Constant(((Constant) functions[i]).evaluate() + ((Constant) functions[j]).evaluate());
 					Function[] toAdd = ArrLib.removeFunctionAt(functions, j);
@@ -87,6 +89,24 @@ public class Add extends CommutativeFunction{
 	protected Function simplifyOneElement() {
 		if (functions.length == 1) return functions[0].simplify();
 		return this;
+	}
+
+	protected Add combineLikeTerms() {
+		for (Function i: functions) {
+			if (i instanceof Variable) i = new Multiply(new Constant(1), i);
+		}
+		for (int i = 1; i < functions.length; i++) {
+			for (int j = 0; j < i; j++) {
+				if (functions[i] instanceof Multiply && functions[j] instanceof Multiply) {
+					//first, make sure it's sorted in the correct order (use .simplify)
+					//TODO: sort things
+					//make a NEW multiply with everything besides the first element (use Arrlib)
+					//then check if the first one .equals the second one
+					//if so, make a new multiply with the sum of the first elements, and then the second element of one of them (they are equal)
+
+				}
+			}
+		}
 	}
 
 	public int compareTo(Function f) {

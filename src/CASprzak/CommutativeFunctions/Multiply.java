@@ -55,29 +55,26 @@ public class Multiply extends CommutativeFunction{
 
 
 	public Function simplify() {
-		for (Function function : functions) {
-			if (function instanceof Constant) {
-				if (((Constant) function).evaluate() == 0) {
-					return new Constant(0);
-				}
-			}
-		}
-		return super.simplifyInternal().simplifyOneElement();
+		Multiply init = (Multiply) simplifyInternal();
+		if (isTimesZero())
+			return new Constant((0));
+		else
+			return simplifyOneElement();
 	}
 
 	@Override
-	protected CommutativeFunction simplifyElements() {
+	protected Multiply simplifyElements() {
 		Function[] toMultiply = new Function[functions.length];
 		for (int i = 0; i < functions.length; i++) toMultiply[i] = functions[i].simplify();
 		return new Multiply(toMultiply);
 	}
 
 	@Override
-	protected CommutativeFunction simplifyIdentity() {
+	protected Multiply simplifyIdentity() {
 		for (int i = 0; i < functions.length; i++) {
 			if (functions[i] instanceof Constant) {
 				if (((Constant) functions[i]).evaluate() == 1) {
-					return (new Add(ArrLib.removeFunctionAt(functions, i))).simplifyIdentity();
+					return (new Multiply(ArrLib.removeFunctionAt(functions, i))).simplifyIdentity();
 				}
 			}
 		}
@@ -85,8 +82,19 @@ public class Multiply extends CommutativeFunction{
 	}
 
 	@Override
-	protected CommutativeFunction simplifyConstants() {
+	protected Multiply simplifyConstants() {
 		return this;
+	}
+
+	protected boolean isTimesZero() {
+		for (Function function : functions) {
+			if (function instanceof Constant) {
+				if (((Constant) function).evaluate() == 0) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	public int compareTo(Function f) {

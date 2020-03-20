@@ -83,6 +83,16 @@ public class Multiply extends CommutativeFunction{
 
 	@Override
 	protected Multiply simplifyConstants() {
+		for (int i = 1; i < functions.length; i++){
+			for (int j = 0; j < i; j++){
+				if (functions[i] instanceof Constant && functions[j] instanceof Constant) {
+					Constant c = new Constant(((Constant) functions[i]).evaluate() * ((Constant) functions[j]).evaluate());
+					Function[] toMultiply = ArrLib.removeFunctionAt(functions, j);
+					toMultiply[i] = c;
+					return (new Multiply(toMultiply)).simplifyConstants();
+				}
+			}
+		}
 		return this;
 	}
 

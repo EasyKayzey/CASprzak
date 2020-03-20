@@ -43,8 +43,12 @@ public class FunctionMaker {
 		switch (i) {
 			case "+":
 				return new Add(a, b);
+			case "-":
+				return new Add(b, new Negative(a));
 			case "*":
 				return new Multiply(a, b);
+			case "/":
+				return new Multiply(b, new Reciprocal(a));
 			case "^":
 				return new Pow(a, b);
 			case "logb":

@@ -34,7 +34,8 @@ public class Constant extends Function {
 	public double evaluate(double[] variableValues) {
 		return constant;
 	}
-	public double evaluate() {
+
+	public double getConstant() {
 		return constant;
 	}
 
@@ -57,7 +58,7 @@ public class Constant extends Function {
 
 	public int compareTo( Function f) {
 		if (f instanceof Constant) {
-			return (int)Math.signum(((Constant)f).evaluate()-evaluate());
+			return (int)Math.signum(((Constant)f).getConstant()- getConstant());
 		}
 		return 0;
 	}

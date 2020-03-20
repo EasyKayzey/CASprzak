@@ -62,7 +62,7 @@ public class Add extends CommutativeFunction{
 	protected CommutativeFunction simplifyIdentity() {
 		for (int i = 0; i < functions.length; i++) {
 			if (functions[i] instanceof Constant) {
-				if (((Constant) functions[i]).evaluate() == 0) {
+				if (((Constant) functions[i]).getConstant() == 0) {
 					return (new Add(ArrLib.removeFunctionAt(functions, i))).simplifyIdentity();
 				}
 			}
@@ -74,7 +74,7 @@ public class Add extends CommutativeFunction{
 		for (int i = 1; i < functions.length; i++){
 			for (int j = 0; j < i; j++){
 				if (functions[i] instanceof Constant && functions[j] instanceof Constant) {
-					Constant c = new Constant(((Constant) functions[i]).evaluate() + ((Constant) functions[j]).evaluate());
+					Constant c = new Constant(((Constant) functions[i]).getConstant() + ((Constant) functions[j]).getConstant());
 					Function[] toAdd = ArrLib.removeFunctionAt(functions, j);
 					toAdd[i] = c;
 					return (new Add(toAdd)).simplifyConstants();

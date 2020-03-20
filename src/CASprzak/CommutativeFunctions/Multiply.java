@@ -73,7 +73,7 @@ public class Multiply extends CommutativeFunction{
 	protected Multiply simplifyIdentity() {
 		for (int i = 0; i < functions.length; i++) {
 			if (functions[i] instanceof Constant) {
-				if (((Constant) functions[i]).evaluate() == 1) {
+				if (((Constant) functions[i]).getConstant() == 1) {
 					return (new Multiply(ArrLib.removeFunctionAt(functions, i))).simplifyIdentity();
 				}
 			}
@@ -86,7 +86,7 @@ public class Multiply extends CommutativeFunction{
 		for (int i = 1; i < functions.length; i++){
 			for (int j = 0; j < i; j++){
 				if (functions[i] instanceof Constant && functions[j] instanceof Constant) {
-					Constant c = new Constant(((Constant) functions[i]).evaluate() * ((Constant) functions[j]).evaluate());
+					Constant c = new Constant(((Constant) functions[i]).getConstant() * ((Constant) functions[j]).getConstant());
 					Function[] toMultiply = ArrLib.removeFunctionAt(functions, j);
 					toMultiply[i] = c;
 					return (new Multiply(toMultiply)).simplifyConstants();
@@ -99,7 +99,7 @@ public class Multiply extends CommutativeFunction{
 	protected boolean isTimesZero() {
 		for (Function function : functions) {
 			if (function instanceof Constant) {
-				if (((Constant) function).evaluate() == 0) {
+				if (((Constant) function).getConstant() == 0) {
 					return true;
 				}
 			}

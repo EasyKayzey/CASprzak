@@ -5,7 +5,7 @@ import CASprzak.SpecialFunctions.Constant;
 public abstract class CommutativeFunction extends Function {
     double identity;
 
-    protected Function[] functions;
+    protected final Function[] functions;
 
     public CommutativeFunction(Function[] functions) {
         this.functions = functions;

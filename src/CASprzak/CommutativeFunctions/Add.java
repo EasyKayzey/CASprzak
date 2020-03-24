@@ -93,17 +93,18 @@ public class Add extends CommutativeFunction{
 	}
 
 	protected Add combineLikeTerms() {
+		Function[] combinedTerms = ArrLib.deepClone(functions);
 		for (Function i: functions) {
 			if (i instanceof Variable) i = new Multiply(new Constant(1), i);
 		}
 		for (int i = 1; i < functions.length; i++) {
 			for (int j = 0; j < i; j++) {
 				if (functions[i] instanceof Multiply && functions[j] instanceof Multiply) {
-					//first, make sure it's sorted in the correct order (use .simplify)
-					//TODO: sort things
-					//make a NEW multiply with everything besides the first element (use Arrlib)
-					//then check if the first one .equals the second one
-					//if so, make a new multiply with the sum of the first elements, and then the second element of one of them (they are equal)
+					Multiply mult1 = new Multiply(ArrLib.removeFunctionAt(((Multiply)functions[i]).getFunctions(), 0));
+					Multiply mult2 = new Multiply(ArrLib.removeFunctionAt(((Multiply)functions[j]).getFunctions(), 0));
+					if (mult1.equals(mult2)){
+						Multiply multCombined = new Multiply(new Add(((Multiply)functions[i]).getFunctions()[0], ((Multiply)functions[j]).getFunctions()[0]), mult1);
+					}
 
 				}
 			}

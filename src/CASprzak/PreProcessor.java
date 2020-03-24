@@ -32,8 +32,8 @@ public class PreProcessor {
 
   public String[] toPostfix(String infix) {
     String[] tokens = infix.split("\\s+");
-    ArrayList<String> postfix = new ArrayList<String>();
-    Stack<String> operators = new Stack<String>();
+    ArrayList<String> postfix = new ArrayList<>();
+    Stack<String> operators = new Stack<>();
 
       for (String i : tokens) {
 
@@ -63,6 +63,6 @@ public class PreProcessor {
       postfix.add(operators.pop());
     }
 
-    return (String[]) postfix.toArray(new String[postfix.size()]);
+    return postfix.toArray(new String[postfix.size()]);
   }
 }

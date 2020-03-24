@@ -2,11 +2,11 @@ package CASprzak.SpecialFunctions;
 
 import CASprzak.Function;
 public class Constant extends Function {
-	protected double constant;
-	protected int constantID;
+	protected final double constant;
+	protected final int constantID;
 
-	private static String[] specialConstantStrings = {"pi", "e"};
-	private static double[] specialConstants = {Math.PI, Math.E};
+	private static final String[] specialConstantStrings = {"pi", "e"};
+	private static final double[] specialConstants = {Math.PI, Math.E};
 
 	public Constant(double constant) {
 		this.constant = constant;

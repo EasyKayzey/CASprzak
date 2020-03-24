@@ -3,9 +3,9 @@ package CASprzak.SpecialFunctions;
 import CASprzak.CAS;
 import CASprzak.Function;
 public class Variable extends Function {
-	protected char[] varNames;
+	protected final char[] varNames;
 
-	private int varID;
+	private final int varID;
 
 	public Variable(int varID, char[] varNames) {
 		this.varID = varID;

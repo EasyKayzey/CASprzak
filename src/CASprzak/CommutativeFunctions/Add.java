@@ -104,12 +104,13 @@ public class Add extends CommutativeFunction{
 					Multiply mult2 = new Multiply(ArrLib.removeFunctionAt(((Multiply)functions[j]).getFunctions(), 0));
 					if (mult1.equals(mult2)){
 						Multiply multCombined = new Multiply(new Add(((Multiply)functions[i]).getFunctions()[0], ((Multiply)functions[j]).getFunctions()[0]), mult1);
+						combinedTerms[j] = multCombined;
+						ArrLib.removeFunctionAt(combinedTerms, i);
 					}
-
 				}
 			}
 		}
-		return this;
+		return new Add(combinedTerms);
 	}
 
 	public int compareTo(Function f) {

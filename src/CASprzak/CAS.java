@@ -27,7 +27,8 @@ public class CAS {
 		SingleVariableSolver solver = new SingleVariableSolver();
 		Parser parser = new Parser(vars);
 		Function curFun = parser.parse(preProcessor.toPostfix(raw));
-		System.out.println("Here is the toString of your function: " + curFun);
+		System.out.println(curFun);
+		System.out.println("Here is the toString of your function: " + curFun.simplify());
 		System.out.println("Here is your output: " + curFun.evaluate(vis));
 		System.out.println("Here is the derivative, unsimplified:");
 //		System.out.println(curFun.toString());

@@ -1,4 +1,5 @@
 package CASprzak.CommutativeFunctions;
+import CASprzak.ArrLib;
 import CASprzak.Function;
 import CASprzak.SpecialFunctions.Constant;
 
@@ -36,6 +37,6 @@ public abstract class CommutativeFunction extends Function {
 
 
     public Function[] getFunctions() {
-        return functions.clone();
+        return ArrLib.deepClone(functions);
     }
 }

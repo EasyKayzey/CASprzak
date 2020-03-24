@@ -77,7 +77,7 @@ public class Add extends CommutativeFunction{
 			for (int j = 0; j < i; j++){
 				if (functions[i] instanceof Constant && functions[j] instanceof Constant) {
 					Constant c = new Constant(((Constant) functions[i]).getConstant() + ((Constant) functions[j]).getConstant());
-					Function[] toAdd = functions.clone();
+					Function[] toAdd = ArrLib.deepClone(functions);
 					toAdd[i] = c;
 					toAdd = ArrLib.removeFunctionAt(toAdd, j);
 					return (new Add(toAdd)).simplifyConstants();

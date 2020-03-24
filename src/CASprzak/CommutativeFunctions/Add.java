@@ -94,8 +94,8 @@ public class Add extends CommutativeFunction{
 
 	protected Add combineLikeTerms() {
 		Function[] combinedTerms = ArrLib.deepClone(functions);
-		for (Function i: functions) {
-			if (i instanceof Variable) i = new Multiply(new Constant(1), i);
+		for (int a = 0; a < functions.length; a++) {
+			if (functions[a] instanceof Variable) functions[a] = new Multiply(new Constant(1), functions[a]);
 		}
 		for (int i = 1; i < functions.length; i++) {
 			for (int j = 0; j < i; j++) {
@@ -105,7 +105,7 @@ public class Add extends CommutativeFunction{
 					if (mult1.equals(mult2)){
 						Multiply multCombined = new Multiply(new Add(((Multiply)functions[i]).getFunctions()[0], ((Multiply)functions[j]).getFunctions()[0]), mult1);
 						combinedTerms[j] = multCombined;
-						ArrLib.removeFunctionAt(combinedTerms, i);
+						combinedTerms = ArrLib.removeFunctionAt(combinedTerms, i);
 					}
 				}
 			}

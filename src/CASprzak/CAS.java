@@ -31,10 +31,9 @@ public class CAS {
 		System.out.println("Here is the toString of your function: " + curFun.simplify());
 		System.out.println("Here is your output: " + curFun.evaluate(vis));
 		System.out.println("Here is the derivative, unsimplified:");
-//		System.out.println(curFun.toString());
-		System.out.println(curFun.getDerivative(0).toString());
+		System.out.println(curFun.getDerivative(0));
 		System.out.println("Here is the derivative, simplified:");
-		System.out.println(curFun.getDerivative(0).simplifyTimes(10).toString());
+		System.out.println(curFun.getDerivative(0).simplifyTimes(10));
 		System.out.println("Here is the derivative, evaluated:");
 		System.out.println(curFun.getDerivative(0).simplifyTimes(10).evaluate(vis));
 		System.out.println("Here is a zero for the expression");

@@ -8,11 +8,6 @@ public class Sec extends UnitaryFunction {
     }
 
     @Override
-    public String toString() {
-        return "sec(" + function.toString() + ")";
-    }
-
-    @Override
     public double evaluate(double[] variableValues) {
         return 1 / Math.cos(function.evaluate(variableValues));
     }

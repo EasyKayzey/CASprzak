@@ -10,11 +10,6 @@ public class Cot extends UnitaryFunction {
     }
 
     @Override
-    public String toString() {
-        return "cot(" + function.toString() + ")";
-    }
-
-    @Override
     public Function getDerivative(int varID) {
         return  new Multiply(new Negative(new Pow(new Csc(function), new Constant(2))), function.getDerivative(varID));
     }

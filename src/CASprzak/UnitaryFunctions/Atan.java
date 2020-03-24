@@ -11,11 +11,6 @@ public class Atan extends UnitaryFunction {
     }
 
     @Override
-    public String toString() {
-        return "atan(" + function.toString() + ")";
-    }
-
-    @Override
     public Function getDerivative(int varID) {
         return new Multiply(function.getDerivative(varID), new Add(new Constant(1), new Reciprocal(new Pow(new Constant(2), function))));
     }

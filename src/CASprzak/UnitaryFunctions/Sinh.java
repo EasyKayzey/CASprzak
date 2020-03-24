@@ -9,11 +9,6 @@ public class Sinh extends UnitaryFunction {
     }
 
     @Override
-    public String toString() {
-        return "sinh(" + function.toString() + ")";
-    }
-
-    @Override
     public double evaluate(double[] variableValues) {
         return Math.sin(function.evaluate(variableValues));
     }

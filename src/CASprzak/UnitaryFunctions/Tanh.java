@@ -10,11 +10,6 @@ public class Tanh extends UnitaryFunction {
     }
 
     @Override
-    public String toString() {
-        return "tanh(" + function.toString() + ")";
-    }
-
-    @Override
     public double evaluate(double[] variableValues) {
         return Math.tan(function.evaluate(variableValues));
     }

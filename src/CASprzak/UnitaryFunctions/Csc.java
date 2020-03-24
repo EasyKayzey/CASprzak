@@ -8,11 +8,6 @@ public class Csc extends UnitaryFunction {
     }
 
     @Override
-    public String toString() {
-        return "csc(" + function.toString() + ")";
-    }
-
-    @Override
     public Function getDerivative(int varID) {
         return new Multiply(new Negative(new Multiply(new Cot(function), new Csc(function))), function.getDerivative(varID));
     }

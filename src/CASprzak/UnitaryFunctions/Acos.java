@@ -11,11 +11,6 @@ public class Acos extends UnitaryFunction {
     }
 
     @Override
-    public String toString() {
-        return "acos(" + function.toString() + ")";
-    }
-
-    @Override
     public Function getDerivative(int varID) {
         return new Multiply(new Multiply(function.getDerivative(varID), new Constant(-1)), new Reciprocal(new Pow(new Constant(0.5), ( new Add(new Constant(1), new Negative(new Pow(new Constant(2), function)))))));
     }

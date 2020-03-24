@@ -9,11 +9,6 @@ public class Cos extends UnitaryFunction {
     }
 
     @Override
-    public String toString() {
-        return "cos(" + function.toString() + ")";
-    }
-
-    @Override
     public Function getDerivative(int varID) {
         return  new Multiply(new Multiply(new Sin(function), new Constant(-1)), function.getDerivative(varID));
     }

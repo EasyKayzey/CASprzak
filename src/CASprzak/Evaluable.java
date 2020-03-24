@@ -1,5 +1,5 @@
 package CASprzak;
 
-interface Evaluatable {
+interface Evaluable {
 	double evaluate(double[] variableValues);
 }

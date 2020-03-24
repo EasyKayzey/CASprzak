@@ -1,6 +1,5 @@
 package CASprzak.SpecialFunctions;
 
-import CASprzak.CAS;
 import CASprzak.Function;
 public class Variable extends Function {
 	protected final char[] varNames;

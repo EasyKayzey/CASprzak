@@ -1,6 +1,5 @@
 package CASprzak;
 
-import java.security.Signature;
 import java.util.ArrayList;
 
 public class SingleVariableSolver {

@@ -4,7 +4,6 @@ import CASprzak.CommutativeFunctions.Add;
 import CASprzak.CommutativeFunctions.Multiply;
 import CASprzak.Function;
 import CASprzak.SpecialFunctions.Constant;
-import CASprzak.UnitaryFunctions.Acos;
 import CASprzak.UnitaryFunctions.Ln;
 import CASprzak.UnitaryFunctions.Negative;
 import CASprzak.UnitaryFunctions.Reciprocal;

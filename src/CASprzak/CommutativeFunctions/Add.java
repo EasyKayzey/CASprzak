@@ -37,14 +37,14 @@ public class Add extends CommutativeFunction{
 		return new Add(toAdd);
 	}
 
-	public Function clone() {
+	public Add clone() {
 		Function[] toAdd = new Function[functions.length];
 		for (int i = 0; i < functions.length; i++) toAdd[i] = functions[i].clone();
 		return new Add(toAdd);
 	}
 
-	public Function simplify() {
-		return super.simplifyInternal().simplifyOneElement();
+	public Add simplifyInternal() {
+		return ((Add) super.simplifyInternal()).combineLikeTerms();
 	}
 
 
@@ -101,11 +101,12 @@ public class Add extends CommutativeFunction{
 						Multiply multCombined = new Multiply(new Add(((Multiply)functions[i]).getFunctions()[0], ((Multiply)functions[j]).getFunctions()[0]), mult1);
 						combinedTerms[j] = multCombined;
 						combinedTerms = ArrLib.removeFunctionAt(combinedTerms, i);
+						return (Add)(new Add(combinedTerms)).simplifyInternal();
 					}
 				}
 			}
 		}
-		return new Add(combinedTerms);
+		return clone();
 	}
 
 	public int compareTo(Function f) {

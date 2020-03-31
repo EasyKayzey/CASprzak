@@ -12,6 +12,10 @@ public abstract class CommutativeFunction extends Function {
         this.functions = functions;
     }
 
+    public Function simplify() {
+        return this.simplifyInternal().simplifyOneElement();
+    }
+
     public CommutativeFunction simplifyInternal() {
         return this.simplifyElements().simplifyIdentity().simplifyConstants();
     }

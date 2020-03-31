@@ -10,7 +10,7 @@ public class Parser {
 
   private char[] variables;
 
-  public Parser(char[] variables) {
+  public Parser(char... variables) {
     this.variables = variables;
   }
 
@@ -28,7 +28,7 @@ public class Parser {
     return false;
   }
 
-  public void setVariables(char[] variables) {
+  public void setVariables(char... variables) {
     this.variables = variables;
   }
 

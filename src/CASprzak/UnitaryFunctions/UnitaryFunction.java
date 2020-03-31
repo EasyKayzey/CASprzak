@@ -10,12 +10,12 @@ public abstract class UnitaryFunction extends Function {
         return function;
     }
 
-    public int compareTo(Function f) {
-        return 0;
-    }
-
     public String toString() {
         return this.getClass().getSimpleName().toLowerCase() + "(" + function.toString() + ")";
+    }
+
+    public int compareTo(Function f) {
+        return 0;
     }
 
     public boolean equals(Function that) {

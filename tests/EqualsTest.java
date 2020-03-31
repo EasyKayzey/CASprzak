@@ -11,28 +11,28 @@ public class EqualsTest {
     void unitaryEqualsUnitary() throws Exception {
         Function test = parser.parse("sin ( x )");
         Function test1 = parser.parse("sin ( x )");
-        assertTrue(test.equals(test1));
+        assertEquals(test, test1);
     }
 
     @Test
     void variablesAreDifferent() throws Exception {
         Function test = parser.parse("sin ( x )");
         Function test1 = parser.parse("sin ( y )");
-        assertFalse(test.equals(test1));
+        assertNotEquals(test, test1);
     }
 
     @Test
     void differentUnitaryFunctions() throws Exception {
         Function test = parser.parse("sin ( x )");
         Function test1 = parser.parse("cos ( x )");
-        assertFalse(test.equals(test1));
+        assertNotEquals(test, test1);
     }
 
     @Test
     void differentFunctionTypes() throws Exception {
         Function test = parser.parse("sin ( x )");
         Function test1 = parser.parse("x + 2");
-        assertFalse(test.equals(test1));
+        assertNotEquals(test, test1);
     }
 
 

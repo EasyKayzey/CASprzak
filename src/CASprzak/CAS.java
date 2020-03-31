@@ -1,8 +1,6 @@
 package CASprzak;
 
 import java.util.*;
-import java.io.*;
-import java.util.stream.Collectors;
 
 public class CAS {
 	public static void main(String[] args) throws Exception {

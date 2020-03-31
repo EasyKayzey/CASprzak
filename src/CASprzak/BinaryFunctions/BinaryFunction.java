@@ -1,7 +1,5 @@
 package CASprzak.BinaryFunctions;
-import CASprzak.Differentiable;
 import CASprzak.Function;
-import CASprzak.UnitaryFunctions.UnitaryFunction;
 
 public abstract class BinaryFunction extends Function {
     protected final Function function1;

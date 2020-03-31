@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
 public class FunctionTest {
-	Parser parserX = new Parser(new char[]{'x'});
-	Parser parserXY = new Parser(new char[]{'x','y'});
+	Parser parserX = new Parser('x');
+	Parser parserXY = new Parser('x','y');
 
 	@Test void fxReturnsX() throws Exception {
 		Function test = parserX.parse("x");

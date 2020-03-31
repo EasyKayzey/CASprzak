@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SolverTest {
-    Parser parserX = new Parser(new char[]{'x'});
-    Parser parserXY = new Parser(new char[]{'x','y'});
+    Parser parserX = new Parser('x');
+    Parser parserXY = new Parser('x','y');
     SingleVariableSolver solver = new SingleVariableSolver();
 
     @Test

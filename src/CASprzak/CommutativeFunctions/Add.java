@@ -101,7 +101,7 @@ public class Add extends CommutativeFunction{
 						Multiply multCombined = new Multiply(new Add(((Multiply)functions[i]).getFunctions()[0], ((Multiply)functions[j]).getFunctions()[0]), mult1);
 						combinedTerms[j] = multCombined;
 						combinedTerms = ArrLib.removeFunctionAt(combinedTerms, i);
-						return (Add)(new Add(combinedTerms)).simplifyInternal();
+						return (new Add(combinedTerms)).simplifyInternal();
 					}
 				}
 			}

@@ -19,4 +19,12 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 		for (int i = 0; i < times; i++) temp = temp.simplify();
 		return temp;
 	}
+
+	public abstract boolean equals(Function f);
+
+	public boolean equals(Object o) {
+		if (!(o instanceof Function))
+			return false;
+		return this.equals((Function) o);
+	}
 }

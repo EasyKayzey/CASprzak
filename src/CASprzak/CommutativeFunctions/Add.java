@@ -6,14 +6,9 @@ import CASprzak.SpecialFunctions.Constant;
 import CASprzak.SpecialFunctions.Variable;
 
 public class Add extends CommutativeFunction{
-	double identity = 0;
-
-	public Add(Function[] functions) {
+	public Add(Function... functions) {
 		super(functions);
-	}
-
-	public Add(Function function1, Function function2) {
-		super(function1, function2);
+		identityValue = 0;
 	}
 
 	public double evaluate(double[] variableValues) {

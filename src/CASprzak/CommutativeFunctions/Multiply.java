@@ -4,14 +4,9 @@ import CASprzak.ArrLib;
 import CASprzak.Function;
 import CASprzak.SpecialFunctions.Constant;
 public class Multiply extends CommutativeFunction{
-	double identity  = 1;
-
-	public Multiply(Function[] functions) {
+	public Multiply(Function... functions) {
 		super(functions);
-	}
-
-	public Multiply(Function function1, Function function2) {
-		super(function1, function2);
+		identityValue = 1;
 	}
 
 	public double evaluate(double[] variableValues) {

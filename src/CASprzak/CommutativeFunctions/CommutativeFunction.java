@@ -4,7 +4,7 @@ import CASprzak.Function;
 import CASprzak.SpecialFunctions.Constant;
 
 public abstract class CommutativeFunction extends Function {
-    double identity;
+    protected double identityValue;
 
     protected final Function[] functions;
 
@@ -24,7 +24,7 @@ public abstract class CommutativeFunction extends Function {
 
     protected Function simplifyOneElement() {
         if (functions.length == 0)
-            return new Constant(identity);
+            return new Constant(identityValue);
         if (functions.length == 1)
             return functions[0].simplify();
         return this;

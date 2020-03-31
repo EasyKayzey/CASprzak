@@ -9,6 +9,7 @@ public class FunctionMaker {
 	public Function constant(double constant) {
 		return new Constant(constant);
 	}
+
 	public Function specialConstant(String constantString) {
 		return new Constant(constantString);
 	}
@@ -16,6 +17,7 @@ public class FunctionMaker {
 	public Function variable(int varID, char[] varNames) {
 		return new Variable(varID, varNames);
 	}
+
 
 	public Function find1(String functionName, Function function) {
 		switch (functionName) {

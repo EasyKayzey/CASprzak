@@ -34,4 +34,11 @@ public abstract class CommutativeFunction extends Function {
     public Function[] getFunctions() {
         return ArrLib.deepClone(functions);
     }
+
+
+    public boolean equals(Function that) {
+        if (this.getClass().equals(that.getClass()))
+            return ArrLib.deepEquals(this.getFunctions(), ((CommutativeFunction)that).getFunctions());
+        return false;
+    }
 }

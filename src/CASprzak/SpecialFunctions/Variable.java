@@ -32,6 +32,11 @@ public class Variable extends Function {
 		return clone();
 	}
 
+
+	public boolean equals(Function that) {
+		return (that instanceof Variable) && (varID == ((Variable)that).varID);
+	}
+
 	public int compareTo( Function f) {
 		return 0;
 	}

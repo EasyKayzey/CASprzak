@@ -17,4 +17,8 @@ public abstract class UnitaryFunction extends Function {
     public String toString() {
         return this.getClass().getSimpleName().toLowerCase() + "(" + function.toString() + ")";
     }
+
+    public boolean equals(Function that) {
+        return this.getClass().equals(that.getClass()) && this.function.equals(((UnitaryFunction)that).function);
+    }
 }

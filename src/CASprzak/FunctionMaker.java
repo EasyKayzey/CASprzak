@@ -54,6 +54,6 @@ public class FunctionMaker {
 			case "logb":
 				return new Logb(a, b);
 		}
-		throw new Exception("Function "+i+" does not exist");
+		throw new Exception("Function " + i + " does not exist");
 	}
 }

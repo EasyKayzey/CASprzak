@@ -2,8 +2,8 @@ package CASprzak.SpecialFunctions;
 
 import CASprzak.Function;
 public class Constant extends Function {
-	protected final double constant;
-	protected final int constantID;
+	public final double constant;
+	public final int constantID;
 
 	private static final String[] specialConstantStrings = {"pi", "e"};
 	private static final double[] specialConstants = {Math.PI, Math.E};
@@ -35,10 +35,6 @@ public class Constant extends Function {
 		return constant;
 	}
 
-	public double getConstant() {
-		return constant;
-	}
-
 	public String toString() {
 		return "" + constant;
 	}
@@ -56,9 +52,14 @@ public class Constant extends Function {
 		return clone();
 	}
 
+
+	public boolean equals(Function that) {
+		return (that instanceof Constant) && (constant == ((Constant)that).constant);
+	}
+
 	public int compareTo( Function f) {
 		if (f instanceof Constant) {
-			return (int)Math.signum(((Constant)f).getConstant()- getConstant());
+			return (int)Math.signum(((Constant)f).constant - constant);
 		}
 		return 0;
 	}

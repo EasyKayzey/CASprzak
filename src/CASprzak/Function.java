@@ -6,7 +6,7 @@ import CASprzak.BinaryFunctions.*;
 import CASprzak.UnitaryFunctions.*;
 
 public abstract class Function implements Evaluable, Differentiable, Simplifiable, Comparable<Function> {
-	protected static final Class[] sortOrder = {Negative.class, Constant.class, Variable.class, Pow.class, Logb.class, Multiply.class, UnitaryFunction.class, Add.class, Reciprocal.class};
+	protected static final Class<?>[] sortOrder = {Negative.class, Constant.class, Variable.class, Pow.class, Logb.class, Multiply.class, UnitaryFunction.class, Add.class, Reciprocal.class};
 
 	protected String functionName;
 

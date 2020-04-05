@@ -1,21 +1,20 @@
 package CASprzak;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.*;
 
 public class ArrLib {
 	public static Function[] removeFunctionAt(Function[] functionArray, int index) {
-		Function[] fout = new Function[functionArray.length-1];
-		for (int i = 0; i < fout.length; i++)
-				fout[i] = functionArray[(i<index?i:i+1)];
-		return fout;
+		Function[] newArray = new Function[functionArray.length-1];
+		for (int i = 0; i < newArray.length; i++)
+				newArray[i] = functionArray[(i<index?i:i+1)];
+		return newArray;
 	}
 
 	public static Function[] deepClone(Function[] functionArray) {
-		Function[] fout = new Function[functionArray.length];
-		for (int i = 0; i < fout.length; i++)
-			fout[i] = functionArray[i].clone();
-		return fout;
+		Function[] newArray = new Function[functionArray.length];
+		for (int i = 0; i < newArray.length; i++)
+			newArray[i] = functionArray[i].clone();
+		return newArray;
 	}
 
 	public static boolean deepEquals(Function[] functionArray1, Function[] functionArray2) {
@@ -46,14 +45,14 @@ public class ArrLib {
 		return -1;
 	}
 
-	public static LinkedList<Double> createRange(double upper, double lower, int sections) {
-		LinkedList<Double> range = new LinkedList<>();
+	public static List<Double> createRange(double upper, double lower, int sections) {
+		List<Double> range = new LinkedList<>();
 		for (int i = 0; i < sections + 1; i++)
 			range.add( lower + i * (upper - lower) / sections);
 		return range;
 	}
 
-	public static void nanRemover(LinkedList<Double> values) {
+	public static void nanRemover(List<Double> values) {
 		for (int i = 0; i < values.size(); i++) {
 			if ((values.get(i)).isNaN()) {
 				values.remove(i);
@@ -62,7 +61,7 @@ public class ArrLib {
 		}
 	}
 
-	public static void removeRepeats(LinkedList<Double> values) {
+	public static void removeRepeats(List<Double> values) {
 		for (int j = 0; j <= values.size(); j++) {
 			for (int i = 0; i < values.size() -1; i++) {
 				if(values.get(i) < values.get(i+1)+1E-15 && values.get(i) > values.get(i+1) - 1E-15) {

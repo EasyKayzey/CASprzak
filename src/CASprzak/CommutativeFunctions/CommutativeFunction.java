@@ -55,6 +55,15 @@ public abstract class CommutativeFunction extends Function {
     }
 
     public int compareSelf(Function that) {
-        return 0; //TODO
+        Function[] thisFunctions = this.getFunctions();
+        Function[] thatFunctions = ((CommutativeFunction)that).getFunctions();
+        if (this.getFunctions().length != thatFunctions.length)
+            return this.getFunctions().length - thatFunctions.length;
+        for (int i = 0; i < thisFunctions.length; i++) {
+            if (!thisFunctions[i].equals(thatFunctions[i]))
+                return thisFunctions[i].compareTo(thatFunctions[i]);
+        }
+        System.out.println("This isn't supposed to happen. Check CompareSelf of CommutativeFunction and Function.compareTo");
+        return 0;
     }
 }

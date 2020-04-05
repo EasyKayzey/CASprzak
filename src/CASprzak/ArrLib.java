@@ -32,7 +32,7 @@ public class ArrLib {
 		if (indexInFirst > 0)
 			System.arraycopy(outer, 0, an, 0, indexInFirst);
 		if (indexInFirst < outer.length - 1)
-			System.arraycopy(outer, indexInFirst + 1, an, indexInFirst, outer.length - indexInFirst);
+			System.arraycopy(outer, indexInFirst + 1, an, indexInFirst, outer.length - indexInFirst - 1);
 		System.arraycopy(inner, 0, an, outer.length - 1, inner.length);
 		return an;
 	}

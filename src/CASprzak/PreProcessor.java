@@ -33,7 +33,7 @@ public class PreProcessor {
 	}
 
 	public String[] toPostfix(String infix) {
-		String[] tokens = infix.split("\\s+");
+		String[] tokens = infix.split("((?!\\w)(?<=\\w)(?<!$)|(?<!\\w)((?<!\\W-)|(?<=\\)-))(?<!^-)(?<!$)(?<!^)|(?=\\())(?<!\\.)((?!\\.)|(?=\\.)(?<!\\d))(?!\\s+)(?<!\\s)|\\s+");
 		ArrayList<String> postfix = new ArrayList<>();
 		Stack<String> operators = new Stack<>();
 

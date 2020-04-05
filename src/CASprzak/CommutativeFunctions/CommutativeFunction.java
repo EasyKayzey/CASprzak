@@ -17,7 +17,7 @@ public abstract class CommutativeFunction extends Function {
     }
 
     public CommutativeFunction simplifyInternal() {
-        return this.simplifyElements().simplifyIdentity().simplifyConstants();
+        return this.simplifyElements().simplifyPull().simplifyIdentity().simplifyConstants();
     }
 
     protected abstract CommutativeFunction simplifyElements();
@@ -34,6 +34,14 @@ public abstract class CommutativeFunction extends Function {
         return this;
     }
 
+    protected CommutativeFunction simplifyPull() {
+        for (int i = 0; i < functions.length; i++) {
+            if (this.getClass().equals(functions[i].getClass())) {
+                return (new Add(ArrLib.pullUp(functions, ((CommutativeFunction) functions[i]).getFunctions(), i))).simplifyInternal();
+            }
+        }
+        return this;
+    }
 
     public Function[] getFunctions() {
         return ArrLib.deepClone(functions);

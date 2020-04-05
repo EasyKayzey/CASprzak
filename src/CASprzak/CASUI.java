@@ -20,7 +20,7 @@ public class CASUI {
 		System.out.println("What are your inputs? Separate with spaces, and order them with your variables.");
 		String[] viss = in.next().split("\\s+");
 		double[] vis = Arrays.stream(viss).mapToDouble(Double::parseDouble).toArray();
-
+		System.out.println("Processing...");
 		//TODO fix support for multiple vars
 		PreProcessor preProcessor = new PreProcessor();
 		SingleVariableSolver solver = new SingleVariableSolver();

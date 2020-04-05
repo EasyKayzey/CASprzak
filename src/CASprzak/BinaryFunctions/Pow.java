@@ -32,6 +32,8 @@ public class Pow extends BinaryFunction {
 	}
 
 	public Function simplify() {
+		if (function1 instanceof Constant && ((Constant)function1).constant == 1)
+			return function2.simplify();
 		return new Pow(function1.simplify(), function2.simplify());
 	}
 

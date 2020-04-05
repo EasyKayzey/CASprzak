@@ -18,6 +18,8 @@ public class Add extends CommutativeFunction{
 	}
 
 	public String toString() {
+		if (functions.length < 1)
+			return "(empty sum)";
 		StringBuilder temp = new StringBuilder("(");
 		for (int i = 0; i < functions.length - 1; i++) {
 			temp.append(functions[i].toString());
@@ -88,11 +90,6 @@ public class Add extends CommutativeFunction{
 				return (new Add(ArrLib.pullUp(functions, ((CommutativeFunction) functions[i]).getFunctions(), i))).simplifyInternal();
 			}
 		}
-		return this;
-	}
-
-	protected Function simplifyOneElement() {
-		if (functions.length == 1) return functions[0].simplify();
 		return this;
 	}
 

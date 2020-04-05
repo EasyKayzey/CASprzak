@@ -14,11 +14,15 @@ public abstract class CommutativeFunction extends Function {
         this.functions = functions;
         Arrays.sort(this.functions);
     }
+//
+//    public Function simplify() {
+//        return this.simplifyInternal().simplifyOneElement();
+//    }
 
-    public Function simplify() {
-        return this.simplifyInternal().simplifyOneElement();
+    public Function simplify() { //for testing purposes
+        CommutativeFunction f = this.simplifyInternal();
+        return f.simplifyOneElement();
     }
-
     public CommutativeFunction simplifyInternal() {
         return this.simplifyElements().simplifyPull().simplifyIdentity().simplifyConstants();
     }

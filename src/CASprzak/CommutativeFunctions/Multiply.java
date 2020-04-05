@@ -122,7 +122,8 @@ public class Multiply extends CommutativeFunction{
 	protected Multiply addExponents() {
 		Function[] simplifiedTerms = ArrLib.deepClone(functions);
 		for (int a = 0; a < simplifiedTerms.length; a++) {
-			if (simplifiedTerms[a] instanceof Variable)  simplifiedTerms[a] = new Pow(simplifiedTerms[a], new Constant(1));
+			if (simplifiedTerms[a] instanceof Variable)
+				simplifiedTerms[a] = new Pow(simplifiedTerms[a], new Constant(1));
 		}
 		for (int i = 1; i < simplifiedTerms.length; i++) {
 			for (int j = 0; j < i; j++) {

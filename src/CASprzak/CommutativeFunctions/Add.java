@@ -89,16 +89,16 @@ public class Add extends CommutativeFunction{
 
 	protected Add combineLikeTerms() {
 		Function[] combinedTerms = ArrLib.deepClone(functions);
-		for (int a = 0; a < functions.length; a++) {
-			if (functions[a] instanceof Variable) functions[a] = new Multiply(new Constant(1), functions[a]);
+		for (int a = 0; a < combinedTerms.length; a++) {
+			if (combinedTerms[a] instanceof Variable)  combinedTerms[a] = new Multiply(new Constant(1), combinedTerms[a]);
 		}
-		for (int i = 1; i < functions.length; i++) {
+		for (int i = 1; i < combinedTerms.length; i++) {
 			for (int j = 0; j < i; j++) {
-				if (functions[i] instanceof Multiply && functions[j] instanceof Multiply) {
-					Multiply mult1 = new Multiply(ArrLib.removeFunctionAt(((Multiply)functions[i]).getFunctions(), 0));
-					Multiply mult2 = new Multiply(ArrLib.removeFunctionAt(((Multiply)functions[j]).getFunctions(), 0));
+				if (combinedTerms[i] instanceof Multiply && combinedTerms[j] instanceof Multiply) {
+					Multiply mult1 = new Multiply(ArrLib.removeFunctionAt(((Multiply)combinedTerms[i]).getFunctions(), 0));
+					Multiply mult2 = new Multiply(ArrLib.removeFunctionAt(((Multiply)combinedTerms[j]).getFunctions(), 0));
 					if (mult1.equals(mult2)){
-						Multiply multCombined = new Multiply(new Add(((Multiply)functions[i]).getFunctions()[0], ((Multiply)functions[j]).getFunctions()[0]), mult1);
+						Multiply multCombined = new Multiply(new Add(((Multiply)combinedTerms[i]).getFunctions()[0], ((Multiply)combinedTerms[j]).getFunctions()[0]), mult1);
 						combinedTerms[j] = multCombined;
 						combinedTerms = ArrLib.removeFunctionAt(combinedTerms, i);
 						return (new Add(combinedTerms)).simplifyInternal();

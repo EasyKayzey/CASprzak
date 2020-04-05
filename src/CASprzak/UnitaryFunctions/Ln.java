@@ -1,7 +1,10 @@
 package CASprzak.UnitaryFunctions;
 
+import CASprzak.BinaryFunctions.Pow;
 import CASprzak.CommutativeFunctions.Multiply;
 import CASprzak.Function;
+import CASprzak.SpecialFunctions.Constant;
+
 public class Ln extends UnitaryFunction {
     public Ln(Function function) {
         super(function);
@@ -14,7 +17,7 @@ public class Ln extends UnitaryFunction {
 
     @Override
     public Function getDerivative(int varID) {
-        return new Multiply(function.getDerivative(varID), new Reciprocal(function));
+        return new Multiply(function.getDerivative(varID), new Pow(new Constant(-1), function));
     }
 
     public Function clone() {

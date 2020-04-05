@@ -10,31 +10,31 @@ public class FunctionTest {
 
 	@Test void fxReturnsX() {
 		Function test = parserX.parse("x");
-		double b = test.evaluate(new double[]{2});
+		double b = test.evaluate(2);
 		assertEquals(2, b);
 	}
 
 	@Test void basicFunctionsWithX() {
 		Function test = parserX.parse("x ^ x + 2 + 5 * x");
-		double b = test.evaluate(new double[]{3});
+		double b = test.evaluate(3);
 		assertEquals(44, b);
 	}
 
 	@Test void multipleVariablesWorks() {
         Function test = parserXY.parse("x + y + y");
-		double b = test.evaluate(new double[]{3, 4});
+		double b = test.evaluate(3, 4);
 		assertEquals(11, b);
 	}
 
 	@Test void logbWorks() {
 		Function test = parserX.parse("logb 3 x");
-		double b = test.evaluate(new double[]{81});
+		double b = test.evaluate(81);
 		assertEquals(4, b);
 	}
 
 	@Test void trigWorks() {
 		Function test = parserX.parse("( sin x ) ^ 2 + ( cos x ) ^ 2");
-		double b = test.evaluate(new double[]{81});
+		double b = test.evaluate(81);
 		assertEquals(1, b);
 	}
 

@@ -8,7 +8,7 @@ public class Parser {
   public static final String[] operations2 = {"^", "*", "/", "+", "-", "logb"};
   public static final String[] operations1 = {"sin", "cos", "tan", "log", "ln", "sqrt", "exp", "sinh", "cosh", "tanh", "csc", "sec", "cot", "asin", "acos", "atan"};
 
-  private char[] variables;
+  private final char[] variables;
 
   public Parser(char... variables) {
     this.variables = variables;
@@ -26,10 +26,6 @@ public class Parser {
       if(x.equals(input)) return true;
     }
     return false;
-  }
-
-  public void setVariables(char... variables) {
-    this.variables = variables;
   }
 
   public int getVarID(char variable) throws IndexOutOfBoundsException{

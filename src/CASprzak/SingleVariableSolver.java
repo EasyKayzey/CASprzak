@@ -6,7 +6,6 @@ public class SingleVariableSolver {
 
     private double newtonsMethod(Function expression, double value) {
         return value - expression.evaluate(value) / expression.getSimplifiedDerivative(0).evaluate(value);
-        //TODO reproduce error
     }
 
     public double getSolutionPoint(Function expression, double initialPoint) {
@@ -36,9 +35,8 @@ public class SingleVariableSolver {
         ArrLib.removeRepeats(solutions);
 
         double[] solutionsArray = new double[solutions.size()];
-        for (int i = 0; i < solutionsArray.length; i++){
+        for (int i = 0; i < solutionsArray.length; i++)
             solutionsArray[i] = solutions.get(i);
-        }
         return solutionsArray;
     }
 }

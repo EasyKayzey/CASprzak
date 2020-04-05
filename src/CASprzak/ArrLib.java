@@ -37,8 +37,11 @@ public class ArrLib {
 	}
 
 	public static double[] createRange(double upper, double lower, int sections) {
-		//TODO
-		return null;
+		double[] range = new double[sections+1];
+		for (int i = 0; i < range.length; i++){
+			range[i] = lower + i * (upper-lower) / sections;
+		}
+		return range;
 	}
 
 }

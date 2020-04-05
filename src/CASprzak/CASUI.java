@@ -8,9 +8,9 @@ public class CASUI {
 		in.useDelimiter("\n");
 
 		System.out.println("What are your variables? Separate with spaces.");
-		String[] varss = in.next().split("\\s+");
-		char[] vars = new char[varss.length];
-		for (int i = 0; i < vars.length; i++) vars[i] = varss[i].charAt(0);
+		String[] varsTemp = in.next().split("\\s+");
+		char[] vars = new char[varsTemp.length];
+		for (int i = 0; i < vars.length; i++) vars[i] = varsTemp[i].charAt(0);
 
 		System.out.println("Enter your function to be stored:");
 		String raw = in.next();
@@ -18,8 +18,8 @@ public class CASUI {
 		raw = raw.replace("{","(").replace("}",")").replace("\\","").replace("_"," ");
 
 		System.out.println("What are your inputs? Separate with spaces, and order them with your variables.");
-		String[] viss = in.next().split("\\s+");
-		double[] vis = Arrays.stream(viss).mapToDouble(Double::parseDouble).toArray();
+		String[] visTemp = in.next().split("\\s+");
+		double[] vis = Arrays.stream(visTemp).mapToDouble(Double::parseDouble).toArray();
 		System.out.println("Processing...");
 		//TODO fix support for multiple vars
 		PreProcessor preProcessor = new PreProcessor();

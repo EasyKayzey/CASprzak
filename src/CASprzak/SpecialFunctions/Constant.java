@@ -14,6 +14,8 @@ public class Constant extends Function {
 	}
 
 	public Constant(String constantString) {
+		if (!isSpecialConstant(constantString))
+			throw new IllegalArgumentException(constantString + " is not a special constant.");
 		constantID = getSpecialConstantID(constantString);
 		constant = specialConstants[constantID];
 	}

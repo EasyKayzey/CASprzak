@@ -1,5 +1,7 @@
 package CASprzak;
 
+import CASprzak.SpecialFunctions.Constant;
+
 import java.util.*;
 
 public class PreProcessor {
@@ -36,8 +38,9 @@ public class PreProcessor {
     Stack<String> operators = new Stack<>();
 
       for (String i : tokens) {
-
-        if(isAnOperator(i)) {
+        if(Constant.isSpecialConstant(i)) {
+          operators.push(i);
+        } else if(isAnOperator(i)) {
           if(operators.empty()) {
             operators.push(i);
           } else if (getPrecedence(i) <= getPrecedence(operators.peek()) && !i.equals("^")) {

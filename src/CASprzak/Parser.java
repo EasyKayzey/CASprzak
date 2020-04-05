@@ -44,11 +44,12 @@ public class Parser {
   }
 
   public Function parse(String[] postfix) {
-
     FunctionMaker functionMaker = new FunctionMaker();
     Stack<Function> functionStack = new Stack<>();
     for (String token : postfix) {
-      if (!isAnOperator1(token) && !isAnOperator2(token)) {
+      if (Constant.isSpecialConstant(token)) {
+        functionStack.push(new Constant(token));
+      } else if (!isAnOperator1(token) && !isAnOperator2(token)) {
         if (Constant.isSpecialConstant(token)) return functionMaker.specialConstant(token);
         try {
           functionStack.push(functionMaker.constant(Double.parseDouble(token)));

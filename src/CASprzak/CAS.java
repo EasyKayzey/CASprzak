@@ -15,7 +15,7 @@ public class CAS {
 		System.out.println("Enter your function to be stored:");
 		String raw = in.next();
 
-		raw = raw.replace("{","(").replace("}",")").replace("ln","log e").replace("\\","").replace("_"," ");
+		raw = raw.replace("{","(").replace("}",")").replace("\\","").replace("_"," ");
 
 		System.out.println("What are your inputs? Separate with spaces, and order them with your variables.");
 		String[] viss = in.next().split("\\s+");

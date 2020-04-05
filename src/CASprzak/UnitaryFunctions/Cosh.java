@@ -9,7 +9,7 @@ public class Cosh extends UnitaryFunction {
 
     @Override
     public Function getDerivative(int varID) {
-        return new Multiply(new Sinh(function), function.getDerivative(varID));
+        return new Multiply(new Sinh(function), function.getSimplifiedDerivative(varID));
     }
 
     @Override

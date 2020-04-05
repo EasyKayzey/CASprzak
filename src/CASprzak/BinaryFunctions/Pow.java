@@ -19,7 +19,7 @@ public class Pow extends BinaryFunction {
 
 	@Override
 	public Function getDerivative(int varID) {
-		return  new Multiply(new Pow(function1, function2), new Add( new Multiply(function1.getDerivative(varID), new Ln(function2)), new Multiply(new Multiply(function1, function2.getDerivative(varID)), new Pow(new Constant(-1), function2))));
+		return  new Multiply(new Pow(function1, function2), new Add( new Multiply(function1.getSimplifiedDerivative(varID), new Ln(function2)), new Multiply(new Multiply(function1, function2.getSimplifiedDerivative(varID)), new Pow(new Constant(-1), function2))));
 	}
 
 	@Override

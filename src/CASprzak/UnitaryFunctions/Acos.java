@@ -12,7 +12,7 @@ public class Acos extends UnitaryFunction {
 
     @Override
     public Function getDerivative(int varID) {
-        return new Multiply(new Multiply(function.getDerivative(varID), new Constant(-1)), new Pow(new Constant(-0.5), ( new Add(new Constant(1), new Multiply(new Constant(-1), new Pow(new Constant(2), function))))));
+        return new Multiply(new Multiply(function.getSimplifiedDerivative(varID), new Constant(-1)), new Pow(new Constant(-0.5), ( new Add(new Constant(1), new Multiply(new Constant(-1), new Pow(new Constant(2), function))))));
     }
 
     @Override

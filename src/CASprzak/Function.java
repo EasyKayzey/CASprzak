@@ -20,6 +20,10 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 
 	public abstract boolean equals(Function that);
 
+	public Function getSimplifiedDerivative(int varID) {
+		return getDerivative(varID).simplify();
+	}
+
 	public boolean equals(Object o) {
 		if (!(o instanceof Function))
 			return false;

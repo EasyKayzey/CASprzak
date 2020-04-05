@@ -12,7 +12,7 @@ public class Asin extends UnitaryFunction {
 
     @Override
     public Function getDerivative(int varID) {
-        return new Multiply(function.getDerivative(varID), new Pow(new Constant(-0.5), ( new Add(new Pow(new Constant(2), function), new Constant(-1)))));
+        return new Multiply(function.getSimplifiedDerivative(varID), new Pow(new Constant(-0.5), ( new Add(new Pow(new Constant(2), function), new Constant(-1)))));
     }
 
     @Override

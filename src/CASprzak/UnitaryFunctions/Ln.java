@@ -17,7 +17,7 @@ public class Ln extends UnitaryFunction {
 
     @Override
     public Function getDerivative(int varID) {
-        return new Multiply(function.getDerivative(varID), new Pow(new Constant(-1), function));
+        return new Multiply(function.getSimplifiedDerivative(varID), new Pow(new Constant(-1), function));
     }
 
     public Function clone() {

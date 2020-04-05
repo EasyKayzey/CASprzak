@@ -34,7 +34,7 @@ public class Add extends CommutativeFunction{
 	public Function getDerivative(int varID) {
 		Function[] toAdd = new Function[functions.length];
 		for (int i = 0; i < functions.length; i++) {
-			toAdd[i] = functions[i].getDerivative(varID);
+			toAdd[i] = functions[i].getSimplifiedDerivative(varID);
 		}
 		return new Add(toAdd);
 	}

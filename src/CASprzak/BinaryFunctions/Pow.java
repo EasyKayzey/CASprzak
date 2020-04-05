@@ -37,6 +37,8 @@ public class Pow extends BinaryFunction {
 		return new Pow(function1.simplify(), function2.simplify());
 	}
 
+	
+
 	public int compareTo( Function f) {
 		return 0;
 	}

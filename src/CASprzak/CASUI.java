@@ -27,7 +27,7 @@ public class CASUI {
 		Parser parser = new Parser(vars);
 
 		Function curFun = parser.parse(preProcessor.toPostfix(raw));
-		System.out.println(curFun);
+		System.out.println("Here is your parsed function: " + curFun);
 		System.out.println("Here is the simplified toString of your function: " + curFun.simplifyTimes(10));
 		System.out.println("Here is your output: " + curFun.evaluate(vis));
 		System.out.println("Here is the derivative, unsimplified:");

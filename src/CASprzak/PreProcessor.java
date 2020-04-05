@@ -38,8 +38,8 @@ public class PreProcessor {
 		Stack<String> operators = new Stack<>();
 
 		for (String token : tokens) {
-			System.out.println(token);
-			System.out.println(operators.toString());
+//			System.out.println(token);
+//			System.out.println(operators.toString());
 			if (Constant.isSpecialConstant(token)) {
 				postfix.add(token);
 			} else if (isAnOperator(token)) {

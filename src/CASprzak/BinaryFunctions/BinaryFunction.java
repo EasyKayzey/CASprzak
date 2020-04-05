@@ -27,6 +27,11 @@ public abstract class BinaryFunction extends Function {
     }
 
     public int compareSelf(Function that) {
-        return 0; //TODO
+        if (!this.function1.equals(((BinaryFunction)that).function1))
+            return this.function1.compareSelf(((BinaryFunction)that).function1);
+        if (!this.function2.equals(((BinaryFunction)that).function2))
+            return this.function2.compareSelf(((BinaryFunction)that).function2);
+        System.out.println("This is never supposed to happen, binaryFunction compareSelf");
+        return 0;
     }
 }

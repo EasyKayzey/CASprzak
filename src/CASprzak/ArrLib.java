@@ -1,6 +1,5 @@
 package CASprzak;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class ArrLib {
@@ -30,12 +29,10 @@ public class ArrLib {
 
 	public static Function[] pullUp(Function[] outer, Function[] inner, int indexInFirst) {
 		Function[] an = new Function[outer.length + inner.length - 1];
-		for (int i = 0; i < indexInFirst; i++)
-			an[i] = outer[i];
-		for (int i = indexInFirst + 1; i < outer.length; i++)
-			an[i - 1] = outer[i];
-		for (int i = 0; i < inner.length; i++)
-			an[outer.length + i - 1] = inner[i];
+		if (indexInFirst >= 0) System.arraycopy(outer, 0, an, 0, indexInFirst);
+		if (outer.length - indexInFirst + 1 >= 0)
+			System.arraycopy(outer, indexInFirst + 1, an, indexInFirst - 1, outer.length - indexInFirst + 1);
+		System.arraycopy(inner, 0, an, outer.length - 1, inner.length);
 		return an;
 	}
 
@@ -65,9 +62,9 @@ public class ArrLib {
 
 	public static void removeRepeats(LinkedList<Double> values) {
 		for (int j = 0; j <= values.size(); j++) {
-			for (int i = 0; i < values.size() -1; i++) {
+			for (int i = 0; i < values.size() - 1; i++) {
 				if(values.get(i) < values.get(i+1)+1E-15 && values.get(i) > values.get(i+1) - 1E-15) {
-					values.remove(i);
+					values.remove(i+1);
 				}
 			}
 		}

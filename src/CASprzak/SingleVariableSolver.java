@@ -1,17 +1,16 @@
 package CASprzak;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class SingleVariableSolver {
 
     private double newtonsMethod(Function expression, double value) {
-        return value - expression.evaluate(new double[]{value}) / expression.getDerivative(0).evaluate(new double[]{value});
+        return value - expression.evaluate(value) / expression.getDerivative(0).evaluate(value);
         //TODO reproduce error
     }
 
     public double getSolutionPoint(Function expression, double initialPoint) {
-        if (expression.evaluate(new double[]{initialPoint}) == 0) return initialPoint;
+        if (expression.evaluate(initialPoint) == 0) return initialPoint;
         for (int i = 0; i < 1000; i++){
             initialPoint = newtonsMethod(expression, initialPoint);
             if (i % 25 == 0) {

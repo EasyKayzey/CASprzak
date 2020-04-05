@@ -37,28 +37,29 @@ public class PreProcessor {
 		ArrayList<String> postfix = new ArrayList<>();
 		Stack<String> operators = new Stack<>();
 
-		for (String i : tokens) {
-			if (Constant.isSpecialConstant(i)) {
-				operators.push(i);
-			} else if (isAnOperator(i)) {
+		for (String token : tokens) {
+			System.out.println(token);
+			System.out.println(operators.toString());
+			if (Constant.isSpecialConstant(token)) {
+				postfix.add(token);
+			} else if (isAnOperator(token)) {
 				if (operators.empty()) {
-					operators.push(i);
-				} else if (getPrecedence(i) <= getPrecedence(operators.peek()) && !i.equals("^")) {
+					operators.push(token);
+				} else if (getPrecedence(token) <= getPrecedence(operators.peek()) && !token.equals("^")) {
 					postfix.add(operators.pop());
-					operators.push(i);
+					operators.push(token);
 				} else {
-					operators.push(i);
+					operators.push(token);
 				}
-			} else if (i.equals("(")) {
-				operators.push(i);
-			} else if (i.equals(")")) {
-
+			} else if (token.equals("(")) {
+				operators.push(token);
+			} else if (token.equals(")")) {
 				while (!operators.peek().equals("(")) {
 					postfix.add(operators.pop());
 				}
 				operators.pop();
 			} else {
-				postfix.add(i);
+				postfix.add(token);
 			}
 		}
 

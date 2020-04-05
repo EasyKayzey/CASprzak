@@ -9,11 +9,13 @@ public class SingleVariableSolver {
     }
 
     public double getSolutionPoint(Function expression, double initialPoint) {
-        if (expression.evaluate(new double[]{initialPoint}) == 0) return initialPoint;
+        if (expression.evaluate(new double[]{initialPoint}) == 0)
+            return initialPoint;
         for (int i = 0; i < 500; i++){
             initialPoint = newtonsMethod(expression, initialPoint);
             if (i % 25 == 0) {
-                if (initialPoint < 1E-15 && initialPoint > -1E-15) return 0;
+                if (initialPoint < 1E-15 && initialPoint > -1E-15)
+                    return 0;
             }
         }
         return initialPoint;

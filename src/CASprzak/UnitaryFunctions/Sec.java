@@ -8,7 +8,7 @@ public class Sec extends UnitaryFunction {
     }
 
     @Override
-    public double evaluate(double[] variableValues) {
+    public double evaluate(double... variableValues) {
         return 1 / Math.cos(function.evaluate(variableValues));
     }
 

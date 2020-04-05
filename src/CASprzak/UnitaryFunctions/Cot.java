@@ -15,7 +15,7 @@ public class Cot extends UnitaryFunction {
     }
 
     @Override
-    public double evaluate(double[] variableValues) {
+    public double evaluate(double... variableValues) {
         return 1 / Math.tan(function.evaluate(variableValues));
     }
 

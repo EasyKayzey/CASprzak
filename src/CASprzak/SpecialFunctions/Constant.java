@@ -33,7 +33,7 @@ public class Constant extends Function {
 		return -1;
 	}
 
-	public double evaluate(double[] variableValues) {
+	public double evaluate(double... variableValues) {
 		return constant;
 	}
 

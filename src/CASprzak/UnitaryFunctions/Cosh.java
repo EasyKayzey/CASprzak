@@ -13,7 +13,7 @@ public class Cosh extends UnitaryFunction {
     }
 
     @Override
-    public double evaluate(double[] variableValues) {
+    public double evaluate(double... variableValues) {
         return Math.cosh(function.evaluate(variableValues));
     }
 

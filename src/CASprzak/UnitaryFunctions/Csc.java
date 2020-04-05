@@ -15,7 +15,7 @@ public class Csc extends UnitaryFunction {
     }
 
     @Override
-    public double evaluate(double[] variableValues) {
+    public double evaluate(double... variableValues) {
         return 1 / Math.sin(function.evaluate(variableValues));
     }
 

@@ -6,7 +6,7 @@ import java.util.LinkedList;
 public class SingleVariableSolver {
 
     private double newtonsMethod(Function expression, double value) {
-        return value - expression.evaluate(new double[]{value}) / expression.getDerivative(0).simplifyTimes(10).evaluate(new double[]{value});
+        return value - expression.evaluate(new double[]{value}) / expression.getDerivative(0).evaluate(new double[]{value});
         //TODO reproduce error
     }
 

@@ -11,7 +11,7 @@ public class Ln extends UnitaryFunction {
     }
 
     @Override
-    public double evaluate(double[] variableValues) {
+    public double evaluate(double... variableValues) {
         return Math.log(function.evaluate(variableValues));
     }
 

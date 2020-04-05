@@ -12,7 +12,7 @@ public class Multiply extends CommutativeFunction{
 		identityValue = 1;
 	}
 
-	public double evaluate(double[] variableValues) {
+	public double evaluate(double... variableValues) {
 		double accumulator = 1;
 		for (Function f : functions) accumulator *= f.evaluate(variableValues);
 		return accumulator;

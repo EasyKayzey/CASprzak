@@ -23,7 +23,7 @@ public class Pow extends BinaryFunction {
 	}
 
 	@Override
-	public double evaluate(double[] variableValues) {
+	public double evaluate(double... variableValues) {
 		return Math.pow(function2.evaluate(variableValues), function1.evaluate(variableValues));
 	}
 

@@ -14,7 +14,7 @@ public class Cos extends UnitaryFunction {
     }
 
     @Override
-    public double evaluate(double[] variableValues) {
+    public double evaluate(double... variableValues) {
         return Math.cos(function.evaluate(variableValues));
     }
 

@@ -20,7 +20,7 @@ public class Variable extends Function {
 		return new Constant(1);
 	}
 
-	public double evaluate(double[] variableValues) {
+	public double evaluate(double... variableValues) {
 		return variableValues[varID];
 	}
 

@@ -16,7 +16,7 @@ public class Acos extends UnitaryFunction {
     }
 
     @Override
-    public double evaluate(double[] variableValues) {
+    public double evaluate(double... variableValues) {
         return Math.acos(function.evaluate(variableValues));
     }
 

@@ -1,5 +1,8 @@
 package CASprzak;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+
 public class ArrLib {
 	public static Function[] removeFunctionAt(Function[] functionArray, int index) {
 		Function[] fout = new Function[functionArray.length-1];
@@ -44,11 +47,31 @@ public class ArrLib {
 		return -1;
 	}
 
-	public static double[] createRange(double upper, double lower, int sections) {
-		double[] range = new double[sections+1];
-		for (int i = 0; i < range.length; i++)
-			range[i] = lower + i * (upper - lower) / sections;
+	public static LinkedList<Double> createRange(double upper, double lower, int sections) {
+		LinkedList<Double> range = new LinkedList<>();
+		for (int i = 0; i < sections + 1; i++)
+			range.add( lower + i * (upper - lower) / sections);
 		return range;
 	}
+
+	public static void nanRemover(LinkedList<Double> values) {
+		for (int i = 0; i < values.size(); i++) {
+			if ((values.get(i)).isNaN()) {
+				values.remove(i);
+				i--;
+			}
+		}
+	}
+
+	public static void removeRepeats(LinkedList<Double> values) {
+		for (int j = 0; j <= values.size(); j++) {
+			for (int i = 0; i < values.size() -1; i++) {
+				if(values.get(i) < values.get(i+1)+1E-15 && values.get(i) > values.get(i+1) - 1E-15) {
+					values.remove(i);
+				}
+			}
+		}
+	}
+
 
 }

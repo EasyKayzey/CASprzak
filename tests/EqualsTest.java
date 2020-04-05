@@ -9,38 +9,37 @@ public class EqualsTest {
 
     @Test
     void unitaryEqualsUnitary() {
-        Function test = parser.parse("sin ( x )");
-        Function test1 = parser.parse("sin ( x )");
-        assertEquals(test, test1);
+        Function test1= parser.parse("sin ( x )");
+        Function test2 = parser.parse("sin ( x )");
+        assertEquals(test1, test2);
     }
 
     @Test
     void variablesAreDifferent() {
-        Function test = parser.parse("sin ( x )");
-        Function test1 = parser.parse("sin ( y )");
-        assertNotEquals(test, test1);
+        Function test1= parser.parse("sin ( x )");
+        Function test2 = parser.parse("sin ( y )");
+        assertNotEquals(test1, test2);
     }
 
     @Test
     void differentUnitaryFunctions() {
-        Function test = parser.parse("sin ( x )");
-        Function test1 = parser.parse("cos ( x )");
-        assertNotEquals(test, test1);
+        Function test1= parser.parse("sin ( x )");
+        Function test2 = parser.parse("cos ( x )");
+        assertNotEquals(test1, test2);
     }
 
     @Test
     void differentFunctionTypes() {
-        Function test = parser.parse("sin ( x )");
-        Function test1 = parser.parse("x + 2");
-        assertNotEquals(test, test1);
+        Function test1= parser.parse("sin ( x )");
+        Function test2 = parser.parse("x + 2");
+        assertNotEquals(test1, test2);
     }
 
     @Test
     void multiplyAndAdd() {
-        Function test = parser.parse("x * 2");
-        Function test1 = parser.parse("x + 2");
-        assertNotEquals(test, test1);
+        Function test1= parser.parse("x * 2");
+        Function test2 = parser.parse("x + 2");
+        assertNotEquals(test1, test2);
     }
-
 
 }

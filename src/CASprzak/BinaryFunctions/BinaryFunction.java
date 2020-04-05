@@ -22,8 +22,11 @@ public abstract class BinaryFunction extends Function {
         return function2;
     }
 
-
     public boolean equals(Function that) {
         return this.getClass().equals(that.getClass()) && this.function1.equals(((BinaryFunction)that).function1) && this.function2.equals(((BinaryFunction)that).function2);
+    }
+
+    public int compareSelf(Function that) {
+        return 0; //TODO
     }
 }

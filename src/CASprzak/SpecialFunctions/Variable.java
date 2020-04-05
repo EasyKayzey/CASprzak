@@ -37,7 +37,7 @@ public class Variable extends Function {
 		return (that instanceof Variable) && (varID == ((Variable)that).varID);
 	}
 
-	public int compareTo( Function f) {
-		return 0;
+	public int compareSelf( Function that) {
+		return this.varID - ((Variable)that).varID;
 	}
 }

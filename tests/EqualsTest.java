@@ -35,5 +35,12 @@ public class EqualsTest {
         assertNotEquals(test, test1);
     }
 
+    @Test
+    void multiplyAndAdd() {
+        Function test = parser.parse("x * 2");
+        Function test1 = parser.parse("x + 2");
+        assertNotEquals(test, test1);
+    }
+
 
 }

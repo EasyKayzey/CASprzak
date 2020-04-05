@@ -54,13 +54,17 @@ public class Constant extends Function {
 
 
 	public boolean equals(Function that) {
-		return (that instanceof Constant) && (constant == ((Constant)that).constant);
+		return (that instanceof Constant) && (constant == ((Constant) that).constant);
 	}
 
-	public int compareTo( Function f) {
-		if (f instanceof Constant) {
-			return (int)Math.signum(((Constant)f).constant - constant);
+	public int compareSelf(Function that) {
+		if (constantID != -1) {
+			if (((Constant) that).constantID != -1)
+				return this.constantID - ((Constant) that).constantID;
+			return -1;
 		}
-		return 0;
+		if (((Constant) that).constantID != -1)
+			return -1;
+		return (int) Math.signum(this.constant - ((Constant) that).constant);
 	}
 }

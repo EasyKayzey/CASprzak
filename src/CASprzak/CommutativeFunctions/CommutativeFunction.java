@@ -53,4 +53,8 @@ public abstract class CommutativeFunction extends Function {
             return ArrLib.deepEquals(this.getFunctions(), ((CommutativeFunction)that).getFunctions());
         return false;
     }
+
+    public int compareSelf(Function that) {
+        return 0; //TODO
+    }
 }

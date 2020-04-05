@@ -14,11 +14,11 @@ public abstract class UnitaryFunction extends Function {
         return this.getClass().getSimpleName().toLowerCase() + "(" + function.toString() + ")";
     }
 
-    public int compareTo(Function f) {
-        return 0;
-    }
-
     public boolean equals(Function that) {
         return this.getClass().equals(that.getClass()) && this.function.equals(((UnitaryFunction)that).function);
+    }
+
+    public int compareSelf(Function that) {
+        return (this.getOperand().compareTo(((UnitaryFunction)that).getOperand()));
     }
 }

@@ -18,11 +18,19 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 		return temp;
 	}
 
-	public abstract boolean equals(Function f);
+	public abstract boolean equals(Function that);
 
 	public boolean equals(Object o) {
 		if (!(o instanceof Function))
 			return false;
 		return this.equals((Function) o);
+	}
+
+	public abstract int compareSelf(Function that);
+
+	public int compareTo(Function that) {
+		if (this.getClass().equals(that.getClass()))
+			return compareSelf(that);
+		return (ArrLib.findClassValue(this) - ArrLib.findClassValue(that));
 	}
 }

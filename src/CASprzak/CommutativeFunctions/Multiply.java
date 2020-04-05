@@ -1,8 +1,11 @@
 package CASprzak.CommutativeFunctions;
 
 import CASprzak.ArrLib;
+import CASprzak.BinaryFunctions.Pow;
 import CASprzak.Function;
 import CASprzak.SpecialFunctions.Constant;
+import CASprzak.SpecialFunctions.Variable;
+
 public class Multiply extends CommutativeFunction{
 	public Multiply(Function... functions) {
 		super(functions);
@@ -50,11 +53,15 @@ public class Multiply extends CommutativeFunction{
 
 
 	public Function simplify() {
-		Multiply init = (Multiply) simplifyInternal();
+		Multiply init = simplifyInternal();
 		if (init.isTimesZero())
 			return new Constant((0));
 		else
 			return init.simplifyOneElement();
+	}
+
+	public Multiply simplifyInternal() {
+		return ((Multiply) super.simplifyInternal()).addExponents();
 	}
 
 	@Override
@@ -101,6 +108,26 @@ public class Multiply extends CommutativeFunction{
 			}
 		}
 		return false;
+	}
+
+	protected Multiply addExponents() {
+		Function[] simplifiedTerms = ArrLib.deepClone(functions);
+		for (int a = 0; a < simplifiedTerms.length; a++) {
+			if (simplifiedTerms[a] instanceof Variable)  simplifiedTerms[a] = new Pow(simplifiedTerms[a], new Constant(1));
+		}
+		for (int i = 1; i < simplifiedTerms.length; i++) {
+			for (int j = 0; j < i; j++) {
+				if (simplifiedTerms[i] instanceof Pow && simplifiedTerms[j] instanceof Pow) {
+					if (((Pow) simplifiedTerms[i]).getFunction2().equals(((Pow) simplifiedTerms[j]).getFunction2())) {
+						Pow combinedExponents = new Pow(new Add(((Pow) simplifiedTerms[i]).getFunction1(), ((Pow) simplifiedTerms[j]).getFunction1()), ((Pow) simplifiedTerms[i]).getFunction2());
+						simplifiedTerms[j] = combinedExponents;
+						simplifiedTerms = ArrLib.removeFunctionAt(simplifiedTerms, i);
+						return (new Multiply(simplifiedTerms)).simplifyInternal();
+					}
+				}
+			}
+		}
+		return clone();
 	}
 
 	public int compareTo(Function f) {

@@ -63,6 +63,6 @@ public class PreProcessor {
       postfix.add(operators.pop());
     }
 
-    return postfix.toArray(new String[postfix.size()]);
+    return postfix.toArray(new String[0]);
   }
 }

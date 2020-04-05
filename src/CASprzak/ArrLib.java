@@ -28,12 +28,11 @@ public class ArrLib {
 
 	public static Function[] pullUp(Function[] outer, Function[] inner, int indexInFirst) {
 		Function[] newArray = new Function[outer.length + inner.length - 1];
-		for (int i = 0; i < indexInFirst; i++)
-			newArray[i] = outer[i];
-		for (int i = indexInFirst + 1; i < outer.length; i++)
-			newArray[i - 1] = outer[i];
-		for (int i = 0; i < inner.length; i++)
-			newArray[outer.length + i - 1] = inner[i];
+		if (indexInFirst >= 0)
+			System.arraycopy(outer, 0, newArray, 0, indexInFirst);
+		if (outer.length - indexInFirst + 1 >= 0)
+			System.arraycopy(outer, indexInFirst + 1, newArray, indexInFirst, outer.length - indexInFirst + 1);
+		System.arraycopy(inner, 0, newArray, outer.length - 1, inner.length);
 		return newArray;
 	}
 

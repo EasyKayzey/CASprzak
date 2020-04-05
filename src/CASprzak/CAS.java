@@ -3,7 +3,7 @@ package CASprzak;
 import java.util.*;
 
 public class CAS {
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
 		in.useDelimiter("\n");
 

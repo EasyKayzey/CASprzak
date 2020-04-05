@@ -39,11 +39,11 @@ public class Parser {
     throw new IndexOutOfBoundsException("No variable "+variable+" found.");
   }
 
-  public Function parse(String infix) throws Exception {
+  public Function parse(String infix) {
     return parse((new PreProcessor()).toPostfix(infix));
   }
 
-  public Function parse(String[] postfix) throws Exception {
+  public Function parse(String[] postfix) {
 
     FunctionMaker functionMaker = new FunctionMaker();
     Stack<Function> functionStack = new Stack<>();

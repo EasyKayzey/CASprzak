@@ -83,6 +83,15 @@ public class Multiply extends CommutativeFunction{
 		return this;
 	}
 
+	protected Multiply simplifyPull() {
+		for (int i = 0; i < functions.length; i++) {
+			if (this.getClass().equals(functions[i].getClass())) {
+				return (new Multiply(ArrLib.pullUp(functions, ((CommutativeFunction) functions[i]).getFunctions(), i))).simplifyInternal();
+			}
+		}
+		return this;
+	}
+
 	@Override
 	protected Multiply simplifyConstants() {
 		for (int i = 1; i < functions.length; i++){

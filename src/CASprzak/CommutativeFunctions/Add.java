@@ -82,6 +82,15 @@ public class Add extends CommutativeFunction{
 		return this;
 	}
 
+	protected Add simplifyPull() {
+		for (int i = 0; i < functions.length; i++) {
+			if (this.getClass().equals(functions[i].getClass())) {
+				return (new Add(ArrLib.pullUp(functions, ((CommutativeFunction) functions[i]).getFunctions(), i))).simplifyInternal();
+			}
+		}
+		return this;
+	}
+
 	protected Function simplifyOneElement() {
 		if (functions.length == 1) return functions[0].simplify();
 		return this;

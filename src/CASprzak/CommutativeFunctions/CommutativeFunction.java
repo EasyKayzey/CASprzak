@@ -26,20 +26,13 @@ public abstract class CommutativeFunction extends Function {
 
     protected abstract CommutativeFunction simplifyConstants();
 
+    protected abstract CommutativeFunction simplifyPull();
+
     protected Function simplifyOneElement() {
         if (functions.length == 0)
             return new Constant(identityValue);
         if (functions.length == 1)
             return functions[0].simplify();
-        return this;
-    }
-
-    protected CommutativeFunction simplifyPull() {
-        for (int i = 0; i < functions.length; i++) {
-            if (this.getClass().equals(functions[i].getClass())) {
-                return (new Add(ArrLib.pullUp(functions, ((CommutativeFunction) functions[i]).getFunctions(), i))).simplifyInternal();
-            }
-        }
         return this;
     }
 

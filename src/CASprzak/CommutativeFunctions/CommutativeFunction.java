@@ -3,6 +3,8 @@ import CASprzak.ArrLib;
 import CASprzak.Function;
 import CASprzak.SpecialFunctions.Constant;
 
+import java.util.Arrays;
+
 public abstract class CommutativeFunction extends Function {
     protected double identityValue;
 
@@ -10,6 +12,7 @@ public abstract class CommutativeFunction extends Function {
 
     public CommutativeFunction(Function... functions) {
         this.functions = functions;
+        Arrays.sort(this.functions);
     }
 
     public Function simplify() {

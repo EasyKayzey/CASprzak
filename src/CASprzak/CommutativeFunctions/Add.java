@@ -21,11 +21,11 @@ public class Add extends CommutativeFunction{
 		if (functions.length < 1)
 			return "(empty sum)";
 		StringBuilder temp = new StringBuilder("(");
-		for (int i = 0; i < functions.length - 1; i++) {
+		for (int i = functions.length - 1; i >= 1; i--) {
 			temp.append(functions[i].toString());
 			temp.append(" + ");
 		}
-		temp.append(functions[functions.length-1].toString());
+		temp.append(functions[0].toString());
 		temp.append(")");
 		return temp.toString();
 	}

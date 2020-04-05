@@ -21,6 +21,7 @@ public class CAS {
 		String[] viss = in.next().split("\\s+");
 		double[] vis = Arrays.stream(viss).mapToDouble(Double::parseDouble).toArray();
 
+		//TODO fix support for multiple vars
 		PreProcessor preProcessor = new PreProcessor();
 		SingleVariableSolver solver = new SingleVariableSolver();
 		Parser parser = new Parser(vars);

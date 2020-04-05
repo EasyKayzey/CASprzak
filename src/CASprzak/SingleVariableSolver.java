@@ -1,6 +1,6 @@
 package CASprzak;
 
-import java.util.LinkedList;
+import java.util.List;
 
 public class SingleVariableSolver {
 
@@ -20,7 +20,7 @@ public class SingleVariableSolver {
     }
 
     public double[] getSolutionsRange(Function expression, double lower, double upper) {
-        LinkedList<Double> solutions = ArrLib.createRange(upper, lower, 17);
+        List<Double> solutions = ArrLib.createRange(upper, lower, 17);
         for (int j = 0; j < 1000; j++) {
             for (int i = 0; i < solutions.size(); i++) {
                 solutions.set(i, newtonsMethod(expression, solutions.get(i)));

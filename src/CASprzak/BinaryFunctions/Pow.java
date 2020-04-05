@@ -32,24 +32,20 @@ public class Pow extends BinaryFunction {
 	}
 
 	public Function simplify() {
-		return new Pow(function1.simplify(), function2.simplify());
+		return (new Pow(function1.simplify(), function2.simplify())).simplifyObviousExponent();
 	}
 
-	protected Function simplifyOne() {
-		if(function1 instanceof Constant && ((Constant)function1).constant == 1){
-			return function2.simplify();
+	protected Function simplifyObviousExponent() {
+		if(function1 instanceof Constant) {
+			if (((Constant) function1).constant == 0)
+				return new Constant(1);
+			if (((Constant) function1).constant == 1)
+				return function2.simplify();
 		}
-		return clone();
+		return this;
 	}
 
-	protected Function simplifyZero() {
-		if(function1 instanceof Constant && ((Constant)function1).constant == 0){
-			return new Constant(1);
-		}
-		return clone();
-	}
-
-	public int compareTo( Function f) {
+	public int compareTo(Function f) {
 		return 0;
 	}
 }

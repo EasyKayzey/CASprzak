@@ -56,7 +56,7 @@ public class Parser {
         } catch (Exception e) {
           if (token.length() > 1) System.out.println(token + " is not a valid function.");
           char v = token.charAt(0);
-          functionStack.push(functionMaker.variable(getVarID(v), new char[]{v}));
+          functionStack.push(functionMaker.variable(getVarID(v), variables));
         }
       } else if (isAnOperator2(token)) {
         Function a = functionStack.pop();

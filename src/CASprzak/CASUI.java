@@ -21,10 +21,11 @@ public class CASUI {
 		String[] visTemp = in.next().split("\\s+");
 		double[] vis = Arrays.stream(visTemp).mapToDouble(Double::parseDouble).toArray();
 		System.out.println("Processing...");
-		//TODO fix support for multiple vars
+
 		PreProcessor preProcessor = new PreProcessor();
 		SingleVariableSolver solver = new SingleVariableSolver();
 		Parser parser = new Parser(vars);
+
 		Function curFun = parser.parse(preProcessor.toPostfix(raw));
 		System.out.println(curFun);
 		curFun = curFun.simplify();

@@ -25,6 +25,17 @@ public class ArrLib {
 		return true;
 	}
 
+	public static Function[] pullUp(Function[] outer, Function[] inner, int indexInFirst) {
+		Function[] an = new Function[outer.length + inner.length - 1];
+		for (int i = 0; i < indexInFirst; i++)
+			an[i] = outer[i];
+		for (int i = indexInFirst + 1; i < outer.length; i++)
+			an[i - 1] = outer[i];
+		for (int i = 0; i < inner.length; i++)
+			an[outer.length + i - 1] = inner[i];
+		return an;
+	}
+
 	public static double[] createRange(double upper, double lower, int sections) {
 		//TODO
 		return null;

@@ -19,7 +19,7 @@ public class Reciprocal extends UnitaryFunction{
 
 	@Override
 	public Function getDerivative(int varID) {
-		return new Multiply(new Negative(function.getDerivative(varID)), new Reciprocal(new Pow(new Constant(2), function)));
+		return new Multiply(new Constant(-1), function.getDerivative(varID), new Reciprocal(new Pow(new Constant(2), function)));
 	}
 
 	public Function clone() {

@@ -34,7 +34,6 @@ public class FunctionMaker {
 			case "cosh": return new Cosh(function);
 			case "tanh": return new Tanh(function);
 			case "ln": return new Ln(function);
-			case "negative": return new Negative(function);
 			case "reciprocal": return new Reciprocal(function);
 			default: throw new IllegalArgumentException("Invalid functionName " + functionName);
 		}
@@ -43,7 +42,7 @@ public class FunctionMaker {
 	public Function find2(String functionName, Function function1, Function function2) {
 		switch (functionName) {
 			case "+": return new Add(function1, function2);
-			case "-": return new Add(function2, new Negative(function1));
+			case "-": return new Add(function2, new Multiply(new Constant(-1), function1));
 			case "*": return new Multiply(function1, function2);
 			case "/": return new Multiply(function2, new Reciprocal(function1));
 			case "^": return new Pow(function1, function2);

@@ -36,6 +36,14 @@ public class ArrLib {
 		return newArray;
 	}
 
+	public static int findClassValue(Function function) {
+		for (int i = 0; i < Function.sortOrder.length; i++) {
+			if (function.getClass().equals(Function.sortOrder[i]))
+				return i;
+		}
+		return -1;
+	}
+
 	public static double[] createRange(double upper, double lower, int sections) {
 		double[] range = new double[sections+1];
 		for (int i = 0; i < range.length; i++)

@@ -18,16 +18,16 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 		return temp;
 	}
 
-	public abstract boolean equals(Function that);
-
 	public Function getSimplifiedDerivative(int varID) {
 		return getDerivative(varID).simplify();
 	}
 
+	public abstract boolean equals(Function that);
+
 	public boolean equals(Object o) {
 		if (!(o instanceof Function))
 			return false;
-		return this.equals((Function) o);
+		return this.simplify().equals(((Function) o).simplify());
 	}
 
 	public abstract int compareSelf(Function that);

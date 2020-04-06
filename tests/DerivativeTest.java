@@ -6,18 +6,31 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DerivativeTest {
-    @Test void constantsGive0() {
-        Parser parser = new Parser('x');
+    Parser parser = new Parser('x');
+
+    @Test
+    void constantsGive0() {
         Function test = parser.parse("2");
         assertEquals(0, test.getSimplifiedDerivative(0).evaluate(3467));
     }
 
-    @Test void variablesGive1() {
-        Parser parser = new Parser('x');
+    @Test
+    void variablesGive1() {
         Function test = parser.parse("x");
         assertEquals(1, test.getSimplifiedDerivative(0).evaluate(3467));
     }
 
-
+    @Test
+    void simpleSumAndProductDerivatives() {
+        Function test;
+        test = parser.parse("x + 3");
+        assertEquals(1, test.getSimplifiedDerivative(0).evaluate(9));
+        test = parser.parse("x * 7");
+        assertEquals(7, test.getSimplifiedDerivative(0).evaluate(9));
+        test = parser.parse("2 * x + 7");
+        assertEquals(2, test.getSimplifiedDerivative(0).evaluate(9));
+        test = parser.parse("2 * ( x + 7 )");
+        assertEquals(2, test.getSimplifiedDerivative(0).evaluate(9));
+    }
 
 }

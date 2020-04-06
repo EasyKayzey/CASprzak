@@ -21,7 +21,7 @@ public class Sec extends UnitaryFunction {
         return new Sec(function.clone());
     }
 
-    public Function simplifyInternal() {
+    public UnitaryFunction simplifyInternal() {
         return new Sec(function.simplify());
     }
 

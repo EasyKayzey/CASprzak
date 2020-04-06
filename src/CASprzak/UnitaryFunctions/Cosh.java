@@ -21,7 +21,7 @@ public class Cosh extends UnitaryFunction {
         return new Cosh(function.clone());
     }
 
-    public Function simplifyInternal() {
+    public UnitaryFunction simplifyInternal() {
         return new Cosh(function.simplify());
     }
 

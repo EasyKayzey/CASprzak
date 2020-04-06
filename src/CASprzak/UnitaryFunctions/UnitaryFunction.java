@@ -17,13 +17,13 @@ public abstract class UnitaryFunction extends Function {
     }
 
     public Function simplify() {
-        UnitaryFunction newFunction = (UnitaryFunction) this.simplifyInternal();
+        UnitaryFunction newFunction = this.simplifyInternal();
         if (newFunction.getOperand() instanceof Constant)
             return new Constant(newFunction.evaluate(0));
         return newFunction;
     }
 
-    public abstract Function simplifyInternal();
+    public abstract UnitaryFunction simplifyInternal();
 
     public boolean equals(Function that) {
         return this.getClass().equals(that.getClass()) && this.function.equals(((UnitaryFunction)that).function);

@@ -3,6 +3,7 @@ package CASprzak;
 import CASprzak.SpecialFunctions.Constant;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Stack;
 
 public class PreProcessor {
@@ -10,15 +11,18 @@ public class PreProcessor {
 	public static final String[] operationsTrig = {"sin", "cos", "tan", "csc", "sec", "cot", "asin", "acos", "atan"};
 
 
-	public PreProcessor() {
-	}
-
-
 	private int getPrecedence(String input) {
-		if (input.equals("^")) return 4;
-		if (input.equals("*") || input.equals("/")) return 3;
-		if (input.equals("+") || input.equals("-")) return 2;
-		if (input.equals("(")) return 0;
+		switch (input) {
+			case "^":
+				return 4;
+			case "*":
+			case "/":
+				return 3;
+			case "+":
+				return 2;
+			case "(":
+				return 0;
+		}
 		return 5;
 	}
 
@@ -33,7 +37,9 @@ public class PreProcessor {
 	}
 
 	public String[] toPostfix(String infix) {
-		String[] tokens = infix.split("((?!\\w)(?<=\\w)(?<!$)|(?<!\\w)((?<!\\W-)|(?<=\\)-))(?<!^-)(?<!$)(?<!^)|(?=\\())(?<!\\.)((?!\\.)|(?=\\.)(?<!\\d))(?!\\s+)(?<!\\s)|\\s+");
+		infix = infix.replaceAll("(?<![\\^\\-+*/ ])\\s*-","+-");
+		String[] tokens = infix.split("\\s+|(((?<=\\W)(?=[\\w-])((?<!-)|(?!\\d))|(?<=\\w)(?=\\W))|(?<=[()])|(?=[()]))(?<![ .])(?![ .])");
+		System.out.println(Arrays.toString(tokens));
 		ArrayList<String> postfix = new ArrayList<>();
 		Stack<String> operators = new Stack<>();
 

@@ -25,7 +25,7 @@ public class CASUI {
 		PreProcessor preProcessor = new PreProcessor();
 		SingleVariableSolver solver = new SingleVariableSolver();
 		Parser parser = new Parser(vars);
-
+		//TODO fix that x-2*x+1 is parsed as x-(2*x+1)
 		Function curFun = parser.parse(preProcessor.toPostfix(raw));
 		System.out.println("Here is your parsed function: " + curFun);
 		System.out.println("Here is the simplified toString of your function: " + curFun.simplifyTimes(10));

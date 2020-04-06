@@ -15,7 +15,7 @@ public class SingleVariableSolver {
             if (i % 25 == 0) {
                 if (initialPoint < 1E-15 && initialPoint > -1E-15) return 0;
             }
-        }
+        } //TODO the solution of a constant is -Infinity
         return initialPoint;
     }
 

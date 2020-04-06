@@ -23,7 +23,7 @@ public class Tanh extends UnitaryFunction {
         return new Tanh(function.clone());
     }
 
-    public Function simplify() {
+    public Function simplifyInternal() {
         return new Tanh(function.simplify());
     }
 

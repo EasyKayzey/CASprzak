@@ -24,7 +24,7 @@ public class Asin extends UnitaryFunction {
         return new Asin(function.clone());
     }
 
-    public Function simplify() {
+    public Function simplifyInternal() {
         return new Asin(function.simplify());
     }
 

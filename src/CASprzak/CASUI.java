@@ -30,9 +30,9 @@ public class CASUI {
 		System.out.println("Here is your parsed function: " + curFun);
 		System.out.println("Here is the simplified toString of your function: " + curFun.simplifyTimes(10));
 		System.out.println("Here is your output: " + curFun.evaluate(vis));
-		System.out.println("Here is the derivative, unsimplified:");
+		System.out.println("Here is the derivative, simplified once:");
 		System.out.println(curFun.getSimplifiedDerivative(0));
-		System.out.println("Here is the derivative, simplified:");
+		System.out.println("Here is the derivative, simplified completely:");
 		System.out.println(curFun.getSimplifiedDerivative(0).simplifyTimes(10));
 		System.out.println("Here is the derivative, evaluated:");
 		System.out.println(curFun.getSimplifiedDerivative(0).simplifyTimes(10).evaluate(vis));

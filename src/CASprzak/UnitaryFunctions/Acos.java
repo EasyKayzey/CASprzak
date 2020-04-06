@@ -24,7 +24,7 @@ public class Acos extends UnitaryFunction {
         return new Acos(function.clone());
     }
 
-    public Function simplify() {
+    public Function simplifyInternal() {
         return new Acos(function.simplify());
     }
 

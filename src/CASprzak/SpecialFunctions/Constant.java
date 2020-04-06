@@ -38,6 +38,8 @@ public class Constant extends Function {
 	}
 
 	public String toString() {
+		if (constantID != -1)
+			return specialConstantStrings[constantID];
 		return "" + constant;
 	}
 

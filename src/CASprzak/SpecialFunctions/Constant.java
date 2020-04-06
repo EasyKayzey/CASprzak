@@ -13,6 +13,13 @@ public class Constant extends Function {
 		this.constantID = -1;
 	}
 
+	public Constant(int constantID, boolean isSpecialConstant) {
+		if (!isSpecialConstant)
+			throw new IllegalArgumentException("This should never happen in Constant constructor");
+		this.constantID = constantID;
+		constant = specialConstants[constantID];
+	}
+
 	public Constant(String constantString) {
 		if (!isSpecialConstant(constantString))
 			throw new IllegalArgumentException(constantString + " is not a special constant.");
@@ -49,13 +56,12 @@ public class Constant extends Function {
 
 	public Function clone() {
 		if (constantID == -1) return new Constant(constant);
-		else return new Constant(specialConstants[constantID]);
+		else return new Constant(constantID, true);
 	}
 
 	public Function simplify() {
 		return clone();
 	}
-
 
 	public boolean equals(Function that) {
 		return (that instanceof Constant) && (constant == ((Constant) that).constant);

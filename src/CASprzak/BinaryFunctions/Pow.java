@@ -45,6 +45,13 @@ public class Pow extends BinaryFunction {
 		return this;
 	}
 
+	protected Function multiplyExponents() {
+		if (function2 instanceof Pow) {
+			return new Pow(new Multiply(((Pow) function2).function1, function1), ((Pow) function2).function2);
+		}
+		return clone();
+	}
+
 	public int compareTo(Function f) {
 		return 0;
 	}

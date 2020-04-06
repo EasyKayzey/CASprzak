@@ -32,7 +32,7 @@ public class Pow extends BinaryFunction {
 	}
 
 	public Function simplify() {
-		return (new Pow(function1.simplify(), function2.simplify())).simplifyObviousExponents();
+		return (new Pow(function1.simplify(), function2.simplify())).multiplyExponents().simplifyObviousExponents();
 	}
 
 	protected Function simplifyObviousExponents() {
@@ -45,11 +45,11 @@ public class Pow extends BinaryFunction {
 		return this;
 	}
 
-	protected Function multiplyExponents() {
+	protected Pow multiplyExponents() {
 		if (function2 instanceof Pow) {
 			return new Pow(new Multiply(((Pow) function2).function1, function1), ((Pow) function2).function2);
 		}
-		return clone();
+		return (Pow) clone();
 	}
 
 	public int compareTo(Function f) {

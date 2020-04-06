@@ -38,5 +38,36 @@ public class FunctionTest {
 		assertEquals(1, b);
 	}
 
+	@Test void eToTheXWorks() {
+		Function test = parserX.parse("e ^ x");
+		double b = test.evaluate(0);
+		assertEquals(1, b);
+	}
+
+	@Test void lnWorks() {
+		Function test = parserX.parse("ln e");
+		double b = test.evaluate(0);
+		assertEquals(1, b);
+	}
+
+	@Test void tanWorks() {
+		Function test = parserX.parse("tan x");
+		double b = test.evaluate(Math.PI/4);
+		assertEquals(1, b);
+	}
+
+	@Test void multiplyWorks() {
+		Function test = parserX.parse("( 1 / ( x + 1 ) ) * ( cos x ) * ( x ^ 2 - 1 )");
+		double b = test.evaluate(0);
+		assertEquals(-1, b);
+	}
+
+	@Test void addWorks() {
+		Function test = parserX.parse("( 1 / ( x + 1 ) ) + ( sec x ) + ( x ^ 3 - 1 )");
+		double b = test.evaluate(0);
+		assertEquals(1, b);
+	}
+
+
 
 }

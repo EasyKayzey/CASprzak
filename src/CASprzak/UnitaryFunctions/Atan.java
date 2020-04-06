@@ -24,7 +24,7 @@ public class Atan extends UnitaryFunction {
         return new Atan(function.clone());
     }
 
-    public Function simplifyInternal() {
+    public UnitaryFunction simplifyInternal() {
         return new Atan(function.simplify());
     }
 

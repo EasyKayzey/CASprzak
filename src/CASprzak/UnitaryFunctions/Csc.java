@@ -23,7 +23,7 @@ public class Csc extends UnitaryFunction {
         return new Csc(function.clone());
     }
 
-    public Function simplifyInternal() {
+    public UnitaryFunction simplifyInternal() {
         return new Csc(function.simplify());
     }
 

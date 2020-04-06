@@ -22,7 +22,7 @@ public class Sinh extends UnitaryFunction {
         return new Sinh(function.clone());
     }
 
-    public Function simplify() {
+    public Function simplifyInternal() {
         return new Sinh(function.simplify());
     }
 

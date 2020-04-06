@@ -23,7 +23,7 @@ public class Tan extends UnitaryFunction {
         return new Tan(function.clone());
     }
 
-    public Function simplify() {
+    public Function simplifyInternal() {
         return new Tan(function.simplify());
     }
 

@@ -22,7 +22,7 @@ public class Cos extends UnitaryFunction {
         return new Cos(function.clone());
     }
 
-    public Function simplify() {
+    public Function simplifyInternal() {
         return new Cos(function.simplify());
     }
 

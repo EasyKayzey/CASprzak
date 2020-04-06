@@ -23,7 +23,7 @@ public class Cot extends UnitaryFunction {
         return new Cot(function.clone());
     }
 
-    public Function simplify() {
+    public Function simplifyInternal() {
         return new Cot(function.simplify());
     }
 

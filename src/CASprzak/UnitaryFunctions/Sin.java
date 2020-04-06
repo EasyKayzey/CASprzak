@@ -21,7 +21,7 @@ public class Sin extends UnitaryFunction {
         return new Sin(function.clone());
     }
 
-    public Function simplify() {
+    public Function simplifyInternal() {
         return new Sin(function.simplify());
     }
 

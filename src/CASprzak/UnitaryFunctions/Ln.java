@@ -24,7 +24,7 @@ public class Ln extends UnitaryFunction {
         return new Ln(function.clone());
     }
 
-    public Function simplify() {
+    public Function simplifyInternal() {
         return new Ln(function.simplify());
     }
 

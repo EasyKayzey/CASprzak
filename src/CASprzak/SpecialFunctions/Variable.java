@@ -17,7 +17,7 @@ public class Variable extends Function {
 
 
 	public Function getDerivative(int varID) {
-		return new Constant(1);
+		return new Constant((this.varID == varID ? 1 : 0));
 	}
 
 	public double evaluate(double... variableValues) {

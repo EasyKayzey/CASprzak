@@ -10,62 +10,52 @@ public class FunctionTest {
 
 	@Test void fxReturnsX() {
 		Function test = parserX.parse("x");
-		double b = test.evaluate(2);
-		assertEquals(2, b);
+		assertEquals(2, test.evaluate(2));
 	}
 
 	@Test void basicFunctionsWithX() {
 		Function test = parserX.parse("x ^ x + 2 + 5 * x");
-		double b = test.evaluate(3);
-		assertEquals(44, b);
+		assertEquals(44, test.evaluate(3));
 	}
 
 	@Test void multipleVariablesWorks() {
         Function test = parserXY.parse("x + y + y");
-		double b = test.evaluate(3, 4);
-		assertEquals(11, b);
+		assertEquals(11, test.evaluate(3, 4));
 	}
 
 	@Test void logbWorks() {
 		Function test = parserX.parse("logb 3 x");
-		double b = test.evaluate(81);
-		assertEquals(4, b);
+		assertEquals(4, test.evaluate(81));
 	}
 
 	@Test void trigWorks() {
 		Function test = parserX.parse("( sin x ) ^ 2 + ( cos x ) ^ 2");
-		double b = test.evaluate(81);
-		assertEquals(1, b);
+		assertEquals(1, test.evaluate(81));
 	}
 
 	@Test void eToTheXWorks() {
 		Function test = parserX.parse("e ^ x");
-		double b = test.evaluate(0);
-		assertEquals(1, b);
+		assertEquals(1, test.evaluate(0));
 	}
 
 	@Test void lnWorks() {
 		Function test = parserX.parse("ln e");
-		double b = test.evaluate(0);
-		assertEquals(1, b);
+		assertEquals(1, test.evaluate(0));
 	}
 
 	@Test void tanWorks() {
 		Function test = parserX.parse("tan x");
-		double b = test.evaluate(Math.PI/4);
-		assertEquals(1, b);
+		assertEquals(1, test.evaluate(Math.PI/4), 0.0000001);
 	}
 
 	@Test void multiplyWorks() {
 		Function test = parserX.parse("( 1 / ( x + 1 ) ) * ( cos x ) * ( x ^ 2 - 1 )");
-		double b = test.evaluate(0);
-		assertEquals(-1, b);
+		assertEquals(-1, test.evaluate(0));
 	}
 
 	@Test void addWorks() {
 		Function test = parserX.parse("( 1 / ( x + 1 ) ) + ( sec x ) + ( x ^ 3 - 1 )");
-		double b = test.evaluate(0);
-		assertEquals(1, b);
+		assertEquals(1, test.evaluate(0));
 	}
 
 

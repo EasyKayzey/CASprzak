@@ -3,24 +3,13 @@ package CASprzak;
 import CASprzak.SpecialFunctions.Constant;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Stack;
 
 public class PreProcessor {
 	public static final String[] operations = {"^", "*", "/", "+", "-", "logb", "log", "ln", "sqrt", "exp", "sinh", "cosh", "tanh"};
 	public static final String[] operationsTrig = {"sin", "cos", "tan", "csc", "sec", "cot", "asin", "acos", "atan"};
 
-
-	public PreProcessor() {
-	}
-
-
-	private int getPrecedence(String input) {
-		if (input.equals("^")) return 4;
-		if (input.equals("*") || input.equals("/")) return 3;
-		if (input.equals("+") || input.equals("-")) return 2;
-		if (input.equals("(")) return 0;
-		return 5;
-	}
 
 	public boolean isAnOperator(String input) {
 		for (String x : operations) {
@@ -33,7 +22,11 @@ public class PreProcessor {
 	}
 
 	public String[] toPostfix(String infix) {
-		String[] tokens = infix.split("((?!\\w)(?<=\\w)(?<!$)|(?<!\\w)((?<!\\W-)|(?<=\\)-))(?<!^-)(?<!$)(?<!^)|(?=\\())(?<!\\.)((?!\\.)|(?=\\.)(?<!\\d))(?!\\s+)(?<!\\s)|\\s+");
+		infix = infix.replace("{","(").replace("}",")").replace("\\","").replace("_"," ");
+		infix = infix.replaceAll("(?<!^)(?<![\\^\\-+*/ ])\\s*-","+-");
+		infix = "((((" + infix.replaceAll("\\(","((((").replaceAll("\\)","))))").replaceAll("\\+","))+((").replaceAll("\\*",")*(").replaceAll("/",")/(") + "))))";
+		String[] tokens = infix.split("\\s+|(((?<=\\W)(?=[\\w-])((?<!-)|(?!\\d))|(?<=\\w)(?=\\W))|(?<=[()])|(?=[()]))(?<![ .])(?![ .])");
+//		System.out.println(Arrays.toString(tokens));
 		ArrayList<String> postfix = new ArrayList<>();
 		Stack<String> operators = new Stack<>();
 
@@ -43,14 +36,7 @@ public class PreProcessor {
 			if (Constant.isSpecialConstant(token)) {
 				postfix.add(token);
 			} else if (isAnOperator(token)) {
-				if (operators.empty()) {
-					operators.push(token);
-				} else if (getPrecedence(token) <= getPrecedence(operators.peek()) && !token.equals("^")) {
-					postfix.add(operators.pop());
-					operators.push(token);
-				} else {
-					operators.push(token);
-				}
+				operators.push(token);
 			} else if (token.equals("(")) {
 				operators.push(token);
 			} else if (token.equals(")")) {

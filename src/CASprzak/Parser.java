@@ -5,8 +5,8 @@ import CASprzak.SpecialFunctions.Constant;
 import java.util.*;
 
 public class Parser {
-  public static final String[] operations2 = {"^", "*", "/", "+", "-", "logb"};
-  public static final String[] operations1 = {"sin", "cos", "tan", "log", "ln", "sqrt", "exp", "sinh", "cosh", "tanh", "csc", "sec", "cot", "asin", "acos", "atan"};
+  public static final String[] operations2 = {"^", "*", "/", "+", "logb"};
+  public static final String[] operations1 = {"-", "sin", "cos", "tan", "log", "ln", "sqrt", "exp", "sinh", "cosh", "tanh", "csc", "sec", "cot", "asin", "acos", "atan"};
 
   private final char[] variables;
 

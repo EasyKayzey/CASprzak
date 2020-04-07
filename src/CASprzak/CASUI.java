@@ -15,8 +15,6 @@ public class CASUI {
 		System.out.println("Enter your function to be stored:");
 		String raw = in.next();
 
-		raw = raw.replace("{","(").replace("}",")").replace("\\","").replace("_"," ");
-
 		System.out.println("What are your inputs? Separate with spaces, and order them with your variables.");
 		String[] visTemp = in.next().split("\\s+");
 		double[] vis = Arrays.stream(visTemp).mapToDouble(Double::parseDouble).toArray();

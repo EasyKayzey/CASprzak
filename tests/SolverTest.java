@@ -12,7 +12,7 @@ public class SolverTest {
 
     @Test
     void simplePolynomial() {
-        Function test = parserX.parse("x ^ 2 + -1");
+        Function test = parserX.parse("x^2+-1");
         assertEquals(1, solver.getSolutionPoint(test, 3));
     }
 }

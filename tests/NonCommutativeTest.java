@@ -20,4 +20,29 @@ public class NonCommutativeTest {
 		assertEquals(-2, test.evaluate(3));
 	}
 
+	@Test
+	void basicNCPolynomial() {
+		Function test = parserX.parse("x^2-5*x+4");
+//		System.out.println(test);
+		assertEquals(-2,test.evaluate(3));
+	}
+
+	@Test
+	void mediumNCPolynomial() {
+		Function test = parserX.parse("x^4-5*x^2+4");
+//		System.out.println(test);
+		assertEquals(40,test.evaluate(3));
+	}
+
+	@Test
+	void negativeConstant() {
+		Function test = parserX.parse("-3");
+		assertEquals(-3, test.evaluate(17));
+	}
+
+	@Test
+	void leadingNegative() {
+		Function test = parserX.parse("-x");
+		assertEquals(-3, test.evaluate(3));
+	}
 }

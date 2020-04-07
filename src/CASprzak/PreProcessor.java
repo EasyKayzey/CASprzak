@@ -23,7 +23,7 @@ public class PreProcessor {
 			case "(":
 				return 0;
 			default:
-				return 5;
+				return 99;
 		}
 	}
 

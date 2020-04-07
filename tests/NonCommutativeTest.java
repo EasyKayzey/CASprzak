@@ -34,4 +34,15 @@ public class NonCommutativeTest {
 		assertEquals(40,test.evaluate(3));
 	}
 
+	@Test
+	void negativeConstant() {
+		Function test = parserX.parse("-3");
+		assertEquals(-3, test.evaluate(17));
+	}
+
+	@Test
+	void leadingNegative() {
+		Function test = parserX.parse("-x");
+		assertEquals(-3, test.evaluate(3));
+	}
 }

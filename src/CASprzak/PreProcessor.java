@@ -22,8 +22,9 @@ public class PreProcessor {
 				return 2;
 			case "(":
 				return 0;
+			default:
+				return 5;
 		}
-		return 5;
 	}
 
 	public boolean isAnOperator(String input) {

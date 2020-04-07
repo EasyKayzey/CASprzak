@@ -63,4 +63,10 @@ public class NonCommutativeTest {
 		Function test = parserX.parse("1/(x^2+x-1)");
 		assertEquals(1, test.evaluate(1));
 	}
+
+	@Test
+	void dividingAndMultiplying() {
+		Function test = parserX.parse("1/x*x");
+		assertEquals(1, test.evaluate(1.786907846347864578324));
+	}
 }

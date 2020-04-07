@@ -51,4 +51,34 @@ public class NonCommutativeTest {
 		Function test = parserXY.parse("-x/-y+-y/3");
 		assertEquals(-1.0/3,test.evaluate(2,3), .001);
 	}
+
+	@Test
+	void dividingNegatives() {
+		Function test = parserX.parse("1/-x");
+		assertEquals(-1, test.evaluate(1));
+	}
+
+	@Test
+	void dividingByOneTerm() {
+		Function test = parserX.parse("1/x^2+x");
+		assertEquals(2, test.evaluate(1));
+	}
+
+	@Test
+	void dividingByPolynomial() {
+		Function test = parserX.parse("1/(x^2+x-1)");
+		assertEquals(1, test.evaluate(1));
+	}
+
+	@Test
+	void dividingAndMultiplying1() {
+		Function test = parserX.parse("1/x*x");
+		assertEquals(1, test.evaluate(1.786));
+	}
+
+	@Test
+	void dividingAndMultiplying2() {
+		Function test = parserX.parse("1/x * x");
+		assertEquals(1, test.evaluate(1.786));
+	}
 }

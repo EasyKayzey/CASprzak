@@ -20,4 +20,11 @@ public class NonCommutativeTest {
 		assertEquals(-2, test.evaluate(3));
 	}
 
+	@Test
+	void basicPolynomial() {
+		Function test = parserX.parse("x^4-5*x^2+4");
+		System.out.println(test.toString());
+		assertEquals(40,test.evaluate(3));
+	}
+
 }

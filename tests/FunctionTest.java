@@ -75,4 +75,10 @@ public class FunctionTest {
 		assertEquals(130, test.evaluate(3));
 	}
 
+	@Test void orderOfOperations() {
+		Function test = parserX.parse("10*4-2*(4^2/4)/2/0.5+9");
+//		System.out.println(test);
+		assertEquals(41, test.evaluate(1));
+	}
+
 }

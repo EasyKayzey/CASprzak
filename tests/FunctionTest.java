@@ -58,9 +58,5 @@ public class FunctionTest {
 		assertEquals(1, test.evaluate(0));
 	}
 
-	@Test void noSpaces() {
-		Function test = parserX.parse("1+x*-3");
-		assertEquals(-5, test.evaluate(2));
-	}
 
 }

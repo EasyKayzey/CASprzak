@@ -11,22 +11,6 @@ public class PreProcessor {
 	public static final String[] operationsTrig = {"sin", "cos", "tan", "csc", "sec", "cot", "asin", "acos", "atan"};
 
 
-	private int getPrecedence(String input) {
-		switch (input) {
-			case "^":
-				return 4;
-			case "*":
-			case "/":
-				return 3;
-			case "+":
-				return 2;
-			case "(":
-				return 0;
-			default:
-				return 99;
-		}
-	}
-
 	public boolean isAnOperator(String input) {
 		for (String x : operations) {
 			if (x.equals(input)) return true;
@@ -38,7 +22,9 @@ public class PreProcessor {
 	}
 
 	public String[] toPostfix(String infix) {
-		infix = infix.replace("{","(").replace("}",")").replace("\\","").replace("_"," ").replaceAll("(?<!^)(?<![\\^\\-+*/ ])\\s*-","+-");
+		infix = infix.replace("{","(").replace("}",")").replace("\\","").replace("_"," ");
+		infix = infix.replaceAll("(?<!^)(?<![\\^\\-+*/ ])\\s*-","+-");
+		infix = "((((" + infix.replaceAll("\\(","((((").replaceAll("\\)","))))").replaceAll("\\+","))+((").replaceAll("\\*",")*(").replaceAll("/",")/(") + "))))";
 		String[] tokens = infix.split("\\s+|(((?<=\\W)(?=[\\w-])((?<!-)|(?!\\d))|(?<=\\w)(?=\\W))|(?<=[()])|(?=[()]))(?<![ .])(?![ .])");
 		System.out.println(Arrays.toString(tokens));
 		ArrayList<String> postfix = new ArrayList<>();
@@ -50,14 +36,7 @@ public class PreProcessor {
 			if (Constant.isSpecialConstant(token)) {
 				postfix.add(token);
 			} else if (isAnOperator(token)) {
-				if (operators.empty()) {
-					operators.push(token);
-				} else if (getPrecedence(token) <= getPrecedence(operators.peek()) && !token.equals("^")) {
-					postfix.add(operators.pop());
-					operators.push(token);
-				} else {
-					operators.push(token);
-				}
+				operators.push(token);
 			} else if (token.equals("(")) {
 				operators.push(token);
 			} else if (token.equals(")")) {

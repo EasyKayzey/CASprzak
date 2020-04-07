@@ -45,4 +45,10 @@ public class NonCommutativeTest {
 		Function test = parserX.parse("-x");
 		assertEquals(-3, test.evaluate(3));
 	}
+
+	@Test
+	void multiVariableDivision() {
+		Function test = parserXY.parse("-x/y+-y/3");
+		assertEquals(-5.0/3,test.evaluate(2,3), .001);
+	}
 }

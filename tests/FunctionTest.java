@@ -62,4 +62,9 @@ public class FunctionTest {
 		Function test = parserX.parse("x ^ 2 + 5 * x + 1");
 		assertEquals(15, test.evaluate(2));
 	}
+
+	@Test void mediumPolynomial() {
+		Function test = parserX.parse("x ^ 4 + 5 * x ^ 2 + 4");
+		assertEquals(130, test.evaluate(3));
+	}
 }

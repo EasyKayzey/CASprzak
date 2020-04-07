@@ -58,5 +58,9 @@ public class NonCommutativeTest {
 		assertEquals(2, test.evaluate(1));
 	}
 
-
+	@Test
+	void dividingByPolynomial() {
+		Function test = parserX.parse("1/(x^2+x-1)");
+		assertEquals(1, test.evaluate(1));
+	}
 }

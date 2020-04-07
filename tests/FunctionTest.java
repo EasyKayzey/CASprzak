@@ -58,5 +58,8 @@ public class FunctionTest {
 		assertEquals(1, test.evaluate(0));
 	}
 
-
+	@Test void basicPolynomial() {
+		Function test = parserX.parse("x ^ 2 + 5 * x + 1");
+		assertEquals(15, test.evaluate(2));
+	}
 }

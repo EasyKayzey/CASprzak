@@ -45,4 +45,18 @@ public class NonCommutativeTest {
 		Function test = parserX.parse("-x");
 		assertEquals(-3, test.evaluate(3));
 	}
+
+	@Test
+	void dividingNegatives() {
+		Function test = parserX.parse("1/-x");
+		assertEquals(-1, test.evaluate(1));
+	}
+
+	@Test
+	void dividingByOneTerm() {
+		Function test = parserX.parse("1/x^2+x");
+		assertEquals(2, test.evaluate(1));
+	}
+
+
 }

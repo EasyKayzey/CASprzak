@@ -62,4 +62,11 @@ public class EqualsTest {
         test2 = parser.parse("" + Math.E);
         assertEquals(test1, test2);
     }
+
+    @Test
+    void simplifiesDivisionExponents() {
+        Function test1 = parser.parse("x^3/x^2");
+        Function test2 = parser.parse("x");
+        assertEquals(test1, test2);
+    }
 }

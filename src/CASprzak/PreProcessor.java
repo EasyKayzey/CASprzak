@@ -23,10 +23,10 @@ public class PreProcessor {
 
 	public String[] toPostfix(String infix) {
 		infix = infix.replace("{","(").replace("}",")").replace("\\","").replace("_"," ");
-		infix = infix.replaceAll("(?<!^)(?<![\\^\\-+*/ ])\\s*-","+-");
-		infix = "((((" + infix.replaceAll("\\(","((((").replaceAll("\\)","))))").replaceAll("\\+","))+((").replaceAll("\\*",")*(").replaceAll("/",")/(") + "))))";
+		infix = infix.replaceAll("(?<!^)(?<![\\^\\-+*/ ])\\s*-","+-").replace("/","*/");
+		infix = "((((" + infix.replaceAll("\\(","((((").replaceAll("\\)","))))").replaceAll("\\+","))+((").replaceAll("\\*",")*(")+ "))))";
 		String[] tokens = infix.split("\\s+|(((?<=\\W)(?=[\\w-])((?<!-)|(?!\\d))|(?<=\\w)(?=\\W))|(?<=[()])|(?=[()]))(?<![ .])(?![ .])");
-//		System.out.println(Arrays.toString(tokens));
+		System.out.println(Arrays.toString(tokens));
 		ArrayList<String> postfix = new ArrayList<>();
 		Stack<String> operators = new Stack<>();
 

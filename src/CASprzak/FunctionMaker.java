@@ -22,6 +22,7 @@ public class FunctionMaker {
 	public Function find1(String functionName, Function function) {
 		switch (functionName) {
 			case "-": return new Multiply(new Constant(-1), function);
+			case "/": return new Pow(new Constant(-1), function);
 			case "sin": return new Sin(function);
 			case "cos": return new Cos(function);
 			case "tan": return new Tan(function);
@@ -42,9 +43,7 @@ public class FunctionMaker {
 	public Function find2(String functionName, Function function1, Function function2) {
 		switch (functionName) {
 			case "+": return new Add(function1, function2);
-//			case "-": return new Add(function2, new Multiply(new Constant(-1), function1));
 			case "*": return new Multiply(function1, function2);
-			case "/": return new Multiply(function2, new Pow(new Constant(-1), function1));
 			case "^": return new Pow(function1, function2);
 			case "logb": return new Logb(function1, function2);
 			default: throw new IllegalArgumentException("Invalid functionName " + functionName);

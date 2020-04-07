@@ -63,4 +63,10 @@ public class FunctionTest {
 		assertEquals(-5, test.evaluate(2));
 	}
 
+	@Test void basicPolynomial() {
+		Function test = parserX.parse("x^4+5*x^2+4");
+		System.out.println(test);
+		assertEquals(130, test.evaluate(3));
+	}
+
 }

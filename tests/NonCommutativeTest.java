@@ -47,6 +47,12 @@ public class NonCommutativeTest {
 	}
 
 	@Test
+	void multiVariableDivisionWithNegatives() {
+		Function test = parserXY.parse("-x/-y+-y/3");
+		assertEquals(-1.0/3,test.evaluate(2,3), .001);
+	}
+
+	@Test
 	void dividingNegatives() {
 		Function test = parserX.parse("1/-x");
 		assertEquals(-1, test.evaluate(1));

@@ -64,6 +64,12 @@ public class FunctionTest {
 	}
 
 	@Test void basicPolynomial() {
+		Function test = parserX.parse("x^2+5*x+4");
+		System.out.println(test);
+		assertEquals(28, test.evaluate(3));
+	}
+
+	@Test void mediumPolynomial() {
 		Function test = parserX.parse("x^4+5*x^2+4");
 		System.out.println(test);
 		assertEquals(130, test.evaluate(3));

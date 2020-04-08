@@ -72,8 +72,8 @@ public class EqualsTest {
 
     @Test
     void combineLikeTerms() {
-        Function test1 = parser.parse("3*x^2+5*x^-1+7*x^-1-3*x^2");
-        Function test2 = parser.parse("12*x^-1");
+        Function test1 = parser.parse("3*x^2+5*x^-1+7*x^-1-3*x^2+1");
+        Function test2 = parser.parse("1+12*x^-1");
         assertEquals(test1, test2);
     }
 }

@@ -10,10 +10,12 @@ Hello, and welcome to our CAS. This is a joint project by The EasyKayzey Show st
 - Evaluating all of the above at any given point
 - Finding zeroes of expressions using Newton's Method
 
-
 ## Notes
 - If you find a problem with the CAS, please make a new issue so we can fix it
 - If you would like to design a better interface than the placeholder that we have now, please contact us.
+
+## Planned Features
+- Multiplication by adjaciency like `3x` (resolves #1)
 
 ## Contacts
 ### Group

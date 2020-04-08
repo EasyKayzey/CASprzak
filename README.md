@@ -10,8 +10,6 @@ Hello, and welcome to our CAS. This is a joint project by The EasyKayzey Show st
 - Evaluating all of the above at any given point
 - Finding zeroes of expressions using Newton's Method
 
-## Known Issues
-- CAS does not support expressions like `3x`
 
 ## Notes
 - If you find a problem with the CAS, please make a new issue so we can fix it

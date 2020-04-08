@@ -3,21 +3,23 @@ package CASprzak;
 import java.util.*;
 
 public class CASUI {
+	public static boolean debug = false;
+
 	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
 		in.useDelimiter("\n");
 
 		System.out.println("What are your variables? Separate with spaces.");
-		String[] varsTemp = in.next().split("\\s+");
+		String[] varsTemp = in.next().split(",\\s*");
 		char[] vars = new char[varsTemp.length];
 		for (int i = 0; i < vars.length; i++) vars[i] = varsTemp[i].charAt(0);
 
 		System.out.println("Enter your function to be stored:");
 		String raw = in.next();
 
-		System.out.println("What are your inputs? Separate with spaces, and order them with your variables.");
-		String[] visTemp = in.next().split("\\s+");
-		double[] vis = Arrays.stream(visTemp).mapToDouble(Double::parseDouble).toArray();
+		System.out.println("What are your inputs? Separate with commas, and order them with your variables.");
+		String[] visTemp = in.next().split(",\\s*");
+		double[] vis = Arrays.stream(visTemp).mapToDouble(ConstantEvaluator::getConstant).toArray();
 		System.out.println("Processing...");
 
 		PreProcessor preProcessor = new PreProcessor();

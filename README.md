@@ -1,0 +1,23 @@
+# Z_CASprzak
+A CAS by Erez Israeli Miller and Michael Kasprzak
+
+Hello, and welcome to our CAS. This is a joint project between Erez IM and Michael K started at HackBCA V, 2020. It consists of a structure for parsing, storing, and working with mathematical expressions with a small command-line demo. 
+
+## Functionality
+- Parsing and storing expressions like `x^2-3*y+sin(1/z)`
+- Simplifying many types of expressions
+- Taking and storing the derivatives of expressions
+- Evaluating all of the above at any given point
+- Finding zeroes of expressions using Newton's Method
+
+## Known Issues
+- CAS does not support expressions like `3x`
+
+## Notes
+- If you find a problem with the CAS, please make a new issue so we can fix it
+- If you would like to design a better interface than the placeholder that we have now, please contact us.
+
+## Contacts
+Erez Israeli Miller: erez.m.israeli@gmail.com
+
+Michael Kasprzak: TODO 

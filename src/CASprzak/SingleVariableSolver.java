@@ -8,15 +8,19 @@ public class SingleVariableSolver {
         return value - expression.evaluate(value) / expression.getSimplifiedDerivative(0).evaluate(value);
     }
 
-    public double getSolutionPoint(Function expression, double initialPoint) {
+    public double getSolutionPoint(Function expression, double initialPoint, int runs) {
         if (expression.evaluate(initialPoint) == 0) return initialPoint;
-        for (int i = 0; i < 1000; i++){
+        for (int i = 0; i < runs; i++){
             initialPoint = newtonsMethod(expression, initialPoint);
             if (i % 25 == 0) {
                 if (initialPoint < 1E-15 && initialPoint > -1E-15) return 0;
             }
         } //TODO the solution of a constant is -Infinity
         return initialPoint;
+    }
+
+    public double getSolutionPoint(Function expression, double initialPoint) {
+        return getSolutionPoint(expression, initialPoint, 100);
     }
 
     public double[] getSolutionsRange(Function expression, double lower, double upper) {

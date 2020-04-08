@@ -18,6 +18,10 @@ Hello, and welcome to our CAS. This is a joint project by The EasyKayzey Show st
 - If you would like to design a better interface than the placeholder that we have now, please contact us.
 
 ## Contacts
+### Group
+The EasyKayzey Show: easykayzey@googlegroups.com
+
+### Individuals
 Erez Israeli Miller: erez.m.israeli@gmail.com
 
 Michael Kasprzak: michaelkasprzak522@gmail.com

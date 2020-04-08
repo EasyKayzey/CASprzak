@@ -20,4 +20,4 @@ Hello, and welcome to our CAS. This is a joint project by The EasyKayzey Show st
 ## Contacts
 Erez Israeli Miller: erez.m.israeli@gmail.com
 
-Michael Kasprzak: TODO 
+Michael Kasprzak: michaelkasprzak522@gmail.com

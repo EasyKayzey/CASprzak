@@ -50,7 +50,8 @@ public class Parser {
         try {
           functionStack.push(functionMaker.constant(Double.parseDouble(token)));
         } catch (Exception e) {
-          if (token.length() > 1) System.out.println(token + " is not a valid function.");
+          if (token.length() > 1)
+            throw new IllegalArgumentException(token + " is not a valid function.");
           char v = token.charAt(0);
           functionStack.push(functionMaker.variable(getVarID(v), variables));
         }

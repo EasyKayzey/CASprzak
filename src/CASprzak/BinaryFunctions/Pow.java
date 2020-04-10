@@ -13,11 +13,6 @@ public class Pow extends BinaryFunction {
 	}
 
 	@Override
-	public String toString() {
-		return "(" + function2.toString() + ")^(" + function1.toString() + ")";
-	}
-
-	@Override
 	public Function getDerivative(int varID) {
 		return  new Multiply(new Pow(function1, function2), new Add( new Multiply(function1.getSimplifiedDerivative(varID), new Ln(function2)), new Multiply(new Multiply(function1, function2.getSimplifiedDerivative(varID)), new Pow(new Constant(-1), function2))));
 	}
@@ -54,5 +49,10 @@ public class Pow extends BinaryFunction {
 
 	public int compareTo(Function f) {
 		return 0;
+	}
+
+	@Override
+	public String toString() {
+		return "(" + function2.toString() + ")^(" + function1.toString() + ")";
 	}
 }

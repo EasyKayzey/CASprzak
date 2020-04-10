@@ -3,7 +3,7 @@ package CASprzak;
 import java.util.*;
 
 public class CASUI {
-	public static final boolean debug = false;
+	public static boolean debug = false;
 	public static final boolean simplifyFunctionsOfConstants = true;
 
 	public static void main(String[] args) {
@@ -42,14 +42,6 @@ public class CASUI {
 		System.out.println("Here are the zeros for the expression");
 		System.out.println(Arrays.toString(solver.getSolutionsRange(curFun, -10, 10)));
 
-
-
-
-
-		// System.out.println(fun.toString());
-//		System.out.println("Function val: "+fun.eval(vis));
-//		// System.out.println(FunctionEvaluator.df(fun,bov).toString());
-//		System.out.println("Derivative val: "+FunctionEvaluator.df(fun,bov).eval(vis));
 	}
 }
 

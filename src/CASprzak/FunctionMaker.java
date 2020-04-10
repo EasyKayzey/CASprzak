@@ -23,6 +23,7 @@ public class FunctionMaker {
 		switch (functionName) {
 			case "-": return new Multiply(new Constant(-1), function);
 			case "/": return new Pow(new Constant(-1), function);
+			case "sqrt": return new Pow(new Constant(.5), function);
 			case "sin": return new Sin(function);
 			case "cos": return new Cos(function);
 			case "tan": return new Tan(function);

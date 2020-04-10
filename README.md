@@ -15,7 +15,7 @@ Hello, and welcome to our CAS. This is a joint project by The EasyKayzey Show st
 - If you would like to design a better interface than the placeholder that we have now, please contact us.
 
 ## Planned Features
-- Multiplication by adjaciency like `3x` (resolves #1)
+- Multiplication by adjacency like `3x` (resolves #1)
 
 ## Contacts
 ### Group

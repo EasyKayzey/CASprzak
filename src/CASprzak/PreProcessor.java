@@ -3,7 +3,6 @@ package CASprzak;
 import CASprzak.SpecialFunctions.Constant;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Stack;
 
 public class PreProcessor {

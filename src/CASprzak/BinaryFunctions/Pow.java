@@ -1,5 +1,6 @@
 package CASprzak.BinaryFunctions;
 
+import CASprzak.CASUI;
 import CASprzak.CommutativeFunctions.Add;
 import CASprzak.CommutativeFunctions.Multiply;
 import CASprzak.Function;
@@ -27,15 +28,17 @@ public class Pow extends BinaryFunction {
 	}
 
 	public Function simplify() {
-		return (new Pow(function1.simplify(), function2.simplify())).multiplyExponents().simplifyObviousExponents();
+		return (new Pow(function1.simplify(), function2.simplify())).multiplyExponents().simplifyObviousExponentsAndFOC();
 	}
 
-	protected Function simplifyObviousExponents() {
+	protected Function simplifyObviousExponentsAndFOC() {
 		if(function1 instanceof Constant) {
 			if (((Constant) function1).constant == 0)
 				return new Constant(1);
 			if (((Constant) function1).constant == 1)
 				return function2.simplify();
+			if (CASUI.simplifyFunctionsOfConstants && function2 instanceof Constant)
+				return new Constant(this.evaluate());
 		}
 		return this;
 	}

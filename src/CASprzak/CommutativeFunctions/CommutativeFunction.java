@@ -50,15 +50,15 @@ public abstract class CommutativeFunction extends Function {
 
     public boolean equals(Function that) {
         if (this.getClass().equals(that.getClass()))
-            return ArrLib.deepEquals(this.getFunctions(), ((CommutativeFunction)that).getFunctions());
+            return ArrLib.deepEquals(functions, ((CommutativeFunction)that).getFunctions());
         return false;
     }
 
     public int compareSelf(Function that) {
-        Function[] thisFunctions = this.getFunctions();
+        Function[] thisFunctions = functions;
         Function[] thatFunctions = ((CommutativeFunction)that).getFunctions();
-        if (this.getFunctions().length != thatFunctions.length)
-            return this.getFunctions().length - thatFunctions.length;
+        if (functions.length != thatFunctions.length)
+            return functions.length - thatFunctions.length;
         for (int i = 0; i < thisFunctions.length; i++) {
             if (!thisFunctions[i].equals(thatFunctions[i]))
                 return thisFunctions[i].compareTo(thatFunctions[i]);

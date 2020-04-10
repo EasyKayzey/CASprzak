@@ -57,7 +57,7 @@ public class Pow extends BinaryFunction {
 	}
 
 	@Override
-	public String toString() {
+	public String toString() { //TODO this should probably be using StringBuilder
 		boolean parenF1 = !((function1 instanceof Constant) || (function1 instanceof Variable) || (function1 instanceof CommutativeFunction));
 		boolean parenF2 = !((function2 instanceof Constant) || (function2 instanceof Variable) || (function2 instanceof CommutativeFunction));
 		return (parenF2 ? "(" : "") + function2.toString() + (parenF2 ? ")" : "") + "^" + (parenF1 ? "(" : "") + function1.toString() + (parenF1 ? ")" : "");

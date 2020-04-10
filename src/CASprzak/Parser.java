@@ -36,7 +36,7 @@ public class Parser {
   }
 
   public Function parse(String infix) {
-    return parse((new PreProcessor()).toPostfix(infix));
+    return parse((new PreProcessor(variables)).toPostfix(infix));
   }
 
   public Function parse(String[] postfix) {

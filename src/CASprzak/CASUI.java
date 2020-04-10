@@ -22,7 +22,7 @@ public class CASUI {
 		double[] vis = Arrays.stream(visTemp).mapToDouble(ConstantEvaluator::getConstant).toArray();
 		System.out.println("Processing...");
 
-		PreProcessor preProcessor = new PreProcessor();
+		PreProcessor preProcessor = new PreProcessor(vars);
 		SingleVariableSolver solver = new SingleVariableSolver();
 		Parser parser = new Parser(vars);
 

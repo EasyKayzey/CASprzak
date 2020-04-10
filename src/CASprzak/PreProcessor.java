@@ -22,9 +22,9 @@ public class PreProcessor {
 	}
 
 	public String[] toPostfix(String infix) {
-		infix = infix.replace("\\","").replace("_"," ");
-		infix = infix.replaceAll("(?<=\\d)(?=[a-zA-Z])|(?<=[a-zA-Z])(?=[\\d])|(?<=\\))(?=[\\w(])|(?<=[\\d)])(?=\\()((?<!logb_\\d)(?<!logb_\\d\\d))", " * ");
-		infix = infix.replace("{","(").replace("}",")");
+		infix = infix.replace("\\","");
+		infix = infix.replaceAll("(?<=\\d)(?=[a-zA-Z])|(?<=[a-zA-Z])(?=[\\d])|(?<=\\))(?=[\\w(])|(?<=[\\d)])(?=\\()(?<!logb_\\d)", " * ");
+		infix = infix.replace("{","(").replace("}",")").replace("_"," ");
 		infix = infix.replaceAll("(?<!^)(?<![\\^\\-+*/ ])\\s*-","+-").replace("/","*/");
 		infix = "((((" + infix.replaceAll("\\(","((((").replaceAll("\\)","))))").replaceAll("\\+","))+((").replaceAll("\\*",")*(")+ "))))";
 		String[] tokens = infix.split("\\s+|(((?<=\\W)(?=[\\w-])((?<!-)|(?!\\d))|(?<=\\w)(?=\\W))|(?<=[()])|(?=[()]))(?<![ .])(?![ .])");

@@ -62,10 +62,13 @@ public class ArrLib {
 	}
 
 	public static void removeRepeats(List<Double> values) {
-		for (int j = 0; j <= values.size(); j++) {
-			for (int i = 0; i < values.size() -1; i++) {
-				if(values.get(i) < values.get(i+1)+1E-15 && values.get(i) > values.get(i+1) - 1E-15) {
-					values.remove(i+1);
+		boolean changing = true;
+		while (changing) {
+			changing = false;
+			for (int i = 0; i < values.size() - 1; i++) {
+				if ((values.get(i) < values.get(i + 1)+1E-15 && values.get(i) > values.get(i + 1) - 1E-15) || values.get(i).equals(values.get(i + 1))) {
+					values.remove(i + 1);
+					changing = true;
 				}
 			}
 		}

@@ -122,19 +122,19 @@ public class FunctionTest {
 	}
 
 
-	@Test void multiplyingByAdjacencyLogb1() {
+	@Test void multiplyingAdjacencyLogb_2() {
+		Function test = parserX.parse("logb_{2}(x)");
+		assertEquals(2, test.evaluate(4));
+	}
+
+	@Test void multiplyingByAdjacencyLogb_33() {
 		Function test = parserX.parse("logb_{33}(x)");
 		assertEquals(2, test.evaluate(1089));
 	}
 
-	@Test void multiplyingAdjacencyLogb2() {
+	@Test void multiplyingAdjacencyLogb_y() {
 		Function test = parserXY.parse("-logb_{y}(x)");
 		assertEquals(-2, test.evaluate(4, 2));
-	}
-
-	@Test void multiplyingAdjacencyLogb3() {
-		Function test = parserX.parse("logb_{2}(x)");
-		assertEquals(2, test.evaluate(4));
 	}
 
 

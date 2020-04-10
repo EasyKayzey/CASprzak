@@ -1,5 +1,7 @@
 package CASprzak;
 
+import CASprzak.SpecialFunctions.Constant;
+
 import java.util.List;
 
 public class SingleVariableSolver {
@@ -10,13 +12,15 @@ public class SingleVariableSolver {
 
     public double getSolutionPoint(Function expression, double initialPoint, int runs) {
         if (expression.evaluate(initialPoint) == 0) return initialPoint;
+        if (expression instanceof Constant) return Double.NaN;
         for (int i = 0; i < runs; i++){
             initialPoint = newtonsMethod(expression, initialPoint);
             if (i % 25 == 0) {
                 if (initialPoint < 1E-15 && initialPoint > -1E-15) return 0;
             }
         } //TODO the solution of a constant is -Infinity
-        return initialPoint;
+        if (expression.evaluate(initialPoint) < 1E-3 && expression.evaluate(initialPoint) > -1E-3) return initialPoint;
+        return Double.NaN;
     }
 
     public double getSolutionPoint(Function expression, double initialPoint) {

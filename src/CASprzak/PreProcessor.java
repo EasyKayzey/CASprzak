@@ -68,7 +68,7 @@ public class PreProcessor {
 	private String parseVariablePairs(String infix) {
 		for (char a : variables) {
 			for (char b : variables) {
-				infix = infix.replaceAll("(?<="+a+")(?="+b+")","*");
+				infix = infix.replaceAll("(?<="+a+")\\s*(?="+b+")","*");
 			}
 		}
 		return infix;

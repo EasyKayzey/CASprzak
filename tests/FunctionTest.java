@@ -86,6 +86,9 @@ public class FunctionTest {
 		assertEquals(26, test.evaluate(2));
 	}
 
-	
+	@Test void multiplyingByAdjacencyAndParentheses() {
+		Function test = parserX.parse("3(x+5x^2)");
+		assertEquals(66, test.evaluate(2));
+	}
 
 }

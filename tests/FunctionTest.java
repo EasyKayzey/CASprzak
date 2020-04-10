@@ -111,6 +111,30 @@ public class FunctionTest {
 		assertEquals(5, test.evaluate(0));
 	}
 
+	@Test void multiplyingByAdjacencyThreeTerms0() {
+		Function test = parserX.parse("(1/4)(2/3)sin(x)");
+		assertEquals(0, test.evaluate(0));
+	}
+
+	@Test void multiplyingByAdjacencyThreeTerms1() {
+		Function test = parserX.parse("sin(pi/2)2(x)");
+		assertEquals(2, test.evaluate(1), 0.01);
+	}
+
+	@Test void multiplyingByAdjacencyLogb0() {
+		Function test = parserX.parse("logb_3(x)");
+		assertEquals(2, test.evaluate(9));
+	}
+
+	@Test void multiplyingByAdjacencyLogb1() {
+		Function test = parserX.parse("logb_33(x)");
+		assertEquals(2, test.evaluate(1089));
+	}
+
+	@Test void multiplyingAdjacencyLogb2() {
+		Function test = parserXY.parse("-logb_y(x)");
+		assertEquals(-2, test.evaluate(4, 2));
+	}
 
 
 

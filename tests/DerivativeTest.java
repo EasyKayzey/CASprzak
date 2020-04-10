@@ -33,4 +33,10 @@ public class DerivativeTest {
         assertEquals(2, test.getSimplifiedDerivative(0).evaluate(9));
     }
 
+    @Test
+    void longDerivative() {
+        Function test = parser.parse("(sin(x^0.5+1) * e^(x^0.5)) * x^-0.5");
+        assertEquals(-0.13874, test.getSimplifiedDerivative(0).getSimplifiedDerivative(0).evaluate(4), 0.0001);
+    }
+
 }

@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DerivativeTest {
-    Parser parser = new Parser('x');
+    final Parser parser = new Parser('x');
 
     @Test
     void constantsGive0() {

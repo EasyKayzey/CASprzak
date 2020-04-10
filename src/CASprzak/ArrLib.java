@@ -66,7 +66,7 @@ public class ArrLib {
 		while (changing) {
 			changing = false;
 			for (int i = 0; i < values.size() - 1; i++) {
-				if ((values.get(i) < values.get(i + 1)+1E-15 && values.get(i) > values.get(i + 1) - 1E-15) || values.get(i).equals(values.get(i + 1))) {
+				if (values.get(i).equals(values.get(i + 1)) || (values.get(i) < values.get(i + 1)+1E-15 && values.get(i) > values.get(i + 1) - 1E-15)) {
 					values.remove(i + 1);
 					changing = true;
 				}

@@ -13,9 +13,14 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 	public abstract Function clone();
 
 	public Function simplifyTimes(int times) {
-		Function temp = this;
-		for (int i = 0; i < times; i++) temp = temp.simplify();
-		return temp;
+		Function newFunction, curFunction = this;
+		for (int i = 0; i < times; i++) {
+			newFunction = curFunction.simplify();
+			if (newFunction.toString().equals(curFunction.toString()))
+				return newFunction;
+			curFunction = newFunction;
+		}
+		return curFunction;
 	}
 
 	public Function getSimplifiedDerivative(int varID) {

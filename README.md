@@ -16,7 +16,7 @@ Hello, and welcome to our CAS. This is a joint project by The EasyKayzey Show st
 
 ## Planned Features
 - Multiplication by adjaciency like `3x` (resolves #1)
-
+- Extended support for `logb` with paretheses (currently requires curly braces, e.g. `logb_256{2}`)
 ## Contacts
 ### Group
 The EasyKayzey Show: easykayzey@googlegroups.com

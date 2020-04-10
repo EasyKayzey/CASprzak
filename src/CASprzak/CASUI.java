@@ -3,7 +3,6 @@ package CASprzak;
 import java.util.*;
 
 public class CASUI {
-	public static boolean debug = false;
 	public static final boolean simplifyFunctionsOfConstants = true;
 
 	public static void main(String[] args) {

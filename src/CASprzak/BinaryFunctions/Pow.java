@@ -53,6 +53,6 @@ public class Pow extends BinaryFunction {
 
 	@Override
 	public String toString() {
-		return "(" + function2.toString() + ")^(" + function1.toString() + ")";
+		return function2.toString() + "^" + function1.toString();
 	}
 }

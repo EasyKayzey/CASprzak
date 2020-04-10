@@ -2,9 +2,11 @@ package CASprzak.BinaryFunctions;
 
 import CASprzak.CASUI;
 import CASprzak.CommutativeFunctions.Add;
+import CASprzak.CommutativeFunctions.CommutativeFunction;
 import CASprzak.CommutativeFunctions.Multiply;
 import CASprzak.Function;
 import CASprzak.SpecialFunctions.Constant;
+import CASprzak.SpecialFunctions.Variable;
 import CASprzak.UnitaryFunctions.Ln;
 
 public class Pow extends BinaryFunction {
@@ -56,6 +58,8 @@ public class Pow extends BinaryFunction {
 
 	@Override
 	public String toString() {
-		return function2.toString() + "^" + function1.toString();
+		boolean parenF1 = !((function1 instanceof Constant) || (function1 instanceof Variable) || (function1 instanceof CommutativeFunction));
+		boolean parenF2 = !((function2 instanceof Constant) || (function2 instanceof Variable) || (function2 instanceof CommutativeFunction));
+		return (parenF2 ? "(" : "") + function2.toString() + (parenF2 ? ")" : "") + "^" + (parenF1 ? "(" : "") + function1.toString() + (parenF1 ? ")" : "");
 	}
 }

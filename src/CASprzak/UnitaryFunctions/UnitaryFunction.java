@@ -19,7 +19,7 @@ public abstract class UnitaryFunction extends Function {
 
     public Function simplify() {
         UnitaryFunction newFunction = this.simplifyInternal();
-        if (CASUI.simplifyConstantsInUnitary && newFunction.getOperand() instanceof Constant)
+        if (CASUI.simplifyFunctionsOfConstants && newFunction.getOperand() instanceof Constant)
             return new Constant(newFunction.evaluate(0));
         return newFunction;
     }

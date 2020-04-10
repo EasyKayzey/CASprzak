@@ -6,7 +6,7 @@ public class ArrLib {
 	public static Function[] removeFunctionAt(Function[] functionArray, int index) {
 		Function[] newArray = new Function[functionArray.length-1];
 		for (int i = 0; i < newArray.length; i++)
-				newArray[i] = functionArray[(i<index?i:i+1)];
+				newArray[i] = functionArray[(i<index ? i : i+1)];
 		return newArray;
 	}
 

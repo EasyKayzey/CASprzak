@@ -43,8 +43,13 @@ public abstract class CommutativeFunction extends Function {
         return this;
     }
 
+
     public Function[] getFunctions() {
         return ArrLib.deepClone(functions);
+    }
+
+    public int getFunctionsLength() {
+        return functions.length;
     }
 
 

@@ -91,4 +91,31 @@ public class FunctionTest {
 		assertEquals(66, test.evaluate(2));
 	}
 
+	@Test void multiplyingAdjacentVariables() {
+		Function test = parserXY.parse("xy");
+		assertEquals(12, test.evaluate(3, 4));
+	}
+
+	@Test void multiplyingAdjacentVariablesAndPowers() {
+		Function test = parserXY.parse("x^2y^-1");
+		assertEquals(8, test.evaluate(4, 2));
+	}
+
+	@Test void multiplyingByAdjacencyAndParenthesesBackwards() {
+		Function test = parserX.parse("(x+5x^2)3");
+		assertEquals(66, test.evaluate(2));
+	}
+
+	@Test void multiplyingByAdjacencyFunctions() {
+		Function test = parserX.parse("(5+x^2)(cos(x))");
+		assertEquals(5, test.evaluate(0));
+	}
+
+
+
+
+
+
+
+
 }

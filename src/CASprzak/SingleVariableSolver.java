@@ -40,7 +40,7 @@ public class SingleVariableSolver {
             }
         }
         ArrLib.nanRemover(solutions);
-        ArrLib.removeRepeats(solutions);
+        ArrLib.removeRepeatsInOrder(solutions);
 
         double[] solutionsArray = new double[solutions.size()];
         for (int i = 0; i < solutionsArray.length; i++)

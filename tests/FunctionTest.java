@@ -120,11 +120,7 @@ public class FunctionTest {
 		Function test = parserX.parse("sin(pi/2)2(x)");
 		assertEquals(2, test.evaluate(1), 0.01);
 	}
-
-	@Test void multiplyingByAdjacencyLogb0() {
-		Function test = parserX.parse("logb_3(x)");
-		assertEquals(2, test.evaluate(9));
-	}
+	
 
 	@Test void multiplyingByAdjacencyLogb1() {
 		Function test = parserX.parse("logb_33(x)");

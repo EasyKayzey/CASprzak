@@ -61,11 +61,11 @@ public class Pow extends BinaryFunction {
 		if (!(function2 instanceof Multiply))
 			throw new IllegalArgumentException("Method should not be called if base is not a Multiply");
 		Function[] oldFunctions = ((Multiply)function2).getFunctions();
-		Function[] functions = new Function[oldFunctions.length];
-		for (int i = 0; i < functions.length; i++) {
-			functions[i] = new Pow(function1, oldFunctions[i]);
+		Function[] toMultiply = new Function[oldFunctions.length];
+		for (int i = 0; i < toMultiply.length; i++) {
+			toMultiply[i] = new Pow(function1, oldFunctions[i]);
 		}
-		return functions;
+		return toMultiply;
 	}
 
 

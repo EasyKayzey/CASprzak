@@ -24,7 +24,4 @@ public class Atan extends UnitaryFunction {
         return new Atan(operand);
     }
 
-    public int compareTo( Function f) {
-        return 0;
-    }
 }

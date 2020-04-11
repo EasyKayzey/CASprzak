@@ -23,7 +23,4 @@ public class Tan extends UnitaryFunction {
         return new Tan(operand);
     }
 
-    public int compareTo( Function f) {
-        return 0;
-    }
 }

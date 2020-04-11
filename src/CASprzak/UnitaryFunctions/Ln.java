@@ -24,7 +24,4 @@ public class Ln extends UnitaryFunction {
         return new Ln(operand);
     }
 
-    public int compareTo( Function f) {
-        return 0;
-    }
 }

@@ -21,7 +21,4 @@ public class Sec extends UnitaryFunction {
         return new Sec(operand);
     }
 
-    public int compareTo( Function f) {
-        return 0;
-    }
 }

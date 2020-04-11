@@ -23,7 +23,4 @@ public class Csc extends UnitaryFunction {
         return new Csc(operand);
     }
 
-    public int compareTo( Function f) {
-        return 0;
-    }
 }

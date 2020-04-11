@@ -21,7 +21,4 @@ public class Cosh extends UnitaryFunction {
         return new Cosh(operand);
     }
 
-    public int compareTo( Function f) {
-        return 0;
-    }
 }

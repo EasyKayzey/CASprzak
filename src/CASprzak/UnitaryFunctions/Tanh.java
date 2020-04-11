@@ -23,7 +23,4 @@ public class Tanh extends UnitaryFunction {
         return new Tanh(operand);
     }
 
-    public int compareTo( Function f) {
-        return 0;
-    }
 }

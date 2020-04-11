@@ -24,7 +24,4 @@ public class Asin extends UnitaryFunction {
         return new Asin(operand);
     }
 
-    public int compareTo( Function f) {
-        return 0;
-    }
 }

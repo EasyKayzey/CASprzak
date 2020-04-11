@@ -21,7 +21,4 @@ public class Sin extends UnitaryFunction {
         return new Sin(operand);
     }
 
-    public int compareTo( Function f) {
-        return 0;
-    }
 }

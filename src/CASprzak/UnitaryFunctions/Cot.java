@@ -23,7 +23,4 @@ public class Cot extends UnitaryFunction {
         return new Cot(operand);
     }
 
-    public int compareTo( Function f) {
-        return 0;
-    }
 }

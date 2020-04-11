@@ -22,7 +22,4 @@ public class Cos extends UnitaryFunction {
         return new Cos(operand);
     }
 
-    public int compareTo( Function f) {
-        return 0;
-    }
 }

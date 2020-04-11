@@ -74,10 +74,6 @@ public class Pow extends BinaryFunction {
 	}
 
 
-	public int compareTo(Function f) {
-		return 0;
-	}
-
 	@Override
 	public String toString() { //TODO this should probably be using StringBuilder
 		boolean parenF1 = !((function1 instanceof Constant) || (function1 instanceof Variable) || (function1 instanceof CommutativeFunction));

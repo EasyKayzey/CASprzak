@@ -11,9 +11,7 @@ public abstract class BinaryFunction extends Function {
         this.function2 = function2;
     }
 
-    public int compareTo( Function f) {
-        return 0;
-    }
+
 
     public Function getFunction1() {
         return function1;
@@ -36,9 +34,9 @@ public abstract class BinaryFunction extends Function {
 
     public int compareSelf(Function that) {
         if (!this.function1.equals(((BinaryFunction)that).function1))
-            return this.function1.compareSelf(((BinaryFunction)that).function1);
+            return this.function1.compareTo(((BinaryFunction)that).function1);
         if (!this.function2.equals(((BinaryFunction)that).function2))
-            return this.function2.compareSelf(((BinaryFunction)that).function2);
+            return this.function2.compareTo(((BinaryFunction)that).function2);
         System.out.println("This is never supposed to happen, binaryFunction compareSelf");
         return 0;
     }

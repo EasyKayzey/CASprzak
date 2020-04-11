@@ -24,7 +24,4 @@ public class Acos extends UnitaryFunction {
         return new Acos(operand);
     }
 
-    public int compareTo( Function f) {
-        return 0;
-    }
 }

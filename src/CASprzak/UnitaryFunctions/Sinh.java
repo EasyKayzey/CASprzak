@@ -22,7 +22,4 @@ public class Sinh extends UnitaryFunction {
         return new Sinh(operand);
     }
 
-    public int compareTo( Function f) {
-        return 0;
-    }
 }

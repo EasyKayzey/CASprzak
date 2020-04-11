@@ -1,3 +1,4 @@
+import CASprzak.CommutativeFunctions.Multiply;
 import CASprzak.Function;
 import CASprzak.Parser;
 import org.junit.jupiter.api.Test;
@@ -75,5 +76,12 @@ public class EqualsTest {
         Function test1 = parser.parse("3*x^2+5*x^-1+7*x^-1-3*x^2+1");
         Function test2 = parser.parse("1+12*x^-1");
         assertEquals(test1, test2);
+    }
+
+    @Test
+    void distributeTerms() {
+        Function test1 = parser.parse("sin(x)*(1+5x)");
+        Function test2 = parser.parse("sin(x)+5*x*sin(x)");
+        assertEquals(((Multiply)test1).distributeAll().simplify(), test2.simplify());
     }
 }

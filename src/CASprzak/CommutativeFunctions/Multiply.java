@@ -144,7 +144,7 @@ public class Multiply extends CommutativeFunction{
 		return new Multiply(functions);
 	}
 
-	protected Function distributeAll() {
+	public Function distributeAll() {
 		Function[] multiplyTerms = getFunctions();
 		Function[] addTerms = null;
 		for (int i = 0; i < multiplyTerms.length; i++) {

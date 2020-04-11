@@ -46,6 +46,7 @@ public class Add extends CommutativeFunction{
 		return new Add(toAdd);
 	}
 
+
 	public Add simplifyInternal() {
 		return ((Add) super.simplifyInternal()).combineLikeTerms();
 	}

@@ -79,6 +79,13 @@ public class EqualsTest {
     }
 
     @Test
+    void switchedOrderVariableConstant() {
+        Function test1 = parser.parse("1+2x");
+        Function test2 = parser.parse("2x+1");
+        assertEquals(test1, test2);
+    }
+
+    @Test
     void switchedOrder() {
         Function test1 = parser.parse("x^2+1+y+3sin(x)+2x");
         Function test2 = parser.parse("3(sin(x))+y+x^2+2x+1");
@@ -96,4 +103,6 @@ public class EqualsTest {
         System.out.println(test2.simplify());
         assertEquals(((Multiply)test1).distributeAll(), test2);
     }
+
+
 }

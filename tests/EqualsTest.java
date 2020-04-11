@@ -93,6 +93,13 @@ public class EqualsTest {
     }
 
     @Test
+    void switchedVariablesWithPowers() {
+        Function test1 = parser.parse("x^2+x^3");
+        Function test2 = parser.parse("x^3+x^2");
+        assertEquals(test1, test2);
+    }
+
+    @Test
     void switchedOrderComplicated() {
         Function test1 = parser.parse("x^2+1+y+3sin(x)+2x");
         Function test2 = parser.parse("3(sin(x))+y+x^2+2x+1");

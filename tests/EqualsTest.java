@@ -79,9 +79,19 @@ public class EqualsTest {
     }
 
     @Test
+    void switchedOrder() {
+        Function test1 = parser.parse("x+1+y+3sin(x)");
+        Function test2 = parser.parse("3(sin(x))+y+x+1");
+        assertEquals(test1, test2);
+    }
+
+
+    @Test
     void distributeTerms() {
         Function test1 = parser.parse("sin(x)*(1+5x)");
         Function test2 = parser.parse("sin(x)+5*x*sin(x)");
+        System.out.println(((Multiply)test1).distributeAll().simplify());
+        System.out.println(test2.simplify());
         assertEquals(((Multiply)test1).distributeAll(), test2);
     }
 }

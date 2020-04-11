@@ -10,7 +10,7 @@ public class Cos extends UnitaryFunction {
 
     @Override
     public Function getDerivative(int varID) {
-        return  new Multiply(new Multiply(new Sin(function), new Constant(-1)), function.getSimplifiedDerivative(varID));
+        return  new Multiply(new Sin(function), new Constant(-1), function.getSimplifiedDerivative(varID));
     }
 
     @Override

@@ -114,6 +114,34 @@ public class EqualsTest {
     }
 
     @Test
+    void switchedOrderVariablesMul() {
+        Function test1 = parser.parse("x*y");
+        Function test2 = parser.parse("yx");
+        assertEquals(test1, test2);
+    }
+
+    @Test
+    void switchedVariablesWithPowersMul() {
+        Function test1 = parser.parse("x^2*x^3");
+        Function test2 = parser.parse("x^3*x^2");
+        assertEquals(test1, test2);
+    }
+
+    @Test
+    void switchedOrderVariableMultiplyMul() {
+        Function test1 = parser.parse("x*2*y");
+        Function test2 = parser.parse("2*y*x");
+        assertEquals(test1, test2);
+    }
+
+    @Test
+    void switchedOrderMultipliesMul() {
+        Function test1 = parser.parse("3x*2y");
+        Function test2 = parser.parse("2y*3x");
+        assertEquals(test1, test2);
+    }
+
+    @Test
     void switchedOrderComplicated() {
         Function test1 = parser.parse("x^2+1+y+3sin(x)+2x");
         Function test2 = parser.parse("3(sin(x))+y+x^2+2x+1");

@@ -22,6 +22,8 @@ public class Multiply extends CommutativeFunction{
 	}
 
 	public String toString() {
+		if (functions.length < 1)
+			return "(empty product)";
 		StringBuilder temp = new StringBuilder("(");
 		for (int i = 0; i < functions.length - 1; i++) {
 			temp.append(functions[i].toString());

@@ -82,6 +82,6 @@ public class EqualsTest {
     void distributeTerms() {
         Function test1 = parser.parse("sin(x)*(1+5x)");
         Function test2 = parser.parse("sin(x)+5*x*sin(x)");
-        assertEquals(((Multiply)test1).distributeAll().simplify(), test2.simplify());
+        assertEquals(((Multiply)test1).distributeAll(), test2);
     }
 }

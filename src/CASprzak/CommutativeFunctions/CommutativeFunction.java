@@ -24,15 +24,22 @@ public abstract class CommutativeFunction extends Function {
         return this.simplifyElements().simplifyPull().simplifyIdentity().simplifyConstants();
     }
 
-    protected abstract CommutativeFunction simplifyElements();
+    public abstract CommutativeFunction simplifyElements();
 
-    protected abstract CommutativeFunction simplifyIdentity();
+    public abstract CommutativeFunction simplifyIdentity();
 
-    protected abstract CommutativeFunction simplifyConstants();
+    public abstract CommutativeFunction simplifyConstants();
 
-    protected abstract CommutativeFunction simplifyPull();
+    public CommutativeFunction simplifyPull() {
+        for (int i = 0; i < functions.length; i++) {
+            if (this.getClass().equals(functions[i].getClass())) {
+                return (me(ArrLib.pullUp(functions, ((CommutativeFunction) functions[i]).getFunctions(), i))).simplifyInternal();
+            }
+        }
+        return this;
+    }
 
-    protected Function simplifyOneElement() {
+    public Function simplifyOneElement() {
         if (functions.length == 0)
             return new Constant(identityValue);
         if (functions.length == 1)

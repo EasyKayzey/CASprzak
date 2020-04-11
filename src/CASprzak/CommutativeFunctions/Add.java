@@ -86,15 +86,6 @@ public class Add extends CommutativeFunction{
 		return this;
 	}
 
-	public Add simplifyPull() {
-		for (int i = 0; i < functions.length; i++) {
-			if (this.getClass().equals(functions[i].getClass())) {
-				return (new Add(ArrLib.pullUp(functions, ((CommutativeFunction) functions[i]).getFunctions(), i))).simplifyInternal();
-			}
-		}
-		return this;
-	}
-
 	public Add combineLikeTerms() {
 		Function[] combinedTerms = ArrLib.deepClone(functions);
 		for (int a = 0; a < combinedTerms.length; a++) {

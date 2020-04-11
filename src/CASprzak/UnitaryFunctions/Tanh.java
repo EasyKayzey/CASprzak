@@ -16,7 +16,7 @@ public class Tanh extends UnitaryFunction {
 
     @Override
     public Function getDerivative(int varID) {
-        return new Multiply(function.getSimplifiedDerivative(varID), new Pow(new Constant(2), new Cosh(function)));
+        return new Multiply(function.getSimplifiedDerivative(varID), new Pow(new Constant(-2), new Cosh(function)));
     }
 
     public Function clone() {

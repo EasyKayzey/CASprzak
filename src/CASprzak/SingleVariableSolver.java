@@ -39,6 +39,9 @@ public class SingleVariableSolver {
                 }
             }
         }
+        for (int i = 0; i < solutions.size(); i++) {
+            if (!(expression.evaluate(solutions.get(i)) < 1E-3 && expression.evaluate(solutions.get(i)) > -1E-3)) solutions.set(i, Double.NaN);
+        }
         ArrLib.nanRemover(solutions);
         ArrLib.removeRepeatsInOrder(solutions);
 

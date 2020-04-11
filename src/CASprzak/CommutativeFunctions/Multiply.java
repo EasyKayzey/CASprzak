@@ -67,7 +67,9 @@ public class Multiply extends CommutativeFunction{
 	}
 
 	public Multiply simplifyInternal() {
-		return ((Multiply) super.simplifyInternal()).addExponents();
+		Multiply current = (Multiply) super.simplifyInternal();
+		current = current.addExponents();
+		return current;
 	}
 
 	@Override

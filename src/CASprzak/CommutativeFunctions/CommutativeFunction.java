@@ -21,7 +21,12 @@ public abstract class CommutativeFunction extends Function {
     }
 
     public CommutativeFunction simplifyInternal() {
-        return this.simplifyElements().simplifyPull().simplifyIdentity().simplifyConstants();
+        CommutativeFunction current = this;
+        current = current.simplifyElements();
+        current = current.simplifyPull();
+        current = current.simplifyIdentity();
+        current = current.simplifyConstants();
+        return current;
     }
 
     public abstract CommutativeFunction simplifyElements();

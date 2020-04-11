@@ -80,8 +80,10 @@ public class EqualsTest {
 
     @Test
     void switchedOrder() {
-        Function test1 = parser.parse("x+1+y+3sin(x)");
-        Function test2 = parser.parse("3(sin(x))+y+x+1");
+        Function test1 = parser.parse("x^2+1+y+3sin(x)+2x");
+        Function test2 = parser.parse("3(sin(x))+y+x^2+2x+1");
+        System.out.println(test1.simplify());
+        System.out.println(test2.simplify());
         assertEquals(test1, test2);
     }
 

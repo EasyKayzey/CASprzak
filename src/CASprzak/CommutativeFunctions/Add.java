@@ -55,7 +55,8 @@ public class Add extends CommutativeFunction{
 	@Override
 	public Add simplifyElements() {
 		Function[] toAdd = new Function[functions.length];
-		for (int i = 0; i < functions.length; i++) toAdd[i] = functions[i].simplify();
+		for (int i = 0; i < functions.length; i++)
+			toAdd[i] = functions[i].simplify();
 		return new Add(toAdd);
 	}
 

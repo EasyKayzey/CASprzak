@@ -37,10 +37,10 @@ public class DerivativeTest {
     void longDerivative() {
         Function test = parser.parse("(sin(x^0.5+1) * e^(x^0.5)) * x^-0.5").getSimplifiedDerivative(0).getSimplifiedDerivative(0);
         assertEquals(-0.13874, test.evaluate(4), 0.0001);
-        System.out.println("Second derivative simplified once:");
-        System.out.println(test);
-        System.out.println("Second derivative simplified twice:");
-        System.out.println(test.simplify());
+//        System.out.println("Second derivative simplified once:");
+//        System.out.println(test);
+//        System.out.println("Second derivative simplified twice:");
+//        System.out.println(test.simplify());
     }
 
 }

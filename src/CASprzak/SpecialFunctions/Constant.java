@@ -80,7 +80,7 @@ public class Constant extends Function {
 			return -1;
 		}
 		if (((Constant) that).constantID != -1)
-			return -1;
+			return 1;
 		return (int) Math.signum(this.constant - ((Constant) that).constant);
 	}
 }

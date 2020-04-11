@@ -7,8 +7,8 @@ import CASprzak.SpecialFunctions.Constant;
 import CASprzak.UnitaryFunctions.Ln;
 
 public class Logb extends BinaryFunction {
-    public Logb(Function function1, Function function2) {
-        super(function1, function2);
+    public Logb(Function argument, Function base) {
+        super(argument, base);
     }
 
     @Override

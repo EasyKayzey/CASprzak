@@ -143,8 +143,4 @@ public class Multiply extends CommutativeFunction{
 		}
 		return clone();
 	}
-
-	public int compareTo(Function f) {
-		return 0;
-	}
 }

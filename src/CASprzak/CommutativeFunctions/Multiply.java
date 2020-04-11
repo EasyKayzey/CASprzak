@@ -6,6 +6,8 @@ import CASprzak.Function;
 import CASprzak.SpecialFunctions.Constant;
 import CASprzak.SpecialFunctions.Variable;
 
+import java.util.Arrays;
+
 public class Multiply extends CommutativeFunction{
 	public Multiply(Function... functions) {
 		super(functions);
@@ -14,7 +16,8 @@ public class Multiply extends CommutativeFunction{
 
 	public double evaluate(double... variableValues) {
 		double accumulator = 1;
-		for (Function f : functions) accumulator *= f.evaluate(variableValues);
+		for (Function f : functions)
+			accumulator *= f.evaluate(variableValues);
 		return accumulator;
 	}
 
@@ -36,8 +39,8 @@ public class Multiply extends CommutativeFunction{
 		for (int i = 0; i < toAdd.length; i++) {
 			Function[] toMultiply = new Function[functions.length];
 			for (int j = 0; j < functions.length; j++) {
-				if (j == i) toMultiply[j] = functions[j].getSimplifiedDerivative(varID);
-				else toMultiply[j] = functions[j];
+				toMultiply = Arrays.copyOf(functions, functions.length);
+				toMultiply[i] = functions[i].getSimplifiedDerivative(varID);
 			}
 			toAdd[i] = new Multiply(toMultiply);
 		}
@@ -47,7 +50,8 @@ public class Multiply extends CommutativeFunction{
 
 	public Multiply clone() {
 		Function[] toMultiply = new Function[functions.length];
-		for (int i = 0; i < functions.length; i++) toMultiply[i] = functions[i].clone();
+		for (int i = 0; i < functions.length; i++)
+			toMultiply[i] = functions[i].clone();
 		return new Multiply(toMultiply);
 	}
 

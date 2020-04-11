@@ -13,7 +13,8 @@ public class Add extends CommutativeFunction{
 
 	public double evaluate(double... variableValues) {
 		double accumulator = 0;
-		for (Function f : functions) accumulator += f.evaluate(variableValues);
+		for (Function f : functions)
+			accumulator += f.evaluate(variableValues);
 		return accumulator;
 	}
 
@@ -44,6 +45,7 @@ public class Add extends CommutativeFunction{
 		for (int i = 0; i < functions.length; i++) toAdd[i] = functions[i].clone();
 		return new Add(toAdd);
 	}
+
 
 	public Add simplifyInternal() {
 		return ((Add) super.simplifyInternal()).combineLikeTerms();

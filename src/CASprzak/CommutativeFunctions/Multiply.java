@@ -37,8 +37,10 @@ public class Multiply extends CommutativeFunction{
 		for (int i = 0; i < toAdd.length; i++) {
 			Function[] toMultiply = new Function[functions.length];
 			for (int j = 0; j < functions.length; j++) {
-				if (j == i) toMultiply[j] = functions[j].getSimplifiedDerivative(varID);
-				else toMultiply[j] = functions[j];
+				if (j == i)
+					toMultiply[j] = functions[j].getSimplifiedDerivative(varID);
+				else
+					toMultiply[j] = functions[j];
 			}
 			toAdd[i] = new Multiply(toMultiply);
 		}
@@ -48,7 +50,8 @@ public class Multiply extends CommutativeFunction{
 
 	public Multiply clone() {
 		Function[] toMultiply = new Function[functions.length];
-		for (int i = 0; i < functions.length; i++) toMultiply[i] = functions[i].clone();
+		for (int i = 0; i < functions.length; i++)
+			toMultiply[i] = functions[i].clone();
 		return new Multiply(toMultiply);
 	}
 

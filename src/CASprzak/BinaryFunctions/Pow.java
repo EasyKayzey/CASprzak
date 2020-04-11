@@ -11,8 +11,8 @@ import CASprzak.UnitaryFunctions.Ln;
 
 public class Pow extends BinaryFunction {
 
-	public Pow(Function function1, Function function2) {
-		super(function1, function2);
+	public Pow(Function exponent, Function base) {
+		super(exponent, base);
 	}
 
 	@Override
@@ -50,6 +50,21 @@ public class Pow extends BinaryFunction {
 			return new Pow(new Multiply(((Pow) function2).function1, function1), ((Pow) function2).function2);
 		}
 		return (Pow) clone();
+	}
+
+	public Multiply distributeExponents() {
+		return new Multiply(distributeExponentsArray());
+	}
+
+	public Function[] distributeExponentsArray() {
+		if (!(function2 instanceof Multiply))
+			throw new IllegalArgumentException("Method should not be called if base is not a Multiply");
+		Function[] oldFunctions = ((Multiply)function2).getFunctions();
+		Function[] functions = new Function[oldFunctions.length];
+		for (int i = 0; i < functions.length; i++) {
+			functions[i] = new Pow(function1, oldFunctions[i]);
+		}
+		return functions;
 	}
 
 	public int compareTo(Function f) {

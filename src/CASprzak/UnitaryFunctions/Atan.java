@@ -20,12 +20,8 @@ public class Atan extends UnitaryFunction {
         return Math.atan(function.evaluate(variableValues));
     }
 
-    public Function clone() {
-        return new Atan(function.clone());
-    }
-
-    public UnitaryFunction simplifyInternal() {
-        return new Atan(function.simplify());
+    public UnitaryFunction me(Function operand) {
+        return new Atan(operand);
     }
 
     public int compareTo( Function f) {

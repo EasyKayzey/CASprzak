@@ -8,6 +8,7 @@ import CASprzak.Function;
 import CASprzak.SpecialFunctions.Constant;
 import CASprzak.SpecialFunctions.Variable;
 import CASprzak.UnitaryFunctions.Ln;
+import CASprzak.UnitaryFunctions.UnitaryFunction;
 
 public class Pow extends BinaryFunction {
 
@@ -66,6 +67,12 @@ public class Pow extends BinaryFunction {
 		}
 		return functions;
 	}
+
+
+	public BinaryFunction me(Function function1, Function function2) {
+		return new Pow(function1, function2);
+	}
+
 
 	public int compareTo(Function f) {
 		return 0;

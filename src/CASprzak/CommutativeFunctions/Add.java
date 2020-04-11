@@ -115,6 +115,10 @@ public class Add extends CommutativeFunction{
 		return clone();
 	}
 
+	public CommutativeFunction me(Function... functions) {
+		return new Add(functions);
+	}
+
 	public int compareTo(Function f) {
 		return 0;
 	}

@@ -17,12 +17,8 @@ public class Cosh extends UnitaryFunction {
         return Math.cosh(function.evaluate(variableValues));
     }
 
-    public Function clone() {
-        return new Cosh(function.clone());
-    }
-
-    public UnitaryFunction simplifyInternal() {
-        return new Cosh(function.simplify());
+    public UnitaryFunction me(Function operand) {
+        return new Cosh(operand);
     }
 
     public int compareTo( Function f) {

@@ -19,12 +19,8 @@ public class Csc extends UnitaryFunction {
         return 1 / Math.sin(function.evaluate(variableValues));
     }
 
-    public Function clone() {
-        return new Csc(function.clone());
-    }
-
-    public UnitaryFunction simplifyInternal() {
-        return new Csc(function.simplify());
+    public UnitaryFunction me(Function operand) {
+        return new Csc(operand);
     }
 
     public int compareTo( Function f) {

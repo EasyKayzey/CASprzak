@@ -33,6 +33,14 @@ public class Variable extends Function {
 	}
 
 
+	public Function substitute(int varID, Function toReplace) {
+		if (this.varID == varID)
+			return toReplace;
+		else
+			return clone();
+	}
+
+
 	public boolean equals(Function that) {
 		return (that instanceof Variable) && (varID == ((Variable)that).varID);
 	}

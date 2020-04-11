@@ -18,12 +18,8 @@ public class Sinh extends UnitaryFunction {
         return new Multiply(new Cosh(function), function.getSimplifiedDerivative(varID));
     }
 
-    public Function clone() {
-        return new Sinh(function.clone());
-    }
-
-    public UnitaryFunction simplifyInternal() {
-        return new Sinh(function.simplify());
+    public UnitaryFunction me(Function operand) {
+        return new Sinh(operand);
     }
 
     public int compareTo( Function f) {

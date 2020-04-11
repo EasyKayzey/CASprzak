@@ -1,4 +1,5 @@
 package CASprzak.BinaryFunctions;
+import CASprzak.CommutativeFunctions.CommutativeFunction;
 import CASprzak.Function;
 
 public abstract class BinaryFunction extends Function {
@@ -21,6 +22,13 @@ public abstract class BinaryFunction extends Function {
     public Function getFunction2() {
         return function2;
     }
+
+    public abstract BinaryFunction me(Function function1, Function function2);
+
+    public Function substitute(int varID, Function toReplace) {
+        return me(function1.substitute(varID, toReplace), function2.substitute(varID, toReplace));
+    }
+
 
     public boolean equals(Function that) {
         return this.getClass().equals(that.getClass()) && this.function1.equals(((BinaryFunction)that).function1) && this.function2.equals(((BinaryFunction)that).function2);

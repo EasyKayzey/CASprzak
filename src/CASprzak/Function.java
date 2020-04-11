@@ -5,7 +5,7 @@ import CASprzak.CommutativeFunctions.*;
 import CASprzak.BinaryFunctions.*;
 import CASprzak.UnitaryFunctions.*;
 
-public abstract class Function implements Evaluable, Differentiable, Simplifiable, Comparable<Function> {
+public abstract class Function implements Evaluable, Differentiable, Simplifiable, Substitutable, Comparable<Function> {
 	protected static final Class<?>[] sortOrder = {Constant.class, Variable.class, Pow.class, Logb.class, Multiply.class, UnitaryFunction.class, Add.class};
 
 	public abstract String toString();

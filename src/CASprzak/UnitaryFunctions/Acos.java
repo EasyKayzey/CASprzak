@@ -20,12 +20,8 @@ public class Acos extends UnitaryFunction {
         return Math.acos(function.evaluate(variableValues));
     }
 
-    public Function clone() {
-        return new Acos(function.clone());
-    }
-
-    public UnitaryFunction simplifyInternal() {
-        return new Acos(function.simplify());
+    public UnitaryFunction me(Function operand) {
+        return new Acos(operand);
     }
 
     public int compareTo( Function f) {

@@ -17,12 +17,8 @@ public class Sin extends UnitaryFunction {
         return new Multiply(new Cos(function), function.getSimplifiedDerivative(varID));
     }
 
-    public Function clone() {
-        return new Sin(function.clone());
-    }
-
-    public UnitaryFunction simplifyInternal() {
-        return new Sin(function.simplify());
+    public UnitaryFunction me(Function operand) {
+        return new Sin(operand);
     }
 
     public int compareTo( Function f) {

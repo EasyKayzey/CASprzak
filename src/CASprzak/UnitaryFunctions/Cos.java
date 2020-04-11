@@ -18,12 +18,8 @@ public class Cos extends UnitaryFunction {
         return Math.cos(function.evaluate(variableValues));
     }
 
-    public Function clone() {
-        return new Cos(function.clone());
-    }
-
-    public UnitaryFunction simplifyInternal() {
-        return new Cos(function.simplify());
+    public UnitaryFunction me(Function operand) {
+        return new Cos(operand);
     }
 
     public int compareTo( Function f) {

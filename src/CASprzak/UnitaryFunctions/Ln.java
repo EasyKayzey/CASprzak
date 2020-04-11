@@ -20,12 +20,8 @@ public class Ln extends UnitaryFunction {
         return new Multiply(function.getSimplifiedDerivative(varID), new Pow(new Constant(-1), function));
     }
 
-    public Function clone() {
-        return new Ln(function.clone());
-    }
-
-    public UnitaryFunction simplifyInternal() {
-        return new Ln(function.simplify());
+    public UnitaryFunction me(Function operand) {
+        return new Ln(operand);
     }
 
     public int compareTo( Function f) {

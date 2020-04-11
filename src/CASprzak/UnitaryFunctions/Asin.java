@@ -20,12 +20,8 @@ public class Asin extends UnitaryFunction {
         return Math.asin(function.evaluate(variableValues));
     }
 
-    public Function clone() {
-        return new Asin(function.clone());
-    }
-
-    public UnitaryFunction simplifyInternal() {
-        return new Asin(function.simplify());
+    public UnitaryFunction me(Function operand) {
+        return new Asin(operand);
     }
 
     public int compareTo( Function f) {

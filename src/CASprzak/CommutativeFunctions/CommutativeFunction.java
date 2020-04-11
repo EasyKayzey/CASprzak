@@ -50,6 +50,16 @@ public abstract class CommutativeFunction extends Function {
     }
 
 
+    public abstract CommutativeFunction me(Function... functions);
+
+    public Function substitute(int varID, Function toReplace) {
+        Function[] newFunctions = new Function[functions.length];
+        for (int i = 0; i < functions.length; i ++)
+            newFunctions[i] = functions[i].substitute(varID, toReplace);
+        return me(newFunctions);
+    }
+
+
     public boolean equals(Function that) {
         if (this.getClass().equals(that.getClass()))
             return ArrLib.deepEquals(functions, ((CommutativeFunction)that).getFunctions());

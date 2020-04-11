@@ -19,12 +19,8 @@ public class Cot extends UnitaryFunction {
         return 1 / Math.tan(function.evaluate(variableValues));
     }
 
-    public Function clone() {
-        return new Cot(function.clone());
-    }
-
-    public UnitaryFunction simplifyInternal() {
-        return new Cot(function.simplify());
+    public UnitaryFunction me(Function operand) {
+        return new Cot(operand);
     }
 
     public int compareTo( Function f) {

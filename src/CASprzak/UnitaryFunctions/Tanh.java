@@ -19,12 +19,8 @@ public class Tanh extends UnitaryFunction {
         return new Multiply(function.getSimplifiedDerivative(varID), new Pow(new Constant(-2), new Cosh(function)));
     }
 
-    public Function clone() {
-        return new Tanh(function.clone());
-    }
-
-    public UnitaryFunction simplifyInternal() {
-        return new Tanh(function.simplify());
+    public UnitaryFunction me(Function operand) {
+        return new Tanh(operand);
     }
 
     public int compareTo( Function f) {

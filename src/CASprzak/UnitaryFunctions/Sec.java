@@ -17,12 +17,8 @@ public class Sec extends UnitaryFunction {
         return new Multiply(new Tan(function), new Sec(function), function.getSimplifiedDerivative(varID));
     }
 
-    public Function clone() {
-        return new Sec(function.clone());
-    }
-
-    public UnitaryFunction simplifyInternal() {
-        return new Sec(function.simplify());
+    public UnitaryFunction me(Function operand) {
+        return new Sec(operand);
     }
 
     public int compareTo( Function f) {

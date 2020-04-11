@@ -24,7 +24,19 @@ public abstract class UnitaryFunction extends Function {
         return newFunction;
     }
 
-    public abstract UnitaryFunction simplifyInternal();
+    public abstract UnitaryFunction me(Function function);
+
+    public UnitaryFunction clone() {
+        return me(function.clone());
+    }
+
+    public UnitaryFunction simplifyInternal() {
+        return me(function.simplify());
+    }
+
+    public UnitaryFunction substitute(int varID, Function toReplace) {
+        return me(function.substitute(varID, toReplace));
+    }
 
     public boolean equals(Function that) {
         return this.getClass().equals(that.getClass()) && this.function.equals(((UnitaryFunction)that).function);

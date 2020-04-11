@@ -34,6 +34,11 @@ public class Logb extends BinaryFunction {
         return new Logb(function1.simplify(), function2.simplify());
     }
 
+
+    public BinaryFunction me(Function function1, Function function2) {
+        return new Logb(function1, function2);
+    }
+
     public int compareTo( Function f) {
         return 0;
     }

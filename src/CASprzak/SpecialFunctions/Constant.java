@@ -60,8 +60,14 @@ public class Constant extends Function {
 	}
 
 	public Function simplify() {
-		return clone();
+		return this;
 	}
+
+
+	public Function substitute(int varID, Function toReplace) {
+		return this;
+	}
+
 
 	public boolean equals(Function that) {
 		return (that instanceof Constant) && (constant == ((Constant) that).constant);

@@ -40,11 +40,12 @@ public class ArrLib {
 	}
 
 	public static int findClassValue(Function function) {
+		Class<?> functionClass = function.getClass();
 		for (int i = 0; i < Function.sortOrder.length; i++) {
-			if (function.getClass().equals(Function.sortOrder[i]))
+			if (Function.sortOrder[i].isAssignableFrom(functionClass))
 				return i;
 		}
-		return -1;
+		throw new IllegalArgumentException("Class " + function.getClass().getSimpleName() + " not supported.");
 	}
 
 	public static List<Double> createRange(double upper, double lower, int sections) {

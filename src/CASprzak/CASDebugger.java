@@ -3,7 +3,7 @@ package CASprzak;
 import java.util.Scanner;
 
 public class CASDebugger {
-	public static boolean debug = false;
+	public static boolean debug = true;
 
 	public static void main(String[] args) throws IllegalArgumentException {
 		Scanner in = new Scanner(System.in);

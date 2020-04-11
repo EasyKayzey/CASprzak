@@ -40,10 +40,9 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 	public int compareTo(Function that) {
 		if (this.equals(that))
 			return 0;
-		if (this.getClass().equals(that.getClass()))
+		else if (this.getClass().equals(that.getClass()))
 			return compareSelf(that);
-		if (CASDebugger.debugComparisons)
-			System.out.println("Comparison: "+this+", "+that+" goes to "+(ArrLib.findClassValue(this) - ArrLib.findClassValue(that)));
-		return (ArrLib.findClassValue(this) - ArrLib.findClassValue(that));
+		else
+			return (ArrLib.findClassValue(this) - ArrLib.findClassValue(that));
 	}
 }

@@ -1,5 +1,7 @@
 package CASprzak;
 
+import CASprzak.CommutativeFunctions.Multiply;
+
 import java.util.*;
 
 public class ArrLib {
@@ -68,6 +70,21 @@ public class ArrLib {
 				i--;
 			}
 		}
+	}
+
+	public static Function[] distribute(Function[] multiply, Function[] add) {
+		Function[] finalAdd = new Function[add.length];
+		for (int i = 0; i < finalAdd.length; i++) {
+			finalAdd[i] = new Multiply(append(multiply, add[i]));
+		}
+		return finalAdd;
+ 	}
+
+	public static Function[] append(Function[] functionArray, Function last) {
+		Function[] finalFunctionArray = new Function[functionArray.length + 1];
+		System.arraycopy(functionArray, 0, finalFunctionArray, 0, functionArray.length);
+		finalFunctionArray[functionArray.length] = last;
+		return finalFunctionArray;
 	}
 
 

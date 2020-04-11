@@ -13,7 +13,8 @@ public class Add extends CommutativeFunction{
 
 	public double evaluate(double... variableValues) {
 		double accumulator = 0;
-		for (Function f : functions) accumulator += f.evaluate(variableValues);
+		for (Function f : functions)
+			accumulator += f.evaluate(variableValues);
 		return accumulator;
 	}
 

@@ -14,7 +14,8 @@ public class Multiply extends CommutativeFunction{
 
 	public double evaluate(double... variableValues) {
 		double accumulator = 1;
-		for (Function f : functions) accumulator *= f.evaluate(variableValues);
+		for (Function f : functions)
+			accumulator *= f.evaluate(variableValues);
 		return accumulator;
 	}
 

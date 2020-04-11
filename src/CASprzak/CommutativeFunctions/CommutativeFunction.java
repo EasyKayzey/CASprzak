@@ -26,7 +26,18 @@ public abstract class CommutativeFunction extends Function {
 
     public abstract CommutativeFunction simplifyElements();
 
-    public abstract CommutativeFunction simplifyIdentity();
+    public CommutativeFunction simplifyIdentity() {
+        Function[] toPut = getFunctions();
+        for (int i = 0; i < toPut.length; i++) {
+            if (toPut[i] instanceof Constant) {
+                if (((Constant) toPut[i]).constant == identityValue) {
+                    toPut = ArrLib.removeFunctionAt(toPut, i);
+                    i--;
+                }
+            }
+        }
+        return me(toPut);
+    }
 
     public abstract CommutativeFunction simplifyConstants();
 

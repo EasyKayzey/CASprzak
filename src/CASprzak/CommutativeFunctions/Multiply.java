@@ -65,14 +65,14 @@ public class Multiply extends CommutativeFunction{
 	}
 
 	@Override
-	protected Multiply simplifyElements() {
+	public Multiply simplifyElements() {
 		Function[] toMultiply = new Function[functions.length];
 		for (int i = 0; i < functions.length; i++) toMultiply[i] = functions[i].simplify();
 		return new Multiply(toMultiply);
 	}
 
 	@Override
-	protected Multiply simplifyIdentity() {
+	public Multiply simplifyIdentity() {
 		for (int i = 0; i < functions.length; i++) {
 			if (functions[i] instanceof Constant) {
 				if (((Constant) functions[i]).constant == 1) {
@@ -83,7 +83,7 @@ public class Multiply extends CommutativeFunction{
 		return this;
 	}
 
-	protected Multiply simplifyPull() {
+	public Multiply simplifyPull() {
 		for (int i = 0; i < functions.length; i++) {
 			if (this.getClass().equals(functions[i].getClass())) {
 				return (new Multiply(ArrLib.pullUp(functions, ((CommutativeFunction) functions[i]).getFunctions(), i))).simplifyInternal();
@@ -93,7 +93,7 @@ public class Multiply extends CommutativeFunction{
 	}
 
 	@Override
-	protected Multiply simplifyConstants() {
+	public Multiply simplifyConstants() {
 		for (int i = 1; i < functions.length; i++){
 			for (int j = 0; j < i; j++){
 				if (functions[i] instanceof Constant && functions[j] instanceof Constant) {
@@ -108,7 +108,7 @@ public class Multiply extends CommutativeFunction{
 		return this;
 	}
 
-	protected boolean isTimesZero() {
+	public boolean isTimesZero() {
 		for (Function function : functions) {
 			if (function instanceof Constant) {
 				if (((Constant) function).constant == 0) {
@@ -119,7 +119,7 @@ public class Multiply extends CommutativeFunction{
 		return false;
 	}
 
-	protected Multiply addExponents() {
+	public Multiply addExponents() {
 		Function[] simplifiedTerms = ArrLib.deepClone(functions);
 		for (int a = 0; a < simplifiedTerms.length; a++) {
 			if (simplifiedTerms[a] instanceof Variable)

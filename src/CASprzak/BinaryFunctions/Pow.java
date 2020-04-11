@@ -34,7 +34,7 @@ public class Pow extends BinaryFunction {
 		return (new Pow(function1.simplify(), function2.simplify())).multiplyExponents().simplifyObviousExponentsAndFOC();
 	}
 
-	protected Function simplifyObviousExponentsAndFOC() {
+	public Function simplifyObviousExponentsAndFOC() { //FOC means Functions of Constants
 		if(function1 instanceof Constant) {
 			if (((Constant) function1).constant == 0)
 				return new Constant(1);
@@ -46,7 +46,7 @@ public class Pow extends BinaryFunction {
 		return this;
 	}
 
-	protected Pow multiplyExponents() {
+	public Pow multiplyExponents() {
 		if (function2 instanceof Pow) {
 			return new Pow(new Multiply(((Pow) function2).function1, function1), ((Pow) function2).function2);
 		}

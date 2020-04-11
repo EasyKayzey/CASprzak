@@ -51,14 +51,14 @@ public class Add extends CommutativeFunction{
 
 
 	@Override
-	protected Add simplifyElements() {
+	public Add simplifyElements() {
 		Function[] toAdd = new Function[functions.length];
 		for (int i = 0; i < functions.length; i++) toAdd[i] = functions[i].simplify();
 		return new Add(toAdd);
 	}
 
 	@Override
-	protected Add simplifyIdentity() {
+	public Add simplifyIdentity() {
 		for (int i = 0; i < functions.length; i++) {
 			if (functions[i] instanceof Constant) {
 				if (((Constant) functions[i]).constant == 0) {
@@ -69,7 +69,7 @@ public class Add extends CommutativeFunction{
 		return this;
 	}
 
-	protected Add simplifyConstants() {
+	public Add simplifyConstants() {
 		for (int i = 1; i < functions.length; i++){
 			for (int j = 0; j < i; j++){
 				if (functions[i] instanceof Constant && functions[j] instanceof Constant) {
@@ -84,7 +84,7 @@ public class Add extends CommutativeFunction{
 		return this;
 	}
 
-	protected Add simplifyPull() {
+	public Add simplifyPull() {
 		for (int i = 0; i < functions.length; i++) {
 			if (this.getClass().equals(functions[i].getClass())) {
 				return (new Add(ArrLib.pullUp(functions, ((CommutativeFunction) functions[i]).getFunctions(), i))).simplifyInternal();
@@ -93,7 +93,7 @@ public class Add extends CommutativeFunction{
 		return this;
 	}
 
-	protected Add combineLikeTerms() {
+	public Add combineLikeTerms() {
 		Function[] combinedTerms = ArrLib.deepClone(functions);
 		for (int a = 0; a < combinedTerms.length; a++) {
 			if (combinedTerms[a] instanceof Variable)  combinedTerms[a] = new Multiply(new Constant(1), combinedTerms[a]);

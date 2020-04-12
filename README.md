@@ -1,5 +1,5 @@
 # Z_CASprzak
-A CAS by The EasyKayzey Show (Erez Israeli Miller and Michael Kasprzak)
+Z_CASprzak is a CAS by The EasyKayzey Show (Erez Israeli Miller and Michael Kasprzak)
 
 Hello, and welcome to our Computer Algebra System. This is a joint project by The EasyKayzey Show started at HackBCA V, 2020. It consists of a structure for parsing, storing, and working with mathematical expressions with a small command-line demo. 
 

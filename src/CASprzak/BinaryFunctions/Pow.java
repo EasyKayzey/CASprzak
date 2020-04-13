@@ -1,14 +1,13 @@
 package CASprzak.BinaryFunctions;
 
-import CASprzak.CASUI;
 import CASprzak.CommutativeFunctions.Add;
 import CASprzak.CommutativeFunctions.CommutativeFunction;
 import CASprzak.CommutativeFunctions.Multiply;
 import CASprzak.Function;
+import CASprzak.Settings;
 import CASprzak.SpecialFunctions.Constant;
 import CASprzak.SpecialFunctions.Variable;
 import CASprzak.UnitaryFunctions.Ln;
-import CASprzak.UnitaryFunctions.UnitaryFunction;
 
 public class Pow extends BinaryFunction {
 
@@ -40,7 +39,7 @@ public class Pow extends BinaryFunction {
 				return new Constant(1);
 			if (((Constant) function1).constant == 1)
 				return function2.simplify();
-			if (CASUI.simplifyFunctionsOfConstants && function2 instanceof Constant)
+			if (Settings.simplifyFunctionsOfConstants && function2 instanceof Constant)
 				return new Constant(this.evaluate());
 		}
 		return this;

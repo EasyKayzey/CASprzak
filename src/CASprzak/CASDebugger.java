@@ -3,7 +3,6 @@ package CASprzak;
 import java.util.Scanner;
 
 public class CASDebugger {
-	public static boolean debugComparisons = true;
 
 	public static void main(String[] args) throws IllegalArgumentException {
 		Scanner in = new Scanner(System.in);
@@ -12,9 +11,9 @@ public class CASDebugger {
 		System.out.println("Debug mode on? (Y/N)");
 		userInput = in.nextLine().toUpperCase();
 		if ("Y".equals(userInput))
-			debugComparisons = true;
+			Settings.debugComparisons = true;
 		else if ("N".equals(userInput))
-			debugComparisons = false;
+			Settings.debugComparisons = false;
 		else
 			throw new IllegalArgumentException(userInput + " is not Y/N.");
 

@@ -3,8 +3,6 @@ package CASprzak;
 import java.util.*;
 
 public class CASUI {
-	public static final boolean simplifyFunctionsOfConstants = true;
-	public static final boolean cacheDerivatives = true;
 
 	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);

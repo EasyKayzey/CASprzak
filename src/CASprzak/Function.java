@@ -28,10 +28,10 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 	}
 
 	public Function getSimplifiedDerivative(int varID) {
-		if (CASUI.cacheDerivatives && derivatives.containsKey(varID))
+		if (Settings.cacheDerivatives && derivatives.containsKey(varID))
 			return derivatives.get(varID);
 		Function derivative = getDerivative(varID).simplify();
-		if (CASUI.cacheDerivatives)
+		if (Settings.cacheDerivatives)
 			derivatives.put(varID, derivative);
 		return derivative;
 	}

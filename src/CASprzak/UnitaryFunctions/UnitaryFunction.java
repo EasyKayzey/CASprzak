@@ -1,6 +1,6 @@
 package CASprzak.UnitaryFunctions;
-import CASprzak.CASUI;
 import CASprzak.Function;
+import CASprzak.Settings;
 import CASprzak.SpecialFunctions.Constant;
 
 public abstract class UnitaryFunction extends Function {
@@ -19,7 +19,7 @@ public abstract class UnitaryFunction extends Function {
 
     public Function simplify() {
         UnitaryFunction newFunction = this.simplifyInternal();
-        if (CASUI.simplifyFunctionsOfConstants && newFunction.getOperand() instanceof Constant)
+        if (Settings.simplifyFunctionsOfConstants && newFunction.getOperand() instanceof Constant)
             return new Constant(newFunction.evaluate());
         return newFunction;
     }

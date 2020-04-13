@@ -10,9 +10,9 @@ public class CASDebugger {
 		System.out.println("Debug mode on? (Y/N)");
 		userInput = in.nextLine().toUpperCase();
 		if ("Y".equals(userInput))
-			Settings.debugComparisons = true;
+			Settings.debug = true;
 		else if ("N".equals(userInput))
-			Settings.debugComparisons = false;
+			Settings.debug = false;
 		else
 			throw new IllegalArgumentException(userInput + " is not Y/N.");
 

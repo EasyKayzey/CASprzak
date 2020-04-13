@@ -5,7 +5,11 @@ import CASprzak.CommutativeFunctions.*;
 import CASprzak.BinaryFunctions.*;
 import CASprzak.UnitaryFunctions.*;
 
+import java.util.HashMap;
+
 public abstract class Function implements Evaluable, Differentiable, Simplifiable, Substitutable, Comparable<Function> {
+	protected HashMap<Integer, Function> derivatives = new HashMap<>();
+
 	protected static final Class<?>[] sortOrder = {Constant.class, Variable.class, Pow.class, Logb.class, Multiply.class, UnitaryFunction.class, Add.class};
 
 	public abstract String toString();
@@ -24,7 +28,12 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 	}
 
 	public Function getSimplifiedDerivative(int varID) {
-		return getDerivative(varID).simplify();
+		if (derivatives.containsKey(varID))
+			return derivatives.get(varID);
+
+		Function derivative = getDerivative(varID).simplify();
+		derivatives.put(varID, derivative);
+		return derivative;
 	}
 
 	public abstract boolean equals(Function that);

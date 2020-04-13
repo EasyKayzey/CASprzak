@@ -27,6 +27,10 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 		return curFunction;
 	}
 
+	/**
+	 * @param varID the ID of the variable being differentiated (see {@link CASprzak.Parser#getVarID(char)}).
+	 * @return the derivative of the {@link CASprzak.Function} it is called on, simplified.
+	 */
 	public Function getSimplifiedDerivative(int varID) {
 		if (Settings.cacheDerivatives && derivatives.containsKey(varID))
 			return derivatives.get(varID);

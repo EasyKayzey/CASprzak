@@ -28,6 +28,11 @@ public class Parser {
     return false;
   }
 
+  /**
+   * @param variable the character corresponding to the variable
+   * @return the ID of the variable, used internally
+   * @throws IndexOutOfBoundsException
+   */
   public int getVarID(char variable) throws IndexOutOfBoundsException{
     for (int i = 0; i < variables.length; i++) if (variables[i] == variable) {
       return i;

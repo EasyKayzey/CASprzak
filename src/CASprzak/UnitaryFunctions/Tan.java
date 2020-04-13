@@ -4,7 +4,9 @@ import CASprzak.BinaryFunctions.Pow;
 import CASprzak.CommutativeFunctions.Multiply;
 import CASprzak.Function;
 import CASprzak.SpecialFunctions.Constant;
+
 public class Tan extends UnitaryFunction {
+
     public Tan(Function function) {
         super(function);
     }

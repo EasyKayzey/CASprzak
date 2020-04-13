@@ -2,6 +2,7 @@ package CASprzak.UnitaryFunctions;
 
 import CASprzak.CommutativeFunctions.Multiply;
 import CASprzak.Function;
+
 public class Sinh extends UnitaryFunction {
 
     public Sinh(Function function) {

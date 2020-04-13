@@ -2,7 +2,9 @@ package CASprzak.UnitaryFunctions;
 
 import CASprzak.CommutativeFunctions.Multiply;
 import CASprzak.Function;
+
 public class Sin extends UnitaryFunction {
+
     public Sin(Function function) {
         super(function);
     }

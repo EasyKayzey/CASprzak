@@ -3,7 +3,6 @@ package CASprzak;
 import java.util.Scanner;
 
 public class CASDebugger {
-
 	public static void main(String[] args) throws IllegalArgumentException {
 		Scanner in = new Scanner(System.in);
 		String userInput;

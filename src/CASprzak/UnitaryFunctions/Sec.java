@@ -4,7 +4,6 @@ import CASprzak.CommutativeFunctions.Multiply;
 import CASprzak.Function;
 
 public class Sec extends UnitaryFunction {
-
     public Sec(Function function) {
         super(function);
     }

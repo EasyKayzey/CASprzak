@@ -6,7 +6,6 @@ import CASprzak.Function;
 import CASprzak.SpecialFunctions.Constant;
 
 public class Cot extends UnitaryFunction {
-
     public Cot(Function function) {
         super(function);
     }

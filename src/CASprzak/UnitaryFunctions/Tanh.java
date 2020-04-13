@@ -6,7 +6,6 @@ import CASprzak.Function;
 import CASprzak.SpecialFunctions.Constant;
 
 public class Tanh extends UnitaryFunction {
-
     public Tanh(Function function) {
         super(function);
     }

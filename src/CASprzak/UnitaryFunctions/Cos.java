@@ -5,7 +5,6 @@ import CASprzak.Function;
 import CASprzak.SpecialFunctions.Constant;
 
 public class Cos extends UnitaryFunction {
-
     public Cos(Function function) {
         super(function);
     }

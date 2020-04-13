@@ -7,7 +7,6 @@ import CASprzak.Function;
 import CASprzak.SpecialFunctions.Constant;
 
 public class Atan extends UnitaryFunction {
-
     public Atan(Function function) {
         super(function);
     }

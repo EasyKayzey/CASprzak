@@ -5,7 +5,6 @@ import CASprzak.Function;
 import CASprzak.SpecialFunctions.Constant;
 
 public class Csc extends UnitaryFunction {
-
     public Csc(Function function) {
         super(function);
     }

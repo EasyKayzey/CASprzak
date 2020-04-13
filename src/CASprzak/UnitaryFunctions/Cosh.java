@@ -4,7 +4,6 @@ import CASprzak.CommutativeFunctions.Multiply;
 import CASprzak.Function;
 
 public class Cosh extends UnitaryFunction {
-
     public Cosh(Function function) {
         super(function);
     }

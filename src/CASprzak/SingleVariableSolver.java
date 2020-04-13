@@ -5,7 +5,6 @@ import CASprzak.SpecialFunctions.Constant;
 import java.util.List;
 
 public class SingleVariableSolver {
-
     private double newtonsMethod(Function expression, double value) {
         return value - expression.evaluate(value) / expression.getSimplifiedDerivative(0).evaluate(value);
     }

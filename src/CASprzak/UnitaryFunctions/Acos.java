@@ -7,7 +7,6 @@ import CASprzak.Function;
 import CASprzak.SpecialFunctions.Constant;
 
 public class Acos extends UnitaryFunction {
-
     public Acos(Function function) {
         super(function);
     }

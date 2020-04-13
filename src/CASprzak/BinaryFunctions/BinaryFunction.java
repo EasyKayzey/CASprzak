@@ -1,5 +1,5 @@
 package CASprzak.BinaryFunctions;
-import CASprzak.CommutativeFunctions.CommutativeFunction;
+
 import CASprzak.Function;
 
 public abstract class BinaryFunction extends Function {

@@ -6,7 +6,6 @@ import CASprzak.Function;
 import CASprzak.SpecialFunctions.Constant;
 
 public class Ln extends UnitaryFunction {
-
     public Ln(Function function) {
         super(function);
     }

@@ -10,7 +10,6 @@ import CASprzak.SpecialFunctions.Variable;
 import CASprzak.UnitaryFunctions.Ln;
 
 public class Pow extends BinaryFunction {
-
 	public Pow(Function exponent, Function base) {
 		super(exponent, base);
 	}

@@ -7,7 +7,6 @@ import CASprzak.Function;
 import CASprzak.SpecialFunctions.Constant;
 
 public class Asin extends UnitaryFunction {
-
     public Asin(Function function) {
         super(function);
     }

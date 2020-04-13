@@ -43,4 +43,13 @@ public class DerivativeTest {
 //        System.out.println(test.simplify());
     }
 
+    @Test
+    void arcTrigTests() {
+        Function test;
+        test = parser.parse("4acos(x)-10atan(x)");
+        assertEquals(-12.773, test.getSimplifiedDerivative(0).evaluate(0.456), 0.01);
+        test = parser.parse("asin(x)+x");
+        assertEquals(2.638, test.getSimplifiedDerivative(0).evaluate(0.792), 0.01);
+    }
+
 }

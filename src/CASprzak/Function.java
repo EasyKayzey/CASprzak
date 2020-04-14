@@ -15,7 +15,7 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 	protected HashMap<Integer, Function> derivatives = new HashMap<>();
 
 	/**
-	 * Describes the order that a {@link Function} should appear in a sorted array (used in {@link #compareTo(Function)}
+	 * Describes the order that a {@link Function} should appear in a sorted array (used in {@link #compareTo(Function)})
 	 */
 	protected static final Class<?>[] sortOrder = {Constant.class, Variable.class, Pow.class, Logb.class, Multiply.class, UnitaryFunction.class, Add.class};
 

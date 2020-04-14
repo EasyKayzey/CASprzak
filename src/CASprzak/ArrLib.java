@@ -5,6 +5,13 @@ import CASprzak.CommutativeFunctions.Multiply;
 import java.util.*;
 
 public class ArrLib {
+
+	/**
+	 * Removes a {@link Function} from a `Function[]` and returns the new array (does not modify)
+	 * @param functionArray the array of `Functions`
+	 * @param index index of the `Function` to be removed
+	 * @return the new array
+	 */
 	public static Function[] removeFunctionAt(Function[] functionArray, int index) {
 		Function[] newArray = new Function[functionArray.length-1];
 		for (int i = 0; i < newArray.length; i++)
@@ -12,6 +19,11 @@ public class ArrLib {
 		return newArray;
 	}
 
+	/**
+	 * Deep-clones an array of `Functions`
+	 * @param functionArray array of `Functions`
+	 * @return new `Function[]`
+	 */
 	public static Function[] deepClone(Function[] functionArray) {
 		Function[] newArray = new Function[functionArray.length];
 		for (int i = 0; i < newArray.length; i++)
@@ -19,6 +31,12 @@ public class ArrLib {
 		return newArray;
 	}
 
+	/**
+	 * Checks if two {@link Function} arrays have equal `Functions` at each index (assumes sorted)
+	 * @param functionArray1 first array
+	 * @param functionArray2 second array
+	 * @return equality
+	 */
 	public static boolean deepEquals(Function[] functionArray1, Function[] functionArray2) {
 		if (functionArray1.length != functionArray2.length)
 			return false;

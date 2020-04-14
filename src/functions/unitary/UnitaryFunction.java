@@ -24,7 +24,7 @@ public abstract class UnitaryFunction extends Function {
 
     public Function simplify() {
         UnitaryFunction newFunction = this.simplifyInternal();
-        if (Settings.simplifyFunctionsOfConstants && newFunction.getOperand() instanceof Constant)
+        if (Settings.simplifyFunctionsOfConstants && newFunction.function instanceof Constant)
             return new Constant(newFunction.evaluate());
         return newFunction;
     }
@@ -48,6 +48,6 @@ public abstract class UnitaryFunction extends Function {
     }
 
     public int compareSelf(Function that) {
-        return (this.getOperand().compareTo(((UnitaryFunction)that).getOperand()));
+        return (this.function.compareTo(((UnitaryFunction) that).function));
     }
 }

@@ -23,6 +23,13 @@ public class Acsc extends UnitaryFunction {
 
     @Override
     public double evaluate(double... variableValues) {
-        return 0;
+        double functionEvaluated = function.evaluate(variableValues);
+        if (functionEvaluated > 1) {
+            return Math.acos(Math.sqrt(Math.pow(functionEvaluated, 2)-1)/functionEvaluated);
+        } else if (functionEvaluated < -1) {
+            return - Math.acos(Math.sqrt(Math.pow(functionEvaluated, 2)-1)/functionEvaluated);
+        } else {
+            return Double.NaN;
+        }
     }
 }

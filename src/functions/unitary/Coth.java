@@ -2,8 +2,8 @@ package functions.unitary;
 
 import functions.Function;
 
-public class Sech extends UnitaryFunction {
-    public Sech(Function function) {
+public class Coth extends UnitaryFunction{
+    public Coth(Function function) {
         super(function);
     }
 

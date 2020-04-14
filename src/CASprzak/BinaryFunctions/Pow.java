@@ -66,7 +66,7 @@ public class Pow extends BinaryFunction {
 		Function[] oldFunctions = ((Multiply)function2).getFunctions();
 		Function[] toMultiply = new Function[oldFunctions.length];
 		for (int i = 0; i < toMultiply.length; i++) {
-			toMultiply[i] = new Pow(function1, oldFunctions[i]);
+			toMultiply[i] = new Pow(function1, oldFunctions[i]).simplify();
 		}
 		return toMultiply;
 	}

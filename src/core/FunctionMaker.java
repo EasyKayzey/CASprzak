@@ -50,6 +50,7 @@ public class FunctionMaker {
 			case "-" -> new Multiply(new Constant(-1), function);
 			case "/" -> new Pow(new Constant(-1), function);
 			case "sqrt" -> new Pow(new Constant(.5), function);
+			case "ln" -> new Ln(function);
 			case "sin" -> new Sin(function);
 			case "cos" -> new Cos(function);
 			case "tan" -> new Tan(function);
@@ -59,10 +60,21 @@ public class FunctionMaker {
 			case "asin" -> new Asin(function);
 			case "acos" -> new Acos(function);
 			case "atan" -> new Atan(function);
+			case "acsc" -> new Acsc(function);
+			case "asec" -> new Asec(function);
+			case "acot" -> new Acot(function);
 			case "sinh" -> new Sinh(function);
 			case "cosh" -> new Cosh(function);
 			case "tanh" -> new Tanh(function);
-			case "ln" -> new Ln(function);
+			case "csch" -> new Csch(function);
+			case "sech" -> new Sech(function);
+			case "coth" -> new Coth(function);
+			case "asinh" -> new Asinh(function);
+			case "acosh" -> new Acosh(function);
+			case "atanh" -> new Atanh(function);
+			case "acsch" -> new Acsch(function);
+			case "asech" -> new Asech(function);
+			case "acoth" -> new Acoth(function);
 			default -> throw new IllegalArgumentException("Invalid functionName " + functionName);
 		};
 	}

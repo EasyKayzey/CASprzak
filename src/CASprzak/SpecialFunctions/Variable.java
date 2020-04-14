@@ -11,6 +11,10 @@ public class Variable extends Function {
 		this.varNames = varNames;
 	}
 
+	/**
+	 * Returns a String representation of the Function
+	 * @return String representation of function
+	 */
 	public String toString() {
 		return "" + varNames[varID];
 	}

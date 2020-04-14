@@ -118,6 +118,12 @@ public class ArrLib {
 		}
 	}
 
+	/**
+	 * Returns a Function[] where every element in add is now a {@link Multiply} of multiply and the function that was previously there in add
+	 * @param multiply the Function[] which is distributed to every element in add
+	 * @param add the Function[] which is being distributed to
+	 * @return Function[] where the multiply has been distributed to the add
+	 */
 	public static Function[] distribute(Function[] multiply, Function[] add) {
 		Function[] finalAdd = new Function[add.length];
 		for (int i = 0; i < finalAdd.length; i++) {

@@ -6,8 +6,8 @@ import functions.commutative.Add;
 import functions.commutative.Multiply;
 import functions.special.Constant;
 
-public class Acoth extends UnitaryFunction {
-    public Acoth(Function function) {
+public class Acot extends UnitaryFunction {
+    public Acot(Function function) {
         super(function);
     }
 
@@ -28,6 +28,6 @@ public class Acoth extends UnitaryFunction {
 
     @Override
     public UnitaryFunction me(Function operand) {
-        return new Acoth(operand);
+        return new Acot(operand);
     }
 }

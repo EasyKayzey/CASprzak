@@ -18,7 +18,8 @@ public class Acosh extends UnitaryFunction {
 
     @Override
     public double evaluate(double... variableValues) {
-        return Math.log(function.evaluate(variableValues)+Math.sqrt(function.evaluate(variableValues)-1));
+        double functionEvaluated = function.evaluate(variableValues);
+        return Math.log(functionEvaluated+Math.sqrt(functionEvaluated*functionEvaluated-1));
     }
 
     @Override

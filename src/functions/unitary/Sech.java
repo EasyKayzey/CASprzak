@@ -14,7 +14,7 @@ public class Sech extends UnitaryFunction {
 
     @Override
     public double evaluate(double... variableValues) {
-        return 0;
+        return 1/Math.cosh(function.evaluate(variableValues));
     }
 
     @Override

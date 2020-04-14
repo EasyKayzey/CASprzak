@@ -9,20 +9,16 @@ public class Parser {
   public static final String[] binaryOperations = {"^", "*", "+", "logb"};
   public static final String[] unitaryOperations = {"-", "/", "sin", "cos", "tan", "log", "ln", "sqrt", "exp", "abs", "sign", "dirac", "sin", "cos", "tan", "csc", "sec", "cot", "asin", "acos", "atan", "acsc", "asec", "acot", "sinh", "cosh", "tanh", "csch", "sech", "coth", "asinh", "acosh", "atanh", "acsch", "asech", "acoth"};
 
-  private final char[] variables;
+  private static char[] variables;
 
-  public Parser(char... variables) {
-    this.variables = variables;
-  }
-
-  public boolean isAnOperator1(String input) {
+  public static boolean isAnOperator1(String input) {
     for (String x : unitaryOperations) {
       if(x.equals(input)) return true;
     }
     return false;
   }
 
-  public boolean isAnOperator2(String input) {
+  public static boolean isAnOperator2(String input) {
     for (String x : binaryOperations) {
       if(x.equals(input)) return true;
     }
@@ -34,19 +30,18 @@ public class Parser {
    * @return the ID of the variable, used internally
    * @throws IndexOutOfBoundsException if no such variable exists
    */
-  public int getVarID(char variable) throws IndexOutOfBoundsException{
+  public static int getVarID(char variable) throws IndexOutOfBoundsException{
     for (int i = 0; i < variables.length; i++) if (variables[i] == variable) {
       return i;
     }
     throw new IndexOutOfBoundsException("No variable " + variable + " found.");
   }
 
-  public Function parse(String infix) {
-    PreProcessor.setVariables(variables);
-    return parse(PreProcessor.toPostfix(infix));
+  public static Function parse(String infix) {
+    return Parser.parse((new PreProcessor(variables)).toPostfix(infix));
   }
 
-  public Function parse(String[] postfix) {
+  public static Function parse(String[] postfix) {
     FunctionMaker functionMaker = new FunctionMaker();
     Stack<Function> functionStack = new Stack<>();
     for (String token : postfix) {

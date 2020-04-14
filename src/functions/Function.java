@@ -25,6 +25,10 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 	 */
 	public static final Class<?>[] sortOrder = {Constant.class, Variable.class, Pow.class, Logb.class, Multiply.class, UnitaryFunction.class, Add.class};
 
+	/**
+	 * Returns a String representation of the Function
+	 * @return String representation of function
+	 */
 	public abstract String toString();
 
 	public abstract Function clone();

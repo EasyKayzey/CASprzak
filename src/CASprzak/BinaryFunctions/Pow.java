@@ -71,7 +71,10 @@ public class Pow extends BinaryFunction {
 		return new Pow(function1, function2);
 	}
 
-
+	/**
+	 * Returns a String representation of the Function
+	 * @return String representation of function
+	 */
 	@Override
 	public String toString() { //TODO this should probably be using StringBuilder
 		boolean parenF1 = !((function1 instanceof Constant) || (function1 instanceof Variable) || (function1 instanceof CommutativeFunction));

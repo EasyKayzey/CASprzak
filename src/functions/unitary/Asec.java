@@ -8,8 +8,8 @@ public class Asec extends UnitaryFunction {
     }
 
     @Override
-    public UnitaryFunction me(Function function) {
-        return null;
+    public UnitaryFunction me(Function operand) {
+        return new Asec(operand);
     }
 
     @Override

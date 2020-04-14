@@ -10,7 +10,7 @@ public class PreProcessor {
 	/**
 	 * List of all supported operators
 	 */
-	public static final String[] operations = {"^", "*", "/", "+", "-", "logb", "log", "ln", "sqrt", "exp", "sinh", "cosh", "tanh", "sin", "cos", "tan", "csc", "sec", "cot", "asin", "acos", "atan"};
+	public static final String[] operations = {"^", "*", "/", "+", "-", "logb", "log", "ln", "sqrt", "exp", "abs", "sign", "dirac", "sin", "cos", "tan", "sec", "csc", "cot", "asin", "acos", "atan", "asec", "acsc", "acot", "sinh", "cosh", "tanh", "sech", "csch", "coth", "asinh", "acosh", "atanh", "asech", "acsch", "acoth"};
 
 	/**
 	 * Array of the characters corresponding to all variables used in expressions

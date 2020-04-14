@@ -18,7 +18,8 @@ public class Asech extends UnitaryFunction {
 
     @Override
     public double evaluate(double... variableValues) {
-        return 0;
+        double functionEvaluated = function.evaluate(variableValues);
+        return Math.log((1+Math.sqrt(functionEvaluated*functionEvaluated-1))/functionEvaluated);
     }
 
     @Override

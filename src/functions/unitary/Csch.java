@@ -1,6 +1,8 @@
 package functions.unitary;
 
 import functions.Function;
+import functions.commutative.Multiply;
+import functions.special.Constant;
 
 public class Csch extends UnitaryFunction{
     public Csch(Function function) {
@@ -9,7 +11,7 @@ public class Csch extends UnitaryFunction{
 
     @Override
     public Function getDerivative(int varID) {
-        return null;
+        return new Multiply(new Constant(-1), function.getSimplifiedDerivative(varID), new Csch(function), new Coth(function));
     }
 
     @Override

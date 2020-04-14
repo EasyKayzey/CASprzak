@@ -17,11 +17,10 @@ public class PreProcessor {
 	 */
 	protected static char[] variables;
 
-
-	public PreProcessor(char[] variables) {
-		PreProcessor.variables = variables;
-	}
-
+	/**
+	 * Sets the variables of the preprocessor
+	 * @param variables array of variables
+	 */
 	public static void setVariables(char[] variables) {
 		PreProcessor.variables = variables;
 	}

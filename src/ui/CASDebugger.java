@@ -21,8 +21,7 @@ public class CASDebugger {
 		else
 			throw new IllegalArgumentException(userInput + " is not Y/N.");
 
-
-			System.out.println("Would you like to exit (E), run CASUI (1), or directly use ParserXYZ (2)?");
+		System.out.println("Would you like to exit (E), run CASUI (1), or directly use ParserXYZ (2)?");
 		userInput = in.nextLine().toUpperCase();
 		switch (userInput) {
 			case "E" -> System.exit(0);

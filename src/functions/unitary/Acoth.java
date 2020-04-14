@@ -18,7 +18,8 @@ public class Acoth extends UnitaryFunction {
 
     @Override
     public double evaluate(double... variableValues) {
-        return 0;
+        double functionEvaluated = function.evaluate(variableValues);
+        return 0.5*Math.log((1+functionEvaluated)/(1+functionEvaluated));
     }
 
     @Override

@@ -46,25 +46,25 @@ public class FunctionMaker {
 	 * @return new {@link Function}
 	 */
 	public Function makeUnitary(String functionName, Function function) {
-		switch (functionName) {
-			case "-": return new Multiply(new Constant(-1), function);
-			case "/": return new Pow(new Constant(-1), function);
-			case "sqrt": return new Pow(new Constant(.5), function);
-			case "sin": return new Sin(function);
-			case "cos": return new Cos(function);
-			case "tan": return new Tan(function);
-			case "csc": return new Csc(function);
-			case "sec": return new Sec(function);
-			case "cot": return new Cot(function);
-			case "asin": return new Asin(function);
-			case "acos": return new Acos(function);
-			case "atan": return new Atan(function);
-			case "sinh": return new Sinh(function);
-			case "cosh": return new Cosh(function);
-			case "tanh": return new Tanh(function);
-			case "ln": return new Ln(function);
-			default: throw new IllegalArgumentException("Invalid functionName " + functionName);
-		}
+		return switch (functionName) {
+			case "-" -> new Multiply(new Constant(-1), function);
+			case "/" -> new Pow(new Constant(-1), function);
+			case "sqrt" -> new Pow(new Constant(.5), function);
+			case "sin" -> new Sin(function);
+			case "cos" -> new Cos(function);
+			case "tan" -> new Tan(function);
+			case "csc" -> new Csc(function);
+			case "sec" -> new Sec(function);
+			case "cot" -> new Cot(function);
+			case "asin" -> new Asin(function);
+			case "acos" -> new Acos(function);
+			case "atan" -> new Atan(function);
+			case "sinh" -> new Sinh(function);
+			case "cosh" -> new Cosh(function);
+			case "tanh" -> new Tanh(function);
+			case "ln" -> new Ln(function);
+			default -> throw new IllegalArgumentException("Invalid functionName " + functionName);
+		};
 	}
 
 	/**
@@ -76,12 +76,12 @@ public class FunctionMaker {
 	 * @return new {@link Function}
 	 */
 	public Function makeBinary(String functionName, Function function1, Function function2) {
-		switch (functionName) {
-			case "+": return new Add(function1, function2);
-			case "*": return new Multiply(function1, function2);
-			case "^": return new Pow(function1, function2);
-			case "logb": return new Logb(function1, function2);
-			default: throw new IllegalArgumentException("Invalid functionName " + functionName);
-		}
+		return switch (functionName) {
+			case "+" -> new Add(function1, function2);
+			case "*" -> new Multiply(function1, function2);
+			case "^" -> new Pow(function1, function2);
+			case "logb" -> new Logb(function1, function2);
+			default -> throw new IllegalArgumentException("Invalid functionName " + functionName);
+		};
 	}
 }

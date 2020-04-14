@@ -2,7 +2,8 @@ package CASprzak;
 
 import CASprzak.CommutativeFunctions.Multiply;
 
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
 
 public class ArrLib {
 
@@ -35,7 +36,7 @@ public class ArrLib {
 	 * Checks if two {@link Function} arrays have equal Functions at each index (assumes sorted)
 	 * @param functionArray1 first array
 	 * @param functionArray2 second array
-	 * @return equality
+	 * @return true if equal
 	 */
 	public static boolean deepEquals(Function[] functionArray1, Function[] functionArray2) {
 		if (functionArray1.length != functionArray2.length)

@@ -11,8 +11,7 @@ public class SubstituteTest {
     void simpleSubstitution() {
         Function test1 = parser.parse("sin(x)");
         Function test2 = parser.parse("y^2");
-        test1.substitute(0,test2);
         Function test3 = parser.parse("sin(y^2)");
-        assertEquals(test1, test3);
+        assertEquals(test1.substitute(0,test2), test3);
     }
 }

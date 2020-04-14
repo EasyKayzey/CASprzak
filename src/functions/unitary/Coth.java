@@ -1,6 +1,9 @@
 package functions.unitary;
 
 import functions.Function;
+import functions.binary.Pow;
+import functions.commutative.Multiply;
+import functions.special.Constant;
 
 public class Coth extends UnitaryFunction{
     public Coth(Function function) {
@@ -9,7 +12,7 @@ public class Coth extends UnitaryFunction{
 
     @Override
     public Function getDerivative(int varID) {
-        return null;
+        return new Multiply(new Constant(-1), function.getSimplifiedDerivative(varID), new Pow(new Constant(2), new Csch(function)));
     }
 
     @Override

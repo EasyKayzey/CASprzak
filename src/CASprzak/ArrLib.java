@@ -92,6 +92,10 @@ public class ArrLib {
 		return range;
 	}
 
+	/**
+	 * Removes all NaNs from a specified List
+	 * @param values the list from which the NaNs will be removed
+	 */
 	public static void nanRemover(List<Double> values) {
 		for (int i = 0; i < values.size(); i++) {
 			if ((values.get(i)).isNaN()) {

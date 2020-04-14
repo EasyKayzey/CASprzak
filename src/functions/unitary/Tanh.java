@@ -12,7 +12,7 @@ public class Tanh extends UnitaryFunction {
 
     @Override
     public double evaluate(double... variableValues) {
-        return Math.tan(function.evaluate(variableValues));
+        return Math.tanh(function.evaluate(variableValues));
     }
 
     @Override

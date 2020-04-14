@@ -20,4 +20,9 @@ public class Abs extends UnitaryFunction {
     public Function getDerivative(int varID) {
         return null;
     }
+
+    @Override
+    public UnitaryFunction me(Function operand) {
+        return new Abs(operand);
+    }
 }

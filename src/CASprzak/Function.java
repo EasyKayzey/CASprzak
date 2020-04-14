@@ -1,13 +1,16 @@
 package CASprzak;
 
-import CASprzak.SpecialFunctions.*;
-import CASprzak.CommutativeFunctions.*;
-import CASprzak.BinaryFunctions.*;
-import CASprzak.UnitaryFunctions.*;
+import CASprzak.BinaryFunctions.Logb;
+import CASprzak.BinaryFunctions.Pow;
+import CASprzak.CommutativeFunctions.Add;
+import CASprzak.CommutativeFunctions.Multiply;
+import CASprzak.SpecialFunctions.Constant;
+import CASprzak.SpecialFunctions.Variable;
+import CASprzak.UnitaryFunctions.UnitaryFunction;
 
 import java.util.HashMap;
 
-public abstract class Function implements Evaluable, Differentiable, Simplifiable, Substitutable, Comparable<Function> {
+public abstract class Function implements Evaluable, Differentiable, Simplifiable, Comparable<Function> {
 
 	/**
 	 * Caches derivatives with the key corresponding to the varID of the derivative
@@ -52,6 +55,15 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 			derivatives.put(varID, derivative);
 		return derivative;
 	}
+
+	/**
+	 * Substitutes a new {@link Function} into a variable
+	 * @param varID the variable to be substituted into
+	 * @param toReplace the {@link Function} that will be substituted
+	 * @return the new {@link Function} after all substitutions are preformed
+	 */
+	public abstract Function substitute(int varID, Function toReplace);
+
 
 	public abstract boolean equals(Function that);
 

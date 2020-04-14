@@ -49,10 +49,10 @@ public class PreProcessor {
 				postfix.add(token);
 			} else if (isAnOperator(token)) {
 				operators.push(token);
-			} else if (token.equals("(")) {
+			} else if ("(".equals(token)) {
 				operators.push(token);
-			} else if (token.equals(")")) {
-				while (!operators.peek().equals("(")) {
+			} else if (")".equals(token)) {
+				while (!"(".equals(operators.peek())) {
 					postfix.add(operators.pop());
 				}
 				operators.pop();

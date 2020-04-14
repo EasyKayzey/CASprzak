@@ -88,9 +88,8 @@ public class Multiply extends CommutativeFunction{
 		for (int i = 1; i < functions.length; i++){
 			for (int j = 0; j < i; j++){
 				if (functions[i] instanceof Constant && functions[j] instanceof Constant) {
-					Constant c = new Constant(((Constant) functions[i]).constant * ((Constant) functions[j]).constant);
 					Function[] toMultiply = ArrLib.deepClone(functions);
-					toMultiply[i] = c;
+					toMultiply[i] = new Constant(((Constant) functions[i]).constant * ((Constant) functions[j]).constant);
 					toMultiply = ArrLib.removeFunctionAt(toMultiply, j);
 					return (new Multiply(toMultiply)).simplifyConstants();
 				}
@@ -124,8 +123,7 @@ public class Multiply extends CommutativeFunction{
 			for (int j = 0; j < i; j++) {
 				if (simplifiedTerms[i] instanceof Pow && simplifiedTerms[j] instanceof Pow) {
 					if (((Pow) simplifiedTerms[i]).getFunction2().equals(((Pow) simplifiedTerms[j]).getFunction2())) {
-						Pow combinedExponents = new Pow(new Add(((Pow) simplifiedTerms[i]).getFunction1(), ((Pow) simplifiedTerms[j]).getFunction1()), ((Pow) simplifiedTerms[i]).getFunction2());
-						simplifiedTerms[j] = combinedExponents;
+						simplifiedTerms[j] = new Pow(new Add(((Pow) simplifiedTerms[i]).getFunction1(), ((Pow) simplifiedTerms[j]).getFunction1()), ((Pow) simplifiedTerms[i]).getFunction2());
 						simplifiedTerms = ArrLib.removeFunctionAt(simplifiedTerms, i);
 						return (new Multiply(simplifiedTerms)).simplifyInternal();
 					}

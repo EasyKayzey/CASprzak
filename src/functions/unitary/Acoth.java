@@ -18,7 +18,12 @@ public class Acoth extends UnitaryFunction {
 
     @Override
     public double evaluate(double... variableValues) {
-        return 0;
+        double functionEvaluated = function.evaluate(variableValues);
+        if (functionEvaluated < 0) {
+            return -0.5*Math.PI - Math.atan(functionEvaluated);
+        } else {
+            return 0.5*Math.PI - Math.atan(functionEvaluated);
+        }
     }
 
     @Override

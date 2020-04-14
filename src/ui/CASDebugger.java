@@ -28,7 +28,7 @@ public class CASDebugger {
 			case "1" -> CASUI.main(args);
 			case "2" -> {
 				System.out.println("Input?");
-				Function function = (new Parser('x', 'y', 'z')).parse(in.nextLine());
+				Function function = Parser.parse(in.nextLine());
 				System.out.println("toString:");
 				System.out.println(function);
 				System.out.println("Simplified once:");

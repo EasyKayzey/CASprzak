@@ -9,16 +9,20 @@ public class Parser {
   public static final String[] binaryOperations = {"^", "*", "+", "logb"};
   public static final String[] unitaryOperations = {"-", "/", "sin", "cos", "tan", "log", "ln", "sqrt", "exp", "abs", "sign", "dirac", "sin", "cos", "tan", "csc", "sec", "cot", "asin", "acos", "atan", "acsc", "asec", "acot", "sinh", "cosh", "tanh", "csch", "sech", "coth", "asinh", "acosh", "atanh", "acsch", "asech", "acoth"};
 
-  private static char[] variables;
+  private static char[] variables = {'x', 'y', 'z'};
 
-  public static boolean isAnOperator1(String input) {
+  public static void setVariables(char... variables) {
+    Parser.variables = variables;
+  }
+
+  public static boolean isUnitaryOperator(String input) {
     for (String x : unitaryOperations) {
       if(x.equals(input)) return true;
     }
     return false;
   }
 
-  public static boolean isAnOperator2(String input) {
+  public static boolean isBinaryOperator(String input) {
     for (String x : binaryOperations) {
       if(x.equals(input)) return true;
     }
@@ -38,7 +42,8 @@ public class Parser {
   }
 
   public static Function parse(String infix) {
-    return Parser.parse((new PreProcessor(variables)).toPostfix(infix));
+    PreProcessor.setVariables(variables);
+    return Parser.parse(PreProcessor.toPostfix(infix));
   }
 
   public static Function parse(String[] postfix) {
@@ -47,7 +52,7 @@ public class Parser {
     for (String token : postfix) {
       if (Constant.isSpecialConstant(token)) {
         functionStack.push(new Constant(token));
-      } else if (!isAnOperator1(token) && !isAnOperator2(token)) {
+      } else if (!isUnitaryOperator(token) && !isBinaryOperator(token)) {
         if (Constant.isSpecialConstant(token)) return functionMaker.specialConstant(token);
         try {
           functionStack.push(functionMaker.constant(Double.parseDouble(token)));
@@ -57,11 +62,11 @@ public class Parser {
           char v = token.charAt(0);
           functionStack.push(functionMaker.variable(getVarID(v), variables));
         }
-      } else if (isAnOperator2(token)) {
+      } else if (isBinaryOperator(token)) {
         Function a = functionStack.pop();
         Function b = functionStack.pop();
         functionStack.push(functionMaker.makeBinary(token, a, b));
-      } else if (isAnOperator1(token)) {
+      } else if (isUnitaryOperator(token)) {
         Function c = functionStack.pop();
         functionStack.push(functionMaker.makeUnitary(token, c));
       }

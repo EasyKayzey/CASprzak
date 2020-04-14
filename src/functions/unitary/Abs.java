@@ -7,6 +7,9 @@ public class Abs extends UnitaryFunction {
         super(function);
     }
 
-
+    @Override
+    public double evaluate(double... variableValues) {
+        return Math.abs(function.evaluate(variableValues));
+    }
 
 }

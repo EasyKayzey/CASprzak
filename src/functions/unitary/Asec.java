@@ -16,14 +16,13 @@ public class Asec extends UnitaryFunction {
         return new Multiply(function.getSimplifiedDerivative(varID), new Pow(new Constant(-1), new Multiply(new Abs(function), new Pow(new Constant(0.5), new Add(new Pow(new Constant(2), function), new Constant(-1))))));
     }
 
+    @SuppressWarnings({"DuplicateExpressions", "RedundantSuppression"})
     @Override
     public double evaluate(double... variableValues) {
         double functionEvaluated = function.evaluate(variableValues);
         if (functionEvaluated > 1) {
-            //noinspection DuplicateExpressions,DuplicateExpressions
             return Math.asin(Math.sqrt(Math.pow(functionEvaluated, 2) - 1) / functionEvaluated);
         } else if (functionEvaluated < -1) {
-            //noinspection DuplicateExpressions,DuplicateExpressions
             return Math.PI + Math.asin(Math.sqrt(Math.pow(functionEvaluated, 2) - 1) / functionEvaluated);
         } else {
             return Double.NaN;

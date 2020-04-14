@@ -1,6 +1,7 @@
 import CASprzak.CommutativeFunctions.Multiply;
 import CASprzak.Function;
 import CASprzak.Parser;
+import CASprzak.Settings;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -158,6 +159,16 @@ public class EqualsTest {
 //        System.out.println(((Multiply)test1).distributeAll().simplify());
 //        System.out.println(test2.simplify());
         assertEquals(((Multiply)test1).distributeAll(), test2);
+    }
+
+    @Test
+    void distributeExponents() {
+        Settings.distributeExponents = true;
+        Function test1 = parser.parse("(2xy)^2");
+        Function test2 = parser.parse("4x^2y^2");
+//        System.out.println(test1.simplify());
+//        System.out.println(test2.simplify());
+        assertEquals(test1, test2);
     }
 
     @Test

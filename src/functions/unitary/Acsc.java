@@ -1,6 +1,10 @@
 package functions.unitary;
 
 import functions.Function;
+import functions.binary.Pow;
+import functions.commutative.Add;
+import functions.commutative.Multiply;
+import functions.special.Constant;
 
 public class Acsc extends UnitaryFunction {
     public Acsc(Function function) {
@@ -14,7 +18,7 @@ public class Acsc extends UnitaryFunction {
 
     @Override
     public Function getDerivative(int varID) {
-        return null;
+        return new Multiply(new Constant(-1), function.getSimplifiedDerivative(varID), new Pow(new Constant(-1), new Multiply(new Abs(function), new Pow(new Constant(0.5), new Add(new Pow(new Constant(2), function), new Constant(-1))))));
     }
 
     @Override

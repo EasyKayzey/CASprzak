@@ -26,10 +26,10 @@ public class Acsc extends UnitaryFunction {
         double functionEvaluated = function.evaluate(variableValues);
         if (functionEvaluated > 1) {
             //noinspection DuplicateExpressions,DuplicateExpressions
-            return Math.acos(Math.sqrt(Math.pow(functionEvaluated, 2)-1)/functionEvaluated);
+            return Math.acos(Math.sqrt(Math.pow(functionEvaluated, 2) - 1) / functionEvaluated);
         } else if (functionEvaluated < -1) {
             //noinspection DuplicateExpressions,DuplicateExpressions
-            return - Math.acos(Math.sqrt(Math.pow(functionEvaluated, 2)-1)/functionEvaluated);
+            return -Math.acos(Math.sqrt(Math.pow(functionEvaluated, 2) - 1) / functionEvaluated);
         } else {
             return Double.NaN;
         }

@@ -13,6 +13,10 @@ public abstract class UnitaryFunction extends Function {
         return function;
     }
 
+    /**
+     * Returns a String representation of the Function
+     * @return String representation of function
+     */
     public String toString() {
         return this.getClass().getSimpleName().toLowerCase() + "(" + function.toString() + ")";
     }

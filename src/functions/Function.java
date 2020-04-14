@@ -10,6 +10,7 @@ import functions.commutative.Multiply;
 import functions.special.Constant;
 import functions.special.Variable;
 import functions.unitary.UnitaryFunction;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 
@@ -97,7 +98,7 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 	 * @param that the {@link Function} compared to
 	 * @return comparison
 	 */
-	public int compareTo(Function that) {
+	public int compareTo(@NotNull Function that) {
 		if (this.equals(that))
 			return 0;
 		else if (this.getClass().equals(that.getClass()))

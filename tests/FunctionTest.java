@@ -137,10 +137,4 @@ public class FunctionTest {
 		assertEquals(-2, test.evaluate(4, 2));
 	}
 
-
-
-
-
-
-
 }

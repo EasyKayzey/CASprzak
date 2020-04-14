@@ -51,7 +51,7 @@ public class Constant extends Function {
 	public String toString() {
 		if (constantID != -1)
 			return specialConstantStrings[constantID];
-		return "" + constant;
+		return String.valueOf(constant);
 	}
 
 	public Function getDerivative(int varID) {

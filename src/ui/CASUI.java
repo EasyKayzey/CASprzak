@@ -8,14 +8,17 @@ import functions.Function;
 
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class CASUI {
+	private static final Pattern commaSpaces = Pattern.compile(",\\s*");
+
 	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
 		in.useDelimiter("\n");
 
 		System.out.println("What are your variables? Separate with spaces.");
-		String[] varsTemp = in.next().split(",\\s*");
+		String[] varsTemp = commaSpaces.split(in.next());
 		char[] vars = new char[varsTemp.length];
 		for (int i = 0; i < vars.length; i++) vars[i] = varsTemp[i].charAt(0);
 
@@ -23,7 +26,7 @@ public class CASUI {
 		String raw = in.next();
 
 		System.out.println("What are your inputs? Separate with commas, and order them with your variables.");
-		String[] visTemp = in.next().split(",\\s*");
+		String[] visTemp = commaSpaces.split(in.next());
 		double[] vis = Arrays.stream(visTemp).mapToDouble(ConstantEvaluator::getConstant).toArray();
 		System.out.println("Processing...");
 

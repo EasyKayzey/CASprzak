@@ -16,7 +16,7 @@ public class Variable extends Function {
 	 * @return String representation of function
 	 */
 	public String toString() {
-		return "" + varNames[varID];
+		return String.valueOf(varNames[varID]);
 	}
 
 

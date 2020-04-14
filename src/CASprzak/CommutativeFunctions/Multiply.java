@@ -135,7 +135,7 @@ public class Multiply extends CommutativeFunction{
 		return new Multiply(functions);
 	}
 
-	public Function distributeAll() {
+	public Function distributeAll() { //TODO this doesn't distribute completely
 		Function[] multiplyTerms = getFunctions();
 		Function[] addTerms;
 		for (int i = 0; i < multiplyTerms.length; i++) {

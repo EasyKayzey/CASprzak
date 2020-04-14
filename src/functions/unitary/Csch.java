@@ -14,7 +14,7 @@ public class Csch extends UnitaryFunction{
 
     @Override
     public double evaluate(double... variableValues) {
-        return 0;
+        return 1/Math.sinh(function.evaluate(variableValues));
     }
 
     @Override

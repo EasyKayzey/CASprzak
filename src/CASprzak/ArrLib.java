@@ -78,6 +78,13 @@ public class ArrLib {
 		throw new IllegalArgumentException("Class " + function.getClass().getSimpleName() + " not supported.");
 	}
 
+	/**
+	 * Returns a list of Doubles which is a range slit into a certain amount of sections
+	 * @param upper the upper bound of the range
+	 * @param lower the lower bound of the range
+	 * @param sections the amount of sections that the range is split into
+	 * @return the specified range
+	 */
 	public static List<Double> createRange(double upper, double lower, int sections) {
 		List<Double> range = new LinkedList<>();
 		for (int i = 0; i < sections + 1; i++)

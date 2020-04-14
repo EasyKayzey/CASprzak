@@ -58,7 +58,7 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 	 * @param that the {@link Function} compared to
 	 * @return comparison
 	 */
-	public abstract int compareSelf(Function that);
+	protected abstract int compareSelf(Function that);
 
 	public int compareTo(Function that) {
 		if (this.equals(that))

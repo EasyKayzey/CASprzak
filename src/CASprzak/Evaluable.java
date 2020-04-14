@@ -1,6 +1,6 @@
 package CASprzak;
 
-interface Evaluable {
+public interface Evaluable {
 
 	/**
 	 * Evaluates a {@link Function} at a point

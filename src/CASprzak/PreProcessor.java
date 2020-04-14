@@ -82,7 +82,7 @@ public class PreProcessor {
 		infix = infix.replace("{","(").replace("}",")").replace("_"," ");
 		// Turns expressions like x-y into x+-y, and turns expressions like x*y into x*/y (the '/' operator represents reciprocals)
 		infix = infix.replaceAll("(?<!^)(?<![\\^\\-+*/ ])\\s*-","+-").replace("/","*/");
-		// Turns expressions like x y z into x*y*z
+		// Turns expressions like xyz into x*y*z
 		infix = parseVariablePairs(infix);
 		// Adds parentheses to enforce order of operations
 		infix = "((((" + infix.replaceAll("\\(","((((").replaceAll("\\)","))))").replaceAll("\\+","))+((").replaceAll("\\*",")*(")+ "))))";

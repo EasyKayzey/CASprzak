@@ -6,8 +6,15 @@ import CASprzak.SpecialFunctions.Constant;
 import java.util.Arrays;
 
 public abstract class CommutativeFunction extends Function {
+
+    /**
+     * The identity of the {@link CommutativeFunction} (e.g. 1 for * and 0 for +)
+     */
     protected double identityValue;
 
+    /**
+     * Array of {@link Function}s operated on by the {@link CommutativeFunction}
+     */
     protected final Function[] functions;
 
     public CommutativeFunction(Function... functions) {

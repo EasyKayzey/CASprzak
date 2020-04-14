@@ -23,6 +23,11 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 
 	public abstract Function clone();
 
+	/**
+	 * Simplifies a {@link Function} multiple times
+	 * @param times the amount of times it is simplified
+	 * @return the simplified {@link Function}
+	 */
 	public Function simplifyTimes(int times) {
 		Function newFunction, curFunction = this;
 		for (int i = 0; i < times; i++) {
@@ -35,8 +40,9 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 	}
 
 	/**
+	 * Returns the derivative of the function, simplified
 	 * @param varID the ID of the variable being differentiated (see {@link Parser#getVarID(char)}).
-	 * @return the derivative of the {@link CASprzak.Function} it is called on, simplified.
+	 * @return the derivative of the {@link Function} it is called on, simplified
 	 */
 	public Function getSimplifiedDerivative(int varID) {
 		if (Settings.cacheDerivatives && derivatives.containsKey(varID))

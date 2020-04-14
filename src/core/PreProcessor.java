@@ -76,6 +76,8 @@ public class PreProcessor {
 	public String[] tokenizeInfix(String infix) {
 		// Remove LaTeX escapes
 		infix = infix.replace("\\","");
+		// Make absolute values into unitary functions
+		infix = infix.replaceAll("\\|(?=([^|]*\\|[^|]*\\|)*$)",")").replaceAll("(?<=\\w)\\|","*abs(").replace("|"," abs(");
 		// Insert multiplication in expressions like 2x and 7(x*y+1)sin(3y)
 		infix = infix.replaceAll("(?<=\\d)(?=[a-zA-Z])|(?<=[a-zA-Z])(?=[\\d])|(?<=\\))(?=[\\w(])|(?<=[\\d)])(?=\\()(?<!logb_\\d)", " * ");
 		// Replace curly braces and underscores with parentheses and spaces

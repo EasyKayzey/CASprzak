@@ -31,7 +31,7 @@ public class FunctionMaker {
 	 * @param varNames array of variable names
 	 * @return new {@link Variable}
 	 */
-	public Function variable(int varID, char[] varNames) {
+	public Function variable(int varID, char... varNames) {
 		return new Variable(varID, varNames);
 	}
 

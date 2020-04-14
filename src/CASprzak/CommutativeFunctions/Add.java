@@ -20,7 +20,7 @@ public class Add extends CommutativeFunction{
 
 	/**
 	 * Returns a String representation of the Function
-	 * @return String representation of function
+	 * @return String representation of the Function
 	 */
 	public String toString() {
 		if (functions.length < 1)

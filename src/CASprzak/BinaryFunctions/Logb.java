@@ -13,7 +13,7 @@ public class Logb extends BinaryFunction {
 
     /**
      * Returns a String representation of the Function
-     * @return String representation of function
+     * @return String representation of the Function
      */
     @Override
     public String toString() {

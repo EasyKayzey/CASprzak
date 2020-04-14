@@ -22,8 +22,8 @@ public class Multiply extends CommutativeFunction{
 	}
 
 	/**
-	 * Returns a String representation of the Function
-	 * @return String representation of the Function
+	 * Returns a String representation of the {@link Function}
+	 * @return String representation of the {@link Function}
 	 */
 	public String toString() {
 			if (functions.length < 1)
@@ -111,7 +111,7 @@ public class Multiply extends CommutativeFunction{
 	}
 
 	/**
-	 * If functions contains two of the same variable times each other such as x*x^3 then the exponents will be added and the terms will be combined into one element of functions
+	 * If {@link #functions} contains multiple of the same {@link Variable} multiplied by each other (e.g. x*x^3) then the exponents will be added and the terms will be combined into one element of {@link #functions}
 	 * @return A new {@link Multiply} with all variable combined with added exponents
 	 */
 	public Multiply addExponents() {

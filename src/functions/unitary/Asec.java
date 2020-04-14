@@ -20,9 +20,11 @@ public class Asec extends UnitaryFunction {
     public double evaluate(double... variableValues) {
         double functionEvaluated = function.evaluate(variableValues);
         if (functionEvaluated > 1) {
-            return Math.asin(Math.sqrt(Math.pow(functionEvaluated, 2)-1)/functionEvaluated);
+            //noinspection DuplicateExpressions,DuplicateExpressions
+            return Math.asin(Math.sqrt(Math.pow(functionEvaluated, 2) - 1) / functionEvaluated);
         } else if (functionEvaluated < -1) {
-            return Math.PI + Math.asin(Math.sqrt(Math.pow(functionEvaluated, 2)-1)/functionEvaluated);
+            //noinspection DuplicateExpressions,DuplicateExpressions
+            return Math.PI + Math.asin(Math.sqrt(Math.pow(functionEvaluated, 2) - 1) / functionEvaluated);
         } else {
             return Double.NaN;
         }

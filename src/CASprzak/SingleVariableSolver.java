@@ -18,7 +18,7 @@ public class SingleVariableSolver {
 
     /**
      * Gives an approximate root of a {@link Function} using {@link #newtonsMethod} for the initialPoint after a specified amount of runs
-     * @param expression the function that is iterated on
+     * @param expression the function whose root is being found
      * @param initialPoint the initial approximation of the root
      * @param runs the amount of times that {@link #newtonsMethod} is ran recursively
      * @return the approximate solution for a root of the function
@@ -38,7 +38,7 @@ public class SingleVariableSolver {
 
     /**
      * Gives an approximate root of a {@link Function} using {@link #newtonsMethod} for the initialPoint after 100 runs
-     * @param expression the function that is iterated on
+     * @param expression the function whose root is being found
      * @param initialPoint the initial approximation of the root
      * @return the approximate solution for a root of the function
      */
@@ -46,9 +46,17 @@ public class SingleVariableSolver {
         return getSolutionPoint(expression, initialPoint, 100);
     }
 
-    public double[] getSolutionsRange(Function expression, double lower, double upper) {
+    /**
+     * Gives approximate roots of a {@link Function} using {@link #newtonsMethod} in a range of values after a specified amount of runs
+     * @param expression the function whose roots are being found
+     * @param lower the lower bound of the values that will be searched for roots
+     * @param upper the lower bound of the values that will be searched for roots
+     * @param runs the amount of times that {@link #newtonsMethod} is ran recursively
+     * @return an array of all the approximate roots found
+     */
+    public double[] getSolutionsRange(Function expression, double lower, double upper, int runs) {
         List<Double> solutions = ArrLib.createRange(upper, lower, 17);
-        for (int j = 0; j < 1000; j++) {
+        for (int j = 0; j < runs; j++) {
             for (int i = 0; i < solutions.size(); i++) {
                 solutions.set(i, newtonsMethod(expression, solutions.get(i)));
             }

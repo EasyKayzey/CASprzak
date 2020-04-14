@@ -31,13 +31,13 @@ public class Parser {
   /**
    * @param variable the character corresponding to the variable
    * @return the ID of the variable, used internally
-   * @throws IndexOutOfBoundsException
+   * @throws IndexOutOfBoundsException if no such variable exists
    */
   public int getVarID(char variable) throws IndexOutOfBoundsException{
     for (int i = 0; i < variables.length; i++) if (variables[i] == variable) {
       return i;
     }
-    throw new IndexOutOfBoundsException("No variable "+variable+" found.");
+    throw new IndexOutOfBoundsException("No variable " + variable + " found.");
   }
 
   public Function parse(String infix) {

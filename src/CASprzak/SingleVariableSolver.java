@@ -16,6 +16,13 @@ public class SingleVariableSolver {
         return value - expression.evaluate(value) / expression.getSimplifiedDerivative(0).evaluate(value);
     }
 
+    /**
+     * Gives an approximate root of a {@link Function} using {@link #newtonsMethod} for the initialPoint after a specified amount of runs
+     * @param expression the function that is iterated on
+     * @param initialPoint the initial approximation of the root
+     * @param runs the amount of times that {@link #newtonsMethod} is ran recursively
+     * @return the approximate solution for a root of the function
+     */
     public double getSolutionPoint(Function expression, double initialPoint, int runs) {
         if (expression.evaluate(initialPoint) == 0) return initialPoint;
         if (expression instanceof Constant) return Double.NaN;
@@ -29,6 +36,12 @@ public class SingleVariableSolver {
         return Double.NaN;
     }
 
+    /**
+     * Gives an approximate root of a {@link Function} using {@link #newtonsMethod} for the initialPoint after 100 runs
+     * @param expression the function that is iterated on
+     * @param initialPoint the initial approximation of the root
+     * @return the approximate solution for a root of the function
+     */
     public double getSolutionPoint(Function expression, double initialPoint) {
         return getSolutionPoint(expression, initialPoint, 100);
     }

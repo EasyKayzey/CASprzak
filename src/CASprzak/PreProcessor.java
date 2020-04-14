@@ -27,20 +27,25 @@ public class PreProcessor {
 	}
 
 	public String[] toPostfix(String infix) {
+		// Remove LaTeX escapes
 		infix = infix.replace("\\","");
+		// Insert multiplication in expressions like 2x and 7(x*y+1)sin(3y)
 		infix = infix.replaceAll("(?<=\\d)(?=[a-zA-Z])|(?<=[a-zA-Z])(?=[\\d])|(?<=\\))(?=[\\w(])|(?<=[\\d)])(?=\\()(?<!logb_\\d)", " * ");
+		// Replace curly braces and underscores with parentheses and spaces
 		infix = infix.replace("{","(").replace("}",")").replace("_"," ");
+		// Turns expressions like x-y into x+-y, and turns expressions like x*y into x*/y (the '/' operator represents reciprocals)
 		infix = infix.replaceAll("(?<!^)(?<![\\^\\-+*/ ])\\s*-","+-").replace("/","*/");
+		// Turns expressions like x y z into x*y*z
 		infix = parseVariablePairs(infix);
+		// Adds parentheses to enforce order of operations
 		infix = "((((" + infix.replaceAll("\\(","((((").replaceAll("\\)","))))").replaceAll("\\+","))+((").replaceAll("\\*",")*(")+ "))))";
+
+
 		String[] tokens = infix.split("\\s+|(((?<=\\W)(?=[\\w-])((?<!-)|(?!\\d))|(?<=\\w)(?=\\W))|(?<=[()])|(?=[()]))(?<![ .])(?![ .])");
-//		System.out.println(Arrays.toString(tokens));
 		ArrayList<String> postfix = new ArrayList<>();
 		Stack<String> operators = new Stack<>();
 
 		for (String token : tokens) {
-//			System.out.println(token);
-//			System.out.println(operators.toString());
 			if (Constant.isSpecialConstant(token)) {
 				postfix.add(token);
 			} else if (isAnOperator(token)) {

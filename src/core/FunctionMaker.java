@@ -50,6 +50,9 @@ public class FunctionMaker {
 			case "-" -> new Multiply(new Constant(-1), function);
 			case "/" -> new Pow(new Constant(-1), function);
 			case "sqrt" -> new Pow(new Constant(.5), function);
+			case "sign" -> new Sign(function);
+			case "abs" -> new Abs(function);
+			case "dirac" -> new Dirac(function);
 			case "ln" -> new Ln(function);
 			case "sin" -> new Sin(function);
 			case "cos" -> new Cos(function);

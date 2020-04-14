@@ -94,7 +94,7 @@ public class ArrLib {
 
 	/**
 	 * Removes all NaNs from a specified List
-	 * @param values the list from which the NaNs will be removed
+	 * @param values the List from which the NaNs will be removed
 	 */
 	public static void nanRemover(List<Double> values) {
 		for (int i = 0; i < values.size(); i++) {
@@ -105,6 +105,10 @@ public class ArrLib {
 		}
 	}
 
+	/**
+	 * Removes a number from a List if that number is adjacent to the same number within a tolerance of 1E-15
+	 * @param values the List from which the repeated values are removed
+	 */
 	public static void removeRepeatsInOrder(List<Double> values) {
 		for (int i = 0; i < values.size() - 1; i++) {
 			if (values.get(i).equals(values.get(i + 1)) || (values.get(i) < values.get(i + 1) + 1E-15 && values.get(i) > values.get(i + 1) - 1E-15)) {

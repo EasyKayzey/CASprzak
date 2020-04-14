@@ -28,17 +28,30 @@ public class CASUI {
 		System.out.println("Here is your parsed function: " + curFun);
 		System.out.println("Here is the simplified toString of your function: " + curFun.simplifyTimes(10));
 		System.out.println("Here is your output: " + curFun.evaluate(vis));
+
 		System.out.println("Here is the derivative, simplified once:");
 		System.out.println(curFun.getSimplifiedDerivative(0));
 		System.out.println("Here is the derivative, simplified completely:");
 		System.out.println(curFun.getSimplifiedDerivative(0).simplifyTimes(10));
+
 		System.out.println("Here is the derivative, evaluated:");
 		System.out.println(curFun.getSimplifiedDerivative(0).simplifyTimes(10).evaluate(vis));
-		System.out.println("Here is a zero for the expression");
-		System.out.println(solver.getSolutionPoint(curFun, -10));
-		System.out.println("Here are the zeros for the expression");
-		System.out.println(Arrays.toString(solver.getSolutionsRange(curFun, -10, 10)));
 
+		double solution = solver.getSolutionPoint(curFun, -10);
+		if (!Double.isNaN(solution)) {
+			System.out.println("Here is one zero for the expression:");
+			System.out.println(solution);
+		} else {
+			System.out.println("The algorithm did not find an initial solution.");
+		}
+
+		double[] solutions = solver.getSolutionsRange(curFun, -10, 10);
+		if (solutions.length > 0) {
+			System.out.println("Here are the zeros of the expression:");
+			System.out.println(Arrays.toString(solutions));
+		} else {
+			System.out.println("The expression has no solutions.");
+		}
 	}
 }
 

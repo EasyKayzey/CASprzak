@@ -12,7 +12,7 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 	/**
 	 * Caches derivatives with the key corresponding to the varID of the derivative
 	 */
-	protected HashMap<Integer, Function> derivatives = new HashMap<>();
+	protected final HashMap<Integer, Function> derivatives = new HashMap<>();
 
 	/**
 	 * Describes the order that a {@link Function} should appear in a sorted array (used in {@link #compareTo(Function)})

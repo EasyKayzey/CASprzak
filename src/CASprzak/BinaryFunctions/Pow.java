@@ -29,7 +29,12 @@ public class Pow extends BinaryFunction {
 	}
 
 	public Function simplify() {
-		return (new Pow(function1.simplify(), function2.simplify())).multiplyExponents().simplifyObviousExponentsAndFOC();
+		Function current = (new Pow(function1.simplify(), function2.simplify()));
+		current = ((Pow)current).multiplyExponents();
+		current = ((Pow)current).simplifyObviousExponentsAndFOC();
+		if ((current instanceof Pow) && (((Pow)current).function2 instanceof Multiply) && Settings.distributeExponents)
+			current = ((Pow)current).distributeExponents();
+		return current;
 	}
 
 	public Function simplifyObviousExponentsAndFOC() { //FOC means Functions of Constants

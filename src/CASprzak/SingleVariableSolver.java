@@ -5,6 +5,13 @@ import CASprzak.SpecialFunctions.Constant;
 import java.util.List;
 
 public class SingleVariableSolver {
+
+    /**
+     *Does one iteration of Newton's method for a given {@link Function} at an given point
+     * @param expression the function that is iterated on
+     * @param value the initial approximation of the root
+     * @return a better approximate of the root based on the value provided
+     */
     private double newtonsMethod(Function expression, double value) {
         return value - expression.evaluate(value) / expression.getSimplifiedDerivative(0).evaluate(value);
     }

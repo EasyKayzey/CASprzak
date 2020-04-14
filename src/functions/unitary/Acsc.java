@@ -8,8 +8,8 @@ public class Acsc extends UnitaryFunction {
     }
 
     @Override
-    public UnitaryFunction me(Function function) {
-        return null;
+    public UnitaryFunction me(Function operand) {
+        return new Acsc(operand);
     }
 
     @Override

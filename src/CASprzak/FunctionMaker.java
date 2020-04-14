@@ -19,7 +19,7 @@ public class FunctionMaker {
 	}
 
 
-	public Function find1(String functionName, Function function) {
+	public Function makeUnitary(String functionName, Function function) {
 		switch (functionName) {
 			case "-": return new Multiply(new Constant(-1), function);
 			case "/": return new Pow(new Constant(-1), function);
@@ -41,7 +41,7 @@ public class FunctionMaker {
 		}
 	}
 
-	public Function find2(String functionName, Function function1, Function function2) {
+	public Function makeBinary(String functionName, Function function1, Function function2) {
 		switch (functionName) {
 			case "+": return new Add(function1, function2);
 			case "*": return new Multiply(function1, function2);

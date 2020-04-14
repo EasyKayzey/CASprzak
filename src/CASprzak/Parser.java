@@ -63,10 +63,10 @@ public class Parser {
       } else if (isAnOperator2(token)) {
         Function a = functionStack.pop();
         Function b = functionStack.pop();
-        functionStack.push(functionMaker.find2(token, a, b));
+        functionStack.push(functionMaker.makeBinary(token, a, b));
       } else if (isAnOperator1(token)) {
         Function c = functionStack.pop();
-        functionStack.push(functionMaker.find1(token, c));
+        functionStack.push(functionMaker.makeUnitary(token, c));
       }
     }
     if (functionStack.size() != 1) throw new IndexOutOfBoundsException("functionStack size is " + functionStack.size());

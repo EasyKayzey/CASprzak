@@ -13,7 +13,7 @@ public class SingleVariableSolver {
      * @param value the initial approximation of the root
      * @return a better approximate of the root based on the value provided
      */
-    private double newtonsMethod(Function expression, double value) {
+    private static double newtonsMethod(Function expression, double value) {
         return value - expression.evaluate(value) / expression.getSimplifiedDerivative(0).evaluate(value);
     }
 
@@ -24,7 +24,7 @@ public class SingleVariableSolver {
      * @param runs the amount of times that {@link #newtonsMethod} is ran recursively
      * @return the approximate solution for a root of the function
      */
-    public double getSolutionPoint(Function expression, double initialPoint, int runs) {
+    public static double getSolutionPoint(Function expression, double initialPoint, int runs) {
         if (expression.evaluate(initialPoint) == 0) return initialPoint;
         if (expression instanceof Constant) return Double.NaN;
         for (int i = 0; i < runs; i++){
@@ -43,7 +43,7 @@ public class SingleVariableSolver {
      * @param initialPoint the initial approximation of the root
      * @return the approximate solution for a root of the function
      */
-    public double getSolutionPoint(Function expression, double initialPoint) {
+    public static double getSolutionPoint(Function expression, double initialPoint) {
         return getSolutionPoint(expression, initialPoint, 100);
     }
 
@@ -55,7 +55,7 @@ public class SingleVariableSolver {
      * @param runs the amount of times that {@link #newtonsMethod} is ran recursively
      * @return an array of all the approximate roots found
      */
-    public double[] getSolutionsRange(Function expression, double lower, double upper, int runs) {
+    public static double[] getSolutionsRange(Function expression, double lower, double upper, int runs) {
         List<Double> solutions = ArrLib.createRange(upper, lower, 17);
         for (int j = 0; j < runs; j++) {
             for (int i = 0; i < solutions.size(); i++) {
@@ -86,7 +86,7 @@ public class SingleVariableSolver {
      * @param upper the upper bound of the values that will be searched for roots
      * @return an array of all the approximate roots found
      */
-    public double[] getSolutionsRange(Function expression, double lower, double upper) {
+    public static double[] getSolutionsRange(Function expression, double lower, double upper) {
         return getSolutionsRange(expression, lower, upper, 1000);
     }
 }

@@ -47,7 +47,7 @@ public class CASUI {
 		System.out.println("Here is the derivative, evaluated:");
 		System.out.println(curFun.getSimplifiedDerivative(0).simplifyTimes(10).evaluate(vis));
 
-		double solution = solver.getSolutionPoint(curFun, -10);
+		double solution = SingleVariableSolver.getSolutionPoint(curFun, -10);
 		if (!Double.isNaN(solution)) {
 			System.out.println("Here is one zero for the expression:");
 			System.out.println(solution);
@@ -55,7 +55,7 @@ public class CASUI {
 			System.out.println("The algorithm did not find an initial solution.");
 		}
 
-		double[] solutions = solver.getSolutionsRange(curFun, -10, 10);
+		double[] solutions = SingleVariableSolver.getSolutionsRange(curFun, -10, 10);
 		if (solutions.length > 0) {
 			System.out.println("Here are the zeros of the expression:");
 			System.out.println(Arrays.toString(solutions));

@@ -159,4 +159,11 @@ public class EqualsTest {
 //        System.out.println(test2.simplify());
         assertEquals(((Multiply)test1).distributeAll(), test2);
     }
+
+    @Test
+    void addExponents() {
+        Function test1 = parser.parse("x^2*x^4");
+        Function test2 = parser.parse("x^6");
+        assertEquals(test1, test2);
+    }
 }

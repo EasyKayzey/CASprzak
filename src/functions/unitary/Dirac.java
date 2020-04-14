@@ -11,7 +11,7 @@ public class Dirac extends UnitaryFunction {
 	@Override
 	public double evaluate(double... variableValues) {
 		if (function.evaluate(variableValues) == 0)
-			return Double.NaN;
+			return Double.POSITIVE_INFINITY;
 		else
 			return 0;
 	}

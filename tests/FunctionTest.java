@@ -137,4 +137,8 @@ public class FunctionTest {
 		assertEquals(-2, test.evaluate(4, 2));
 	}
 
+	@Test void multiplyVariablesNoSpace() {
+		Function test = parserXY.parse("2xy+3x");
+		assertEquals(4, test.evaluate(4,-1));
+	}
 }

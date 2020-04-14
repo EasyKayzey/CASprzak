@@ -22,12 +22,16 @@ public class PreProcessor {
 		PreProcessor.variables = variables;
 	}
 
+	public static void setVariables(char[] variables) {
+		PreProcessor.variables = variables;
+	}
+
 	/**
 	 * Checks if a given string is an operator
 	 * @param input possible operator
 	 * @return true if in {@link #operations}
 	 */
-	public boolean isAnOperator(String input) {
+	public static boolean isAnOperator(String input) {
 		for (String x : operations) {
 			if (x.equals(input)) return true;
 		}
@@ -39,7 +43,7 @@ public class PreProcessor {
 	 * @param infix input string in infix
 	 * @return array of postfix tokens
 	 */
-	public String[] toPostfix(String infix) {
+	public static String[] toPostfix(String infix) {
 		String[] tokens = tokenizeInfix(infix);
 		ArrayList<String> postfix = new ArrayList<>();
 		Stack<String> operators = new Stack<>();
@@ -73,7 +77,7 @@ public class PreProcessor {
 	 * @param infix input string in infix
 	 * @return array of infix tokens
 	 */
-	public String[] tokenizeInfix(String infix) {
+	public static String[] tokenizeInfix(String infix) {
 		// Remove LaTeX escapes
 		infix = infix.replace("\\","");
 		// Make absolute values into unitary functions
@@ -97,7 +101,7 @@ public class PreProcessor {
 	 * @param infix input string in infix
 	 * @return infix string with inserted asterisks
 	 */
-	private String parseVariablePairs(String infix) {
+	private static String parseVariablePairs(String infix) {
 		for (char a : variables) {
 			for (char b : variables) {
 				infix = infix.replaceAll("(?<="+a+")\\s*(?="+b+")","*");

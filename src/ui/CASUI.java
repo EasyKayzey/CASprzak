@@ -30,11 +30,11 @@ public class CASUI {
 		double[] vis = Arrays.stream(visTemp).mapToDouble(ConstantEvaluator::getConstant).toArray();
 		System.out.println("Processing...");
 
-		PreProcessor preProcessor = new PreProcessor(vars);
+		PreProcessor.setVariables(vars);
 		SingleVariableSolver solver = new SingleVariableSolver();
 		Parser parser = new Parser(vars);
 
-		Function curFun = parser.parse(preProcessor.toPostfix(raw));
+		Function curFun = parser.parse(PreProcessor.toPostfix(raw));
 		System.out.println("Here is your parsed function: " + curFun);
 		System.out.println("Here is the simplified toString of your function: " + curFun.simplifyTimes(10));
 		System.out.println("Here is your output: " + curFun.evaluate(vis));

@@ -7,9 +7,9 @@ import java.util.*;
 public class ArrLib {
 
 	/**
-	 * Removes a {@link Function} from a `Function[]` and returns the new array (does not modify)
-	 * @param functionArray the array of `Functions`
-	 * @param index index of the `Function` to be removed
+	 * Removes a {@link Function} from a Function[] and returns the new array (does not modify)
+	 * @param functionArray the array of Functions
+	 * @param index index of the Function to be removed
 	 * @return the new array
 	 */
 	public static Function[] removeFunctionAt(Function[] functionArray, int index) {
@@ -20,9 +20,9 @@ public class ArrLib {
 	}
 
 	/**
-	 * Deep-clones an array of `Functions`
-	 * @param functionArray array of `Functions`
-	 * @return new `Function[]`
+	 * Deep-clones an array of Functions
+	 * @param functionArray array of Functions
+	 * @return new Function[]
 	 */
 	public static Function[] deepClone(Function[] functionArray) {
 		Function[] newArray = new Function[functionArray.length];
@@ -32,7 +32,7 @@ public class ArrLib {
 	}
 
 	/**
-	 * Checks if two {@link Function} arrays have equal `Functions` at each index (assumes sorted)
+	 * Checks if two {@link Function} arrays have equal Functions at each index (assumes sorted)
 	 * @param functionArray1 first array
 	 * @param functionArray2 second array
 	 * @return equality
@@ -47,16 +47,28 @@ public class ArrLib {
 		return true;
 	}
 
-	public static Function[] pullUp(Function[] outer, Function[] inner, int indexInFirst) {
+	/**
+	 * Creates a new {@link Function}[] out of two Function arrays, including all elements from both except for one in the first.
+	 * @param outer first Function[]
+	 * @param inner second Function[]
+	 * @param indexInOuter index to not include in the first Function[]
+	 * @return new Function[] with elements from both
+	 */
+	public static Function[] pullUp(Function[] outer, Function[] inner, int indexInOuter) {
 		Function[] an = new Function[outer.length + inner.length - 1];
-		if (indexInFirst > 0)
-			System.arraycopy(outer, 0, an, 0, indexInFirst);
-		if (indexInFirst < outer.length - 1)
-			System.arraycopy(outer, indexInFirst + 1, an, indexInFirst, outer.length - indexInFirst - 1);
+		if (indexInOuter > 0)
+			System.arraycopy(outer, 0, an, 0, indexInOuter);
+		if (indexInOuter < outer.length - 1)
+			System.arraycopy(outer, indexInOuter + 1, an, indexInOuter, outer.length - indexInOuter - 1);
 		System.arraycopy(inner, 0, an, outer.length - 1, inner.length);
 		return an;
 	}
 
+	/**
+	 * Returns the location of a {@link Function} in its class-based sort order (see {@link Function#sortOrder})
+	 * @param function the function whose class order is to be found
+	 * @return location in {@link Function#sortOrder}
+	 */
 	public static int findClassValue(Function function) {
 		Class<?> functionClass = function.getClass();
 		for (int i = 0; i < Function.sortOrder.length; i++) {
@@ -99,10 +111,16 @@ public class ArrLib {
 		return finalAdd;
  	}
 
-	public static Function[] append(Function[] functionArray, Function last) {
-		Function[] finalFunctionArray = new Function[functionArray.length + 1];
-		System.arraycopy(functionArray, 0, finalFunctionArray, 0, functionArray.length);
-		finalFunctionArray[functionArray.length] = last;
+	/**
+	 * Appends two {@link Function} arrays
+	 * @param first first array
+	 * @param second second array
+	 * @return new combined array
+	 */
+	public static Function[] append(Function[] first, Function second) {
+		Function[] finalFunctionArray = new Function[first.length + 1];
+		System.arraycopy(first, 0, finalFunctionArray, 0, first.length);
+		finalFunctionArray[first.length] = second;
 		return finalFunctionArray;
 	}
 

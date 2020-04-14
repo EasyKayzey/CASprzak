@@ -18,7 +18,7 @@ public class Atanh extends UnitaryFunction {
 
     @Override
     public double evaluate(double... variableValues) {
-        return 0;
+        return 0.5*Math.log((1+function.evaluate(variableValues))/(1+function.evaluate(variableValues)));
     }
 
     @Override

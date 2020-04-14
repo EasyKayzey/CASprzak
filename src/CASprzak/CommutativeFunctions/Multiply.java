@@ -26,16 +26,16 @@ public class Multiply extends CommutativeFunction{
 	 * @return String representation of the Function
 	 */
 	public String toString() {
-		if (functions.length < 1)
-			return "(empty product)";
-		StringBuilder temp = new StringBuilder("(");
-		for (int i = 0; i < functions.length - 1; i++) {
-			temp.append(functions[i].toString());
-			temp.append(" * ");
-		}
-		temp.append(functions[functions.length-1].toString());
-		temp.append(")");
-		return temp.toString();
+			if (functions.length < 1)
+				return "(empty product)";
+			StringBuilder temp = new StringBuilder("(");
+			for (int i = 0; i < functions.length - 1; i++) {
+				temp.append(functions[i].toString());
+				temp.append(" * ");
+			}
+			temp.append(functions[functions.length-1].toString());
+			temp.append(")");
+			return temp.toString();
 	}
 
 	@Override
@@ -110,6 +110,10 @@ public class Multiply extends CommutativeFunction{
 		return false;
 	}
 
+	/**
+	 * If functions contains two of the same variable times each other such as x*x^3 then the exponents will be added and the terms will be combined into one element of functions
+	 * @return A new {@link Multiply} with all variable combined with added exponents
+	 */
 	public Multiply addExponents() {
 		Function[] simplifiedTerms = ArrLib.deepClone(functions);
 		for (int a = 0; a < simplifiedTerms.length; a++) {

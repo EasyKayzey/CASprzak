@@ -1,6 +1,5 @@
-
-import CASprzak.Function;
-import CASprzak.Parser;
+import core.Parser;
+import functions.Function;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

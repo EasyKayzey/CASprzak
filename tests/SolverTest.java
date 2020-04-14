@@ -1,6 +1,6 @@
-import CASprzak.Function;
-import CASprzak.Parser;
-import CASprzak.SingleVariableSolver;
+import core.Parser;
+import core.SingleVariableSolver;
+import functions.Function;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

@@ -1,10 +1,11 @@
-import CASprzak.CommutativeFunctions.Multiply;
-import CASprzak.Function;
-import CASprzak.Parser;
-import CASprzak.Settings;
+import core.Parser;
+import core.Settings;
+import functions.Function;
+import functions.commutative.Multiply;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class EqualsTest {
     final Parser parser = new Parser('x', 'y');

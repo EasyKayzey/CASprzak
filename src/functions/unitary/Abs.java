@@ -1,10 +1,7 @@
 package functions.unitary;
 
 import functions.Function;
-import functions.binary.Pow;
-import functions.commutative.Add;
 import functions.commutative.Multiply;
-import functions.special.Constant;
 
 public class Abs extends UnitaryFunction {
     public Abs(Function function) {
@@ -18,7 +15,7 @@ public class Abs extends UnitaryFunction {
 
     @Override
     public Function getDerivative(int varID) {
-        return null;
+        return new Multiply(function.getSimplifiedDerivative(varID), new Sign(function));
     }
 
     @Override

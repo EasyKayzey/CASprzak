@@ -42,12 +42,22 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 
 	public abstract boolean equals(Function that);
 
-	public boolean equals(Object o) {
-		if (!(o instanceof Function))
+	/**
+	 * Simplifies the two functions, then compares them with {@link #equals(Function)}
+	 * @param that the object compared to
+	 * @return true if they're equal
+	 */
+	public boolean equals(Object that) {
+		if (!(that instanceof Function))
 			return false;
-		return this.simplify().equals(((Function) o).simplify());
+		return this.simplify().equals(((Function) that).simplify());
 	}
 
+	/**
+	 * Used internally for comparing two functions of **the same exact type**
+	 * @param that the {@link Function} compared to
+	 * @return comparison
+	 */
 	public abstract int compareSelf(Function that);
 
 	public int compareTo(Function that) {

@@ -41,14 +41,14 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 	 * @return the simplified {@link Function}
 	 */
 	public Function simplifyTimes(int times) {
-		Function newFunction, curFunction = this;
+		Function newFunction, currentFunction = this;
 		for (int i = 0; i < times; i++) {
-			newFunction = curFunction.simplify();
-			if (newFunction.toString().equals(curFunction.toString()))
+			newFunction = currentFunction.simplify();
+			if (newFunction.toString().equals(currentFunction.toString()))
 				return newFunction;
-			curFunction = newFunction;
+			currentFunction = newFunction;
 		}
-		return curFunction;
+		return currentFunction;
 	}
 
 	/**

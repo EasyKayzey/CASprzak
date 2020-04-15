@@ -1,6 +1,7 @@
 package functions.commutative;
 
 import core.ArrLib;
+import core.Settings;
 import functions.Function;
 import functions.binary.Pow;
 import functions.special.Constant;
@@ -28,14 +29,14 @@ public class Multiply extends CommutativeFunction{
 	public String toString() {
 			if (functions.length < 1)
 				return "(empty product)";
-			StringBuilder temp = new StringBuilder("(");
+			StringBuilder string = new StringBuilder("(");
 			for (int i = 0; i < functions.length - 1; i++) {
-				temp.append(functions[i].toString());
-				temp.append(" * ");
+				string.append(functions[i].toString());
+				string.append(" * ");
 			}
-			temp.append(functions[functions.length-1].toString());
-			temp.append(")");
-			return temp.toString();
+			string.append(functions[functions.length-1].toString());
+			string.append(")");
+			return string.toString();
 	}
 
 	@Override
@@ -95,7 +96,10 @@ public class Multiply extends CommutativeFunction{
 				}
 			}
 		}
-		return this;
+		if (Settings.trustImmutability)
+			return this;
+		else
+			return clone();
 	}
 
 	public boolean isTimesZero() {
@@ -130,7 +134,10 @@ public class Multiply extends CommutativeFunction{
 				}
 			}
 		}
-		return clone();
+		if (Settings.trustImmutability)
+			return this;
+		else
+			return clone();
 	}
 
 	public CommutativeFunction me(Function... functions) {
@@ -147,6 +154,9 @@ public class Multiply extends CommutativeFunction{
 				return new Add(ArrLib.distribute(multiplyTerms, addTerms)).simplify();
 			}
 		}
-		return clone();
+		if (Settings.trustImmutability)
+			return this;
+		else
+			return clone();
 	}
 }

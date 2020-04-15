@@ -49,14 +49,20 @@ public class Pow extends BinaryFunction {
 			if (Settings.simplifyFunctionsOfConstants && function2 instanceof Constant)
 				return new Constant(this.evaluate());
 		}
-		return this;
+		if (Settings.trustImmutability)
+			return this;
+		else
+			return clone();
 	}
 
 	public Pow multiplyExponents() {
 		if (function2 instanceof Pow) {
 			return new Pow(new Multiply(((Pow) function2).function1, function1), ((Pow) function2).function2);
 		}
-		return (Pow) clone();
+		if (Settings.trustImmutability)
+			return this;
+		else
+			return (Pow) clone();
 	}
 
 	public Multiply distributeExponents() {

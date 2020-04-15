@@ -1,5 +1,6 @@
 package functions.commutative;
 import core.ArrLib;
+import core.Settings;
 import functions.Function;
 import functions.special.Constant;
 
@@ -59,7 +60,10 @@ public abstract class CommutativeFunction extends Function {
                 return (me(ArrLib.pullUp(functions, ((CommutativeFunction) functions[i]).getFunctions(), i))).simplifyInternal();
             }
         }
-        return this;
+        if (Settings.trustImmutability)
+            return this;
+        else
+            return (CommutativeFunction) clone();
     }
 
     public Function simplifyOneElement() {
@@ -67,12 +71,18 @@ public abstract class CommutativeFunction extends Function {
             return new Constant(identityValue);
         if (functions.length == 1)
             return functions[0].simplify();
-        return this;
+        if (Settings.trustImmutability)
+            return this;
+        else
+            return clone();
     }
 
 
     public Function[] getFunctions() {
-        return ArrLib.deepClone(functions);
+        if (Settings.trustImmutability)
+            return functions;
+        else
+            return ArrLib.deepClone(functions);
     }
 
     public int getFunctionsLength() {

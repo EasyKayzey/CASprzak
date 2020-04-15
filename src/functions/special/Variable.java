@@ -1,6 +1,8 @@
 package functions.special;
 
+import core.Settings;
 import functions.Function;
+
 public class Variable extends Function {
 	protected final char[] varNames;
 
@@ -41,7 +43,10 @@ public class Variable extends Function {
 		if (this.varID == varID)
 			return toReplace;
 		else
-			return clone();
+			if (Settings.trustImmutability)
+				return this;
+			else
+				return clone();
 	}
 
 

@@ -1,6 +1,7 @@
 package functions.commutative;
 
 import core.ArrLib;
+import core.Settings;
 import functions.Function;
 import functions.special.Constant;
 import functions.special.Variable;
@@ -25,14 +26,14 @@ public class Add extends CommutativeFunction{
 	public String toString() {
 		if (functions.length < 1)
 			return "(empty sum)";
-		StringBuilder temp = new StringBuilder("(");
+		StringBuilder string = new StringBuilder("(");
 		for (int i = functions.length - 1; i >= 1; i--) {
-			temp.append(functions[i].toString());
-			temp.append(" + ");
+			string.append(functions[i].toString());
+			string.append(" + ");
 		}
-		temp.append(functions[0].toString());
-		temp.append(")");
-		return temp.toString();
+		string.append(functions[0].toString());
+		string.append(")");
+		return string.toString();
 	}
 
 	@Override
@@ -77,7 +78,10 @@ public class Add extends CommutativeFunction{
 				}
 			}
 		}
-		return this;
+		if (Settings.trustImmutability)
+			return this;
+		else
+			return clone();
 	}
 
 	public Add combineLikeTerms() {
@@ -97,7 +101,10 @@ public class Add extends CommutativeFunction{
 				}
 			}
 		}
-		return clone();
+		if (Settings.trustImmutability)
+			return this;
+		else
+			return clone();
 	}
 
 	public CommutativeFunction me(Function... functions) {

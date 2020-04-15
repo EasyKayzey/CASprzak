@@ -10,9 +10,6 @@ public abstract class UnitaryFunction extends Function {
         this.function = function;
     }
 
-    public Function getOperand() {
-        return function;
-    }
 
     /**
      * Returns a String representation of the Function

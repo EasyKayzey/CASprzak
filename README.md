@@ -1,18 +1,24 @@
 # Z_CASprzak
 Z_CASprzak is a CAS by The EasyKayzey Show (Erez Israeli Miller and Michael Kasprzak)
 
-Hello, and welcome to our Computer Algebra System. This is a joint project by The EasyKayzey Show started at HackBCA V, 2020. It consists of a structure for parsing, storing, and working with mathematical expressions with a small command-line demo. 
+Hello, and welcome to our Computer Algebra System. This is a joint project by The EasyKayzey Show started at HackBCA V, 2020. Z_CASprzak is a computer-algebra framework mainly for storing, modifying, and applying mathematical functions and functionals, and it currently has a small command-line demo.
 
 ## Functionality
-- Parsing and storing expressions like `x^2-3y+sin(1/z)`
-- Simplifying many types of expressions
-- Taking and storing the derivatives of expressions
-- Evaluating all of the above at any given point
+### Core
+- Expression simplification
+- Differentiation of functions, storing derivatives as new functions
+- Evaluation of functions
 - Finding zeroes of expressions using Newton's Method
+### Other
+- Parsing and storing expressions like `x^2-3y+sin(1/z)`
+- Command-line demo
+### Future
+- See `Projects` window
 
 ## Notes
-- If you find a problem with the CAS, please make a new issue so we can fix it
-- If you would like to design a better interface than the placeholder that we have now, please contact us.
+- If you find a problem with the CAS, please report the bug in `Issues` so we can fix it
+- If you have any feature suggestions not present in `Projects`, make a feature request in `Issues`
+- If you would like to design a better interface than the placeholder that we have now, please contact us by email
 
 ## Contacts
 ### Group

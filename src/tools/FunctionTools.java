@@ -81,21 +81,6 @@ public class FunctionTools {
 	}
 
 	/**
-	 * Returns the location of a {@link Function} in its class-based sort order (see {@link Function#sortOrder})
-	 *
-	 * @param function the function whose class order is to be found
-	 * @return location in {@link Function#sortOrder}
-	 */
-	public static int findClassValue(Function function) {
-		Class<?> functionClass = function.getClass();
-		for (int i = 0; i < Function.sortOrder.length; i++) {
-			if (Function.sortOrder[i].isAssignableFrom(functionClass))
-				return i;
-		}
-		throw new IllegalArgumentException("Class " + function.getClass().getSimpleName() + " not supported.");
-	}
-
-	/**
 	 * Returns a Function[] where every element in add is now a {@link Multiply} of multiply and the function that was previously there in add
 	 *
 	 * @param multiply the Function[] which is distributed to every element in add

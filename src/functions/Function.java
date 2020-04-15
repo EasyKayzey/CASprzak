@@ -1,6 +1,5 @@
 package functions;
 
-import tools.FunctionTools;
 import parsing.Parser;
 import core.Settings;
 import functions.binary.Logb;
@@ -11,6 +10,7 @@ import functions.special.Constant;
 import functions.special.Variable;
 import functions.unitary.UnitaryFunction;
 import org.jetbrains.annotations.NotNull;
+import tools.MiscTools;
 
 import java.util.HashMap;
 
@@ -117,7 +117,7 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 	protected abstract int compareSelf(Function that);
 
 	/**
-	 * Two different Function types are sorted according to {@link #sortOrder} and {@link FunctionTools#findClassValue(Function)}, and same types are sorted using {@link #compareSelf(Function)}
+	 * Two different Function types are sorted according to {@link #sortOrder} and {@link MiscTools#findClassValue(Function)}, and same types are sorted using {@link #compareSelf(Function)}
 	 *
 	 * @param that the {@link Function} compared to
 	 * @return comparison
@@ -128,6 +128,6 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 		else if (this.getClass().equals(that.getClass()))
 			return compareSelf(that);
 		else
-			return (FunctionTools.findClassValue(this) - FunctionTools.findClassValue(that));
+			return (MiscTools.findClassValue(this) - MiscTools.findClassValue(that));
 	}
 }

@@ -13,6 +13,10 @@ dependencies {
     implementation 'org.jetbrains:annotations:16.0.2'
 }
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_14
+}
+
 application {
     mainClassName = 'ui.CASUI'
 }

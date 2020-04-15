@@ -25,7 +25,15 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 	 * Describes the order that a {@link Function} should appear in a sorted array (used in {@link #compareTo(Function)})
 	 */
 	@SuppressWarnings("ClassReferencesSubclass")
-	public static final Class<?>[] sortOrder = {Constant.class, Variable.class, Pow.class, Logb.class, Multiply.class, UnitaryFunction.class, Add.class};
+	public static final Class<?>[] sortOrder = {
+			Constant.class,
+			Variable.class,
+			Pow.class,
+			Logb.class,
+			Multiply.class,
+			UnitaryFunction.class,
+			Add.class
+	};
 
 	/**
 	 * Returns a String representation of the Function

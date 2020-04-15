@@ -4,13 +4,26 @@ import core.Settings;
 import functions.Function;
 
 public class Variable extends Function {
-	protected final char[] varNames;
+	protected static char[] varNames;
 
 	private final int varID;
 
-	public Variable(int varID, char[] varNames) {
+	public Variable(int varID, char... varNames) {
 		this.varID = varID;
-		this.varNames = varNames;
+		Variable.varNames = varNames;
+	}
+
+	public Variable(int varID) {
+		this.varID = varID;
+	}
+
+	/**
+	 * Sets the variable names
+	 *
+	 * @param varNames array of variable names
+	 */
+	public static void setVarNames(char... varNames) {
+		Variable.varNames = varNames;
 	}
 
 	/**
@@ -32,7 +45,7 @@ public class Variable extends Function {
 	}
 
 	public Function clone() {
-		return new Variable(varID, varNames);
+		return new Variable(varID);
 	}
 
 	public Function simplify() {

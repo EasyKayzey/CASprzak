@@ -42,6 +42,10 @@ public class FunctionMaker {
 		return new Variable(varID, varNames);
 	}
 
+	public static Function variable(int varID) {
+		return new Variable(varID);
+	}
+
 	/**
 	 * Returns a {@link Function} corresponding to a "unitary" operation string
 	 *

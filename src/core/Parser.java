@@ -2,6 +2,7 @@ package core;
 
 import functions.Function;
 import functions.special.Constant;
+import functions.special.Variable;
 
 import java.util.Stack;
 
@@ -44,6 +45,7 @@ public class Parser {
 
 	public static Function parse(String infix) {
 		PreProcessor.setVariables(variables);
+		Variable.setVarNames(variables);
 		return Parser.parse(PreProcessor.toPostfix(infix));
 	}
 
@@ -59,8 +61,8 @@ public class Parser {
 				} catch (Exception e) {
 					if (token.length() > 1)
 						throw new IllegalArgumentException(token + " is not a valid function.");
-					char v = token.charAt(0);
-					functionStack.push(FunctionMaker.variable(getVarID(v), variables));
+					char variableName = token.charAt(0);
+					functionStack.push(FunctionMaker.variable(getVarID(variableName)));
 				}
 			} else if (isBinaryOperator(token)) {
 				Function a = functionStack.pop();

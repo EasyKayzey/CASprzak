@@ -87,9 +87,9 @@ public class Multiply extends CommutativeFunction{
 	public Multiply simplifyConstants() {
 		for (int i = 1; i < functions.length; i++){
 			for (int j = 0; j < i; j++){
-				if (functions[i] instanceof Constant && functions[j] instanceof Constant) {
+				if (functions[i] instanceof Constant first && functions[j] instanceof Constant second) {
 					Function[] toMultiply = ArrLib.deepClone(functions);
-					toMultiply[i] = new Constant(((Constant) functions[i]).constant * ((Constant) functions[j]).constant);
+					toMultiply[i] = new Constant(first.constant * second.constant);
 					toMultiply = ArrLib.removeFunctionAt(toMultiply, j);
 					return (new Multiply(toMultiply)).simplifyConstants();
 				}
@@ -100,8 +100,8 @@ public class Multiply extends CommutativeFunction{
 
 	public boolean isTimesZero() {
 		for (Function function : functions) {
-			if (function instanceof Constant) {
-				if (((Constant) function).constant == 0) {
+			if (function instanceof Constant constant) {
+				if (constant.constant == 0) {
 					return true;
 				}
 			}
@@ -121,9 +121,9 @@ public class Multiply extends CommutativeFunction{
 		}
 		for (int i = 1; i < simplifiedTerms.length; i++) {
 			for (int j = 0; j < i; j++) {
-				if (simplifiedTerms[i] instanceof Pow && simplifiedTerms[j] instanceof Pow) {
-					if (((Pow) simplifiedTerms[i]).getFunction2().equals(((Pow) simplifiedTerms[j]).getFunction2())) {
-						simplifiedTerms[j] = new Pow(new Add(((Pow) simplifiedTerms[i]).getFunction1(), ((Pow) simplifiedTerms[j]).getFunction1()), ((Pow) simplifiedTerms[i]).getFunction2());
+				if (simplifiedTerms[i] instanceof Pow first && simplifiedTerms[j] instanceof Pow second) {
+					if (first.getFunction2().equals(second.getFunction2())) {
+						simplifiedTerms[j] = new Pow(new Add(first.getFunction1(), second.getFunction1()), first.getFunction2());
 						simplifiedTerms = ArrLib.removeFunctionAt(simplifiedTerms, i);
 						return (new Multiply(simplifiedTerms)).simplifyInternal();
 					}
@@ -141,8 +141,8 @@ public class Multiply extends CommutativeFunction{
 		Function[] multiplyTerms = getFunctions();
 		Function[] addTerms;
 		for (int i = 0; i < multiplyTerms.length; i++) {
-			if (multiplyTerms[i] instanceof Add) {
-				addTerms = ((Add) multiplyTerms[i]).getFunctions();
+			if (multiplyTerms[i] instanceof Add add) {
+				addTerms = add.getFunctions();
 				multiplyTerms = ArrLib.removeFunctionAt(multiplyTerms, i);
 				return new Add(ArrLib.distribute(multiplyTerms, addTerms)).simplify();
 			}

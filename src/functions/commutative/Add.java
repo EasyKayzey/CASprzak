@@ -6,7 +6,7 @@ import functions.Function;
 import functions.special.Constant;
 import functions.special.Variable;
 
-public class Add extends CommutativeFunction{
+public class Add extends CommutativeFunction {
 	public Add(Function... functions) {
 		super(functions);
 		identityValue = 0;
@@ -21,6 +21,7 @@ public class Add extends CommutativeFunction{
 
 	/**
 	 * Returns a String representation of the Function
+	 *
 	 * @return String representation of the Function
 	 */
 	public String toString() {
@@ -68,8 +69,8 @@ public class Add extends CommutativeFunction{
 	}
 
 	public Add simplifyConstants() {
-		for (int i = 1; i < functions.length; i++){
-			for (int j = 0; j < i; j++){
+		for (int i = 1; i < functions.length; i++) {
+			for (int j = 0; j < i; j++) {
 				if (functions[i] instanceof Constant first && functions[j] instanceof Constant second) {
 					Function[] toAdd = ArrLib.deepClone(functions);
 					toAdd[i] = new Constant(first.constant + second.constant);
@@ -87,13 +88,13 @@ public class Add extends CommutativeFunction{
 	public Add combineLikeTerms() {
 		Function[] combinedTerms = ArrLib.deepClone(functions);
 		for (int a = 0; a < combinedTerms.length; a++) {
-			if (combinedTerms[a] instanceof Variable)  
+			if (combinedTerms[a] instanceof Variable)
 				combinedTerms[a] = new Multiply(new Constant(1), combinedTerms[a]);
 		}
 		for (int i = 1; i < combinedTerms.length; i++) {
 			for (int j = 0; j < i; j++) {
 				if (combinedTerms[i] instanceof Multiply first && combinedTerms[j] instanceof Multiply second) {
-					if (ArrLib.deepEquals(first.getFunctions(), second.getFunctions(), 1)){
+					if (ArrLib.deepEquals(first.getFunctions(), second.getFunctions(), 1)) {
 						combinedTerms[j] = new Multiply(new Add(first.getFunctions()[0], second.getFunctions()[0]), new Multiply(ArrLib.removeFunctionAt(first.getFunctions(), 0)));
 						combinedTerms = ArrLib.removeFunctionAt(combinedTerms, i);
 						return (new Add(combinedTerms)).simplifyInternal();

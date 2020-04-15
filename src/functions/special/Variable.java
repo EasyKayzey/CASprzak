@@ -15,6 +15,7 @@ public class Variable extends Function {
 
 	/**
 	 * Returns a String representation of the Function
+	 *
 	 * @return String representation of function
 	 */
 	public String toString() {
@@ -42,19 +43,18 @@ public class Variable extends Function {
 	public Function substitute(int varID, Function toReplace) {
 		if (this.varID == varID)
 			return toReplace;
+		else if (Settings.trustImmutability)
+			return this;
 		else
-			if (Settings.trustImmutability)
-				return this;
-			else
-				return clone();
+			return clone();
 	}
 
 
 	public boolean equals(Function that) {
-		return (that instanceof Variable) && (varID == ((Variable)that).varID);
+		return (that instanceof Variable) && (varID == ((Variable) that).varID);
 	}
 
-	public int compareSelf( Function that) {
-		return this.varID - ((Variable)that).varID;
+	public int compareSelf(Function that) {
+		return this.varID - ((Variable) that).varID;
 	}
 }

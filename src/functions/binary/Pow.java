@@ -41,7 +41,7 @@ public class Pow extends BinaryFunction {
 	}
 
 	public Function simplifyObviousExponentsAndFOC() { //FOC means Functions of Constants
-		if(function1 instanceof Constant constant) {
+		if (function1 instanceof Constant constant) {
 			if (constant.constant == 0)
 				return new Constant(1);
 			if (constant.constant == 1)
@@ -89,6 +89,7 @@ public class Pow extends BinaryFunction {
 
 	/**
 	 * Returns a String representation of the Function
+	 *
 	 * @return String representation of the Function
 	 */
 	@Override

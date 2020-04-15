@@ -9,7 +9,7 @@ import functions.special.Variable;
 
 import java.util.Arrays;
 
-public class Multiply extends CommutativeFunction{
+public class Multiply extends CommutativeFunction {
 	public Multiply(Function... functions) {
 		super(functions);
 		identityValue = 1;
@@ -24,19 +24,20 @@ public class Multiply extends CommutativeFunction{
 
 	/**
 	 * Returns a String representation of the {@link Function}
+	 *
 	 * @return String representation of the {@link Function}
 	 */
 	public String toString() {
-			if (functions.length < 1)
-				return "(empty product)";
-			StringBuilder string = new StringBuilder("(");
-			for (int i = 0; i < functions.length - 1; i++) {
-				string.append(functions[i].toString());
-				string.append(" * ");
-			}
-			string.append(functions[functions.length-1].toString());
-			string.append(")");
-			return string.toString();
+		if (functions.length < 1)
+			return "(empty product)";
+		StringBuilder string = new StringBuilder("(");
+		for (int i = 0; i < functions.length - 1; i++) {
+			string.append(functions[i].toString());
+			string.append(" * ");
+		}
+		string.append(functions[functions.length - 1].toString());
+		string.append(")");
+		return string.toString();
 	}
 
 	@Override
@@ -88,8 +89,8 @@ public class Multiply extends CommutativeFunction{
 
 	@Override
 	public Multiply simplifyConstants() {
-		for (int i = 1; i < functions.length; i++){
-			for (int j = 0; j < i; j++){
+		for (int i = 1; i < functions.length; i++) {
+			for (int j = 0; j < i; j++) {
 				if (functions[i] instanceof Constant first && functions[j] instanceof Constant second) {
 					Function[] toMultiply = ArrLib.deepClone(functions);
 					toMultiply[i] = new Constant(first.constant * second.constant);
@@ -117,6 +118,7 @@ public class Multiply extends CommutativeFunction{
 
 	/**
 	 * If {@link #functions} contains multiple of the same {@link Variable} multiplied by each other (e.g. x*x^3) then the exponents will be added and the terms will be combined into one element of {@link #functions}
+	 *
 	 * @return A new {@link Multiply} with all variable combined with added exponents
 	 */
 	public Multiply addExponents() {

@@ -1,12 +1,12 @@
 package functions.special;
 
 import functions.Function;
-public class Constant extends Function {
-	public final double constant;
-	public final int constantID;
 
+public class Constant extends Function {
 	private static final String[] specialConstantStrings = {"pi", "e"};
 	private static final double[] specialConstants = {Math.PI, Math.E};
+	public final double constant;
+	public final int constantID;
 
 	public Constant(double constant) {
 		this.constant = constant;
@@ -33,6 +33,7 @@ public class Constant extends Function {
 		}
 		return false;
 	}
+
 	public static int getSpecialConstantID(String s) {
 		for (int i = 0; i < specialConstantStrings.length; i++) {
 			if (specialConstantStrings[i].equals(s)) return i;
@@ -46,6 +47,7 @@ public class Constant extends Function {
 
 	/**
 	 * Returns a String representation of the Function
+	 *
 	 * @return String representation of function
 	 */
 	public String toString() {

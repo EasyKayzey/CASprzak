@@ -10,6 +10,30 @@ Hello, and welcome to our Computer Algebra System. This is a joint project by Th
 - Evaluating all of the above at any given point
 - Finding zeroes of expressions using Newton's Method
 
+## Building & Running
+This project uses Gradle to automate builds. Run it with `gradlew.bat` on Windows or using `./gradlew` on Unix systems.
+
+To build and test, run:
+```
+./gradlew build
+```
+On Windows, replace `./gradlew` with `gradlew.bat`.
+
+To run the built-in command line UI, run:
+```
+./gradlew run
+```
+
+To run the `CASDebugger`, run:
+```
+./gradlew debugger
+```
+
+To create a JAR file suitable for distribution, run:
+```
+./gradlew jar
+```
+
 ## Notes
 - If you find a problem with the CAS, please make a new issue so we can fix it
 - If you would like to design a better interface than the placeholder that we have now, please contact us.

@@ -1,6 +1,6 @@
 package functions.commutative;
 
-import tools.ArrLib;
+import tools.FunctionTools;
 import core.Settings;
 import functions.Function;
 import functions.binary.Pow;
@@ -92,9 +92,9 @@ public class Multiply extends CommutativeFunction {
 		for (int i = 1; i < functions.length; i++) {
 			for (int j = 0; j < i; j++) {
 				if (functions[i] instanceof Constant first && functions[j] instanceof Constant second) {
-					Function[] toMultiply = ArrLib.deepClone(functions);
+					Function[] toMultiply = FunctionTools.deepClone(functions);
 					toMultiply[i] = new Constant(first.constant * second.constant);
-					toMultiply = ArrLib.removeFunctionAt(toMultiply, j);
+					toMultiply = FunctionTools.removeFunctionAt(toMultiply, j);
 					return (new Multiply(toMultiply)).simplifyConstants();
 				}
 			}
@@ -122,7 +122,7 @@ public class Multiply extends CommutativeFunction {
 	 * @return A new {@link Multiply} with all variable combined with added exponents
 	 */
 	public Multiply addExponents() {
-		Function[] simplifiedTerms = ArrLib.deepClone(functions);
+		Function[] simplifiedTerms = FunctionTools.deepClone(functions);
 		for (int a = 0; a < simplifiedTerms.length; a++) {
 			if (simplifiedTerms[a] instanceof Variable)
 				simplifiedTerms[a] = new Pow(new Constant(1), simplifiedTerms[a]);
@@ -132,7 +132,7 @@ public class Multiply extends CommutativeFunction {
 				if (simplifiedTerms[i] instanceof Pow first && simplifiedTerms[j] instanceof Pow second) {
 					if (first.getFunction2().equals(second.getFunction2())) {
 						simplifiedTerms[j] = new Pow(new Add(first.getFunction1(), second.getFunction1()), first.getFunction2());
-						simplifiedTerms = ArrLib.removeFunctionAt(simplifiedTerms, i);
+						simplifiedTerms = FunctionTools.removeFunctionAt(simplifiedTerms, i);
 						return (new Multiply(simplifiedTerms)).simplifyInternal();
 					}
 				}
@@ -154,8 +154,8 @@ public class Multiply extends CommutativeFunction {
 		for (int i = 0; i < multiplyTerms.length; i++) {
 			if (multiplyTerms[i] instanceof Add add) {
 				addTerms = add.getFunctions();
-				multiplyTerms = ArrLib.removeFunctionAt(multiplyTerms, i);
-				return new Add(ArrLib.distribute(multiplyTerms, addTerms)).simplify();
+				multiplyTerms = FunctionTools.removeFunctionAt(multiplyTerms, i);
+				return new Add(FunctionTools.distribute(multiplyTerms, addTerms)).simplify();
 			}
 		}
 		if (Settings.trustImmutability)

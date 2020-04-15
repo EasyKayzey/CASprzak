@@ -1,6 +1,6 @@
 package functions.commutative;
 
-import tools.ArrLib;
+import tools.FunctionTools;
 import core.Settings;
 import functions.Function;
 import functions.special.Constant;
@@ -71,9 +71,9 @@ public class Add extends CommutativeFunction {
 		for (int i = 1; i < functions.length; i++) {
 			for (int j = 0; j < i; j++) {
 				if (functions[i] instanceof Constant first && functions[j] instanceof Constant second) {
-					Function[] toAdd = ArrLib.deepClone(functions);
+					Function[] toAdd = FunctionTools.deepClone(functions);
 					toAdd[i] = new Constant(first.constant + second.constant);
-					toAdd = ArrLib.removeFunctionAt(toAdd, j);
+					toAdd = FunctionTools.removeFunctionAt(toAdd, j);
 					return (new Add(toAdd)).simplifyConstants();
 				}
 			}
@@ -85,7 +85,7 @@ public class Add extends CommutativeFunction {
 	}
 
 	public Add combineLikeTerms() {
-		Function[] combinedTerms = ArrLib.deepClone(functions);
+		Function[] combinedTerms = FunctionTools.deepClone(functions);
 		for (int a = 0; a < combinedTerms.length; a++) {
 			if (!(combinedTerms[a] instanceof Multiply && ((Multiply) combinedTerms[a]).getFunctions()[0] instanceof Constant))
 				combinedTerms[a] = new Multiply(new Constant(1), combinedTerms[a]).simplifyPull();
@@ -93,9 +93,9 @@ public class Add extends CommutativeFunction {
 		for (int i = 1; i < combinedTerms.length; i++) {
 			for (int j = 0; j < i; j++) {
 				if (combinedTerms[i] instanceof Multiply first && combinedTerms[j] instanceof Multiply second) {
-					if (ArrLib.deepEquals(first.getFunctions(), second.getFunctions(), 1)) {
-						combinedTerms[j] = new Multiply(new Add(first.getFunctions()[0], second.getFunctions()[0]), new Multiply(ArrLib.removeFunctionAt(first.getFunctions(), 0)));
-						combinedTerms = ArrLib.removeFunctionAt(combinedTerms, i);
+					if (FunctionTools.deepEquals(first.getFunctions(), second.getFunctions(), 1)) {
+						combinedTerms[j] = new Multiply(new Add(first.getFunctions()[0], second.getFunctions()[0]), new Multiply(FunctionTools.removeFunctionAt(first.getFunctions(), 0)));
+						combinedTerms = FunctionTools.removeFunctionAt(combinedTerms, i);
 						return (new Add(combinedTerms)).simplifyInternal();
 					}
 				}

@@ -3,24 +3,7 @@ package tools;
 import functions.Function;
 import functions.commutative.Multiply;
 
-import java.util.LinkedList;
-import java.util.List;
-
-public class ArrLib {
-
-	/**
-	 * Removes a {@link Function} from a Function[] and returns the new array (does not modify)
-	 *
-	 * @param functionArray the array of Functions
-	 * @param index         index of the Function to be removed
-	 * @return the new array
-	 */
-	public static Function[] removeFunctionAt(Function[] functionArray, int index) {
-		Function[] newArray = new Function[functionArray.length - 1];
-		for (int i = 0; i < newArray.length; i++)
-			newArray[i] = functionArray[(i < index ? i : i + 1)];
-		return newArray;
-	}
+public class FunctionTools {
 
 	/**
 	 * Deep-clones an array of Functions
@@ -66,6 +49,20 @@ public class ArrLib {
 	}
 
 	/**
+	 * Removes a {@link Function} from a Function[] and returns the new array (does not modify)
+	 *
+	 * @param functionArray the array of Functions
+	 * @param index         index of the Function to be removed
+	 * @return the new array
+	 */
+	public static Function[] removeFunctionAt(Function[] functionArray, int index) {
+		Function[] newArray = new Function[functionArray.length - 1];
+		for (int i = 0; i < newArray.length; i++)
+			newArray[i] = functionArray[(i < index ? i : i + 1)];
+		return newArray;
+	}
+
+	/**
 	 * Creates a new {@link Function}[] out of two Function arrays, including all elements from both except for one in the first.
 	 *
 	 * @param outer        first Function[]
@@ -99,49 +96,6 @@ public class ArrLib {
 	}
 
 	/**
-	 * Returns a list of Doubles which is a range slit into a certain amount of sections
-	 *
-	 * @param upper    the upper bound of the range
-	 * @param lower    the lower bound of the range
-	 * @param sections the amount of sections that the range is split into
-	 * @return the specified range
-	 */
-	public static List<Double> createRange(double upper, double lower, int sections) {
-		List<Double> range = new LinkedList<>();
-		for (int i = 0; i < sections + 1; i++)
-			range.add(lower + i * (upper - lower) / sections);
-		return range;
-	}
-
-	/**
-	 * Removes all NaNs from a specified List
-	 *
-	 * @param values the List from which the NaNs will be removed
-	 */
-	public static void nanRemover(List<Double> values) {
-		for (int i = 0; i < values.size(); i++) {
-			if ((values.get(i)).isNaN()) {
-				values.remove(i);
-				i--;
-			}
-		}
-	}
-
-	/**
-	 * Removes a number from a List if that number is adjacent to the same number within a tolerance of 1E-15
-	 *
-	 * @param values the List from which the repeated values are removed
-	 */
-	public static void removeRepeatsInOrder(List<Double> values) {
-		for (int i = 0; i < values.size() - 1; i++) {
-			if (values.get(i).equals(values.get(i + 1)) || (values.get(i) < values.get(i + 1) + 1E-15 && values.get(i) > values.get(i + 1) - 1E-15)) {
-				values.remove(i + 1);
-				i--;
-			}
-		}
-	}
-
-	/**
 	 * Returns a Function[] where every element in add is now a {@link Multiply} of multiply and the function that was previously there in add
 	 *
 	 * @param multiply the Function[] which is distributed to every element in add
@@ -168,21 +122,6 @@ public class ArrLib {
 		System.arraycopy(first, 0, finalFunctionArray, 0, first.length);
 		finalFunctionArray[first.length] = second;
 		return finalFunctionArray;
-	}
-
-	/**
-	 * Returns n factorial (n!)
-	 *
-	 * @param n the number
-	 * @return n!
-	 */
-	public static int factorial(int n) {
-		if (n < 0)
-			throw new IllegalArgumentException("Cannot take the factorial of a negative number.");
-		else if (n <= 1)
-			return 1;
-		else
-			return n * factorial(n - 1);
 	}
 
 }

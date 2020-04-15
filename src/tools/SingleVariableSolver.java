@@ -60,7 +60,7 @@ public class SingleVariableSolver {
 	 * @return an array of all the approximate roots found
 	 */
 	public static double[] getSolutionsRange(Function expression, double lower, double upper, int runs) {
-		List<Double> solutions = ArrLib.createRange(upper, lower, 17);
+		List<Double> solutions = SolverTools.createRange(upper, lower, 17);
 		for (int j = 0; j < runs; j++) {
 			for (int i = 0; i < solutions.size(); i++) {
 				solutions.set(i, newtonsMethod(expression, solutions.get(i)));
@@ -75,8 +75,8 @@ public class SingleVariableSolver {
 			if (!(expression.evaluate(solutions.get(i)) < 1E-3 && expression.evaluate(solutions.get(i)) > -1E-3))
 				solutions.set(i, Double.NaN);
 		}
-		ArrLib.nanRemover(solutions);
-		ArrLib.removeRepeatsInOrder(solutions);
+		SolverTools.nanRemover(solutions);
+		SolverTools.removeRepeatsInOrder(solutions);
 
 		double[] solutionsArray = new double[solutions.size()];
 		for (int i = 0; i < solutionsArray.length; i++)

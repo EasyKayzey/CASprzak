@@ -1,6 +1,6 @@
 package functions.commutative;
 
-import tools.ArrLib;
+import tools.FunctionTools;
 import core.Settings;
 import functions.Function;
 import functions.special.Constant;
@@ -45,7 +45,7 @@ public abstract class CommutativeFunction extends Function {
 		for (int i = 0; i < toPut.length; i++) {
 			if (toPut[i] instanceof Constant constant) {
 				if (constant.constant == identityValue) {
-					toPut = ArrLib.removeFunctionAt(toPut, i);
+					toPut = FunctionTools.removeFunctionAt(toPut, i);
 					i--;
 				}
 			}
@@ -58,7 +58,7 @@ public abstract class CommutativeFunction extends Function {
 	public CommutativeFunction simplifyPull() {
 		for (int i = 0; i < functions.length; i++) {
 			if (this.getClass().equals(functions[i].getClass())) {
-				return (me(ArrLib.pullUp(functions, ((CommutativeFunction) functions[i]).getFunctions(), i))).simplifyInternal();
+				return (me(FunctionTools.pullUp(functions, ((CommutativeFunction) functions[i]).getFunctions(), i))).simplifyInternal();
 			}
 		}
 		if (Settings.trustImmutability)
@@ -83,7 +83,7 @@ public abstract class CommutativeFunction extends Function {
 		if (Settings.trustImmutability)
 			return functions;
 		else
-			return ArrLib.deepClone(functions);
+			return FunctionTools.deepClone(functions);
 	}
 
 	public int getFunctionsLength() {
@@ -103,7 +103,7 @@ public abstract class CommutativeFunction extends Function {
 
 	public boolean equals(Function that) {
 		if (that instanceof CommutativeFunction function && this.getClass().equals(that.getClass()))
-			return ArrLib.deepEquals(functions, function.getFunctions());
+			return FunctionTools.deepEquals(functions, function.getFunctions());
 		return false;
 	}
 

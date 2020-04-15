@@ -1,6 +1,6 @@
 package functions;
 
-import tools.ArrLib;
+import tools.FunctionTools;
 import parsing.Parser;
 import core.Settings;
 import functions.binary.Logb;
@@ -117,7 +117,7 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 	protected abstract int compareSelf(Function that);
 
 	/**
-	 * Two different Function types are sorted according to {@link #sortOrder} and {@link ArrLib#findClassValue(Function)}, and same types are sorted using {@link #compareSelf(Function)}
+	 * Two different Function types are sorted according to {@link #sortOrder} and {@link FunctionTools#findClassValue(Function)}, and same types are sorted using {@link #compareSelf(Function)}
 	 *
 	 * @param that the {@link Function} compared to
 	 * @return comparison
@@ -128,6 +128,6 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 		else if (this.getClass().equals(that.getClass()))
 			return compareSelf(that);
 		else
-			return (ArrLib.findClassValue(this) - ArrLib.findClassValue(that));
+			return (FunctionTools.findClassValue(this) - FunctionTools.findClassValue(that));
 	}
 }

@@ -16,10 +16,10 @@ public class Pow extends BinaryFunction {
 
 	@Override
 	public Function getDerivative(int varID) {
-		if (function1 instanceof Constant exponent) {
-			return new Multiply(new Constant(exponent.constant), new Pow(new Constant(exponent.constant-1), function2), function2.getSimplifiedDerivative(varID));
-		} else
-		return  new Multiply(new Pow(function1, function2), new Add( new Multiply(function1.getSimplifiedDerivative(varID), new Ln(function2)), new Multiply(new Multiply(function1, function2.getSimplifiedDerivative(varID)), new Pow(new Constant(-1), function2))));
+		if (function1 instanceof Constant exponent)
+			return new Multiply(new Constant(exponent.constant), new Pow(new Constant(exponent.constant - 1), function2), function2.getSimplifiedDerivative(varID));
+		else
+			return new Multiply(new Pow(function1, function2), new Add(new Multiply(function1.getSimplifiedDerivative(varID), new Ln(function2)), new Multiply(new Multiply(function1, function2.getSimplifiedDerivative(varID)), new Pow(new Constant(-1), function2))));
 	}
 
 	@Override

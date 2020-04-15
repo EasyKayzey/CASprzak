@@ -22,10 +22,10 @@ public class Logb extends BinaryFunction {
 
     @Override
     public Function getDerivative(int varID) {
-        if (function2 instanceof Constant base) {
+        if (function2 instanceof Constant base)
             return new Multiply(function1.getSimplifiedDerivative(varID), new Pow(new Constant(-1), new Multiply(new Ln(new Constant(base.constant)), function1)));
-        } else
-        return new Multiply(new Add(new Multiply(function1.getSimplifiedDerivative(varID), new Ln(function2), new Pow(new Constant(-1), function1)), new Multiply(new Constant(-1), function2.getSimplifiedDerivative(varID), new Ln(function1), new Pow(new Constant(-1), function2))), new Pow(new Constant(-2), new Ln(function2)));
+        else
+            return new Multiply(new Add(new Multiply(function1.getSimplifiedDerivative(varID), new Ln(function2), new Pow(new Constant(-1), function1)), new Multiply(new Constant(-1), function2.getSimplifiedDerivative(varID), new Ln(function1), new Pow(new Constant(-1), function2))), new Pow(new Constant(-2), new Ln(function2)));
     }
 
     @Override

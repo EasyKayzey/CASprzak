@@ -1,9 +1,6 @@
 package ui;
 
-import core.ConstantEvaluator;
-import core.Parser;
-import core.PreProcessor;
-import core.SingleVariableSolver;
+import core.*;
 import functions.Function;
 
 import java.util.Arrays;
@@ -63,6 +60,9 @@ public class CASUI {
 			} else {
 				System.out.println("The expression has no solutions.");
 			}
+
+			System.out.println("Here is a Maclaurin Series of the expression:");
+			System.out.println(TaylorSeries.makeTaylorSeries(currentFunction, 5).simplify());
 		} else {
 			System.out.println("The solver does not currently support multivariable systems.");
 		}

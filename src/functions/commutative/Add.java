@@ -69,9 +69,9 @@ public class Add extends CommutativeFunction{
 	public Add simplifyConstants() {
 		for (int i = 1; i < functions.length; i++){
 			for (int j = 0; j < i; j++){
-				if (functions[i] instanceof Constant && functions[j] instanceof Constant) {
+				if (functions[i] instanceof Constant first && functions[j] instanceof Constant second) {
 					Function[] toAdd = ArrLib.deepClone(functions);
-					toAdd[i] = new Constant(((Constant) functions[i]).constant + ((Constant) functions[j]).constant);
+					toAdd[i] = new Constant(first.constant + second.constant);
 					toAdd = ArrLib.removeFunctionAt(toAdd, j);
 					return (new Add(toAdd)).simplifyConstants();
 				}
@@ -83,16 +83,16 @@ public class Add extends CommutativeFunction{
 	public Add combineLikeTerms() {
 		Function[] combinedTerms = ArrLib.deepClone(functions);
 		for (int a = 0; a < combinedTerms.length; a++) {
-			if (combinedTerms[a] instanceof Variable)  combinedTerms[a] = new Multiply(new Constant(1), combinedTerms[a]);
+			if (combinedTerms[a] instanceof Variable)  
+				combinedTerms[a] = new Multiply(new Constant(1), combinedTerms[a]);
 		}
 		for (int i = 1; i < combinedTerms.length; i++) {
 			for (int j = 0; j < i; j++) {
-				if (combinedTerms[i] instanceof Multiply && combinedTerms[j] instanceof Multiply) {
-					Multiply mult1 = new Multiply(ArrLib.removeFunctionAt(((Multiply)combinedTerms[i]).getFunctions(), 0));
-					Multiply mult2 = new Multiply(ArrLib.removeFunctionAt(((Multiply)combinedTerms[j]).getFunctions(), 0));
+				if (combinedTerms[i] instanceof Multiply first && combinedTerms[j] instanceof Multiply second) {
+					Multiply mult1 = new Multiply(ArrLib.removeFunctionAt(first.getFunctions(), 0));
+					Multiply mult2 = new Multiply(ArrLib.removeFunctionAt(second.getFunctions(), 0));
 					if (mult1.equals(mult2)){
-						Multiply multCombined = new Multiply(new Add(((Multiply)combinedTerms[i]).getFunctions()[0], ((Multiply)combinedTerms[j]).getFunctions()[0]), mult1);
-						combinedTerms[j] = multCombined;
+						combinedTerms[j] = new Multiply(new Add(first.getFunctions()[0], second.getFunctions()[0]), mult1);
 						combinedTerms = ArrLib.removeFunctionAt(combinedTerms, i);
 						return (new Add(combinedTerms)).simplifyInternal();
 					}

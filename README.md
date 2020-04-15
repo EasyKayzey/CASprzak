@@ -9,6 +9,7 @@ Hello, and welcome to our Computer Algebra System. This is a joint project by Th
 - Differentiation of functions, storing derivatives as new functions
 - Evaluation of functions
 - Finding zeroes of expressions using Newton's Method
+- Creating Taylor Series from any function
 ### Other
 - Parsing and storing expressions like `x^2-3y+sin(1/z)`
 - Command-line demo

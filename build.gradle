@@ -14,7 +14,7 @@ dependencies {
 }
 
 application {
-    mainClassName = 'CASprzak.CASUI'
+    mainClassName = 'ui.CASUI'
 }
 
 sourceSets {
@@ -39,7 +39,7 @@ run {
 
 jar {
     manifest {
-        attributes 'Main-Class': 'CASprzak.CASUI'
+        attributes 'Main-Class': 'ui.CASUI'
     }
 }
 
@@ -52,7 +52,7 @@ test {
 
 // https://stackoverflow.com/questions/43937169/gradle-application-plugin-with-multiple-main-classes/46938169
 task(debugger, dependsOn: 'classes', type: JavaExec) {
-    main = 'CASprzak.CASDebugger'
+    main = 'ui.CASDebugger'
     classpath = sourceSets.main.runtimeClasspath
     standardInput = System.in
 

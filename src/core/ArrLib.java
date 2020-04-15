@@ -33,6 +33,7 @@ public class ArrLib {
 		return newArray;
 	}
 
+
 	/**
 	 * Checks if two {@link Function} arrays have equal Functions at each index (assumes sorted)
 	 * @param functionArray1 first array
@@ -40,9 +41,20 @@ public class ArrLib {
 	 * @return true if equal
 	 */
 	public static boolean deepEquals(Function[] functionArray1, Function[] functionArray2) {
+		return deepEquals(functionArray1, functionArray2, 0);
+	}
+
+	/**
+	 * Checks if two {@link Function} arrays have equal Functions at each index, starting at a point (assumes sorted)
+	 * @param functionArray1 first array
+	 * @param functionArray2 second array
+	 * @param start index to begin at
+	 * @return true if equal
+	 */
+	public static boolean deepEquals(Function[] functionArray1, Function[] functionArray2, int start) {
 		if (functionArray1.length != functionArray2.length)
 			return false;
-		for (int i = 0; i < functionArray1.length; i++) {
+		for (int i = start; i < functionArray1.length; i++) {
 			if (!functionArray1[i].equals(functionArray2[i]))
 				return false;
 		}

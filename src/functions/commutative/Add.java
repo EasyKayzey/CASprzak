@@ -89,10 +89,8 @@ public class Add extends CommutativeFunction{
 		for (int i = 1; i < combinedTerms.length; i++) {
 			for (int j = 0; j < i; j++) {
 				if (combinedTerms[i] instanceof Multiply first && combinedTerms[j] instanceof Multiply second) {
-					Multiply mult1 = new Multiply(ArrLib.removeFunctionAt(first.getFunctions(), 0));
-					Multiply mult2 = new Multiply(ArrLib.removeFunctionAt(second.getFunctions(), 0));
-					if (mult1.equals(mult2)){
-						combinedTerms[j] = new Multiply(new Add(first.getFunctions()[0], second.getFunctions()[0]), mult1);
+					if (ArrLib.deepEquals(first.getFunctions(), second.getFunctions(), 1)){
+						combinedTerms[j] = new Multiply(new Add(first.getFunctions()[0], second.getFunctions()[0]), new Multiply(ArrLib.removeFunctionAt(first.getFunctions(), 0)));
 						combinedTerms = ArrLib.removeFunctionAt(combinedTerms, i);
 						return (new Add(combinedTerms)).simplifyInternal();
 					}

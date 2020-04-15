@@ -1,7 +1,8 @@
-package functions.unitary;
+package functions.unitary.trig;
 
 import functions.Function;
 import functions.commutative.Multiply;
+import functions.unitary.UnitaryFunction;
 
 public class Cosh extends UnitaryFunction {
 	public Cosh(Function function) {

@@ -1,10 +1,11 @@
-package functions.unitary;
+package functions.unitary.trig;
 
 import functions.Function;
 import functions.binary.Pow;
 import functions.commutative.Add;
 import functions.commutative.Multiply;
 import functions.special.Constant;
+import functions.unitary.UnitaryFunction;
 
 public class Atan extends UnitaryFunction {
 	public Atan(Function function) {

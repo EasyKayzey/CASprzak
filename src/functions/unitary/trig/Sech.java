@@ -1,8 +1,9 @@
-package functions.unitary;
+package functions.unitary.trig;
 
 import functions.Function;
 import functions.commutative.Multiply;
 import functions.special.Constant;
+import functions.unitary.UnitaryFunction;
 
 public class Sech extends UnitaryFunction {
 	public Sech(Function function) {

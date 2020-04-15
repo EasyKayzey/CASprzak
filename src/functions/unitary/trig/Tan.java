@@ -1,9 +1,10 @@
-package functions.unitary;
+package functions.unitary.trig;
 
 import functions.Function;
 import functions.binary.Pow;
 import functions.commutative.Multiply;
 import functions.special.Constant;
+import functions.unitary.UnitaryFunction;
 
 public class Tan extends UnitaryFunction {
 	public Tan(Function function) {

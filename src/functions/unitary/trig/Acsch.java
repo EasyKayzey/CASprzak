@@ -1,13 +1,14 @@
-package functions.unitary;
+package functions.unitary.trig;
 
 import functions.Function;
 import functions.binary.Pow;
 import functions.commutative.Add;
 import functions.commutative.Multiply;
 import functions.special.Constant;
+import functions.unitary.UnitaryFunction;
 
-public class Asech extends UnitaryFunction {
-	public Asech(Function function) {
+public class Acsch extends UnitaryFunction {
+	public Acsch(Function function) {
 		super(function);
 	}
 
@@ -19,11 +20,11 @@ public class Asech extends UnitaryFunction {
 	@Override
 	public double evaluate(double... variableValues) {
 		double functionEvaluated = function.evaluate(variableValues);
-		return Math.log((1 + Math.sqrt(functionEvaluated * functionEvaluated - 1)) / functionEvaluated);
+		return Math.log((1 + Math.sqrt(functionEvaluated * functionEvaluated + 1)) / functionEvaluated);
 	}
 
 	@Override
 	public UnitaryFunction me(Function operand) {
-		return new Asech(operand);
+		return new Acsch(operand);
 	}
 }

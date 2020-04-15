@@ -8,6 +8,7 @@ import functions.commutative.Multiply;
 import functions.special.Constant;
 import functions.special.Variable;
 import functions.unitary.*;
+import functions.unitary.trig.*;
 
 public class FunctionMaker {
 

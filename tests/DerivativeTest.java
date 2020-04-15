@@ -50,4 +50,13 @@ public class DerivativeTest {
         assertEquals(2.638, test.getSimplifiedDerivative(0).evaluate(0.792), 0.01);
     }
 
+    @Test
+    void getNthDerivative() {
+        Function test1;
+        test1 = Parser.parse("x^2");
+        assertEquals(test1.getNthDerivative(0, 0), test1);
+    }
+
+
+
 }

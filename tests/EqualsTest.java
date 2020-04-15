@@ -177,4 +177,12 @@ public class EqualsTest {
         Function test2 = Parser.parse("x^6");
         assertEquals(test1, test2);
     }
+
+    @Test
+    void combineLikeTermsMultExample() {
+        Function test1 = Parser.parse("(3+x)(2+x)(1+x)");
+        Function test2 = Parser.parse("x^3+11x+6x^2+6");
+        assertEquals(test1, test2);
+    }
+
 }

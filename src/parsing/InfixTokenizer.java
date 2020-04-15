@@ -1,4 +1,4 @@
-package core;
+package parsing;
 
 import java.util.regex.Pattern;
 

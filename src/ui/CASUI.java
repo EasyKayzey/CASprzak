@@ -1,9 +1,9 @@
 package ui;
 
-import core.ConstantEvaluator;
-import core.Parser;
-import core.PreProcessor;
-import core.SingleVariableSolver;
+import parsing.ConstantEvaluator;
+import parsing.Parser;
+import parsing.PreProcessor;
+import tools.SingleVariableSolver;
 import functions.Function;
 
 import java.util.Arrays;

@@ -1,4 +1,4 @@
-package core;
+package tools;
 
 import functions.Function;
 import functions.special.Constant;

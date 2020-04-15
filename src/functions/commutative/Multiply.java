@@ -1,6 +1,6 @@
 package functions.commutative;
 
-import core.ArrLib;
+import tools.ArrLib;
 import core.Settings;
 import functions.Function;
 import functions.binary.Pow;

@@ -1,7 +1,7 @@
 package ui;
 
-import core.ConstantEvaluator;
-import core.Parser;
+import parsing.ConstantEvaluator;
+import parsing.Parser;
 import functions.Function;
 
 import java.util.Scanner;

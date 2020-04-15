@@ -1,4 +1,4 @@
-import core.Parser;
+import parsing.Parser;
 import functions.Function;
 import org.junit.jupiter.api.Test;
 

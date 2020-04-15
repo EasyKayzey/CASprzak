@@ -1,7 +1,7 @@
 package functions;
 
-import core.ArrLib;
-import core.Parser;
+import tools.ArrLib;
+import parsing.Parser;
 import core.Settings;
 import functions.binary.Logb;
 import functions.binary.Pow;

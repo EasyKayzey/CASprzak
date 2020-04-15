@@ -1,4 +1,4 @@
-package core;
+package parsing;
 
 import functions.Function;
 import functions.special.Constant;

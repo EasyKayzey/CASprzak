@@ -1,5 +1,5 @@
-import core.Parser;
-import core.SingleVariableSolver;
+import parsing.Parser;
+import tools.SingleVariableSolver;
 import functions.Function;
 import org.junit.jupiter.api.Test;
 

@@ -64,11 +64,13 @@ public class Multiply extends CommutativeFunction{
 
 
 	public Function simplify() {
-		Multiply init = simplifyInternal();
-		if (init.isTimesZero())
+		Multiply currentFunction = simplifyInternal();
+		if (currentFunction.isTimesZero())
 			return new Constant((0));
+		else if (currentFunction.getFunctions().length <= 1)
+			return currentFunction.simplifyOneElement();
 		else
-			return init.simplifyOneElement();
+			return currentFunction.distributeAll();
 	}
 
 	public Multiply simplifyInternal() {

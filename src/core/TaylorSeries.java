@@ -15,4 +15,14 @@ public class TaylorSeries {
         }
         return new Add(taylorSeriesTerms);
     }
+
+    public static Function makeTaylorSeries(Function function, int size, double center) {
+        Function[] taylorSeriesTerms = new Function[size];
+        for (int i = 0; i < size; i++){
+            taylorSeriesTerms[i] = new Multiply(new Constant(function.getNthDerivative(0, i).evaluate(center)/ArrLib.factorial(0)), new Pow(new Constant(i), new Add(new Variable(0), new Constant(-center))));
+        }
+        return new Add(taylorSeriesTerms);
+    }
 }
+
+

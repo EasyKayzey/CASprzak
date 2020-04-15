@@ -11,7 +11,7 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class CASUI {
-	private static final Pattern commaSpaces = Pattern.compile("(?<=\\w),?\\s*(?=\\w)");
+	private static final Pattern commaSpaces = Pattern.compile("(?<=\\w)(,\\s*|\\s+)(?=\\w)");
 
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
@@ -19,7 +19,6 @@ public class CASUI {
 
 		System.out.println("What are your variables? Separate with commas and/or spaces.");
 		String[] variableStrings = commaSpaces.split(scanner.next());
-		System.out.println(Arrays.toString(variableStrings));
 		char[] variables = new char[variableStrings.length];
 		for (int i = 0; i < variables.length; i++)
 			variables[i] = variableStrings[i].charAt(0);

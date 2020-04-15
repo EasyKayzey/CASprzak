@@ -6,7 +6,7 @@ The core of the project (the `functions` package) is relatively set-in-stone, th
 
 The main help we need in Z_CASprzak is in the front-end and environment - especially front-end. We are a team of two back-end developers, and anybody who wants to develop better UI will be greatly appreciated.
 
-Contact us with any other ideas you have: things like improving documentation, writing a wiki, or bug triaging would also be greatly appreciated.
+Contact us with any other ideas you have: things like improving documentation, writing a wiki, or bug triage would also be greatly appreciated.
 
 # Ground Rules
 Responsibilities:

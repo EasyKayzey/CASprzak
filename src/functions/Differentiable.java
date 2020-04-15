@@ -9,4 +9,13 @@ public interface Differentiable {
 	 * @return the derivative of the function with respect to varID
 	 */
 	Function getDerivative(int varID);
+
+	/**
+	 * Returns the Nth derivative of a {@link Function} with respect to a variable
+	 *
+	 * @param varID the ID of the variable that is differentiated against
+	 * @param N the amount of times to be differentiated
+	 * @return the derivative of the function with respect to varID
+	 */
+	Function getNthDerivative(int varID, int N);
 }

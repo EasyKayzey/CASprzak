@@ -75,6 +75,15 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 		return derivative;
 	}
 
+	public Function getNthDerivative(int varID, int N) {
+		Function currentFunction = this;
+		while (N > 0) {
+			currentFunction = currentFunction.getSimplifiedDerivative(varID);
+			N--;
+		}
+		return currentFunction;
+	}
+
 	/**
 	 * Substitutes a new {@link Function} into a variable
 	 *

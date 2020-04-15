@@ -47,28 +47,27 @@ public class Parser {
   }
 
   public static Function parse(String[] postfix) {
-    FunctionMaker functionMaker = new FunctionMaker();
     Stack<Function> functionStack = new Stack<>();
     for (String token : postfix) {
       if (Constant.isSpecialConstant(token)) {
         functionStack.push(new Constant(token));
       } else if (!isUnitaryOperator(token) && !isBinaryOperator(token)) {
-        if (Constant.isSpecialConstant(token)) return functionMaker.specialConstant(token);
+        if (Constant.isSpecialConstant(token)) return FunctionMaker.specialConstant(token);
         try {
-          functionStack.push(functionMaker.constant(Double.parseDouble(token)));
+          functionStack.push(FunctionMaker.constant(Double.parseDouble(token)));
         } catch (Exception e) {
           if (token.length() > 1)
             throw new IllegalArgumentException(token + " is not a valid function.");
           char v = token.charAt(0);
-          functionStack.push(functionMaker.variable(getVarID(v), variables));
+          functionStack.push(FunctionMaker.variable(getVarID(v), variables));
         }
       } else if (isBinaryOperator(token)) {
         Function a = functionStack.pop();
         Function b = functionStack.pop();
-        functionStack.push(functionMaker.makeBinary(token, a, b));
+        functionStack.push(FunctionMaker.makeBinary(token, a, b));
       } else if (isUnitaryOperator(token)) {
         Function c = functionStack.pop();
-        functionStack.push(functionMaker.makeUnitary(token, c));
+        functionStack.push(FunctionMaker.makeUnitary(token, c));
       }
     }
     if (functionStack.size() != 1) throw new IndexOutOfBoundsException("functionStack size is " + functionStack.size());

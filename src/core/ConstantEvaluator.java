@@ -2,7 +2,6 @@ package core;
 
 public class ConstantEvaluator {
 	public static double getConstant(String infix) {
-		Parser parser = new Parser();
-		return parser.parse(infix).evaluate();
+		return Parser.parse(infix).evaluate();
 	}
 }

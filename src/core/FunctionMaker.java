@@ -16,7 +16,7 @@ public class FunctionMaker {
 	 * @param constant value of constant
 	 * @return new {@link Constant}
 	 */
-	public Function constant(double constant) {
+	public static Function constant(double constant) {
 		return new Constant(constant);
 	}
 
@@ -25,7 +25,7 @@ public class FunctionMaker {
 	 * @param constantString string of constant
 	 * @return new {@link Constant}
 	 */
-	public Function specialConstant(String constantString) {
+	public static Function specialConstant(String constantString) {
 		return new Constant(constantString);
 	}
 
@@ -35,7 +35,7 @@ public class FunctionMaker {
 	 * @param varNames array of variable names
 	 * @return new {@link Variable}
 	 */
-	public Function variable(int varID, char... varNames) {
+	public static Function variable(int varID, char... varNames) {
 		return new Variable(varID, varNames);
 	}
 
@@ -45,7 +45,7 @@ public class FunctionMaker {
 	 * @param function the {@link Function} to be operated on
 	 * @return new {@link Function}
 	 */
-	public Function makeUnitary(String functionName, Function function) {
+	public static Function makeUnitary(String functionName, Function function) {
 		return switch (functionName) {
 			case "-" -> new Multiply(new Constant(-1), function);
 			case "/" -> new Pow(new Constant(-1), function);
@@ -90,7 +90,7 @@ public class FunctionMaker {
 	 * @param function2 another {@link Function} to be operated on
 	 * @return new {@link Function}
 	 */
-	public Function makeBinary(String functionName, Function function1, Function function2) {
+	public static Function makeBinary(String functionName, Function function1, Function function2) {
 		return switch (functionName) {
 			case "+" -> new Add(function1, function2);
 			case "*" -> new Multiply(function1, function2);

@@ -44,7 +44,7 @@ public abstract class UnitaryFunction extends Function {
     }
 
     public boolean equals(Function that) {
-        return this.getClass().equals(that.getClass()) && this.function.equals(((UnitaryFunction)that).function);
+        return this.getClass().equals(that.getClass()) && this.function.equals(((UnitaryFunction) that).function);
     }
 
     public int compareSelf(Function that) {

@@ -29,19 +29,19 @@ public class Pow extends BinaryFunction {
 	}
 
 	public Function simplify() {
-		Function current = (new Pow(function1.simplify(), function2.simplify()));
-		current = ((Pow)current).multiplyExponents();
-		current = ((Pow)current).simplifyObviousExponentsAndFOC();
-		if ((current instanceof Pow) && (((Pow)current).function2 instanceof Multiply) && Settings.distributeExponents)
-			current = ((Pow)current).distributeExponents();
+		Pow currentPow = (new Pow(function1.simplify(), function2.simplify()));
+		currentPow = currentPow.multiplyExponents();
+		Function current = currentPow.simplifyObviousExponentsAndFOC();
+		if (current instanceof Pow pow && pow.function2 instanceof Multiply && Settings.distributeExponents)
+			current = pow.distributeExponents();
 		return current;
 	}
 
 	public Function simplifyObviousExponentsAndFOC() { //FOC means Functions of Constants
-		if(function1 instanceof Constant) {
-			if (((Constant) function1).constant == 0)
+		if(function1 instanceof Constant constant) {
+			if (constant.constant == 0)
 				return new Constant(1);
-			if (((Constant) function1).constant == 1)
+			if (constant.constant == 1)
 				return function2.simplify();
 			if (Settings.simplifyFunctionsOfConstants && function2 instanceof Constant)
 				return new Constant(this.evaluate());
@@ -61,14 +61,16 @@ public class Pow extends BinaryFunction {
 	}
 
 	public Function[] distributeExponentsArray() {
-		if (!(function2 instanceof Multiply))
+		if (function2 instanceof Multiply multiply) {
+			Function[] oldFunctions = multiply.getFunctions();
+			Function[] toMultiply = new Function[oldFunctions.length];
+			for (int i = 0; i < toMultiply.length; i++) {
+				toMultiply[i] = new Pow(function1, oldFunctions[i]).simplify();
+			}
+			return toMultiply;
+		} else {
 			throw new IllegalArgumentException("Method should not be called if base is not a Multiply");
-		Function[] oldFunctions = ((Multiply)function2).getFunctions();
-		Function[] toMultiply = new Function[oldFunctions.length];
-		for (int i = 0; i < toMultiply.length; i++) {
-			toMultiply[i] = new Pow(function1, oldFunctions[i]).simplify();
 		}
-		return toMultiply;
 	}
 
 

@@ -41,8 +41,8 @@ public abstract class CommutativeFunction extends Function {
     public CommutativeFunction simplifyIdentity() {
         Function[] toPut = getFunctions();
         for (int i = 0; i < toPut.length; i++) {
-            if (toPut[i] instanceof Constant) {
-                if (((Constant) toPut[i]).constant == identityValue) {
+            if (toPut[i] instanceof Constant constant) {
+                if (constant.constant == identityValue) {
                     toPut = ArrLib.removeFunctionAt(toPut, i);
                     i--;
                 }
@@ -91,19 +91,23 @@ public abstract class CommutativeFunction extends Function {
 
 
     public boolean equals(Function that) {
-        if (this.getClass().equals(that.getClass()))
-            return ArrLib.deepEquals(functions, ((CommutativeFunction)that).getFunctions());
+        if (that instanceof CommutativeFunction function && this.getClass().equals(that.getClass()))
+            return ArrLib.deepEquals(functions, function.getFunctions());
         return false;
     }
 
     public int compareSelf(Function that) {
-        if (functions.length != ((CommutativeFunction) that).getFunctionsLength())
-            return functions.length - ((CommutativeFunction) that).getFunctionsLength();
-        Function[] thisFunctions = functions;
-        Function[] thatFunctions = ((CommutativeFunction)that).getFunctions();
-        for (int i = 0; i < thisFunctions.length; i++) {
-            if (!thisFunctions[i].equals(thatFunctions[i]))
-                return thisFunctions[i].compareTo(thatFunctions[i]);
+        if (that instanceof CommutativeFunction function) {
+            if (functions.length != function.getFunctionsLength())
+                return functions.length - function.getFunctionsLength();
+            Function[] thisFunctions = functions;
+            Function[] thatFunctions = function.getFunctions();
+            for (int i = 0; i < thisFunctions.length; i++) {
+                if (!thisFunctions[i].equals(thatFunctions[i]))
+                    return thisFunctions[i].compareTo(thatFunctions[i]);
+            }
+        } else {
+            throw new IllegalArgumentException("Illegally called CommutativeFunction.compareSelf on a non-CommutativeFunction");
         }
         System.out.println("This isn't supposed to happen. Check CompareSelf of CommutativeFunction and Function.compareTo");
         return 0;

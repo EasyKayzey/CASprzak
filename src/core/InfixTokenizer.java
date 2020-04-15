@@ -11,6 +11,7 @@ public class InfixTokenizer {
 	private static final Pattern OOO2 = Pattern.compile("\\)");
 	private static final Pattern OOO3 = Pattern.compile("\\+");
 	private static final Pattern OOO4 = Pattern.compile("\\*");
+	private static final Pattern Splitter = Pattern.compile("\\s+|(((?<=\\W)(?=[\\w-])((?<!-)|(?!\\d))|(?<=\\w)(?=\\W))|(?<=[()])|(?=[()]))(?<![ .])(?![ .])");
 
 	/**
 	 * Tokenizes an input infix string into a format supported by the {@link PreProcessor}
@@ -33,7 +34,7 @@ public class InfixTokenizer {
 		// Adds parentheses to enforce order of operations
 		infix = "((((" + OOO4.matcher(OOO3.matcher(OOO2.matcher(OOO1.matcher(infix).replaceAll("((((")).replaceAll("))))")).replaceAll("))+((")).replaceAll(")*(") + "))))";
 		// Splits infix into tokens
-		return infix.split("\\s+|(((?<=\\W)(?=[\\w-])((?<!-)|(?!\\d))|(?<=\\w)(?=\\W))|(?<=[()])|(?=[()]))(?<![ .])(?![ .])");
+		return Splitter.split(infix);
 	}
 
 	/**

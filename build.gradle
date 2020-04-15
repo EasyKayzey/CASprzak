@@ -10,6 +10,7 @@ repositories {
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.1.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.1.0'
+    implementation 'org.jetbrains:annotations:16.0.2'
 }
 
 application {
@@ -31,6 +32,9 @@ sourceSets {
 
 run {
     standardInput = System.in
+
+    // https://stackoverflow.com/questions/55433883/how-to-enable-java-12-preview-features-with-gradle
+    jvmArgs(['--enable-preview'])
 }
 
 jar {
@@ -41,6 +45,9 @@ jar {
 
 test {
     useJUnitPlatform()
+
+    // https://stackoverflow.com/questions/55433883/how-to-enable-java-12-preview-features-with-gradle
+    jvmArgs(['--enable-preview'])
 }
 
 // https://stackoverflow.com/questions/43937169/gradle-application-plugin-with-multiple-main-classes/46938169
@@ -48,4 +55,12 @@ task(debugger, dependsOn: 'classes', type: JavaExec) {
     main = 'CASprzak.CASDebugger'
     classpath = sourceSets.main.runtimeClasspath
     standardInput = System.in
+
+    // https://stackoverflow.com/questions/55433883/how-to-enable-java-12-preview-features-with-gradle
+    jvmArgs(['--enable-preview'])
+}
+
+// https://stackoverflow.com/questions/55433883/how-to-enable-java-12-preview-features-with-gradle
+tasks.withType(JavaCompile).each {
+    it.options.compilerArgs.add('--enable-preview')
 }

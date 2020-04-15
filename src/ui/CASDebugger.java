@@ -2,7 +2,6 @@ package ui;
 
 import core.ConstantEvaluator;
 import core.Parser;
-import core.Settings;
 import functions.Function;
 
 import java.util.Scanner;
@@ -12,14 +11,14 @@ public class CASDebugger {
 		Scanner in = new Scanner(System.in);
 		String userInput;
 
-		System.out.println("Debug mode on? (Y/N)");
-		userInput = in.nextLine().toUpperCase();
-		if ("Y".equals(userInput))
-			Settings.debug = true;
-		else if ("N".equals(userInput))
-			Settings.debug = false;
-		else
-			throw new IllegalArgumentException(userInput + " is not Y/N.");
+//		System.out.println("Debug mode on? (Y/N)");
+//		userInput = in.nextLine().toUpperCase();
+//		if ("Y".equals(userInput))
+//			Settings.debug = true;
+//		else if ("N".equals(userInput))
+//			Settings.debug = false;
+//		else
+//			throw new IllegalArgumentException(userInput + " is not Y/N.");
 
 		System.out.println("Would you like to exit (E), run CASUI (1), or directly use ParserXYZ (2)?");
 		userInput = in.nextLine().toUpperCase();

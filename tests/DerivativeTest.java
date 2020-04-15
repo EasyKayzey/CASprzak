@@ -1,46 +1,53 @@
-
-import CASprzak.Function;
-import CASprzak.Parser;
+import core.Parser;
+import functions.Function;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DerivativeTest {
-    final Parser parser = new Parser('x');
 
     @Test
     void constantsGive0() {
-        Function test = parser.parse("2");
+        Function test = Parser.parse("2");
         assertEquals(0, test.getSimplifiedDerivative(0).evaluate(3467));
     }
 
     @Test
     void variablesGive1() {
-        Function test = parser.parse("x");
+        Function test = Parser.parse("x");
         assertEquals(1, test.getSimplifiedDerivative(0).evaluate(3467));
     }
 
     @Test
     void simpleSumAndProductDerivatives() {
         Function test;
-        test = parser.parse("x+3");
+        test = Parser.parse("x+3");
         assertEquals(1, test.getSimplifiedDerivative(0).evaluate(9));
-        test = parser.parse("x*7");
+        test = Parser.parse("x*7");
         assertEquals(7, test.getSimplifiedDerivative(0).evaluate(9));
-        test = parser.parse("2*x+7");
+        test = Parser.parse("2*x+7");
         assertEquals(2, test.getSimplifiedDerivative(0).evaluate(9));
-        test = parser.parse("2*(x+7)");
+        test = Parser.parse("2*(x+7)");
         assertEquals(2, test.getSimplifiedDerivative(0).evaluate(9));
     }
 
     @Test
     void longDerivative() {
-        Function test = parser.parse("(sin(x^0.5+1) * e^(x^0.5)) * x^-0.5").getSimplifiedDerivative(0).getSimplifiedDerivative(0);
+        Function test = Parser.parse("(sin(x^0.5+1) * e^(x^0.5)) * x^-0.5").getSimplifiedDerivative(0).getSimplifiedDerivative(0);
         assertEquals(-0.13874, test.evaluate(4), 0.0001);
 //        System.out.println("Second derivative simplified once:");
 //        System.out.println(test);
 //        System.out.println("Second derivative simplified twice:");
 //        System.out.println(test.simplify());
+    }
+
+    @Test
+    void arcTrigTests() {
+        Function test;
+        test = Parser.parse("4acos(x)-10atan(x)");
+        assertEquals(-12.773, test.getSimplifiedDerivative(0).evaluate(0.456), 0.01);
+        test = Parser.parse("asin(x)+x");
+        assertEquals(2.638, test.getSimplifiedDerivative(0).evaluate(0.792), 0.01);
     }
 
 }

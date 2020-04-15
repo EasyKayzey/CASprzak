@@ -28,9 +28,9 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 	public static final Class<?>[] sortOrder = {
 			Constant.class,
 			Variable.class,
+			Multiply.class,
 			Pow.class,
 			Logb.class,
-			Multiply.class,
 			UnitaryFunction.class,
 			Add.class
 	};

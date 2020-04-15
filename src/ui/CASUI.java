@@ -47,20 +47,24 @@ public class CASUI {
 		System.out.println("Here is the derivative, evaluated:");
 		System.out.println(currentFunction.getSimplifiedDerivative(0).simplifyTimes(10).evaluate(inputs));
 
-		double solution = SingleVariableSolver.getSolutionPoint(currentFunction, -10);
-		if (!Double.isNaN(solution)) {
-			System.out.println("Here is one zero for the expression:");
-			System.out.println(solution);
-		} else {
-			System.out.println("The algorithm did not find an initial solution.");
-		}
+		if (variables.length == 1) {
+			double solution = SingleVariableSolver.getSolutionPoint(currentFunction, -10);
+			if (!Double.isNaN(solution)) {
+				System.out.println("Here is one zero for the expression:");
+				System.out.println(solution);
+			} else {
+				System.out.println("The algorithm did not find an initial solution.");
+			}
 
-		double[] solutions = SingleVariableSolver.getSolutionsRange(currentFunction, -10, 10);
-		if (solutions.length > 0) {
-			System.out.println("Here are the zeros of the expression:");
-			System.out.println(Arrays.toString(solutions));
+			double[] solutions = SingleVariableSolver.getSolutionsRange(currentFunction, -10, 10);
+			if (solutions.length > 0) {
+				System.out.println("Here are the zeros of the expression:");
+				System.out.println(Arrays.toString(solutions));
+			} else {
+				System.out.println("The expression has no solutions.");
+			}
 		} else {
-			System.out.println("The expression has no solutions.");
+			System.out.println("The solver does not currently support multivariable systems.");
 		}
 	}
 }

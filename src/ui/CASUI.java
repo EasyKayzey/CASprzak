@@ -21,7 +21,8 @@ public class CASUI {
 		System.out.println("What are your variables? Separate with spaces.");
 		String[] variableStrings = spacesMaybeComma.split(scanner.next());
 		char[] variables = new char[variableStrings.length];
-		for (int i = 0; i < variables.length; i++) variables[i] = variableStrings[i].charAt(0);
+		for (int i = 0; i < variables.length; i++)
+			variables[i] = variableStrings[i].charAt(0);
 
 		System.out.println("Enter your function to be stored:");
 		String rawInput = scanner.next();

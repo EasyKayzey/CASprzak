@@ -4,7 +4,6 @@ import core.ArrLib;
 import core.Settings;
 import functions.Function;
 import functions.special.Constant;
-import functions.special.Variable;
 
 public class Add extends CommutativeFunction {
 	public Add(Function... functions) {
@@ -88,8 +87,8 @@ public class Add extends CommutativeFunction {
 	public Add combineLikeTerms() {
 		Function[] combinedTerms = ArrLib.deepClone(functions);
 		for (int a = 0; a < combinedTerms.length; a++) {
-			if (combinedTerms[a] instanceof Variable)
-				combinedTerms[a] = new Multiply(new Constant(1), combinedTerms[a]);
+			if (!(combinedTerms[a] instanceof Multiply && ((Multiply) combinedTerms[a]).getFunctions()[0] instanceof Constant))
+				combinedTerms[a] = new Multiply(new Constant(1), combinedTerms[a]).simplifyPull();
 		}
 		for (int i = 1; i < combinedTerms.length; i++) {
 			for (int j = 0; j < i; j++) {

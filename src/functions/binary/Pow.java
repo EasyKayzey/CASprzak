@@ -74,7 +74,7 @@ public class Pow extends BinaryFunction {
 		return new Multiply(distributeExponentsArray());
 	}
 
-	public Function[] distributeExponentsArray() {
+	private Function[] distributeExponentsArray() {
 		if (function2 instanceof Multiply multiply) {
 			Function[] oldFunctions = multiply.getFunctions();
 			Function[] toMultiply = new Function[oldFunctions.length];

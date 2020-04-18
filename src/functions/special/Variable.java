@@ -8,11 +8,21 @@ public class Variable extends Function {
 
 	private final int varID;
 
+	/**
+	 * Constructs a new Variable
+	 * @param varID The variable's ID
+	 * @param varNames The character representing the variable
+	 */
 	public Variable(int varID, char... varNames) {
 		this.varID = varID;
 		Variable.varNames = varNames;
 	}
 
+
+	/**
+	 * Constructs a new Variable
+	 * @param varID The variable's ID
+	 */
 	public Variable(int varID) {
 		this.varID = varID;
 	}

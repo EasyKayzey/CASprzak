@@ -8,6 +8,10 @@ public class Constant extends Function {
 	public final double constant;
 	public final int constantID;
 
+	/**
+	 * Constructs a new Constant
+	 * @param constant The numerical value of the constant
+	 */
 	public Constant(double constant) {
 		this.constant = constant;
 		this.constantID = -1;

@@ -16,11 +16,7 @@ public class Logb extends BinaryFunction {
 		super(argument, base);
 	}
 
-	/**
-	 * Returns a String representation of the Function
-	 *
-	 * @return String representation of the Function
-	 */
+
 	@Override
 	public String toString() {
 		return "log_{" + function2.toString() + "}(" + function1.toString() + ")";

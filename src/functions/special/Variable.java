@@ -36,11 +36,7 @@ public class Variable extends Function {
 		Variable.varNames = varNames;
 	}
 
-	/**
-	 * Returns a String representation of the Function
-	 *
-	 * @return String representation of function
-	 */
+
 	public String toString() {
 		return String.valueOf(varNames[varID]);
 	}

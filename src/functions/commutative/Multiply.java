@@ -26,11 +26,7 @@ public class Multiply extends CommutativeFunction {
 		return accumulator;
 	}
 
-	/**
-	 * Returns a String representation of the {@link Function}
-	 *
-	 * @return String representation of the {@link Function}
-	 */
+
 	public String toString() {
 		if (functions.length < 1)
 			return "(empty product)";

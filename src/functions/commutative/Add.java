@@ -22,11 +22,7 @@ public class Add extends CommutativeFunction {
 		return accumulator;
 	}
 
-	/**
-	 * Returns a String representation of the Function
-	 *
-	 * @return String representation of the Function
-	 */
+
 	public String toString() {
 		if (functions.length < 1)
 			return "(empty sum)";

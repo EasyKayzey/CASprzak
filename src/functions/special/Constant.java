@@ -49,11 +49,7 @@ public class Constant extends Function {
 		return constant;
 	}
 
-	/**
-	 * Returns a String representation of the Function
-	 *
-	 * @return String representation of function
-	 */
+
 	public String toString() {
 		if (constantID != -1)
 			return specialConstantStrings[constantID];

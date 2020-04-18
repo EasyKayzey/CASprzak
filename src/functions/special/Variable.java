@@ -32,7 +32,6 @@ public class Variable extends Function {
 
 	/**
 	 * Sets the variable names
-	 *
 	 * @param varNames array of variable names
 	 */
 	public static void setVarNames(char... varNames) {

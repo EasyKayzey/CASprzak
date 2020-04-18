@@ -9,7 +9,6 @@ public class FunctionTools {
 
 	/**
 	 * Deep-clones an array of Functions
-	 *
 	 * @param functionArray array of Functions
 	 * @return new Function[]
 	 */
@@ -23,7 +22,6 @@ public class FunctionTools {
 
 	/**
 	 * Checks if two {@link Function} arrays have equal Functions at each index (assumes sorted)
-	 *
 	 * @param functionArray1 first array
 	 * @param functionArray2 second array
 	 * @return true if equal
@@ -34,7 +32,6 @@ public class FunctionTools {
 
 	/**
 	 * Checks if two {@link Function} arrays have equal Functions at each index, starting at a point (assumes sorted)
-	 *
 	 * @param functionArray1 first array
 	 * @param functionArray2 second array
 	 * @param start          index to begin at
@@ -52,7 +49,6 @@ public class FunctionTools {
 
 	/**
 	 * Removes a {@link Function} from a Function[] and returns the new array (does not modify)
-	 *
 	 * @param functionArray the array of Functions
 	 * @param index         index of the Function to be removed
 	 * @return the new array
@@ -66,7 +62,6 @@ public class FunctionTools {
 
 	/**
 	 * Creates a new {@link Function}[] out of two Function arrays, including all elements from both except for one in the first.
-	 *
 	 * @param outer        first Function[]
 	 * @param inner        second Function[]
 	 * @param indexInOuter index to not include in the first Function[]
@@ -84,7 +79,6 @@ public class FunctionTools {
 
 	/**
 	 * Returns a Function[] where every element in add is now a {@link Multiply} of multiply and the function that was previously there in add
-	 *
 	 * @param multiply the Function[] which is distributed to every element in add
 	 * @param add      the Function[] which is being distributed to
 	 * @return Function[] where the multiply has been distributed to the add
@@ -99,7 +93,6 @@ public class FunctionTools {
 
 	/**
 	 * Appends two {@link Function} arrays
-	 *
 	 * @param first  first array
 	 * @param second second array
 	 * @return new combined array

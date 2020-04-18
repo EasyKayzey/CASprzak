@@ -118,7 +118,6 @@ public class Multiply extends CommutativeFunction {
 
 	/**
 	 * If {@link #functions} contains multiple of the same {@link Variable} multiplied by each other (e.g. x*x^3) then the exponents will be added and the terms will be combined into one element of {@link #functions}
-	 *
 	 * @return A new {@link Multiply} with all variable combined with added exponents
 	 */
 	public Multiply addExponents() {

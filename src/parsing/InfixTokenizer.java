@@ -17,7 +17,6 @@ public class InfixTokenizer {
 
 	/**
 	 * Tokenizes an input infix string into a format supported by the {@link PreProcessor}
-	 *
 	 * @param infix input string in infix
 	 * @param variables list of variables ordered by varID
 	 * @return array of infix tokens
@@ -43,7 +42,6 @@ public class InfixTokenizer {
 
 	/**
 	 * Turns pairs of variables like xy into x*y
-	 *
 	 * @param infix input string in infix
 	 * @return infix string with inserted asterisks
 	 */

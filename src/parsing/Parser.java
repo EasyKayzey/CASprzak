@@ -32,8 +32,7 @@ public class Parser {
 		return false;
 	}
 
-	/**
-	 * @param variable the character corresponding to the variable
+	/** @param variable the character corresponding to the variable
 	 * @return the ID of the variable, used internally
 	 * @throws IndexOutOfBoundsException if no such variable exists
 	 */

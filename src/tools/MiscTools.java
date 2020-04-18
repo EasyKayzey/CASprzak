@@ -8,7 +8,6 @@ public class MiscTools {
 
 	/**
 	 * Returns n factorial (n!)
-	 *
 	 * @param n the number
 	 * @return n!
 	 */
@@ -23,7 +22,6 @@ public class MiscTools {
 
 	/**
 	 * Returns the location of a {@link Function} in its class-based sort order (see {@link Function#sortOrder})
-	 *
 	 * @param function the function whose class order is to be found
 	 * @return location in {@link Function#sortOrder}
 	 */

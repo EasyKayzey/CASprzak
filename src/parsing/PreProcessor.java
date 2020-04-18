@@ -21,7 +21,6 @@ public class PreProcessor {
 
 	/**
 	 * Sets the variables of the preprocessor
-	 *
 	 * @param variables array of variables
 	 */
 	public static void setVariables(char[] variables) {
@@ -30,7 +29,6 @@ public class PreProcessor {
 
 	/**
 	 * Checks if a given string is an operator
-	 *
 	 * @param input possible operator
 	 * @return true if in {@link #operations}
 	 */
@@ -43,7 +41,6 @@ public class PreProcessor {
 
 	/**
 	 * Turns an infix string to a postfix array
-	 *
 	 * @param infix input string in infix
 	 * @return array of postfix tokens
 	 */

@@ -36,7 +36,6 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 
 	/**
 	 * Returns a String representation of the Function
-	 *
 	 * @return String representation of function
 	 */
 	public abstract String toString();
@@ -49,7 +48,6 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 
 	/**
 	 * Simplifies a {@link Function} multiple times
-	 *
 	 * @param times the amount of times it is simplified
 	 * @return the simplified {@link Function}
 	 */
@@ -66,7 +64,6 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 
 	/**
 	 * Returns the derivative of the function, simplified
-	 *
 	 * @param varID the ID of the variable being differentiated (see {@link Parser#getVarID(char)}).
 	 * @return the derivative of the {@link Function} it is called on, simplified
 	 */
@@ -90,7 +87,6 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 
 	/**
 	 * Substitutes a new {@link Function} into a variable
-	 *
 	 * @param varID     the variable to be substituted into
 	 * @param toReplace the {@link Function} that will be substituted
 	 * @return the new {@link Function} after all substitutions are preformed
@@ -107,7 +103,6 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 
 	/**
 	 * Simplifies the two functions, then compares them with {@link #equals(Function)}
-	 *
 	 * @param that the object compared to
 	 * @return true if they're equal
 	 */
@@ -119,7 +114,6 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 
 	/**
 	 * Used internally for comparing two functions of **the same exact type**
-	 *
 	 * @param that the {@link Function} compared to
 	 * @return comparison
 	 */
@@ -127,7 +121,6 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 
 	/**
 	 * Two different Function types are sorted according to {@link #sortOrder} and {@link MiscTools#findClassValue(Function)}, and same types are sorted using {@link #compareSelf(Function)}
-	 *
 	 * @param that the {@link Function} compared to
 	 * @return comparison
 	 */

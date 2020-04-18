@@ -11,7 +11,6 @@ public class SingleVariableSolver {
 
 	/**
 	 * Does one iteration of Newton's method for a given {@link Function} at an given point
-	 *
 	 * @param expression the function that is iterated on
 	 * @param value      the initial approximation of the root
 	 * @return a better approximate of the root based on the value provided
@@ -22,7 +21,6 @@ public class SingleVariableSolver {
 
 	/**
 	 * Gives an approximate root of a {@link Function} using {@link #newtonsMethod} for the initialPoint after a specified amount of runs
-	 *
 	 * @param expression   the function whose root is being found
 	 * @param initialPoint the initial approximation of the root
 	 * @param runs         the amount of times that {@link #newtonsMethod} is ran recursively
@@ -43,7 +41,6 @@ public class SingleVariableSolver {
 
 	/**
 	 * Gives an approximate root of a {@link Function} using {@link #newtonsMethod} for the initialPoint after 100 runs
-	 *
 	 * @param expression   the function whose root is being found
 	 * @param initialPoint the initial approximation of the root
 	 * @return the approximate solution for a root of the function
@@ -54,7 +51,6 @@ public class SingleVariableSolver {
 
 	/**
 	 * Gives approximate roots of a {@link Function} using {@link #newtonsMethod} in a range of values after a specified amount of runs
-	 *
 	 * @param expression the function whose roots are being found
 	 * @param lower      the lower bound of the values that will be searched for roots
 	 * @param upper      the upper bound of the values that will be searched for roots
@@ -88,7 +84,6 @@ public class SingleVariableSolver {
 
 	/**
 	 * Gives approximate roots of a {@link Function} using {@link #newtonsMethod} in a range of values after 1000 runs
-	 *
 	 * @param expression the function whose roots are being found
 	 * @param lower      the lower bound of the values that will be searched for roots
 	 * @param upper      the upper bound of the values that will be searched for roots

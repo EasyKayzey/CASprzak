@@ -9,7 +9,6 @@ public class SolverTools {
 
 	/**
 	 * Returns a list of Doubles which is a range slit into a certain amount of sections
-	 *
 	 * @param upper    the upper bound of the range
 	 * @param lower    the lower bound of the range
 	 * @param sections the amount of sections that the range is split into
@@ -24,7 +23,6 @@ public class SolverTools {
 
 	/**
 	 * Removes all NaNs from a specified List
-	 *
 	 * @param values the List from which the NaNs will be removed
 	 */
 	public static void nanRemover(List<Double> values) {
@@ -38,7 +36,6 @@ public class SolverTools {
 
 	/**
 	 * Removes a number from a List if that number is adjacent to the same number within a tolerance of 1E-15
-	 *
 	 * @param values the List from which the repeated values are removed
 	 */
 	public static void removeRepeatsInOrder(List<Double> values) {

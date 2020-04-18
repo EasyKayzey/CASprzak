@@ -16,7 +16,6 @@ public class FunctionMaker {
 
 	/**
 	 * Returns a new  {@link Constant}
-	 *
 	 * @param constant value of constant
 	 * @return new {@link Constant}
 	 */
@@ -26,7 +25,6 @@ public class FunctionMaker {
 
 	/**
 	 * Returns a new special {@link Constant} like "e" or "pi"
-	 *
 	 * @param constantString string of constant
 	 * @return new {@link Constant}
 	 */
@@ -36,7 +34,6 @@ public class FunctionMaker {
 
 	/**
 	 * Returns a new {@link Variable} with a varID and includes the variable names
-	 *
 	 * @param varID    ID of variable
 	 * @param varNames array of variable names
 	 * @return new {@link Variable}
@@ -51,7 +48,6 @@ public class FunctionMaker {
 
 	/**
 	 * Returns a {@link Function} corresponding to a "unitary" operation string
-	 *
 	 * @param functionName the string of the operation (e.g. "-" or "csc")
 	 * @param function     the {@link Function} to be operated on
 	 * @return new {@link Function}
@@ -96,7 +92,6 @@ public class FunctionMaker {
 	/**
 	 * Returns a {@link Function} corresponding to a "binary" operation string
 	 * NOTE: The functions are sometimes in a weird order for non-commutative types, so always check the constructors
-	 *
 	 * @param functionName the string of the operation (e.g. "*" or "logb")
 	 * @param function1    one {@link Function} to be operated on
 	 * @param function2    another {@link Function} to be operated on

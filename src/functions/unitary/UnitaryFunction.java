@@ -28,12 +28,21 @@ public abstract class UnitaryFunction extends Function {
 		return newFunction;
 	}
 
+	/**
+	 * Returns an instance of this {@link Function}
+	 * @param function Constructor parameter
+	 * @return an instance of this Function
+	 */
 	public abstract UnitaryFunction me(Function function);
 
 	public UnitaryFunction clone() {
 		return me(function.clone());
 	}
 
+	/**
+	 * Returns the {@link UnitaryFunction} with {@link #function}.{@link #simplify()}
+	 * @return the {@link UnitaryFunction} with {@link #function}.{@link #simplify()}
+	 */
 	public UnitaryFunction simplifyInternal() {
 		return me(function.simplify());
 	}

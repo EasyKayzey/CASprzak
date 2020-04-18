@@ -20,6 +20,11 @@ public class Coth extends UnitaryFunction {
 		return new Multiply(new Constant(-1), function.getSimplifiedDerivative(varID), new Pow(new Constant(2), new Csch(function)));
 	}
 
+	/**
+	 * Returns the hyperbolic cotangent of the stored {@link #function} evaluated
+	 * @param variableValues The values of the variables of the {@link Function} at the point
+	 * @return the coth of {@link #function} evaluated
+	 */
 	@Override
 	public double evaluate(double... variableValues) {
 		return 1 / Math.tanh(function.evaluate(variableValues));

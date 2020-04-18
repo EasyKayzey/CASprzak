@@ -16,6 +16,11 @@ public class Atan extends UnitaryFunction {
 		super(function);
 	}
 
+	/**
+	 * Returns the inverse tangent of the stored {@link #function} evaluated
+	 * @param variableValues The values of the variables of the {@link Function} at the point
+	 * @return the arctan of {@link #function} evaluated
+	 */
 	@Override
 	public double evaluate(double... variableValues) {
 		return Math.atan(function.evaluate(variableValues));

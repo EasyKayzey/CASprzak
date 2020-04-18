@@ -21,6 +21,11 @@ public class Acosh extends UnitaryFunction {
 		return new Multiply(function.getSimplifiedDerivative(varID), new Pow(new Constant(-0.5), new Add(new Constant(1), new Multiply(new Constant(-1), new Pow(new Constant(2), function)))));
 	}
 
+	/**
+	 * Returns the inverse hyperbolic cosine of the stored {@link #function} evaluated
+	 * @param variableValues The values of the variables of the {@link Function} at the point
+	 * @return the arccosh of {@link #function} evaluated
+	 */
 	@Override
 	public double evaluate(double... variableValues) {
 		double functionEvaluated = function.evaluate(variableValues);

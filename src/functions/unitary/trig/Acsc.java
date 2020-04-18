@@ -27,6 +27,11 @@ public class Acsc extends UnitaryFunction {
 		return new Multiply(new Constant(-1), function.getSimplifiedDerivative(varID), new Pow(new Constant(-1), new Multiply(new Abs(function), new Pow(new Constant(0.5), new Add(new Pow(new Constant(2), function), new Constant(-1))))));
 	}
 
+	/**
+	 * Returns the inverse hyperbolic cosecant of the stored {@link #function} evaluated
+	 * @param variableValues The values of the variables of the {@link Function} at the point
+	 * @return the arccsc of {@link #function} evaluated
+	 */
 	@SuppressWarnings("RedundantSuppression")
 	@Override
 	public double evaluate(double... variableValues) {

@@ -16,6 +16,11 @@ public class Asin extends UnitaryFunction {
 		super(function);
 	}
 
+	/**
+	 * Returns the inverse sine of the stored {@link #function} evaluated
+	 * @param variableValues The values of the variables of the {@link Function} at the point
+	 * @return the sin of {@link #function} evaluated
+	 */
 	@Override
 	public double evaluate(double... variableValues) {
 		return Math.asin(function.evaluate(variableValues));

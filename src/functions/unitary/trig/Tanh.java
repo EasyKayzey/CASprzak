@@ -15,6 +15,11 @@ public class Tanh extends UnitaryFunction {
 		super(function);
 	}
 
+	/**
+	 * Returns the hyperbolic tangent of the stored {@link #function} evaluated
+	 * @param variableValues The values of the variables of the {@link Function} at the point
+	 * @return the tanh of {@link #function} evaluated
+	 */
 	@Override
 	public double evaluate(double... variableValues) {
 		return Math.tanh(function.evaluate(variableValues));

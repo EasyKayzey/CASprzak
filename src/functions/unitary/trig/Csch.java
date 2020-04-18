@@ -19,6 +19,11 @@ public class Csch extends UnitaryFunction {
 		return new Multiply(new Constant(-1), function.getSimplifiedDerivative(varID), new Csch(function), new Coth(function));
 	}
 
+	/**
+	 * Returns the hyperbolic cosecant of the stored {@link #function} evaluated
+	 * @param variableValues The values of the variables of the {@link Function} at the point
+	 * @return the csch of {@link #function} evaluated
+	 */
 	@Override
 	public double evaluate(double... variableValues) {
 		return 1 / Math.sinh(function.evaluate(variableValues));

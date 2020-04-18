@@ -14,6 +14,11 @@ public class Csc extends UnitaryFunction {
 		super(function);
 	}
 
+	/**
+	 * Returns the cosecant of the stored {@link #function} evaluated
+	 * @param variableValues The values of the variables of the {@link Function} at the point
+	 * @return the csc of {@link #function} evaluated
+	 */
 	@Override
 	public double evaluate(double... variableValues) {
 		return 1 / Math.sin(function.evaluate(variableValues));

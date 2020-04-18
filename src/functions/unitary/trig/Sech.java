@@ -19,6 +19,11 @@ public class Sech extends UnitaryFunction {
 		return new Multiply(new Constant(-1), function.getSimplifiedDerivative(varID), new Sech(function), new Tanh(function));
 	}
 
+	/**
+	 * Returns the hyperbolic secant of the stored {@link #function} evaluated
+	 * @param variableValues The values of the variables of the {@link Function} at the point
+	 * @return the sech of {@link #function} evaluated
+	 */
 	@Override
 	public double evaluate(double... variableValues) {
 		return 1 / Math.cosh(function.evaluate(variableValues));

@@ -16,6 +16,11 @@ public class Acos extends UnitaryFunction {
 		super(function);
 	}
 
+	/**
+	 * Returns the inverse cosine of the stored {@link #function} evaluated
+	 * @param variableValues The values of the variables of the {@link Function} at the point
+	 * @return the arccos of {@link #function} evaluated
+	 */
 	@Override
 	public double evaluate(double... variableValues) {
 		return Math.acos(function.evaluate(variableValues));

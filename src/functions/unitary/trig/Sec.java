@@ -13,6 +13,11 @@ public class Sec extends UnitaryFunction {
 		super(function);
 	}
 
+	/**
+	 * Returns the secant of the stored {@link #function} evaluated
+	 * @param variableValues The values of the variables of the {@link Function} at the point
+	 * @return the sec of {@link #function} evaluated
+	 */
 	@Override
 	public double evaluate(double... variableValues) {
 		return 1 / Math.cos(function.evaluate(variableValues));

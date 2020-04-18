@@ -13,6 +13,11 @@ public class Cosh extends UnitaryFunction {
 		super(function);
 	}
 
+	/**
+	 * Returns the hyperbolic cosine of the stored {@link #function} evaluated
+	 * @param variableValues The values of the variables of the {@link Function} at the point
+	 * @return the cosh of {@link #function} evaluated
+	 */
 	@Override
 	public double evaluate(double... variableValues) {
 		return Math.cosh(function.evaluate(variableValues));

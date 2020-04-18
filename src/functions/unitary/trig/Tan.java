@@ -15,6 +15,11 @@ public class Tan extends UnitaryFunction {
 		super(function);
 	}
 
+	/**
+	 * Returns the tangent of the stored {@link #function} evaluated
+	 * @param variableValues The values of the variables of the {@link Function} at the point
+	 * @return the tan of {@link #function} evaluated
+	 */
 	@Override
 	public double evaluate(double... variableValues) {
 		return Math.tan(function.evaluate(variableValues));

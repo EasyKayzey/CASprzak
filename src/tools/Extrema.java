@@ -9,6 +9,13 @@ public class Extrema {
 
     private Extrema(){}
 
+    /**
+     * Returns the local minima of a {@link Function} function on a specified range
+     * @param function The {@link Function} whose minima is being found
+     * @param lowerBound The lowerbound of the range
+     * @param upperBound The upperbound of the range
+     * @return the local minima of function on the specified range
+     */
     public static double findLocalMinima(Function function, double lowerBound, double upperBound) {
         double[] criticalPoints = SingleVariableSolver.getSolutionsRange(function.getDerivative(0), lowerBound, upperBound);
         if (criticalPoints.length == 0) return Double.NaN;
@@ -37,6 +44,13 @@ public class Extrema {
         return secondDerivativeIsPositive.get(smallest);
     }
 
+    /**
+     * Returns the local maxima of a {@link Function} function on a specified range
+     * @param function The {@link Function} whose maxima is being found
+     * @param lowerBound The lowerbound of the range
+     * @param upperBound The upperbound of the range
+     * @return the local maxima of function on the specified range
+     */
     public static double findLocalMaxima(Function function, double lowerBound, double upperBound) {
         double[] criticalPoints = SingleVariableSolver.getSolutionsRange(function.getDerivative(0), lowerBound, upperBound);
         if (criticalPoints.length == 0) return Double.NaN;
@@ -65,6 +79,13 @@ public class Extrema {
         return secondDerivativeIsNegative.get(largest);
     }
 
+    /**
+     * Returns any minima of a {@link Function} function on a specified range
+     * @param function The {@link Function} whose minima is being found
+     * @param lowerBound The lowerbound of the range
+     * @param upperBound The upperbound of the range
+     * @return any minima of function on the specified range
+     */
     public static double[] findAnyMinima(Function function, double lowerBound, double upperBound) {
         double[] criticalPoints = SingleVariableSolver.getSolutionsRange(function.getDerivative(0), lowerBound, upperBound);
         if (criticalPoints.length == 0) return null;
@@ -83,6 +104,13 @@ public class Extrema {
 
     }
 
+    /**
+     * Returns any maxima of a {@link Function} function on a specified range
+     * @param function The {@link Function} whose maxima is being found
+     * @param lowerBound The lowerbound of the range
+     * @param upperBound The upperbound of the range
+     * @return any maxima of function on the specified range
+     */
     public static double[] findAnyMaxima(Function function, double lowerBound, double upperBound) {
         double[] criticalPoints = SingleVariableSolver.getSolutionsRange(function.getDerivative(0), lowerBound, upperBound);
         if (criticalPoints.length == 0) return null;
@@ -101,6 +129,13 @@ public class Extrema {
 
     }
 
+    /**
+     * Returns any inflection point of a {@link Function} function on a specified range
+     * @param function The {@link Function} whose inflection points are being found
+     * @param lowerBound The lowerbound of the range
+     * @param upperBound The upperbound of the range
+     * @return any inflection point of function on the specified range
+     */
     public static double[] findAnyInflectionPoints(Function function, double lowerBound, double upperBound) {
         double[] criticalPoints = SingleVariableSolver.getSolutionsRange(function.getDerivative(0), lowerBound, upperBound);
         if (criticalPoints.length == 0) return null;

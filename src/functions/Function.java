@@ -41,6 +41,10 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 	 */
 	public abstract String toString();
 
+	/**
+	 * Returns a clone of the {@link Function}
+	 * @return a clone of the Function
+	 */
 	public abstract Function clone();
 
 	/**

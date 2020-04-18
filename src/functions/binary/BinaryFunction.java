@@ -40,6 +40,13 @@ public abstract class BinaryFunction extends Function {
 	}
 
 	//TODO document all the "me"s
+
+	/**
+	 * Returns an instance of this {@link Function}
+	 * @param function1 Constructor parameter 1
+	 * @param function2 Constructor parameter 2
+	 * @return an instance of this Function
+	 */
 	public abstract BinaryFunction me(Function function1, Function function2);
 
 	/**

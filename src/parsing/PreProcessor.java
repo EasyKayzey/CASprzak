@@ -17,7 +17,7 @@ public class PreProcessor {
 	 */
 	protected static char[] variables;
 
-	private PreProcessor(){};
+	private PreProcessor(){}
 
 	/**
 	 * Sets the variables of the preprocessor

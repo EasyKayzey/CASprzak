@@ -5,7 +5,7 @@ import java.util.List;
 
 public class SolverTools {
 
-	private SolverTools(){};
+	private SolverTools(){}
 
 	/**
 	 * Returns a list of Doubles which is a range slit into a certain amount of sections

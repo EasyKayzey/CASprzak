@@ -12,7 +12,7 @@ public class Parser {
 
 	private static char[] variables = {'x', 'y', 'z'};
 
-	private Parser(){};
+	private Parser(){}
 
 	public static void setVariables(char... variables) {
 		Parser.variables = variables;

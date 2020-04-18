@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Extrema {
 
-    private Extrema(){};
+    private Extrema(){}
 
     public static double findLocalMinima(Function function, double lowerBound, double upperBound) {
         double[] criticalPoints = SingleVariableSolver.getSolutionsRange(function.getDerivative(0), lowerBound, upperBound);

@@ -9,7 +9,7 @@ import functions.special.Variable;
 
 public class TaylorSeries {
 
-    private TaylorSeries(){};
+    private TaylorSeries(){}
 
     public static Function makeTaylorSeries(Function function, int size) {
         Function[] taylorSeriesTerms = new Function[size];

@@ -7,7 +7,7 @@ import java.util.List;
 
 public class SingleVariableSolver {
 
-	private SingleVariableSolver(){};
+	private SingleVariableSolver(){}
 
 	/**
 	 * Does one iteration of Newton's method for a given {@link Function} at an given point

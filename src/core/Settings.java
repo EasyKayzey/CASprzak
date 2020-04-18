@@ -3,7 +3,7 @@ package core;
 @SuppressWarnings("CanBeFinal")
 public class Settings {
 
-	private Settings(){};
+	private Settings(){}
 
 	//	public static boolean debug = true;
 	public static boolean simplifyFunctionsOfConstants = true;

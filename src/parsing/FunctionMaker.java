@@ -12,6 +12,8 @@ import functions.unitary.trig.*;
 
 public class FunctionMaker {
 
+	private FunctionMaker(){};
+
 	/**
 	 * Returns a new  {@link Constant}
 	 *

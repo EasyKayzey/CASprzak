@@ -3,6 +3,9 @@ package tools;
 import functions.Function;
 
 public class MiscTools {
+
+	private MiscTools(){};
+
 	/**
 	 * Returns n factorial (n!)
 	 *

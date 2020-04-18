@@ -2,6 +2,9 @@ package core;
 
 @SuppressWarnings("CanBeFinal")
 public class Settings {
+
+	private Settings(){};
+
 	//	public static boolean debug = true;
 	public static boolean simplifyFunctionsOfConstants = true;
 	public static boolean distributeExponents = true;

@@ -13,6 +13,8 @@ public class InfixTokenizer {
 	private static final Pattern OOO4 = Pattern.compile("\\*");
 	private static final Pattern Splitter = Pattern.compile("\\s+|(((?<=\\W)(?=[\\w-])((?<!-)|(?!\\d))|(?<=\\w)(?=\\W))|(?<=[()])|(?=[()]))(?<![ .])(?![ .])");
 
+	private InfixTokenizer(){};
+
 	/**
 	 * Tokenizes an input infix string into a format supported by the {@link PreProcessor}
 	 *

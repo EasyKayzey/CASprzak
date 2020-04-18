@@ -5,6 +5,8 @@ import functions.commutative.Multiply;
 
 public class FunctionTools {
 
+	private FunctionTools(){};
+
 	/**
 	 * Deep-clones an array of Functions
 	 *

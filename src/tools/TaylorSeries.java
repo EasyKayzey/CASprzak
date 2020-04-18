@@ -8,6 +8,9 @@ import functions.special.Constant;
 import functions.special.Variable;
 
 public class TaylorSeries {
+
+    private TaylorSeries(){};
+
     public static Function makeTaylorSeries(Function function, int size) {
         Function[] taylorSeriesTerms = new Function[size];
         for (int i = 0; i < size; i++){

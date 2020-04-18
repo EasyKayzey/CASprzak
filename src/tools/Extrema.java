@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Extrema {
+
+    private Extrema(){};
+
     public static double findLocalMinima(Function function, double lowerBound, double upperBound) {
         double[] criticalPoints = SingleVariableSolver.getSolutionsRange(function.getDerivative(0), lowerBound, upperBound);
         if (criticalPoints.length == 0) return Double.NaN;

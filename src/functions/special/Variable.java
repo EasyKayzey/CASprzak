@@ -4,6 +4,9 @@ import core.Settings;
 import functions.Function;
 
 public class Variable extends Function {
+	/**
+	 * The array containing all the variable characters
+	 */
 	protected static char[] varNames;
 
 	private final int varID;

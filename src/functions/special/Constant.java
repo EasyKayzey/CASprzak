@@ -46,16 +46,26 @@ public class Constant extends Function {
 		constant = specialConstants[constantID];
 	}
 
-	public static boolean isSpecialConstant(String s) {
+	/**
+	 * Returns true if string is a special Constant
+	 * @param string The string that is being checked if it is a special constant
+	 * @return true if string is a special Constant
+	 */
+	public static boolean isSpecialConstant(String string) {
 		for (String specialConstantString : specialConstantStrings) {
-			if (specialConstantString.equals(s)) return true;
+			if (specialConstantString.equals(string)) return true;
 		}
 		return false;
 	}
 
-	public static int getSpecialConstantID(String s) {
+	/**
+	 * Returns the {@link #constantID} for a String string
+	 * @param string The String whose {@link #constantID} is returned
+	 * @return the {@link #constantID} for string
+	 */
+	public static int getSpecialConstantID(String string) {
 		for (int i = 0; i < specialConstantStrings.length; i++) {
-			if (specialConstantStrings[i].equals(s)) return i;
+			if (specialConstantStrings[i].equals(string)) return i;
 		}
 		return -1;
 	}

@@ -52,6 +52,10 @@ public abstract class CommutativeFunction extends Function {
 	 */
 	public abstract CommutativeFunction simplifyElements();
 
+	/**
+	 * Returns current {@link CommutativeFunction} after simplifying the {@link #identityValue}
+	 * @return current {@link CommutativeFunction} after simplifying the {@link #identityValue}
+	 */
 	public CommutativeFunction simplifyIdentity() {
 		Function[] toPut = getFunctions();
 		for (int i = 0; i < toPut.length; i++) {
@@ -65,8 +69,13 @@ public abstract class CommutativeFunction extends Function {
 		return me(toPut);
 	}
 
+	/**
+	 * Returns current {@link CommutativeFunction} after combined the {@link Constant}s
+	 * @return current {@link CommutativeFunction} after combined the {@link Constant}s
+	 */
 	public abstract CommutativeFunction simplifyConstants();
 
+	//TODO I (Michael) don't know what this does and don't feel like reading it
 	public CommutativeFunction simplifyPull() {
 		for (int i = 0; i < functions.length; i++) {
 			if (this.getClass().equals(functions[i].getClass())) {

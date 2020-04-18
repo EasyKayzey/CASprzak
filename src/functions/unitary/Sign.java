@@ -5,6 +5,10 @@ import functions.commutative.Multiply;
 import functions.special.Constant;
 
 public class Sign extends UnitaryFunction {
+	/**
+	 * Constructs a new Sign
+	 * @param function The function which sign is operating on
+	 */
 	public Sign(Function function) {
 		super(function);
 	}

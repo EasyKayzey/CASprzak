@@ -6,6 +6,11 @@ public abstract class BinaryFunction extends Function {
 	protected final Function function1;
 	protected final Function function2;
 
+	/**
+	 * Constructs a new BinaryFunction
+	 * @param function1 The first {@link Function} in the binary operation
+	 * @param function2 The second {@link Function} in the binary operation
+	 */
 	public BinaryFunction(Function function1, Function function2) {
 		this.function1 = function1;
 		this.function2 = function2;

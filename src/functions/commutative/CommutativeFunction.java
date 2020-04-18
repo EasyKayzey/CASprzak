@@ -19,6 +19,10 @@ public abstract class CommutativeFunction extends Function {
 	 */
 	protected double identityValue;
 
+	/**
+	 * Constructs a new CommutativeFunction
+	 * @param functions The {@link Function}s that will be acted on
+	 */
 	public CommutativeFunction(Function... functions) {
 		this.functions = functions;
 		Arrays.sort(this.functions);

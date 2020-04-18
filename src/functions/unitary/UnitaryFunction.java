@@ -7,6 +7,10 @@ import functions.special.Constant;
 public abstract class UnitaryFunction extends Function {
 	protected final Function function;
 
+	/**
+	 * Constructs a new UnitaryFunction
+	 * @param function The {@link Function} which will be operated on
+	 */
 	public UnitaryFunction(Function function) {
 		this.function = function;
 	}

@@ -33,6 +33,10 @@ public abstract class CommutativeFunction extends Function {
 		return this.simplifyInternal().simplifyOneElement();
 	}
 
+	/**
+	 * Returns current {@link CommutativeFunction} after {@link #simplifyElements()}, {@link #simplifyPull()}, {@link #simplifyIdentity()}, and {@link #simplifyConstants()}
+	 * @return the simplified {@link CommutativeFunction}
+	 */
 	public CommutativeFunction simplifyInternal() {
 		CommutativeFunction current = this;
 		current = current.simplifyElements();
@@ -42,6 +46,10 @@ public abstract class CommutativeFunction extends Function {
 		return current;
 	}
 
+	/**
+	 * Returns current {@link CommutativeFunction} after simplifying each {@link Function} in {@link #functions}
+	 * @return current {@link CommutativeFunction} after simplifying each {@link Function} in {@link #functions}
+	 */
 	public abstract CommutativeFunction simplifyElements();
 
 	public CommutativeFunction simplifyIdentity() {

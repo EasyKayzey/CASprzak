@@ -31,6 +31,6 @@ public class Extrema {
                 smallest = i;
             }
         }
-        return secondDerivativeIsPositive.get(i);
+        return secondDerivativeIsPositive.get(smallest);
     }
 }

@@ -61,4 +61,22 @@ public class Extrema {
         }
         return secondDerivativeIsNegative.get(largest);
     }
+
+    public static double[] findAnyMinima(Function function, double lowerBound, double upperBound) {
+        double[] criticalPoints = SingleVariableSolver.getSolutionsRange(function.getDerivative(0), lowerBound, upperBound);
+        if (criticalPoints.length == 0) return null;
+
+        List<Double> secondDerivativeIsPositive = new ArrayList<>();
+        for (double criticalPoint : criticalPoints) {
+            if (function.getNthDerivative(0, 2).evaluate(criticalPoint) > 0) {
+                secondDerivativeIsPositive.add(criticalPoint);
+            }
+        }
+        double[] secondDerivativeIsPositivePoints = new double[secondDerivativeIsPositive.size()];
+        for (int i = 0; i < secondDerivativeIsPositive.size(); i++) {
+            secondDerivativeIsPositivePoints[i] = secondDerivativeIsPositive.get(i);
+        }
+        return secondDerivativeIsPositivePoints;
+
+    }
 }

@@ -1,6 +1,8 @@
 import parsing.Parser;
 import functions.Function;
 import org.junit.jupiter.api.Test;
+import tools.Extrema;
+import tools.SingleVariableSolver;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

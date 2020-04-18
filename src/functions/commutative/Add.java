@@ -84,6 +84,10 @@ public class Add extends CommutativeFunction {
 			return clone();
 	}
 
+	/**
+	 * Returns a {@link Add} where like terms are added together. Example: {@code 2x+x=3x}
+	 * @return a {@link Add} where like terms are added together
+	 */
 	public Add combineLikeTerms() {
 		Function[] combinedTerms = FunctionTools.deepClone(functions);
 		for (int a = 0; a < combinedTerms.length; a++) {

@@ -8,6 +8,10 @@ import functions.special.Constant;
 import functions.unitary.UnitaryFunction;
 
 public class Asinh extends UnitaryFunction {
+	/**
+	 * Constructs a new Asinh
+	 * @param function The function which arcsinh is operating on
+	 */
 	public Asinh(Function function) {
 		super(function);
 	}

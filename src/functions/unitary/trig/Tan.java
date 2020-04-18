@@ -7,6 +7,10 @@ import functions.special.Constant;
 import functions.unitary.UnitaryFunction;
 
 public class Tan extends UnitaryFunction {
+	/**
+	 * Constructs a new Tan
+	 * @param function The function which tan is operating on
+	 */
 	public Tan(Function function) {
 		super(function);
 	}

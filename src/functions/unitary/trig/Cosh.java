@@ -5,6 +5,10 @@ import functions.commutative.Multiply;
 import functions.unitary.UnitaryFunction;
 
 public class Cosh extends UnitaryFunction {
+	/**
+	 * Constructs a new Cosh
+	 * @param function The function which cosh is operating on
+	 */
 	public Cosh(Function function) {
 		super(function);
 	}

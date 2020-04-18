@@ -8,6 +8,10 @@ import functions.special.Constant;
 import functions.unitary.UnitaryFunction;
 
 public class Atanh extends UnitaryFunction {
+	/**
+	 * Constructs a new Atanh
+	 * @param function The function which arctanh is operating on
+	 */
 	public Atanh(Function function) {
 		super(function);
 	}

@@ -5,6 +5,10 @@ import functions.commutative.Multiply;
 import functions.unitary.UnitaryFunction;
 
 public class Sin extends UnitaryFunction {
+	/**
+	 * Constructs a new Sin
+	 * @param function The function which sin is operating on
+	 */
 	public Sin(Function function) {
 		super(function);
 	}

@@ -7,6 +7,10 @@ import functions.special.Constant;
 import functions.unitary.UnitaryFunction;
 
 public class Cot extends UnitaryFunction {
+	/**
+	 * Constructs a new Cot
+	 * @param function The function which cot is operating on
+	 */
 	public Cot(Function function) {
 		super(function);
 	}

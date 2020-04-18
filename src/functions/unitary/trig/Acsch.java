@@ -8,6 +8,10 @@ import functions.special.Constant;
 import functions.unitary.UnitaryFunction;
 
 public class Acsch extends UnitaryFunction {
+	/**
+	 * Constructs a new Acsch
+	 * @param function The function which arccsch is operating on
+	 */
 	public Acsch(Function function) {
 		super(function);
 	}

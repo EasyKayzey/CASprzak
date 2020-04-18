@@ -7,6 +7,10 @@ import functions.special.Constant;
 import functions.unitary.UnitaryFunction;
 
 public class Coth extends UnitaryFunction {
+	/**
+	 * Constructs a new Coth
+	 * @param function The function which coth is operating on
+	 */
 	public Coth(Function function) {
 		super(function);
 	}

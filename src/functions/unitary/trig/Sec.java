@@ -5,6 +5,10 @@ import functions.commutative.Multiply;
 import functions.unitary.UnitaryFunction;
 
 public class Sec extends UnitaryFunction {
+	/**
+	 * Constructs a new Sec
+	 * @param function The function which sec is operating on
+	 */
 	public Sec(Function function) {
 		super(function);
 	}

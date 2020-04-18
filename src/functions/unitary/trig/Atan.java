@@ -8,6 +8,10 @@ import functions.special.Constant;
 import functions.unitary.UnitaryFunction;
 
 public class Atan extends UnitaryFunction {
+	/**
+	 * Constructs a new Atan
+	 * @param function The function which arctan is operating on
+	 */
 	public Atan(Function function) {
 		super(function);
 	}

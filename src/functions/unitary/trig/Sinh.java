@@ -5,6 +5,10 @@ import functions.commutative.Multiply;
 import functions.unitary.UnitaryFunction;
 
 public class Sinh extends UnitaryFunction {
+	/**
+	 * Constructs a new Sinh
+	 * @param function The function which sinh is operating on
+	 */
 	public Sinh(Function function) {
 		super(function);
 	}

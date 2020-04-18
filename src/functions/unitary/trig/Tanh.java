@@ -7,6 +7,10 @@ import functions.special.Constant;
 import functions.unitary.UnitaryFunction;
 
 public class Tanh extends UnitaryFunction {
+	/**
+	 * Constructs a new Tanh
+	 * @param function The function which tanh is operating on
+	 */
 	public Tanh(Function function) {
 		super(function);
 	}

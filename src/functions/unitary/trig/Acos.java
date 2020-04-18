@@ -8,6 +8,10 @@ import functions.special.Constant;
 import functions.unitary.UnitaryFunction;
 
 public class Acos extends UnitaryFunction {
+	/**
+	 * Constructs a new Acos
+	 * @param function The function which arccos is operating on
+	 */
 	public Acos(Function function) {
 		super(function);
 	}

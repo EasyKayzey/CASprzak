@@ -8,6 +8,10 @@ import functions.special.Constant;
 import functions.unitary.UnitaryFunction;
 
 public class Asin extends UnitaryFunction {
+	/**
+	 * Constructs a new Asin
+	 * @param function The function which arcsin is operating on
+	 */
 	public Asin(Function function) {
 		super(function);
 	}

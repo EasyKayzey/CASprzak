@@ -6,6 +6,10 @@ import functions.special.Constant;
 import functions.unitary.UnitaryFunction;
 
 public class Csc extends UnitaryFunction {
+	/**
+	 * Constructs a new Csc
+	 * @param function The function which csc is operating on
+	 */
 	public Csc(Function function) {
 		super(function);
 	}

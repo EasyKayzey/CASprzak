@@ -9,6 +9,10 @@ import functions.unitary.Abs;
 import functions.unitary.UnitaryFunction;
 
 public class Asec extends UnitaryFunction {
+	/**
+	 * Constructs a new Asec
+	 * @param function The function which arcsec is operating on
+	 */
 	public Asec(Function function) {
 		super(function);
 	}

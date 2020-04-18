@@ -8,6 +8,10 @@ import functions.special.Constant;
 import functions.unitary.UnitaryFunction;
 
 public class Acot extends UnitaryFunction {
+	/**
+	 * Constructs a new Acot
+	 * @param function The function which arccot is operating on
+	 */
 	public Acot(Function function) {
 		super(function);
 	}

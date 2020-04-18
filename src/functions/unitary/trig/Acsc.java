@@ -9,6 +9,10 @@ import functions.unitary.Abs;
 import functions.unitary.UnitaryFunction;
 
 public class Acsc extends UnitaryFunction {
+	/**
+	 * Constructs a new Acsc
+	 * @param function The function which arccsc is operating on
+	 */
 	public Acsc(Function function) {
 		super(function);
 	}

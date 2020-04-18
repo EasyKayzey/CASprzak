@@ -6,6 +6,10 @@ import functions.special.Constant;
 import functions.unitary.UnitaryFunction;
 
 public class Cos extends UnitaryFunction {
+	/**
+	 * Constructs a new Cos
+	 * @param function The function which cos is operating on
+	 */
 	public Cos(Function function) {
 		super(function);
 	}

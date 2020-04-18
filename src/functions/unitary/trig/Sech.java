@@ -6,6 +6,10 @@ import functions.special.Constant;
 import functions.unitary.UnitaryFunction;
 
 public class Sech extends UnitaryFunction {
+	/**
+	 * Constructs a new Sech
+	 * @param function The function which sech is operating on
+	 */
 	public Sech(Function function) {
 		super(function);
 	}

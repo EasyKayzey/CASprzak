@@ -75,7 +75,10 @@ public abstract class CommutativeFunction extends Function {
 	 */
 	public abstract CommutativeFunction simplifyConstants();
 
-	//TODO I (Michael) don't know what this does and don't feel like reading it
+	/**
+	 * Returns current {@link CommutativeFunction} after instance of the same {@link CommutativeFunction} have been pulled out and each term added to {@link #functions}
+	 * @return current {@link CommutativeFunction} after instance of the same {@link CommutativeFunction} have been pulled out and each term added to {@link #functions}
+	 */
 	public CommutativeFunction simplifyPull() {
 		for (int i = 0; i < functions.length; i++) {
 			if (this.getClass().equals(functions[i].getClass())) {
@@ -88,6 +91,10 @@ public abstract class CommutativeFunction extends Function {
 			return (CommutativeFunction) clone();
 	}
 
+	/**
+	 * Returns identity {@link Constant} if {@link #functions} length is 0 or the {@link Function} if {@link #functions} length is 1
+	 * @return identity {@link Constant} if {@link #functions} length is 0 or the {@link Function} if {@link #functions} length is 1
+	 */
 	public Function simplifyOneElement() {
 		if (functions.length == 0)
 			return new Constant(identityValue);
@@ -100,6 +107,10 @@ public abstract class CommutativeFunction extends Function {
 	}
 
 
+	/**
+	 * Returns {@link #functions}
+	 * @return {@link #functions}
+	 */
 	public Function[] getFunctions() {
 		if (Settings.trustImmutability)
 			return functions;
@@ -107,11 +118,20 @@ public abstract class CommutativeFunction extends Function {
 			return FunctionTools.deepClone(functions);
 	}
 
+	/**
+	 * Returns the length of {@link #functions}
+	 * @return the length of {@link #functions}
+	 */
 	public int getFunctionsLength() {
 		return functions.length;
 	}
 
 
+	/**
+	 * Returns an instance of this {@link Function}
+	 * @param functions Constructor parameter
+	 * @return an instance of this Function
+	 */
 	public abstract CommutativeFunction me(Function... functions);
 
 	public Function substitute(int varID, Function toReplace) {

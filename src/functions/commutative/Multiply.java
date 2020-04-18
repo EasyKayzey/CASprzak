@@ -105,6 +105,10 @@ public class Multiply extends CommutativeFunction {
 			return clone();
 	}
 
+	/**
+	 * Returns true if the {@link Multiply} contains a 0 {@link Constant}
+	 * @return true if the {@link Multiply} contains a 0 {@link Constant}
+	 */
 	public boolean isTimesZero() {
 		for (Function function : functions) {
 			if (function instanceof Constant constant) {
@@ -147,6 +151,10 @@ public class Multiply extends CommutativeFunction {
 		return new Multiply(functions);
 	}
 
+	/**
+	 * Returns a {@link Function} where the rest of the multiple has been distributed to any {@link Add}. Example: {@code sin(y)*(x+2) = x*sin(y) + 2*sin(y)}
+	 * @return a {@link Function} where the rest of the multiple has been distributed to any {@link Add}
+	 */
 	public Function distributeAll() { //TODO this doesn't distribute completely
 		Function[] multiplyTerms = getFunctions();
 		Function[] addTerms;

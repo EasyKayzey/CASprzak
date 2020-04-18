@@ -7,6 +7,11 @@ import functions.special.Constant;
 import functions.unitary.Ln;
 
 public class Logb extends BinaryFunction {
+	/**
+	 * Constructs a new Logb
+	 * @param argument The argument of the logarithm
+	 * @param base The base of the logarithm
+	 */
 	public Logb(Function argument, Function base) {
 		super(argument, base);
 	}

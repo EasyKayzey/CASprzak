@@ -6,6 +6,10 @@ import functions.Function;
 import functions.special.Constant;
 
 public class Add extends CommutativeFunction {
+	/**
+	 * Constructs a new Add
+	 * @param functions The terms being added together
+	 */
 	public Add(Function... functions) {
 		super(functions);
 		identityValue = 0;

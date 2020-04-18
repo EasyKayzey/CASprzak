@@ -10,6 +10,10 @@ import functions.special.Variable;
 import java.util.Arrays;
 
 public class Multiply extends CommutativeFunction {
+	/**
+	 * Constructs a new Multiply
+	 * @param functions The terms being multiplied together
+	 */
 	public Multiply(Function... functions) {
 		super(functions);
 		identityValue = 1;

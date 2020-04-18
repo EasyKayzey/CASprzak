@@ -10,6 +10,11 @@ import functions.special.Variable;
 import functions.unitary.Ln;
 
 public class Pow extends BinaryFunction {
+	/**
+	 * Constructs a new Pow
+	 * @param exponent The exponent of the exponent
+	 * @param base The base of the exponent
+	 */
 	public Pow(Function exponent, Function base) {
 		super(exponent, base);
 	}

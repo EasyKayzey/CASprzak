@@ -16,7 +16,7 @@ public class SolverTest {
 
     @Test
     void simpleMinima() {
-        Function test = Parser.parse("x^2+-1");
+        Function test = Parser.parse("x^2-1");
         assertEquals(0, Extrema.findLocalMinima(test, -3,3));
     }
 

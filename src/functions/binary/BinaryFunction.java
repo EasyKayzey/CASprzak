@@ -24,6 +24,7 @@ public abstract class BinaryFunction extends Function {
 
 
 	/**
+	 * Returns the {@link Function} stored in {@link #function1}
 	 * @return the {@link Function} stored in {@link #function1}
 	 */
 	public Function getFunction1() {
@@ -31,6 +32,7 @@ public abstract class BinaryFunction extends Function {
 	}
 
 	/**
+	 * Returns the {@link Function} stored in {@link #function2}
 	 * @return the {@link Function} stored in {@link #function2}
 	 */
 	public Function getFunction2() {

@@ -97,4 +97,22 @@ public class Extrema {
         return secondDerivativeIsPositivePoints;
 
     }
+
+    public static double[] findAnyInflectionPoints(Function function, double lowerBound, double upperBound) {
+        double[] criticalPoints = SingleVariableSolver.getSolutionsRange(function.getDerivative(0), lowerBound, upperBound);
+        if (criticalPoints.length == 0) return null;
+
+        List<Double> secondDerivativeIsZero = new ArrayList<>();
+        for (double criticalPoint : criticalPoints) {
+            if (Math.abs(function.getNthDerivative(0, 2).evaluate(criticalPoint)) < 1E-5) {
+                secondDerivativeIsZero.add(criticalPoint);
+            }
+        }
+        double[] secondDerivativeIsPositivePoints = new double[secondDerivativeIsZero.size()];
+        for (int i = 0; i < secondDerivativeIsZero.size(); i++) {
+            secondDerivativeIsPositivePoints[i] = secondDerivativeIsZero.get(i);
+        }
+        return secondDerivativeIsPositivePoints;
+
+    }
 }

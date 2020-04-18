@@ -94,6 +94,11 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 	public abstract Function substitute(int varID, Function toReplace);
 
 
+	/**
+	 * Returns true when the two functions simplified are equal
+	 * @param that The {@link Function} that the current function is being checked equal to
+	 * @return true when the two functions are equal
+	 */
 	public abstract boolean equals(Function that);
 
 	/**

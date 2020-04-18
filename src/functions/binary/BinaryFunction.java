@@ -52,9 +52,9 @@ public abstract class BinaryFunction extends Function {
 
 
 	/**
-	 * Returns true when the specified {@link Function} equals the current {@link Function}. Two {@link BinaryFunction}s are equal if their stored instance functions are equal. Returns false otherwise.
-	 * @param that The function that the current Function is being compared to
-	 * @return true if the functions are equal
+	 * Returns true when the two functions simplified are equal
+	 * @param that The {@link Function} that the current function is being checked equal to
+	 * @return true when the two functions are equal
 	 */
 	public boolean equals(Function that) {
 		return this.getClass().equals(that.getClass()) && this.function1.equals(((BinaryFunction) that).function1) && this.function2.equals(((BinaryFunction) that).function2);

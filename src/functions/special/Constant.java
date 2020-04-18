@@ -5,11 +5,17 @@ import functions.Function;
 public class Constant extends Function {
 	private static final String[] specialConstantStrings = {"pi", "e"};
 	private static final double[] specialConstants = {Math.PI, Math.E};
+	/**
+	 * The numerical value of the constant
+	 */
 	public final double constant;
+	/**
+	 * The location of the Constant in {@link #specialConstants}
+	 */
 	public final int constantID;
 
 	/**
-	 * Constructs a new Constant
+	 * Constructs a new Constant from the specified numerical value
 	 * @param constant The numerical value of the constant
 	 */
 	public Constant(double constant) {
@@ -17,13 +23,22 @@ public class Constant extends Function {
 		this.constantID = -1;
 	}
 
+	/**
+	 * Constructs a new special Constant from its constantID
+	 * @param constantID The location of the Constant in {@link #specialConstants}
+	 * @param isSpecialConstant Whether or not the Constant is a special Constant
+	 */
 	public Constant(int constantID, boolean isSpecialConstant) {
 		if (!isSpecialConstant)
-			throw new IllegalArgumentException("This should never happen in Constant constructor");
+			throw new IllegalArgumentException("This constructor should not be called if the constant is not a special constant.\n");
 		this.constantID = constantID;
 		constant = specialConstants[constantID];
 	}
 
+	/**
+	 * Constructs a new special Constant from its String
+	 * @param constantString The string of the special Constant
+	 */
 	public Constant(String constantString) {
 		if (!isSpecialConstant(constantString))
 			throw new IllegalArgumentException(constantString + " is not a special constant.");

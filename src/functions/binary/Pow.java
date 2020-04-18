@@ -45,6 +45,10 @@ public class Pow extends BinaryFunction {
 		return current;
 	}
 
+	/**
+	 * Returns a {@link Function} where obvious exponents (ex: {@code (x+1)^1 or (x-1)^0}) have been simplified and {@link Constant} bases and {@link Constant} exponents (ex: {@code 2^7}) are simplified
+	 * @return a {@link Function} where obvious exponents and Functions of Constants are simplified
+	 */
 	public Function simplifyObviousExponentsAndFOC() { //FOC means Functions of Constants
 		if (function1 instanceof Constant constant) {
 			if (constant.constant == 0)
@@ -60,6 +64,10 @@ public class Pow extends BinaryFunction {
 			return clone();
 	}
 
+	/**
+	 * Returns a {@link Pow} where an exponent to an exponent has been simplified. Example: {@code (x^2)^3 = x^6}
+	 * @return a {@link Pow} where the exponents are multiplied
+	 */
 	public Pow multiplyExponents() {
 		if (function2 instanceof Pow) {
 			return new Pow(new Multiply(((Pow) function2).function1, function1), ((Pow) function2).function2);
@@ -70,6 +78,10 @@ public class Pow extends BinaryFunction {
 			return (Pow) clone();
 	}
 
+	/**
+	 * Returns a {@link Multiply} where the exponent is on each term. Example: {@code (xy)^2 = (x^2)(y^2) }
+	 * @return a {@link Multiply} with the exponent distributed
+	 */
 	public Multiply distributeExponents() {
 		return new Multiply(distributeExponentsArray());
 	}

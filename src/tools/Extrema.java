@@ -79,4 +79,22 @@ public class Extrema {
         return secondDerivativeIsPositivePoints;
 
     }
+
+    public static double[] findAnyMaxima(Function function, double lowerBound, double upperBound) {
+        double[] criticalPoints = SingleVariableSolver.getSolutionsRange(function.getDerivative(0), lowerBound, upperBound);
+        if (criticalPoints.length == 0) return null;
+
+        List<Double> secondDerivativeIsNegative = new ArrayList<>();
+        for (double criticalPoint : criticalPoints) {
+            if (function.getNthDerivative(0, 2).evaluate(criticalPoint) < 0) {
+                secondDerivativeIsNegative.add(criticalPoint);
+            }
+        }
+        double[] secondDerivativeIsPositivePoints = new double[secondDerivativeIsNegative.size()];
+        for (int i = 0; i < secondDerivativeIsNegative.size(); i++) {
+            secondDerivativeIsPositivePoints[i] = secondDerivativeIsNegative.get(i);
+        }
+        return secondDerivativeIsPositivePoints;
+
+    }
 }

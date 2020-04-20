@@ -107,7 +107,7 @@ public class Extrema {
     /**
      * Returns any maxima of a {@link Function} function on a specified range
      * @param function The {@link Function} whose maxima is being found
-     * @param lowerBound The lowerbound of the range
+     * @param lowerBound The lower bound of the range
      * @param upperBound The upperbound of the range
      * @return any maxima of function on the specified range
      */

@@ -7,17 +7,34 @@ import functions.special.Variable;
 import java.util.Stack;
 
 public class Parser {
-	public static final String[] binaryOperations = {"^", "*", "+", "logb"};
+	/**
+	 * A list of unitary operations
+	 */
 	public static final String[] unitaryOperations = {"-", "/", "sin", "cos", "tan", "log", "ln", "sqrt", "exp", "abs", "sign", "dirac", "sin", "cos", "tan", "csc", "sec", "cot", "asin", "acos", "atan", "acsc", "asec", "acot", "sinh", "cosh", "tanh", "csch", "sech", "coth", "asinh", "acosh", "atanh", "acsch", "asech", "acoth"};
 
+	/**
+	 * A list of binary operations
+	 */
+	public static final String[] binaryOperations = {"^", "*", "+", "logb"};
+
+	/**
+	 * The list of used variables, initially set to {@code {'x', 'y', 'z'}}
+	 */
 	private static char[] variables = {'x', 'y', 'z'};
 
-	private Parser(){}
-
+	/**
+	 * Sets {@link #variables} to something new
+	 * @param variables array of variables
+	 */
 	public static void setVariables(char... variables) {
 		Parser.variables = variables;
 	}
 
+	/**
+	 * Checks if a string is in {@link #unitaryOperations}
+	 * @param input operation
+	 * @return true if unitary
+	 */
 	public static boolean isUnitaryOperator(String input) {
 		for (String x : unitaryOperations) {
 			if (x.equals(input)) return true;
@@ -25,6 +42,11 @@ public class Parser {
 		return false;
 	}
 
+	/**
+	 * Checks if a string is in {@link #binaryOperations}
+	 * @param input operation
+	 * @return true if binary
+	 */
 	public static boolean isBinaryOperator(String input) {
 		for (String x : binaryOperations) {
 			if (x.equals(input)) return true;
@@ -44,12 +66,23 @@ public class Parser {
 		throw new IndexOutOfBoundsException("No variable " + variable + " found.");
 	}
 
+
+	/**
+	 * Parses infix using {@link parsing.PreProcessor} and {@link #parse(String[])}
+	 * @param infix infix string
+	 * @return a {@link functions.Function}
+	 */
 	public static Function parse(String infix) {
 		PreProcessor.setVariables(variables);
 		Variable.setVarNames(variables);
 		return Parser.parse(PreProcessor.toPostfix(infix));
 	}
 
+	/**
+	 * Parses an array of postfix tokens into a {@link functions.Function}
+	 * @param postfix array of tokens in postfix
+	 * @return a {@link functions.Function}
+	 */
 	public static Function parse(String[] postfix) {
 		Stack<Function> functionStack = new Stack<>();
 		for (String token : postfix) {

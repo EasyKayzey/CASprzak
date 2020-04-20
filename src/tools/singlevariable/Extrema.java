@@ -1,4 +1,4 @@
-package tools;
+package tools.singlevariable;
 
 import functions.Function;
 
@@ -17,7 +17,7 @@ public class Extrema {
      * @return the local minima of function on the specified range
      */
     public static double findLocalMinima(Function function, double lowerBound, double upperBound) {
-        double[] criticalPoints = SingleVariableSolver.getSolutionsRange(function.getDerivative(0), lowerBound, upperBound);
+        double[] criticalPoints = Solver.getSolutionsRange(function.getDerivative(0), lowerBound, upperBound);
         if (criticalPoints.length == 0) return Double.NaN;
 
         List<Double> secondDerivativeIsPositive = new ArrayList<>();
@@ -52,7 +52,7 @@ public class Extrema {
      * @return the local maxima of function on the specified range
      */
     public static double findLocalMaxima(Function function, double lowerBound, double upperBound) {
-        double[] criticalPoints = SingleVariableSolver.getSolutionsRange(function.getDerivative(0), lowerBound, upperBound);
+        double[] criticalPoints = Solver.getSolutionsRange(function.getDerivative(0), lowerBound, upperBound);
         if (criticalPoints.length == 0) return Double.NaN;
 
         List<Double> secondDerivativeIsNegative = new ArrayList<>();
@@ -87,7 +87,7 @@ public class Extrema {
      * @return any minima of function on the specified range
      */
     public static double[] findAnyMinima(Function function, double lowerBound, double upperBound) {
-        double[] criticalPoints = SingleVariableSolver.getSolutionsRange(function.getDerivative(0), lowerBound, upperBound);
+        double[] criticalPoints = Solver.getSolutionsRange(function.getDerivative(0), lowerBound, upperBound);
         if (criticalPoints.length == 0) return null;
 
         List<Double> secondDerivativeIsPositive = new ArrayList<>();
@@ -112,7 +112,7 @@ public class Extrema {
      * @return any maxima of function on the specified range
      */
     public static double[] findAnyMaxima(Function function, double lowerBound, double upperBound) {
-        double[] criticalPoints = SingleVariableSolver.getSolutionsRange(function.getDerivative(0), lowerBound, upperBound);
+        double[] criticalPoints = Solver.getSolutionsRange(function.getDerivative(0), lowerBound, upperBound);
         if (criticalPoints.length == 0) return null;
 
         List<Double> secondDerivativeIsNegative = new ArrayList<>();
@@ -137,7 +137,7 @@ public class Extrema {
      * @return any inflection point of function on the specified range
      */
     public static double[] findAnyInflectionPoints(Function function, double lowerBound, double upperBound) {
-        double[] criticalPoints = SingleVariableSolver.getSolutionsRange(function.getDerivative(0), lowerBound, upperBound);
+        double[] criticalPoints = Solver.getSolutionsRange(function.getDerivative(0), lowerBound, upperBound);
         if (criticalPoints.length == 0) return null;
 
         List<Double> secondDerivativeIsZero = new ArrayList<>();

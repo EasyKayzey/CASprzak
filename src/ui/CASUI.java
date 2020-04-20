@@ -3,7 +3,7 @@ package ui;
 import parsing.ConstantEvaluator;
 import parsing.Parser;
 import parsing.PreProcessor;
-import tools.SingleVariableSolver;
+import tools.singlevariable.Solver;
 import functions.Function;
 
 import java.util.Arrays;
@@ -47,7 +47,7 @@ public class CASUI {
 		System.out.println("Here is the derivative, evaluated:");
 		System.out.println(currentFunction.getSimplifiedDerivative(0).simplifyTimes(10).evaluate(inputs));
 
-		double solution = SingleVariableSolver.getSolutionPoint(currentFunction, -10);
+		double solution = Solver.getSolutionPoint(currentFunction, -10);
 		if (!Double.isNaN(solution)) {
 			System.out.println("Here is one zero for the expression:");
 			System.out.println(solution);
@@ -55,7 +55,7 @@ public class CASUI {
 			System.out.println("The algorithm did not find an initial solution.");
 		}
 
-		double[] solutions = SingleVariableSolver.getSolutionsRange(currentFunction, -10, 10);
+		double[] solutions = Solver.getSolutionsRange(currentFunction, -10, 10);
 		if (solutions.length > 0) {
 			System.out.println("Here are the zeros of the expression:");
 			System.out.println(Arrays.toString(solutions));

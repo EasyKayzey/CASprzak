@@ -1,6 +1,6 @@
 import parsing.Parser;
-import tools.Extrema;
-import tools.SingleVariableSolver;
+import tools.singlevariable.Extrema;
+import tools.singlevariable.Solver;
 import functions.Function;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +11,7 @@ public class SolverTest {
     @Test
     void simplePolynomial() {
         Function test = Parser.parse("x^2+-1");
-        assertEquals(1, SingleVariableSolver.getSolutionPoint(test, 3));
+        assertEquals(1, Solver.getSolutionPoint(test, 3));
     }
 
     @Test

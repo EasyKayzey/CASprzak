@@ -1,13 +1,14 @@
-package tools;
+package tools.singlevariable;
 
 import functions.Function;
 import functions.special.Constant;
+import tools.SolverTools;
 
 import java.util.List;
 
-public class SingleVariableSolver {
+public class Solver {
 
-	private SingleVariableSolver(){}
+	private Solver(){}
 
 	/**
 	 * Does one iteration of Newton's method for a given {@link Function} at an given point

@@ -18,9 +18,11 @@ public class Parser {
 	public static final String[] binaryOperations = {"^", "*", "+", "logb"};
 
 	/**
-	 * The list of used variables, initially set to {@code {'x', 'y', 'z'}}
+	 * The list of characters corresponding to variables, initially set to {@code {'x', 'y', 'z'}}
 	 */
 	private static char[] variables = {'x', 'y', 'z'};
+
+	private Parser(){}
 
 	/**
 	 * Sets {@link #variables} to something new

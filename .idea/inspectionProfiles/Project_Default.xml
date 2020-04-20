@@ -142,7 +142,7 @@
     <inspection_tool class="SuspiciousArrayCast" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="TrivialFunctionalExpressionUsage" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="TrivialStringConcatenation" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
-    <inspection_tool class="TypeMayBeWeakened" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+    <inspection_tool class="TypeMayBeWeakened" enabled="false" level="WEAK WARNING" enabled_by_default="false">
       <option name="useRighthandTypeAsWeakestTypeInAssignments" value="true" />
       <option name="useParameterizedTypeForCollectionMethods" value="true" />
       <option name="doNotWeakenToJavaLangObject" value="true" />

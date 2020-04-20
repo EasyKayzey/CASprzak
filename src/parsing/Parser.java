@@ -70,7 +70,7 @@ public class Parser {
 	/**
 	 * Parses infix using {@link parsing.PreProcessor} and {@link #parse(String[])}
 	 * @param infix infix string
-	 * @return a {@link functions.Function}
+	 * @return a {@link functions.Function} corresponding to the infix string
 	 */
 	public static Function parse(String infix) {
 		PreProcessor.setVariables(variables);
@@ -81,7 +81,7 @@ public class Parser {
 	/**
 	 * Parses an array of postfix tokens into a {@link functions.Function}
 	 * @param postfix array of tokens in postfix
-	 * @return a {@link functions.Function}
+	 * @return a {@link functions.Function} corresponding to the postfix string
 	 */
 	public static Function parse(String[] postfix) {
 		Stack<Function> functionStack = new Stack<>();

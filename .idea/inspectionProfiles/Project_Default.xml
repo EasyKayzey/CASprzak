@@ -107,7 +107,7 @@
     <inspection_tool class="MethodReturnOfConcreteClass" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
     <inspection_tool class="MisspelledEquals" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="NestedAssignment" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
-    <inspection_tool class="ObjectAllocationInLoop" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
+    <inspection_tool class="ObjectAllocationInLoop" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
     <inspection_tool class="ObjectToString" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="ObviousNullCheck" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="OverlyStrongTypeCast" enabled="false" level="WEAK WARNING" enabled_by_default="false">

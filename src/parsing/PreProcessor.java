@@ -40,7 +40,7 @@ public class PreProcessor {
 	}
 
 	/**
-	 * Turns an infix string to a postfix array
+	 * Turns an infix string into a postfix array
 	 * @param infix input string in infix
 	 * @return array of postfix tokens
 	 */

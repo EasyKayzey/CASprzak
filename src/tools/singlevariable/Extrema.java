@@ -1,5 +1,6 @@
 package tools.singlevariable;
 
+import core.Settings;
 import functions.Function;
 
 import java.util.ArrayList;
@@ -143,7 +144,7 @@ public class Extrema {
 
         List<Double> secondDerivativeIsZero = new ArrayList<>();
         for (double criticalPoint : criticalPoints) {
-            if (Math.abs(function.getNthDerivative(0, 2).evaluate(criticalPoint)) < 1E-5) {
+            if (Math.abs(function.getNthDerivative(0, 2).evaluate(criticalPoint)) < Settings.zeroMargin) {
                 secondDerivativeIsZero.add(criticalPoint);
             }
         }

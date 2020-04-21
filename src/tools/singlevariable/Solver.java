@@ -1,5 +1,6 @@
 package tools.singlevariable;
 
+import core.Settings;
 import functions.Function;
 import functions.special.Constant;
 import tools.SolverTools;
@@ -36,10 +37,10 @@ public class Solver {
 		for (int i = 0; i < runs; i++) {
 			initialPoint = newtonsMethod(expression, initialPoint);
 			if (i % 25 == 0)
-				if (initialPoint < 1E-15 && initialPoint > -1E-15)
+				if (initialPoint < 1E-10 && initialPoint > -1E-10)
 					return 0;
 		}
-		if (expression.evaluate(initialPoint) < 1E-3 && expression.evaluate(initialPoint) > -1E-3)
+		if (expression.evaluate(initialPoint) < Settings.zeroMargin && expression.evaluate(initialPoint) > -Settings.zeroMargin)
 			return initialPoint;
 		return Double.NaN;
 	}
@@ -51,7 +52,7 @@ public class Solver {
 	 * @return the approximate solution for a root of the function
 	 */
 	public static double getSolutionPoint(Function expression, double initialPoint) {
-		return getSolutionPoint(expression, initialPoint, 100);
+		return getSolutionPoint(expression, initialPoint, Settings.defaultSolverIterations);
 	}
 
 	/**
@@ -63,11 +64,11 @@ public class Solver {
 	 * @return an array of all the approximate roots found
 	 */
 	public static double[] getSolutionsRange(Function expression, double lower, double upper, int runs) {
-		List<Double> solutions = SolverTools.createRange(upper, lower, 17);
+		List<Double> solutions = SolverTools.createRange(upper, lower, Settings.defaultRangeSections);
 		ListIterator<Double> iter = solutions.listIterator();
 		while (iter.hasNext()) {
 			double nextLocation = getSolutionPoint(expression, iter.next(), runs);
-			if (!(expression.evaluate(nextLocation) < 1E-3 && expression.evaluate(nextLocation) > -1E-3))
+			if (!(expression.evaluate(nextLocation) < Settings.zeroMargin && expression.evaluate(nextLocation) > -Settings.zeroMargin))
 				iter.remove();
 			else
 				iter.set(nextLocation);
@@ -85,6 +86,6 @@ public class Solver {
 	 * @return an array of all the approximate roots found
 	 */
 	public static double[] getSolutionsRange(Function expression, double lower, double upper) {
-		return getSolutionsRange(expression, lower, upper, 1000);
+		return getSolutionsRange(expression, lower, upper, Settings.defaultSolverIterations);
 	}
 }

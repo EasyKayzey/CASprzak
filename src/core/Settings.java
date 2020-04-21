@@ -6,6 +6,9 @@ public class Settings {
 	private Settings(){}
 
 	//	public static boolean debug = true;
+	public static int defaultSolverIterations = 100;
+	public static int defaultRangeSections = 29;
+	public static double zeroMargin = 1e-3;
 	public static boolean simplifyFunctionsOfConstants = true;
 	public static boolean distributeExponents = true;
 	public static boolean cacheDerivatives = true;

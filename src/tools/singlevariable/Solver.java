@@ -57,9 +57,9 @@ public class Solver {
 	/**
 	 * Gives approximate roots of a {@link Function} using {@link #newtonsMethod} in a range of values after a specified amount of runs
 	 * @param expression the function whose roots are being found
-	 * @param lower the lower bound of the values that will be searched for roots
-	 * @param upper the upper bound of the values that will be searched for roots
-	 * @param runs the amount of times that {@link #newtonsMethod} is ran recursively
+	 * @param lower      the lower bound of the values that will be searched for roots
+	 * @param upper      the upper bound of the values that will be searched for roots
+	 * @param runs       the amount of times that {@link #newtonsMethod} is ran recursively
 	 * @return an array of all the approximate roots found
 	 */
 	public static double[] getSolutionsRange(Function expression, double lower, double upper, int runs) {
@@ -80,8 +80,8 @@ public class Solver {
 	/**
 	 * Gives approximate roots of a {@link Function} using {@link #newtonsMethod} in a range of values after 1000 runs
 	 * @param expression the function whose roots are being found
-	 * @param lower the lower bound of the values that will be searched for roots
-	 * @param upper the upper bound of the values that will be searched for roots
+	 * @param lower      the lower bound of the values that will be searched for roots
+	 * @param upper      the upper bound of the values that will be searched for roots
 	 * @return an array of all the approximate roots found
 	 */
 	public static double[] getSolutionsRange(Function expression, double lower, double upper) {

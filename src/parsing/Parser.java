@@ -4,7 +4,8 @@ import functions.Function;
 import functions.special.Constant;
 import functions.special.Variable;
 
-import java.util.Stack;
+import java.util.Deque;
+import java.util.LinkedList;
 
 public class Parser {
 	/**
@@ -86,7 +87,7 @@ public class Parser {
 	 * @return a {@link functions.Function} corresponding to the postfix string
 	 */
 	public static Function parse(String[] postfix) {
-		Stack<Function> functionStack = new Stack<>();
+		Deque<Function> functionStack = new LinkedList<>();
 		for (String token : postfix) {
 			if (Constant.isSpecialConstant(token)) {
 				functionStack.push(new Constant(token));

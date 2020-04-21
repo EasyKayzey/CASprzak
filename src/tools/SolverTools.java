@@ -2,6 +2,7 @@ package tools;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 
 public class SolverTools {
 
@@ -34,11 +35,17 @@ public class SolverTools {
 	 * @param values the List from which the repeated values are removed
 	 */
 	public static void removeRepeatsInOrder(List<Double> values) {
-		for (int i = 0; i < values.size() - 1; i++) {
-			if (values.get(i).equals(values.get(i + 1)) || (values.get(i) < values.get(i + 1) + 1E-15 && values.get(i) > values.get(i + 1) - 1E-15)) {
-				values.remove(i + 1);
-				i--;
-			}
+		ListIterator<Double> iter = values.listIterator();
+		double current;
+		double previous;
+		if (!iter.hasNext())
+			return;
+		current = iter.next();
+		while (iter.hasNext()) {
+			previous = current;
+			current = iter.next();
+			if (current == previous || (current - previous < 1e-10 && previous - current < 1e-10))
+				iter.remove();
 		}
 	}
 }

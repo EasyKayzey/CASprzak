@@ -5,6 +5,7 @@ import functions.Function;
 import functions.special.Constant;
 import tools.SolverTools;
 
+import java.sql.SQLOutput;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -39,6 +40,7 @@ public class Solver {
 			if (i % 25 == 0)
 				if (initialPoint < 1E-10 && initialPoint > -1E-10)
 					return 0;
+			System.out.println(initialPoint);
 		}
 		if (expression.evaluate(initialPoint) < Settings.zeroMargin && expression.evaluate(initialPoint) > -Settings.zeroMargin)
 			return initialPoint;

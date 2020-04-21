@@ -44,7 +44,7 @@ public class SolverTools {
 		while (iter.hasNext()) {
 			previous = current;
 			current = iter.next();
-			if (current == previous || (current - previous < 1e-10 && previous - current < 1e-10))
+			if (current == previous || (current - previous < 1e-15 && previous - current < 1e-15))
 				iter.remove();
 		}
 	}

@@ -46,6 +46,18 @@ public class SolverTest {
     }
 
     @Test
+    void simpleTrigZero() {
+        Function test = Parser.parse("sin(x-3)");
+        assertEquals(3, Solver.getSolutionPoint(test, 3.5));
+    }
+
+    @Test
+    void simpleConstant() {
+        Function test = Parser.parse("2");
+        assertEquals(Double.NaN, Solver.getSolutionPoint(test, 23));
+    }
+
+    @Test
     void simpleMinima() {
         Function test = Parser.parse("x^2-1");
         assertEquals(0, Extrema.findLocalMinima(test, -3,3));

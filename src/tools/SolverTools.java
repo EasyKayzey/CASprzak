@@ -35,11 +35,11 @@ public class SolverTools {
 	 * @param values the List from which the repeated values are removed
 	 */
 	public static void removeRepeatsInOrder(List<Double> values) {
+		if (values.size() <= 1)
+			return;
 		ListIterator<Double> iter = values.listIterator();
 		double current;
 		double previous;
-		if (!iter.hasNext())
-			return;
 		current = iter.next();
 		while (iter.hasNext()) {
 			previous = current;

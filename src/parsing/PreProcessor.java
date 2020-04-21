@@ -2,8 +2,7 @@ package parsing;
 
 import functions.special.Constant;
 
-import java.util.ArrayList;
-import java.util.Stack;
+import java.util.*;
 
 public class PreProcessor {
 
@@ -46,8 +45,8 @@ public class PreProcessor {
 	 */
 	public static String[] toPostfix(String infix) {
 		String[] tokens = InfixTokenizer.tokenizeInfix(infix, variables);
-		ArrayList<String> postfix = new ArrayList<>();
-		Stack<String> operators = new Stack<>();
+		Deque<String> postfix = new LinkedList<>();
+		Deque<String> operators = new LinkedList<>();
 
 		for (String token : tokens) {
 			if (Constant.isSpecialConstant(token)) {

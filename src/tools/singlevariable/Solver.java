@@ -65,7 +65,6 @@ public class Solver {
 	public static double[] getSolutionsRange(Function expression, double lower, double upper, int runs) {
 		List<Double> solutions = SolverTools.createRange(upper, lower, 17);
 		solutions.forEach(solution -> getSolutionPoint(expression, solution, runs));
-		System.out.println(solutions);
 		ListIterator<Double> iter = solutions.listIterator();
 		double current;
 		while (iter.hasNext()) {

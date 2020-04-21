@@ -5,6 +5,7 @@ import functions.special.Constant;
 import tools.SolverTools;
 
 import java.util.List;
+import java.util.ListIterator;
 
 public class Solver {
 
@@ -28,15 +29,18 @@ public class Solver {
 	 * @return the approximate solution for a root of the function
 	 */
 	public static double getSolutionPoint(Function expression, double initialPoint, int runs) {
-		if (expression.evaluate(initialPoint) == 0) return initialPoint;
-		if (expression instanceof Constant) return Double.NaN;
+		if (expression.evaluate(initialPoint) == 0)
+			return initialPoint;
+		if (expression instanceof Constant)
+			return Double.NaN;
 		for (int i = 0; i < runs; i++) {
 			initialPoint = newtonsMethod(expression, initialPoint);
-			if (i % 25 == 0) {
-				if (initialPoint < 1E-15 && initialPoint > -1E-15) return 0;
-			}
+			if (i % 25 == 0)
+				if (initialPoint < 1E-15 && initialPoint > -1E-15)
+					return 0;
 		}
-		if (expression.evaluate(initialPoint) < 1E-3 && expression.evaluate(initialPoint) > -1E-3) return initialPoint;
+		if (expression.evaluate(initialPoint) < 1E-3 && expression.evaluate(initialPoint) > -1E-3)
+			return initialPoint;
 		return Double.NaN;
 	}
 
@@ -59,29 +63,18 @@ public class Solver {
 	 * @return an array of all the approximate roots found
 	 */
 	public static double[] getSolutionsRange(Function expression, double lower, double upper, int runs) {
-		//TODO make this function use ListIterator
 		List<Double> solutions = SolverTools.createRange(upper, lower, 17);
-		for (int j = 0; j < runs; j++) {
-			for (int i = 0; i < solutions.size(); i++) {
-				solutions.set(i, newtonsMethod(expression, solutions.get(i)));
-			}
-			if (j % 25 == 0) {
-				for (int i = 0; i < solutions.size(); i++) {
-					if (solutions.get(i) < 1E-15 && solutions.get(i) > -1E-15) solutions.set(i, 0.0);
-				}
-			}
-		}
-		for (int i = 0; i < solutions.size(); i++) {
-			if (!(expression.evaluate(solutions.get(i)) < 1E-3 && expression.evaluate(solutions.get(i)) > -1E-3))
-				solutions.set(i, Double.NaN);
+		solutions.forEach(solution -> getSolutionPoint(expression, solution, runs));
+		ListIterator<Double> iter = solutions.listIterator();
+		double current;
+		while (iter.hasNext()) {
+			current = iter.next();
+			if (!(expression.evaluate(current) < 1E-3 && expression.evaluate(current) > -1E-3))
+				iter.remove();
 		}
 		SolverTools.nanRemover(solutions);
 		SolverTools.removeRepeatsInOrder(solutions);
-
-		double[] solutionsArray = new double[solutions.size()];
-		for (int i = 0; i < solutionsArray.length; i++)
-			solutionsArray[i] = solutions.get(i);
-		return solutionsArray;
+		return solutions.stream().mapToDouble(i -> i).toArray();
 	}
 
 	/**

@@ -64,15 +64,13 @@ public class Solver {
 	 */
 	public static double[] getSolutionsRange(Function expression, double lower, double upper, int runs) {
 		List<Double> solutions = SolverTools.createRange(upper, lower, 17);
-		solutions.forEach(solution -> getSolutionPoint(expression, solution, runs));
 		ListIterator<Double> iter = solutions.listIterator();
-		double current;
 		while (iter.hasNext()) {
-			current = getSolutionPoint(expression, iter.next(), runs);
-			if (!(expression.evaluate(current) < 1E-3 && expression.evaluate(current) > -1E-3))
+			double nextLocation = getSolutionPoint(expression, iter.next(), runs);
+			if (!(expression.evaluate(nextLocation) < 1E-3 && expression.evaluate(nextLocation) > -1E-3))
 				iter.remove();
 			else
-				iter.set(current);
+				iter.set(nextLocation);
 		}
 		SolverTools.nanRemover(solutions);
 		SolverTools.removeRepeatsInOrder(solutions);

@@ -20,7 +20,7 @@ public class SolverTest {
     @Test
     void moreAdvancedPolynomial() {
         Function test = Parser.parse("x^4-5x^2+4");
-        assertEquals(Arrays.toString(new double[]{-2, -1, 1, 2}), Arrays.toString(Solver.getSolutionsRange(test, -10, 10)));
+        assertTrue(Arrays.equals(new double[]{-2, -1, 1, 2}, Solver.getSolutionsRange(test, -10, 10)));
     }
 
     @Test
@@ -32,13 +32,13 @@ public class SolverTest {
     @Test
     void polynomialWithNoSolutionRange() {
         Function test = Parser.parse("x^2+1");
-        assertEquals(Arrays.toString(new double[]{}), Arrays.toString(Solver.getSolutionsRange(test, -10, 10)));
+        assertTrue(Arrays.equals(new double[]{}, Solver.getSolutionsRange(test, -10, 10)));
     }
 
     @Test
     void simpleNotPolynomial1() {
         Function test = Parser.parse("ln(x)");
-        assertEquals(1, Solver.getSolutionPoint(test, 4));
+        assertTrue(Arrays.equals(new double[]{1}, Solver.getSolutionsRange(test, -10, 10)));
     }
 
      @Test

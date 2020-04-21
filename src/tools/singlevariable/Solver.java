@@ -40,7 +40,6 @@ public class Solver {
 			if (i % 25 == 0)
 				if (initialPoint < 1E-10 && initialPoint > -1E-10)
 					return 0;
-			System.out.println(initialPoint);
 		}
 		if (expression.evaluate(initialPoint) < Settings.zeroMargin && expression.evaluate(initialPoint) > -Settings.zeroMargin)
 			return initialPoint;

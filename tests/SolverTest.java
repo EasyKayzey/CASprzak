@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SolverTest {
 
@@ -43,7 +44,7 @@ public class SolverTest {
      @Test
     void simpleNotPolynomial2() {
         Function test = Parser.parse("e^(x-5) - 1");
-        assertEquals(Arrays.toString(new double[]{5}), Arrays.toString(Solver.getSolutionsRange(test, 0, 7.68785)));
+         assertTrue(Arrays.equals(new double[]{5}, Solver.getSolutionsRange(test, 0, 7.68785)));
     }
 
     @Test

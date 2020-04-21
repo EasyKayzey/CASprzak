@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Extrema {
+    //TODO make entire class use ListIterator
 
     private Extrema(){}
 

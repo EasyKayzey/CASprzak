@@ -59,6 +59,7 @@ public class Solver {
 	 * @return an array of all the approximate roots found
 	 */
 	public static double[] getSolutionsRange(Function expression, double lower, double upper, int runs) {
+		//TODO make this function use ListIterator
 		List<Double> solutions = SolverTools.createRange(upper, lower, 17);
 		for (int j = 0; j < runs; j++) {
 			for (int i = 0; i < solutions.size(); i++) {

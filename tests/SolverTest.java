@@ -31,7 +31,7 @@ public class SolverTest {
     @Test
     void polynomialWithNoSolutionRange() {
         Function test = Parser.parse("x^2+1");
-        assertEquals(Arrays.toString(new double[]{}), Solver.getSolutionsRange(test, -10, 10));
+        assertEquals(Arrays.toString(new double[]{}), Arrays.toString(Solver.getSolutionsRange(test, -10, 10)));
     }
 
     @Test

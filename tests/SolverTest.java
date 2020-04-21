@@ -1,13 +1,11 @@
+import functions.Function;
+import org.junit.jupiter.api.Test;
 import parsing.Parser;
 import tools.singlevariable.Extrema;
 import tools.singlevariable.Solver;
-import functions.Function;
-import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SolverTest {
 
@@ -20,7 +18,7 @@ public class SolverTest {
     @Test
     void moreAdvancedPolynomial() {
         Function test = Parser.parse("x^4-5x^2+4");
-        assertTrue(Arrays.equals(new double[]{-2, -1, 1, 2}, Solver.getSolutionsRange(test, -10, 10)));
+        assertArrayEquals(new double[]{-2, -1, 1, 2}, Solver.getSolutionsRange(test, -10, 10));
     }
 
     @Test
@@ -32,19 +30,19 @@ public class SolverTest {
     @Test
     void polynomialWithNoSolutionRange() {
         Function test = Parser.parse("x^2+1");
-        assertTrue(Arrays.equals(new double[]{}, Solver.getSolutionsRange(test, -10, 10)));
+        assertArrayEquals(new double[]{}, Solver.getSolutionsRange(test, -10, 10));
     }
 
     @Test
     void simpleNotPolynomial1() {
         Function test = Parser.parse("ln(x)");
-        assertTrue(Arrays.equals(new double[]{1}, Solver.getSolutionsRange(test, -10, 10)));
+        assertArrayEquals(new double[]{1}, Solver.getSolutionsRange(test, -10, 10));
     }
 
      @Test
     void simpleNotPolynomial2() {
         Function test = Parser.parse("e^(x-5) - 1");
-         assertTrue(Arrays.equals(new double[]{5}, Solver.getSolutionsRange(test, 0, 7.68785)));
+         assertArrayEquals(new double[]{5}, Solver.getSolutionsRange(test, 0, 7.68785));
     }
 
     @Test

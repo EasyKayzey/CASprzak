@@ -2,7 +2,8 @@ package parsing;
 
 import functions.special.Constant;
 
-import java.util.*;
+import java.util.Deque;
+import java.util.LinkedList;
 
 public class PreProcessor {
 

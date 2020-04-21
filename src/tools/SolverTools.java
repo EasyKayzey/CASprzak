@@ -9,8 +9,8 @@ public class SolverTools {
 
 	/**
 	 * Returns a list of Doubles which is a range slit into a certain amount of sections
-	 * @param upper    the upper bound of the range
-	 * @param lower    the lower bound of the range
+	 * @param upper the upper bound of the range
+	 * @param lower the lower bound of the range
 	 * @param sections the amount of sections that the range is split into
 	 * @return the specified range
 	 */
@@ -26,12 +26,7 @@ public class SolverTools {
 	 * @param values the List from which the NaNs will be removed
 	 */
 	public static void nanRemover(List<Double> values) {
-		for (int i = 0; i < values.size(); i++) {
-			if ((values.get(i)).isNaN()) {
-				values.remove(i);
-				i--;
-			}
-		}
+		values.removeIf(value -> value.isNaN());
 	}
 
 	/**

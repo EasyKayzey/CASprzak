@@ -35,6 +35,18 @@ public class SolverTest {
     }
 
     @Test
+    void simpleNotPolynomial1() {
+        Function test = Parser.parse("ln(x)");
+        assertEquals(1, Solver.getSolutionPoint(test, 4));
+    }
+
+     @Test
+    void simpleNotPolynomial2() {
+        Function test = Parser.parse("e^(x-5) - 1");
+        assertEquals(Arrays.toString(new double[]{5}), Arrays.toString(Solver.getSolutionsRange(test, 0, 7.68785)));
+    }
+
+    @Test
     void simpleMinima() {
         Function test = Parser.parse("x^2-1");
         assertEquals(0, Extrema.findLocalMinima(test, -3,3));

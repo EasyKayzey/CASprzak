@@ -102,6 +102,6 @@ public class SolverTest {
     @Test
     void simpleFindAnyMaxima() {
         Function test = Parser.parse("x^{4}-3x^{3}+2x^{2}+x+1");
-        assertArrayEquals(new double[]{1}, Extrema.findAnyMinima(test, -6.30457892, 7.2543525), .01);
+        assertArrayEquals(new double[]{1}, Extrema.findAnyMaxima(test, -6.30457892, 7.2543525), .01);
     }
 }

@@ -63,6 +63,8 @@ public class CASUI {
 			} else {
 				System.out.println("The expression has no solutions.");
 			}
+		} else {
+			System.out.println("Finding solutions or extrema is not yet supported with multivariable functions.");
 		}
 	}
 }

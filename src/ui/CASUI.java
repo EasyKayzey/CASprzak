@@ -39,28 +39,30 @@ public class CASUI {
 		System.out.println("Here is the simplified toString of your function: " + currentFunction.simplifyTimes(10));
 		System.out.println("Here is your output: " + currentFunction.evaluate(inputs));
 
-		System.out.println("Here is the derivative, simplified once:");
+		System.out.println("Here is the derivative with respect to " + Variable.variables.get(0) + ", simplified once:");
 		System.out.println(currentFunction.getSimplifiedDerivative(0));
-		System.out.println("Here is the derivative, simplified completely:");
+		System.out.println("Here is the derivative with respect to " + Variable.variables.get(0) + ", simplified completely:");
 		System.out.println(currentFunction.getSimplifiedDerivative(0).simplifyTimes(10));
 
-		System.out.println("Here is the derivative, evaluated:");
+		System.out.println("Here is the derivative with respect to " + Variable.variables.get(0) + ", evaluated:");
 		System.out.println(currentFunction.getSimplifiedDerivative(0).simplifyTimes(10).evaluate(inputs));
 
-		double solution = Solver.getSolutionPoint(currentFunction, -10);
-		if (!Double.isNaN(solution)) {
-			System.out.println("Here is one zero for the expression:");
-			System.out.println(solution);
-		} else {
-			System.out.println("The algorithm did not find an initial solution.");
-		}
+		if (Variable.variables.size() == 1) {
+			double solution = Solver.getSolutionPoint(currentFunction, -10);
+			if (!Double.isNaN(solution)) {
+				System.out.println("Here is one zero for the expression:");
+				System.out.println(solution);
+			} else {
+				System.out.println("The algorithm did not find an initial solution.");
+			}
 
-		double[] solutions = Solver.getSolutionsRange(currentFunction, -10, 10);
-		if (solutions.length > 0) {
-			System.out.println("Here are the zeros of the expression:");
-			System.out.println(Arrays.toString(solutions));
-		} else {
-			System.out.println("The expression has no solutions.");
+			double[] solutions = Solver.getSolutionsRange(currentFunction, -10, 10);
+			if (solutions.length > 0) {
+				System.out.println("Here are the zeros of the expression:");
+				System.out.println(Arrays.toString(solutions));
+			} else {
+				System.out.println("The expression has no solutions.");
+			}
 		}
 	}
 }

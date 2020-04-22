@@ -20,22 +20,7 @@ public class Extrema {
      */
     public static double findLocalMinima(Function function, double lowerBound, double upperBound) {
        double[] secondDerivativeIsPositive = findPoints(function, lowerBound, upperBound, 1);
-        if (secondDerivativeIsPositive.length == 1) {
-            return secondDerivativeIsPositive[0];
-        }
-        double[] functionAtPoints = new double[secondDerivativeIsPositive.length];
-        for (int i = 0; i < functionAtPoints.length; i++) {
-            functionAtPoints[i] = function.evaluate(secondDerivativeIsPositive[i]);
-        }
-        int smallest = 0;
-        for (int i = 1; i < functionAtPoints.length; i++) {
-            if (functionAtPoints[i] == functionAtPoints[smallest]) {
-                return Double.NaN;
-            } else if (functionAtPoints[i] < functionAtPoints[smallest]) {
-                smallest = i;
-            }
-        }
-        return secondDerivativeIsPositive[smallest];
+        return findSmallestOrLargest(function, secondDerivativeIsPositive, -1);
     }
 
 
@@ -48,22 +33,7 @@ public class Extrema {
      */
     public static double findLocalMaxima(Function function, double lowerBound, double upperBound) {
         double[] secondDerivativeIsNegative = findPoints(function, lowerBound, upperBound, -1);
-        if (secondDerivativeIsNegative.length == 1) {
-            return secondDerivativeIsNegative[0];
-        }
-        double[] functionAtPoints = new double[secondDerivativeIsNegative.length];
-        for (int i = 0; i < functionAtPoints.length; i++) {
-            functionAtPoints[i] = function.evaluate(secondDerivativeIsNegative[i]);
-        }
-        int largest = 0;
-        for (int i = 1; i < functionAtPoints.length; i++) {
-            if (functionAtPoints[i] == functionAtPoints[largest]) {
-                return Double.NaN;
-            } else if (functionAtPoints[i] > functionAtPoints[largest]) {
-                largest = i;
-            }
-        }
-        return secondDerivativeIsNegative[largest];
+        return findSmallestOrLargest(function, secondDerivativeIsNegative, 1);
     }
 
     /**
@@ -109,16 +79,35 @@ public class Extrema {
 
     }
 
-    private static double[] findPoints(Function function, double lowerBound, double upperBound, double number) {
+    private static double[] findPoints(Function function, double lowerBound, double upperBound, double sign) {
         double[] criticalPoints = Solver.getSolutionsRange(function.getDerivative(0), lowerBound, upperBound);
         if (criticalPoints.length == 0) return null;
 
         List<Double> secondDerivative = new ArrayList<>();
         for (double criticalPoint : criticalPoints) {
-            if (function.getNthDerivative(0, 2).evaluate(criticalPoint)*Math.signum(number) > 0) {
+            if (function.getNthDerivative(0, 2).evaluate(criticalPoint)*sign > 0) {
                 secondDerivative.add(criticalPoint);
             }
         }
         return secondDerivative.stream().mapToDouble(i -> i).toArray();
+    }
+
+    private static double findSmallestOrLargest(Function function, double[] numbers, double sign) {
+        if (numbers.length == 1) {
+            return numbers[0];
+        }
+        double[] functionAtPoints = new double[numbers.length];
+        for (int i = 0; i < functionAtPoints.length; i++) {
+            functionAtPoints[i] = function.evaluate(numbers[i]);
+        }
+        int index = 0;
+        for (int i = 1; i < functionAtPoints.length; i++) {
+            if (functionAtPoints[i] == functionAtPoints[index]) {
+                return Double.NaN;
+            } else if (functionAtPoints[i]*sign > functionAtPoints[index]*sign) {
+                index = i;
+            }
+        }
+        return numbers[index];
     }
 }

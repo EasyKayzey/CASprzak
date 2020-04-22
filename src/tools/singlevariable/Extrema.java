@@ -75,7 +75,7 @@ public class Extrema {
 
         List<Double> derivativePoints = new ArrayList<>();
         for (double point : points) {
-            if (strategy.compare(function.getNthDerivative(0, 2).evaluate(point), 0)) {
+            if (strategy.compare(function.getNthDerivative(0, differentiations).evaluate(point), 0)) {
                 derivativePoints.add(point);
             }
         }

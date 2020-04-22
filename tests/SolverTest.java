@@ -92,4 +92,16 @@ public class SolverTest {
         Function test = Parser.parse("1-x^2");
         assertEquals(Double.NaN, Extrema.findLocalMinima(test, -7.62184632046246723904723482376450934, 4.788237402784035873405));
     }
+
+    @Test
+    void simpleFindAnyMinima() {
+        Function test = Parser.parse("x^{4}-3x^{3}+2x^{2}+x+1");
+        assertArrayEquals(new double[]{-.175, 1.425}, Extrema.findAnyMinima(test, -6.30457892, 7.2543525), 0.01);
+    }
+
+    @Test
+    void simpleFindAnyMaxima() {
+        Function test = Parser.parse("x^{4}-3x^{3}+2x^{2}+x+1");
+        assertArrayEquals(new double[]{1, 2}, Extrema.findAnyMinima(test, -6.30457892, 7.2543525), .01);
+    }
 }

@@ -19,7 +19,7 @@ public class Extrema {
      * @return the local minima of function on the specified range
      */
     public static double findLocalMinima(Function function, double lowerBound, double upperBound) {
-       double[] secondDerivativeIsPositive = findPoints(function, lowerBound, upperBound, new GreaterThan());
+       double[] secondDerivativeIsPositive = findDerivativePoints(function, lowerBound, upperBound, 2, new GreaterThan());
         return findSmallestOrLargest(function, secondDerivativeIsPositive, new LessThan());
     }
 
@@ -32,7 +32,7 @@ public class Extrema {
      * @return the local maxima of function on the specified range
      */
     public static double findLocalMaxima(Function function, double lowerBound, double upperBound) {
-        double[] secondDerivativeIsNegative = findPoints(function, lowerBound, upperBound, new LessThan());
+        double[] secondDerivativeIsNegative = findDerivativePoints(function, lowerBound, upperBound, 2, new LessThan());
         return findSmallestOrLargest(function, secondDerivativeIsNegative, new GreaterThan());
     }
 
@@ -44,7 +44,7 @@ public class Extrema {
      * @return any minima of function on the specified range
      */
     public static double[] findAnyMinima(Function function, double lowerBound, double upperBound) {
-        return findPoints(function, lowerBound, upperBound, new GreaterThan());
+        return findDerivativePoints(function, lowerBound, upperBound, 2, new GreaterThan());
     }
 
     /**
@@ -55,7 +55,7 @@ public class Extrema {
      * @return any maxima of function on the specified range
      */
     public static double[] findAnyMaxima(Function function, double lowerBound, double upperBound) {
-       return findPoints(function, lowerBound, upperBound, new LessThan());
+       return findDerivativePoints(function, lowerBound, upperBound, 2, new LessThan());
     }
 
     /**
@@ -66,20 +66,20 @@ public class Extrema {
      * @return any inflection point of function on the specified range
      */
     public static double[] findAnyInflectionPoints(Function function, double lowerBound, double upperBound) {
-        return findPoints(function, lowerBound, upperBound, new InMargin());
+        return findDerivativePoints(function, lowerBound, upperBound, 2, new InMargin());
     }
 
-    private static double[] findPoints(Function function, double lowerBound, double upperBound, ComparisonStrategy strategy) {
-        double[] criticalPoints = Solver.getSolutionsRange(function.getDerivative(0), lowerBound, upperBound);
-        if (criticalPoints.length == 0) return null;
+    private static double[] findDerivativePoints(Function function, double lowerBound, double upperBound, int differentiations, ComparisonStrategy strategy) {
+        double[] points = Solver.getSolutionsRange(function.getDerivative(0), lowerBound, upperBound);
+        if (points.length == 0) return null;
 
-        List<Double> secondDerivative = new ArrayList<>();
-        for (double criticalPoint : criticalPoints) {
-            if (strategy.compare(function.getNthDerivative(0, 2).evaluate(criticalPoint), 0)) {
-                secondDerivative.add(criticalPoint);
+        List<Double> derivativePoints = new ArrayList<>();
+        for (double point : points) {
+            if (strategy.compare(function.getNthDerivative(0, 2).evaluate(point), 0)) {
+                derivativePoints.add(point);
             }
         }
-        return secondDerivative.stream().mapToDouble(i -> i).toArray();
+        return derivativePoints.stream().mapToDouble(i -> i).toArray();
     }
 
     private static double findSmallestOrLargest(Function function, double[] numbers, ComparisonStrategy strategy) {

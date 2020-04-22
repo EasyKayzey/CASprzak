@@ -31,7 +31,7 @@ public class SolverTools {
 	}
 
 	/**
-	 * Removes a number from a List if that number is adjacent to the same number within a tolerance of 1E-15
+	 * Removes a number from a List if that number is adjacent to the same number within a tolerance of 1E-10
 	 * @param values the List from which the repeated values are removed
 	 */
 	public static void removeRepeatsInOrder(List<Double> values) {
@@ -44,7 +44,7 @@ public class SolverTools {
 		while (iter.hasNext()) {
 			previous = current;
 			current = iter.next();
-			if (current == previous || (current - previous < 1e-15 && previous - current < 1e-15))
+			if (current == previous || (current - previous < 1e-10 && previous - current < 1e-10))
 				iter.remove();
 		}
 	}

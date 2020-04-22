@@ -68,4 +68,10 @@ public class SolverTest {
         Function test = Parser.parse("x^2-6x+8");
         assertEquals(3, Extrema.findLocalMinima(test, -5,5));
     }
+
+    @Test
+    void simpleMaxima() {
+        Function test = Parser.parse("1-x^2");
+        assertEquals(0, Extrema.findLocalMaxima(test, -4, 3));
+    }
 }

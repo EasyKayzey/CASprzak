@@ -1,4 +1,4 @@
-package tools;
+package tools.singlevariable;
 
 import functions.Function;
 import functions.binary.Pow;
@@ -6,6 +6,7 @@ import functions.commutative.Add;
 import functions.commutative.Multiply;
 import functions.special.Constant;
 import functions.special.Variable;
+import tools.MiscTools;
 
 public class TaylorSeries {
 

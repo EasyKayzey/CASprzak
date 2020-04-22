@@ -19,21 +19,13 @@ public class Extrema {
      * @return the local minima of function on the specified range
      */
     public static double findLocalMinima(Function function, double lowerBound, double upperBound) {
-        double[] criticalPoints = Solver.getSolutionsRange(function.getDerivative(0), lowerBound, upperBound);
-        if (criticalPoints.length == 0) return Double.NaN;
-
-        List<Double> secondDerivativeIsPositive = new ArrayList<>();
-        for (double criticalPoint : criticalPoints) {
-            if (function.getNthDerivative(0, 2).evaluate(criticalPoint) > 0) {
-                secondDerivativeIsPositive.add(criticalPoint);
-            }
+       double[] secondDerivativeIsPositive = findPoints(function, lowerBound, upperBound, 1);
+        if (secondDerivativeIsPositive.length == 1) {
+            return secondDerivativeIsPositive[0];
         }
-        if (secondDerivativeIsPositive.size() == 1) {
-            return secondDerivativeIsPositive.get(0);
-        }
-        double[] functionAtPoints = new double[secondDerivativeIsPositive.size()];
+        double[] functionAtPoints = new double[secondDerivativeIsPositive.length];
         for (int i = 0; i < functionAtPoints.length; i++) {
-            functionAtPoints[i] = function.evaluate(secondDerivativeIsPositive.get(i));
+            functionAtPoints[i] = function.evaluate(secondDerivativeIsPositive[i]);
         }
         int smallest = 0;
         for (int i = 1; i < functionAtPoints.length; i++) {
@@ -43,8 +35,9 @@ public class Extrema {
                 smallest = i;
             }
         }
-        return secondDerivativeIsPositive.get(smallest);
+        return secondDerivativeIsPositive[smallest];
     }
+
 
     /**
      * Returns the local maxima of a {@link Function} function on a specified range
@@ -54,21 +47,13 @@ public class Extrema {
      * @return the local maxima of function on the specified range
      */
     public static double findLocalMaxima(Function function, double lowerBound, double upperBound) {
-        double[] criticalPoints = Solver.getSolutionsRange(function.getDerivative(0), lowerBound, upperBound);
-        if (criticalPoints.length == 0) return Double.NaN;
-
-        List<Double> secondDerivativeIsNegative = new ArrayList<>();
-        for (double criticalPoint : criticalPoints) {
-            if (function.getNthDerivative(0, 2).evaluate(criticalPoint) < 0) {
-                secondDerivativeIsNegative.add(criticalPoint);
-            }
+        double[] secondDerivativeIsNegative = findPoints(function, lowerBound, upperBound, -1);
+        if (secondDerivativeIsNegative.length == 1) {
+            return secondDerivativeIsNegative[0];
         }
-        if (secondDerivativeIsNegative.size() == 1) {
-            return secondDerivativeIsNegative.get(0);
-        }
-        double[] functionAtPoints = new double[secondDerivativeIsNegative.size()];
+        double[] functionAtPoints = new double[secondDerivativeIsNegative.length];
         for (int i = 0; i < functionAtPoints.length; i++) {
-            functionAtPoints[i] = function.evaluate(secondDerivativeIsNegative.get(i));
+            functionAtPoints[i] = function.evaluate(secondDerivativeIsNegative[i]);
         }
         int largest = 0;
         for (int i = 1; i < functionAtPoints.length; i++) {
@@ -78,7 +63,7 @@ public class Extrema {
                 largest = i;
             }
         }
-        return secondDerivativeIsNegative.get(largest);
+        return secondDerivativeIsNegative[largest];
     }
 
     /**
@@ -89,21 +74,7 @@ public class Extrema {
      * @return any minima of function on the specified range
      */
     public static double[] findAnyMinima(Function function, double lowerBound, double upperBound) {
-        double[] criticalPoints = Solver.getSolutionsRange(function.getDerivative(0), lowerBound, upperBound);
-        if (criticalPoints.length == 0) return null;
-
-        List<Double> secondDerivativeIsPositive = new ArrayList<>();
-        for (double criticalPoint : criticalPoints) {
-            if (function.getNthDerivative(0, 2).evaluate(criticalPoint) > 0) {
-                secondDerivativeIsPositive.add(criticalPoint);
-            }
-        }
-        double[] secondDerivativeIsPositivePoints = new double[secondDerivativeIsPositive.size()];
-        for (int i = 0; i < secondDerivativeIsPositive.size(); i++) {
-            secondDerivativeIsPositivePoints[i] = secondDerivativeIsPositive.get(i);
-        }
-        return secondDerivativeIsPositivePoints;
-
+        return findPoints(function, lowerBound, upperBound, 1);
     }
 
     /**
@@ -114,21 +85,7 @@ public class Extrema {
      * @return any maxima of function on the specified range
      */
     public static double[] findAnyMaxima(Function function, double lowerBound, double upperBound) {
-        double[] criticalPoints = Solver.getSolutionsRange(function.getDerivative(0), lowerBound, upperBound);
-        if (criticalPoints.length == 0) return null;
-
-        List<Double> secondDerivativeIsNegative = new ArrayList<>();
-        for (double criticalPoint : criticalPoints) {
-            if (function.getNthDerivative(0, 2).evaluate(criticalPoint) < 0) {
-                secondDerivativeIsNegative.add(criticalPoint);
-            }
-        }
-        double[] secondDerivativeIsPositivePoints = new double[secondDerivativeIsNegative.size()];
-        for (int i = 0; i < secondDerivativeIsNegative.size(); i++) {
-            secondDerivativeIsPositivePoints[i] = secondDerivativeIsNegative.get(i);
-        }
-        return secondDerivativeIsPositivePoints;
-
+       return findPoints(function, lowerBound, upperBound, -1);
     }
 
     /**
@@ -148,11 +105,20 @@ public class Extrema {
                 secondDerivativeIsZero.add(criticalPoint);
             }
         }
-        double[] secondDerivativeIsPositivePoints = new double[secondDerivativeIsZero.size()];
-        for (int i = 0; i < secondDerivativeIsZero.size(); i++) {
-            secondDerivativeIsPositivePoints[i] = secondDerivativeIsZero.get(i);
-        }
-        return secondDerivativeIsPositivePoints;
+        return secondDerivativeIsZero.stream().mapToDouble(i -> i).toArray();
 
+    }
+
+    private static double[] findPoints(Function function, double lowerBound, double upperBound, double number) {
+        double[] criticalPoints = Solver.getSolutionsRange(function.getDerivative(0), lowerBound, upperBound);
+        if (criticalPoints.length == 0) return null;
+
+        List<Double> secondDerivative = new ArrayList<>();
+        for (double criticalPoint : criticalPoints) {
+            if (function.getNthDerivative(0, 2).evaluate(criticalPoint)*Math.signum(number) > 0) {
+                secondDerivative.add(criticalPoint);
+            }
+        }
+        return secondDerivative.stream().mapToDouble(i -> i).toArray();
     }
 }

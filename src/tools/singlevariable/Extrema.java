@@ -86,6 +86,9 @@ public class Extrema {
         if (numbers.length == 1) {
             return numbers[0];
         }
+        if (numbers.length == 0) {
+            return Double.NaN;
+        }
         double[] functionAtPoints = new double[numbers.length];
         for (int i = 0; i < functionAtPoints.length; i++) {
             functionAtPoints[i] = function.evaluate(numbers[i]);

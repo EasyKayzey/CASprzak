@@ -80,4 +80,16 @@ public class SolverTest {
         Function test = Parser.parse("x^3");
         assertArrayEquals(new double[]{0}, Extrema.findAnyInflectionPoints(test, -5.87329472, 5.023954780232345));
     }
+
+    @Test
+    void simpleInflectionWithNoInflection() {
+        Function test = Parser.parse("x^2");
+        assertArrayEquals(new double[]{}, Extrema.findAnyInflectionPoints(test, -5.01238941, 7.80293154));
+    }
+
+    @Test
+    void simpleMinimaWithNoMinima() {
+        Function test = Parser.parse("1-x^2");
+        assertEquals(Double.NaN, Extrema.findLocalMinima(test, -7.62184632046246723904723482376450934, 4.788237402784035873405));
+    }
 }

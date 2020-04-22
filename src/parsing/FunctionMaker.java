@@ -33,16 +33,6 @@ public class FunctionMaker {
 	}
 
 	/**
-	 * Returns a new {@link Variable} with a varID and includes the variable names
-	 * @param varID    ID of variable
-	 * @param varNames array of variable names
-	 * @return new {@link Variable}
-	 */
-	public static Function variable(int varID, char... varNames) {
-		return new Variable(varID, varNames);
-	}
-
-	/**
 	 * Returns a new {@link Variable} with a varID
 	 * @param varID    ID of variable
 	 * @return new {@link Variable}

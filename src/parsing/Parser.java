@@ -6,6 +6,7 @@ import functions.special.Variable;
 
 import java.util.Deque;
 import java.util.LinkedList;
+import java.util.ListIterator;
 
 public class Parser {
 	/**
@@ -18,20 +19,7 @@ public class Parser {
 	 */
 	public static final String[] binaryOperations = {"^", "*", "+", "logb"};
 
-	/**
-	 * The list of characters corresponding to variables, initially set to {@code {'x', 'y', 'z'}}
-	 */
-	private static char[] variables = {'x', 'y', 'z'};
-
 	private Parser(){}
-
-	/**
-	 * Sets {@link #variables} to something new
-	 * @param variables array of variables
-	 */
-	public static void setVariables(char... variables) {
-		Parser.variables = variables;
-	}
 
 	/**
 	 * Checks if a string is in {@link #unitaryOperations}
@@ -62,10 +50,12 @@ public class Parser {
 	 * @throws IndexOutOfBoundsException if no such variable exists
 	 */
 	public static int getVarID(char variable) throws IndexOutOfBoundsException {
-		for (int i = 0; i < variables.length; i++)
-			if (variables[i] == variable) {
-				return i;
+		ListIterator<Character> iter = Variable.variables.listIterator();
+		while (iter.hasNext()) {
+			if (iter.next() == variable) {
+				return iter.previousIndex();
 			}
+		}
 		throw new IndexOutOfBoundsException("No variable " + variable + " found.");
 	}
 
@@ -76,8 +66,6 @@ public class Parser {
 	 * @return a {@link functions.Function} corresponding to the infix string
 	 */
 	public static Function parse(String infix) {
-		PreProcessor.setVariables(variables);
-		Variable.setVarNames(variables);
 		return Parser.parse(PreProcessor.toPostfix(infix));
 	}
 

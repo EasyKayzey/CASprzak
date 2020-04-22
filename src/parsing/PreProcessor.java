@@ -12,20 +12,9 @@ public class PreProcessor {
 	 */
 	public static final String[] operations = {"^", "*", "/", "+", "-", "logb", "log", "ln", "sqrt", "exp", "abs", "sign", "dirac", "sin", "cos", "tan", "csc", "sec", "cot", "asin", "acos", "atan", "acsc", "asec", "acot", "sinh", "cosh", "tanh", "csch", "sech", "coth", "asinh", "acosh", "atanh", "acsch", "asech", "acoth"};
 
-	/**
-	 * Array of the characters corresponding to all variables used in expressions
-	 */
-	protected static char[] variables;
 
 	private PreProcessor(){}
 
-	/**
-	 * Sets the variables of the preprocessor
-	 * @param variables array of variables
-	 */
-	public static void setVariables(char[] variables) {
-		PreProcessor.variables = variables;
-	}
 
 	/**
 	 * Checks if a given string is an operator
@@ -45,7 +34,7 @@ public class PreProcessor {
 	 * @return array of postfix tokens
 	 */
 	public static String[] toPostfix(String infix) {
-		String[] tokens = InfixTokenizer.tokenizeInfix(infix, variables);
+		String[] tokens = InfixTokenizer.tokenizeInfix(infix);
 		Deque<String> postfix = new LinkedList<>();
 		Deque<String> operators = new LinkedList<>();
 

@@ -1,5 +1,7 @@
 package parsing;
 
+import functions.special.Variable;
+
 import java.util.regex.Pattern;
 
 public class InfixTokenizer {
@@ -18,11 +20,10 @@ public class InfixTokenizer {
 
 	/**
 	 * Tokenizes an input infix string into a format supported by the {@link PreProcessor}
-	 * @param infix     input string in infix
-	 * @param variables list of variables ordered by varID
+	 * @param infix input string in infix
 	 * @return array of infix tokens
 	 */
-	public static String[] tokenizeInfix(String infix, char[] variables) {
+	public static String[] tokenizeInfix(String infix) {
 		// Remove LaTeX escapes
 		infix = infix.replace("\\", "");
 		// Make absolute values into unitary functions
@@ -34,7 +35,7 @@ public class InfixTokenizer {
 		// Turns expressions like x-y into x+-y, and turns expressions like x*y into x*/y (the '/' operator represents reciprocals)
 		infix = subtractionFinder.matcher(infix).replaceAll("+-").replace("/", "*/");
 		// Turns expressions like xyz into x*y*z
-		infix = parseVariablePairs(infix, variables);
+		infix = parseVariablePairs(infix);
 		// Adds parentheses to enforce order of operations
 		infix = "((((" + OOO4.matcher(OOO3.matcher(OOO2.matcher(OOO1.matcher(infix).replaceAll("((((")).replaceAll("))))")).replaceAll("))+((")).replaceAll(")*(") + "))))";
 		// Splits infix into tokens
@@ -46,9 +47,9 @@ public class InfixTokenizer {
 	 * @param infix input string in infix
 	 * @return infix string with inserted asterisks
 	 */
-	private static String parseVariablePairs(String infix, char[] variables) {
-		for (char a : variables) {
-			for (char b : variables) {
+	private static String parseVariablePairs(String infix) {
+		for (char a : Variable.variables) {
+			for (char b : Variable.variables) {
 				infix = infix.replaceAll("(?<=" + a + ")\\s*(?=" + b + ")", "*");
 			}
 		}

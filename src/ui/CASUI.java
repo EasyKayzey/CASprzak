@@ -1,5 +1,6 @@
 package ui;
 
+import functions.special.Variable;
 import parsing.ConstantEvaluator;
 import parsing.Parser;
 import parsing.PreProcessor;
@@ -19,7 +20,7 @@ public class CASUI {
 
 		System.out.println("What are your variables? Separate with commas and/or spaces.");
 		String[] variableStrings = commaSpaces.split(scanner.next());
-		char[] variables = new char[variableStrings.length];
+		Character[] variables = new Character[variableStrings.length];
 		for (int i = 0; i < variables.length; i++)
 			variables[i] = variableStrings[i].charAt(0);
 
@@ -31,8 +32,7 @@ public class CASUI {
 		double[] inputs = Arrays.stream(inputStrings).mapToDouble(ConstantEvaluator::getConstant).toArray();
 		System.out.println("Processing...");
 
-		Parser.setVariables(variables);
-		PreProcessor.setVariables(variables);
+		Variable.setVariables(variables);
 
 		Function currentFunction = Parser.parse(PreProcessor.toPostfix(rawInput));
 		System.out.println("Here is your parsed function: " + currentFunction);

@@ -2,9 +2,7 @@ package core;
 
 @SuppressWarnings("CanBeFinal")
 public class Settings {
-
 	private Settings(){}
-
 	//	public static boolean debug = true;
 	public static int defaultSolverIterations = 100;
 	public static int defaultRangeSections = 29;

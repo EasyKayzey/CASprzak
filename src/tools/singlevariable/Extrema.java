@@ -69,7 +69,7 @@ public class Extrema {
         return findPoints(function, lowerBound, upperBound, (a, b) -> (a - b < Settings.zeroMargin && b - a < Settings.zeroMargin));
     }
 
-    private static double[] findPoints(Function function, double lowerBound, double upperBound, BiPredicate<Double, Double> strategy) {
+    private static double[] findPoints(Function function, double lowerBound, double upperBound, BiPredicate<? super Double, ? super Double> strategy) {
         double[] criticalPoints = Solver.getSolutionsRange(function.getDerivative(0), lowerBound, upperBound);
         if (criticalPoints.length == 0) return null;
 
@@ -82,7 +82,7 @@ public class Extrema {
         return secondDerivative.stream().mapToDouble(i -> i).toArray();
     }
 
-    private static double findSmallestOrLargest(Function function, double[] numbers, BiPredicate<Double, Double> strategy) {
+    private static double findSmallestOrLargest(Function function, double[] numbers, BiPredicate<? super Double, ? super Double> strategy) {
         if (numbers.length == 1) {
             return numbers[0];
         }

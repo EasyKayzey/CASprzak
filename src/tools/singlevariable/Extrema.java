@@ -7,7 +7,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Extrema {
-    //TODO make entire class use ListIterator
 
     private Extrema(){}
 

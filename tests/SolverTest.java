@@ -74,4 +74,10 @@ public class SolverTest {
         Function test = Parser.parse("1-x^2");
         assertEquals(0, Extrema.findLocalMaxima(test, -4, 3));
     }
+
+    @Test
+    void simpleInflection() {
+        Function test = Parser.parse("x^3");
+        assertArrayEquals(new double[]{0}, Extrema.findAnyInflectionPoints(test, -5.87329472, 5.023954780232345));
+    }
 }

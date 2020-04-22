@@ -3,7 +3,7 @@ package tools.singlevariable;
 import core.Settings;
 import functions.Function;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Extrema {
@@ -73,7 +73,7 @@ public class Extrema {
         double[] criticalPoints = Solver.getSolutionsRange(function.getDerivative(0), lowerBound, upperBound);
         if (criticalPoints.length == 0) return null;
 
-        List<Double> secondDerivative = new ArrayList<>();
+        List<Double> secondDerivative = new LinkedList<>();
         for (double criticalPoint : criticalPoints) {
             if (strategy.compare(function.getNthDerivative(0, 2).evaluate(criticalPoint), 0)) {
                 secondDerivative.add(criticalPoint);
@@ -90,6 +90,7 @@ public class Extrema {
         for (int i = 0; i < functionAtPoints.length; i++) {
             functionAtPoints[i] = function.evaluate(numbers[i]);
         }
+
         int index = 0;
         for (int i = 1; i < functionAtPoints.length; i++) {
             if (functionAtPoints[i] == functionAtPoints[index]) {

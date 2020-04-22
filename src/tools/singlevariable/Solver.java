@@ -3,7 +3,6 @@ package tools.singlevariable;
 import core.Settings;
 import functions.Function;
 import functions.special.Constant;
-import functions.special.Variable;
 import tools.SolverTools;
 
 import java.util.List;
@@ -31,8 +30,6 @@ public class Solver {
 	 * @return the approximate solution for a root of the function
 	 */
 	public static double getSolutionPoint(Function expression, double initialPoint, int runs) {
-		if (Variable.variables.size() > 1)
-			throw new IllegalArgumentException("tools.singlevariable.Solver does not support multivariable functions.");
 		if (expression.evaluate(initialPoint) == 0)
 			return initialPoint;
 		if (expression instanceof Constant)

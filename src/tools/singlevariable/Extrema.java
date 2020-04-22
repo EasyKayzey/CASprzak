@@ -5,6 +5,7 @@ import functions.Function;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.function.BiPredicate;
 
 public class Extrema {
 
@@ -18,8 +19,8 @@ public class Extrema {
      * @return the local minima of function on the specified range
      */
     public static double findLocalMinima(Function function, double lowerBound, double upperBound) {
-       double[] secondDerivativeIsPositive = findPoints(function, lowerBound, upperBound, new GreaterThan());
-        return findSmallestOrLargest(function, secondDerivativeIsPositive, new LessThan());
+       double[] secondDerivativeIsPositive = findPoints(function, lowerBound, upperBound, (a, b) -> (a > b));
+        return findSmallestOrLargest(function, secondDerivativeIsPositive, (a, b) -> (a < b));
     }
 
 
@@ -31,8 +32,8 @@ public class Extrema {
      * @return the local maxima of function on the specified range
      */
     public static double findLocalMaxima(Function function, double lowerBound, double upperBound) {
-        double[] secondDerivativeIsNegative = findPoints(function, lowerBound, upperBound, new LessThan());
-        return findSmallestOrLargest(function, secondDerivativeIsNegative, new GreaterThan());
+        double[] secondDerivativeIsNegative = findPoints(function, lowerBound, upperBound, (a, b) -> (a < b));
+        return findSmallestOrLargest(function, secondDerivativeIsNegative, (a, b) -> (a > b));
     }
 
     /**
@@ -43,7 +44,7 @@ public class Extrema {
      * @return any minima of function on the specified range
      */
     public static double[] findAnyMinima(Function function, double lowerBound, double upperBound) {
-        return findPoints(function, lowerBound, upperBound, new GreaterThan());
+        return findPoints(function, lowerBound, upperBound, (a, b) -> (a > b));
     }
 
     /**
@@ -54,7 +55,7 @@ public class Extrema {
      * @return any maxima of function on the specified range
      */
     public static double[] findAnyMaxima(Function function, double lowerBound, double upperBound) {
-       return findPoints(function, lowerBound, upperBound, new LessThan());
+       return findPoints(function, lowerBound, upperBound, (a, b) -> (a < b));
     }
 
     /**
@@ -65,23 +66,23 @@ public class Extrema {
      * @return any inflection point of function on the specified range
      */
     public static double[] findAnyInflectionPoints(Function function, double lowerBound, double upperBound) {
-        return findPoints(function, lowerBound, upperBound, new InMargin());
+        return findPoints(function, lowerBound, upperBound, (a, b) -> (a - b < Settings.zeroMargin && b - a < Settings.zeroMargin));
     }
 
-    private static double[] findPoints(Function function, double lowerBound, double upperBound, ComparisonStrategy strategy) {
+    private static double[] findPoints(Function function, double lowerBound, double upperBound, BiPredicate<Double, Double> strategy) {
         double[] criticalPoints = Solver.getSolutionsRange(function.getDerivative(0), lowerBound, upperBound);
         if (criticalPoints.length == 0) return null;
 
         List<Double> secondDerivative = new LinkedList<>();
         for (double criticalPoint : criticalPoints) {
-            if (strategy.compare(function.getNthDerivative(0, 2).evaluate(criticalPoint), 0)) {
+            if (strategy.test(function.getNthDerivative(0, 2).evaluate(criticalPoint), 0.0)) {
                 secondDerivative.add(criticalPoint);
             }
         }
         return secondDerivative.stream().mapToDouble(i -> i).toArray();
     }
 
-    private static double findSmallestOrLargest(Function function, double[] numbers, ComparisonStrategy strategy) {
+    private static double findSmallestOrLargest(Function function, double[] numbers, BiPredicate<Double, Double> strategy) {
         if (numbers.length == 1) {
             return numbers[0];
         }
@@ -94,32 +95,11 @@ public class Extrema {
         for (int i = 1; i < functionAtPoints.length; i++) {
             if (functionAtPoints[i] == functionAtPoints[index]) {
                 return Double.NaN;
-            } else if (strategy.compare(functionAtPoints[i], functionAtPoints[index])) {
+            } else if (strategy.test(functionAtPoints[i], functionAtPoints[index])) {
                 index = i;
             }
         }
         return numbers[index];
     }
 
-    static abstract class ComparisonStrategy {
-        abstract boolean compare(double a, double b);
-    }
-
-    static class LessThan extends ComparisonStrategy {
-        boolean compare(double a, double b) {
-            return a < b;
-        }
-    }
-
-    static class GreaterThan extends ComparisonStrategy {
-        boolean compare(double a, double b) {
-            return a > b;
-        }
-    }
-
-    static class InMargin extends ComparisonStrategy {
-        boolean compare(double a, double b) {
-            return (a - b < Settings.zeroMargin && b - a < Settings.zeroMargin);
-        }
-    }
 }

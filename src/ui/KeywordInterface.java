@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 @SuppressWarnings("SpellCheckingInspection")
 public class KeywordInterface {
 	private static final Pattern spaces = Pattern.compile("\\s+");
-	public static final Pattern spacesOutsideQuotes = Pattern.compile("\\s+(?=[^\"]*(\"[^\"]*\"[^\"]*)*$)");
+	public static final Pattern spacesOutsideQuotes = Pattern.compile("\"\\s\"|\"\\s|\\s\"|\"$|\\s+(?=[^\"]*(\"[^\"]*\"[^\"]*)*$)");
 	/**
 	 * A list of sets of keywords corresponding to operations
 	 */

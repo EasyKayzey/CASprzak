@@ -76,6 +76,13 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 		return derivative;
 	}
 
+
+	/**
+	 * Returns the Nth derivative of the function, simplified
+	 * @param varID the ID of the variable being differentiated (see {@link Parser#getVarID(char)}).
+	 * @param N the amount of times to differentiate
+	 * @return the Nth derivative of the {@link Function} it is called on, simplified
+	 */
 	public Function getNthDerivative(int varID, int N) {
 		Function currentFunction = this;
 		while (N > 0) {
@@ -83,6 +90,16 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 			N--;
 		}
 		return currentFunction;
+	}
+
+	/**
+	 * Returns the value of the derivative at point
+	 * @param varID the ID of the variable being differentiated (see {@link Parser#getVarID(char)}).
+	 * @param point the point to find the derivative at
+	 * @return the value of the derivative at point
+	 */
+	public double derivativeAt(int varID, double... point) {
+		return getDerivative(varID).evaluate(point);
 	}
 
 	/**

@@ -34,7 +34,7 @@ public class KeywordInterface {
 			case "sol", "solve" -> sol(splitInput[1]);
 			case "ext", "extrema" -> ext(splitInput[1]);
 			case "tay", "taylor" -> tay(splitInput[1]);
-			case "sto", "store" -> sto(splitInput[1]);
+			case "sto", "store", "new", "def" -> sto(splitInput[1]);
 			default -> null;
 		};
 		if (ret == null) {

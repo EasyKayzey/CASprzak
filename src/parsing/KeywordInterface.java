@@ -64,8 +64,9 @@ public class KeywordInterface {
 	 * eval [function] [values]
 	 */
 	public static double eval(String input) {
-		String[] splitInput = spacesOutsideQuotes.split(input);
-		return Parser.parse(splitInput[1]).evaluate(); //TODO make this actually use the user input
+		String[] splitInput = spacesOutsideQuotes.split(input, 1);
+		double[] values =
+		return Parser.parse(splitInput[0]).evaluate(); //TODO make this actually use the user input
 	}
 
 	/**
@@ -85,7 +86,7 @@ public class KeywordInterface {
 	}
 
 	/**
-	 * sol [function] [min] [max]
+	 * sol [function] [startrange] [endrange]
 	 */
 	public static double[] sol(String input) {
 		String[] splitInput = spacesOutsideQuotes.split(input);
@@ -93,7 +94,7 @@ public class KeywordInterface {
 	}
 
 	/**
-	 * ext [function]
+	 * ext ["min(ima)"/"max(ima)"/"anymin(ima)"/"anymax(ima)"/"inflect(ion)"] [function] [startrange] [endrange]
 	 */
 	public static double[] ext(String input) {
 		String[] splitInput = spacesOutsideQuotes.split(input);

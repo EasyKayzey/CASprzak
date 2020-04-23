@@ -26,21 +26,21 @@ public class KeywordInterface {
 		scan.useDelimiter("\\n");
 		String[] input = spaces.split(scan.next(), 1);
 		// Partials
-		if (Arrays.stream(keywordSets[0]).anyMatch(input[0]::equals))
+		if (Arrays.asList(keywordSets[0]).contains(input[0]))
 			pd(input[1]);
-		else if (Arrays.stream(keywordSets[1]).anyMatch(input[0]::equals))
+		else if (Arrays.asList(keywordSets[1]).contains(input[0]))
 			eval(input[1]);
-		else if (Arrays.stream(keywordSets[2]).anyMatch(input[0]::equals))
+		else if (Arrays.asList(keywordSets[2]).contains(input[0]))
 			simp(input[1]);
-		else if (Arrays.stream(keywordSets[3]).anyMatch(input[0]::equals))
+		else if (Arrays.asList(keywordSets[3]).contains(input[0]))
 			sub(input[1]);
-		else if (Arrays.stream(keywordSets[4]).anyMatch(input[0]::equals))
+		else if (Arrays.asList(keywordSets[4]).contains(input[0]))
 			sol(input[1]);
-		else if (Arrays.stream(keywordSets[5]).anyMatch(input[0]::equals))
+		else if (Arrays.asList(keywordSets[5]).contains(input[0]))
 			ext(input[1]);
-		else if (Arrays.stream(keywordSets[6]).anyMatch(input[0]::equals))
+		else if (Arrays.asList(keywordSets[6]).contains(input[0]))
 			tay(input[1]);
-		else if (Arrays.stream(keywordSets[7]).anyMatch(input[0]::equals))
+		else if (Arrays.asList(keywordSets[7]).contains(input[0]))
 			sto(input[1]);
 		else
 			System.out.println(input[0] + " is not supported by KeywordInterface");

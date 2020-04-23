@@ -80,7 +80,7 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 	/**
 	 * Returns the Nth derivative of the function, simplified
 	 * @param varID the ID of the variable being differentiated (see {@link Parser#getVarID(char)}).
-	 * @param N the amount of times to differentiate
+	 * @param N     the amount of times to differentiate
 	 * @return the Nth derivative of the {@link Function} it is called on, simplified
 	 */
 	public Function getNthDerivative(int varID, int N) {

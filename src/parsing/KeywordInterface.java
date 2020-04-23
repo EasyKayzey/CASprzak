@@ -24,6 +24,8 @@ public class KeywordInterface {
 	 */
 	public static Object useKeywords(String input) {
 		String[] splitInput = spacesOutsideQuotes.split(input, 2);
+		if (input.length() >= 4 && "d/d".equals(input.substring(0, 3)))
+			return useKeywords("pd " + input.substring(3));
 		Object ret = switch (splitInput[0]) {
 			case "pd", "pdiff", "partial", "pdifferentiate" -> pd(splitInput[1]);
 			case "eval", "evaluate" -> eval(splitInput[1]);

@@ -30,7 +30,7 @@ public class KeywordInterface {
 	 * @return the Object requested
 	 */
 	public static Object useKeywords(String input) {
-		String[] splitInput = spaces.split(input, 2);
+		String[] splitInput = spaces.split(input, 2); //TODO MAKE THIS USE ENHANCED SWITCH
 		if (Arrays.asList(keywordSets[0]).contains(splitInput[0]))
 			return pd(splitInput[1]);
 		else if (Arrays.asList(keywordSets[1]).contains(splitInput[0]))

@@ -46,11 +46,10 @@ public class KeywordInterface {
 		else if (Arrays.asList(keywordSets[6]).contains(splitInput[0]))
 			return tay(splitInput[1]);
 		else if (Arrays.asList(keywordSets[7]).contains(splitInput[0]))
-			sto(splitInput[1]);
+			return sto(splitInput[1]);
 		else {
 			throw new IllegalArgumentException(splitInput[0] + " is not supported by KeywordInterface");
 		}
-		return null;
 	}
 
 	public static Function pd(String input) {
@@ -88,8 +87,9 @@ public class KeywordInterface {
 		return null; //TODO make this actually use user input
 	}
 
-	public static void sto(String input) {
+	public static Function sto(String input) {
 		String[] splitInput = spacesOutsideQuotes.split(input);
 		//TODO make this actually use user input
+		return null;
 	}
 }

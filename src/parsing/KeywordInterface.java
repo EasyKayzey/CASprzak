@@ -14,6 +14,7 @@ import java.util.regex.Pattern;
 public class KeywordInterface {
 	public static final Pattern spacesOutsideQuotes = Pattern.compile("\"\\s\"|\"\\s|\\s\"|\"$|\\s+(?=[^\"]*(\"[^\"]*\"[^\"]*)*$)");
 	public static HashMap<String, Function> storedFunctions = new HashMap<>();
+
 	/**
 	 * A list of sets of keywords corresponding to operations
 	 */
@@ -122,11 +123,15 @@ public class KeywordInterface {
 	}
 
 	/**
-	 * sto [uppercaselocationstring] [function]
+	 * sto [locationstring] [input]
 	 */
 	public static Object sto(String input) {
-		String[] splitInput = spacesOutsideQuotes.split(input);
-		//TODO make this actually use user input
-		return null;
+		String[] splitInput = spacesOutsideQuotes.split(input, 2);
+		try {
+			storedFunctions.put(splitInput[0], (Function) KeywordInterface.useKeywords(splitInput[1]));
+		} catch (IllegalArgumentException e) {
+			storedFunctions.put(splitInput[0], parseStored(splitInput[1]));
+		}
+		return storedFunctions.get(splitInput[0]);
 	}
 }

@@ -32,26 +32,18 @@ public class KeywordInterface {
 	 * @return the Object requested
 	 */
 	public static Object useKeywords(String input) {
-		String[] splitInput = spacesOutsideQuotes.split(input, 2); //TODO MAKE THIS USE ENHANCED SWITCH
-		if (Arrays.asList(keywordSets[0]).contains(splitInput[0]))
-			return pd(splitInput[1]);
-		else if (Arrays.asList(keywordSets[1]).contains(splitInput[0]))
-			return eval(splitInput[1]);
-		else if (Arrays.asList(keywordSets[2]).contains(splitInput[0]))
-			return simp(splitInput[1]);
-		else if (Arrays.asList(keywordSets[3]).contains(splitInput[0]))
-			return sub(splitInput[1]);
-		else if (Arrays.asList(keywordSets[4]).contains(splitInput[0]))
-			return sol(splitInput[1]);
-		else if (Arrays.asList(keywordSets[5]).contains(splitInput[0]))
-			return ext(splitInput[1]);
-		else if (Arrays.asList(keywordSets[6]).contains(splitInput[0]))
-			return tay(splitInput[1]);
-		else if (Arrays.asList(keywordSets[7]).contains(splitInput[0]))
-			return sto(splitInput[1]);
-		else {
-			throw new IllegalArgumentException(splitInput[0] + " is not supported by KeywordInterface");
-		}
+		String[] splitInput = spacesOutsideQuotes.split(input, 2);
+		return switch (splitInput[0]) {
+			case "pd", "pdiff", "partial", "pdifferentiate" -> pd(splitInput[1]);
+			case "eval", "evaluate" -> eval(splitInput[1]);
+			case "simp", "simplify" -> simp(splitInput[1]);
+			case "sub", "substitute" -> sub(splitInput[1]);
+			case "sol", "solve" -> sol(splitInput[1]);
+			case "ext", "extrema" -> ext(splitInput[1]);
+			case "tay", "taylor" -> tay(splitInput[1]);
+			case "sto", "store" -> sto(splitInput[1]);
+			default -> throw new IllegalArgumentException(splitInput[0] + " is not supported by KeywordInterface");
+		};
 	}
 
 	/**

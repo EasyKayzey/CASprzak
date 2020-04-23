@@ -37,7 +37,7 @@ public class KeywordInterface {
 	public static boolean useKeywords(String input) {
 		@SuppressWarnings("DynamicRegexReplaceableByCompiledPattern")
 		String[] splitInput = input.split("\\s+", 2);
-		if (splitInput[0].equals("exit"))
+		if ("exit".equals(splitInput[0]))
 			return false;
 		else if (Arrays.asList(keywordSets[0]).contains(splitInput[0]))
 			pd(splitInput[1]);

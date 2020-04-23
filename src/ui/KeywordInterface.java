@@ -2,9 +2,11 @@ package ui;
 
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 @SuppressWarnings("SpellCheckingInspection")
 public class KeywordInterface {
+	private static final Pattern COMPILE = Pattern.compile("\\s+");
 	/**
 	 * A list of sets of keywords corresponding to operations
 	 */
@@ -35,8 +37,7 @@ public class KeywordInterface {
 	 * @param input contains the command and arguments
 	 */
 	public static boolean useKeywords(String input) {
-		@SuppressWarnings("DynamicRegexReplaceableByCompiledPattern")
-		String[] splitInput = input.split("\\s+", 2);
+		String[] splitInput = COMPILE.split(input, 2);
 		if ("exit".equals(splitInput[0]))
 			return false;
 		else if (Arrays.asList(keywordSets[0]).contains(splitInput[0]))

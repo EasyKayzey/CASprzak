@@ -15,7 +15,7 @@ public class KeywordUI extends KeywordInterface {
 		boolean flag = true;
 		while (flag) {
 			String input = scan.next();
-			if ("exit".equals(input.substring(0, 4)))
+			if ('!' == input.charAt(0) || "exit".equals(input.substring(0, 4)))
 				flag = false;
 			else {
 				try {

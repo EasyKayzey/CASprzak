@@ -117,11 +117,15 @@ public class KeywordInterface {
 	}
 
 	/**
-	 * sto [uppercaselocationstring] [function]
+	 * sto [locationstring] [input]
 	 */
 	public static Object sto(String input) {
-		String[] splitInput = spacesOutsideQuotes.split(input);
-		//TODO make this actually use user input
-		return null;
+		String[] splitInput = spacesOutsideQuotes.split(input, 2);
+		try {
+			storedFunctions.put(splitInput[0], (Function) KeywordInterface.useKeywords(splitInput[1]));
+		} catch (IllegalArgumentException e) {
+			storedFunctions.put(splitInput[0], parseStored(splitInput[1]));
+		}
+		return storedFunctions.get(splitInput[0]);
 	}
 }

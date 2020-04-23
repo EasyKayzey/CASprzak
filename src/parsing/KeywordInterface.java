@@ -22,7 +22,7 @@ public class KeywordInterface {
 	 */
 	public static Object useKeywords(String input) {
 		String[] splitInput = spacesOutsideQuotes.split(input, 2);
-		return switch (splitInput[0]) {
+		Object ret = switch (splitInput[0]) {
 			case "pd", "pdiff", "partial", "pdifferentiate" -> pd(splitInput[1]);
 			case "eval", "evaluate" -> eval(splitInput[1]);
 			case "simp", "simplify" -> simp(splitInput[1]);
@@ -31,15 +31,23 @@ public class KeywordInterface {
 			case "ext", "extrema" -> ext(splitInput[1]);
 			case "tay", "taylor" -> tay(splitInput[1]);
 			case "sto", "store" -> sto(splitInput[1]);
-			default -> throw new IllegalArgumentException(splitInput[0] + " is not supported by KeywordInterface");
+			default -> null;
 		};
+		if (ret == null) {
+			try {
+				return parseStored(input);
+			} catch (Exception ignored) {
+				throw new IllegalArgumentException(splitInput[0] + " is not supported by KeywordInterface");
+			}
+		}
+		return ret;
 	}
 
 	public static Function parseStored(String input) {
 		if (storedFunctions.containsKey(input))
 			return storedFunctions.get(input);
 		else
-			return Parser.parse(input);
+			return (Function) useKeywords(input);
 	}
 	
 	/**

@@ -34,8 +34,10 @@ public class KeywordInterface {
 			default -> null;
 		};
 		if (ret == null) {
-			try {
-				return parseStored(input);
+			if (storedFunctions.containsKey(input))
+				return storedFunctions.get(input);
+			else try {
+				 return Parser.parse(input);
 			} catch (Exception ignored) {
 				throw new IllegalArgumentException(splitInput[0] + " is not supported by KeywordInterface");
 			}

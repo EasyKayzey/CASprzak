@@ -33,28 +33,21 @@ public class KeywordInterface {
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
 		scan.useDelimiter("\\n");
-		//noinspection StatementWithEmptyBody
-		while (userUseKeywords(scan.next()));
-	}
-
-	/**
-	 * Takes input as a string with command, arguments... and prints the result
-	 * @param input contains the command and arguments
-	 * @return false if exiting
-	 */
-	public static boolean userUseKeywords(String input) {
-		String[] splitInput = spaces.split(input, 2);
-		if ("exit".equals(splitInput[0]))
-			return false;
-		else {
-			try {
-				System.out.println(useKeywords(input));
-			} catch (IllegalArgumentException e) {
-				System.out.println(e.getMessage());
-				return false;
+		boolean flag = true;
+		while (flag) {
+			String input = scan.next();
+			if ("exit".equals(input.substring(0, 4)))
+				flag = false;
+			else {
+				try {
+					System.out.println(useKeywords(input));
+					flag = true;
+				} catch (IllegalArgumentException e) {
+					System.out.println(e.getMessage());
+					flag = false;
+				}
 			}
 		}
-		return true;
 	}
 
 	/**

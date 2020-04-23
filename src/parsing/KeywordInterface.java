@@ -64,9 +64,9 @@ public class KeywordInterface {
 	 * eval [function] [values]
 	 */
 	public static double eval(String input) {
-		String[] splitInput = spacesOutsideQuotes.split(input, 1);
-		double[] values =
-		return Parser.parse(splitInput[0]).evaluate(); //TODO make this actually use the user input
+		String[] splitInput = spacesOutsideQuotes.split(input, 2);
+		double[] values = Arrays.stream(spacesOutsideQuotes.split(splitInput[1])).mapToDouble(ConstantEvaluator::getConstant).toArray();
+		return Parser.parse(splitInput[0]).evaluate(values);
 	}
 
 	/**

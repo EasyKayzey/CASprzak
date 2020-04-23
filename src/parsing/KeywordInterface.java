@@ -16,20 +16,6 @@ public class KeywordInterface {
 	public static HashMap<String, Function> storedFunctions = new HashMap<>();
 
 	/**
-	 * A list of sets of keywords corresponding to operations
-	 */
-	public static String[][] keywordSets = {
-			{"pd", "pdiff", "partial", "pdifferentiate"},
-			{"eval", "evaluate"},
-			{"simp", "simplify"},
-			{"sub", "substitute"},
-			{"sol", "solve"},
-			{"ext", "extrema"},
-			{"tay", "taylor"},
-			{"sto", "store"},
-	};
-
-	/**
 	 * Takes input as a string with command, arguments...
 	 * @param input contains the command and arguments
 	 * @return the Object requested
@@ -123,15 +109,11 @@ public class KeywordInterface {
 	}
 
 	/**
-	 * sto [locationstring] [input]
+	 * sto [uppercaselocationstring] [function]
 	 */
 	public static Object sto(String input) {
-		String[] splitInput = spacesOutsideQuotes.split(input, 2);
-		try {
-			storedFunctions.put(splitInput[0], (Function) KeywordInterface.useKeywords(splitInput[1]));
-		} catch (IllegalArgumentException e) {
-			storedFunctions.put(splitInput[0], parseStored(splitInput[1]));
-		}
-		return storedFunctions.get(splitInput[0]);
+		String[] splitInput = spacesOutsideQuotes.split(input);
+		//TODO make this actually use user input
+		return null;
 	}
 }

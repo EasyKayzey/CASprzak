@@ -58,6 +58,12 @@ public class SolverTest {
     }
 
     @Test
+    void simpleExponent() {
+        Function test = Parser.parse("(x+1)^2");
+        assertEquals(-1, Solver.getSolutionPoint(test, 23));
+    }
+
+    @Test
     void simpleMinima() {
         Function test = Parser.parse("x^2-1");
         assertEquals(0, Extrema.findLocalMinima(test, -3,3));

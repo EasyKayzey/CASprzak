@@ -2,11 +2,9 @@ package ui;
 
 import java.util.Arrays;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 @SuppressWarnings("SpellCheckingInspection")
 public class KeywordInterface {
-	private static final Pattern spaces = Pattern.compile("\\s+");
 	/**
 	 * A list of sets of keywords corresponding to operations
 	 */
@@ -21,29 +19,47 @@ public class KeywordInterface {
 			{"sto", "store"},
 	};
 
+	/**
+	 * Runs {@link #useKeywords} on user input
+	 * @param args default main arguments
+	 */
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
 		scan.useDelimiter("\\n");
-		String[] input = spaces.split(scan.next(), 1);
-		// Partials
-		if (Arrays.asList(keywordSets[0]).contains(input[0]))
-			pd(input[1]);
-		else if (Arrays.asList(keywordSets[1]).contains(input[0]))
-			eval(input[1]);
-		else if (Arrays.asList(keywordSets[2]).contains(input[0]))
-			simp(input[1]);
-		else if (Arrays.asList(keywordSets[3]).contains(input[0]))
-			sub(input[1]);
-		else if (Arrays.asList(keywordSets[4]).contains(input[0]))
-			sol(input[1]);
-		else if (Arrays.asList(keywordSets[5]).contains(input[0]))
-			ext(input[1]);
-		else if (Arrays.asList(keywordSets[6]).contains(input[0]))
-			tay(input[1]);
-		else if (Arrays.asList(keywordSets[7]).contains(input[0]))
-			sto(input[1]);
+		try {
+			//noinspection InfiniteLoopStatement
+			while (true)
+				useKeywords(scan.next());
+		} catch (IllegalArgumentException ignored) {
+//			ignored.printStackTrace();
+		}
+	}
+
+	/**
+	 * Takes input as a string with command, arguments...
+	 * @param input contains the command and arguments
+	 */
+	public static void useKeywords(String input) {
+		@SuppressWarnings("DynamicRegexReplaceableByCompiledPattern")
+		String[] splitInput = input.split("\\s+", 2);
+		if (Arrays.asList(keywordSets[0]).contains(splitInput[0]))
+			pd(splitInput[1]);
+		else if (Arrays.asList(keywordSets[1]).contains(splitInput[0]))
+			eval(splitInput[1]);
+		else if (Arrays.asList(keywordSets[2]).contains(splitInput[0]))
+			simp(splitInput[1]);
+		else if (Arrays.asList(keywordSets[3]).contains(splitInput[0]))
+			sub(splitInput[1]);
+		else if (Arrays.asList(keywordSets[4]).contains(splitInput[0]))
+			sol(splitInput[1]);
+		else if (Arrays.asList(keywordSets[5]).contains(splitInput[0]))
+			ext(splitInput[1]);
+		else if (Arrays.asList(keywordSets[6]).contains(splitInput[0]))
+			tay(splitInput[1]);
+		else if (Arrays.asList(keywordSets[7]).contains(splitInput[0]))
+			sto(splitInput[1]);
 		else
-			System.out.println(input[0] + " is not supported by KeywordInterface");
+			throw new IllegalArgumentException(splitInput[0] + " is not supported by KeywordInterface");
 	}
 
 	private static void pd(String s) {

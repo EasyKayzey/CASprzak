@@ -57,6 +57,11 @@ public class DerivativeTest {
         assertEquals(test1.getNthDerivative(0, 0), test1);
     }
 
-
+    @Test
+    void logbTests() {
+        Function test;
+        test = Parser.parse("logb_{10}(x)");
+        assertEquals(0.659, test.getSimplifiedDerivative(0).evaluate(0.659), 0.01);
+    }
 
 }

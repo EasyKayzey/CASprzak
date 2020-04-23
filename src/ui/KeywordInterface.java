@@ -26,23 +26,20 @@ public class KeywordInterface {
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
 		scan.useDelimiter("\\n");
-		try {
-			//noinspection InfiniteLoopStatement
-			while (true)
-				useKeywords(scan.next());
-		} catch (IllegalArgumentException ignored) {
-//			ignored.printStackTrace();
-		}
+		//noinspection StatementWithEmptyBody
+		while (useKeywords(scan.next()));
 	}
 
 	/**
 	 * Takes input as a string with command, arguments...
 	 * @param input contains the command and arguments
 	 */
-	public static void useKeywords(String input) {
+	public static boolean useKeywords(String input) {
 		@SuppressWarnings("DynamicRegexReplaceableByCompiledPattern")
 		String[] splitInput = input.split("\\s+", 2);
-		if (Arrays.asList(keywordSets[0]).contains(splitInput[0]))
+		if (splitInput[0].equals("exit"))
+			return false;
+		else if (Arrays.asList(keywordSets[0]).contains(splitInput[0]))
 			pd(splitInput[1]);
 		else if (Arrays.asList(keywordSets[1]).contains(splitInput[0]))
 			eval(splitInput[1]);
@@ -58,31 +55,34 @@ public class KeywordInterface {
 			tay(splitInput[1]);
 		else if (Arrays.asList(keywordSets[7]).contains(splitInput[0]))
 			sto(splitInput[1]);
-		else
-			throw new IllegalArgumentException(splitInput[0] + " is not supported by KeywordInterface");
+		else {
+			System.out.println(splitInput[0] + " is not supported by KeywordInterface");
+			return false;
+		}
+		return true;
 	}
 
-	private static void pd(String s) {
+	private static void pd(String input) {
 	}
 
-	private static void eval(String s) {
+	private static void eval(String input) {
 	}
 
-	private static void simp(String s) {
+	private static void simp(String input) {
 	}
 
-	private static void sub(String s) {
+	private static void sub(String input) {
 	}
 
-	private static void sol(String s) {
+	private static void sol(String input) {
 	}
 
-	private static void ext(String s) {
+	private static void ext(String input) {
 	}
 
-	private static void tay(String s) {
+	private static void tay(String input) {
 	}
 
-	private static void sto(String s) {
+	private static void sto(String input) {
 	}
 }

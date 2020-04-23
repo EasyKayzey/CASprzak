@@ -1,3 +1,4 @@
+import functions.binary.Pow;
 import parsing.Parser;
 import core.Settings;
 import functions.Function;
@@ -185,4 +186,46 @@ public class EqualsTest {
         assertEquals(test1, test2);
     }
 
+    @Test
+    void simplifySimpleExponents() {
+        Function test1 = Parser.parse("(x+1)^1");
+        Function test2 = Parser.parse("x+1");
+        assertEquals(test1, test2);
+    }
+
+    @Test
+    void simplifyMultiplyExponents() {
+        Function test1 = Parser.parse("(x^3)^2");
+        Function test2 = Parser.parse("x^6");
+        assertEquals(((Pow)test1).multiplyExponents(), test2);
+        //TODO why does the method need to be called
+    }
+
+    @Test
+    void simplifyIdentity() {
+        Function test1 = Parser.parse("x+0");
+        Function test2 = Parser.parse("x*1");
+        assertEquals(test1, test2);
+    }
+
+    @Test
+    void simplifyPullAdd() {
+        Function test1 = Parser.parse("(x+(y+z))");
+        Function test2 = Parser.parse("x+y+z");
+        assertEquals(test1, test2);
+    }
+
+    @Test
+    void simplifyPullMultiply() {
+        Function test1 = Parser.parse("x(yz)");
+        Function test2 = Parser.parse("x*y*z");
+        assertEquals(test1, test2);
+    }
+
+    @Test
+    void timesZero() {
+        Function test1 = Parser.parse("x*0");
+        Function test2 = Parser.parse("0");
+        assertEquals(test1, test2);
+    }
 }

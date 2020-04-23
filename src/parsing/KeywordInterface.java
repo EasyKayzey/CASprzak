@@ -7,11 +7,13 @@ import tools.singlevariable.Solver;
 import tools.singlevariable.TaylorSeries;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.regex.Pattern;
 
 @SuppressWarnings("SpellCheckingInspection")
 public class KeywordInterface {
 	public static final Pattern spacesOutsideQuotes = Pattern.compile("\"\\s\"|\"\\s|\\s\"|\"$|\\s+(?=[^\"]*(\"[^\"]*\"[^\"]*)*$)");
+	public static HashMap<String, Function> storedFunctions = new HashMap<>();
 	/**
 	 * A list of sets of keywords corresponding to operations
 	 */
@@ -46,12 +48,19 @@ public class KeywordInterface {
 		};
 	}
 
+	public static Function parseStored(String input) {
+		if (storedFunctions.containsKey(input))
+			return storedFunctions.get(input);
+		else
+			return Parser.parse(input);
+	}
+	
 	/**
 	 * pd [variable] [function]
 	 */
 	public static Function pd(String input) {
 		String[] splitInput = spacesOutsideQuotes.split(input);
-		return Parser.parse(splitInput[1]).getSimplifiedDerivative(Variable.getVarID(splitInput[0].charAt(0)));
+		return parseStored(splitInput[1]).getSimplifiedDerivative(Variable.getVarID(splitInput[0].charAt(0)));
 	}
 
 	/**
@@ -60,7 +69,7 @@ public class KeywordInterface {
 	public static double eval(String input) {
 		String[] splitInput = spacesOutsideQuotes.split(input, 2);
 		double[] values = Arrays.stream(spacesOutsideQuotes.split(splitInput[1])).mapToDouble(ConstantEvaluator::getConstant).toArray();
-		return Parser.parse(splitInput[0]).evaluate(values);
+		return parseStored(splitInput[0]).evaluate(values);
 	}
 
 	/**
@@ -68,7 +77,7 @@ public class KeywordInterface {
 	 */
 	public static Function simp(String input) {
 		String[] splitInput = spacesOutsideQuotes.split(input);
-		return Parser.parse(splitInput[0]).simplify();
+		return parseStored(splitInput[0]).simplify();
 	}
 
 	/**
@@ -78,7 +87,7 @@ public class KeywordInterface {
 		String[] splitInput = spacesOutsideQuotes.split(input);
 		if (splitInput[1].length() > 1)
 			throw new IllegalArgumentException("Variables are one character, so " + splitInput[1] + " is not valid.");
-		return Parser.parse(splitInput[0]).substitute(Variable.getVarID(splitInput[1].charAt(0)), Parser.parse(splitInput[2]));
+		return parseStored(splitInput[0]).substitute(Variable.getVarID(splitInput[1].charAt(0)), parseStored(splitInput[2]));
 	}
 
 	/**
@@ -86,7 +95,7 @@ public class KeywordInterface {
 	 */
 	public static double[] sol(String input) {
 		String[] splitInput = spacesOutsideQuotes.split(input);
-		return Solver.getSolutionsRange(Parser.parse(splitInput[0]), ConstantEvaluator.getConstant(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]));
+		return Solver.getSolutionsRange(parseStored(splitInput[0]), ConstantEvaluator.getConstant(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]));
 	}
 
 	/**
@@ -95,11 +104,11 @@ public class KeywordInterface {
 	public static Object ext(String input) {
 		String[] splitInput = spacesOutsideQuotes.split(input);
 		return switch (splitInput[0]) {
-			case "min", "minima" -> Extrema.findLocalMinima(Parser.parse(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]), ConstantEvaluator.getConstant(splitInput[3]));
-			case "max", "maxima" -> Extrema.findLocalMaxima(Parser.parse(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]), ConstantEvaluator.getConstant(splitInput[3]));
-			case "anymin", "anyminima" -> Extrema.findAnyMinima(Parser.parse(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]), ConstantEvaluator.getConstant(splitInput[3]));
-			case "anymax", "anymaxima" -> Extrema.findAnyMaxima(Parser.parse(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]), ConstantEvaluator.getConstant(splitInput[3]));
-			case "inflect", "inflection" -> Extrema.findAnyInflectionPoints(Parser.parse(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]), ConstantEvaluator.getConstant(splitInput[3]));
+			case "min", "minima" -> Extrema.findLocalMinima(parseStored(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]), ConstantEvaluator.getConstant(splitInput[3]));
+			case "max", "maxima" -> Extrema.findLocalMaxima(parseStored(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]), ConstantEvaluator.getConstant(splitInput[3]));
+			case "anymin", "anyminima" -> Extrema.findAnyMinima(parseStored(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]), ConstantEvaluator.getConstant(splitInput[3]));
+			case "anymax", "anymaxima" -> Extrema.findAnyMaxima(parseStored(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]), ConstantEvaluator.getConstant(splitInput[3]));
+			case "inflect", "inflection" -> Extrema.findAnyInflectionPoints(parseStored(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]), ConstantEvaluator.getConstant(splitInput[3]));
 			default -> throw new IllegalArgumentException("Invalid setting for extrema:" + splitInput[0]);
 		};
 	}
@@ -109,13 +118,13 @@ public class KeywordInterface {
 	 */
 	public static Function tay(String input) {
 		String[] splitInput = spacesOutsideQuotes.split(input);
-		return TaylorSeries.makeTaylorSeries(Parser.parse(splitInput[0]), (int) ConstantEvaluator.getConstant(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]));
+		return TaylorSeries.makeTaylorSeries(parseStored(splitInput[0]), (int) ConstantEvaluator.getConstant(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]));
 	}
 
 	/**
-	 * sto [locationstring] [function]
+	 * sto [uppercaselocationstring] [function]
 	 */
-	public static Function sto(String input) {
+	public static Object sto(String input) {
 		String[] splitInput = spacesOutsideQuotes.split(input);
 		//TODO make this actually use user input
 		return null;

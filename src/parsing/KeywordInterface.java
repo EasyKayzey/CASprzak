@@ -4,6 +4,7 @@ import functions.Function;
 import functions.special.Variable;
 import tools.singlevariable.Extrema;
 import tools.singlevariable.Solver;
+import tools.singlevariable.TaylorSeries;
 
 import java.util.Arrays;
 import java.util.regex.Pattern;
@@ -112,11 +113,11 @@ public class KeywordInterface {
 	}
 
 	/**
-	 * tay [variable] [function]
+	 * tay [function] [terms] [center]
 	 */
 	public static Function tay(String input) {
 		String[] splitInput = spacesOutsideQuotes.split(input);
-		return null; //TODO make this actually use user input
+		return TaylorSeries.makeTaylorSeries(Parser.parse(splitInput[0]), (int) ConstantEvaluator.getConstant(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]));
 	}
 
 	/**

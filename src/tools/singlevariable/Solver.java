@@ -19,7 +19,10 @@ public class Solver {
 	 * @return a better approximate of the root based on the value provided
 	 */
 	private static double newtonsMethod(Function expression, double value) {
-		return value - expression.evaluate(value) / expression.getSimplifiedDerivative(0).evaluate(value);
+		double nextValue = value - expression.evaluate(value) / expression.getSimplifiedDerivative(0).evaluate(value);
+		if (Double.isNaN(nextValue))
+			return value;
+		return nextValue;
 	}
 
 	/**

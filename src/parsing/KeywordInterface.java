@@ -10,7 +10,6 @@ import java.util.regex.Pattern;
 
 @SuppressWarnings("SpellCheckingInspection")
 public class KeywordInterface {
-	private static final Pattern spaces = Pattern.compile("\\s+");
 	public static final Pattern spacesOutsideQuotes = Pattern.compile("\"\\s\"|\"\\s|\\s\"|\"$|\\s+(?=[^\"]*(\"[^\"]*\"[^\"]*)*$)");
 	/**
 	 * A list of sets of keywords corresponding to operations
@@ -32,7 +31,7 @@ public class KeywordInterface {
 	 * @return the Object requested
 	 */
 	public static Object useKeywords(String input) {
-		String[] splitInput = spaces.split(input, 2); //TODO MAKE THIS USE ENHANCED SWITCH
+		String[] splitInput = spacesOutsideQuotes.split(input, 2); //TODO MAKE THIS USE ENHANCED SWITCH
 		if (Arrays.asList(keywordSets[0]).contains(splitInput[0]))
 			return pd(splitInput[1]);
 		else if (Arrays.asList(keywordSets[1]).contains(splitInput[0]))
@@ -84,7 +83,9 @@ public class KeywordInterface {
 	 */
 	public static Function sub(String input) {
 		String[] splitInput = spacesOutsideQuotes.split(input);
-		return Parser.parse(splitInput[1]).substitute('\0', null); //TODO make this actually use user input
+		if (splitInput[1].length() > 1)
+			throw new IllegalArgumentException("Variables are one character, so " + splitInput[1] + " is not valid.");
+		return Parser.parse(splitInput[0]).substitute(splitInput[1].charAt(0), Parser.parse(splitInput[2])); //TODO fix
 	}
 
 	/**

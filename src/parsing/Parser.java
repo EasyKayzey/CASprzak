@@ -84,7 +84,7 @@ public class Parser {
 			}
 		}
 		if (functionStack.size() != 1)
-			throw new IndexOutOfBoundsException("functionStack size is " + functionStack.size());
+			throw new IndexOutOfBoundsException("functionStack size is " + functionStack.size() + ", current stack is " +functionStack);
 		return functionStack.pop();
 	}
 

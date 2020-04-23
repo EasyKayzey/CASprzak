@@ -52,6 +52,7 @@ public class InfixTokenizer {
 			for (char b : Variable.variables) {
 				infix = infix.replaceAll("(?<=" + a + ")\\s*(?=" + b + ")", "*");
 			}
+			infix = infix.replaceAll("(?<=(?<![A-Za-z])" + a + ")\\s*(?=\\()", "*"); //NOTE: this regex might break things eventually
 		}
 		return infix;
 	}

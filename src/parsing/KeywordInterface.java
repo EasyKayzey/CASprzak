@@ -106,7 +106,7 @@ public class KeywordInterface {
 			case "anymin", "anyminima" -> Extrema.findAnyMinima(Parser.parse(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]), ConstantEvaluator.getConstant(splitInput[3]));
 			case "anymax", "anymaxima" -> Extrema.findAnyMaxima(Parser.parse(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]), ConstantEvaluator.getConstant(splitInput[3]));
 			case "inflect", "inflection" -> Extrema.findAnyInflectionPoints(Parser.parse(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]), ConstantEvaluator.getConstant(splitInput[3]));
-			default -> throw new IllegalArgumentException("Not a valid setting for extrema");
+			default -> throw new IllegalArgumentException("Invalid setting for extrema:" + splitInput[0]);
 		};
 	}
 

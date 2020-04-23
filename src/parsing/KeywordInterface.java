@@ -2,6 +2,8 @@ package parsing;
 
 import functions.Function;
 import functions.special.Variable;
+import tools.singlevariable.Extrema;
+import tools.singlevariable.Solver;
 
 import java.util.Arrays;
 import java.util.regex.Pattern;
@@ -90,15 +92,22 @@ public class KeywordInterface {
 	 */
 	public static double[] sol(String input) {
 		String[] splitInput = spacesOutsideQuotes.split(input);
-		return new double[0]; //TODO make this actually use user input
+		return Solver.getSolutionsRange(Parser.parse(splitInput[0]), ConstantEvaluator.getConstant(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]));
 	}
 
 	/**
 	 * ext ["min(ima)"/"max(ima)"/"anymin(ima)"/"anymax(ima)"/"inflect(ion)"] [function] [startrange] [endrange]
 	 */
-	public static double[] ext(String input) {
+	public static Object ext(String input) {
 		String[] splitInput = spacesOutsideQuotes.split(input);
-		return new double[0]; //TODO make this actually use user input
+		return switch (splitInput[0]) {
+			case "min", "minima" -> Extrema.findLocalMinima(Parser.parse(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]), ConstantEvaluator.getConstant(splitInput[3]));
+			case "max", "maxima" -> Extrema.findLocalMaxima(Parser.parse(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]), ConstantEvaluator.getConstant(splitInput[3]));
+			case "anymin", "anyminima" -> Extrema.findAnyMinima(Parser.parse(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]), ConstantEvaluator.getConstant(splitInput[3]));
+			case "anymax", "anymaxima" -> Extrema.findAnyMaxima(Parser.parse(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]), ConstantEvaluator.getConstant(splitInput[3]));
+			case "inflect", "inflection" -> Extrema.findAnyInflectionPoints(Parser.parse(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]), ConstantEvaluator.getConstant(splitInput[3]));
+			default -> throw new IllegalArgumentException("Not a valid setting for extrema");
+		};
 	}
 
 	/**

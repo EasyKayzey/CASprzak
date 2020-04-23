@@ -85,7 +85,7 @@ public class KeywordInterface {
 		String[] splitInput = spacesOutsideQuotes.split(input);
 		if (splitInput[1].length() > 1)
 			throw new IllegalArgumentException("Variables are one character, so " + splitInput[1] + " is not valid.");
-		return Parser.parse(splitInput[0]).substitute(splitInput[1].charAt(0), Parser.parse(splitInput[2])); //TODO fix
+		return Parser.parse(splitInput[0]).substitute(Variable.getVarID(splitInput[1].charAt(0)), Parser.parse(splitInput[2]));
 	}
 
 	/**

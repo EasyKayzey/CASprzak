@@ -60,9 +60,9 @@ public class KeywordInterface {
 	/**
 	 * Takes input as a string with command, arguments...
 	 * @param input contains the command and arguments
-	 * @return the {@link functions.Function} requested
+	 * @return the Object requested
 	 */
-	public static Function useKeywords(String input) {
+	public static Object useKeywords(String input) {
 		String[] splitInput = spaces.split(input, 2);
 		if (Arrays.asList(keywordSets[0]).contains(splitInput[0]))
 			pd(splitInput[1]);
@@ -91,31 +91,38 @@ public class KeywordInterface {
 		return Parser.parse(splitInput[1]).getSimplifiedDerivative(Variable.getVarID(splitInput[0].charAt(0)));
 	}
 
-	public static Function eval(String input) {
+	public static double eval(String input) {
 		String[] splitInput = spacesOutsideQuotes.split(input);
+		return Parser.parse(splitInput[1]).evaluate(); //TODO make this actually use the user input
 	}
 
 	public static Function simp(String input) {
 		String[] splitInput = spacesOutsideQuotes.split(input);
+		return Parser.parse(splitInput[1]).simplify();
 	}
 
 	public static Function sub(String input) {
 		String[] splitInput = spacesOutsideQuotes.split(input);
+		return Parser.parse(splitInput[1]).substitute('\0', null); //TODO make this actually use user input
 	}
 
-	public static Function sol(String input) {
+	public static double[] sol(String input) {
 		String[] splitInput = spacesOutsideQuotes.split(input);
+		return new double[0]; //TODO make this actually use user input
 	}
 
-	public static Function ext(String input) {
+	public static double[] ext(String input) {
 		String[] splitInput = spacesOutsideQuotes.split(input);
+		return new double[0]; //TODO make this actually use user input
 	}
 
 	public static Function tay(String input) {
 		String[] splitInput = spacesOutsideQuotes.split(input);
+		return null; //TODO make this actually use user input
 	}
 
-	public static Function sto(String input) {
+	public static void sto(String input) {
 		String[] splitInput = spacesOutsideQuotes.split(input);
+		//TODO make this actually use user input
 	}
 }

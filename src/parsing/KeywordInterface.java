@@ -52,41 +52,65 @@ public class KeywordInterface {
 		}
 	}
 
+	/**
+	 * pd [variable] [function]
+	 */
 	public static Function pd(String input) {
 		String[] splitInput = spacesOutsideQuotes.split(input);
 		return Parser.parse(splitInput[1]).getSimplifiedDerivative(Variable.getVarID(splitInput[0].charAt(0)));
 	}
 
+	/**
+	 * eval [function] [values]
+	 */
 	public static double eval(String input) {
 		String[] splitInput = spacesOutsideQuotes.split(input);
 		return Parser.parse(splitInput[1]).evaluate(); //TODO make this actually use the user input
 	}
 
+	/**
+	 * simp [function]
+	 */
 	public static Function simp(String input) {
 		String[] splitInput = spacesOutsideQuotes.split(input);
 		return Parser.parse(splitInput[1]).simplify();
 	}
 
+	/**
+	 * sub [function] [variable] [replacementfunction]
+	 */
 	public static Function sub(String input) {
 		String[] splitInput = spacesOutsideQuotes.split(input);
 		return Parser.parse(splitInput[1]).substitute('\0', null); //TODO make this actually use user input
 	}
 
+	/**
+	 * sol [function]
+	 */
 	public static double[] sol(String input) {
 		String[] splitInput = spacesOutsideQuotes.split(input);
 		return new double[0]; //TODO make this actually use user input
 	}
 
+	/**
+	 * ext [function]
+	 */
 	public static double[] ext(String input) {
 		String[] splitInput = spacesOutsideQuotes.split(input);
 		return new double[0]; //TODO make this actually use user input
 	}
 
+	/**
+	 * tay [variable] [function]
+	 */
 	public static Function tay(String input) {
 		String[] splitInput = spacesOutsideQuotes.split(input);
 		return null; //TODO make this actually use user input
 	}
 
+	/**
+	 * sto [locationstring] [function]
+	 */
 	public static Function sto(String input) {
 		String[] splitInput = spacesOutsideQuotes.split(input);
 		//TODO make this actually use user input

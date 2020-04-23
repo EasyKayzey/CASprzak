@@ -5,6 +5,7 @@ import functions.Function;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.ListIterator;
 
 public class Variable extends Function {
 	/**
@@ -31,6 +32,20 @@ public class Variable extends Function {
 	 */
 	public static void setVariables(Character... variables) {
 		Variable.variables = Arrays.asList(variables);
+	}
+
+	/** @param variable the character corresponding to the variable
+	 * @return the ID of the variable, used internally
+	 * @throws IndexOutOfBoundsException if no such variable exists
+	 */
+	public static int getVarID(char variable) throws IndexOutOfBoundsException {
+		ListIterator<Character> iter = variables.listIterator();
+		while (iter.hasNext()) {
+			if (iter.next() == variable) {
+				return iter.previousIndex();
+			}
+		}
+		throw new IndexOutOfBoundsException("No variable " + variable + " found.");
 	}
 
 

@@ -6,7 +6,6 @@ import functions.special.Variable;
 
 import java.util.Deque;
 import java.util.LinkedList;
-import java.util.ListIterator;
 
 public class Parser {
 	/**
@@ -45,20 +44,6 @@ public class Parser {
 		return false;
 	}
 
-	/** @param variable the character corresponding to the variable
-	 * @return the ID of the variable, used internally
-	 * @throws IndexOutOfBoundsException if no such variable exists
-	 */
-	public static int getVarID(char variable) throws IndexOutOfBoundsException {
-		ListIterator<Character> iter = Variable.variables.listIterator();
-		while (iter.hasNext()) {
-			if (iter.next() == variable) {
-				return iter.previousIndex();
-			}
-		}
-		throw new IndexOutOfBoundsException("No variable " + variable + " found.");
-	}
-
 
 	/**
 	 * Parses infix using {@link parsing.PreProcessor} and {@link #parse(String[])}
@@ -87,7 +72,7 @@ public class Parser {
 					if (token.length() > 1)
 						throw new IllegalArgumentException(token + " is not a valid function.");
 					char variableName = token.charAt(0);
-					functionStack.push(FunctionMaker.variable(getVarID(variableName)));
+					functionStack.push(FunctionMaker.variable(Variable.getVarID(variableName)));
 				}
 			} else if (isBinaryOperator(token)) {
 				Function a = functionStack.pop();

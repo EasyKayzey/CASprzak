@@ -48,6 +48,10 @@ public class Variable extends Function {
 		throw new IndexOutOfBoundsException("No variable " + variable + " found.");
 	}
 
+	public static void addVariable(char variable) {
+		variables.add(variable);
+	}
+
 
 	public String toString() {
 		return String.valueOf(variables.get(varID));

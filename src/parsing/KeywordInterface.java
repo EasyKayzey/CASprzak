@@ -73,7 +73,7 @@ public class KeywordInterface {
 	 */
 	public static Function simp(String input) {
 		String[] splitInput = spacesOutsideQuotes.split(input);
-		return Parser.parse(splitInput[1]).simplify();
+		return Parser.parse(splitInput[0]).simplify();
 	}
 
 	/**
@@ -85,7 +85,7 @@ public class KeywordInterface {
 	}
 
 	/**
-	 * sol [function]
+	 * sol [function] [min] [max]
 	 */
 	public static double[] sol(String input) {
 		String[] splitInput = spacesOutsideQuotes.split(input);

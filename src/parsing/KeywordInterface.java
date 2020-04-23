@@ -32,19 +32,19 @@ public class KeywordInterface {
 	public static Object useKeywords(String input) {
 		String[] splitInput = spaces.split(input, 2);
 		if (Arrays.asList(keywordSets[0]).contains(splitInput[0]))
-			pd(splitInput[1]);
+			return pd(splitInput[1]);
 		else if (Arrays.asList(keywordSets[1]).contains(splitInput[0]))
-			eval(splitInput[1]);
+			return eval(splitInput[1]);
 		else if (Arrays.asList(keywordSets[2]).contains(splitInput[0]))
-			simp(splitInput[1]);
+			return simp(splitInput[1]);
 		else if (Arrays.asList(keywordSets[3]).contains(splitInput[0]))
-			sub(splitInput[1]);
+			return sub(splitInput[1]);
 		else if (Arrays.asList(keywordSets[4]).contains(splitInput[0]))
-			sol(splitInput[1]);
+			return sol(splitInput[1]);
 		else if (Arrays.asList(keywordSets[5]).contains(splitInput[0]))
-			ext(splitInput[1]);
+			return ext(splitInput[1]);
 		else if (Arrays.asList(keywordSets[6]).contains(splitInput[0]))
-			tay(splitInput[1]);
+			return tay(splitInput[1]);
 		else if (Arrays.asList(keywordSets[7]).contains(splitInput[0]))
 			sto(splitInput[1]);
 		else {

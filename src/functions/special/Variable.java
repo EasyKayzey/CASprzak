@@ -3,6 +3,7 @@ package functions.special;
 import core.Settings;
 import functions.Function;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ListIterator;
@@ -11,7 +12,7 @@ public class Variable extends Function {
 	/**
 	 * The array containing all the variable characters
 	 */
-	public static List<Character> variables = Arrays.asList('x', 'y', 'z');
+	public static List<Character> variables = new ArrayList<>(Arrays.asList('x', 'y', 'z'));
 
 	/**
 	 * The index of this variable in {@link #variables}

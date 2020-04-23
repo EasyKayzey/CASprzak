@@ -8,12 +8,14 @@ import tools.singlevariable.TaylorSeries;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 @SuppressWarnings("SpellCheckingInspection")
 public class KeywordInterface {
 	public static final Pattern spacesOutsideQuotes = Pattern.compile("\"\\s\"|\"\\s|\\s\"|\"$|\\s+(?=[^\"]*(\"[^\"]*\"[^\"]*)*$)");
 	public static HashMap<String, Function> storedFunctions = new HashMap<>();
+
 
 	/**
 	 * Takes input as a string with command, arguments...
@@ -37,7 +39,7 @@ public class KeywordInterface {
 			if (storedFunctions.containsKey(input))
 				return storedFunctions.get(input);
 			else try {
-				 return Parser.parse(input);
+				 return substituteAll(Parser.parse(input));
 			} catch (Exception ignored) {
 				throw new IllegalArgumentException(splitInput[0] + " is not supported by KeywordInterface");
 			}
@@ -45,12 +47,24 @@ public class KeywordInterface {
 		return ret;
 	}
 
+	/**
+	 * Parses input using {@link #useKeywords(String)} and {@link #storedFunctions}
+	 * @param input input string
+	 * @return a {@link functions.Function}
+	 */
 	public static Function parseStored(String input) {
 		if (storedFunctions.containsKey(input))
 			return storedFunctions.get(input);
 		else
 			return (Function) useKeywords(input);
 	}
+
+	public static Function substituteAll(Function function) {
+		for (Map.Entry<String, Function>  entry : storedFunctions.entrySet())
+			function = function.substitute(Variable.getVarID(entry.getKey().charAt(0)), entry.getValue());
+		return function;
+	}
+
 	
 	/**
 	 * pd [variable] [function]
@@ -123,6 +137,7 @@ public class KeywordInterface {
 	 */
 	public static Object sto(String input) {
 		String[] splitInput = spacesOutsideQuotes.split(input, 2);
+		Variable.addVariable(input.charAt(0));
 		try {
 			storedFunctions.put(splitInput[0], (Function) KeywordInterface.useKeywords(splitInput[1]));
 		} catch (IllegalArgumentException e) {

@@ -19,10 +19,7 @@ public class Solver {
 	 * @return a better approximate of the root based on the value provided
 	 */
 	private static double newtonsMethod(Function expression, double value) {
-		double nextValue = value - expression.evaluate(value) / expression.getSimplifiedDerivative(0).evaluate(value);
-		if (Double.isNaN(nextValue))
-			return value;
-		return nextValue;
+		return value - expression.evaluate(value) / expression.getSimplifiedDerivative(0).evaluate(value);
 	}
 
 	/**
@@ -38,7 +35,10 @@ public class Solver {
 		if (expression instanceof Constant)
 			return Double.NaN;
 		for (int i = 0; i < runs; i++) {
-			initialPoint = newtonsMethod(expression, initialPoint);
+			double nextPoint = newtonsMethod(expression, initialPoint);
+			if (Double.isNaN(nextPoint))
+				return initialPoint;
+			initialPoint = nextPoint;
 			if (i % 25 == 0)
 				if (initialPoint < 1E-10 && initialPoint > -1E-10)
 					return 0;

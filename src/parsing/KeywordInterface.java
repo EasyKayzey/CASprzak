@@ -45,6 +45,7 @@ public class KeywordInterface {
 			case "printfun", "printfunctions" -> printfun();
 			case "clearfun", "clearfunctions" -> clearfun();
 			case "intn", "intnumeric" -> integrateNumeric(splitInput[1]);
+			case "intne", "intnumericerror" -> integrateNumericError(splitInput[1]);
 			default -> null;
 		};
 		if (ret == null) {
@@ -61,6 +62,7 @@ public class KeywordInterface {
 		prev = ret;
 		return ret;
 	}
+
 
 	/**
 	 * Parses input using {@link #useKeywords(String)} and {@link #storedFunctions}
@@ -82,7 +84,7 @@ public class KeywordInterface {
 		return function;
 	}
 
-	
+
 	/**
 	 * pd [variable] [function]
 	 */
@@ -217,5 +219,11 @@ public class KeywordInterface {
 	public static double integrateNumeric(String input) {
 		String[] splitInput = spacesOutsideQuotes.split(input);
 		return NumericalIntegration.simpsonsRule(parseStored(splitInput[0]), ConstantEvaluator.getConstant(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]));
+	}
+
+
+	private static String integrateNumericError(String input) {
+		String[] splitInput = spacesOutsideQuotes.split(input);
+		return NumericalIntegration.simpsonsRuleWithError(parseStored(splitInput[0]), ConstantEvaluator.getConstant(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]));
 	}
 }

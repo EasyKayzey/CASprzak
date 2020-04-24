@@ -159,8 +159,9 @@ public class KeywordInterface {
 	 * var [variablename]
 	 */
 	public static char var(String input) {
-		String[] splitInput = spacesOutsideQuotes.split(input);
-		Variable.addVariable(splitInput[0].charAt(0));
-		return splitInput[0].charAt(0);
+		if (input.length() > 1)
+			throw new IllegalArgumentException("Variables should be one character");
+		Variable.addVariable(input.charAt(0));
+		return input.charAt(0);
 	}
 }

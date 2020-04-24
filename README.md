@@ -11,6 +11,7 @@ Hello, and welcome to our Computer Algebra System. This is a joint project by Th
 - Finding zeroes of expressions using Newton's Method
 - Finding the local maxima or minima of any function on a range
 - Creating Taylor Series from any function
+- Numerical integration via Simpson's rule
 ### Other
 - Parsing and storing expressions like `x^2-3y+sin(1/z)`
 - Command-line demo

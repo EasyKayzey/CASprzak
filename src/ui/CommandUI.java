@@ -4,7 +4,7 @@ import parsing.KeywordInterface;
 
 import java.util.Scanner;
 
-public class KeywordUI extends KeywordInterface {
+public class CommandUI extends KeywordInterface {
 	/**
 	 * Runs {@link #useKeywords} on user input
 	 * @param args default main arguments

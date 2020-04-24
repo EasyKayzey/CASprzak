@@ -35,6 +35,7 @@ public class KeywordInterface {
 			case "ext", "extrema" -> ext(splitInput[1]);
 			case "tay", "taylor" -> tay(splitInput[1]);
 			case "sto", "store", "new", "def" -> sto(splitInput[1]);
+			case "addvar", "var" -> var(splitInput[1]);
 			default -> null;
 		};
 		if (ret == null) {
@@ -146,5 +147,14 @@ public class KeywordInterface {
 			storedFunctions.put(splitInput[0], parseStored(splitInput[1]));
 		}
 		return storedFunctions.get(splitInput[0]);
+	}
+
+	/**
+	 * var [variablename]
+	 */
+	public static char var(String input) {
+		String[] splitInput = spacesOutsideQuotes.split(input);
+		Variable.addVariable(splitInput[0].charAt(0));
+		return splitInput[0].charAt(0);
 	}
 }

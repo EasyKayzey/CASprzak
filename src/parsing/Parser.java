@@ -88,4 +88,13 @@ public class Parser {
 		return functionStack.pop();
 	}
 
+	@SuppressWarnings("ChainOfInstanceofChecks")
+	public static Function toFunction(Object input) {
+		if (input instanceof Function f)
+			return f;
+		else if (input instanceof Double d)
+			return new Constant(d);
+		else
+			return null;
+	}
 }

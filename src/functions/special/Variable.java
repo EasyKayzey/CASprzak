@@ -51,8 +51,10 @@ public class Variable extends Function {
 	}
 
 	public static void addVariable(char variable) {
-		variables.add(variablesEnd, variable);
-		variablesEnd++;
+		if (!variables.contains(variable)) {
+			variables.add(variablesEnd, variable);
+			variablesEnd++;
+		}
 	}
 
 	public static void addFunctionVariable(char variable) {

@@ -37,8 +37,8 @@ public class KeywordInterface {
 			case "tay", "taylor" -> tay(splitInput[1]);
 			case "sto", "store", "new", "def" -> sto(splitInput[1]);
 			case "addvar" -> addvar(splitInput[1]);
-			case "vars" -> printVars();
-			case "clearvars" -> clearVars();
+			case "vars", "printvars" -> printvars();
+			case "clearvars" -> clearvars();
 			default -> null;
 		};
 		if (ret == null) {
@@ -148,7 +148,7 @@ public class KeywordInterface {
 	 */
 	public static Object sto(String input) {
 		String[] splitInput = spacesOutsideQuotes.split(input, 2);
-		Variable.addVariable(input.charAt(0));
+		Variable.addFunctionVariable(input.charAt(0));
 		try {
 			storedFunctions.put(splitInput[0], (Function) KeywordInterface.useKeywords(splitInput[1]));
 		} catch (IllegalArgumentException e) {
@@ -167,11 +167,11 @@ public class KeywordInterface {
 		return input.charAt(0);
 	}
 
-	public static String printVars() {
+	public static String printvars() {
 		return String.valueOf(Variable.variables);
 	}
 
-	public static String clearVars() {
+	public static String clearvars() {
 		Variable.variables.clear();
 		return String.valueOf(Variable.variables);
 	}

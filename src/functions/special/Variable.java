@@ -13,6 +13,7 @@ public class Variable extends Function {
 	 * The array containing all the variable characters
 	 */
 	public static List<Character> variables = new ArrayList<>(Arrays.asList('x', 'y', 'z'));
+	public static int lastVariable = 2;
 
 	/**
 	 * The index of this variable in {@link #variables}
@@ -50,6 +51,11 @@ public class Variable extends Function {
 	}
 
 	public static void addVariable(char variable) {
+		lastVariable++;
+		variables.add(lastVariable, variable);
+	}
+
+	public static void addFunctionVariable(char variable) {
 		variables.add(variable);
 	}
 

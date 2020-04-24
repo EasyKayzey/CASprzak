@@ -179,20 +179,32 @@ public class KeywordInterface {
 		return printvars();
 	}
 
+	/**
+	 * printvars
+	 */
 	public static String printvars() {
 		return String.valueOf(Variable.variables);
 	}
 
+	/**
+	 * clearvars
+	 */
 	public static String clearvars() {
 		Variable.clearVariables();
 		storedFunctions.clear();
 		return String.valueOf(Variable.variables);
 	}
 
+	/**
+	 * printfun
+	 */
 	public static String printfun() {
 		return String.valueOf(storedFunctions);
 	}
 
+	/**
+	 * clearfun
+	 */
 	public static String clearfun() {
 		Variable.clearFunctionVariables();
 		storedFunctions.clear();

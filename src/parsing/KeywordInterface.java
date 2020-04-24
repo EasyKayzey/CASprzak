@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 
 @SuppressWarnings("SpellCheckingInspection")
 public class KeywordInterface {
-	public static final Pattern spacesOutsideQuotes = Pattern.compile("\"\\s\"|\"\\s|\\s\"|\"$|\\s+(?=[^\"]*(\"[^\"]*\"[^\"]*)*$)");
+	public static final Pattern spacesOutsideQuotes = Pattern.compile("\"\\s+\"|\"\\s+|\\s+\"|\"$|\\s+(?=[^\"]*(\"[^\"]*\"[^\"]*)*$)");
 	private static final Pattern ddvar = Pattern.compile("^d/d");
 	public static HashMap<String, Function> storedFunctions = new HashMap<>();
 	public static Object prev;

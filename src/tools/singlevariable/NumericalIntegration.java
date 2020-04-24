@@ -54,11 +54,4 @@ public class NumericalIntegration {
         return new double[]{simpsonsRule(function, lowerBound, upperBound), simpsonsError(function, lowerBound, upperBound)};
     }
 
-    public static double monteCarlo(Function function, Function[][] bounds) {
-        Random random = new Random(Settings.seed);
-
-
-
-        return 0;
-    }
 }

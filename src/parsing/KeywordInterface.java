@@ -39,7 +39,7 @@ public class KeywordInterface {
 			case "ext", "extrema" -> extrema(splitInput[1]);
 			case "tay", "taylor" -> taylor(splitInput[1]);
 			case "sto", "store", "new", "def" -> store(splitInput[1]);
-			case "addvar" -> addvar(splitInput[1]);
+			case "addvar", "addvars" -> addvars(splitInput[1]);
 			case "vars", "printvars" -> printvars();
 			case "clearvars" -> clearvars();
 			case "printfun", "printfunctions" -> printfun();
@@ -169,11 +169,14 @@ public class KeywordInterface {
 	/**
 	 * var [variablename]
 	 */
-	public static char addvar(String input) {
-		if (input.length() > 1)
-			throw new IllegalArgumentException("Variables should be one character.");
-		Variable.addVariable(input.charAt(0));
-		return input.charAt(0);
+	public static String addvars(String input) {
+		String[] splitInput = spacesOutsideQuotes.split(input);
+		for (String var : splitInput) {
+			if (var.length() > 1)
+				throw new IllegalArgumentException("Variables should be one character.");
+			Variable.addVariable(var.charAt(0));
+		}
+		return printvars();
 	}
 
 	public static String printvars() {
@@ -181,7 +184,7 @@ public class KeywordInterface {
 	}
 
 	public static String clearvars() {
-		Variable.variables.clear();
+		Variable.clearVariables();
 		storedFunctions.clear();
 		return String.valueOf(Variable.variables);
 	}

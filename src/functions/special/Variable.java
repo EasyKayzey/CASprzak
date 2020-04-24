@@ -61,10 +61,14 @@ public class Variable extends Function {
 		variables.add(variable);
 	}
 
+	public static void clearVariables() {
+		variables.clear();
+		variablesEnd = 0;
+	}
+
 	public static void clearFunctionVariables() {
 		variables = variables.subList(0, variablesEnd);
 	}
-
 
 	public String toString() {
 		return String.valueOf(variables.get(varID));

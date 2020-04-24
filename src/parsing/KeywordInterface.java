@@ -14,6 +14,7 @@ import java.util.regex.Pattern;
 @SuppressWarnings("SpellCheckingInspection")
 public class KeywordInterface {
 	public static final Pattern spacesOutsideQuotes = Pattern.compile("\"\\s\"|\"\\s|\\s\"|\"$|\\s+(?=[^\"]*(\"[^\"]*\"[^\"]*)*$)");
+	private static final Pattern ddvar = Pattern.compile("^d/d");
 	public static HashMap<String, Function> storedFunctions = new HashMap<>();
 
 
@@ -23,9 +24,8 @@ public class KeywordInterface {
 	 * @return the Object requested
 	 */
 	public static Object useKeywords(String input) {
+		input = ddvar.matcher(input).replaceAll("pd ");
 		String[] splitInput = spacesOutsideQuotes.split(input, 2);
-		if (input.length() >= 4 && "d/d".equals(input.substring(0, 3)))
-			return useKeywords("pd " + input.substring(3));
 		Object ret = switch (splitInput[0]) {
 			case "pd", "pdiff", "partial", "pdifferentiate" -> pd(splitInput[1]);
 			case "eval", "evaluate" -> eval(splitInput[1]);
@@ -52,7 +52,7 @@ public class KeywordInterface {
 	/**
 	 * Parses input using {@link #useKeywords(String)} and {@link #storedFunctions}
 	 * @param input input string
-	 * @return a {@link functions.Function}
+	 * @return a {@link Function}
 	 */
 	public static Function parseStored(String input) {
 		if (storedFunctions.containsKey(input))

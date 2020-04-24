@@ -25,6 +25,8 @@ public class KeywordInterface {
 	 * @return the Object requested
 	 */
 	public static Object useKeywords(String input) {
+		if ("_".equals(input))
+			return prev;
 		input = ddvar.matcher(input).replaceAll("pd ");
 		String[] splitInput = spacesOutsideQuotes.split(input, 2);
 		Object ret = switch (splitInput[0]) {

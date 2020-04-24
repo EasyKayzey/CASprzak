@@ -39,6 +39,7 @@ public class KeywordInterface {
 			case "addvar" -> addvar(splitInput[1]);
 			case "vars", "printvars" -> printvars();
 			case "clearvars" -> clearvars();
+			case "clearfun", "clearfunctions" -> clearfun();
 			default -> null;
 		};
 		if (ret == null) {
@@ -173,6 +174,13 @@ public class KeywordInterface {
 
 	public static String clearvars() {
 		Variable.variables.clear();
+		storedFunctions.clear();
+		return String.valueOf(Variable.variables);
+	}
+
+	public static String clearfun() {
+		Variable.clearFunctionVariables();
+		storedFunctions.clear();
 		return String.valueOf(Variable.variables);
 	}
 }

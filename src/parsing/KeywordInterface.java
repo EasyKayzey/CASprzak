@@ -16,6 +16,7 @@ public class KeywordInterface {
 	public static final Pattern spacesOutsideQuotes = Pattern.compile("\"\\s\"|\"\\s|\\s\"|\"$|\\s+(?=[^\"]*(\"[^\"]*\"[^\"]*)*$)");
 	private static final Pattern ddvar = Pattern.compile("^d/d");
 	public static HashMap<String, Function> storedFunctions = new HashMap<>();
+	public static Object prev;
 
 
 	/**
@@ -39,14 +40,17 @@ public class KeywordInterface {
 			default -> null;
 		};
 		if (ret == null) {
-			if (storedFunctions.containsKey(input))
-				return storedFunctions.get(input);
-			else try {
-				 return substituteAll(Parser.parse(input));
+			if (storedFunctions.containsKey(input)) {
+				prev = storedFunctions.get(input);
+				return prev;
+			} else try {
+				 prev = substituteAll(Parser.parse(input));
+				 return prev;
 			} catch (Exception ignored) {
 				throw new IllegalArgumentException(splitInput[0] + " is not supported by KeywordInterface");
 			}
 		}
+		prev = ret;
 		return ret;
 	}
 
@@ -56,6 +60,8 @@ public class KeywordInterface {
 	 * @return a {@link Function}
 	 */
 	public static Function parseStored(String input) {
+		if ("_".equals(input))
+			return Parser.toFunction(prev);
 		if (storedFunctions.containsKey(input))
 			return storedFunctions.get(input);
 		else

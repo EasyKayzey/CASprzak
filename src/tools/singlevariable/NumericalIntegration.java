@@ -14,9 +14,9 @@ public class NumericalIntegration {
      */
     public static double simpsonsRule(Function function, double lowerBound, double upperBound) {
         double sum = function.evaluate(lowerBound);
-        double step = (upperBound-lowerBound)/ Settings.amountOfSegments;
+        double step = (upperBound-lowerBound)/ Settings.simpsonsSegments;
         double x = lowerBound + step;
-        for (int i = 1; i < Settings.amountOfSegments/2; i++) {
+        for (int i = 1; i < Settings.simpsonsSegments /2; i++) {
             sum += 4*function.evaluate(x);
             x += step;
             sum += 2*function.evaluate(x);
@@ -38,6 +38,6 @@ public class NumericalIntegration {
      */
     public static double simpsonsError(Function function, double lowerBound, double upperBound) {
         Function fourthDerivative = function.getNthDerivative(0, 4);
-        return fourthDerivative.evaluate(Extrema.findLocalMaxima(fourthDerivative, lowerBound, upperBound))*Math.pow(upperBound - lowerBound, 5) / (180 * Math.pow(Settings.amountOfSegments, 4));
+        return fourthDerivative.evaluate(Extrema.findLocalMaxima(fourthDerivative, lowerBound, upperBound))*Math.pow(upperBound - lowerBound, 5) / (180 * Math.pow(Settings.simpsonsSegments, 4));
     }
 }

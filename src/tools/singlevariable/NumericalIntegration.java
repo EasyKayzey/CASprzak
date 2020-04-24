@@ -48,7 +48,7 @@ public class NumericalIntegration {
      * @param upperBound The upper bound of the range
      * @return the approximate definite integral of function on a range with an error range
      */
-    public static String simpsonsRuleWithError(Function function, double lowerBound, double upperBound) {
-        return simpsonsRule(function, lowerBound, upperBound) + " +/- " + simpsonsError(function, lowerBound, upperBound);
+    public static double[] simpsonsRuleWithError(Function function, double lowerBound, double upperBound) {
+        return new double[]{simpsonsRule(function, lowerBound, upperBound), simpsonsError(function, lowerBound, upperBound)};
     }
 }

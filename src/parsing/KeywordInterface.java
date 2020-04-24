@@ -36,7 +36,9 @@ public class KeywordInterface {
 			case "ext", "extrema" -> ext(splitInput[1]);
 			case "tay", "taylor" -> tay(splitInput[1]);
 			case "sto", "store", "new", "def" -> sto(splitInput[1]);
-			case "addvar", "var" -> addvar(splitInput[1]);
+			case "addvar" -> addvar(splitInput[1]);
+			case "vars" -> printVars();
+			case "clearvars" -> clearVars();
 			default -> null;
 		};
 		if (ret == null) {
@@ -163,5 +165,14 @@ public class KeywordInterface {
 			throw new IllegalArgumentException("Variables should be one character");
 		Variable.addVariable(input.charAt(0));
 		return input.charAt(0);
+	}
+
+	public static String printVars() {
+		return String.valueOf(Variable.variables);
+	}
+
+	public static String clearVars() {
+		Variable.variables.clear();
+		return String.valueOf(Variable.variables);
 	}
 }

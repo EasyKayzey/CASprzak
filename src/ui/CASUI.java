@@ -4,8 +4,10 @@ import functions.special.Variable;
 import parsing.ConstantEvaluator;
 import parsing.Parser;
 import parsing.PreProcessor;
+import tools.singlevariable.NumericalIntegration;
 import tools.singlevariable.Solver;
 import functions.Function;
+import tools.singlevariable.TaylorSeries;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -63,6 +65,9 @@ public class CASUI {
 			} else {
 				System.out.println("The expression has no solutions.");
 			}
+
+			System.out.println("Here is a 5 term Taylor Series: " + TaylorSeries.makeTaylorSeries(currentFunction, 5).simplify());
+			System.out.println("Here is the integral from 0 to 1: " + NumericalIntegration.simpsonsRule(currentFunction, 0, 1));
 		} else {
 			System.out.println("Finding solutions or extrema is not yet supported with multivariable functions.");
 		}

@@ -8,7 +8,7 @@ public class NumericalIntegration {
 
     public static double simpsonsRule(Function function, double lowerBound, double upperBound) {
         double sum = function.evaluate(lowerBound);
-        double step = 0.5*(upperBound-lowerBound);
+        double step = (upperBound-lowerBound)/amountOfSegments;
         double x = lowerBound + step;
         for (int i = 1; i < amountOfSegments/2; i++) {
             sum += 4*function.evaluate(x);
@@ -17,6 +17,7 @@ public class NumericalIntegration {
             x += step;
         }
         sum += function.evaluate(sum);
+        sum *= step/3;
         return sum;
     }
 }

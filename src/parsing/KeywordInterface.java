@@ -89,7 +89,7 @@ public class KeywordInterface {
 	 * pd [variable] [function]
 	 */
 	public static Function partialDiff(String input) {
-		String[] splitInput = spacesOutsideQuotes.split(input);
+		String[] splitInput = spacesOutsideQuotes.split(input, 2);
 		return parseStored(splitInput[1]).getSimplifiedDerivative(Variable.getVarID(splitInput[0].charAt(0)));
 	}
 

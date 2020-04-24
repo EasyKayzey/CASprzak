@@ -3,6 +3,8 @@ package tools.singlevariable;
 import core.Settings;
 import functions.Function;
 
+import java.util.Random;
+
 public class NumericalIntegration {
 
     /**
@@ -50,5 +52,13 @@ public class NumericalIntegration {
      */
     public static double[] simpsonsRuleWithError(Function function, double lowerBound, double upperBound) {
         return new double[]{simpsonsRule(function, lowerBound, upperBound), simpsonsError(function, lowerBound, upperBound)};
+    }
+
+    public static double monteCarlo(Function function, Function[][] bounds) {
+        Random random = new Random(Settings.seed);
+
+
+
+        return 0;
     }
 }

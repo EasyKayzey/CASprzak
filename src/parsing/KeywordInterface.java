@@ -31,20 +31,20 @@ public class KeywordInterface {
 		input = ddvar.matcher(input).replaceAll("pd ");
 		String[] splitInput = spacesOutsideQuotes.split(input, 2);
 		Object ret = switch (splitInput[0]) {
-			case "pd", "pdiff", "partial", "pdifferentiate" -> pd(splitInput[1]);
-			case "eval", "evaluate" -> eval(splitInput[1]);
-			case "simp", "simplify" -> simp(splitInput[1]);
-			case "sub", "substitute" -> sub(splitInput[1]);
-			case "sol", "solve" -> sol(splitInput[1]);
-			case "ext", "extrema" -> ext(splitInput[1]);
-			case "tay", "taylor" -> tay(splitInput[1]);
-			case "sto", "store", "new", "def" -> sto(splitInput[1]);
+			case "pd", "pdiff", "partial", "pdifferentiate" -> partialDiff(splitInput[1]);
+			case "eval", "evaluate" -> evaluate(splitInput[1]);
+			case "simp", "simplify" -> simplify(splitInput[1]);
+			case "sub", "substitute" -> substitute(splitInput[1]);
+			case "sol", "solve" -> solve(splitInput[1]);
+			case "ext", "extrema" -> extrema(splitInput[1]);
+			case "tay", "taylor" -> taylor(splitInput[1]);
+			case "sto", "store", "new", "def" -> store(splitInput[1]);
 			case "addvar" -> addvar(splitInput[1]);
 			case "vars", "printvars" -> printvars();
 			case "clearvars" -> clearvars();
 			case "printfun", "printfunctions" -> printfun();
 			case "clearfun", "clearfunctions" -> clearfun();
-			case "intn" -> numIntegral(splitInput[1]);
+			case "intn", "intnumeric" -> integrateNumeric(splitInput[1]);
 			default -> null;
 		};
 		if (ret == null) {
@@ -86,7 +86,7 @@ public class KeywordInterface {
 	/**
 	 * pd [variable] [function]
 	 */
-	public static Function pd(String input) {
+	public static Function partialDiff(String input) {
 		String[] splitInput = spacesOutsideQuotes.split(input);
 		return parseStored(splitInput[1]).getSimplifiedDerivative(Variable.getVarID(splitInput[0].charAt(0)));
 	}
@@ -94,7 +94,7 @@ public class KeywordInterface {
 	/**
 	 * eval [function] [values]
 	 */
-	public static double eval(String input) {
+	public static double evaluate(String input) {
 		String[] splitInput = spacesOutsideQuotes.split(input, 2);
 		double[] values = Arrays.stream(spacesOutsideQuotes.split(splitInput[1])).mapToDouble(ConstantEvaluator::getConstant).toArray();
 		return parseStored(splitInput[0]).evaluate(values);
@@ -103,7 +103,7 @@ public class KeywordInterface {
 	/**
 	 * simp [function]
 	 */
-	public static Function simp(String input) {
+	public static Function simplify(String input) {
 		String[] splitInput = spacesOutsideQuotes.split(input);
 		return parseStored(splitInput[0]).simplify();
 	}
@@ -111,7 +111,7 @@ public class KeywordInterface {
 	/**
 	 * sub [function] [variable] [replacementfunction]
 	 */
-	public static Function sub(String input) {
+	public static Function substitute(String input) {
 		String[] splitInput = spacesOutsideQuotes.split(input);
 		if (splitInput[1].length() > 1)
 			throw new IllegalArgumentException("Variables are one character, so " + splitInput[1] + " is not valid.");
@@ -121,7 +121,7 @@ public class KeywordInterface {
 	/**
 	 * sol [function] [startrange] [endrange]
 	 */
-	public static double[] sol(String input) {
+	public static double[] solve(String input) {
 		String[] splitInput = spacesOutsideQuotes.split(input);
 		return Solver.getSolutionsRange(parseStored(splitInput[0]), ConstantEvaluator.getConstant(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]));
 	}
@@ -129,7 +129,7 @@ public class KeywordInterface {
 	/**
 	 * ext ["min(ima)"/"max(ima)"/"anymin(ima)"/"anymax(ima)"/"inflect(ion)"] [function] [startrange] [endrange]
 	 */
-	public static Object ext(String input) {
+	public static Object extrema(String input) {
 		String[] splitInput = spacesOutsideQuotes.split(input);
 		return switch (splitInput[0]) {
 			case "min", "minima" -> Extrema.findLocalMinima(parseStored(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]), ConstantEvaluator.getConstant(splitInput[3]));
@@ -144,7 +144,7 @@ public class KeywordInterface {
 	/**
 	 * tay [function] [terms] [center]
 	 */
-	public static Function tay(String input) {
+	public static Function taylor(String input) {
 		String[] splitInput = spacesOutsideQuotes.split(input);
 		return TaylorSeries.makeTaylorSeries(parseStored(splitInput[0]), (int) ConstantEvaluator.getConstant(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]));
 	}
@@ -152,7 +152,7 @@ public class KeywordInterface {
 	/**
 	 * sto [locationstring] [input]
 	 */
-	public static Object sto(String input) {
+	public static Object store(String input) {
 		String[] splitInput = spacesOutsideQuotes.split(input, 2);
 		if (splitInput[0].length() != 1)
 			throw new IllegalArgumentException("Functions should be one character.");
@@ -199,7 +199,7 @@ public class KeywordInterface {
 	/**
 	 * intn [function] [startvalue] [endvalue]
 	 */
-	public static double numIntegral(String input) {
+	public static double integrateNumeric(String input) {
 		String[] splitInput = spacesOutsideQuotes.split(input);
 		return NumericalIntegration.simpsonsRule(parseStored(splitInput[0]), ConstantEvaluator.getConstant(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]));
 	}

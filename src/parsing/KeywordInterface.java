@@ -28,7 +28,7 @@ public class KeywordInterface {
 	public static Object useKeywords(String input) {
 		if ("_".equals(input))
 			return prev;
-		input = ddvar.matcher(input).replaceAll("pd ");
+		input = ddvar.matcher(input).replaceAll("pd "); //TODO put this in splitter
 		String[] splitInput = spacesOutsideQuotes.split(input, 2);
 		Object ret = switch (splitInput[0]) {
 			case "pd", "pdiff", "partial", "pdifferentiate" -> partialDiff(splitInput[1]);

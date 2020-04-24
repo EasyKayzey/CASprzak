@@ -4,6 +4,7 @@ package core;
 public class Settings {
 	private Settings(){}
 	//	public static boolean debug = true;
+	public static double amountOfSegments = 500; //MUST BE EVEN
 	public static int defaultSolverIterations = 100;
 	public static int defaultRangeSections = 29;
 	public static double zeroMargin = 1e-3;

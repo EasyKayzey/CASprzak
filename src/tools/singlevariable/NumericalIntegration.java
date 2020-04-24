@@ -1,12 +1,9 @@
 package tools.singlevariable;
 
+import core.Settings;
 import functions.Function;
 
 public class NumericalIntegration {
-    /**
-     * The amount of segments the region can be broken into (MUST BE EVEN)
-     */
-    public static final double amountOfSegments = 500;
 
 
     /**
@@ -18,9 +15,9 @@ public class NumericalIntegration {
      */
     public static double simpsonsRule(Function function, double lowerBound, double upperBound) {
         double sum = function.evaluate(lowerBound);
-        double step = (upperBound-lowerBound)/amountOfSegments;
+        double step = (upperBound-lowerBound)/ Settings.amountOfSegments;
         double x = lowerBound + step;
-        for (int i = 1; i < amountOfSegments/2; i++) {
+        for (int i = 1; i < Settings.amountOfSegments/2; i++) {
             sum += 4*function.evaluate(x);
             x += step;
             sum += 2*function.evaluate(x);

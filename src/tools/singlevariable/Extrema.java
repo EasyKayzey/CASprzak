@@ -20,7 +20,10 @@ public class Extrema {
      */
     public static double findLocalMinima(Function function, double lowerBound, double upperBound) {
        double[] secondDerivativeIsPositive = findPoints(function, lowerBound, upperBound, (a, b) -> (a > b));
-        return findSmallestOrLargest(function, secondDerivativeIsPositive, (a, b) -> (a < b));
+        double  minima = findSmallestOrLargest(function, secondDerivativeIsPositive, (a, b) -> (a < b));
+        if (minima > upperBound || minima < lowerBound)
+            return Double.NaN;
+        return minima;
     }
 
 
@@ -33,7 +36,10 @@ public class Extrema {
      */
     public static double findLocalMaxima(Function function, double lowerBound, double upperBound) {
         double[] secondDerivativeIsNegative = findPoints(function, lowerBound, upperBound, (a, b) -> (a < b));
-        return findSmallestOrLargest(function, secondDerivativeIsNegative, (a, b) -> (a > b));
+        double maxima = findSmallestOrLargest(function, secondDerivativeIsNegative, (a, b) -> (a > b));
+        if (maxima > upperBound || maxima < lowerBound)
+            return Double.NaN;
+        return maxima;
     }
 
     /**

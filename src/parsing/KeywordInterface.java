@@ -39,6 +39,7 @@ public class KeywordInterface {
 			case "addvar" -> addvar(splitInput[1]);
 			case "vars", "printvars" -> printvars();
 			case "clearvars" -> clearvars();
+			case "printfun", "printfunctions" -> printfun();
 			case "clearfun", "clearfunctions" -> clearfun();
 			default -> null;
 		};
@@ -149,7 +150,10 @@ public class KeywordInterface {
 	 */
 	public static Object sto(String input) {
 		String[] splitInput = spacesOutsideQuotes.split(input, 2);
-		Variable.addFunctionVariable(input.charAt(0));
+		if (splitInput[0].length() != 1)
+			throw new IllegalArgumentException("Functions should be one character.");
+		if (!storedFunctions.containsKey(splitInput[0]))
+			Variable.addFunctionVariable(splitInput[0].charAt(0));
 		try {
 			storedFunctions.put(splitInput[0], (Function) KeywordInterface.useKeywords(splitInput[1]));
 		} catch (IllegalArgumentException e) {
@@ -163,7 +167,7 @@ public class KeywordInterface {
 	 */
 	public static char addvar(String input) {
 		if (input.length() > 1)
-			throw new IllegalArgumentException("Variables should be one character");
+			throw new IllegalArgumentException("Variables should be one character.");
 		Variable.addVariable(input.charAt(0));
 		return input.charAt(0);
 	}
@@ -176,6 +180,10 @@ public class KeywordInterface {
 		Variable.variables.clear();
 		storedFunctions.clear();
 		return String.valueOf(Variable.variables);
+	}
+
+	public static String printfun() {
+		return String.valueOf(storedFunctions);
 	}
 
 	public static String clearfun() {

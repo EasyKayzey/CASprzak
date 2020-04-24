@@ -3,6 +3,7 @@ package parsing;
 import functions.Function;
 import functions.special.Variable;
 import tools.singlevariable.Extrema;
+import tools.singlevariable.NumericalIntegration;
 import tools.singlevariable.Solver;
 import tools.singlevariable.TaylorSeries;
 
@@ -43,6 +44,7 @@ public class KeywordInterface {
 			case "clearvars" -> clearvars();
 			case "printfun", "printfunctions" -> printfun();
 			case "clearfun", "clearfunctions" -> clearfun();
+			case "intn" -> numIntegral(splitInput[1]);
 			default -> null;
 		};
 		if (ret == null) {
@@ -192,5 +194,13 @@ public class KeywordInterface {
 		Variable.clearFunctionVariables();
 		storedFunctions.clear();
 		return String.valueOf(Variable.variables);
+	}
+
+	/**
+	 * intn [function] [startvalue] [endvalue]
+	 */
+	public static double numIntegral(String input) {
+		String[] splitInput = spacesOutsideQuotes.split(input);
+		return NumericalIntegration.simpsonsRule(parseStored(splitInput[0]), ConstantEvaluator.getConstant(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]));
 	}
 }

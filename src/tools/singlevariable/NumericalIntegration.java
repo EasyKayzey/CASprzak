@@ -16,7 +16,9 @@ public class NumericalIntegration {
             sum += 2*function.evaluate(x);
             x += step;
         }
-        sum += function.evaluate(sum);
+        sum += 4*function.evaluate(x);
+        x += step;
+        sum += function.evaluate(x);
         sum *= step/3;
         return sum;
     }

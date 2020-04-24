@@ -221,8 +221,10 @@ public class KeywordInterface {
 		return NumericalIntegration.simpsonsRule(parseStored(splitInput[0]), ConstantEvaluator.getConstant(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]));
 	}
 
-
-	private static String integrateNumericError(String input) {
+	/**
+	 * intne [function] [startvalue] [endvalue]
+	 */
+	private static double[] integrateNumericError(String input) {
 		String[] splitInput = spacesOutsideQuotes.split(input);
 		return NumericalIntegration.simpsonsRuleWithError(parseStored(splitInput[0]), ConstantEvaluator.getConstant(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]));
 	}

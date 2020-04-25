@@ -64,7 +64,7 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 
 	/**
 	 * Returns the derivative of the function, simplified
-	 * @param varID the ID of the variable being differentiated (see {@link Variable#getVarID(char)}).
+	 * @param varID the ID of the variable being differentiated
 	 * @return the derivative of the {@link Function} it is called on, simplified
 	 */
 	public Function getSimplifiedDerivative(char varID) {
@@ -79,7 +79,7 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 
 	/**
 	 * Returns the Nth derivative of the function, simplified
-	 * @param varID the ID of the variable being differentiated (see {@link Variable#getVarID(char)}).
+	 * @param varID the ID of the variable being differentiated
 	 * @param N     the amount of times to differentiate
 	 * @return the Nth derivative of the {@link Function} it is called on, simplified
 	 */
@@ -94,7 +94,7 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 
 	/**
 	 * Returns the value of the derivative at point
-	 * @param varID the ID of the variable being differentiated (see {@link Variable#getVarID(char)}).
+	 * @param varID the ID of the variable being differentiated
 	 * @param point the point to find the derivative at
 	 * @return the value of the derivative at point
 	 */

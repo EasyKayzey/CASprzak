@@ -16,8 +16,8 @@ public class Dirac extends UnitaryFunction {
 	}
 
 	@Override
-	public double evaluate(Map<Character, Double> variableValues) {
-		if (function.evaluate(variableValues) == 0)
+	public double oldEvaluate(Map<Character, Double> variableValues) {
+		if (function.oldEvaluate(variableValues) == 0)
 			return Double.POSITIVE_INFINITY;
 		else
 			return 0;

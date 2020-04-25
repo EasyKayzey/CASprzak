@@ -62,7 +62,7 @@ public class Constant extends Function {
 		specialConstants.remove(string);
 	}
 
-	public double evaluate(Map<Character, Double> variableValues) {
+	public double oldEvaluate(Map<Character, Double> variableValues) {
 		return constant;
 	}
 

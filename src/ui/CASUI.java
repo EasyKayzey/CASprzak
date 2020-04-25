@@ -39,7 +39,7 @@ public class CASUI {
 		Function currentFunction = Parser.parse(PreProcessor.toPostfix(rawInput));
 		System.out.println("Here is your parsed function: " + currentFunction);
 		System.out.println("Here is the simplified toString of your function: " + currentFunction.simplifyTimes(10));
-		System.out.println("Here is your output: " + currentFunction.evaluate(inputs));
+		System.out.println("Here is your output: " + currentFunction.oldEvaluate(inputs));
 
 		System.out.println("Here is the derivative with respect to " + Variable.variables.get(0) + ", simplified once:");
 		System.out.println(currentFunction.getSimplifiedDerivative(0));
@@ -47,7 +47,7 @@ public class CASUI {
 		System.out.println(currentFunction.getSimplifiedDerivative(0).simplifyTimes(10));
 
 		System.out.println("Here is the derivative with respect to " + Variable.variables.get(0) + ", evaluated:");
-		System.out.println(currentFunction.getSimplifiedDerivative(0).simplifyTimes(10).evaluate(inputs));
+		System.out.println(currentFunction.getSimplifiedDerivative(0).simplifyTimes(10).oldEvaluate(inputs));
 
 		if (Variable.variables.size() == 1) {
 			double solution = Solver.getSolutionPoint(currentFunction, -10);

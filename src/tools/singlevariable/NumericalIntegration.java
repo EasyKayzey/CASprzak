@@ -13,18 +13,18 @@ public class NumericalIntegration {
      * @return the approximate definite integral of function on a range
      */
     public static double simpsonsRule(Function function, double lowerBound, double upperBound) {
-        double sum = function.evaluate(lowerBound);
+        double sum = function.oldEvaluate(lowerBound);
         double step = (upperBound-lowerBound)/ Settings.simpsonsSegments;
         double x = lowerBound + step;
         for (int i = 1; i < Settings.simpsonsSegments /2; i++) {
-            sum += 4*function.evaluate(x);
+            sum += 4*function.oldEvaluate(x);
             x += step;
-            sum += 2*function.evaluate(x);
+            sum += 2*function.oldEvaluate(x);
             x += step;
         }
-        sum += 4*function.evaluate(x);
+        sum += 4*function.oldEvaluate(x);
         x += step;
-        sum += function.evaluate(x);
+        sum += function.oldEvaluate(x);
         sum *= step/3;
         return sum;
     }
@@ -37,8 +37,8 @@ public class NumericalIntegration {
      * @return the maximum error associated with the definite integral of function on a range
      */
     public static double simpsonsError(Function function, double lowerBound, double upperBound) {
-        Function fourthDerivative = function.getNthDerivative(0, 4);
-        return fourthDerivative.evaluate(Extrema.findLocalMaxima(fourthDerivative, lowerBound, upperBound))*Math.pow(upperBound - lowerBound, 5) / (180 * Math.pow(Settings.simpsonsSegments, 4));
+        Function fourthDerivative = function.getNthDerivative('x', 4);
+        return fourthDerivative.oldEvaluate(Extrema.findLocalMaxima(fourthDerivative, lowerBound, upperBound))*Math.pow(upperBound - lowerBound, 5) / (180 * Math.pow(Settings.simpsonsSegments, 4));
     }
 
     /**

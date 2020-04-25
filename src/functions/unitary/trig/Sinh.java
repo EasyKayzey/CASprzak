@@ -22,8 +22,8 @@ public class Sinh extends UnitaryFunction {
 	 * @return the sinh of {@link #function} evaluated
 	 */
 	@Override
-	public double evaluate(Map<Character, Double> variableValues) {
-		return Math.sin(function.evaluate(variableValues));
+	public double oldEvaluate(Map<Character, Double> variableValues) {
+		return Math.sin(function.oldEvaluate(variableValues));
 	}
 
 	@Override

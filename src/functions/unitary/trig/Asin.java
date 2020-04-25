@@ -25,8 +25,8 @@ public class Asin extends UnitaryFunction {
 	 * @return the sin of {@link #function} evaluated
 	 */
 	@Override
-	public double evaluate(Map<Character, Double> variableValues) {
-		return Math.asin(function.evaluate(variableValues));
+	public double oldEvaluate(Map<Character, Double> variableValues) {
+		return Math.asin(function.oldEvaluate(variableValues));
 	}
 
 	@Override

@@ -20,10 +20,10 @@ public class Multiply extends CommutativeFunction {
 		identityValue = 1;
 	}
 
-	public double evaluate(Map<Character, Double> variableValues) {
+	public double oldEvaluate(Map<Character, Double> variableValues) {
 		double accumulator = identityValue;
 		for (Function f : functions)
-			accumulator *= f.evaluate(variableValues);
+			accumulator *= f.oldEvaluate(variableValues);
 		return accumulator;
 	}
 

@@ -19,7 +19,7 @@ public class Solver {
 	 * @return a better approximate of the root based on the value provided
 	 */
 	private static double newtonsMethod(Function expression, double value) {
-		return value - expression.evaluate(value) / expression.getSimplifiedDerivative(0).evaluate(value);
+		return value - expression.oldEvaluate(value) / expression.getSimplifiedDerivative('x').oldEvaluate(value);
 	}
 
 	/**
@@ -30,7 +30,7 @@ public class Solver {
 	 * @return the approximate solution for a root of the function
 	 */
 	public static double getSolutionPoint(Function expression, double initialPoint, int runs) {
-		if (expression.evaluate(initialPoint) == 0)
+		if (expression.oldEvaluate(initialPoint) == 0)
 			return initialPoint;
 		if (expression instanceof Constant)
 			return Double.NaN;
@@ -43,7 +43,7 @@ public class Solver {
 				if (initialPoint < 1E-10 && initialPoint > -1E-10)
 					return 0;
 		}
-		if (expression.evaluate(initialPoint) < Settings.zeroMargin && expression.evaluate(initialPoint) > -Settings.zeroMargin)
+		if (expression.oldEvaluate(initialPoint) < Settings.zeroMargin && expression.oldEvaluate(initialPoint) > -Settings.zeroMargin)
 			return initialPoint;
 		return Double.NaN;
 	}
@@ -71,7 +71,7 @@ public class Solver {
 		ListIterator<Double> iter = solutions.listIterator();
 		while (iter.hasNext()) {
 			double nextLocation = getSolutionPoint(expression, iter.next(), runs);
-			if (!(expression.evaluate(nextLocation) < Settings.zeroMargin && expression.evaluate(nextLocation) > -Settings.zeroMargin))
+			if (!(expression.oldEvaluate(nextLocation) < Settings.zeroMargin && expression.oldEvaluate(nextLocation) > -Settings.zeroMargin))
 				iter.remove();
 			else
 				iter.set(nextLocation);

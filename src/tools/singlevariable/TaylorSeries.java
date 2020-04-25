@@ -32,7 +32,7 @@ public class TaylorSeries {
     public static Function makeTaylorSeries(Function function, int size, double center) {
         Function[] taylorSeriesTerms = new Function[size];
         for (int i = 0; i < size; i++){
-            taylorSeriesTerms[i] = new Multiply(new Constant(function.getNthDerivative(0, i).evaluate(center) / MiscTools.factorial(i)), new Pow(new Constant(i), new Add(new Variable(0), new Constant(-center))));
+            taylorSeriesTerms[i] = new Multiply(new Constant(function.getNthDerivative('x', i).oldEvaluate(center) / MiscTools.factorial(i)), new Pow(new Constant(i), new Add(new Variable('x'), new Constant(-center))));
         }
         return new Add(taylorSeriesTerms);
     }

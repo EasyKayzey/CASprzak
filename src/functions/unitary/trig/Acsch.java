@@ -30,8 +30,8 @@ public class Acsch extends UnitaryFunction {
 	 * @return the arccsch of {@link #function} evaluated
 	 */
 	@Override
-	public double evaluate(Map<Character, Double> variableValues) {
-		double functionEvaluated = function.evaluate(variableValues);
+	public double oldEvaluate(Map<Character, Double> variableValues) {
+		double functionEvaluated = function.oldEvaluate(variableValues);
 		return Math.log((1 + Math.sqrt(functionEvaluated * functionEvaluated + 1)) / functionEvaluated);
 	}
 

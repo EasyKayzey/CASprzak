@@ -76,12 +76,12 @@ public class Extrema {
     }
 
     private static double[] findPoints(Function function, double lowerBound, double upperBound, BiPredicate<? super Double, ? super Double> strategy) {
-        double[] criticalPoints = Solver.getSolutionsRange(function.getDerivative(0), lowerBound, upperBound);
+        double[] criticalPoints = Solver.getSolutionsRange(function.getDerivative('x'), lowerBound, upperBound);
         if (criticalPoints.length == 0) return null;
 
         List<Double> secondDerivative = new LinkedList<>();
         for (double criticalPoint : criticalPoints) {
-            if (strategy.test(function.getNthDerivative(0, 2).evaluate(criticalPoint), 0.0)) {
+            if (strategy.test(function.getNthDerivative('x', 2).oldEvaluate(criticalPoint), 0.0)) {
                 secondDerivative.add(criticalPoint);
             }
         }
@@ -97,7 +97,7 @@ public class Extrema {
         }
         double[] functionAtPoints = new double[numbers.length];
         for (int i = 0; i < functionAtPoints.length; i++) {
-            functionAtPoints[i] = function.evaluate(numbers[i]);
+            functionAtPoints[i] = function.oldEvaluate(numbers[i]);
         }
 
         int index = 0;

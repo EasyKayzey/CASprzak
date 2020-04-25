@@ -65,7 +65,7 @@ public class Variable extends Function {
 	}
 
 	public String toString() {
-		return String.valueOf(variables.get(varID));
+		return String.valueOf(varID);
 	}
 
 

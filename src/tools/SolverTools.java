@@ -52,18 +52,12 @@ public class SolverTools {
 
 
 	public static void removeNotInRange(List<Double> values, double lowerBound, double upperBound) {
-		System.out.println("Lower Bound: " + lowerBound);
-		System.out.println("Upper Bound: " + upperBound);
 		ListIterator<Double> iter = values.listIterator();
 		double current;
-		current = iter.next();
-		System.out.println("current: " +  current);
 		while (iter.hasNext()) {
-			if (current > upperBound || current < lowerBound) {
-				iter.remove();
-			}
-			System.out.println("current: " +  current);
 			current = iter.next();
+			if (current > upperBound || current < lowerBound)
+				iter.remove();
 		}
 	}
 }

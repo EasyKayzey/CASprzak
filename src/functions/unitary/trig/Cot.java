@@ -21,7 +21,7 @@ public class Cot extends UnitaryFunction {
 	 * @return the cot of {@link #function} evaluated
 	 */
 	@Override
-	public double evaluate(double... variableValues) {
+	public double evaluate(Map<Character, Double> variableValues) {
 		return 1 / Math.tan(function.evaluate(variableValues));
 	}
 

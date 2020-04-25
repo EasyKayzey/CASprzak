@@ -26,7 +26,7 @@ public class Coth extends UnitaryFunction {
 	 * @return the coth of {@link #function} evaluated
 	 */
 	@Override
-	public double evaluate(double... variableValues) {
+	public double evaluate(Map<Character, Double> variableValues) {
 		return 1 / Math.tanh(function.evaluate(variableValues));
 	}
 

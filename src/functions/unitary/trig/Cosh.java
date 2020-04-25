@@ -19,7 +19,7 @@ public class Cosh extends UnitaryFunction {
 	 * @return the cosh of {@link #function} evaluated
 	 */
 	@Override
-	public double evaluate(double... variableValues) {
+	public double evaluate(Map<Character, Double> variableValues) {
 		return Math.cosh(function.evaluate(variableValues));
 	}
 

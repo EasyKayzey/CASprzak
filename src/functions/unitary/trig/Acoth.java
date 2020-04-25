@@ -27,7 +27,7 @@ public class Acoth extends UnitaryFunction {
 	 * @return the arccoth of {@link #function} evaluated
 	 */
 	@Override
-	public double evaluate(double... variableValues) {
+	public double evaluate(Map<Character, Double> variableValues) {
 		double functionEvaluated = function.evaluate(variableValues);
 		return 0.5 * Math.log((1 + functionEvaluated) / (1 + functionEvaluated));
 	}

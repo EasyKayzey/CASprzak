@@ -14,7 +14,7 @@ public class Sign extends UnitaryFunction {
 	}
 
 	@Override
-	public double evaluate(double... variableValues) {
+	public double evaluate(Map<Character, Double> variableValues) {
 		return Math.signum(function.evaluate(variableValues));
 	}
 

@@ -71,7 +71,7 @@ public class Variable extends Function {
 		return new Constant((this.varID == varID ? 1 : 0));
 	}
 
-	public double evaluate(double... variableValues) {
+	public double evaluate(Map<Character, Double> variableValues) {
 		return variableValues[varID];
 	}
 

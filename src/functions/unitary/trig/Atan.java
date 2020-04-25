@@ -22,7 +22,7 @@ public class Atan extends UnitaryFunction {
 	 * @return the arctan of {@link #function} evaluated
 	 */
 	@Override
-	public double evaluate(double... variableValues) {
+	public double evaluate(Map<Character, Double> variableValues) {
 		return Math.atan(function.evaluate(variableValues));
 	}
 

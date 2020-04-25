@@ -31,7 +31,7 @@ public class Logb extends BinaryFunction {
 	}
 
 	@Override
-	public double evaluate(double... variableValues) {
+	public double evaluate(Map<Character, Double> variableValues) {
 		return Math.log(function1.evaluate(variableValues)) / Math.log(function2.evaluate(variableValues));
 	}
 

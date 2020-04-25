@@ -25,7 +25,7 @@ public class Csch extends UnitaryFunction {
 	 * @return the csch of {@link #function} evaluated
 	 */
 	@Override
-	public double evaluate(double... variableValues) {
+	public double evaluate(Map<Character, Double> variableValues) {
 		return 1 / Math.sinh(function.evaluate(variableValues));
 	}
 

@@ -19,7 +19,7 @@ public class Sin extends UnitaryFunction {
 	 * @return the sin of {@link #function} evaluated
 	 */
 	@Override
-	public double evaluate(double... variableValues) {
+	public double evaluate(Map<Character, Double> variableValues) {
 		return Math.sin(function.evaluate(variableValues));
 	}
 

@@ -15,7 +15,7 @@ public class Add extends CommutativeFunction {
 		identityValue = 0;
 	}
 
-	public double evaluate(double... variableValues) {
+	public double evaluate(Map<Character, Double> variableValues) {
 		double accumulator = identityValue;
 		for (Function f : functions)
 			accumulator += f.evaluate(variableValues);

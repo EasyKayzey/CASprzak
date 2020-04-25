@@ -22,7 +22,7 @@ public class Acos extends UnitaryFunction {
 	 * @return the arccos of {@link #function} evaluated
 	 */
 	@Override
-	public double evaluate(double... variableValues) {
+	public double evaluate(Map<Character, Double> variableValues) {
 		return Math.acos(function.evaluate(variableValues));
 	}
 

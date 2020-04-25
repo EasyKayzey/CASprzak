@@ -29,7 +29,7 @@ public class Asec extends UnitaryFunction {
 	 */
 	@SuppressWarnings({"DuplicateExpressions", "RedundantSuppression"})
 	@Override
-	public double evaluate(double... variableValues) {
+	public double evaluate(Map<Character, Double> variableValues) {
 		double functionEvaluated = function.evaluate(variableValues);
 		if (functionEvaluated > 1) {
 			return Math.asin(Math.sqrt(Math.pow(functionEvaluated, 2) - 1) / functionEvaluated);

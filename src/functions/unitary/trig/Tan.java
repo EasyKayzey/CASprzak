@@ -21,7 +21,7 @@ public class Tan extends UnitaryFunction {
 	 * @return the tan of {@link #function} evaluated
 	 */
 	@Override
-	public double evaluate(double... variableValues) {
+	public double evaluate(Map<Character, Double> variableValues) {
 		return Math.tan(function.evaluate(variableValues));
 	}
 

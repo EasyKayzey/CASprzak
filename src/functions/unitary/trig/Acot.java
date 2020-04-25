@@ -27,7 +27,7 @@ public class Acot extends UnitaryFunction {
 	 * @return the arccot of {@link #function} evaluated
 	 */
 	@Override
-	public double evaluate(double... variableValues) {
+	public double evaluate(Map<Character, Double> variableValues) {
 		double functionEvaluated = function.evaluate(variableValues);
 		if (functionEvaluated < 0) {
 			return -0.5 * Math.PI - Math.atan(functionEvaluated);

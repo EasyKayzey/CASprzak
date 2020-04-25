@@ -60,7 +60,7 @@ public class Constant extends Function {
 		specialConstants.remove(string);
 	}
 
-	public double evaluate(double... variableValues) {
+	public double evaluate(Map<Character, Double> variableValues) {
 		return constant;
 	}
 

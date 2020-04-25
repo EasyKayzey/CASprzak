@@ -27,7 +27,7 @@ public class Asinh extends UnitaryFunction {
 	 * @return the arcsinh of {@link #function} evaluated
 	 */
 	@Override
-	public double evaluate(double... variableValues) {
+	public double evaluate(Map<Character, Double> variableValues) {
 		double functionEvaluated = function.evaluate(variableValues);
 		return Math.log(functionEvaluated + Math.sqrt(functionEvaluated * functionEvaluated + 1));
 	}

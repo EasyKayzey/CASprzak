@@ -1,5 +1,6 @@
 package tools;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
@@ -34,7 +35,8 @@ public class SolverTools {
 	 * Removes a number from a List if that number is adjacent to the same number within a tolerance of 1E-10
 	 * @param values the List from which the repeated values are removed
 	 */
-	public static void removeRepeatsInOrder(List<Double> values) {
+	public static void removeRepeatsSort(List<Double> values) {
+		Collections.sort(values);
 		if (values.size() <= 1)
 			return;
 		ListIterator<Double> iter = values.listIterator();

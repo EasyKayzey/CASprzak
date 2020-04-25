@@ -78,7 +78,7 @@ public class Solver {
 		}
 		SolverTools.nanRemover(solutions);
 		SolverTools.removeNotInRange(solutions, lower, upper);
-		SolverTools.removeRepeatsInOrder(solutions);
+		SolverTools.removeRepeatsSort(solutions);
 		return solutions.stream().mapToDouble(i -> i).toArray();
 	}
 

@@ -1,18 +1,28 @@
 package functions.special;
 
 import functions.Function;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.HashMap;
 
 public class Constant extends Function {
-	private static final String[] specialConstantStrings = {"pi", "e"};
-	private static final double[] specialConstants = {Math.PI, Math.E};
+	private static final String[] specialConstantStringsTEMP = {"pi", "e"};
+	private static final double[] specialConstantsTEMP = {Math.PI, Math.E};
+	private static final HashMap<String, Double> specialConstants = new HashMap<>() {
+		{
+			put("pi", Math.PI);
+			put("e", Math.E);
+		}
+	};
+
 	/**
 	 * The numerical value of the constant
 	 */
 	public final double constant;
 	/**
-	 * The location of the Constant in {@link #specialConstants}
+	 * The location of the Constant in {@link #specialConstantsTEMP}
 	 */
-	public final int constantID;
+	public final @Nullable String constantKey;
 
 	/**
 	 * Constructs a new Constant from the specified numerical value
@@ -20,30 +30,19 @@ public class Constant extends Function {
 	 */
 	public Constant(double constant) {
 		this.constant = constant;
-		this.constantID = -1;
-	}
-
-	/**
-	 * Constructs a new special Constant from its constantID
-	 * @param constantID The location of the Constant in {@link #specialConstants}
-	 * @param isSpecialConstant Whether or not the Constant is a special Constant
-	 */
-	public Constant(int constantID, boolean isSpecialConstant) {
-		if (!isSpecialConstant)
-			throw new IllegalArgumentException("This constructor should not be called if the constant is not a special constant.\n");
-		this.constantID = constantID;
-		constant = specialConstants[constantID];
+		this.constantKey = null;
 	}
 
 	/**
 	 * Constructs a new special Constant from its String
 	 * @param constantString The string of the special Constant
 	 */
+	@SuppressWarnings("NullableProblems")
 	public Constant(String constantString) {
 		if (!isSpecialConstant(constantString))
 			throw new IllegalArgumentException(constantString + " is not a special constant.");
-		constantID = getSpecialConstantID(constantString);
-		constant = specialConstants[constantID];
+		constantKey = constantString;
+		constant = specialConstants.get(constantKey);
 	}
 
 	/**
@@ -52,22 +51,15 @@ public class Constant extends Function {
 	 * @return true if string is a special Constant
 	 */
 	public static boolean isSpecialConstant(String string) {
-		for (String specialConstantString : specialConstantStrings) {
-			if (specialConstantString.equals(string)) return true;
-		}
-		return false;
+		return specialConstants.containsKey(string);
 	}
 
-	/**
-	 * Returns the {@link #constantID} for a String string
-	 * @param string The String whose {@link #constantID} is returned
-	 * @return the {@link #constantID} for string
-	 */
-	public static int getSpecialConstantID(String string) {
-		for (int i = 0; i < specialConstantStrings.length; i++) {
-			if (specialConstantStrings[i].equals(string)) return i;
-		}
-		return -1;
+	public static void addSpecialConstant(String string, double value) {
+		specialConstants.put(string, value);
+	}
+
+	public static void removeSpecialConstant(String string) {
+		specialConstants.remove(string);
 	}
 
 	public double evaluate(double... variableValues) {
@@ -76,8 +68,8 @@ public class Constant extends Function {
 
 
 	public String toString() {
-		if (constantID != -1)
-			return specialConstantStrings[constantID];
+		if (constantKey != null)
+			return constantKey;
 		return String.valueOf(constant);
 	}
 
@@ -86,8 +78,9 @@ public class Constant extends Function {
 	}
 
 	public Function clone() {
-		if (constantID == -1) return new Constant(constant);
-		else return new Constant(constantID, true);
+		if (constantKey == null)
+			return new Constant(constant);
+		else return new Constant(constantKey);
 	}
 
 	public Function simplify() {
@@ -105,12 +98,14 @@ public class Constant extends Function {
 	}
 
 	public int compareSelf(Function that) {
-		if (constantID != -1) {
-			if (((Constant) that).constantID != -1)
-				return this.constantID - ((Constant) that).constantID;
+		if (constantKey != null) {
+			if (((Constant) that).constantKey != null)
+				//noinspection ConstantConditions
+				return this.constantKey.compareTo(((Constant) that).constantKey);
 			return -1;
 		}
-		if (((Constant) that).constantID != -1)
+		//noinspection VariableNotUsedInsideIf
+		if (((Constant) that).constantKey != null)
 			return 1;
 		return (int) Math.signum(this.constant - ((Constant) that).constant);
 	}

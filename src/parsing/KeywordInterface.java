@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
 @SuppressWarnings("SpellCheckingInspection")
 public class KeywordInterface {
 	public static final Pattern keywordSplitter = Pattern.compile("(?<=^d/d)(?=[a-zA-Z])|\"\\s+\"|\"\\s+|\\s+\"|\"$|\\s+(?=[^\"]*(\"[^\"]*\"[^\"]*)*$)");
-	public static HashMap<String, Function> storedFunctions = new HashMap<>();
+	public static final HashMap<String, Function> storedFunctions = new HashMap<>();
 	public static Object prev;
 
 

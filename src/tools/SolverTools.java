@@ -35,6 +35,7 @@ public class SolverTools {
 	 * @param values the List from which the repeated values are removed
 	 */
 	public static void removeRepeatsInOrder(List<Double> values) {
+		System.out.println("removeRepeatsInOrder is being called");
 		if (values.size() <= 1)
 			return;
 		ListIterator<Double> iter = values.listIterator();
@@ -46,6 +47,23 @@ public class SolverTools {
 			current = iter.next();
 			if (current == previous || (current - previous < 1e-10 && previous - current < 1e-10))
 				iter.remove();
+		}
+	}
+
+
+	public static void removeNotInRange(List<Double> values, double lowerBound, double upperBound) {
+		System.out.println("Lower Bound: " + lowerBound);
+		System.out.println("Upper Bound: " + upperBound);
+		ListIterator<Double> iter = values.listIterator();
+		double current;
+		current = iter.next();
+		System.out.println("current: " +  current);
+		while (iter.hasNext()) {
+			if (current > upperBound || current < lowerBound) {
+				iter.remove();
+			}
+			System.out.println("current: " +  current);
+			current = iter.next();
 		}
 	}
 }

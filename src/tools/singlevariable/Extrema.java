@@ -3,6 +3,7 @@ package tools.singlevariable;
 import core.Settings;
 import functions.Function;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.BiPredicate;
@@ -36,7 +37,9 @@ public class Extrema {
      */
     public static double findLocalMaxima(Function function, double lowerBound, double upperBound) {
         double[] secondDerivativeIsNegative = findPoints(function, lowerBound, upperBound, (a, b) -> (a < b));
+        System.out.println("Extrema second d/dx is 0: " + Arrays.toString(secondDerivativeIsNegative));
         double maxima = findSmallestOrLargest(function, secondDerivativeIsNegative, (a, b) -> (a > b));
+        System.out.println("Extrema maxima: " + maxima);
         if (maxima > upperBound || maxima < lowerBound)
             return Double.NaN;
         return maxima;
@@ -77,6 +80,7 @@ public class Extrema {
 
     private static double[] findPoints(Function function, double lowerBound, double upperBound, BiPredicate<? super Double, ? super Double> strategy) {
         double[] criticalPoints = Solver.getSolutionsRange(function.getDerivative(0), lowerBound, upperBound);
+        System.out.println("Solver's getSolutionRange: " + Arrays.toString(criticalPoints));
         if (criticalPoints.length == 0) return null;
 
         List<Double> secondDerivative = new LinkedList<>();
@@ -84,6 +88,7 @@ public class Extrema {
             if (strategy.test(function.getNthDerivative(0, 2).evaluate(criticalPoint), 0.0)) {
                 secondDerivative.add(criticalPoint);
             }
+            System.out.println("Extrema's secondDerivative LinkedList: " + secondDerivative.toString());
         }
         return secondDerivative.stream().mapToDouble(i -> i).toArray();
     }

@@ -110,4 +110,10 @@ public class SolverTest {
         Function test = Parser.parse("x^{4}-3x^{3}+2x^{2}+x+1");
         assertArrayEquals(new double[]{1}, Extrema.findAnyMaxima(test, -6.30457892, 7.2543525), .01);
     }
+
+    @Test
+    void sinTest() {
+        Function test = Parser.parse("sin(x)");
+        assertEquals(Math.PI/2, Extrema.findLocalMaxima(test, 0, Math.PI), .01);
+    }
 }

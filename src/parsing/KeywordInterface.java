@@ -89,7 +89,7 @@ public class KeywordInterface {
 	 */
 	public static Function substituteAll(Function function) {
 		for (Map.Entry<String, Function>  entry : storedFunctions.entrySet())
-			function = function.substitute(Variable.getVarID(entry.getKey().charAt(0)), entry.getValue());
+			function = function.substitute(entry.getKey().charAt(0), entry.getValue());
 		return function;
 	}
 
@@ -99,14 +99,14 @@ public class KeywordInterface {
 	 */
 	public static Function partialDiff(String input) {
 		String[] splitInput = keywordSplitter.split(input, 2);
-		return parseStored(splitInput[1]).getSimplifiedDerivative(Variable.getVarID(splitInput[0].charAt(0)));
+		return parseStored(splitInput[1]).getSimplifiedDerivative(splitInput[0].charAt(0));
 	}
 	/**
 	 * pdn [variable] [times] [function]
 	 */
 	private static Function partialDiffNth(String input) {
 		String[] splitInput = keywordSplitter.split(input, 3);
-		return parseStored(splitInput[2]).getNthDerivative(Variable.getVarID(splitInput[0].charAt(0)), Integer.parseInt(splitInput[1]));
+		return parseStored(splitInput[2]).getNthDerivative(splitInput[0].charAt(0), Integer.parseInt(splitInput[1]));
 	}
 
 	/**
@@ -115,7 +115,7 @@ public class KeywordInterface {
 	public static double evaluate(String input) {
 		String[] splitInput = keywordSplitter.split(input, 2);
 		double[] values = Arrays.stream(keywordSplitter.split(splitInput[1])).mapToDouble(ConstantEvaluator::getConstant).toArray();
-		return parseStored(splitInput[0]).evaluate(values);
+		return parseStored(splitInput[0]).oldEvaluate(values);
 	}
 
 	/**
@@ -133,7 +133,7 @@ public class KeywordInterface {
 		String[] splitInput = keywordSplitter.split(input);
 		if (splitInput[1].length() > 1)
 			throw new IllegalArgumentException("Variables are one character, so " + splitInput[1] + " is not valid.");
-		return parseStored(splitInput[0]).substitute(Variable.getVarID(splitInput[1].charAt(0)), parseStored(splitInput[2]));
+		return parseStored(splitInput[0]).substitute(splitInput[1].charAt(0), parseStored(splitInput[2]));
 	}
 
 	/**

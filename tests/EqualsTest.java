@@ -146,8 +146,6 @@ public class EqualsTest {
     void switchedOrderComplicated() {
         Function test1 = Parser.parse("x^2+1+y+3sin(x)+2x");
         Function test2 = Parser.parse("3(sin(x))+y+x^2+2x+1");
-//        System.out.println(test1.simplify());
-//        System.out.println(test2.simplify());
         assertEquals(test1, test2);
     }
 
@@ -156,8 +154,6 @@ public class EqualsTest {
     void distributeTerms() {
         Function test1 = Parser.parse("sin(x)*(1+5x)");
         Function test2 = Parser.parse("sin(x)+5*x*sin(x)");
-//        System.out.println(((Multiply)test1).distributeAll().simplify());
-//        System.out.println(test2.simplify());
         assertEquals(((Multiply)test1).distributeAll(), test2);
     }
 
@@ -166,8 +162,6 @@ public class EqualsTest {
         Settings.distributeExponents = true;
         Function test1 = Parser.parse("(2xy)^2");
         Function test2 = Parser.parse("4x^2y^2");
-//        System.out.println(test1.simplify());
-//        System.out.println(test2.simplify());
         assertEquals(test1, test2);
     }
 

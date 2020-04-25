@@ -49,7 +49,12 @@ public class SolverTools {
 		}
 	}
 
-
+	/**
+	 * Removes values in a list which are not in the given range
+	 * @param values the list from which values are being removed
+	 * @param lowerBound the lower bound of the range
+	 * @param upperBound the upper bound of the range
+	 */
 	public static void removeNotInRange(List<Double> values, double lowerBound, double upperBound) {
 		ListIterator<Double> iter = values.listIterator();
 		double current;

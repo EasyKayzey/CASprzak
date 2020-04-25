@@ -30,6 +30,7 @@ public class KeywordInterface {
 		String[] splitInput = keywordSplitter.split(input, 2);
 		Object ret = switch (splitInput[0]) {
 			case "pd", "pdiff", "partial", "pdifferentiate", "d/d" -> partialDiff(splitInput[1]);
+			case "pdn", "pdiffn", "partialn", "pdifferentiaten" -> partialDiffNth(splitInput[1]);
 			case "eval", "evaluate" -> evaluate(splitInput[1]);
 			case "simp", "simplify" -> simplify(splitInput[1]);
 			case "sub", "substitute" -> substitute(splitInput[1]);
@@ -94,6 +95,13 @@ public class KeywordInterface {
 	public static Function partialDiff(String input) {
 		String[] splitInput = keywordSplitter.split(input, 2);
 		return parseStored(splitInput[1]).getSimplifiedDerivative(Variable.getVarID(splitInput[0].charAt(0)));
+	}
+	/**
+	 * pdn [variable] [times] [function]
+	 */
+	private static Function partialDiffNth(String input) {
+		String[] splitInput = keywordSplitter.split(input, 3);
+		return parseStored(splitInput[2]).getNthDerivative(Variable.getVarID(splitInput[0].charAt(0)), Integer.parseInt(splitInput[1]));
 	}
 
 	/**

@@ -98,7 +98,7 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 	 * @param point the point to find the derivative at
 	 * @return the value of the derivative at point
 	 */
-	public double derivativeAt(char varID, double... point) {
+	public double derivativeAt(char varID, Map<Character, Double> point) {
 		return getDerivative(varID).evaluate(point);
 	}
 

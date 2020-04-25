@@ -12,6 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import tools.MiscTools;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public abstract class Function implements Evaluable, Differentiable, Simplifiable, Comparable<Function> {
 
@@ -109,6 +110,18 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 	 */
 	public abstract Function substitute(char varID, Function toReplace);
 
+	/**
+	 * @Deprecated Blindly inserts the values into a HashMap as specfied by {@link Variable.variables}. For testing purposes only.
+	 * @param values array of values
+	 * @return a double
+	 */
+	public double oldEvaluate(double... values) {
+		Map<Character, Double> map = new HashMap<>();
+		for (int i = 0; i < values.length; i++) {
+			map.put(Variable.variables.get(i), values[i]);
+		}
+		return evaluate(map);
+	}
 
 	/**
 	 * Returns true when the two functions simplified are equal

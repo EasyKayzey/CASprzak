@@ -3,8 +3,6 @@ package tools.singlevariable;
 import core.Settings;
 import functions.Function;
 
-import java.util.Random;
-
 public class NumericalIntegration {
 
     /**

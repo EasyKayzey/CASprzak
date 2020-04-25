@@ -42,12 +42,12 @@ public class CASUI {
 		System.out.println("Here is your output: " + currentFunction.oldEvaluate(inputs));
 
 		System.out.println("Here is the derivative with respect to " + Variable.variables.get(0) + ", simplified once:");
-		System.out.println(currentFunction.getSimplifiedDerivative(0));
+		System.out.println(currentFunction.getSimplifiedDerivative(Variable.variables.get(0)));
 		System.out.println("Here is the derivative with respect to " + Variable.variables.get(0) + ", simplified completely:");
-		System.out.println(currentFunction.getSimplifiedDerivative(0).simplifyTimes(10));
+		System.out.println(currentFunction.getSimplifiedDerivative(Variable.variables.get(0)).simplifyTimes(10));
 
 		System.out.println("Here is the derivative with respect to " + Variable.variables.get(0) + ", evaluated:");
-		System.out.println(currentFunction.getSimplifiedDerivative(0).simplifyTimes(10).oldEvaluate(inputs));
+		System.out.println(currentFunction.getSimplifiedDerivative(Variable.variables.get(0)).simplifyTimes(10).oldEvaluate(inputs));
 
 		if (Variable.variables.size() == 1) {
 			double solution = Solver.getSolutionPoint(currentFunction, -10);

@@ -29,7 +29,7 @@ public abstract class UnitaryFunction extends Function {
 	public Function simplify() {
 		UnitaryFunction newFunction = this.simplifyInternal();
 		if (Settings.simplifyFunctionsOfConstants && newFunction.function instanceof Constant)
-			return new Constant(newFunction.evaluate());
+			return new Constant(newFunction.evaluate(null));
 		return newFunction;
 	}
 

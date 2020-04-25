@@ -35,7 +35,6 @@ public class SolverTools {
 	 * @param values the List from which the repeated values are removed
 	 */
 	public static void removeRepeatsInOrder(List<Double> values) {
-		System.out.println("removeRepeatsInOrder is being called");
 		if (values.size() <= 1)
 			return;
 		ListIterator<Double> iter = values.listIterator();

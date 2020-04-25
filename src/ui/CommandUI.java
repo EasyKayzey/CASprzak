@@ -16,7 +16,7 @@ public class CommandUI extends KeywordInterface {
 		boolean flag = true;
 		while (flag) {
 			String input = scan.next();
-			if ('!' == input.charAt(0) || (input.length() >= 4 && "exit".equals(input.substring(0, 4))))
+			if ('!' == input.charAt(0) || (input.length() == 4 && "exit".equals(input.substring(0, 4))))
 				flag = false;
 			else {
 				try {

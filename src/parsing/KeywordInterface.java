@@ -14,8 +14,7 @@ import java.util.regex.Pattern;
 
 @SuppressWarnings("SpellCheckingInspection")
 public class KeywordInterface {
-	public static final Pattern spacesOutsideQuotes = Pattern.compile("\"\\s+\"|\"\\s+|\\s+\"|\"$|\\s+(?=[^\"]*(\"[^\"]*\"[^\"]*)*$)");
-	private static final Pattern ddvar = Pattern.compile("^d/d");
+	public static final Pattern keywordSplitter = Pattern.compile("(?<=^d/d)(?=[a-zA-Z])|\"\\s+\"|\"\\s+|\\s+\"|\"$|\\s+(?=[^\"]*(\"[^\"]*\"[^\"]*)*$)");
 	public static HashMap<String, Function> storedFunctions = new HashMap<>();
 	public static Object prev;
 
@@ -28,10 +27,9 @@ public class KeywordInterface {
 	public static Object useKeywords(String input) {
 		if ("_".equals(input))
 			return prev;
-		input = ddvar.matcher(input).replaceAll("pd "); //TODO put this in splitter
-		String[] splitInput = spacesOutsideQuotes.split(input, 2);
+		String[] splitInput = keywordSplitter.split(input, 2);
 		Object ret = switch (splitInput[0]) {
-			case "pd", "pdiff", "partial", "pdifferentiate" -> partialDiff(splitInput[1]);
+			case "pd", "pdiff", "partial", "pdifferentiate", "d/d" -> partialDiff(splitInput[1]);
 			case "eval", "evaluate" -> evaluate(splitInput[1]);
 			case "simp", "simplify" -> simplify(splitInput[1]);
 			case "sub", "substitute" -> substitute(splitInput[1]);
@@ -89,7 +87,7 @@ public class KeywordInterface {
 	 * pd [variable] [function]
 	 */
 	public static Function partialDiff(String input) {
-		String[] splitInput = spacesOutsideQuotes.split(input, 2);
+		String[] splitInput = keywordSplitter.split(input, 2);
 		return parseStored(splitInput[1]).getSimplifiedDerivative(Variable.getVarID(splitInput[0].charAt(0)));
 	}
 
@@ -97,8 +95,8 @@ public class KeywordInterface {
 	 * eval [function] [values]
 	 */
 	public static double evaluate(String input) {
-		String[] splitInput = spacesOutsideQuotes.split(input, 2);
-		double[] values = Arrays.stream(spacesOutsideQuotes.split(splitInput[1])).mapToDouble(ConstantEvaluator::getConstant).toArray();
+		String[] splitInput = keywordSplitter.split(input, 2);
+		double[] values = Arrays.stream(keywordSplitter.split(splitInput[1])).mapToDouble(ConstantEvaluator::getConstant).toArray();
 		return parseStored(splitInput[0]).evaluate(values);
 	}
 
@@ -106,7 +104,7 @@ public class KeywordInterface {
 	 * simp [function]
 	 */
 	public static Function simplify(String input) {
-		String[] splitInput = spacesOutsideQuotes.split(input);
+		String[] splitInput = keywordSplitter.split(input);
 		return parseStored(splitInput[0]).simplify();
 	}
 
@@ -114,7 +112,7 @@ public class KeywordInterface {
 	 * sub [function] [variable] [replacementfunction]
 	 */
 	public static Function substitute(String input) {
-		String[] splitInput = spacesOutsideQuotes.split(input);
+		String[] splitInput = keywordSplitter.split(input);
 		if (splitInput[1].length() > 1)
 			throw new IllegalArgumentException("Variables are one character, so " + splitInput[1] + " is not valid.");
 		return parseStored(splitInput[0]).substitute(Variable.getVarID(splitInput[1].charAt(0)), parseStored(splitInput[2]));
@@ -124,7 +122,7 @@ public class KeywordInterface {
 	 * sol [function] [startrange] [endrange]
 	 */
 	public static double[] solve(String input) {
-		String[] splitInput = spacesOutsideQuotes.split(input);
+		String[] splitInput = keywordSplitter.split(input);
 		return Solver.getSolutionsRange(parseStored(splitInput[0]), ConstantEvaluator.getConstant(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]));
 	}
 
@@ -132,7 +130,7 @@ public class KeywordInterface {
 	 * ext ["min(ima)"/"max(ima)"/"anymin(ima)"/"anymax(ima)"/"inflect(ion)"] [function] [startrange] [endrange]
 	 */
 	public static Object extrema(String input) {
-		String[] splitInput = spacesOutsideQuotes.split(input);
+		String[] splitInput = keywordSplitter.split(input);
 		return switch (splitInput[0]) {
 			case "min", "minima" -> Extrema.findLocalMinima(parseStored(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]), ConstantEvaluator.getConstant(splitInput[3]));
 			case "max", "maxima" -> Extrema.findLocalMaxima(parseStored(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]), ConstantEvaluator.getConstant(splitInput[3]));
@@ -147,7 +145,7 @@ public class KeywordInterface {
 	 * tay [function] [terms] [center]
 	 */
 	public static Function taylor(String input) {
-		String[] splitInput = spacesOutsideQuotes.split(input);
+		String[] splitInput = keywordSplitter.split(input);
 		return TaylorSeries.makeTaylorSeries(parseStored(splitInput[0]), (int) ConstantEvaluator.getConstant(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]));
 	}
 
@@ -155,7 +153,7 @@ public class KeywordInterface {
 	 * sto [locationstring] [input]
 	 */
 	public static Object store(String input) {
-		String[] splitInput = spacesOutsideQuotes.split(input, 2);
+		String[] splitInput = keywordSplitter.split(input, 2);
 		if (splitInput[0].length() != 1)
 			throw new IllegalArgumentException("Functions should be one character.");
 		if (!storedFunctions.containsKey(splitInput[0]))
@@ -172,7 +170,7 @@ public class KeywordInterface {
 	 * var [variablename]
 	 */
 	public static String addvars(String input) {
-		String[] splitInput = spacesOutsideQuotes.split(input);
+		String[] splitInput = keywordSplitter.split(input);
 		for (String var : splitInput) {
 			if (var.length() > 1)
 				throw new IllegalArgumentException("Variables should be one character.");
@@ -217,7 +215,7 @@ public class KeywordInterface {
 	 * intn [function] [startvalue] [endvalue]
 	 */
 	public static double integrateNumeric(String input) {
-		String[] splitInput = spacesOutsideQuotes.split(input);
+		String[] splitInput = keywordSplitter.split(input);
 		return NumericalIntegration.simpsonsRule(parseStored(splitInput[0]), ConstantEvaluator.getConstant(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]));
 	}
 
@@ -225,7 +223,7 @@ public class KeywordInterface {
 	 * intne [function] [startvalue] [endvalue]
 	 */
 	private static double[] integrateNumericError(String input) {
-		String[] splitInput = spacesOutsideQuotes.split(input);
+		String[] splitInput = keywordSplitter.split(input);
 		return NumericalIntegration.simpsonsRuleWithError(parseStored(splitInput[0]), ConstantEvaluator.getConstant(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]));
 	}
 }

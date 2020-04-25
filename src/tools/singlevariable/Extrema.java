@@ -3,7 +3,6 @@ package tools.singlevariable;
 import core.Settings;
 import functions.Function;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.BiPredicate;

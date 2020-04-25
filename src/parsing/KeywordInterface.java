@@ -82,6 +82,11 @@ public class KeywordInterface {
 			return (Function) useKeywords(input);
 	}
 
+	/**
+	 * Substitutes everything stored in {@link #storedFunctions} into the input {@link functions.Function}
+	 * @param function the function to be substituted into
+	 * @return input with all substitutions
+	 */
 	public static Function substituteAll(Function function) {
 		for (Map.Entry<String, Function>  entry : storedFunctions.entrySet())
 			function = function.substitute(Variable.getVarID(entry.getKey().charAt(0)), entry.getValue());

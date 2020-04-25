@@ -6,6 +6,8 @@ import functions.commutative.Multiply;
 import functions.special.Constant;
 import functions.unitary.Ln;
 
+import java.util.Map;
+
 public class Logb extends BinaryFunction {
 	/**
 	 * Constructs a new Logb

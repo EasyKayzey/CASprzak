@@ -1,6 +1,6 @@
-import parsing.Parser;
 import functions.Function;
 import org.junit.jupiter.api.Test;
+import parsing.Parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

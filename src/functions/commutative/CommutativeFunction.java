@@ -1,9 +1,9 @@
 package functions.commutative;
 
-import tools.FunctionTools;
 import core.Settings;
 import functions.Function;
 import functions.special.Constant;
+import tools.FunctionTools;
 
 import java.util.Arrays;
 

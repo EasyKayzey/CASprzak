@@ -1,9 +1,9 @@
-import functions.binary.Pow;
-import parsing.Parser;
 import core.Settings;
 import functions.Function;
+import functions.binary.Pow;
 import functions.commutative.Multiply;
 import org.junit.jupiter.api.Test;
+import parsing.Parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;

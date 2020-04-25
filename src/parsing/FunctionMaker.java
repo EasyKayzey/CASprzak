@@ -7,7 +7,10 @@ import functions.commutative.Add;
 import functions.commutative.Multiply;
 import functions.special.Constant;
 import functions.special.Variable;
-import functions.unitary.*;
+import functions.unitary.Abs;
+import functions.unitary.Dirac;
+import functions.unitary.Ln;
+import functions.unitary.Sign;
 import functions.unitary.trig.*;
 
 public class FunctionMaker {

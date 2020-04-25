@@ -9,6 +9,8 @@ import functions.special.Constant;
 import functions.special.Variable;
 import functions.unitary.Ln;
 
+import java.util.Map;
+
 public class Pow extends BinaryFunction {
 	/**
 	 * Constructs a new Pow
@@ -56,7 +58,7 @@ public class Pow extends BinaryFunction {
 			if (constant.constant == 1)
 				return function2.simplify();
 			if (Settings.simplifyFunctionsOfConstants && function2 instanceof Constant)
-				return new Constant(this.evaluate());
+				return new Constant(this.evaluate(null));
 		}
 		if (Settings.trustImmutability)
 			return this;

@@ -1,12 +1,12 @@
 package ui;
 
+import functions.Function;
 import functions.special.Variable;
 import parsing.ConstantEvaluator;
 import parsing.Parser;
 import parsing.PreProcessor;
 import tools.singlevariable.NumericalIntegration;
 import tools.singlevariable.Solver;
-import functions.Function;
 import tools.singlevariable.TaylorSeries;
 
 import java.util.Arrays;

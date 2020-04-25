@@ -1,13 +1,14 @@
 package functions.commutative;
 
-import tools.FunctionTools;
 import core.Settings;
 import functions.Function;
 import functions.binary.Pow;
 import functions.special.Constant;
 import functions.special.Variable;
+import tools.FunctionTools;
 
 import java.util.Arrays;
+import java.util.Map;
 
 public class Multiply extends CommutativeFunction {
 	/**

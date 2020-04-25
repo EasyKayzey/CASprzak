@@ -70,6 +70,11 @@ public class KeywordInterface {
 	public static Function parseStored(String input) {
 		if ("_".equals(input))
 			return Parser.toFunction(prev);
+		if (input.chars().filter(ch -> ch == '\"').count() % 2 == 1) // this is a really janky fix
+			if (input.charAt(input.length() - 1) == '\"')
+				input = input.substring(0, input.length() - 1);
+			else
+				throw new IllegalArgumentException("Unmatched quotes in " + input);
 		if (storedFunctions.containsKey(input))
 			return storedFunctions.get(input);
 		else

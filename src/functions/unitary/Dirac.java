@@ -3,6 +3,9 @@ package functions.unitary;
 import functions.Function;
 import functions.special.Constant;
 
+import java.util.Map;
+
+
 public class Dirac extends UnitaryFunction {
 	/**
 	 * Constructs a new Dirac

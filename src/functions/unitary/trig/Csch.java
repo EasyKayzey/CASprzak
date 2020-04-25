@@ -5,6 +5,9 @@ import functions.commutative.Multiply;
 import functions.special.Constant;
 import functions.unitary.UnitaryFunction;
 
+import java.util.Map;
+
+
 public class Csch extends UnitaryFunction {
 	/**
 	 * Constructs a new Csch

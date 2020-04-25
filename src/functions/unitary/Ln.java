@@ -5,6 +5,9 @@ import functions.binary.Pow;
 import functions.commutative.Multiply;
 import functions.special.Constant;
 
+import java.util.Map;
+
+
 public class Ln extends UnitaryFunction {
 	/**
 	 * Constructs a new Ln

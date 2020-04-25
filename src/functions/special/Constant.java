@@ -4,6 +4,8 @@ import functions.Function;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
+import java.util.Map;
+
 
 public class Constant extends Function {
 	private static final HashMap<String, Double> specialConstants = new HashMap<>() {

@@ -4,6 +4,8 @@ import core.Settings;
 import functions.Function;
 import functions.special.Constant;
 
+
+
 public abstract class UnitaryFunction extends Function {
 	/**
 	 * The {@link Function} which the {@link UnitaryFunction} operates on

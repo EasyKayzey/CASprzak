@@ -3,6 +3,9 @@ package functions.unitary;
 import functions.Function;
 import functions.commutative.Multiply;
 
+import java.util.Map;
+
+
 public class Abs extends UnitaryFunction {
 	/**
 	 * Constructs a new Abs

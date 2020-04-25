@@ -4,6 +4,9 @@ import functions.Function;
 import functions.commutative.Multiply;
 import functions.unitary.UnitaryFunction;
 
+import java.util.Map;
+
+
 public class Cosh extends UnitaryFunction {
 	/**
 	 * Constructs a new Cosh

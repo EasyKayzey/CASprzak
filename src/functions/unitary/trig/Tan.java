@@ -6,6 +6,9 @@ import functions.commutative.Multiply;
 import functions.special.Constant;
 import functions.unitary.UnitaryFunction;
 
+import java.util.Map;
+
+
 public class Tan extends UnitaryFunction {
 	/**
 	 * Constructs a new Tan

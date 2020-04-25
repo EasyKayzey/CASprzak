@@ -4,6 +4,9 @@ import functions.Function;
 import functions.commutative.Multiply;
 import functions.special.Constant;
 
+import java.util.Map;
+
+
 public class Sign extends UnitaryFunction {
 	/**
 	 * Constructs a new Sign

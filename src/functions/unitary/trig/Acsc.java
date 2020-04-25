@@ -8,6 +8,9 @@ import functions.special.Constant;
 import functions.unitary.Abs;
 import functions.unitary.UnitaryFunction;
 
+import java.util.Map;
+
+
 public class Acsc extends UnitaryFunction {
 	/**
 	 * Constructs a new Acsc

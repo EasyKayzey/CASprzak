@@ -23,8 +23,8 @@ public class Csc extends UnitaryFunction {
 	 * @return the csc of {@link #function} evaluated
 	 */
 	@Override
-	public double oldEvaluate(Map<Character, Double> variableValues) {
-		return 1 / Math.sin(function.oldEvaluate(variableValues));
+	public double evaluate(Map<Character, Double> variableValues) {
+		return 1 / Math.sin(function.evaluate(variableValues));
 	}
 
 	@Override

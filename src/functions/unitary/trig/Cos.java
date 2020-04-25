@@ -23,8 +23,8 @@ public class Cos extends UnitaryFunction {
 	 * @return the cos of {@link #function} evaluated
 	 */
 	@Override
-	public double oldEvaluate(Map<Character, Double> variableValues) {
-		return Math.cos(function.oldEvaluate(variableValues));
+	public double evaluate(Map<Character, Double> variableValues) {
+		return Math.cos(function.evaluate(variableValues));
 	}
 
 	@Override

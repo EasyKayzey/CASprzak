@@ -18,8 +18,8 @@ public class Ln extends UnitaryFunction {
 	}
 
 	@Override
-	public double oldEvaluate(Map<Character, Double> variableValues) {
-		return Math.log(function.oldEvaluate(variableValues));
+	public double evaluate(Map<Character, Double> variableValues) {
+		return Math.log(function.evaluate(variableValues));
 	}
 
 	@Override

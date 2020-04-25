@@ -16,8 +16,8 @@ public class Abs extends UnitaryFunction {
 	}
 
 	@Override
-	public double oldEvaluate(Map<Character, Double> variableValues) {
-		return Math.abs(function.oldEvaluate(variableValues));
+	public double evaluate(Map<Character, Double> variableValues) {
+		return Math.abs(function.evaluate(variableValues));
 	}
 
 	@Override

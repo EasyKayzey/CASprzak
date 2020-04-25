@@ -37,8 +37,8 @@ public class Acsc extends UnitaryFunction {
 	 */
 	@SuppressWarnings("RedundantSuppression")
 	@Override
-	public double oldEvaluate(Map<Character, Double> variableValues) {
-		double functionEvaluated = function.oldEvaluate(variableValues);
+	public double evaluate(Map<Character, Double> variableValues) {
+		double functionEvaluated = function.evaluate(variableValues);
 		if (functionEvaluated > 1) {
 			//noinspection DuplicateExpressions
 			return Math.acos(Math.sqrt(Math.pow(functionEvaluated, 2) - 1) / functionEvaluated);

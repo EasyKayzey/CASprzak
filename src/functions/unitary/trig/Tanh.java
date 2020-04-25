@@ -24,8 +24,8 @@ public class Tanh extends UnitaryFunction {
 	 * @return the tanh of {@link #function} evaluated
 	 */
 	@Override
-	public double oldEvaluate(Map<Character, Double> variableValues) {
-		return Math.tanh(function.oldEvaluate(variableValues));
+	public double evaluate(Map<Character, Double> variableValues) {
+		return Math.tanh(function.evaluate(variableValues));
 	}
 
 	@Override

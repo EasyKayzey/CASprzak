@@ -41,7 +41,7 @@ public class CASDebugger {
 					double[] values = new double[unparsedValues.length];
 					for (int i = 0; i < values.length; i++)
 						values[i] = ConstantEvaluator.getConstant(unparsedValues[i]);
-					System.out.println(function.oldEvaluate(values));
+					System.out.println(function.evaluate(values));
 				}
 			}
 			default -> throw new IllegalArgumentException(userInput + " is not supported.");

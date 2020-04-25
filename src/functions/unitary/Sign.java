@@ -17,8 +17,8 @@ public class Sign extends UnitaryFunction {
 	}
 
 	@Override
-	public double oldEvaluate(Map<Character, Double> variableValues) {
-		return Math.signum(function.oldEvaluate(variableValues));
+	public double evaluate(Map<Character, Double> variableValues) {
+		return Math.signum(function.evaluate(variableValues));
 	}
 
 	@Override

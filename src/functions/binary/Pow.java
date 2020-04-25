@@ -30,8 +30,8 @@ public class Pow extends BinaryFunction {
 	}
 
 	@Override
-	public double oldEvaluate(Map<Character, Double> variableValues) {
-		return Math.pow(function2.oldEvaluate(variableValues), function1.oldEvaluate(variableValues));
+	public double evaluate(Map<Character, Double> variableValues) {
+		return Math.pow(function2.evaluate(variableValues), function1.evaluate(variableValues));
 	}
 
 	public Function clone() {
@@ -58,7 +58,7 @@ public class Pow extends BinaryFunction {
 			if (constant.constant == 1)
 				return function2.simplify();
 			if (Settings.simplifyFunctionsOfConstants && function2 instanceof Constant)
-				return new Constant(this.oldEvaluate(null));
+				return new Constant(this.evaluate(null));
 		}
 		if (Settings.trustImmutability)
 			return this;

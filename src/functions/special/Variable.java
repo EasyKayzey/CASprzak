@@ -73,7 +73,7 @@ public class Variable extends Function {
 		return new Constant((this.varID == varID ? 1 : 0));
 	}
 
-	public double oldEvaluate(Map<Character, Double> variableValues) {
+	public double evaluate(Map<Character, Double> variableValues) {
 		return variableValues.get(varID);
 	}
 

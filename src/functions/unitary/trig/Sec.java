@@ -22,8 +22,8 @@ public class Sec extends UnitaryFunction {
 	 * @return the sec of {@link #function} evaluated
 	 */
 	@Override
-	public double oldEvaluate(Map<Character, Double> variableValues) {
-		return 1 / Math.cos(function.oldEvaluate(variableValues));
+	public double evaluate(Map<Character, Double> variableValues) {
+		return 1 / Math.cos(function.evaluate(variableValues));
 	}
 
 	@Override

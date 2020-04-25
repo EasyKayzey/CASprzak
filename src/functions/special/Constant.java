@@ -6,8 +6,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 
 public class Constant extends Function {
-	private static final String[] specialConstantStringsTEMP = {"pi", "e"};
-	private static final double[] specialConstantsTEMP = {Math.PI, Math.E};
 	private static final HashMap<String, Double> specialConstants = new HashMap<>() {
 		{
 			put("pi", Math.PI);
@@ -20,7 +18,7 @@ public class Constant extends Function {
 	 */
 	public final double constant;
 	/**
-	 * The location of the Constant in {@link #specialConstantsTEMP}
+	 * The string relating to this special constant (null if normal constant)
 	 */
 	public final @Nullable String constantKey;
 

@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.Map;
 
 
 public class Variable extends Function {
@@ -75,7 +74,7 @@ public class Variable extends Function {
 	}
 
 	public double evaluate(Map<Character, Double> variableValues) {
-		return variableValues[varID];
+		return variableValues.get(varID);
 	}
 
 	public Function clone() {

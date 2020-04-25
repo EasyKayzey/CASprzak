@@ -217,7 +217,7 @@ public class EqualsTest {
 
     @Test
     void simplifyPullMultiply() {
-        Function test1 = Parser.parse("x(yz)");
+        Function test1 = Parser.parse("x*(yz)");
         Function test2 = Parser.parse("x*y*z");
         assertEquals(test1, test2);
     }

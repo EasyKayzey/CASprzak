@@ -23,7 +23,7 @@ public class Logb extends BinaryFunction {
 	}
 
 	@Override
-	public Function getDerivative(int varID) {
+	public Function getDerivative(char varID) {
 		if (function2 instanceof Constant base)
 			return new Multiply(function1.getSimplifiedDerivative(varID), new Pow(new Constant(-1), new Multiply(new Ln(new Constant(base.constant)), function1)));
 		else

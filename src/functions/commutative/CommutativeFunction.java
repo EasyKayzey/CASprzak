@@ -134,7 +134,7 @@ public abstract class CommutativeFunction extends Function {
 	 */
 	public abstract CommutativeFunction me(Function... functions);
 
-	public Function substitute(int varID, Function toReplace) {
+	public Function substitute(char varID, Function toReplace) {
 		Function[] newFunctions = new Function[functions.length];
 		for (int i = 0; i < functions.length; i++)
 			newFunctions[i] = functions[i].substitute(varID, toReplace);

@@ -21,7 +21,7 @@ public class Dirac extends UnitaryFunction {
 	}
 
 	@Override
-	public Function getDerivative(int varID) {
+	public Function getDerivative(char varID) {
 		return new Constant(0);
 	}
 

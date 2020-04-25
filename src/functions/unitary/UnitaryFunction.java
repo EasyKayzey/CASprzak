@@ -50,7 +50,7 @@ public abstract class UnitaryFunction extends Function {
 		return me(function.simplify());
 	}
 
-	public UnitaryFunction substitute(int varID, Function toReplace) {
+	public UnitaryFunction substitute(char varID, Function toReplace) {
 		return me(function.substitute(varID, toReplace));
 	}
 

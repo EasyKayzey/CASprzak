@@ -37,7 +37,7 @@ public class FunctionMaker {
 	 * @param varID    ID of variable
 	 * @return new {@link Variable}
 	 */
-	public static Function variable(int varID) {
+	public static Function variable(char varID) {
 		return new Variable(varID);
 	}
 

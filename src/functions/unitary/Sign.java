@@ -19,7 +19,7 @@ public class Sign extends UnitaryFunction {
 	}
 
 	@Override
-	public Function getDerivative(int varID) {
+	public Function getDerivative(char varID) {
 		return new Multiply(function.getSimplifiedDerivative(varID), new Constant(2), new Dirac(function));
 	}
 

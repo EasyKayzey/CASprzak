@@ -24,7 +24,7 @@ public class Sin extends UnitaryFunction {
 	}
 
 	@Override
-	public Function getDerivative(int varID) {
+	public Function getDerivative(char varID) {
 		return new Multiply(new Cos(function), function.getSimplifiedDerivative(varID));
 	}
 

@@ -41,7 +41,7 @@ public class Multiply extends CommutativeFunction {
 	}
 
 	@Override
-	public Function getDerivative(int varID) {
+	public Function getDerivative(char varID) {
 		Function[] toAdd = new Function[functions.length];
 
 		for (int i = 0; i < toAdd.length; i++) {

@@ -17,7 +17,7 @@ public class Acsch extends UnitaryFunction {
 	}
 
 	@Override
-	public Function getDerivative(int varID) {
+	public Function getDerivative(char varID) {
 		return new Multiply(new Constant(-1), function.getSimplifiedDerivative(varID), new Pow(new Constant(-1), new Multiply(function, new Pow(new Constant(0.5), new Add(new Constant(1), new Multiply(new Constant(-1), new Pow(new Constant(2), function)))))));
 	}
 

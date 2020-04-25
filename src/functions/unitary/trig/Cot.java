@@ -26,7 +26,7 @@ public class Cot extends UnitaryFunction {
 	}
 
 	@Override
-	public Function getDerivative(int varID) {
+	public Function getDerivative(char varID) {
 		return new Multiply(new Constant(-1), new Pow(new Constant(2), new Csc(function)), function.getSimplifiedDerivative(varID));
 	}
 

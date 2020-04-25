@@ -20,7 +20,7 @@ public class Pow extends BinaryFunction {
 	}
 
 	@Override
-	public Function getDerivative(int varID) {
+	public Function getDerivative(char varID) {
 		if (function1 instanceof Constant exponent)
 			return new Multiply(new Constant(exponent.constant), new Pow(new Constant(exponent.constant - 1), function2), function2.getSimplifiedDerivative(varID));
 		else

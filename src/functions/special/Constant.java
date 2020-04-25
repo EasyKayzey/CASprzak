@@ -71,7 +71,7 @@ public class Constant extends Function {
 		return String.valueOf(constant);
 	}
 
-	public Function getDerivative(int varID) {
+	public Function getDerivative(char varID) {
 		return new Constant(0);
 	}
 
@@ -86,7 +86,7 @@ public class Constant extends Function {
 	}
 
 
-	public Function substitute(int varID, Function toReplace) {
+	public Function substitute(char varID, Function toReplace) {
 		return this;
 	}
 

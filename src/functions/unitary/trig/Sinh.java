@@ -24,7 +24,7 @@ public class Sinh extends UnitaryFunction {
 	}
 
 	@Override
-	public Function getDerivative(int varID) {
+	public Function getDerivative(char varID) {
 		return new Multiply(new Cosh(function), function.getSimplifiedDerivative(varID));
 	}
 

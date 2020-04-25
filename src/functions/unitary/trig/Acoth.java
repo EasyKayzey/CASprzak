@@ -17,7 +17,7 @@ public class Acoth extends UnitaryFunction {
 	}
 
 	@Override
-	public Function getDerivative(int varID) {
+	public Function getDerivative(char varID) {
 		return new Multiply(function.getSimplifiedDerivative(varID), new Pow(new Constant(-1), new Add(new Constant(1), new Multiply(new Constant(-1), new Pow(new Constant(2), function)))));
 	}
 

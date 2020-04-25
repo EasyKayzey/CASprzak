@@ -31,7 +31,7 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 	/**
 	 * Caches derivatives with the key corresponding to the varID of the derivative
 	 */
-	protected final HashMap<Integer, Function> derivatives = new HashMap<>();
+	protected final HashMap<Character, Function> derivatives = new HashMap<>();
 
 	/**
 	 * Returns a String representation of the Function
@@ -66,7 +66,7 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 	 * @param varID the ID of the variable being differentiated (see {@link Variable#getVarID(char)}).
 	 * @return the derivative of the {@link Function} it is called on, simplified
 	 */
-	public Function getSimplifiedDerivative(int varID) {
+	public Function getSimplifiedDerivative(char varID) {
 		if (Settings.cacheDerivatives && derivatives.containsKey(varID))
 			return derivatives.get(varID);
 		Function derivative = getDerivative(varID).simplify();
@@ -82,7 +82,7 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 	 * @param N     the amount of times to differentiate
 	 * @return the Nth derivative of the {@link Function} it is called on, simplified
 	 */
-	public Function getNthDerivative(int varID, int N) {
+	public Function getNthDerivative(char varID, int N) {
 		Function currentFunction = this;
 		while (N > 0) {
 			currentFunction = currentFunction.getSimplifiedDerivative(varID);
@@ -97,7 +97,7 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 	 * @param point the point to find the derivative at
 	 * @return the value of the derivative at point
 	 */
-	public double derivativeAt(int varID, double... point) {
+	public double derivativeAt(char varID, double... point) {
 		return getDerivative(varID).evaluate(point);
 	}
 
@@ -107,7 +107,7 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 	 * @param toReplace the {@link Function} that will be substituted
 	 * @return the new {@link Function} after all substitutions are preformed
 	 */
-	public abstract Function substitute(int varID, Function toReplace);
+	public abstract Function substitute(char varID, Function toReplace);
 
 
 	/**

@@ -37,7 +37,7 @@ public class Add extends CommutativeFunction {
 	}
 
 	@Override
-	public Function getDerivative(int varID) {
+	public Function getDerivative(char varID) {
 		Function[] toAdd = new Function[functions.length];
 		for (int i = 0; i < functions.length; i++) {
 			toAdd[i] = functions[i].getSimplifiedDerivative(varID);

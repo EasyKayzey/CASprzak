@@ -24,7 +24,7 @@ public class Sec extends UnitaryFunction {
 	}
 
 	@Override
-	public Function getDerivative(int varID) {
+	public Function getDerivative(char varID) {
 		return new Multiply(new Tan(function), new Sec(function), function.getSimplifiedDerivative(varID));
 	}
 

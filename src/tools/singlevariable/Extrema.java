@@ -43,6 +43,17 @@ public class Extrema {
         return maxima;
     }
 
+    public static double findMaximaOnRange(Function function, double lowerBound, double upperBound) {
+        double maximum = findLocalMaxima(function, lowerBound, upperBound);
+        if (Double.isNaN(maximum)) {
+            maximum = lowerBound;
+        } else if (function.evaluate(Map.of(Settings.singleVariableDefault, lowerBound)) > function.evaluate(Map.of(Settings.singleVariableDefault, maximum)))
+            maximum = lowerBound;
+        if (function.evaluate(Map.of(Settings.singleVariableDefault, upperBound)) > function.evaluate(Map.of(Settings.singleVariableDefault, maximum)))
+            maximum = upperBound;
+        return maximum;
+    }
+
     /**
      * Returns any minima of a {@link Function} function on a specified range
      * @param function The {@link Function} whose minima is being found

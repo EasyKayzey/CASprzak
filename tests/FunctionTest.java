@@ -162,7 +162,7 @@ public class FunctionTest {
 		assertEquals(2, test.evaluate(Map.of('x', 2.0, 'n', 1.7, 'q', Double.MIN_VALUE)));
 	}
 
-	@Test void multivarMap() {
+	@Test void multivariableMap() {
 		Function test = Parser.parse("x+2y");
 		assertEquals(5, test.evaluate(Map.of('x', 2.4, 'y', 1.3)));
 	}

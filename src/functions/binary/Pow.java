@@ -72,7 +72,7 @@ public class Pow extends BinaryFunction {
 	 */
 	public Pow multiplyExponents() {
 		if (function2 instanceof Pow base)
-			return new Pow(new Multiply(base.function1, function1), base.function2);
+			return new Pow(new Multiply(base.function1, function1).simplify(), base.function2);
 		if (Settings.trustImmutability)
 			return this;
 		else

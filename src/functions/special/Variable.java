@@ -20,7 +20,8 @@ public class Variable extends Function {
 			add('z');
 		}
 	};
-	public static int variablesEnd = 3;
+
+	private static int variablesEnd = 3;
 
 	/**
 	 * The index of this variable in {@link #variables}

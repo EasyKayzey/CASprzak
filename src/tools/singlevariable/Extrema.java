@@ -43,6 +43,13 @@ public class Extrema {
         return maxima;
     }
 
+    /**
+     * Returns the maximum of a {@link Function} function on a specified range (endpoints included)
+     * @param function The {@link Function} whose maximum is being found
+     * @param lowerBound The lower bound of the range
+     * @param upperBound The upper bound of the range
+     * @return the maximum of function on the specified range
+     */
     public static double findMaximaOnRange(Function function, double lowerBound, double upperBound) {
         double maximum = findLocalMaxima(function, lowerBound, upperBound);
         if (Double.isNaN(maximum)) {

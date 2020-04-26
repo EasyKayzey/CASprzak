@@ -27,5 +27,19 @@ public class KeywordInterfaceTest {
         Function test2 = Parser.parse("0");
         assertEquals(test2, test1);
     }
+
+    @Test
+    void partialOfASimp() {
+        Function test1 = (Function) KeywordInterface.useKeywords("d/dx simp 2x+3x");
+        Function test2 = Parser.parse("5");
+        assertEquals(test2, test1);
+    }
+
+    @Test
+    void partialDerivativeNTimes() {
+        Function test1 = (Function) KeywordInterface.useKeywords("pdn x 4 sin(x)");
+        Function test2 = Parser.parse("sin(x)");
+        assertEquals(test2, test1);
+    }
 }
 

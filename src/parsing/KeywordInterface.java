@@ -47,7 +47,7 @@ public class KeywordInterface {
 			case "addc", "addconstant", "defc", "defcon", "defconstant" -> defineConstant(splitInput[1]);
 			case "rmc", "rmconstant", "removeconstant" -> removeConstant(splitInput[1]);
 			case "vars", "printvars" -> printVariables();
-			case "clearvars" -> clearVariables();
+			case "cv", "clearvars" -> clearVariables();
 			case "printfun", "printfunctions" -> printFunctions();
 			case "clearfun", "clearfunctions" -> clearFunctions();
 			default -> null;

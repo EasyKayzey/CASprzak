@@ -57,5 +57,26 @@ public class KeywordInterfaceTest {
         KeywordInterface.clearvars();
         KeywordInterface.addvars("x y z");
     }
+
+    @Test
+    void basicEvalWithThreeVariables() {
+        double test = (double) KeywordInterface.useKeywords("eval y+x+z 3 2 1");
+        assertEquals(6, test);
+    }
+
+    @Test
+    void basicSimplify() {
+        Function test1 = (Function) KeywordInterface.useKeywords("simp 1*(x+2x+0)");
+        Function test2 = Parser.parse("3x");
+        assertEquals(test2, test1);
+    }
+
+    @Test
+    void notSoBasicSubstitute() {
+        KeywordInterface.useKeywords("sto t x^2");
+        Function test1 = (Function) KeywordInterface.useKeywords("sub z+y y t");
+        Function test2 = Parser.parse("z+x^2");
+        assertEquals(test2, test1);
+    }
 }
 

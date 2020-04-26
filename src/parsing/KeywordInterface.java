@@ -40,8 +40,10 @@ public class KeywordInterface {
 			case "tay", "taylor" -> taylor(splitInput[1]);
 			case "intn", "intnumeric" -> integrateNumeric(splitInput[1]);
 			case "intne", "intnumericerror" -> integrateNumericError(splitInput[1]);
-			case "sto", "store", "new", "def", "addf" -> store(splitInput[1]);
+			case "sto", "store", "new", "def", "addf" -> storeFunction(splitInput[1]);
+			case "rmf", "rmfun", "removefun", "removefunction" -> removeVariables(splitInput[1]);
 			case "addv", "addvar", "addvars" -> addVariables(splitInput[1]);
+			case "rmv", "rmvar", "removevar", "removevariable" -> removeVariables(splitInput[1]);
 			case "addc", "addconstant", "defc", "defcon", "defconstant" -> defineConstant(splitInput[1]);
 			case "rmc", "rmconstant", "removeconstant" -> removeConstant(splitInput[1]);
 			case "vars", "printvars" -> printVariables();
@@ -181,7 +183,7 @@ public class KeywordInterface {
 	/**
 	 * sto [locationstring] [input]
 	 */
-	public static Object store(String input) {
+	public static Object storeFunction(String input) {
 		String[] splitInput = keywordSplitter.split(input, 2);
 		if (splitInput[0].length() != 1)
 			throw new IllegalArgumentException("Functions should be one character.");
@@ -193,6 +195,44 @@ public class KeywordInterface {
 			storedFunctions.put(splitInput[0], parseStored(splitInput[1]));
 		}
 		return storedFunctions.get(splitInput[0]);
+	}
+
+	/**
+	 * rmfun [functionname]
+	 */
+	private static Object removeFunction(String input) {
+		String[] splitInput = keywordSplitter.split(input);
+		if (input.length() > 1)
+			throw new IllegalArgumentException("Variables should be one character.");
+		Variable.removeFunctionVariable(input.charAt(0));
+		return printVariables();
+	}
+
+
+	/**
+	 * var(s) [variablename(s)]
+	 */
+	public static String addVariables(String input) {
+		String[] splitInput = keywordSplitter.split(input);
+		for (String var : splitInput) {
+			if (var.length() > 1)
+				throw new IllegalArgumentException("Variables should be one character.");
+			Variable.addVariable(var.charAt(0));
+		}
+		return printVariables();
+	}
+
+	/**
+	 * rmvar(s) [variablenames]
+	 */
+	private static Object removeVariables(String input) {
+		String[] splitInput = keywordSplitter.split(input);
+		for (String var : splitInput) {
+			if (var.length() > 1)
+				throw new IllegalArgumentException("Variables should be one character.");
+			Variable.removeVariable(var.charAt(0));
+		}
+		return printVariables();
 	}
 
 	/**
@@ -212,21 +252,8 @@ public class KeywordInterface {
 	 */
 	private static double removeConstant(String input) {
 		return Constant.removeSpecialConstant(input);
-	}
 
-	/**
-	 * var [variablename]
-	 */
-	public static String addVariables(String input) {
-		String[] splitInput = keywordSplitter.split(input);
-		for (String var : splitInput) {
-			if (var.length() > 1)
-				throw new IllegalArgumentException("Variables should be one character.");
-			Variable.addVariable(var.charAt(0));
-		}
-		return printVariables();
 	}
-
 	/**
 	 * printvars
 	 */

@@ -201,7 +201,6 @@ public class KeywordInterface {
 	 * rmfun [functionname]
 	 */
 	private static Object removeFunction(String input) {
-		String[] splitInput = keywordSplitter.split(input);
 		if (input.length() > 1)
 			throw new IllegalArgumentException("Variables should be one character.");
 		Variable.removeFunctionVariable(input.charAt(0));

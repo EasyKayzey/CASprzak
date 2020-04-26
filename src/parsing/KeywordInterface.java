@@ -43,6 +43,7 @@ public class KeywordInterface {
 			case "sto", "store", "new", "def", "addf" -> store(splitInput[1]);
 			case "addv", "addvar", "addvars" -> addvars(splitInput[1]);
 			case "addc", "addconstant", "defc", "defcon", "defconstant" -> defineConstant(splitInput[1]);
+			case "rmc", "rmconstant", "removeconstant" -> removeConstant(splitInput[1]);
 			case "vars", "printvars" -> printvars();
 			case "clearvars" -> clearvars();
 			case "printfun", "printfunctions" -> printfun();
@@ -200,11 +201,17 @@ public class KeywordInterface {
 	private static Object defineConstant(String input) {
 		String[] splitInput = keywordSplitter.split(input, 2);
 		try {
-			Constant.addSpecialConstant(splitInput[0], ((Function) KeywordInterface.useKeywords(splitInput[1])).evaluate(null));
+			return Constant.addSpecialConstant(splitInput[0], ((Function) KeywordInterface.useKeywords(splitInput[1])).evaluate(null));
 		} catch (Exception e) {
-			Constant.addSpecialConstant(splitInput[0], parseStored(splitInput[1]).evaluate(null));
+			return Constant.addSpecialConstant(splitInput[0], parseStored(splitInput[1]).evaluate(null));
 		}
-		return Constant.getSpecialConstant(splitInput[0]);
+	}
+
+	/**
+	 * rmc [constantstring]
+	 */
+	private static double removeConstant(String input) {
+		return Constant.removeSpecialConstant(input);
 	}
 
 	/**

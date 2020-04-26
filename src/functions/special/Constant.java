@@ -68,16 +68,17 @@ public class Constant extends Function {
 	 * @param string name of constant
 	 * @param value value of constant
 	 */
-	public static void addSpecialConstant(String string, double value) {
+	public static double addSpecialConstant(String string, double value) {
 		specialConstants.put(string, value);
+		return value;
 	}
 
 	/**
 	 * Removes a special constant
 	 * @param string name of constant
 	 */
-	public static void removeSpecialConstant(String string) {
-		specialConstants.remove(string);
+	public static double removeSpecialConstant(String string) {
+		return specialConstants.remove(string);
 	}
 
 	public double evaluate(Map<Character, Double> variableValues) {

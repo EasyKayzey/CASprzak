@@ -41,13 +41,13 @@ public class KeywordInterface {
 			case "intn", "intnumeric" -> integrateNumeric(splitInput[1]);
 			case "intne", "intnumericerror" -> integrateNumericError(splitInput[1]);
 			case "sto", "store", "new", "def", "addf" -> store(splitInput[1]);
-			case "addv", "addvar", "addvars" -> addvars(splitInput[1]);
+			case "addv", "addvar", "addvars" -> addVariables(splitInput[1]);
 			case "addc", "addconstant", "defc", "defcon", "defconstant" -> defineConstant(splitInput[1]);
 			case "rmc", "rmconstant", "removeconstant" -> removeConstant(splitInput[1]);
-			case "vars", "printvars" -> printvars();
-			case "clearvars" -> clearvars();
-			case "printfun", "printfunctions" -> printfun();
-			case "clearfun", "clearfunctions" -> clearfun();
+			case "vars", "printvars" -> printVariables();
+			case "clearvars" -> clearVariables();
+			case "printfun", "printfunctions" -> printFunctions();
+			case "clearfun", "clearfunctions" -> clearFunctions();
 			default -> null;
 		};
 		if (ret == null) {
@@ -217,27 +217,27 @@ public class KeywordInterface {
 	/**
 	 * var [variablename]
 	 */
-	public static String addvars(String input) {
+	public static String addVariables(String input) {
 		String[] splitInput = keywordSplitter.split(input);
 		for (String var : splitInput) {
 			if (var.length() > 1)
 				throw new IllegalArgumentException("Variables should be one character.");
 			Variable.addVariable(var.charAt(0));
 		}
-		return printvars();
+		return printVariables();
 	}
 
 	/**
 	 * printvars
 	 */
-	public static String printvars() {
+	public static String printVariables() {
 		return String.valueOf(Variable.variables);
 	}
 
 	/**
 	 * clearvars
 	 */
-	public static String clearvars() {
+	public static String clearVariables() {
 		Variable.clearVariables();
 		storedFunctions.clear();
 		return String.valueOf(Variable.variables);
@@ -246,14 +246,14 @@ public class KeywordInterface {
 	/**
 	 * printfun
 	 */
-	public static String printfun() {
+	public static String printFunctions() {
 		return String.valueOf(storedFunctions);
 	}
 
 	/**
 	 * clearfun
 	 */
-	public static String clearfun() {
+	public static String clearFunctions() {
 		Variable.clearFunctionVariables();
 		storedFunctions.clear();
 		return String.valueOf(Variable.variables);

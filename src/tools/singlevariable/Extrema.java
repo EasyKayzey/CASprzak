@@ -100,7 +100,8 @@ public class Extrema {
 
     private static double[] findPoints(Function function, double lowerBound, double upperBound, BiPredicate<? super Double, ? super Double> strategy) {
         double[] criticalPoints = Solver.getSolutionsRange(function.getDerivative(Settings.singleVariableDefault), lowerBound, upperBound);
-        if (criticalPoints.length == 0) return null;
+        if (criticalPoints.length == 0)
+            return new double[0];
 
         List<Double> secondDerivative = new LinkedList<>();
         for (double criticalPoint : criticalPoints) {

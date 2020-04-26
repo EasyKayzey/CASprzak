@@ -112,10 +112,12 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 	public abstract Function substitute(char varID, Function toReplace);
 
 	/**
-	 * @Deprecated Blindly inserts the values into a HashMap as specified by {@link Variable#variables}. For testing purposes only.
+	 * @deprecated use {@link Evaluable#evaluate(Map)} instead
+	 * Blindly inserts the values into a HashMap as specified by {@link Variable#variables}. For testing purposes only.
 	 * @param values array of values
 	 * @return a double
 	 */
+	@Deprecated
 	public double oldEvaluate(double... values) {
 		Map<Character, Double> map = new HashMap<>();
 		for (int i = 0; i < values.length; i++) {

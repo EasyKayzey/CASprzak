@@ -12,32 +12,32 @@ public class DerivativeTest {
     @Test
     void constantsGive0() {
         Function test = Parser.parse("2");
-        assertEquals(0, test.getSimplifiedDerivative('x').evaluate(Map.of('x', 3467));
+        assertEquals(0, test.getSimplifiedDerivative('x').evaluate(Map.of('x', 3467.0)));
     }
 
     @Test
     void variablesGive1() {
         Function test = Parser.parse("x");
-        assertEquals(1, test.getSimplifiedDerivative('x').evaluate(Map.of('x', 3467));
+        assertEquals(1, test.getSimplifiedDerivative('x').evaluate(Map.of('x', 3467.0)));
     }
 
     @Test
     void simpleSumAndProductDerivatives() {
         Function test;
         test = Parser.parse("x+3");
-        assertEquals(1, test.getSimplifiedDerivative('x').evaluate(Map.of('x', 9));
+        assertEquals(1, test.getSimplifiedDerivative('x').evaluate(Map.of('x', 9.0)));
         test = Parser.parse("x*7");
-        assertEquals(7, test.getSimplifiedDerivative('x').evaluate(Map.of('x', 9));
+        assertEquals(7, test.getSimplifiedDerivative('x').evaluate(Map.of('x', 9.0)));
         test = Parser.parse("2*x+7");
-        assertEquals(2, test.getSimplifiedDerivative('x').evaluate(Map.of('x', 9));
+        assertEquals(2, test.getSimplifiedDerivative('x').evaluate(Map.of('x', 9.0)));
         test = Parser.parse("2*(x+7)");
-        assertEquals(2, test.getSimplifiedDerivative('x').evaluate(Map.of('x', 9));
+        assertEquals(2, test.getSimplifiedDerivative('x').evaluate(Map.of('x', 9.0)));
     }
 
     @Test
     void longDerivative() {
         Function test = Parser.parse("(sin(x^0.5+1) * e^(x^0.5)) * x^-0.5").getSimplifiedDerivative('x').getSimplifiedDerivative('x');
-        assertEquals(-0.13874, test.evaluate(Map.of('x', 4), 0.0001);
+        assertEquals(-0.13874, test.evaluate(Map.of('x', 4.0)), 0.0001);
 //        System.out.println("Second derivative simplified once:");
 //        System.out.println(test);
 //        System.out.println("Second derivative simplified twice:");
@@ -48,9 +48,9 @@ public class DerivativeTest {
     void arcTrigTests() {
         Function test;
         test = Parser.parse("4acos(x)-10atan(x)");
-        assertEquals(-12.773, test.getSimplifiedDerivative('x').evaluate(Map.of('x', 0.456), 0.01);
+        assertEquals(-12.773, test.getSimplifiedDerivative('x').evaluate(Map.of('x', 0.456)), 0.01);
         test = Parser.parse("asin(x)+x");
-        assertEquals(2.638, test.getSimplifiedDerivative('x').evaluate(Map.of('x', 0.792), 0.01);
+        assertEquals(2.638, test.getSimplifiedDerivative('x').evaluate(Map.of('x', 0.792)), 0.01);
     }
 
     @Test

@@ -50,8 +50,12 @@ public class KeywordInterfaceTest {
 
     @Test
     void basicEvalWithNewVariable() {
+        KeywordInterface.clearvars();
+        KeywordInterface.addvars("y");
         double test = (double) KeywordInterface.useKeywords("eval y^2 2");
         assertEquals(4, test);
+        KeywordInterface.clearvars();
+        KeywordInterface.addvars("x y z");
     }
 }
 

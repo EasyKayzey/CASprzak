@@ -2,6 +2,8 @@ import functions.Function;
 import org.junit.jupiter.api.Test;
 import parsing.Parser;
 
+import java.util.Map;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FunctionTest {
@@ -38,7 +40,17 @@ public class FunctionTest {
 
 	@Test void lnWorks() {
 		Function test = Parser.parse("ln(e)");
-		assertEquals(1, test.oldEvaluate(0));
+		assertEquals(1, test.evaluate(Map.of()));
+	}
+
+	@Test void emptyMap() {
+		Function test = Parser.parse("ln(e)");
+		assertEquals(1, test.evaluate(Map.of()));
+	}
+
+	@Test void nullMap() {
+		Function test = Parser.parse("ln(e)");
+		assertEquals(1, test.evaluate(null));
 	}
 
 	@Test void tanWorks() {
@@ -138,5 +150,20 @@ public class FunctionTest {
 	@Test void multiplyVariablesNoSpace() {
 		Function test = Parser.parse("2xy+3x");
 		assertEquals(4, test.oldEvaluate(4,-1));
+	}
+
+	@Test void basicMap() {
+		Function test = Parser.parse("x");
+		assertEquals(2, test.evaluate(Map.of('x', 2.0)));
+	}
+
+	@Test void overfullMap() {
+		Function test = Parser.parse("x");
+		assertEquals(2, test.evaluate(Map.of('x', 2.0, 'n', 1.7, 'q', Double.MIN_VALUE)));
+	}
+
+	@Test void multivarMap() {
+		Function test = Parser.parse("x+2y");
+		assertEquals(5, test.evaluate(Map.of('x', 2.4, 'y', 1.3)));
 	}
 }

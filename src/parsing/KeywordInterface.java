@@ -1,6 +1,7 @@
 package parsing;
 
 import functions.Function;
+import functions.special.Constant;
 import functions.special.Variable;
 import tools.singlevariable.Extrema;
 import tools.singlevariable.NumericalIntegration;
@@ -39,8 +40,9 @@ public class KeywordInterface {
 			case "tay", "taylor" -> taylor(splitInput[1]);
 			case "intn", "intnumeric" -> integrateNumeric(splitInput[1]);
 			case "intne", "intnumericerror" -> integrateNumericError(splitInput[1]);
-			case "sto", "store", "new", "def" -> store(splitInput[1]);
-			case "addvar", "addvars" -> addvars(splitInput[1]);
+			case "sto", "store", "new", "def", "addf" -> store(splitInput[1]);
+			case "addv", "addvar", "addvars" -> addvars(splitInput[1]);
+			case "addc", "addconstant", "defcon", "defconstant" -> defineConstant(splitInput[1]);
 			case "vars", "printvars" -> printvars();
 			case "clearvars" -> clearvars();
 			case "printfun", "printfunctions" -> printfun();
@@ -185,6 +187,19 @@ public class KeywordInterface {
 			storedFunctions.put(splitInput[0], parseStored(splitInput[1]));
 		}
 		return storedFunctions.get(splitInput[0]);
+	}
+
+	/**
+	 * defcon [constantstring] [value]
+	 */
+	private static Object defineConstant(String input) {
+		String[] splitInput = keywordSplitter.split(input, 2);
+		try {
+			Constant.addSpecialConstant(splitInput[0], ((Function) KeywordInterface.useKeywords(splitInput[1])).evaluate(null));
+		} catch (IllegalArgumentException e) {
+			Constant.addSpecialConstant(splitInput[0], parseStored(splitInput[1]).evaluate(null));
+		}
+		return Constant.getSpecialConstant(splitInput[0]);
 	}
 
 	/**

@@ -98,5 +98,17 @@ public class KeywordInterfaceTest {
         Function test2 = Parser.parse("1");
         assertEquals(test2, test1);
     }
+
+    @Test
+    void basicNumericalIntegration() {
+        double test = (double) KeywordInterface.useKeywords("intn sin(x) 0 pi");
+        assertEquals(2, test, 0.01);
+    }
+
+    @Test
+    void basicNumericalIntegrationWithError() {
+        double[] test = (double[]) KeywordInterface.useKeywords("intne sin(x) 0 pi");
+        assertArrayEquals(new double[]{2, 0.01}, test, 0.01);
+    }
 }
 

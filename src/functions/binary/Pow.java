@@ -71,9 +71,8 @@ public class Pow extends BinaryFunction {
 	 * @return a {@link Pow} where the exponents are multiplied
 	 */
 	public Pow multiplyExponents() {
-		if (function2 instanceof Pow) {
-			return new Pow(new Multiply(((Pow) function2).function1, function1), ((Pow) function2).function2);
-		}
+		if (function2 instanceof Pow base)
+			return new Pow(new Multiply(base.function1, function1), base.function2);
 		if (Settings.trustImmutability)
 			return this;
 		else

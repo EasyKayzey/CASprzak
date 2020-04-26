@@ -52,8 +52,17 @@ public class Variable extends Function {
 		}
 	}
 
+	public static void removeVariable(char variable) {
+		variables.remove(variable);
+		variablesEnd--;
+	}
+
 	public static void addFunctionVariable(char variable) {
 		variables.add(variable);
+	}
+
+	public static void removeFunctionVariable(char variable) {
+		variables.remove(variable);
 	}
 
 	public static void clearVariables() {

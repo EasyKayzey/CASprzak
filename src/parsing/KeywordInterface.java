@@ -115,7 +115,10 @@ public class KeywordInterface {
 	public static double evaluate(String input) {
 		String[] splitInput = keywordSplitter.split(input, 2);
 		double[] values = Arrays.stream(keywordSplitter.split(splitInput[1])).mapToDouble(ConstantEvaluator::getConstant).toArray();
-		return parseStored(splitInput[0]).oldEvaluate(values);
+		Map<Character, Double> map = new HashMap<>();
+		for (int i = 0; i < values.length; i++)
+			map.put(Variable.variables.get(i), values[i]);
+		return parseStored(splitInput[0]).evaluate(map);
 	}
 
 	/**

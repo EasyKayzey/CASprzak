@@ -61,6 +61,13 @@ public class Extrema {
         return maximum;
     }
 
+    /**
+     * Returns the minimum of a {@link Function} function on a specified range (endpoints included)
+     * @param function The {@link Function} whose minimum is being found
+     * @param lowerBound The lower bound of the range
+     * @param upperBound The upper bound of the range
+     * @return the minimum of function on the specified range
+     */
     public static double findMinimaOnRange(Function function, double lowerBound, double upperBound) {
         double minima = findLocalMinima(function, lowerBound, upperBound);
         if (Double.isNaN(minima)) {

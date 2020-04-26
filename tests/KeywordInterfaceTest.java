@@ -91,5 +91,12 @@ public class KeywordInterfaceTest {
         double test = (double) KeywordInterface.useKeywords("extrema max 1-x^2 -pi pi");
         assertEquals(0, test);
     }
+
+    @Test
+    void basicTaylor() {
+        Function test1 = (Function) KeywordInterface.useKeywords("tay cos(x) 1 0");
+        Function test2 = Parser.parse("1");
+        assertEquals(test2, test1);
+    }
 }
 

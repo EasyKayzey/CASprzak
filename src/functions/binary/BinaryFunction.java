@@ -39,10 +39,8 @@ public abstract class BinaryFunction extends Function {
 		return function2;
 	}
 
-	//TODO document all the "me"s
-
 	/**
-	 * Returns an instance of this {@link Function}
+	 * Returns an instance of this {@link Function}, using the correct subclass
 	 * @param function1 Constructor parameter 1
 	 * @param function2 Constructor parameter 2
 	 * @return an instance of this Function

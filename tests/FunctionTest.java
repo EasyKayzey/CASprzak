@@ -40,17 +40,7 @@ public class FunctionTest {
 
 	@Test void lnWorks() {
 		Function test = Parser.parse("ln(e)");
-		assertEquals(1, test.evaluate(Map.of()));
-	}
-
-	@Test void emptyMap() {
-		Function test = Parser.parse("ln(e)");
-		assertEquals(1, test.evaluate(Map.of()));
-	}
-
-	@Test void nullMap() {
-		Function test = Parser.parse("ln(e)");
-		assertEquals(1, test.evaluate(null));
+		assertEquals(1, test.oldEvaluate(1.5));
 	}
 
 	@Test void tanWorks() {
@@ -165,5 +155,15 @@ public class FunctionTest {
 	@Test void multivariableMap() {
 		Function test = Parser.parse("x+2y");
 		assertEquals(5, test.evaluate(Map.of('x', 2.4, 'y', 1.3)));
+	}
+
+	@Test void emptyMap() {
+		Function test = Parser.parse("ln(e)");
+		assertEquals(1, test.evaluate(Map.of()));
+	}
+
+	@Test void nullMap() {
+		Function test = Parser.parse("ln(e)");
+		assertEquals(1, test.evaluate(null));
 	}
 }

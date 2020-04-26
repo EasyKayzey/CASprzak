@@ -37,14 +37,14 @@ public class KeywordInterface {
 			case "sol", "solve" -> solve(splitInput[1]);
 			case "ext", "extrema" -> extrema(splitInput[1]);
 			case "tay", "taylor" -> taylor(splitInput[1]);
+			case "intn", "intnumeric" -> integrateNumeric(splitInput[1]);
+			case "intne", "intnumericerror" -> integrateNumericError(splitInput[1]);
 			case "sto", "store", "new", "def" -> store(splitInput[1]);
 			case "addvar", "addvars" -> addvars(splitInput[1]);
 			case "vars", "printvars" -> printvars();
 			case "clearvars" -> clearvars();
 			case "printfun", "printfunctions" -> printfun();
 			case "clearfun", "clearfunctions" -> clearfun();
-			case "intn", "intnumeric" -> integrateNumeric(splitInput[1]);
-			case "intne", "intnumericerror" -> integrateNumericError(splitInput[1]);
 			default -> null;
 		};
 		if (ret == null) {

@@ -60,4 +60,28 @@ public class ExtremaTest {
         Function test = Parser.parse("sin(x)");
         assertEquals(Math.PI/2, Extrema.findLocalMaxima(test, 0, Math.PI), .01);
     }
+
+    @Test
+    void minOnRange() {
+        Function test = Parser.parse("(x-1)^2+3");
+        assertEquals(1, Extrema.findMinimumOnRange(test, -3, 17));
+    }
+
+    @Test
+    void minOnRangeBoundary() {
+        Function test = Parser.parse("x");
+        assertEquals(3, Extrema.findMinimumOnRange(test, 3, 17));
+    }
+
+    @Test
+    void maxOnRange() {
+        Function test = Parser.parse("3-(x+2)^2");
+        assertEquals(-2, Extrema.findMaximumOnRange(test, -3, 13));
+    }
+
+    @Test
+    void maxOnRangeBoundary() {
+        Function test = Parser.parse("x");
+        assertEquals(11, Extrema.findMaximumOnRange(test, 3, 11));
+    }
 }

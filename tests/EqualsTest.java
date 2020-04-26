@@ -1,6 +1,4 @@
-import core.Settings;
 import functions.Function;
-import functions.commutative.Multiply;
 import org.junit.jupiter.api.Test;
 import parsing.Parser;
 

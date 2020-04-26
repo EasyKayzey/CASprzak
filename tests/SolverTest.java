@@ -1,7 +1,6 @@
 import functions.Function;
 import org.junit.jupiter.api.Test;
 import parsing.Parser;
-import tools.singlevariable.Extrema;
 import tools.singlevariable.Solver;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;

@@ -13,5 +13,19 @@ public class KeywordInterfaceTest {
         Function test2 = Parser.parse("2x");
         assertEquals(test2, test1);
     }
+
+    @Test
+    void doublePartialDerivatives() {
+        Function test1 = (Function) KeywordInterface.useKeywords("d/dx d/dx x^2");
+        Function test2 = Parser.parse("2");
+        assertEquals(test2, test1);
+    }
+
+    @Test
+    void partialWithRespectToVariableDoesNotExist() {
+        Function test1 = (Function) KeywordInterface.useKeywords("d/dn x^2");
+        Function test2 = Parser.parse("0");
+        assertEquals(test2, test1);
+    }
 }
 

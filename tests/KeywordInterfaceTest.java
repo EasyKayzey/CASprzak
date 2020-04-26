@@ -3,6 +3,7 @@ import org.junit.jupiter.api.Test;
 import parsing.KeywordInterface;
 import parsing.Parser;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class KeywordInterfaceTest {
@@ -77,6 +78,18 @@ public class KeywordInterfaceTest {
         Function test1 = (Function) KeywordInterface.useKeywords("sub z+y y t");
         Function test2 = Parser.parse("z+x^2");
         assertEquals(test2, test1);
+    }
+
+    @Test
+    void basicSolve() {
+        double[] test = (double[]) KeywordInterface.useKeywords("solve 5-5x 0 2");
+        assertArrayEquals(new double[]{1}, test);
+    }
+
+    @Test
+    void basicExtremaMax() {
+        double test = (double) KeywordInterface.useKeywords("extrema max 1-x^2 -pi pi");
+        assertEquals(0, test);
     }
 }
 

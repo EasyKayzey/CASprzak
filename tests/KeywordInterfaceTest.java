@@ -49,14 +49,15 @@ public class KeywordInterfaceTest {
         assertEquals(4, test);
     }
 
+    @SuppressWarnings("SpellCheckingInspection")
     @Test
     void basicEvalWithNewVariable() {
-        KeywordInterface.clearvars();
-        KeywordInterface.addvars("y");
+        KeywordInterface.useKeywords("clearvars");
+        KeywordInterface.useKeywords("addvar y");
         double test = (double) KeywordInterface.useKeywords("eval y^2 2");
         assertEquals(4, test);
-        KeywordInterface.clearvars();
-        KeywordInterface.addvars("x y z");
+        KeywordInterface.useKeywords("clearvars");
+        KeywordInterface.useKeywords("addvars x y z");
     }
 
     @Test

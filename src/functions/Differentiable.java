@@ -15,5 +15,6 @@ public interface Differentiable {
 	 * @param N the amount of times to be differentiated
 	 * @return the derivative of the function with respect to varID
 	 */
+	@SuppressWarnings("unused")
 	Function getNthDerivative(char varID, int N);
 }

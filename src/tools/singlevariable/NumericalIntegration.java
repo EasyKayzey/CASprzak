@@ -40,7 +40,7 @@ public class NumericalIntegration {
      */
     public static double simpsonsError(Function function, double lowerBound, double upperBound) {
         Function fourthDerivative = function.getNthDerivative(Settings.singleVariableDefault, 4);
-        return fourthDerivative.evaluate(Map.of(Settings.singleVariableDefault, Extrema.findMaximaOnRange(fourthDerivative, lowerBound, upperBound)))*Math.pow(upperBound - lowerBound, 5) / (180 * Math.pow(Settings.simpsonsSegments, 4));
+        return fourthDerivative.evaluate(Map.of(Settings.singleVariableDefault, Extrema.findMaximumOnRange(fourthDerivative, lowerBound, upperBound)))*Math.pow(upperBound - lowerBound, 5) / (180 * Math.pow(Settings.simpsonsSegments, 4));
     }
 
     /**

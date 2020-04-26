@@ -50,15 +50,9 @@ public class Extrema {
      * @param upperBound The upper bound of the range
      * @return the maximum of function on the specified range
      */
-    public static double findMaximaOnRange(Function function, double lowerBound, double upperBound) {
+    public static double findMaximumOnRange(Function function, double lowerBound, double upperBound) {
         double maximum = findLocalMaxima(function, lowerBound, upperBound);
-        if (Double.isNaN(maximum)) {
-            maximum = lowerBound;
-        } else if (function.evaluate(Map.of(Settings.singleVariableDefault, lowerBound)) > function.evaluate(Map.of(Settings.singleVariableDefault, maximum)))
-            maximum = lowerBound;
-        if (function.evaluate(Map.of(Settings.singleVariableDefault, upperBound)) > function.evaluate(Map.of(Settings.singleVariableDefault, maximum)))
-            maximum = upperBound;
-        return maximum;
+        return findExtremumOnRange(function, lowerBound, upperBound, (a, b) -> (a > b), maximum);
     }
 
     /**
@@ -68,15 +62,20 @@ public class Extrema {
      * @param upperBound The upper bound of the range
      * @return the minimum of function on the specified range
      */
-    public static double findMinimaOnRange(Function function, double lowerBound, double upperBound) {
-        double minima = findLocalMinima(function, lowerBound, upperBound);
-        if (Double.isNaN(minima)) {
-            minima = lowerBound;
-        } else if (function.evaluate(Map.of(Settings.singleVariableDefault, lowerBound)) < function.evaluate(Map.of(Settings.singleVariableDefault, minima)))
-            minima = lowerBound;
-        if (function.evaluate(Map.of(Settings.singleVariableDefault, upperBound)) < function.evaluate(Map.of(Settings.singleVariableDefault, minima)))
-            minima = upperBound;
-        return minima;
+    public static double findMinimumOnRange(Function function, double lowerBound, double upperBound) {
+        double minimum = findLocalMinima(function, lowerBound, upperBound);
+        return findExtremumOnRange(function, lowerBound, upperBound, (a, b) -> (a < b), minimum);
+    }
+
+    private static double findExtremumOnRange(Function function, double lowerBound, double upperBound, BiPredicate<? super Double, ? super Double> strategy, double extremum) {
+        if (Double.isNaN(extremum))
+            extremum = lowerBound;
+        else if (strategy.test(function.evaluate(Map.of(Settings.singleVariableDefault, lowerBound)), function.evaluate(Map.of(Settings.singleVariableDefault, extremum))))
+            extremum = lowerBound;
+
+        if (strategy.test(function.evaluate(Map.of(Settings.singleVariableDefault, upperBound)), function.evaluate(Map.of(Settings.singleVariableDefault, extremum))))
+            extremum = upperBound;
+        return extremum;
     }
 
     /**

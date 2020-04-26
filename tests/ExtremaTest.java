@@ -10,19 +10,19 @@ public class ExtremaTest {
     @Test
     void simpleMinima() {
         Function test = Parser.parse("x^2-1");
-        assertEquals(0, Extrema.findLocalMinima(test, -3,3));
+        assertEquals(0, Extrema.findLocalMinimum(test, -3,3));
     }
 
     @Test
     void lessSimpleMinima() {
         Function test = Parser.parse("x^2-6x+8");
-        assertEquals(3, Extrema.findLocalMinima(test, -5,5));
+        assertEquals(3, Extrema.findLocalMinimum(test, -5,5));
     }
 
     @Test
     void simpleMaxima() {
         Function test = Parser.parse("1-x^2");
-        assertEquals(0, Extrema.findLocalMaxima(test, -4, 3));
+        assertEquals(0, Extrema.findLocalMaximum(test, -4, 3));
     }
 
     @Test
@@ -40,7 +40,7 @@ public class ExtremaTest {
     @Test
     void simpleMinimaWithNoMinima() {
         Function test = Parser.parse("1-x^2");
-        assertEquals(Double.NaN, Extrema.findLocalMinima(test, -7.62184632046246723904723482376450934, 4.788237402784035873405));
+        assertEquals(Double.NaN, Extrema.findLocalMinimum(test, -7.62184632046246723904723482376450934, 4.788237402784035873405));
     }
 
     @Test
@@ -58,7 +58,7 @@ public class ExtremaTest {
     @Test
     void sinTest() {
         Function test = Parser.parse("sin(x)");
-        assertEquals(Math.PI/2, Extrema.findLocalMaxima(test, 0, Math.PI), .01);
+        assertEquals(Math.PI/2, Extrema.findLocalMaximum(test, 0, Math.PI), .01);
     }
 
     @Test

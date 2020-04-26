@@ -19,12 +19,12 @@ public class Extrema {
      * @param upperBound The upper bound of the range
      * @return the local minima of function on the specified range
      */
-    public static double findLocalMinima(Function function, double lowerBound, double upperBound) {
+    public static double findLocalMinimum(Function function, double lowerBound, double upperBound) {
        double[] secondDerivativeIsPositive = findPoints(function, lowerBound, upperBound, (a, b) -> (a > b));
-        double  minima = findSmallestOrLargest(function, secondDerivativeIsPositive, (a, b) -> (a < b));
-        if (minima > upperBound || minima < lowerBound)
+        double minimum = findSmallestOrLargest(function, secondDerivativeIsPositive, (a, b) -> (a < b));
+        if (minimum > upperBound || minimum < lowerBound)
             return Double.NaN;
-        return minima;
+        return minimum;
     }
 
 
@@ -35,12 +35,12 @@ public class Extrema {
      * @param upperBound The upper bound of the range
      * @return the local maxima of function on the specified range
      */
-    public static double findLocalMaxima(Function function, double lowerBound, double upperBound) {
+    public static double findLocalMaximum(Function function, double lowerBound, double upperBound) {
         double[] secondDerivativeIsNegative = findPoints(function, lowerBound, upperBound, (a, b) -> (a < b));
-        double maxima = findSmallestOrLargest(function, secondDerivativeIsNegative, (a, b) -> (a > b));
-        if (maxima > upperBound || maxima < lowerBound)
+        double minimum = findSmallestOrLargest(function, secondDerivativeIsNegative, (a, b) -> (a > b));
+        if (minimum > upperBound || minimum < lowerBound)
             return Double.NaN;
-        return maxima;
+        return minimum;
     }
 
     /**
@@ -51,7 +51,7 @@ public class Extrema {
      * @return the maximum of function on the specified range
      */
     public static double findMaximumOnRange(Function function, double lowerBound, double upperBound) {
-        double maximum = findLocalMaxima(function, lowerBound, upperBound);
+        double maximum = findLocalMaximum(function, lowerBound, upperBound);
         return findExtremumOnRange(function, lowerBound, upperBound, (a, b) -> (a > b), maximum);
     }
 
@@ -63,7 +63,7 @@ public class Extrema {
      * @return the minimum of function on the specified range
      */
     public static double findMinimumOnRange(Function function, double lowerBound, double upperBound) {
-        double minimum = findLocalMinima(function, lowerBound, upperBound);
+        double minimum = findLocalMinimum(function, lowerBound, upperBound);
         return findExtremumOnRange(function, lowerBound, upperBound, (a, b) -> (a < b), minimum);
     }
 

@@ -42,7 +42,7 @@ public class KeywordInterface {
 			case "intne", "intnumericerror" -> integrateNumericError(splitInput[1]);
 			case "sto", "store", "new", "def", "addf" -> store(splitInput[1]);
 			case "addv", "addvar", "addvars" -> addvars(splitInput[1]);
-			case "addc", "addconstant", "defcon", "defconstant" -> defineConstant(splitInput[1]);
+			case "addc", "addconstant", "defc", "defcon", "defconstant" -> defineConstant(splitInput[1]);
 			case "vars", "printvars" -> printvars();
 			case "clearvars" -> clearvars();
 			case "printfun", "printfunctions" -> printfun();
@@ -52,6 +52,9 @@ public class KeywordInterface {
 		if (ret == null) {
 			if (storedFunctions.containsKey(input)) {
 				prev = storedFunctions.get(input);
+				return prev;
+			} else if (Constant.isSpecialConstant(input)) {
+				prev = Constant.getSpecialConstant(input);
 				return prev;
 			} else try {
 				 prev = substituteAll(Parser.parse(input));
@@ -80,6 +83,8 @@ public class KeywordInterface {
 				throw new IllegalArgumentException("Unmatched quotes in " + input);
 		if (storedFunctions.containsKey(input))
 			return storedFunctions.get(input);
+		else if (Constant.isSpecialConstant(input))
+			return new Constant(input);
 		else
 			return (Function) useKeywords(input);
 	}

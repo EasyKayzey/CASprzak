@@ -156,7 +156,7 @@ public class Multiply extends CommutativeFunction {
 	 * Returns a {@link Function} where the rest of the multiple has been distributed to any {@link Add}. Example: {@code sin(y)*(x+2) = x*sin(y) + 2*sin(y)}
 	 * @return a {@link Function} where the rest of the multiple has been distributed to any {@link Add}
 	 */
-	public Function distributeAll() { //TODO this doesn't distribute completely
+	public Function distributeAll() {
 		Function[] multiplyTerms = getFunctions();
 		Function[] addTerms;
 		for (int i = 0; i < multiplyTerms.length; i++) {

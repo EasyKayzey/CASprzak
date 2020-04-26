@@ -5,6 +5,9 @@ import functions.commutative.Multiply;
 import functions.special.Constant;
 import functions.unitary.UnitaryFunction;
 
+import java.util.Map;
+
+
 public class Sech extends UnitaryFunction {
 	/**
 	 * Constructs a new Sech
@@ -15,7 +18,7 @@ public class Sech extends UnitaryFunction {
 	}
 
 	@Override
-	public Function getDerivative(int varID) {
+	public Function getDerivative(char varID) {
 		return new Multiply(new Constant(-1), function.getSimplifiedDerivative(varID), new Sech(function), new Tanh(function));
 	}
 
@@ -25,7 +28,7 @@ public class Sech extends UnitaryFunction {
 	 * @return the sech of {@link #function} evaluated
 	 */
 	@Override
-	public double evaluate(double... variableValues) {
+	public double evaluate(Map<Character, Double> variableValues) {
 		return 1 / Math.cosh(function.evaluate(variableValues));
 	}
 

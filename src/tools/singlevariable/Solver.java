@@ -7,6 +7,7 @@ import tools.SolverTools;
 
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Map;
 
 public class Solver {
 
@@ -19,7 +20,7 @@ public class Solver {
 	 * @return a better approximate of the root based on the value provided
 	 */
 	private static double newtonsMethod(Function expression, double value) {
-		return value - expression.evaluate(value) / expression.getSimplifiedDerivative(0).evaluate(value);
+		return value - expression.evaluate(Map.of(Settings.singleVariableDefault, value)) / expression.getSimplifiedDerivative('x').evaluate(Map.of(Settings.singleVariableDefault, value));
 	}
 
 	/**
@@ -30,7 +31,7 @@ public class Solver {
 	 * @return the approximate solution for a root of the function
 	 */
 	public static double getSolutionPoint(Function expression, double initialPoint, int runs) {
-		if (expression.evaluate(initialPoint) == 0)
+		if (expression.evaluate(Map.of(Settings.singleVariableDefault, initialPoint)) == 0)
 			return initialPoint;
 		if (expression instanceof Constant)
 			return Double.NaN;
@@ -43,7 +44,7 @@ public class Solver {
 				if (initialPoint < 1E-10 && initialPoint > -1E-10)
 					return 0;
 		}
-		if (expression.evaluate(initialPoint) < Settings.zeroMargin && expression.evaluate(initialPoint) > -Settings.zeroMargin)
+		if (expression.evaluate(Map.of(Settings.singleVariableDefault, initialPoint)) < Settings.zeroMargin && expression.evaluate(Map.of(Settings.singleVariableDefault, initialPoint)) > -Settings.zeroMargin)
 			return initialPoint;
 		return Double.NaN;
 	}
@@ -71,7 +72,7 @@ public class Solver {
 		ListIterator<Double> iter = solutions.listIterator();
 		while (iter.hasNext()) {
 			double nextLocation = getSolutionPoint(expression, iter.next(), runs);
-			if (!(expression.evaluate(nextLocation) < Settings.zeroMargin && expression.evaluate(nextLocation) > -Settings.zeroMargin))
+			if (!(expression.evaluate(Map.of(Settings.singleVariableDefault, nextLocation)) < Settings.zeroMargin && expression.evaluate(Map.of(Settings.singleVariableDefault, nextLocation)) > -Settings.zeroMargin))
 				iter.remove();
 			else
 				iter.set(nextLocation);

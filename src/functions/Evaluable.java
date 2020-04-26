@@ -1,5 +1,7 @@
 package functions;
 
+import java.util.Map;
+
 public interface Evaluable {
 
 	/**
@@ -7,5 +9,5 @@ public interface Evaluable {
 	 * @param variableValues the values of the variables of the {@link Function} at the point
 	 * @return the value of the {@link Function} at the point
 	 */
-	double evaluate(double... variableValues);
+	double evaluate(Map<Character, Double> variableValues);
 }

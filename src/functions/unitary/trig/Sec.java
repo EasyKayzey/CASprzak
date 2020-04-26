@@ -4,6 +4,9 @@ import functions.Function;
 import functions.commutative.Multiply;
 import functions.unitary.UnitaryFunction;
 
+import java.util.Map;
+
+
 public class Sec extends UnitaryFunction {
 	/**
 	 * Constructs a new Sec
@@ -19,12 +22,12 @@ public class Sec extends UnitaryFunction {
 	 * @return the sec of {@link #function} evaluated
 	 */
 	@Override
-	public double evaluate(double... variableValues) {
+	public double evaluate(Map<Character, Double> variableValues) {
 		return 1 / Math.cos(function.evaluate(variableValues));
 	}
 
 	@Override
-	public Function getDerivative(int varID) {
+	public Function getDerivative(char varID) {
 		return new Multiply(new Tan(function), new Sec(function), function.getSimplifiedDerivative(varID));
 	}
 

@@ -1,15 +1,18 @@
 package ui;
 
+import core.Settings;
+import functions.Function;
 import functions.special.Variable;
 import parsing.ConstantEvaluator;
 import parsing.Parser;
 import parsing.PreProcessor;
 import tools.singlevariable.NumericalIntegration;
 import tools.singlevariable.Solver;
-import functions.Function;
 import tools.singlevariable.TaylorSeries;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -32,22 +35,30 @@ public class CASUI {
 		System.out.println("What are your inputs? Separate with commas and/or spaces, and order them with your variables.");
 		String[] inputStrings = commaSpaces.split(scanner.next());
 		double[] inputs = Arrays.stream(inputStrings).mapToDouble(ConstantEvaluator::getConstant).toArray();
+
+		if (inputs.length != variables.length)
+			throw new IllegalArgumentException("Amount of values and amount of variables do not match!");
+
 		System.out.println("Processing...");
 
 		Variable.setVariables(variables);
+		Settings.singleVariableDefault = variables[0];
+		Map<Character, Double> map = new HashMap<>();
+		for (int i = 0; i < variables.length; i++)
+			map.put(variables[i], inputs[i]);
 
 		Function currentFunction = Parser.parse(PreProcessor.toPostfix(rawInput));
 		System.out.println("Here is your parsed function: " + currentFunction);
 		System.out.println("Here is the simplified toString of your function: " + currentFunction.simplifyTimes(10));
-		System.out.println("Here is your output: " + currentFunction.evaluate(inputs));
+		System.out.println("Here is your output: " + currentFunction.evaluate(map));
 
 		System.out.println("Here is the derivative with respect to " + Variable.variables.get(0) + ", simplified once:");
-		System.out.println(currentFunction.getSimplifiedDerivative(0));
+		System.out.println(currentFunction.getSimplifiedDerivative(Variable.variables.get(0)));
 		System.out.println("Here is the derivative with respect to " + Variable.variables.get(0) + ", simplified completely:");
-		System.out.println(currentFunction.getSimplifiedDerivative(0).simplifyTimes(10));
+		System.out.println(currentFunction.getSimplifiedDerivative(Variable.variables.get(0)).simplifyTimes(10));
 
 		System.out.println("Here is the derivative with respect to " + Variable.variables.get(0) + ", evaluated:");
-		System.out.println(currentFunction.getSimplifiedDerivative(0).simplifyTimes(10).evaluate(inputs));
+		System.out.println(currentFunction.getSimplifiedDerivative(Variable.variables.get(0)).simplifyTimes(10).evaluate(map));
 
 		if (Variable.variables.size() == 1) {
 			double solution = Solver.getSolutionPoint(currentFunction, -10);
@@ -67,7 +78,7 @@ public class CASUI {
 			}
 
 			System.out.println("Here is a 5 term Taylor Series: " + TaylorSeries.makeTaylorSeries(currentFunction, 5).simplify());
-			System.out.println("Here is the integral from 0 to 1: " + NumericalIntegration.simpsonsRule(currentFunction, 0, Math.PI));
+			System.out.println("Here is the integral from 0 to 1: " + NumericalIntegration.simpsonsRule(currentFunction, 0, 1));
 		} else {
 			System.out.println("Finding solutions or extrema is not yet supported with multivariable functions.");
 		}

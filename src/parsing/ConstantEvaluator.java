@@ -10,6 +10,6 @@ public class ConstantEvaluator {
 	 * @return a double corresponding to the evaluated constant to be evaluated
 	 */
 	public static double getConstant(String infix) {
-		return Parser.parse(infix).evaluate();
+		return Parser.parse(infix).evaluate(null);
 	}
 }

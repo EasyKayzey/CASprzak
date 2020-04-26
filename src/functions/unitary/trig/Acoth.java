@@ -7,6 +7,9 @@ import functions.commutative.Multiply;
 import functions.special.Constant;
 import functions.unitary.UnitaryFunction;
 
+import java.util.Map;
+
+
 public class Acoth extends UnitaryFunction {
 	/**
 	 * Constructs a new Acoth
@@ -17,7 +20,7 @@ public class Acoth extends UnitaryFunction {
 	}
 
 	@Override
-	public Function getDerivative(int varID) {
+	public Function getDerivative(char varID) {
 		return new Multiply(function.getSimplifiedDerivative(varID), new Pow(new Constant(-1), new Add(new Constant(1), new Multiply(new Constant(-1), new Pow(new Constant(2), function)))));
 	}
 
@@ -27,7 +30,7 @@ public class Acoth extends UnitaryFunction {
 	 * @return the arccoth of {@link #function} evaluated
 	 */
 	@Override
-	public double evaluate(double... variableValues) {
+	public double evaluate(Map<Character, Double> variableValues) {
 		double functionEvaluated = function.evaluate(variableValues);
 		return 0.5 * Math.log((1 + functionEvaluated) / (1 + functionEvaluated));
 	}

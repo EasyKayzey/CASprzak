@@ -6,6 +6,9 @@ import functions.commutative.Multiply;
 import functions.special.Constant;
 import functions.unitary.UnitaryFunction;
 
+import java.util.Map;
+
+
 public class Coth extends UnitaryFunction {
 	/**
 	 * Constructs a new Coth
@@ -16,7 +19,7 @@ public class Coth extends UnitaryFunction {
 	}
 
 	@Override
-	public Function getDerivative(int varID) {
+	public Function getDerivative(char varID) {
 		return new Multiply(new Constant(-1), function.getSimplifiedDerivative(varID), new Pow(new Constant(2), new Csch(function)));
 	}
 
@@ -26,7 +29,7 @@ public class Coth extends UnitaryFunction {
 	 * @return the coth of {@link #function} evaluated
 	 */
 	@Override
-	public double evaluate(double... variableValues) {
+	public double evaluate(Map<Character, Double> variableValues) {
 		return 1 / Math.tanh(function.evaluate(variableValues));
 	}
 

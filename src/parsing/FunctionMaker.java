@@ -7,7 +7,10 @@ import functions.commutative.Add;
 import functions.commutative.Multiply;
 import functions.special.Constant;
 import functions.special.Variable;
-import functions.unitary.*;
+import functions.unitary.Abs;
+import functions.unitary.Dirac;
+import functions.unitary.Ln;
+import functions.unitary.Sign;
 import functions.unitary.trig.*;
 
 public class FunctionMaker {
@@ -37,7 +40,7 @@ public class FunctionMaker {
 	 * @param varID    ID of variable
 	 * @return new {@link Variable}
 	 */
-	public static Function variable(int varID) {
+	public static Function variable(char varID) {
 		return new Variable(varID);
 	}
 

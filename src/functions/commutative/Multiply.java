@@ -1,13 +1,14 @@
 package functions.commutative;
 
-import tools.FunctionTools;
 import core.Settings;
 import functions.Function;
 import functions.binary.Pow;
 import functions.special.Constant;
 import functions.special.Variable;
+import tools.FunctionTools;
 
 import java.util.Arrays;
+import java.util.Map;
 
 public class Multiply extends CommutativeFunction {
 	/**
@@ -19,7 +20,7 @@ public class Multiply extends CommutativeFunction {
 		identityValue = 1;
 	}
 
-	public double evaluate(double... variableValues) {
+	public double evaluate(Map<Character, Double> variableValues) {
 		double accumulator = identityValue;
 		for (Function f : functions)
 			accumulator *= f.evaluate(variableValues);
@@ -41,7 +42,7 @@ public class Multiply extends CommutativeFunction {
 	}
 
 	@Override
-	public Function getDerivative(int varID) {
+	public Function getDerivative(char varID) {
 		Function[] toAdd = new Function[functions.length];
 
 		for (int i = 0; i < toAdd.length; i++) {

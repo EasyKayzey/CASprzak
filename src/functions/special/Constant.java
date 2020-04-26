@@ -4,6 +4,8 @@ import functions.Function;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
+import java.util.Map;
+
 
 public class Constant extends Function {
 	private static final HashMap<String, Double> specialConstants = new HashMap<>() {
@@ -60,7 +62,7 @@ public class Constant extends Function {
 		specialConstants.remove(string);
 	}
 
-	public double evaluate(double... variableValues) {
+	public double evaluate(Map<Character, Double> variableValues) {
 		return constant;
 	}
 
@@ -71,7 +73,7 @@ public class Constant extends Function {
 		return String.valueOf(constant);
 	}
 
-	public Function getDerivative(int varID) {
+	public Function getDerivative(char varID) {
 		return new Constant(0);
 	}
 
@@ -86,7 +88,7 @@ public class Constant extends Function {
 	}
 
 
-	public Function substitute(int varID, Function toReplace) {
+	public Function substitute(char varID, Function toReplace) {
 		return this;
 	}
 

@@ -6,25 +6,33 @@ import functions.Function;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.ListIterator;
+import java.util.Map;
+
 
 public class Variable extends Function {
 	/**
-	 * The array containing all the variable characters
+	 * The list containing all the variable characters
 	 */
-	public static List<Character> variables = new ArrayList<>(Arrays.asList('x', 'y', 'z'));
-	public static int variablesEnd = 3;
+	public static List<Character> variables = new ArrayList<>() {
+		{
+			add('x');
+			add('y');
+			add('z');
+		}
+	};
+
+	private static int variablesEnd = 3;
 
 	/**
 	 * The index of this variable in {@link #variables}
 	 */
-	private final int varID;
+	private final char varID;
 
 	/**
 	 * Constructs a new Variable
-	 * @param varID The variable's ID
+	 * @param varID The variable's representative character
 	 */
-	public Variable(int varID) {
+	public Variable(char varID) {
 		this.varID = varID;
 	}
 
@@ -36,19 +44,6 @@ public class Variable extends Function {
 		Variable.variables = Arrays.asList(variables);
 	}
 
-	/** @param variable the character corresponding to the variable
-	 * @return the ID of the variable, used internally
-	 * @throws IndexOutOfBoundsException if no such variable exists
-	 */
-	public static int getVarID(char variable) throws IndexOutOfBoundsException {
-		ListIterator<Character> iter = variables.listIterator();
-		while (iter.hasNext()) {
-			if (iter.next() == variable) {
-				return iter.previousIndex();
-			}
-		}
-		throw new IndexOutOfBoundsException("No variable " + variable + " found.");
-	}
 
 	public static void addVariable(char variable) {
 		if (!variables.contains(variable)) {
@@ -71,16 +66,16 @@ public class Variable extends Function {
 	}
 
 	public String toString() {
-		return String.valueOf(variables.get(varID));
+		return String.valueOf(varID);
 	}
 
 
-	public Function getDerivative(int varID) {
+	public Function getDerivative(char varID) {
 		return new Constant((this.varID == varID ? 1 : 0));
 	}
 
-	public double evaluate(double... variableValues) {
-		return variableValues[varID];
+	public double evaluate(Map<Character, Double> variableValues) {
+		return variableValues.get(varID);
 	}
 
 	public Function clone() {
@@ -92,7 +87,7 @@ public class Variable extends Function {
 	}
 
 
-	public Function substitute(int varID, Function toReplace) {
+	public Function substitute(char varID, Function toReplace) {
 		if (this.varID == varID)
 			return toReplace;
 		else if (Settings.trustImmutability)

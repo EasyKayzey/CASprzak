@@ -1,9 +1,8 @@
-import functions.binary.Pow;
-import parsing.Parser;
 import core.Settings;
 import functions.Function;
 import functions.commutative.Multiply;
 import org.junit.jupiter.api.Test;
+import parsing.Parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -197,8 +196,7 @@ public class EqualsTest {
     void simplifyMultiplyExponents() {
         Function test1 = Parser.parse("(x^3)^2");
         Function test2 = Parser.parse("x^6");
-        assertEquals(((Pow)test1).multiplyExponents(), test2);
-        //TODO why does the method need to be called
+        assertEquals(test1, test2);
     }
 
     @Test

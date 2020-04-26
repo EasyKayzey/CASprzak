@@ -5,6 +5,9 @@ import functions.commutative.Multiply;
 import functions.special.Constant;
 import functions.unitary.UnitaryFunction;
 
+import java.util.Map;
+
+
 public class Csch extends UnitaryFunction {
 	/**
 	 * Constructs a new Csch
@@ -15,7 +18,7 @@ public class Csch extends UnitaryFunction {
 	}
 
 	@Override
-	public Function getDerivative(int varID) {
+	public Function getDerivative(char varID) {
 		return new Multiply(new Constant(-1), function.getSimplifiedDerivative(varID), new Csch(function), new Coth(function));
 	}
 
@@ -25,7 +28,7 @@ public class Csch extends UnitaryFunction {
 	 * @return the csch of {@link #function} evaluated
 	 */
 	@Override
-	public double evaluate(double... variableValues) {
+	public double evaluate(Map<Character, Double> variableValues) {
 		return 1 / Math.sinh(function.evaluate(variableValues));
 	}
 

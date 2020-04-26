@@ -4,6 +4,9 @@ import functions.Function;
 import functions.commutative.Multiply;
 import functions.unitary.UnitaryFunction;
 
+import java.util.Map;
+
+
 public class Cosh extends UnitaryFunction {
 	/**
 	 * Constructs a new Cosh
@@ -19,12 +22,12 @@ public class Cosh extends UnitaryFunction {
 	 * @return the cosh of {@link #function} evaluated
 	 */
 	@Override
-	public double evaluate(double... variableValues) {
+	public double evaluate(Map<Character, Double> variableValues) {
 		return Math.cosh(function.evaluate(variableValues));
 	}
 
 	@Override
-	public Function getDerivative(int varID) {
+	public Function getDerivative(char varID) {
 		return new Multiply(new Sinh(function), function.getSimplifiedDerivative(varID));
 	}
 

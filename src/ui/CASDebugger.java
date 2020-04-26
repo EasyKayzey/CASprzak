@@ -1,9 +1,11 @@
 package ui;
 
+import functions.Function;
 import parsing.ConstantEvaluator;
 import parsing.Parser;
-import functions.Function;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class CASDebugger {
@@ -38,9 +40,10 @@ public class CASDebugger {
 				userInput = in.nextLine();
 				if (userInput.charAt(0) != '!') {
 					String[] unparsedValues = userInput.split(",");
-					double[] values = new double[unparsedValues.length];
-					for (int i = 0; i < values.length; i++)
-						values[i] = ConstantEvaluator.getConstant(unparsedValues[i]);
+					char[] chars = {'x', 'y', 'z'};
+					Map<Character, Double> values = new HashMap<>();
+					for (int i = 0; i < unparsedValues.length; i++)
+						values.put(chars[i], ConstantEvaluator.getConstant(unparsedValues[i]));
 					System.out.println(function.evaluate(values));
 				}
 			}

@@ -4,6 +4,8 @@ import core.Settings;
 import functions.Function;
 import functions.special.Constant;
 
+
+
 public abstract class UnitaryFunction extends Function {
 	/**
 	 * The {@link Function} which the {@link UnitaryFunction} operates on
@@ -27,7 +29,7 @@ public abstract class UnitaryFunction extends Function {
 	public Function simplify() {
 		UnitaryFunction newFunction = this.simplifyInternal();
 		if (Settings.simplifyFunctionsOfConstants && newFunction.function instanceof Constant)
-			return new Constant(newFunction.evaluate());
+			return new Constant(newFunction.evaluate(null));
 		return newFunction;
 	}
 
@@ -50,7 +52,7 @@ public abstract class UnitaryFunction extends Function {
 		return me(function.simplify());
 	}
 
-	public UnitaryFunction substitute(int varID, Function toReplace) {
+	public UnitaryFunction substitute(char varID, Function toReplace) {
 		return me(function.substitute(varID, toReplace));
 	}
 

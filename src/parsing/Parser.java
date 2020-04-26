@@ -2,7 +2,6 @@ package parsing;
 
 import functions.Function;
 import functions.special.Constant;
-import functions.special.Variable;
 
 import java.util.Deque;
 import java.util.LinkedList;
@@ -72,7 +71,7 @@ public class Parser {
 					if (token.length() > 1)
 						throw new IllegalArgumentException(token + " is not a valid function.");
 					char variableName = token.charAt(0);
-					functionStack.push(FunctionMaker.variable(Variable.getVarID(variableName)));
+					functionStack.push(FunctionMaker.variable(variableName));
 				}
 			} else if (isBinaryOperator(token)) {
 				Function a = functionStack.pop();

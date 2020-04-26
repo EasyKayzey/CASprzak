@@ -4,6 +4,9 @@ import functions.Function;
 import functions.commutative.Multiply;
 import functions.special.Constant;
 
+import java.util.Map;
+
+
 public class Sign extends UnitaryFunction {
 	/**
 	 * Constructs a new Sign
@@ -14,12 +17,12 @@ public class Sign extends UnitaryFunction {
 	}
 
 	@Override
-	public double evaluate(double... variableValues) {
+	public double evaluate(Map<Character, Double> variableValues) {
 		return Math.signum(function.evaluate(variableValues));
 	}
 
 	@Override
-	public Function getDerivative(int varID) {
+	public Function getDerivative(char varID) {
 		return new Multiply(function.getSimplifiedDerivative(varID), new Constant(2), new Dirac(function));
 	}
 

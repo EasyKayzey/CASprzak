@@ -3,8 +3,10 @@ package tools.singlevariable;
 import core.Settings;
 import functions.Function;
 
-public class NumericalIntegration {
+import java.util.Map;
 
+public class NumericalIntegration {
+    
     /**
      * Returns the approximate definite integral of a {@link Function} function on a range
      * @param function The {@link Function} whose integral is being found
@@ -13,18 +15,18 @@ public class NumericalIntegration {
      * @return the approximate definite integral of function on a range
      */
     public static double simpsonsRule(Function function, double lowerBound, double upperBound) {
-        double sum = function.evaluate(lowerBound);
+        double sum = function.evaluate(Map.of(Settings.singleVariableDefault, lowerBound));
         double step = (upperBound-lowerBound)/ Settings.simpsonsSegments;
         double x = lowerBound + step;
         for (int i = 1; i < Settings.simpsonsSegments /2; i++) {
-            sum += 4*function.evaluate(x);
+            sum += 4*function.evaluate(Map.of(Settings.singleVariableDefault, x));
             x += step;
-            sum += 2*function.evaluate(x);
+            sum += 2*function.evaluate(Map.of(Settings.singleVariableDefault, x));
             x += step;
         }
-        sum += 4*function.evaluate(x);
+        sum += 4*function.evaluate(Map.of(Settings.singleVariableDefault, x));
         x += step;
-        sum += function.evaluate(x);
+        sum += function.evaluate(Map.of(Settings.singleVariableDefault, x));
         sum *= step/3;
         return sum;
     }
@@ -37,8 +39,8 @@ public class NumericalIntegration {
      * @return the maximum error associated with the definite integral of function on a range
      */
     public static double simpsonsError(Function function, double lowerBound, double upperBound) {
-        Function fourthDerivative = function.getNthDerivative(0, 4);
-        return fourthDerivative.evaluate(Extrema.findLocalMaxima(fourthDerivative, lowerBound, upperBound))*Math.pow(upperBound - lowerBound, 5) / (180 * Math.pow(Settings.simpsonsSegments, 4));
+        Function fourthDerivative = function.getNthDerivative(Settings.singleVariableDefault, 4);
+        return fourthDerivative.evaluate(Map.of(Settings.singleVariableDefault, Extrema.findLocalMaxima(fourthDerivative, lowerBound, upperBound)))*Math.pow(upperBound - lowerBound, 5) / (180 * Math.pow(Settings.simpsonsSegments, 4));
     }
 
     /**

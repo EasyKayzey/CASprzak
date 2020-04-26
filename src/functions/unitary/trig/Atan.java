@@ -7,6 +7,9 @@ import functions.commutative.Multiply;
 import functions.special.Constant;
 import functions.unitary.UnitaryFunction;
 
+import java.util.Map;
+
+
 public class Atan extends UnitaryFunction {
 	/**
 	 * Constructs a new Atan
@@ -22,12 +25,12 @@ public class Atan extends UnitaryFunction {
 	 * @return the arctan of {@link #function} evaluated
 	 */
 	@Override
-	public double evaluate(double... variableValues) {
+	public double evaluate(Map<Character, Double> variableValues) {
 		return Math.atan(function.evaluate(variableValues));
 	}
 
 	@Override
-	public Function getDerivative(int varID) {
+	public Function getDerivative(char varID) {
 		return new Multiply(function.getSimplifiedDerivative(varID), new Pow(new Constant(-1), new Add(new Constant(1), new Pow(new Constant(2), function))));
 	}
 

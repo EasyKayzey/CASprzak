@@ -8,6 +8,9 @@ import functions.special.Constant;
 import functions.unitary.Abs;
 import functions.unitary.UnitaryFunction;
 
+import java.util.Map;
+
+
 public class Acsc extends UnitaryFunction {
 	/**
 	 * Constructs a new Acsc
@@ -23,7 +26,7 @@ public class Acsc extends UnitaryFunction {
 	}
 
 	@Override
-	public Function getDerivative(int varID) {
+	public Function getDerivative(char varID) {
 		return new Multiply(new Constant(-1), function.getSimplifiedDerivative(varID), new Pow(new Constant(-1), new Multiply(new Abs(function), new Pow(new Constant(0.5), new Add(new Pow(new Constant(2), function), new Constant(-1))))));
 	}
 
@@ -34,7 +37,7 @@ public class Acsc extends UnitaryFunction {
 	 */
 	@SuppressWarnings("RedundantSuppression")
 	@Override
-	public double evaluate(double... variableValues) {
+	public double evaluate(Map<Character, Double> variableValues) {
 		double functionEvaluated = function.evaluate(variableValues);
 		if (functionEvaluated > 1) {
 			//noinspection DuplicateExpressions

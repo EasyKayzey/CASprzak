@@ -9,6 +9,8 @@ import functions.special.Constant;
 import functions.special.Variable;
 import functions.unitary.Ln;
 
+import java.util.Map;
+
 public class Pow extends BinaryFunction {
 	/**
 	 * Constructs a new Pow
@@ -20,7 +22,7 @@ public class Pow extends BinaryFunction {
 	}
 
 	@Override
-	public Function getDerivative(int varID) {
+	public Function getDerivative(char varID) {
 		if (function1 instanceof Constant exponent)
 			return new Multiply(new Constant(exponent.constant), new Pow(new Constant(exponent.constant - 1), function2), function2.getSimplifiedDerivative(varID));
 		else
@@ -28,7 +30,7 @@ public class Pow extends BinaryFunction {
 	}
 
 	@Override
-	public double evaluate(double... variableValues) {
+	public double evaluate(Map<Character, Double> variableValues) {
 		return Math.pow(function2.evaluate(variableValues), function1.evaluate(variableValues));
 	}
 
@@ -56,7 +58,7 @@ public class Pow extends BinaryFunction {
 			if (constant.constant == 1)
 				return function2.simplify();
 			if (Settings.simplifyFunctionsOfConstants && function2 instanceof Constant)
-				return new Constant(this.evaluate());
+				return new Constant(this.evaluate(null));
 		}
 		if (Settings.trustImmutability)
 			return this;

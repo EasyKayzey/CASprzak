@@ -5,6 +5,9 @@ import functions.binary.Pow;
 import functions.commutative.Multiply;
 import functions.special.Constant;
 
+import java.util.Map;
+
+
 public class Ln extends UnitaryFunction {
 	/**
 	 * Constructs a new Ln
@@ -15,12 +18,12 @@ public class Ln extends UnitaryFunction {
 	}
 
 	@Override
-	public double evaluate(double... variableValues) {
+	public double evaluate(Map<Character, Double> variableValues) {
 		return Math.log(function.evaluate(variableValues));
 	}
 
 	@Override
-	public Function getDerivative(int varID) {
+	public Function getDerivative(char varID) {
 		return new Multiply(function.getSimplifiedDerivative(varID), new Pow(new Constant(-1), function));
 	}
 

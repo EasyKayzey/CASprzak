@@ -6,6 +6,9 @@ import functions.commutative.Multiply;
 import functions.special.Constant;
 import functions.unitary.UnitaryFunction;
 
+import java.util.Map;
+
+
 public class Tan extends UnitaryFunction {
 	/**
 	 * Constructs a new Tan
@@ -21,12 +24,12 @@ public class Tan extends UnitaryFunction {
 	 * @return the tan of {@link #function} evaluated
 	 */
 	@Override
-	public double evaluate(double... variableValues) {
+	public double evaluate(Map<Character, Double> variableValues) {
 		return Math.tan(function.evaluate(variableValues));
 	}
 
 	@Override
-	public Function getDerivative(int varID) {
+	public Function getDerivative(char varID) {
 		return new Multiply(new Pow(new Constant(2), new Sec(function)), function.getSimplifiedDerivative(varID));
 	}
 

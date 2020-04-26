@@ -3,6 +3,9 @@ package functions.unitary;
 import functions.Function;
 import functions.commutative.Multiply;
 
+import java.util.Map;
+
+
 public class Abs extends UnitaryFunction {
 	/**
 	 * Constructs a new Abs
@@ -13,12 +16,12 @@ public class Abs extends UnitaryFunction {
 	}
 
 	@Override
-	public double evaluate(double... variableValues) {
+	public double evaluate(Map<Character, Double> variableValues) {
 		return Math.abs(function.evaluate(variableValues));
 	}
 
 	@Override
-	public Function getDerivative(int varID) {
+	public Function getDerivative(char varID) {
 		return new Multiply(function.getSimplifiedDerivative(varID), new Sign(function));
 	}
 

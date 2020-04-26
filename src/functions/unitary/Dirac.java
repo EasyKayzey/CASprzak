@@ -3,6 +3,9 @@ package functions.unitary;
 import functions.Function;
 import functions.special.Constant;
 
+import java.util.Map;
+
+
 public class Dirac extends UnitaryFunction {
 	/**
 	 * Constructs a new Dirac
@@ -13,7 +16,7 @@ public class Dirac extends UnitaryFunction {
 	}
 
 	@Override
-	public double evaluate(double... variableValues) {
+	public double evaluate(Map<Character, Double> variableValues) {
 		if (function.evaluate(variableValues) == 0)
 			return Double.POSITIVE_INFINITY;
 		else
@@ -21,7 +24,7 @@ public class Dirac extends UnitaryFunction {
 	}
 
 	@Override
-	public Function getDerivative(int varID) {
+	public Function getDerivative(char varID) {
 		return new Constant(0);
 	}
 

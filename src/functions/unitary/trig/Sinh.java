@@ -4,6 +4,9 @@ import functions.Function;
 import functions.commutative.Multiply;
 import functions.unitary.UnitaryFunction;
 
+import java.util.Map;
+
+
 public class Sinh extends UnitaryFunction {
 	/**
 	 * Constructs a new Sinh
@@ -19,12 +22,12 @@ public class Sinh extends UnitaryFunction {
 	 * @return the sinh of {@link #function} evaluated
 	 */
 	@Override
-	public double evaluate(double... variableValues) {
+	public double evaluate(Map<Character, Double> variableValues) {
 		return Math.sin(function.evaluate(variableValues));
 	}
 
 	@Override
-	public Function getDerivative(int varID) {
+	public Function getDerivative(char varID) {
 		return new Multiply(new Cosh(function), function.getSimplifiedDerivative(varID));
 	}
 

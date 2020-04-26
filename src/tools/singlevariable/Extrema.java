@@ -5,6 +5,7 @@ import functions.Function;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.function.BiPredicate;
 
 public class Extrema {
@@ -76,12 +77,12 @@ public class Extrema {
     }
 
     private static double[] findPoints(Function function, double lowerBound, double upperBound, BiPredicate<? super Double, ? super Double> strategy) {
-        double[] criticalPoints = Solver.getSolutionsRange(function.getDerivative(0), lowerBound, upperBound);
+        double[] criticalPoints = Solver.getSolutionsRange(function.getDerivative(Settings.singleVariableDefault), lowerBound, upperBound);
         if (criticalPoints.length == 0) return null;
 
         List<Double> secondDerivative = new LinkedList<>();
         for (double criticalPoint : criticalPoints) {
-            if (strategy.test(function.getNthDerivative(0, 2).evaluate(criticalPoint), 0.0)) {
+            if (strategy.test(function.getNthDerivative(Settings.singleVariableDefault, 2).evaluate(Map.of(Settings.singleVariableDefault, criticalPoint)), 0.0)) {
                 secondDerivative.add(criticalPoint);
             }
         }
@@ -97,7 +98,7 @@ public class Extrema {
         }
         double[] functionAtPoints = new double[numbers.length];
         for (int i = 0; i < functionAtPoints.length; i++) {
-            functionAtPoints[i] = function.evaluate(numbers[i]);
+            functionAtPoints[i] = function.evaluate(Map.of(Settings.singleVariableDefault, numbers[i]));
         }
 
         int index = 0;

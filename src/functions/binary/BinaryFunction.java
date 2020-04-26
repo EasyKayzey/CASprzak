@@ -55,7 +55,7 @@ public abstract class BinaryFunction extends Function {
 	 * @param toReplace the {@link Function} that will be substituted
 	 * @return the function after the given substitution was made
 	 */
-	public Function substitute(int varID, Function toReplace) {
+	public Function substitute(char varID, Function toReplace) {
 		return me(function1.substitute(varID, toReplace), function2.substitute(varID, toReplace));
 	}
 

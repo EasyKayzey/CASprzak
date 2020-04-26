@@ -12,6 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import tools.MiscTools;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public abstract class Function implements Evaluable, Differentiable, Simplifiable, Comparable<Function> {
 
@@ -31,7 +32,7 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 	/**
 	 * Caches derivatives with the key corresponding to the varID of the derivative
 	 */
-	protected final HashMap<Integer, Function> derivatives = new HashMap<>();
+	protected final HashMap<Character, Function> derivatives = new HashMap<>();
 
 	/**
 	 * Returns a String representation of the Function
@@ -63,10 +64,10 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 
 	/**
 	 * Returns the derivative of the function, simplified
-	 * @param varID the ID of the variable being differentiated (see {@link Variable#getVarID(char)}).
+	 * @param varID the ID of the variable being differentiated
 	 * @return the derivative of the {@link Function} it is called on, simplified
 	 */
-	public Function getSimplifiedDerivative(int varID) {
+	public Function getSimplifiedDerivative(char varID) {
 		if (Settings.cacheDerivatives && derivatives.containsKey(varID))
 			return derivatives.get(varID);
 		Function derivative = getDerivative(varID).simplify();
@@ -78,11 +79,11 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 
 	/**
 	 * Returns the Nth derivative of the function, simplified
-	 * @param varID the ID of the variable being differentiated (see {@link Variable#getVarID(char)}).
+	 * @param varID the ID of the variable being differentiated
 	 * @param N     the amount of times to differentiate
 	 * @return the Nth derivative of the {@link Function} it is called on, simplified
 	 */
-	public Function getNthDerivative(int varID, int N) {
+	public Function getNthDerivative(char varID, int N) {
 		Function currentFunction = this;
 		while (N > 0) {
 			currentFunction = currentFunction.getSimplifiedDerivative(varID);
@@ -93,11 +94,11 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 
 	/**
 	 * Returns the value of the derivative at point
-	 * @param varID the ID of the variable being differentiated (see {@link Variable#getVarID(char)}).
+	 * @param varID the ID of the variable being differentiated
 	 * @param point the point to find the derivative at
 	 * @return the value of the derivative at point
 	 */
-	public double derivativeAt(int varID, double... point) {
+	public double derivativeAt(char varID, Map<Character, Double> point) {
 		return getDerivative(varID).evaluate(point);
 	}
 
@@ -107,8 +108,20 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 	 * @param toReplace the {@link Function} that will be substituted
 	 * @return the new {@link Function} after all substitutions are preformed
 	 */
-	public abstract Function substitute(int varID, Function toReplace);
+	public abstract Function substitute(char varID, Function toReplace);
 
+	/**
+	 * @Deprecated Blindly inserts the values into a HashMap as specified by {@link Variable#variables}. For testing purposes only.
+	 * @param values array of values
+	 * @return a double
+	 */
+	public double oldEvaluate(double... values) {
+		Map<Character, Double> map = new HashMap<>();
+		for (int i = 0; i < values.length; i++) {
+			map.put(Variable.variables.get(i), values[i]);
+		}
+		return evaluate(map);
+	}
 
 	/**
 	 * Returns true when the two functions simplified are equal

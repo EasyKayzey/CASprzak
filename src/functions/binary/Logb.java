@@ -6,6 +6,8 @@ import functions.commutative.Multiply;
 import functions.special.Constant;
 import functions.unitary.Ln;
 
+import java.util.Map;
+
 public class Logb extends BinaryFunction {
 	/**
 	 * Constructs a new Logb
@@ -23,7 +25,7 @@ public class Logb extends BinaryFunction {
 	}
 
 	@Override
-	public Function getDerivative(int varID) {
+	public Function getDerivative(char varID) {
 		if (function2 instanceof Constant base)
 			return new Multiply(function1.getSimplifiedDerivative(varID), new Pow(new Constant(-1), new Multiply(new Ln(new Constant(base.constant)), function1)));
 		else
@@ -31,7 +33,7 @@ public class Logb extends BinaryFunction {
 	}
 
 	@Override
-	public double evaluate(double... variableValues) {
+	public double evaluate(Map<Character, Double> variableValues) {
 		return Math.log(function1.evaluate(variableValues)) / Math.log(function2.evaluate(variableValues));
 	}
 

@@ -1,9 +1,11 @@
 package functions.commutative;
 
-import tools.FunctionTools;
 import core.Settings;
 import functions.Function;
 import functions.special.Constant;
+import tools.FunctionTools;
+
+import java.util.Map;
 
 public class Add extends CommutativeFunction {
 	/**
@@ -15,7 +17,7 @@ public class Add extends CommutativeFunction {
 		identityValue = 0;
 	}
 
-	public double evaluate(double... variableValues) {
+	public double evaluate(Map<Character, Double> variableValues) {
 		double accumulator = identityValue;
 		for (Function f : functions)
 			accumulator += f.evaluate(variableValues);
@@ -37,7 +39,7 @@ public class Add extends CommutativeFunction {
 	}
 
 	@Override
-	public Function getDerivative(int varID) {
+	public Function getDerivative(char varID) {
 		Function[] toAdd = new Function[functions.length];
 		for (int i = 0; i < functions.length; i++) {
 			toAdd[i] = functions[i].getSimplifiedDerivative(varID);

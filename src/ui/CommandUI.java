@@ -21,10 +21,8 @@ public class CommandUI extends KeywordInterface {
 			else {
 				try {
 					output(useKeywords(input));
-//					flag = true;
 				} catch (IllegalArgumentException e) {
 					System.out.println(e.getMessage());
-//					flag = false;
 				}
 			}
 		}

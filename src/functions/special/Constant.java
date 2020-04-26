@@ -54,10 +54,28 @@ public class Constant extends Function {
 		return specialConstants.containsKey(string);
 	}
 
+	/**
+	 * Returns the value of a special constant
+	 * @param string name of constant
+	 * @return the value of the constant
+	 */
+	public static double getSpecialConstant(String string) {
+		return specialConstants.get(string);
+	}
+
+	/**
+	 * Defines a new special constant
+	 * @param string name of constant
+	 * @param value value of constant
+	 */
 	public static void addSpecialConstant(String string, double value) {
 		specialConstants.put(string, value);
 	}
 
+	/**
+	 * Removes a special constant
+	 * @param string name of constant
+	 */
 	public static void removeSpecialConstant(String string) {
 		specialConstants.remove(string);
 	}

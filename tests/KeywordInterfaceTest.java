@@ -41,5 +41,17 @@ public class KeywordInterfaceTest {
         Function test2 = Parser.parse("sin(x)");
         assertEquals(test2, test1);
     }
+
+    @Test
+    void basicEval() {
+        double test = (double) KeywordInterface.useKeywords("eval x^2 2");
+        assertEquals(4, test);
+    }
+
+    @Test
+    void basicEvalWithNewVariable() {
+        double test = (double) KeywordInterface.useKeywords("eval y^2 2");
+        assertEquals(4, test);
+    }
 }
 

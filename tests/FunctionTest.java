@@ -10,32 +10,32 @@ public class FunctionTest {
 
 	@Test void fxReturnsX() {
 		Function test = Parser.parse("x");
-		assertEquals(2, test.evaluate(Map.of('x',2)));
+		assertEquals(2, test.evaluate(Map.of('x',2.0)));
 	}
 
 	@Test void basicFunctionsWithX() {
 		Function test = Parser.parse("x^x+2+5*x");
-		assertEquals(44, test.evaluate(Map.of('x',3)));
+		assertEquals(44, test.evaluate(Map.of('x',3.0)));
 	}
 
 	@Test void multipleVariablesWorks() {
         Function test = Parser.parse("x+y+y");
-		assertEquals(11, test.evaluate(Map.of('x',3, 4)));
+		assertEquals(11, test.evaluate(Map.of('x',3.0, 'y', 4.0)));
 	}
 
 	@Test void logbWorks() {
 		Function test = Parser.parse("logb_3(x)");
-		assertEquals(4, test.evaluate(Map.of('x',81)));
+		assertEquals(4, test.evaluate(Map.of('x',81.0)));
 	}
 
 	@Test void trigWorks() {
 		Function test = Parser.parse("(sin(x))^2+(cos x)^2");
-		assertEquals(1, test.evaluate(Map.of('x',81)));
+		assertEquals(1, test.evaluate(Map.of('x',81.0)));
 	}
 
 	@Test void eToTheXWorks() {
 		Function test = Parser.parse("e^x");
-		assertEquals(1, test.evaluate(Map.of('x',0)));
+		assertEquals(1, test.evaluate(Map.of('x',0.0)));
 	}
 
 	@Test void lnWorks() {
@@ -50,70 +50,70 @@ public class FunctionTest {
 
 	@Test void multiplyWorks() {
 		Function test = Parser.parse("(1/(x+1))*(cos x)*(x^2-1)");
-		assertEquals(-1, test.evaluate(Map.of('x',0)));
+		assertEquals(-1, test.evaluate(Map.of('x',0.0)));
 	}
 
 	@Test void addWorks() {
 		Function test = Parser.parse("(1/(x+1))+(sec(x))+(x^3-1)");
-		assertEquals(1, test.evaluate(Map.of('x',0)));
+		assertEquals(1, test.evaluate(Map.of('x',0.0)));
 	}
 
 	@Test void noSpaces() {
 		Function test = Parser.parse("1+x*-3");
-		assertEquals(-5, test.evaluate(Map.of('x',2)));
+		assertEquals(-5, test.evaluate(Map.of('x',2.0)));
 	}
 
 	@Test void basicPolynomial() {
 		Function test = Parser.parse("x^2+5*x+4");
 //		System.out.println(test);
-		assertEquals(28, test.evaluate(Map.of('x',3)));
+		assertEquals(28, test.evaluate(Map.of('x',3.0)));
 	}
 
 	@Test void mediumPolynomial() {
 		Function test = Parser.parse("x^4+5*x^2+4");
 //		System.out.println(test);
-		assertEquals(130, test.evaluate(Map.of('x',3)));
+		assertEquals(130, test.evaluate(Map.of('x',3.0)));
 	}
 
 	@Test void orderOfOperations() {
 		Function test = Parser.parse("10*4-2*(4^2/4)/2/0.5+9");
 //		System.out.println(test);
-		assertEquals(41, test.evaluate(Map.of('x',1)));
+		assertEquals(41, test.evaluate(Map.of('x',1.0)));
 	}
 
 	@Test void multiplyingByAdjacency() {
 		Function test = Parser.parse("3x+5x^2");
-		assertEquals(26, test.evaluate(Map.of('x',2)));
+		assertEquals(26, test.evaluate(Map.of('x',2.0)));
 	}
 
 	@Test void multiplyingByAdjacencyAndParentheses() {
 		Function test = Parser.parse("3(x+5x^2)");
-		assertEquals(66, test.evaluate(Map.of('x',2)));
+		assertEquals(66, test.evaluate(Map.of('x',2.0)));
 	}
 
 	@Test void multiplyingAdjacentVariables() {
 		Function test = Parser.parse("xy");
-		assertEquals(12, test.evaluate(Map.of('x',3, 4)+);
+		assertEquals(12, test.evaluate(Map.of('x',3.0, 'y', 4.0)));
 	}
 
 	@Test void multiplyingAdjacentVariablesAndPowers() {
 		Function test = Parser.parse("x^2y^-1");
-		assertEquals(8, test.evaluate(Map.of('x',4, 2)));
+		assertEquals(8, test.evaluate(Map.of('x',4.0, 'y', 2.0)));
 	}
 
 	@Test void multiplyingByAdjacencyAndParenthesesBackwards() {
 		Function test = Parser.parse("(x+5x^2)3");
-		assertEquals(66, test.evaluate(Map.of('x',2)));
+		assertEquals(66, test.evaluate(Map.of('x',2.0)));
 	}
 
 	@Test void multiplyingByAdjacencyFunctions() {
 		Function test = Parser.parse("(5+x^2)(cos(x))");
-		assertEquals(5, test.evaluate(Map.of('x',0)));
+		assertEquals(5, test.evaluate(Map.of('x',0.0)));
 	}
 
 	@Test void multiplyingByAdjacencyThreeTerms0() {
 		Function test = Parser.parse("(1/4)(2/3)sin(x)");
-		assertEquals(0, test.evaluate(Map.of('x',0)));
+		assertEquals(0, test.evaluate(Map.of('x',0.0)));
 	}
 
 	@Test void multiplyingByAdjacencyThreeTerms1() {

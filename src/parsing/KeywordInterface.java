@@ -41,7 +41,7 @@ public class KeywordInterface {
 			case "intn", "intnumeric" -> integrateNumeric(splitInput[1]);
 			case "intne", "intnumericerror" -> integrateNumericError(splitInput[1]);
 			case "sto", "store", "new", "def", "addf" -> storeFunction(splitInput[1]);
-			case "rmf", "rmfun", "removefun", "removefunction" -> removeVariables(splitInput[1]);
+			case "rmf", "rmfun", "removefun", "removefunction" -> removeFunction(splitInput[1]);
 			case "addv", "addvar", "addvars" -> addVariables(splitInput[1]);
 			case "rmv", "rmvar", "removevar", "removevariable" -> removeVariables(splitInput[1]);
 			case "addc", "addconstant", "defc", "defcon", "defconstant" -> defineConstant(splitInput[1]);

@@ -201,7 +201,7 @@ public class KeywordInterface {
 		String[] splitInput = keywordSplitter.split(input, 2);
 		try {
 			Constant.addSpecialConstant(splitInput[0], ((Function) KeywordInterface.useKeywords(splitInput[1])).evaluate(null));
-		} catch (IllegalArgumentException e) {
+		} catch (Exception e) {
 			Constant.addSpecialConstant(splitInput[0], parseStored(splitInput[1]).evaluate(null));
 		}
 		return Constant.getSpecialConstant(splitInput[0]);

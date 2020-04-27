@@ -159,13 +159,13 @@ public class Multiply extends CommutativeFunction {
 	public int compareSelf(Function that) {
 		boolean thisIsMonomial = PolynomialTools.isMonomial(this);
 		boolean thatIsMonomial = PolynomialTools.isMonomial(that);
-		if (thisIsMonomial && !thatIsMonomial)
+		if (thisIsMonomial && !thatIsMonomial) {
 			return 1;
-		else if (!thisIsMonomial && thatIsMonomial)
+		} else if (!thisIsMonomial && thatIsMonomial) {
 			return -1;
-		else if (!thisIsMonomial) // && !thatIsMonomial
+		} else if (!thisIsMonomial) { // && !thatIsMonomial
 			return super.compareSelf(that);
-		else { // thisIsMonomial && thatIsMonomial
+		} else { // thisIsMonomial && thatIsMonomial
 			double thisDegree = PolynomialTools.getDegree(this);
 			double thatDegree = PolynomialTools.getDegree(that);
 			if (thisDegree == thatDegree)

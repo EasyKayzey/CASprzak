@@ -77,9 +77,9 @@ public class PolynomialTools {
 		else if (function instanceof Pow power && power.getFunction1() instanceof Constant number)
 			return number.constant;
 		else if (function instanceof Multiply product) {
-			Function[] elemennts = product.getFunctions();
+			Function[] elements = product.getFunctions();
 			double sum = 0;
-			for (Function element: elemennts) {
+			for (Function element: elements) {
 				if (element instanceof Pow power && power.getFunction1() instanceof Constant number)
 					sum += number.constant;
 			}

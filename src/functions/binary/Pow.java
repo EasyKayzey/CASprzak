@@ -7,6 +7,7 @@ import functions.commutative.Multiply;
 import functions.special.Constant;
 import functions.unitary.Ln;
 
+import java.util.Arrays;
 import java.util.Map;
 
 public class Pow extends BinaryFunction {
@@ -96,6 +97,20 @@ public class Pow extends BinaryFunction {
 		} else {
 			throw new IllegalArgumentException("Method should not be called if base is not a Multiply");
 		}
+	}
+
+	private Function unwrapIntegerPower() {
+		if (function1 instanceof Constant constant) {
+			if (constant.constant % 1 == 0) {
+				Function[] toMultiply = new Function[(int)constant.constant];
+				Arrays.fill(toMultiply, function2);
+				return new Multiply(toMultiply);
+			}
+		}
+		if (Settings.trustImmutability)
+			return this;
+		else
+			return clone();
 	}
 
 

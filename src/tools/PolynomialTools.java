@@ -74,7 +74,7 @@ public class PolynomialTools {
 	 * @return the degree of the monomial
 	 */
 	public static double getDegree(Function function) {
-		if (!isMonomial(function))
+		if (!isGeneralMonomial(function))
 			throw new IllegalArgumentException(function + " is not a monomial");
 		else if (function instanceof Variable)
 			return 1;

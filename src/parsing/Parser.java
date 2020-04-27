@@ -102,7 +102,9 @@ public class Parser {
 			return f;
 		else if (input instanceof Double d)
 			return new Constant(d);
+		else if (input instanceof String s)
+			return parse(s);
 		else
-			return null;
+			throw new IllegalArgumentException("Cannot parse " + input);
 	}
 }

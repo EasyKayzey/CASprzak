@@ -52,7 +52,9 @@ public class PolynomialTools {
 	}
 
 	private static boolean isGivenMonomial(Function function, DoublePredicate test) {
-		if (function instanceof Multiply product) {
+		if (function instanceof Constant || function instanceof Variable || (function instanceof Pow pow && pow.getFunction2() instanceof Variable && pow.getFunction1() instanceof Constant exp && test.test(exp.evaluate(null)))) {
+			return true;
+		} else if (function instanceof Multiply product) {
 			Function[] elements = product.getFunctions();
 			for (Function element : elements) {
 				if (!(element instanceof Constant || element instanceof Variable || element instanceof Pow))

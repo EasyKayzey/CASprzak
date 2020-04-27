@@ -6,6 +6,7 @@ import functions.binary.Pow;
 import functions.special.Constant;
 import functions.special.Variable;
 import tools.FunctionTools;
+import tools.PolynomialTools;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -156,6 +157,20 @@ public class Multiply extends CommutativeFunction {
 	}
 
 	public int compareSelf(Function that) {
-		return super.compareSelf(that);
+		boolean thisIsMonomial = PolynomialTools.isMonomial(this);
+		boolean thatIsMonomial = PolynomialTools.isMonomial(that);
+		if (thisIsMonomial && !thatIsMonomial)
+			return 1;
+		else if (!thisIsMonomial && thatIsMonomial)
+			return -1;
+		else if (!thisIsMonomial) // && !thatIsMonomial
+			return super.compareSelf(that);
+		else { // thisIsMonomial && thatIsMonomial
+			double thisOrder = PolynomialTools.getOrder(this);
+			double thatOrder = PolynomialTools.getOrder(that);
+			if (thisOrder == thatOrder)
+				return super.compareSelf(that);
+			return (int) Math.signum(thisOrder - thatOrder);
+		}
 	}
 }

@@ -68,7 +68,11 @@ public class PolynomialTools {
 		}
 	}
 
-	//TODO WRITE AND DOCUMENT THIS
+	/**
+	 * Returns the degree a monomial. Returns an error when the function isn't a monomial.
+	 * @param function The monomial whose degree is being found
+	 * @return the degree of the monomial
+	 */
 	public static double getDegree(Function function) {
 		if (!isMonomial(function))
 			throw new IllegalArgumentException(function + " is not a monomial");

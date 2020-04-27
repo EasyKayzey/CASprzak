@@ -3,10 +3,8 @@ package functions.binary;
 import core.Settings;
 import functions.Function;
 import functions.commutative.Add;
-import functions.commutative.CommutativeFunction;
 import functions.commutative.Multiply;
 import functions.special.Constant;
-import functions.special.Variable;
 import functions.unitary.Ln;
 
 import java.util.Map;
@@ -109,8 +107,8 @@ public class Pow extends BinaryFunction {
 	@Override
 	public String toString() {
 		StringBuilder out = new StringBuilder();
-		boolean parenF1 = !((function1 instanceof Constant) || (function1 instanceof Variable) || (function1 instanceof CommutativeFunction));
-		boolean parenF2 = !((function2 instanceof Constant) || (function2 instanceof Variable) || (function2 instanceof CommutativeFunction));
+		boolean parenF1 = function1 instanceof BinaryFunction;
+		boolean parenF2 = function2 instanceof BinaryFunction;
 		if (parenF2)
 			out.append("(");
 		out.append(function2.toString());

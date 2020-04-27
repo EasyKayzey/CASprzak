@@ -18,6 +18,7 @@ public class Multiply extends CommutativeFunction {
 	public Multiply(Function... functions) {
 		super(functions);
 		identityValue = 1;
+		operation = (a, b) -> (a * b);
 	}
 
 	public double evaluate(Map<Character, Double> variableValues) {
@@ -86,24 +87,6 @@ public class Multiply extends CommutativeFunction {
 		Function[] toMultiply = new Function[functions.length];
 		for (int i = 0; i < functions.length; i++) toMultiply[i] = functions[i].simplify();
 		return new Multiply(toMultiply);
-	}
-
-	@Override
-	public Multiply simplifyConstants() {
-		for (int i = 1; i < functions.length; i++) {
-			for (int j = 0; j < i; j++) {
-				if (functions[i] instanceof Constant first && functions[j] instanceof Constant second) {
-					Function[] toMultiply = FunctionTools.deepClone(functions);
-					toMultiply[i] = new Constant(first.constant * second.constant);
-					toMultiply = FunctionTools.removeFunctionAt(toMultiply, j);
-					return (new Multiply(toMultiply)).simplifyConstants();
-				}
-			}
-		}
-		if (Settings.trustImmutability)
-			return this;
-		else
-			return clone();
 	}
 
 	/**

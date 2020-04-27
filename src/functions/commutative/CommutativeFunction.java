@@ -6,6 +6,7 @@ import functions.special.Constant;
 import tools.FunctionTools;
 
 import java.util.Arrays;
+import java.util.function.DoubleBinaryOperator;
 
 public abstract class CommutativeFunction extends Function {
 
@@ -18,6 +19,11 @@ public abstract class CommutativeFunction extends Function {
 	 * The identity of the {@link CommutativeFunction} (e.g. 1 for * and 0 for +)
 	 */
 	protected double identityValue;
+
+	/**
+	 * The operation performed by the {@link CommutativeFunction}
+	 */
+	public DoubleBinaryOperator operation;
 
 	/**
 	 * Constructs a new CommutativeFunction
@@ -73,7 +79,23 @@ public abstract class CommutativeFunction extends Function {
 	 * Returns current {@link CommutativeFunction} after combined the {@link Constant}s
 	 * @return current {@link CommutativeFunction} after combined the {@link Constant}s
 	 */
-	public abstract CommutativeFunction simplifyConstants();
+	public CommutativeFunction simplifyConstants() {
+		for (int i = 1; i < functions.length; i++) {
+			for (int j = 0; j < i; j++) {
+				if (functions[i] instanceof Constant first && functions[j] instanceof Constant second) {
+					Function[] toOperate = FunctionTools.deepClone(functions);
+					toOperate[i] = new Constant(operation.applyAsDouble(first.constant, second.constant));
+					toOperate = FunctionTools.removeFunctionAt(toOperate, j);
+					return me(toOperate).simplifyConstants();
+				}
+			}
+		}
+		if (Settings.trustImmutability)
+			return this;
+		else
+			return (CommutativeFunction) clone();
+	}
+
 
 	/**
 	 * Returns current {@link CommutativeFunction} after instance of the same {@link CommutativeFunction} have been pulled out and each term added to {@link #functions}

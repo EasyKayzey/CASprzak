@@ -15,6 +15,7 @@ public class Add extends CommutativeFunction {
 	public Add(Function... functions) {
 		super(functions);
 		identityValue = 0;
+		operation = Double::sum;
 	}
 
 	public double evaluate(Map<Character, Double> variableValues) {
@@ -67,23 +68,6 @@ public class Add extends CommutativeFunction {
 		for (int i = 0; i < functions.length; i++)
 			toAdd[i] = functions[i].simplify();
 		return new Add(toAdd);
-	}
-
-	public Add simplifyConstants() {
-		for (int i = 1; i < functions.length; i++) {
-			for (int j = 0; j < i; j++) {
-				if (functions[i] instanceof Constant first && functions[j] instanceof Constant second) {
-					Function[] toAdd = FunctionTools.deepClone(functions);
-					toAdd[i] = new Constant(first.constant + second.constant);
-					toAdd = FunctionTools.removeFunctionAt(toAdd, j);
-					return (new Add(toAdd)).simplifyConstants();
-				}
-			}
-		}
-		if (Settings.trustImmutability)
-			return this;
-		else
-			return clone();
 	}
 
 	/**

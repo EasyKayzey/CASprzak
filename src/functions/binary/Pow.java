@@ -101,7 +101,7 @@ public class Pow extends BinaryFunction {
 
 	public Function unwrapIntegerPower() {
 		if (function1 instanceof Constant constant) {
-			if (constant.constant % 1 == 0) {
+			if ((int) constant.constant == constant.constant) {
 				Function[] toMultiply = new Function[(int)constant.constant];
 				Arrays.fill(toMultiply, function2);
 				return new Multiply(toMultiply);

@@ -28,4 +28,9 @@ public class PolynomialTest {
         assert(PolynomialTools.isMonomial(test));
     }
 
+    @Test
+    void isGeneralMonomial() {
+        Function test = Parser.parse("3.32145*x^(-4.4352)");
+        assert(PolynomialTools.isGeneralMonomial(test));
+    }
 }

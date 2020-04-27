@@ -154,4 +154,8 @@ public class Multiply extends CommutativeFunction {
 		else
 			return clone();
 	}
+
+	public int compareSelf(Function that) {
+		return super.compareSelf(that);
+	}
 }

@@ -13,7 +13,7 @@ import java.util.function.DoublePredicate;
 public class PolynomialTools {
 
 	/**
-	 * Checks if a given {@link Function} is a polynomial
+	 * Checks if a given {@link Function} is a polynomial. Must call {@link Function#simplify()} before using.
 	 * @param function the function to be checked
 	 * @return true if function is a polynomial
 	 */
@@ -34,7 +34,7 @@ public class PolynomialTools {
 	}
 
 	/**
-	 * Checks if a given {@link Function} is a monomial (positive integer powers)
+	 * Checks if a given {@link Function} is a monomial (positive integer powers). Must call {@link Function#simplify()} before using.
 	 * @param function the function to be checked
 	 * @return true if function is a monomial
 	 */
@@ -43,7 +43,7 @@ public class PolynomialTools {
 	}
 
 	/**
-	 * Checks if a given {@link Function} is a generalized monomial (any constant powers)
+	 * Checks if a given {@link Function} is a generalized monomial (any constant powers). Must call {@link Function#simplify()} before using.
 	 * @param function the function to be checked
 	 * @return true if function is a generalized monomial
 	 */

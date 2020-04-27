@@ -116,6 +116,7 @@ public class Pow extends BinaryFunction {
 		out.append(function2.toString());
 		if (parenF2)
 			out.append(")");
+		out.append("^");
 		if (parenF1)
 			out.append("(");
 		out.append(function1.toString());

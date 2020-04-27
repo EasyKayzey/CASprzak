@@ -122,4 +122,11 @@ public class SimplifyTest {
         Function test2 = Parser.parse("(x+1)*(x+1)*(x+1)");
         assertEquals(((Pow)test1).unwrapIntegerPower(), test2);
     }
+
+    @Test
+    void unwrapPowersEdgeTest() {
+        Function test1 = Parser.parse("(x+1)^0");
+        Function test2 = Parser.parse("1");
+        assertEquals(((Pow)test1).unwrapIntegerPower(), test2);
+    }
 }

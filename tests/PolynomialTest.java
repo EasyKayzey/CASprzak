@@ -53,4 +53,10 @@ public class PolynomialTest {
         Function test = Parser.parse("5x^3+x^2+5x+3269485");
         assert(PolynomialTools.isPolynomial(test));
     }
+
+    @Test
+    void isSimpleUnsimplifiedPolynomial() {
+        Function test = Parser.parse("x+3x");
+        assert(PolynomialTools.isPolynomial(test));
+    }
 }

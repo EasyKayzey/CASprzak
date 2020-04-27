@@ -1,5 +1,6 @@
 import core.Settings;
 import functions.Function;
+import functions.binary.Pow;
 import functions.commutative.Multiply;
 import org.junit.jupiter.api.Test;
 import parsing.Parser;
@@ -115,4 +116,10 @@ public class SimplifyTest {
         assertEquals(test1, test2);
     }
 
+    @Test
+    void unwrapPowersTest() {
+        Function test1 = Parser.parse("(x+1)^3");
+        Function test2 = Parser.parse("(x+1)*(x+1)*(x+1)");
+        assertEquals(((Pow)test1).unwrapIntegerPower(), test2);
+    }
 }

@@ -48,7 +48,7 @@ public class PolynomialTools {
 	 * @return true if function is a generalized monomial
 	 */
 	public static boolean isGeneralMonomial(Function function) {
-		return isGivenMonomial(function, (a -> ((int) a == a)));
+		return isGivenMonomial(function, a -> true);
 	}
 
 	private static boolean isGivenMonomial(Function function, DoublePredicate test) {

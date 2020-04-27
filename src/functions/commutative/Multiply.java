@@ -71,7 +71,7 @@ public class Multiply extends CommutativeFunction {
 		if (currentFunction.isTimesZero())
 			return new Constant((0));
 		else if (currentFunction.getFunctions().length <= 1)
-			return currentFunction.simplifyOneElement();
+			return currentFunction.simplifyTrivialElement();
 		else
 			return currentFunction.distributeAll();
 	}

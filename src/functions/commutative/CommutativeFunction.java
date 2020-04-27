@@ -36,7 +36,7 @@ public abstract class CommutativeFunction extends Function {
 
 
 	public Function simplify() {
-		return this.simplifyInternal().simplifyOneElement();
+		return this.simplifyInternal().simplifyTrivialElement();
 	}
 
 	/**
@@ -117,7 +117,7 @@ public abstract class CommutativeFunction extends Function {
 	 * Returns identity {@link Constant} if {@link #functions} length is 0 or the {@link Function} if {@link #functions} length is 1
 	 * @return identity {@link Constant} if {@link #functions} length is 0 or the {@link Function} if {@link #functions} length is 1
 	 */
-	public Function simplifyOneElement() {
+	public Function simplifyTrivialElement() {
 		if (functions.length == 0)
 			return new Constant(identityValue);
 		if (functions.length == 1)

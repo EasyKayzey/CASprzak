@@ -54,9 +54,4 @@ public class PolynomialTest {
         assert(PolynomialTools.isPolynomial(test));
     }
 
-    @Test
-    void isSimpleUnsimplifiedPolynomial() {
-        Function test = Parser.parse("x+3x");
-        assert(PolynomialTools.isPolynomial(test));
-    }
 }

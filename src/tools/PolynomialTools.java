@@ -69,9 +69,23 @@ public class PolynomialTools {
 	}
 
 	//TODO WRITE AND DOCUMENT THIS
-	public static int getOrder(Function function) {
+	public static double getOrder(Function function) {
 		if (!isMonomial(function))
-			throw new IllegalArgumentException("Not a monomial!");
-		return 0; //write code here
+			throw new IllegalArgumentException(function + " is not a monomial");
+		else if (function instanceof Variable)
+			return 1;
+		else if (function instanceof Pow power && power.getFunction1() instanceof Constant number)
+			return number.constant;
+		else if (function instanceof Multiply product) {
+			Function[] elemennts = product.getFunctions();
+			double sum = 0;
+			for (Function element: elemennts) {
+				if (element instanceof Pow power && power.getFunction1() instanceof Constant number)
+					sum += number.constant;
+			}
+			return sum;
+		} else {
+			throw new IllegalArgumentException("This code should never run");
+		}
 	}
 }

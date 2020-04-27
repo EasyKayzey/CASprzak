@@ -166,11 +166,11 @@ public class Multiply extends CommutativeFunction {
 		else if (!thisIsMonomial) // && !thatIsMonomial
 			return super.compareSelf(that);
 		else { // thisIsMonomial && thatIsMonomial
-			double thisDegree = PolynomialTools.getOrder(this);
-			double thatDegree = PolynomialTools.getOrder(that);
-			if (thisDegree == thatDegree)
+			double thisOrder = PolynomialTools.getDegree(this);
+			double thatOrder = PolynomialTools.getDegree(that);
+			if (thisOrder == thatOrder)
 				return super.compareSelf(that);
-			return (int) Math.signum(thisDegree - thatDegree);
+			return (int) Math.signum(thisOrder - thatOrder);
 		}
 	}
 }

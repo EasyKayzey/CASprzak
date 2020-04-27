@@ -69,7 +69,7 @@ public class PolynomialTools {
 	}
 
 	//TODO WRITE AND DOCUMENT THIS
-	public static double getOrder(Function function) {
+	public static double getDegree(Function function) {
 		if (!isMonomial(function))
 			throw new IllegalArgumentException(function + " is not a monomial");
 		else if (function instanceof Variable)

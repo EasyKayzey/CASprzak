@@ -50,7 +50,7 @@ public class PolynomialTest {
 
     @Test
     void isSimplePolynomial() {
-        Function test = Parser.parse("5x^3+x^2+5x+3269485").simplify();
+        Function test = Parser.parseSimplified("5x^3+x^2+5x+3269485");
         assert(PolynomialTools.isPolynomial(test));
     }
 

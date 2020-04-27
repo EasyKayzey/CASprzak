@@ -54,6 +54,15 @@ public class Parser {
 	}
 
 	/**
+	 * Parses infix using {@link parsing.PreProcessor} and {@link #parse(String[])}, then simplifies the output
+	 * @param infix infix string
+	 * @return a {@link functions.Function} corresponding to the infix string, simplified
+	 */
+	public static Function parseSimplified(String infix) {
+		return parse(infix).simplify();
+	}
+
+	/**
 	 * Parses an array of postfix tokens into a {@link functions.Function}
 	 * @param postfix array of tokens in postfix
 	 * @return a {@link functions.Function} corresponding to the postfix string

@@ -128,7 +128,7 @@ public class Multiply extends CommutativeFunction {
 	public Multiply addExponents() {
 		Function[] simplifiedTerms = FunctionTools.deepClone(functions);
 		for (int a = 0; a < simplifiedTerms.length; a++) {
-			if (simplifiedTerms[a] instanceof Variable)
+			if (!(simplifiedTerms[a] instanceof Pow))
 				simplifiedTerms[a] = new Pow(new Constant(1), simplifiedTerms[a]);
 		}
 		for (int i = 1; i < simplifiedTerms.length; i++) {

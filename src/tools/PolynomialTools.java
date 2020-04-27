@@ -67,4 +67,11 @@ public class PolynomialTools {
 			return false;
 		}
 	}
+
+	//TODO WRITE AND DOCUMENT THIS
+	public static int getOrder(Function function) {
+		if (!isMonomial(function))
+			throw new IllegalArgumentException("Not a monomial!");
+		return 0; //write code here
+	}
 }

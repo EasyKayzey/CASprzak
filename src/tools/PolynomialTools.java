@@ -1,6 +1,7 @@
 package tools;
 
 import functions.Function;
+import functions.commutative.Add;
 
 public class PolynomialTools {
 
@@ -10,7 +11,19 @@ public class PolynomialTools {
 	 * @return true if function is a polynomial
 	 */
 	public static boolean isPolynomial(Function function) {
-		return false;
+		if (isMonomial(function)) {
+			return true;
+		} else if (function instanceof Add sum) {
+			Function[] terms = sum.getFunctions();
+			for (Function term : terms) {
+				if (!isMonomial(term)) {
+					return false;
+				}
+			}
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**

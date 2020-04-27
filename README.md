@@ -14,9 +14,7 @@ Hello, and welcome to our Computer Algebra System. This is a joint project by Th
 - Numerical integration via Simpson's rule
 ### Other
 - Parsing and storing expressions like `x^2-3y+sin(1/z)`
-- Command-line demo
-### Future
-- See `Projects` window
+- Command-line interface
 
 ## Notes
 - If you find a problem with the CAS, please report the bug in `Issues` so we can fix it

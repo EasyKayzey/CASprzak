@@ -3,6 +3,7 @@ package tools.singlevariable;
 import config.Settings;
 import functions.Function;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -113,6 +114,7 @@ public class Extrema {
 
     private static double[] findPoints(Function function, double lowerBound, double upperBound, BiPredicate<? super Double, ? super Double> strategy) {
         double[] criticalPoints = Solver.getSolutionsRange(function.getDerivative(Settings.singleVariableDefault), lowerBound, upperBound);
+        System.out.println("Critical points in Extrema.findPoints: " + Arrays.toString(criticalPoints));
         if (criticalPoints.length == 0)
             return new double[0];
 

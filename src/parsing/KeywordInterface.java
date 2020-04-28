@@ -1,7 +1,6 @@
 package parsing;
 
 import config.Settings;
-import config.SolverType;
 import functions.Function;
 import functions.special.Constant;
 import functions.special.Variable;
@@ -13,7 +12,6 @@ import tools.singlevariable.TaylorSeries;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 import java.util.regex.Pattern;
 
 @SuppressWarnings("SpellCheckingInspection")

@@ -54,6 +54,7 @@ public class KeywordInterface {
 			case "printfun", "printfunctions" -> printFunctions();
 			case "clearfun", "clearfunctions" -> clearFunctions();
 			case "sset", "setsetting" -> setSettings(splitInput[1]);
+			case "settings" -> settings();
 			default -> null;
 		};
 		if (ret == null) {
@@ -323,5 +324,21 @@ public class KeywordInterface {
 			default -> throw new IllegalArgumentException("Setting " + splitInput[0] + " does not exist");
 		}
 		return splitInput[0] + " = " + splitInput[1];
+	}
+
+	/**
+	 * setting
+	 */
+	private static String settings() {
+		return "simpsonsSegments = " + Settings.simpsonsSegments + "\n"
+		+ "defaultSolverIterations = " + Settings.defaultSolverIterations + "\n"
+		+ "defaultRangeSections = " + Settings.defaultRangeSections + "\n"
+		+ "zeroMargin = " + Settings.zeroMargin + "\n"
+		+ "simplifyFunctionsOfConstants = " + Settings.simplifyFunctionsOfConstants + "\n"
+		+ "distributeExponents = " + Settings.distributeExponents + "\n"
+		+ "cacheDerivatives = " + Settings.cacheDerivatives + "\n"
+		+ "trustImmutability = " + Settings.trustImmutability + "\n"
+		+ "singleVariableDefault = " + Settings.singleVariableDefault + "\n"
+		+ "defaultSolverType = " + Settings.defaultSolverType;
 	}
 }

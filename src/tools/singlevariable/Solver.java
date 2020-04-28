@@ -62,11 +62,13 @@ public class Solver {
 		return getSolutionPointNewton(expression, initialPoint, Settings.defaultSolverIterations);
 	}
 
+	@SuppressWarnings("UnnecessaryDefault")
 	public static double[] getSolutionsRange(Function expression, double lower, double upper) {
-		switch (Settings.defaultSolverType) {
-
-		}
-			return null;
+		return switch (Settings.defaultSolverType) {
+			case NEWTON -> getSolutionsRangeNewton(expression, lower, upper);
+			case HALLEY -> getSolutionsRangeHalley(expression, lower, upper);
+			default -> throw new IllegalArgumentException("Solver type unspecified!");
+		};
 	}
 
 	/**

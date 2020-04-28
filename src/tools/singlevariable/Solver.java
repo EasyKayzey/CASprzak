@@ -40,6 +40,7 @@ public class Solver {
 			return Double.NaN;
 		for (int i = 0; i < runs; i++) {
 			double nextPoint = newtonsMethod(expression, initialPoint);
+			System.out.println(nextPoint);
 			if (Double.isNaN(nextPoint))
 				return initialPoint;
 			initialPoint = nextPoint;

@@ -62,4 +62,8 @@ public class SolverTest {
         assertEquals(-1, Solver.getSolutionPoint(test, 23));
     }
 
+    @Test void chemTest() {
+        Function test = Parser.parse("x^2/(.2-x)-.013");
+        assertEquals(2, Solver.getSolutionsRange(test, -1, 1).length);
+    }
 }

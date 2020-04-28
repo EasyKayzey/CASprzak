@@ -62,6 +62,13 @@ public class Solver {
 		return getSolutionPointNewton(expression, initialPoint, Settings.defaultSolverIterations);
 	}
 
+	/**
+	 * Gives approximate roots of a {@link Function} in a range of values after
+	 * @param expression the function whose roots are being found
+	 * @param lower      the lower bound of the values that will be searched for roots
+	 * @param upper      the upper bound of the values that will be searched for roots
+	 * @return an array of all the approximate roots found
+	 */
 	@SuppressWarnings("UnnecessaryDefault")
 	public static double[] getSolutionsRange(Function expression, double lower, double upper) {
 		return switch (Settings.defaultSolverType) {

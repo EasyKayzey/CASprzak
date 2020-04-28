@@ -14,7 +14,7 @@ public class InfixTokenizer {
 	private static final Pattern OOO2 = Pattern.compile("\\)");
 	private static final Pattern OOO3 = Pattern.compile("\\+");
 	private static final Pattern OOO4 = Pattern.compile("\\*");
-	private static final Pattern Splitter = Pattern.compile("\\s+|(((?<=\\W)(?=[\\w-])((?<!-)|(?!\\d))|(?<=\\w)(?=\\W))|(?<=[()])|(?=[()]))(?<![ .])(?![ .])|(?<=[\\D-])(?=\\.)");
+	private static final Pattern Splitter = Pattern.compile("\\s+|(((?<=\\W)(?=[\\w-])((?<!-)|(?!\\d))|(?<=\\w)(?=\\W)(?<!(?<=\\dE)(?=-?\\d)))|(?<=[()])|(?=[()]))(?<![ .])(?![ .])|(?<=[\\D-])(?=\\.)");
 
 	private InfixTokenizer(){}
 

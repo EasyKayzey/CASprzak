@@ -73,6 +73,6 @@ public class Integral extends Function {
 			}
 			return new Add(integratedTerms);
 		}
-		return clone();
+		return new Constant(0);
 	}
 }

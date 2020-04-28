@@ -11,8 +11,8 @@ public class IntegralTest {
 
     @Test
     void splitAdds() {
-        Function test1 = new Integral(Parser.parse("x+e^x"), 'x');
+        Integral test1 = new Integral(Parser.parse("x+e^x"), 'x');
         Function test2 = new Add(new Integral(Parser.parse("x"), 'x'), new Integral(Parser.parse("e^x"), 'x'));
-        assertEquals(test1, test2);
+        assertEquals(test1.integrate() , test2);
     }
 }

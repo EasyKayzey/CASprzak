@@ -14,7 +14,7 @@ import tools.MiscTools;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class Function implements Evaluable, Differentiable, Simplifiable, Comparable<Function> {
+public abstract class Function implements Evaluable, Differentiable, Simplifiable, Comparable<Function>, Iterable<Function> {
 
 	/**
 	 * Describes the order that a {@link Function} should appear in a sorted array (used in {@link #compareTo(Function)})

@@ -30,7 +30,7 @@ public class Solver {
 	 * @param runs         the amount of times that {@link #newtonsMethod} is ran recursively
 	 * @return the approximate solution for a root of the function
 	 */
-	public static double getSolutionPoint(Function expression, double initialPoint, int runs) {
+	public static double getSolutionPointNewton(Function expression, double initialPoint, int runs) {
 		if (expression.evaluate(Map.of(Settings.singleVariableDefault, initialPoint)) == 0)
 			return initialPoint;
 		if (expression instanceof Constant)
@@ -55,8 +55,8 @@ public class Solver {
 	 * @param initialPoint the initial approximation of the root
 	 * @return the approximate solution for a root of the function
 	 */
-	public static double getSolutionPoint(Function expression, double initialPoint) {
-		return getSolutionPoint(expression, initialPoint, Settings.defaultSolverIterations);
+	public static double getSolutionPointNewton(Function expression, double initialPoint) {
+		return getSolutionPointNewton(expression, initialPoint, Settings.defaultSolverIterations);
 	}
 
 	/**
@@ -67,11 +67,11 @@ public class Solver {
 	 * @param runs       the amount of times that {@link #newtonsMethod} is ran recursively
 	 * @return an array of all the approximate roots found
 	 */
-	public static double[] getSolutionsRange(Function expression, double lower, double upper, int runs) {
+	public static double[] getSolutionsRangeNewton(Function expression, double lower, double upper, int runs) {
 		List<Double> solutions = SolverTools.createRange(upper, lower, Settings.defaultRangeSections);
 		ListIterator<Double> iter = solutions.listIterator();
 		while (iter.hasNext()) {
-			double nextLocation = getSolutionPoint(expression, iter.next(), runs);
+			double nextLocation = getSolutionPointNewton(expression, iter.next(), runs);
 			if (!(expression.evaluate(Map.of(Settings.singleVariableDefault, nextLocation)) < Settings.zeroMargin && expression.evaluate(Map.of(Settings.singleVariableDefault, nextLocation)) > -Settings.zeroMargin))
 				iter.remove();
 			else
@@ -90,7 +90,7 @@ public class Solver {
 	 * @param upper      the upper bound of the values that will be searched for roots
 	 * @return an array of all the approximate roots found
 	 */
-	public static double[] getSolutionsRange(Function expression, double lower, double upper) {
-		return getSolutionsRange(expression, lower, upper, Settings.defaultSolverIterations);
+	public static double[] getSolutionsRangeNewton(Function expression, double lower, double upper) {
+		return getSolutionsRangeNewton(expression, lower, upper, Settings.defaultSolverIterations);
 	}
 }

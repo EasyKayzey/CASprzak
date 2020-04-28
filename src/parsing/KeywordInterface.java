@@ -154,7 +154,7 @@ public class KeywordInterface {
 	 */
 	public static double[] solve(String input) {
 		String[] splitInput = keywordSplitter.split(input);
-		return Solver.getSolutionsRange(parseStored(splitInput[0]), ConstantEvaluator.getConstant(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]));
+		return Solver.getSolutionsRangeNewton(parseStored(splitInput[0]), ConstantEvaluator.getConstant(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]));
 	}
 
 	/**

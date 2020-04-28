@@ -112,7 +112,7 @@ public class Extrema {
     }
 
     private static double[] findPoints(Function function, double lowerBound, double upperBound, BiPredicate<? super Double, ? super Double> strategy) {
-        double[] criticalPoints = Solver.getSolutionsRange(function.getDerivative(Settings.singleVariableDefault), lowerBound, upperBound);
+        double[] criticalPoints = Solver.getSolutionsRangeNewton(function.getDerivative(Settings.singleVariableDefault), lowerBound, upperBound);
         if (criticalPoints.length == 0)
             return new double[0];
 

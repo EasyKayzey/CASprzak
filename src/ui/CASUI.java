@@ -61,7 +61,7 @@ public class CASUI {
 		System.out.println(currentFunction.getSimplifiedDerivative(Variable.variables.get(0)).simplifyTimes(10).evaluate(map));
 
 		if (Variable.variables.size() == 1) {
-			double solution = Solver.getSolutionPoint(currentFunction, -10);
+			double solution = Solver.getSolutionPointNewton(currentFunction, -10);
 			if (!Double.isNaN(solution)) {
 				System.out.println("Here is one zero for the expression:");
 				System.out.println(solution);
@@ -69,7 +69,7 @@ public class CASUI {
 				System.out.println("The algorithm did not find an initial solution.");
 			}
 
-			double[] solutions = Solver.getSolutionsRange(currentFunction, -10, 10);
+			double[] solutions = Solver.getSolutionsRangeNewton(currentFunction, -10, 10);
 			if (solutions.length > 0) {
 				System.out.println("Here are the zeros of the expression:");
 				System.out.println(Arrays.toString(solutions));

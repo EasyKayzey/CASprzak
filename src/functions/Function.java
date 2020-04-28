@@ -10,6 +10,7 @@ import functions.special.Variable;
 import functions.unitary.UnitaryFunction;
 import org.jetbrains.annotations.NotNull;
 import tools.MiscTools;
+import tools.integral.Integral;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,6 +22,7 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 	 */
 	@SuppressWarnings("ClassReferencesSubclass")
 	public static final Class<?>[] sortOrder = {
+			Integral.class,
 			Constant.class,
 			Variable.class,
 			Multiply.class,

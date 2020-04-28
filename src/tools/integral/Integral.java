@@ -62,7 +62,7 @@ public class Integral extends Function {
 
 	@Override
 	public Function simplify() {
-		return null; //TODO implement
+		return integrate(); //TODO implement
 	}
 
 	public Function integrate() {
@@ -73,6 +73,6 @@ public class Integral extends Function {
 			}
 			return new Add(integratedTerms);
 		}
-		return new Constant("0");
+		return clone();
 	}
 }

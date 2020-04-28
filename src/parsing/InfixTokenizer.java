@@ -8,7 +8,7 @@ public class InfixTokenizer {
 	private static final Pattern absoluteValueEnd = Pattern.compile("\\|(?=([^|]*\\|[^|]*\\|)*$)");
 	private static final Pattern absoluteValueStart = Pattern.compile("(?<=\\w)\\|");
 	private static final Pattern adjacentMultiplier = Pattern.compile("(?<=\\d)(?=[a-zA-Z])(?!E-?\\d)|(?<=[a-zA-Z])(?=[\\d])(?<!\\dE)|(?<=\\))(?=[\\w(])|(?<=[\\d)])(?=\\()(?<!logb_\\d)");
-	private static final Pattern subtractionFinder = Pattern.compile("(?<!^)(?<!\\dE-)(?<![\\^\\-+*/\\s(])\\s*-");
+	private static final Pattern subtractionFinder = Pattern.compile("(?<!^)(?<!(?<=\\dE)(?=-\\d))(?<![\\^\\-+*/\\s(])\\s*-");
 	//OOO is Order of Operations
 	private static final Pattern OOO1 = Pattern.compile("\\(");
 	private static final Pattern OOO2 = Pattern.compile("\\)");

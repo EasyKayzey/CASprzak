@@ -1,5 +1,6 @@
 import functions.Function;
 import functions.binary.Pow;
+import functions.special.Variable;
 import org.junit.jupiter.api.Test;
 import parsing.Parser;
 
@@ -17,5 +18,26 @@ public class IteratorTest {
 		}
 		assertTrue(io);
 		assertEquals(i, 3);
+	}
+
+	@Test
+	void testBinary1() {
+		Function test = Parser.parseSimplified("x^2");
+		int i = 0;
+		for (Function f : test) {
+			i++;
+		}
+		assertEquals(i, 2);
+	}
+
+	@Test
+	void testUnitary1() {
+		Function test = Parser.parseSimplified("sin x");
+		int i = 0;
+		for (Function f : test) {
+			i++;
+			assertTrue(f instanceof Variable);
+		}
+		assertEquals(i, 1);
 	}
 }

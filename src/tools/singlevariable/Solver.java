@@ -2,7 +2,10 @@ package tools.singlevariable;
 
 import core.Settings;
 import functions.Function;
+import functions.binary.Pow;
+import functions.commutative.Multiply;
 import functions.special.Constant;
+import functions.unitary.Abs;
 import tools.SolverTools;
 
 import java.util.List;
@@ -84,7 +87,21 @@ public class Solver {
 	}
 
 	/**
-	 * Gives approximate roots of a {@link Function} using {@link #newtonsMethod} in a range of values after 1000 runs
+	 * Gives approximate roots of a {@link Function} using Halley's method in a range of values after the amount of runs specified in {@link Settings}
+	 * @param expression the function whose roots are being found
+	 * @param lower      the lower bound of the values that will be searched for roots
+	 * @param upper      the upper bound of the values that will be searched for roots
+	 * @return an array of all the approximate roots found
+	 */
+	public static double[] getSolutionsRangeHalley(Function expression, double lower, double upper) {
+		return getSolutionsRangeNewton(
+				(new Multiply(expression, new Pow(new Constant(-.5), new Abs(expression.getDerivative(Settings.singleVariableDefault))))).simplify(),
+				lower, upper
+		);
+	}
+
+	/**
+	 * Gives approximate roots of a {@link Function} using {@link #newtonsMethod} in a range of values after the amount of runs specified in {@link Settings}
 	 * @param expression the function whose roots are being found
 	 * @param lower      the lower bound of the values that will be searched for roots
 	 * @param upper      the upper bound of the values that will be searched for roots

@@ -23,7 +23,7 @@ public class Solver {
 	 * @return a better approximate of the root based on the value provided
 	 */
 	private static double newtonsMethod(Function expression, double value) {
-		return value - expression.evaluate(Map.of(Settings.singleVariableDefault, value)) / expression.getSimplifiedDerivative('x').evaluate(Map.of(Settings.singleVariableDefault, value));
+		return value - expression.evaluate(Map.of(Settings.singleVariableDefault, value)) / expression.getSimplifiedDerivative(Settings.singleVariableDefault).evaluate(Map.of(Settings.singleVariableDefault, value));
 	}
 
 	/**

@@ -40,4 +40,14 @@ public class IteratorTest {
 		}
 		assertEquals(i, 1);
 	}
+
+	@Test
+	void testSpecial1() {
+		Function test = Parser.parseSimplified("x");
+		int i = 0;
+		for (Function f : test) {
+			i++;
+		}
+		assertEquals(i, 0);
+	}
 }

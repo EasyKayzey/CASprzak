@@ -166,4 +166,9 @@ public class FunctionTest {
 		Function test = Parser.parse("ln(e)");
 		assertEquals(1, test.evaluate(null));
 	}
+
+	@Test void usingEDoubles() {
+		Function test = Parser.parse("16E-6*1E6");
+		assertEquals(16, test.evaluate(null));
+	}
 }

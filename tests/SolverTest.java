@@ -41,7 +41,7 @@ public class SolverTest {
      @Test
     void simpleNotPolynomial2() {
         Function test = Parser.parse("e^(x-5) - 1");
-         assertArrayEquals(new double[]{5}, Solver.getSolutionsRangeNewton(test, 0, 7.68785));
+         assertArrayEquals(new double[]{5}, Solver.getSolutionsRangeHalley(test, 0, 7.68785));
     }
 
     @Test
@@ -64,6 +64,6 @@ public class SolverTest {
 
     @Test void chemTest() {
         Function test = Parser.parse("x^2/(.2-x)-.013");
-        assertEquals(2, Solver.getSolutionsRangeNewton(test, -1, 1).length);
+        assertEquals(2, Solver.getSolutionsRangeHalley(test, -10, 10).length);
     }
 }

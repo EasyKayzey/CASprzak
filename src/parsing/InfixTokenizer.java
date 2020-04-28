@@ -8,13 +8,13 @@ public class InfixTokenizer {
 	private static final Pattern absoluteValueEnd = Pattern.compile("\\|(?=([^|]*\\|[^|]*\\|)*$)");
 	private static final Pattern absoluteValueStart = Pattern.compile("(?<=\\w)\\|");
 	private static final Pattern adjacentMultiplier = Pattern.compile("(?<=\\d)(?=[a-zA-Z])|(?<=[a-zA-Z])(?=[\\d])|(?<=\\))(?=[\\w(])|(?<=[\\d)])(?=\\()(?<!logb_\\d)");
-	private static final Pattern subtractionFinder = Pattern.compile("(?<!^)(?<![\\^\\-+*/\\s(])\\s*-");
+	private static final Pattern subtractionFinder = Pattern.compile("(?<!^)(?<!\\dE-)(?<![\\^\\-+*/\\s(])\\s*-");
 	//OOO is Order of Operations
 	private static final Pattern OOO1 = Pattern.compile("\\(");
 	private static final Pattern OOO2 = Pattern.compile("\\)");
 	private static final Pattern OOO3 = Pattern.compile("\\+");
 	private static final Pattern OOO4 = Pattern.compile("\\*");
-	private static final Pattern Splitter = Pattern.compile("\\s+|(((?<=\\W)(?=[\\w-])((?<!-)|(?!\\d))|(?<=\\w)(?=\\W))|(?<=[()])|(?=[()]))(?<![ .])(?![ .])");
+	private static final Pattern Splitter = Pattern.compile("\\s+|(((?<=\\W)(?=[\\w-])((?<!-)|(?!\\d))|(?<=\\w)(?=\\W))|(?<=[()])|(?=[()]))(?<![ .])(?![ .])|(?<=[\\D-])(?=\\.)");
 
 	private InfixTokenizer(){}
 

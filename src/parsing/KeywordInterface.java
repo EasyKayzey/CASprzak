@@ -53,6 +53,7 @@ public class KeywordInterface {
 			case "cv", "clearvars" -> clearVariables();
 			case "printfun", "printfunctions" -> printFunctions();
 			case "clearfun", "clearfunctions" -> clearFunctions();
+			case "sset", "setsetting" -> setSettings(splitInput[1]);
 			default -> null;
 		};
 		if (ret == null) {

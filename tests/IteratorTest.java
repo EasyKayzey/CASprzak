@@ -7,6 +7,7 @@ import parsing.Parser;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@SuppressWarnings("ChainOfInstanceofChecks")
 public class IteratorTest {
 	@Test
 	void testCommutative1() {

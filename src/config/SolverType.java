@@ -1,6 +1,6 @@
 package config;
 
-public enum SolverTypes {
+public enum SolverType {
 	NEWTON,
 	HALLEY,
 }

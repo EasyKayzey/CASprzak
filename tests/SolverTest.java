@@ -64,6 +64,6 @@ public class SolverTest {
 
     @Test void chemTest() {
         Function test = Parser.parse("x^2/(.2-x)-.013");
-        assertEquals(2, Solver.getSolutionsRangeHalley(test, -10, 10).length);
+        assertArrayEquals(new double[]{-.057, .045}, Solver.getSolutionsRangeHalley(test, -10, 10), .05);
     }
 }

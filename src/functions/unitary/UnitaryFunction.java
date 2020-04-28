@@ -1,6 +1,6 @@
 package functions.unitary;
 
-import core.Settings;
+import config.Settings;
 import functions.Function;
 import functions.special.Constant;
 

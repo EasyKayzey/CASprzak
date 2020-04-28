@@ -1,6 +1,6 @@
 package functions.commutative;
 
-import core.Settings;
+import config.Settings;
 import functions.Function;
 import functions.special.Constant;
 import tools.FunctionTools;

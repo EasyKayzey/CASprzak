@@ -2,7 +2,7 @@
 
 Thank you for considering contributing to Z_CASprzak. Following these guidelines will resolve many problems before they even happen. 
 
-The core of the project (the `functions` package) is relatively set-in-stone, though we always welcome ideas. This isn't to say you cannot contribute to it; it will just be harder to accept changes to existing files.
+The config of the project (the `functions` package) is relatively set-in-stone, though we always welcome ideas. This isn't to say you cannot contribute to it; it will just be harder to accept changes to existing files.
 
 The main help we need in Z_CASprzak is in the front-end and environment - especially front-end. We are a team of two back-end developers, and anybody who wants to develop better UI will be greatly appreciated.
 

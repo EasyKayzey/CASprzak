@@ -1,4 +1,4 @@
-package core;
+package config;
 
 @SuppressWarnings("CanBeFinal")
 public class Settings {

@@ -1,6 +1,6 @@
 package tools.singlevariable;
 
-import core.Settings;
+import config.Settings;
 import functions.Function;
 import functions.binary.Pow;
 import functions.commutative.Add;

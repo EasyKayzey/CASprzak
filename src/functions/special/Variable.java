@@ -1,6 +1,6 @@
 package functions.special;
 
-import core.Settings;
+import config.Settings;
 import functions.Function;
 
 import java.util.ArrayList;

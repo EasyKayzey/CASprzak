@@ -1,6 +1,6 @@
 package functions.binary;
 
-import core.Settings;
+import config.Settings;
 import functions.Function;
 import functions.commutative.Add;
 import functions.commutative.Multiply;

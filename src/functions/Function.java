@@ -1,6 +1,6 @@
 package functions;
 
-import core.Settings;
+import config.Settings;
 import functions.binary.Logb;
 import functions.binary.Pow;
 import functions.commutative.Add;

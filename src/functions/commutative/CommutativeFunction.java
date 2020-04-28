@@ -190,6 +190,7 @@ public abstract class CommutativeFunction extends Function {
 		return 0;
 	}
 
+
 	public @NotNull Iterator<Function> iterator() {
 		return new CommutativeIterator(this);
 	}

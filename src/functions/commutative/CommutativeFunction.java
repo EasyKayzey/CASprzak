@@ -3,9 +3,12 @@ package functions.commutative;
 import config.Settings;
 import functions.Function;
 import functions.special.Constant;
+import org.jetbrains.annotations.NotNull;
 import tools.FunctionTools;
 
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.function.DoubleBinaryOperator;
 
 public abstract class CommutativeFunction extends Function {
@@ -185,5 +188,32 @@ public abstract class CommutativeFunction extends Function {
 		}
 		System.out.println("This isn't supposed to happen. Check CompareSelf of CommutativeFunction and Function.compareTo");
 		return 0;
+	}
+
+	public @NotNull Iterator<Function> iterator() {
+		return new CommutativeIterator(this);
+	}
+
+	private static class CommutativeIterator implements Iterator<Function> {
+		private final Function[] functions;
+		private int loc;
+
+		private CommutativeIterator(CommutativeFunction function) {
+			this.functions = function.getFunctions();
+			loc = 0;
+		}
+
+		@Override
+		public boolean hasNext() {
+			return loc < functions.length;
+		}
+
+		@SuppressWarnings("ValueOfIncrementOrDecrementUsed")
+		@Override
+		public Function next() {
+			if (!hasNext())
+				throw new NoSuchElementException("Out of elements in CommutativeFunction " + Arrays.toString(functions));
+			return functions[loc++];
+		}
 	}
 }

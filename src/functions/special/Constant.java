@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class Constant extends Function {
+public class Constant extends SpecialFunction {
 	private static final HashMap<String, Double> specialConstants = new HashMap<>() {
 		{
 			put("pi", Math.PI);

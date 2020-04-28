@@ -46,11 +46,8 @@ public class Solver {
 				return initialPoint;
 			initialPoint = nextPoint;
 			if (i % 25 == 0)
-				if (initialPoint < 1E-10 && initialPoint > -1E-10) {
-					System.out.println(nextPoint);
-					System.out.println("i have returned zero");
+				if (initialPoint < 1E-10 && initialPoint > -1E-10)
 					return 0;
-				}
 		}
 		if (expression.evaluate(Map.of(Settings.singleVariableDefault, initialPoint)) < Settings.zeroMargin && expression.evaluate(Map.of(Settings.singleVariableDefault, initialPoint)) > -Settings.zeroMargin)
 			return initialPoint;
@@ -92,16 +89,12 @@ public class Solver {
 	 * @return an array of all the approximate roots found
 	 */
 	public static double[] getSolutionsRangeNewton(Function expression, double lower, double upper, int runs) {
-		System.out.println("The function: " + expression);
 		List<Double> solutions = SolverTools.createRange(upper, lower, Settings.defaultRangeSections);
 		ListIterator<Double> iter = solutions.listIterator();
 		while (iter.hasNext()) {
 			double nextLocation = getSolutionPointNewton(expression, iter.next(), runs);
-			System.out.println("The point nextLocation: " + nextLocation);
-			if (!(expression.evaluate(Map.of(Settings.singleVariableDefault, nextLocation)) < Settings.zeroMargin && expression.evaluate(Map.of(Settings.singleVariableDefault, nextLocation)) > -Settings.zeroMargin)) {
-				System.out.println("it is being removed");
+			if (!(expression.evaluate(Map.of(Settings.singleVariableDefault, nextLocation)) < Settings.zeroMargin && expression.evaluate(Map.of(Settings.singleVariableDefault, nextLocation)) > -Settings.zeroMargin))
 				iter.remove();
-			}
 			else
 				iter.set(nextLocation);
 		}

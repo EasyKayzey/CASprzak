@@ -114,19 +114,13 @@ public class Extrema {
 
     private static double[] findPoints(Function function, double lowerBound, double upperBound, BiPredicate<? super Double, ? super Double> strategy) {
         double[] criticalPoints = Solver.getSolutionsRange(function.getSimplifiedDerivative(Settings.singleVariableDefault), lowerBound, upperBound);
-        System.out.println("Critical points in Extrema.findPoints: " + Arrays.toString(criticalPoints));
         if (criticalPoints.length == 0)
             return new double[0];
 
         List<Double> secondDerivative = new LinkedList<>();
         for (double criticalPoint : criticalPoints) {
-            if (strategy.test(function.getNthDerivative(Settings.singleVariableDefault, 2).evaluate(Map.of(Settings.singleVariableDefault, criticalPoint)), 0.0)) {
+            if (strategy.test(function.getNthDerivative(Settings.singleVariableDefault, 2).evaluate(Map.of(Settings.singleVariableDefault, criticalPoint)), 0.0))
                 secondDerivative.add(criticalPoint);
-            }
-            System.out.println(function.getNthDerivative(Settings.singleVariableDefault, 2));
-            System.out.println(function.getNthDerivative(Settings.singleVariableDefault, 2).evaluate(Map.of(Settings.singleVariableDefault, criticalPoint)));
-            System.out.println("crit point: " + criticalPoint);
-            System.out.println(secondDerivative.toString());
         }
         return secondDerivative.stream().mapToDouble(i -> i).toArray();
     }

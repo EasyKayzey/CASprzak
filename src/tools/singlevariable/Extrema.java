@@ -123,6 +123,10 @@ public class Extrema {
             if (strategy.test(function.getNthDerivative(Settings.singleVariableDefault, 2).evaluate(Map.of(Settings.singleVariableDefault, criticalPoint)), 0.0)) {
                 secondDerivative.add(criticalPoint);
             }
+            System.out.println(function.getNthDerivative(Settings.singleVariableDefault, 2));
+            System.out.println(function.getNthDerivative(Settings.singleVariableDefault, 2).evaluate(Map.of(Settings.singleVariableDefault, criticalPoint)));
+            System.out.println("crit point: " + criticalPoint);
+            System.out.println(secondDerivative.toString());
         }
         return secondDerivative.stream().mapToDouble(i -> i).toArray();
     }

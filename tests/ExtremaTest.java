@@ -26,6 +26,12 @@ public class ExtremaTest {
     }
 
     @Test
+    void simpleHighOrderMinima() {
+        Function test = Parser.parse("x^4");
+        assertArrayEquals(new double[]{0}, Extrema.findMinimumOnRange(test, -5.87329472, 5.023954780232345));
+    }
+
+    @Test
     void simpleInflection() {
         Function test = Parser.parse("x^3");
         assertArrayEquals(new double[]{0}, Extrema.findAnyInflectionPoints(test, -5.87329472, 5.023954780232345));

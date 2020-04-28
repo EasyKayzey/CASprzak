@@ -13,5 +13,5 @@ public class Settings {
 	public static boolean cacheDerivatives = true;
 	public static boolean trustImmutability = true; // Makes it so that getFunctions and other getters don't return clone()
 	public static char singleVariableDefault = 'x';
-	public static SolverType defaultSolverType = SolverType.HALLEY;
+	public static SolverType defaultSolverType = SolverType.NEWTON;
 }

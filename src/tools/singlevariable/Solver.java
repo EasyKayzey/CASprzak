@@ -34,19 +34,23 @@ public class Solver {
 	 * @return the approximate solution for a root of the function
 	 */
 	public static double getSolutionPointNewton(Function expression, double initialPoint, int runs) {
+		if (expression.evaluate(Map.of(Settings.singleVariableDefault, 0.0)) == 0) //Temporary but probably best fix
+			return 0;
 		if (expression.evaluate(Map.of(Settings.singleVariableDefault, initialPoint)) == 0)
 			return initialPoint;
 		if (expression instanceof Constant)
 			return Double.NaN;
 		for (int i = 0; i < runs; i++) {
 			double nextPoint = newtonsMethod(expression, initialPoint);
-			System.out.println(nextPoint);
 			if (Double.isNaN(nextPoint))
 				return initialPoint;
 			initialPoint = nextPoint;
 			if (i % 25 == 0)
-				if (initialPoint < 1E-10 && initialPoint > -1E-10)
+				if (initialPoint < 1E-10 && initialPoint > -1E-10) {
+					System.out.println(nextPoint);
+					System.out.println("i have returned zero");
 					return 0;
+				}
 		}
 		if (expression.evaluate(Map.of(Settings.singleVariableDefault, initialPoint)) < Settings.zeroMargin && expression.evaluate(Map.of(Settings.singleVariableDefault, initialPoint)) > -Settings.zeroMargin)
 			return initialPoint;
@@ -88,12 +92,16 @@ public class Solver {
 	 * @return an array of all the approximate roots found
 	 */
 	public static double[] getSolutionsRangeNewton(Function expression, double lower, double upper, int runs) {
+		System.out.println("The function: " + expression);
 		List<Double> solutions = SolverTools.createRange(upper, lower, Settings.defaultRangeSections);
 		ListIterator<Double> iter = solutions.listIterator();
 		while (iter.hasNext()) {
 			double nextLocation = getSolutionPointNewton(expression, iter.next(), runs);
-			if (!(expression.evaluate(Map.of(Settings.singleVariableDefault, nextLocation)) < Settings.zeroMargin && expression.evaluate(Map.of(Settings.singleVariableDefault, nextLocation)) > -Settings.zeroMargin))
+			System.out.println("The point nextLocation: " + nextLocation);
+			if (!(expression.evaluate(Map.of(Settings.singleVariableDefault, nextLocation)) < Settings.zeroMargin && expression.evaluate(Map.of(Settings.singleVariableDefault, nextLocation)) > -Settings.zeroMargin)) {
+				System.out.println("it is being removed");
 				iter.remove();
+			}
 			else
 				iter.set(nextLocation);
 		}

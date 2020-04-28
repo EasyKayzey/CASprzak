@@ -1,5 +1,7 @@
 package parsing;
 
+import config.Settings;
+import config.SolverType;
 import functions.Function;
 import functions.special.Constant;
 import functions.special.Variable;
@@ -11,6 +13,7 @@ import tools.singlevariable.TaylorSeries;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 @SuppressWarnings("SpellCheckingInspection")
@@ -299,5 +302,25 @@ public class KeywordInterface {
 	private static double[] integrateNumericError(String input) {
 		String[] splitInput = keywordSplitter.split(input);
 		return NumericalIntegration.simpsonsRuleWithError(parseStored(splitInput[0]), ConstantEvaluator.getConstant(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]));
+	}
+
+	/**
+	 * setsetting [setting] [value]
+	 */
+	private static String setSettings(String input) {
+		String[] splitInput = keywordSplitter.split(input);
+		switch (splitInput[0]) {
+			case "simpsonsSegments" -> Settings.simpsonsSegments = Integer.parseInt(splitInput[1]);
+			case "defaultSolverIterations" -> Settings.defaultSolverIterations = Integer.parseInt(splitInput[1]);
+			case "defaultRangeSections" -> Settings.defaultRangeSections = Integer.parseInt(splitInput[1]);
+			case "zeroMargin" -> Settings.zeroMargin = Double.parseDouble(splitInput[1]);
+			case "simplifyFunctionsOfConstants" -> Settings.simplifyFunctionsOfConstants = Boolean.parseBoolean(splitInput[1]);
+			case "distributeExponents" -> Settings.distributeExponents = Boolean.parseBoolean(splitInput[1]);
+			case "cacheDerivatives" -> Settings.cacheDerivatives = Boolean.parseBoolean(splitInput[1]);
+			case "trustImmutability" -> Settings.trustImmutability = Boolean.parseBoolean(splitInput[1]);
+			case "singleVariableDefault" -> Settings.singleVariableDefault = splitInput[1].charAt(0);
+			default -> throw new IllegalArgumentException("Setting " + splitInput[0] + " does not exist");
+		}
+		return splitInput[0] + " = " + splitInput[1];
 	}
 }

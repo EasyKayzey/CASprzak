@@ -86,6 +86,8 @@ public class PolynomialTools {
 			for (Function element: elements) {
 				if (element instanceof Pow power && power.getFunction1() instanceof Constant number)
 					sum += number.constant;
+				else if (element instanceof Variable)
+					sum += 1;
 			}
 			return sum;
 		} else {

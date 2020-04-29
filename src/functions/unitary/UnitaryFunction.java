@@ -69,15 +69,13 @@ public abstract class UnitaryFunction extends Function {
 
 
 	public @NotNull Iterator<Function> iterator() {
-		return new UnitaryIterator(this);
+		return new UnitaryIterator();
 	}
 
-	private static class UnitaryIterator implements Iterator<Function> {
-		private final Function operand;
+	private class UnitaryIterator implements Iterator<Function> {
 		private boolean used;
 
-		private UnitaryIterator(UnitaryFunction function) {
-			this.operand = function.function;
+		private UnitaryIterator() {
 			used = false;
 		}
 
@@ -92,7 +90,7 @@ public abstract class UnitaryFunction extends Function {
 			if (used)
 				throw new NoSuchElementException("Out of elements in UnitaryFunction");
 			used = true;
-			return operand;
+			return function;
 		}
 	}
 }

@@ -4,6 +4,7 @@ import config.Settings;
 import functions.Function;
 import functions.special.Constant;
 import functions.special.Variable;
+import tools.MiscTools;
 import tools.singlevariable.Extrema;
 import tools.singlevariable.NumericalIntegration;
 import tools.singlevariable.Solver;
@@ -49,10 +50,10 @@ public class KeywordInterface {
 			case "rmc", "rmconstant", "removeconstant" -> removeConstant(splitInput[1]);
 			case "vars", "printvars" -> printVariables();
 			case "cv", "clearvars" -> clearVariables();
-			case "printfun", "printfunctions" -> printFunctions();
-			case "clearfun", "clearfunctions" -> clearFunctions();
-			case "sset", "setsetting" -> setSettings(splitInput[1]);
-			case "settings" -> settings();
+			case "pf", "printfun", "printfunctions" -> printFunctions();
+			case "cf", "clearfun", "clearfunctions" -> clearFunctions();
+			case "ss", "sset", "sets", "setsetting" -> setSettings(splitInput[1]);
+			case "ps", "settings", "printsettings" -> printSettings();
 			default -> null;
 		};
 		if (ret == null) {
@@ -314,20 +315,25 @@ public class KeywordInterface {
 			case "defaultSolverIterations" -> Settings.defaultSolverIterations = Integer.parseInt(splitInput[1]);
 			case "defaultRangeSections" -> Settings.defaultRangeSections = Integer.parseInt(splitInput[1]);
 			case "zeroMargin" -> Settings.zeroMargin = Double.parseDouble(splitInput[1]);
-			case "simplifyFunctionsOfConstants" -> Settings.simplifyFunctionsOfConstants = Boolean.parseBoolean(splitInput[1]);
-			case "distributeExponents" -> Settings.distributeExponents = Boolean.parseBoolean(splitInput[1]);
-			case "cacheDerivatives" -> Settings.cacheDerivatives = Boolean.parseBoolean(splitInput[1]);
-			case "trustImmutability" -> Settings.trustImmutability = Boolean.parseBoolean(splitInput[1]);
-			case "singleVariableDefault" -> Settings.singleVariableDefault = splitInput[1].charAt(0);
+			case "simplifyFunctionsOfConstants" -> Settings.simplifyFunctionsOfConstants = MiscTools.parseBoolean(splitInput[1]);
+			case "distributeExponents" -> Settings.distributeExponents = MiscTools.parseBoolean(splitInput[1]);
+			case "cacheDerivatives" -> Settings.cacheDerivatives = MiscTools.parseBoolean(splitInput[1]);
+			case "trustImmutability" -> Settings.trustImmutability = MiscTools.parseBoolean(splitInput[1]);
+			case "singleVariableDefault" -> {
+				if (splitInput[1].length() == 1)
+					Settings.singleVariableDefault = splitInput[1].charAt(0);
+				else
+					throw new IllegalArgumentException("This setting should only be one character");
+			}
 			default -> throw new IllegalArgumentException("Setting " + splitInput[0] + " does not exist");
 		}
 		return splitInput[0] + " = " + splitInput[1];
 	}
 
 	/**
-	 * setting
+	 * settings
 	 */
-	private static String settings() {
+	private static String printSettings() {
 		return "simpsonsSegments = " + Settings.simpsonsSegments + "\n"
 		+ "defaultSolverIterations = " + Settings.defaultSolverIterations + "\n"
 		+ "defaultRangeSections = " + Settings.defaultRangeSections + "\n"

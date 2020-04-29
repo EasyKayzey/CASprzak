@@ -33,4 +33,19 @@ public class MiscTools {
 		}
 		throw new IllegalArgumentException("Class " + function.getClass().getSimpleName() + " not supported.");
 	}
+
+	/**
+	 * Parses a string to a boolean using the following rules, ignoring case:
+	 * TRUE: true, 1, yes, t
+	 * FALSE: false, 0, no, f
+	 * @param s the string to be parsed
+	 * @return the string parsed to a boolean
+	 */
+	public static boolean parseBoolean(String s) {
+		return switch (s.toLowerCase()) {
+			case "true", "t", "1", "yes" -> true;
+			case "false", "f", "0", "no" -> false;
+			default -> throw new IllegalArgumentException(s + " cannot be parsed to a boolean");
+		};
+	}
 }

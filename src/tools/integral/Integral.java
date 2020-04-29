@@ -3,31 +3,31 @@ package tools.integral;
 import functions.Function;
 import functions.commutative.Add;
 import functions.special.Constant;
+import functions.unitary.UnitaryFunction;
 
 import java.util.Map;
 
-public class Integral extends Function {
-	public final Function integrand;
+public class Integral extends UnitaryFunction {
 	public final char respectTo;
 
 	public Integral(Function integrand, char respectTo) {
-		this.integrand = integrand;
+		super(integrand);
 		this.respectTo = respectTo;
 	}
 
 	@Override
 	public String toString() {
-		return "∫[" + integrand.toString() + "]d" + respectTo;
+		return "∫[" + function.toString() + "]d" + respectTo;
 	}
 
 	@Override
-	public Function clone() {
-		return new Integral(integrand.clone(), respectTo);
+	public UnitaryFunction clone() {
+		return new Integral(function.clone(), respectTo);
 	}
 
 	@Override
-	public Function substitute(char varID, Function toReplace) {
-		return new Integral(integrand.substitute(varID, toReplace), respectTo);
+	public UnitaryFunction substitute(char varID, Function toReplace) {
+		return new Integral(function.substitute(varID, toReplace), respectTo);
 	}
 
 	@Override
@@ -39,10 +39,10 @@ public class Integral extends Function {
 	}
 
 	@Override
-	protected int compareSelf(Function that) {
+	public int compareSelf(Function that) {
 		if (that instanceof Integral integral) {
 			if (respectTo == integral.respectTo)
-				return integrand.compareTo(integral.integrand);
+				return function.compareTo(integral.integrand);
 			else
 				return respectTo - integral.respectTo;
 		} else {
@@ -65,8 +65,13 @@ public class Integral extends Function {
 		return integrate(); //TODO implement
 	}
 
+	@Override
+	public UnitaryFunction me(Function function) {
+		return new Integral(function, respectTo);
+	}
+
 	public Function integrate() {
-		if (integrand instanceof Add terms) {
+		if (function instanceof Add terms) {
 			Function[] integratedTerms = new Function[terms.getFunctionsLength()];
 			for(int i = 0; i < terms.getFunctionsLength(); i++) {
 				integratedTerms[i] = new Integral(terms.getFunctions()[i], respectTo);

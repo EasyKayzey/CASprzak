@@ -1,5 +1,6 @@
 package tools.integral;
 
+import config.Settings;
 import functions.Function;
 import functions.commutative.Add;
 import functions.special.Constant;
@@ -33,7 +34,7 @@ public class Integral extends UnitaryFunction {
 	@Override
 	public boolean equals(Function that) {
 		if (that instanceof Integral integral)
-			return respectTo == integral.respectTo && integrand.equals(integral.integrand);
+			return respectTo == integral.respectTo && function.equals(integral.function);
 		else
 			return false;
 	}
@@ -42,7 +43,7 @@ public class Integral extends UnitaryFunction {
 	public int compareSelf(Function that) {
 		if (that instanceof Integral integral) {
 			if (respectTo == integral.respectTo)
-				return function.compareTo(integral.integrand);
+				return function.compareTo(integral.function);
 			else
 				return respectTo - integral.respectTo;
 		} else {
@@ -63,6 +64,14 @@ public class Integral extends UnitaryFunction {
 	@Override
 	public Function simplify() {
 		return integrate(); //TODO implement
+	}
+
+	@Override
+	public UnitaryFunction simplifyInternal() {
+		if(Settings.trustImmutability)
+			return this;
+		else
+			return clone();
 	}
 
 	@Override

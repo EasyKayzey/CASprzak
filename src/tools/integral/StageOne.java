@@ -5,22 +5,16 @@ import functions.binary.Logb;
 import functions.binary.Pow;
 import functions.special.Constant;
 import tools.SearchTools;
+import tools.helperclasses.Pair;
 
 public class StageOne {
-    public static Function derivativeDivides(Function function, char variableChar) {
+    public static Function derivativeDivides(Function integrand, char variableChar) {
         Class<?> operator;
+        Pair<Double, Function> stripConstant = IntegralsTools.stripConstants(integrand);
+        Function function = stripConstant.second;
+        double number = stripConstant.first;
         Function u;
-        double number = 1;
 
-        for (Function f: function) {
-            if (f instanceof Pow power && power.getFunction1() instanceof Constant constant) {
-                if (constant.constant != -1) {
-
-                } else {
-
-                }
-            }
-        }
 
 
         return function;

@@ -50,10 +50,10 @@ public class KeywordInterface {
 			case "rmc", "rmconstant", "removeconstant" -> removeConstant(splitInput[1]);
 			case "vars", "printvars" -> printVariables();
 			case "cv", "clearvars" -> clearVariables();
-			case "printfun", "printfunctions" -> printFunctions();
-			case "clearfun", "clearfunctions" -> clearFunctions();
-			case "sset", "sets", "setsetting" -> setSettings(splitInput[1]);
-			case "settings", "printsettings" -> printSettings();
+			case "pf", "printfun", "printfunctions" -> printFunctions();
+			case "cf", "clearfun", "clearfunctions" -> clearFunctions();
+			case "ss", "sset", "sets", "setsetting" -> setSettings(splitInput[1]);
+			case "ps", "settings", "printsettings" -> printSettings();
 			default -> null;
 		};
 		if (ret == null) {
@@ -331,7 +331,7 @@ public class KeywordInterface {
 	}
 
 	/**
-	 * setting
+	 * settings
 	 */
 	private static String printSettings() {
 		return "simpsonsSegments = " + Settings.simpsonsSegments + "\n"

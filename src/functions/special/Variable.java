@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class Variable extends Function {
+public class Variable extends SpecialFunction {
 	/**
 	 * The list containing all the variable characters
 	 */

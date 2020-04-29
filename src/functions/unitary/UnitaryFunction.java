@@ -3,7 +3,10 @@ package functions.unitary;
 import config.Settings;
 import functions.Function;
 import functions.special.Constant;
+import org.jetbrains.annotations.NotNull;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 
 public abstract class UnitaryFunction extends Function {
@@ -62,5 +65,34 @@ public abstract class UnitaryFunction extends Function {
 
 	public int compareSelf(Function that) {
 		return (this.function.compareTo(((UnitaryFunction) that).function));
+	}
+
+
+	public @NotNull Iterator<Function> iterator() {
+		return new UnitaryIterator(this);
+	}
+
+	private static class UnitaryIterator implements Iterator<Function> {
+		private final Function operand;
+		private boolean used;
+
+		private UnitaryIterator(UnitaryFunction function) {
+			this.operand = function.function;
+			used = false;
+		}
+
+		@Override
+		public boolean hasNext() {
+			return !used;
+		}
+
+		@SuppressWarnings("ValueOfIncrementOrDecrementUsed")
+		@Override
+		public Function next() {
+			if (used)
+				throw new NoSuchElementException("Out of elements in UnitaryFunction");
+			used = true;
+			return operand;
+		}
 	}
 }

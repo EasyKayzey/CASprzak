@@ -51,8 +51,8 @@ public class KeywordInterface {
 			case "cv", "clearvars" -> clearVariables();
 			case "printfun", "printfunctions" -> printFunctions();
 			case "clearfun", "clearfunctions" -> clearFunctions();
-			case "sset", "setsetting" -> setSettings(splitInput[1]);
-			case "settings" -> settings();
+			case "sset", "sets", "setsetting" -> setSettings(splitInput[1]);
+			case "settings", "printsettings" -> printSettings();
 			default -> null;
 		};
 		if (ret == null) {
@@ -327,7 +327,7 @@ public class KeywordInterface {
 	/**
 	 * setting
 	 */
-	private static String settings() {
+	private static String printSettings() {
 		return "simpsonsSegments = " + Settings.simpsonsSegments + "\n"
 		+ "defaultSolverIterations = " + Settings.defaultSolverIterations + "\n"
 		+ "defaultRangeSections = " + Settings.defaultRangeSections + "\n"

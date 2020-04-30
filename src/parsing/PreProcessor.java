@@ -4,6 +4,7 @@ import functions.special.Constant;
 
 import java.util.Deque;
 import java.util.LinkedList;
+import java.util.List;
 
 public class PreProcessor {
 
@@ -34,7 +35,7 @@ public class PreProcessor {
 	 * @return array of postfix tokens
 	 */
 	public static String[] toPostfix(String infix) {
-		String[] tokens = InfixTokenizer.tokenizeInfix(infix);
+		List<String> tokens = InfixTokenizer.tokenizeInfix(infix);
 		Deque<String> postfix = new LinkedList<>();
 		Deque<String> operators = new LinkedList<>();
 

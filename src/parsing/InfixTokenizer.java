@@ -2,7 +2,10 @@ package parsing;
 
 import functions.special.Variable;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class InfixTokenizer {
 	private static final Pattern absoluteValueEnd = Pattern.compile("\\|(?=([^|]*\\|[^|]*\\|)*$)");
@@ -22,7 +25,7 @@ public class InfixTokenizer {
 	 * @param infix input string in infix
 	 * @return array of infix tokens
 	 */
-	public static String[] tokenizeInfix(String infix) {
+	public static List<String> tokenizeInfix(String infix) {
 		// Remove LaTeX escapes
 		infix = infix.replace("\\", "");
 		// Make absolute values into unitary functions
@@ -38,7 +41,11 @@ public class InfixTokenizer {
 		// Adds parentheses to enforce order of operations
 		infix = "((((" + times.matcher(plus.matcher(closeParen.matcher(openParen.matcher(infix).replaceAll("((((")).replaceAll("))))")).replaceAll("))+((")).replaceAll(")*(") + "))))";
 		// Splits infix into tokens
-		return infixSplitter.split(infix);
+		List<String> tokens = infixSplitter.splitAsStream(infix).collect(Collectors.toCollection(LinkedList::new));
+		// Move postfix operations like ! to infix
+		movePostfix(tokens);
+		// Return tokens
+		return tokens;
 	}
 
 	/**
@@ -53,5 +60,9 @@ public class InfixTokenizer {
 			}
 		}
 		return infix;
+	}
+
+	private static void movePostfix(List<String> tokens) {
+
 	}
 }

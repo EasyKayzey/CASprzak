@@ -3,8 +3,10 @@ package tools.integral;
 import functions.Function;
 import functions.binary.Pow;
 import functions.commutative.Product;
+import functions.commutative.Sum;
 import functions.special.Constant;
 import functions.special.Variable;
+import functions.unitary.Ln;
 import tools.SearchTools;
 import tools.helperclasses.Pair;
 
@@ -21,6 +23,9 @@ public class StageOne<function> {
             } else if (function instanceof Pow power && power.getFunction1() instanceof Constant constant1 && power.getFunction2().getSimplifiedDerivative(variableChar) instanceof Constant constant2) {
                 number /= constant2.constant;
                 return power(number, constant1.constant, power.getFunction2());
+            } else if (function instanceof Ln log && log.operand().getSimplifiedDerivative(variableChar) instanceof Constant constant1) {
+                number /= constant1.constant;
+                return naturalLog(number, log.operand());
             }
         }
 
@@ -44,6 +49,13 @@ public class StageOne<function> {
     }
 
     private static Function power(double number, double exponent, Function base) {
-        return new Product(new Constant(number/(exponent+1)), new Pow(new Constant(exponent+1), base));
+        if (exponent == -1)
+            return new Product(new Constant(number), new Ln(base));
+        else
+            return new Product(new Constant(number/(exponent+1)), new Pow(new Constant(exponent+1), base));
+    }
+
+    private static Function naturalLog(double number, Function operand) {
+        return new Product(new Constant(number), new Sum(new Product(operand, new Ln(operand)), new Product(new Constant(-1), operand)));
     }
 }

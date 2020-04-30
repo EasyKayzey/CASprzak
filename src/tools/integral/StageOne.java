@@ -14,7 +14,7 @@ import tools.SearchTools;
 import tools.helperclasses.Pair;
 
 @SuppressWarnings("ChainOfInstanceofChecks")
-public class StageOne<function> {
+public class StageOne {
     public static Function derivativeDivides(Function integrand, char variableChar) {
         Pair<Double, Function> stripConstant = IntegralsTools.stripConstants(integrand);
         Function function = stripConstant.second;

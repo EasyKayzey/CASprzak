@@ -74,16 +74,7 @@ public class SearchTools {
 	 * @return true if the condition was satisfied by a subset
 	 */
 	public static boolean existsInSurfaceSubset(CommutativeFunction input, FunctionPredicate test) {
-		Function[] functions = input.getFunctions();
-		for (int run = 0; run < Math.pow(2, functions.length); run++) {
-			List<Function> subset = new ArrayList<>();
-			for (int ix = 0; ix < functions.length; ix++)
-				if (((run >> ix) & 1) > 0)
-					subset.add(functions[ix]);
-			if (test.test(input.me(subset.toArray(new Function[0]))))
-				return true;
-		}
-		return false;
+		return getSubsetIDs(input, test).size() > 0;
 	}
 
 	/**
@@ -91,22 +82,31 @@ public class SearchTools {
 	 * @param test the condition to be satisfied
 	 * @return true if the condition was satisfied by a subset
 	 */
-	public static boolean existsInOppositeSurfaceSubset(CommutativeFunction input, FunctionPredicate test, FunctionPredicate exclude) {
+	public static boolean existsInOppositeSurfaceSubsetExcluding(CommutativeFunction input, FunctionPredicate test, FunctionPredicate excludeFromSubset, FunctionPredicate excludeFromSearch) {
 		Function[] functions = input.getFunctions();
+		List<Integer> excludedIDs = getSubsetIDs(input, excludeFromSubset);
+		for (int run : excludedIDs) {
+			List<Function> subset = new ArrayList<>();
+			for (int ix = 0; ix < functions.length; ix++)
+				if (((~run >> ix) & 1) > 0)
+					subset.add(functions[ix]);
+			if (existsExcluding(input.me(subset.toArray(new Function[0])), test, excludeFromSearch))
+				return true;
+		}
+		return false;
+	}
+
+	private static List<Integer> getSubsetIDs(CommutativeFunction input, FunctionPredicate test) {
+		Function[] functions = input.getFunctions();
+		List<Integer> ids = new ArrayList<>();
 		for (int run = 0; run < Math.pow(2, functions.length); run++) {
 			List<Function> subset = new ArrayList<>();
 			for (int ix = 0; ix < functions.length; ix++)
 				if (((run >> ix) & 1) > 0)
 					subset.add(functions[ix]);
-			if (exclude.test(input.me(subset.toArray(new Function[0])))) {
-				subset.clear();
-				for (int ix = 0; ix < functions.length; ix++)
-					if (((~run >> ix) & 1) > 0)
-						subset.add(functions[ix]);
-				if (existsInSurfaceSubset(input, test))
-					return true;
-			}
+			if (test.test(input.me(subset.toArray(new Function[0]))))
+				ids.add(run);
 		}
-		return false;
+		return ids;
 	}
 }

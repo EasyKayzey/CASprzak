@@ -13,6 +13,7 @@ import functions.unitary.trig.Sin;
 import tools.SearchTools;
 import tools.helperclasses.Pair;
 
+@SuppressWarnings("ChainOfInstanceofChecks")
 public class StageOne<function> {
     public static Function derivativeDivides(Function integrand, char variableChar) {
         Pair<Double, Function> stripConstant = IntegralsTools.stripConstants(integrand);

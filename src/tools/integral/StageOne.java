@@ -12,18 +12,15 @@ public class StageOne<function> {
     public static Function derivativeDivides(Function integrand, char variableChar) {
         Pair<Double, Function> stripConstant = IntegralsTools.stripConstants(integrand);
         Function function = stripConstant.second;
-        System.out.println(function);
-        System.out.println(function.getClass());
         double number = stripConstant.first;
-        System.out.println(number);
 
         if (!(function instanceof Product)) {
             if (function instanceof Pow power && power.getFunction2() instanceof Constant constant1 && power.getFunction1().getSimplifiedDerivative(variableChar) instanceof Constant constant2) {
-                System.out.println(number);
                 number /= constant2.constant;
-                System.out.println(number);
-                return new Product(new Constant(number), exponential(constant1.constant, power.getFunction1()));
-
+                return exponential(number, constant1.constant, power.getFunction1());
+            } else if (function instanceof Pow power && power.getFunction1() instanceof Constant constant1 && power.getFunction2().getSimplifiedDerivative(variableChar) instanceof Constant constant2) {
+                number /= constant2.constant;
+                return power(number, constant1.constant, power.getFunction2());
             }
         }
 
@@ -42,7 +39,11 @@ public class StageOne<function> {
 //        SearchTools.exists(integrand, (f -> f.equals(toFind))) && !SearchTools.existsExcluding(integrand, (f -> f instanceof Variable), (f -> f.equals(toFind)))
     }
 
-    private static Function exponential(double base, Function exponent) {
+    private static Function exponential(double number, double base, Function exponent) {
         return new Product(new Constant(1/Math.log(base)), new Pow(exponent, new Constant(base)));
+    }
+
+    private static Function power(double number, double exponent, Function base) {
+        return new Product(new Constant(number/(exponent+1)), new Pow(new Constant(exponent+1), base));
     }
 }

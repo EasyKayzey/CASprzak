@@ -26,7 +26,7 @@ public class Variable extends SpecialFunction {
 	/**
 	 * The index of this variable in {@link #variables}
 	 */
-	private final char varID;
+	public final char varID;
 
 	/**
 	 * Constructs a new Variable

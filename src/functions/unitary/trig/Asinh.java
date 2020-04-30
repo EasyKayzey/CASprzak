@@ -21,17 +21,17 @@ public class Asinh extends UnitaryFunction {
 
 	@Override
 	public Function getDerivative(char varID) {
-		return new Product(function.getSimplifiedDerivative(varID), new Pow(new Constant(-0.5), new Sum(new Constant(1), new Pow(new Constant(2), function))));
+		return new Product(operand.getSimplifiedDerivative(varID), new Pow(new Constant(-0.5), new Sum(new Constant(1), new Pow(new Constant(2), operand))));
 	}
 
 	/**
-	 * Returns the inverse hyperbolic sine of the stored {@link #function} evaluated
+	 * Returns the inverse hyperbolic sine of the stored {@link #operand} evaluated
 	 * @param variableValues The values of the variables of the {@link Function} at the point
-	 * @return the arcsinh of {@link #function} evaluated
+	 * @return the arcsinh of {@link #operand} evaluated
 	 */
 	@Override
 	public double evaluate(Map<Character, Double> variableValues) {
-		double functionEvaluated = function.evaluate(variableValues);
+		double functionEvaluated = operand.evaluate(variableValues);
 		return Math.log(functionEvaluated + Math.sqrt(functionEvaluated * functionEvaluated + 1));
 	}
 

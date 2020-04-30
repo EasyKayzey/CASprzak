@@ -18,18 +18,18 @@ public class Cos extends UnitaryFunction {
 	}
 
 	/**
-	 * Returns the cosine of the stored {@link #function} evaluated
+	 * Returns the cosine of the stored {@link #operand} evaluated
 	 * @param variableValues The values of the variables of the {@link Function} at the point
-	 * @return the cos of {@link #function} evaluated
+	 * @return the cos of {@link #operand} evaluated
 	 */
 	@Override
 	public double evaluate(Map<Character, Double> variableValues) {
-		return Math.cos(function.evaluate(variableValues));
+		return Math.cos(operand.evaluate(variableValues));
 	}
 
 	@Override
 	public Function getDerivative(char varID) {
-		return new Product(new Sin(function), new Constant(-1), function.getSimplifiedDerivative(varID));
+		return new Product(new Sin(operand), new Constant(-1), operand.getSimplifiedDerivative(varID));
 	}
 
 	public UnitaryFunction me(Function operand) {

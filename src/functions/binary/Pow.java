@@ -95,7 +95,7 @@ public class Pow extends BinaryFunction {
 			}
 			return toMultiply;
 		} else {
-			throw new IllegalArgumentException("Method should not be called if base is not a Multiply");
+			throw new IllegalCallerException("Method should not be called if base is not a Multiply");
 		}
 	}
 

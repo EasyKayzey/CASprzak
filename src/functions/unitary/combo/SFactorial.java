@@ -22,7 +22,7 @@ public class SFactorial extends Factorial {
 
 	@Override
 	public Function classForm() {
-		return new Product(new Pow(new Constant(.5), new Product(new Constant(2), new Constant("pi"), function)), new Pow(function, new Product(function, new Pow(new Constant(-1), new Constant("e")))));
+		return new Product(new Pow(new Constant(.5), new Product(new Constant(2), new Constant("pi"), operand)), new Pow(operand, new Product(operand, new Pow(new Constant(-1), new Constant("e")))));
 	}
 
 	@Override
@@ -37,7 +37,7 @@ public class SFactorial extends Factorial {
 
 	@Override
 	public double evaluate(Map<Character, Double> variableValues) {
-		double argument = function.evaluate(variableValues);
+		double argument = operand.evaluate(variableValues);
 		if (Settings.enforceIntegerOperations)
 			argument = MiscTools.toInteger(argument);
 		double ans = Math.sqrt(2 * Math.PI * argument) * Math.pow(argument / Math.E, argument);

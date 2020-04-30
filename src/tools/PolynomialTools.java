@@ -69,11 +69,12 @@ public class PolynomialTools {
 	}
 
 	/**
-	 * Returns the degree a monomial. Returns an error when the function isn't a monomial.
+	 * Returns the degree a monomial.
 	 * @param function The monomial whose degree is being found
 	 * @return the degree of the monomial
+	 * @throws IllegalArgumentException when input is not a monomial
 	 */
-	public static double getDegree(Function function) {
+	public static double getDegree(Function function) throws IllegalArgumentException {
 		if (!isGeneralMonomial(function))
 			throw new IllegalArgumentException(function + " is not a monomial");
 		else if (function instanceof Variable)
@@ -91,7 +92,7 @@ public class PolynomialTools {
 			}
 			return sum;
 		} else {
-			throw new IllegalArgumentException("This code should never run");
+			throw new IllegalStateException("This code should never run");
 		}
 	}
 }

@@ -3,6 +3,8 @@ package tools;
 import config.Settings;
 import functions.Function;
 
+import java.lang.reflect.MalformedParametersException;
+
 public class MiscTools {
 
 	private MiscTools(){}
@@ -14,7 +16,7 @@ public class MiscTools {
 	 */
 	public static int factorial(int n) {
 		if (n < 0)
-			throw new IllegalArgumentException("Cannot take the factorial of a negative number.");
+			throw new UnsupportedOperationException("Cannot take the factorial of a negative number.");
 		else if (n <= 1)
 			return 1;
 		else
@@ -32,7 +34,7 @@ public class MiscTools {
 			if (Function.sortOrder[i].isAssignableFrom(functionClass))
 				return i;
 		}
-		throw new IllegalArgumentException("Class " + function.getClass().getSimpleName() + " not supported.");
+		throw new UnsupportedOperationException("Class " + function.getClass().getSimpleName() + " not supported.");
 	}
 
 	/**
@@ -46,7 +48,7 @@ public class MiscTools {
 		return switch (s.toLowerCase()) {
 			case "true", "t", "1", "yes" -> true;
 			case "false", "f", "0", "no" -> false;
-			default -> throw new IllegalArgumentException(s + " cannot be parsed to a boolean");
+			default -> throw new MalformedParametersException(s + " cannot be parsed to a boolean");
 		};
 	}
 

@@ -19,12 +19,12 @@ public class Ln extends UnitaryFunction {
 
 	@Override
 	public double evaluate(Map<Character, Double> variableValues) {
-		return Math.log(function.evaluate(variableValues));
+		return Math.log(operand.evaluate(variableValues));
 	}
 
 	@Override
 	public Function getDerivative(char varID) {
-		return new Product(function.getSimplifiedDerivative(varID), new Pow(new Constant(-1), function));
+		return new Product(operand.getSimplifiedDerivative(varID), new Pow(new Constant(-1), operand));
 	}
 
 	public UnitaryFunction me(Function operand) {

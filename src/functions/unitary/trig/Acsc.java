@@ -27,18 +27,18 @@ public class Acsc extends UnitaryFunction {
 
 	@Override
 	public Function getDerivative(char varID) {
-		return new Product(new Constant(-1), function.getSimplifiedDerivative(varID), new Pow(new Constant(-1), new Product(new Abs(function), new Pow(new Constant(0.5), new Sum(new Pow(new Constant(2), function), new Constant(-1))))));
+		return new Product(new Constant(-1), operand.getSimplifiedDerivative(varID), new Pow(new Constant(-1), new Product(new Abs(operand), new Pow(new Constant(0.5), new Sum(new Pow(new Constant(2), operand), new Constant(-1))))));
 	}
 
 	/**
-	 * Returns the inverse hyperbolic cosecant of the stored {@link #function} evaluated
+	 * Returns the inverse hyperbolic cosecant of the stored {@link #operand} evaluated
 	 * @param variableValues The values of the variables of the {@link Function} at the point
-	 * @return the arccsc of {@link #function} evaluated
+	 * @return the arccsc of {@link #operand} evaluated
 	 */
 	@SuppressWarnings("RedundantSuppression")
 	@Override
 	public double evaluate(Map<Character, Double> variableValues) {
-		double functionEvaluated = function.evaluate(variableValues);
+		double functionEvaluated = operand.evaluate(variableValues);
 		if (functionEvaluated > 1) {
 			//noinspection DuplicateExpressions
 			return Math.acos(Math.sqrt(Math.pow(functionEvaluated, 2) - 1) / functionEvaluated);

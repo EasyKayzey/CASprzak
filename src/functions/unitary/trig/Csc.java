@@ -18,18 +18,18 @@ public class Csc extends UnitaryFunction {
 	}
 
 	/**
-	 * Returns the cosecant of the stored {@link #function} evaluated
+	 * Returns the cosecant of the stored {@link #operand} evaluated
 	 * @param variableValues The values of the variables of the {@link Function} at the point
-	 * @return the csc of {@link #function} evaluated
+	 * @return the csc of {@link #operand} evaluated
 	 */
 	@Override
 	public double evaluate(Map<Character, Double> variableValues) {
-		return 1 / Math.sin(function.evaluate(variableValues));
+		return 1 / Math.sin(operand.evaluate(variableValues));
 	}
 
 	@Override
 	public Function getDerivative(char varID) {
-		return new Product(new Constant(-1), new Cot(function), new Csc(function), function.getSimplifiedDerivative(varID));
+		return new Product(new Constant(-1), new Cot(operand), new Csc(operand), operand.getSimplifiedDerivative(varID));
 	}
 
 	public UnitaryFunction me(Function operand) {

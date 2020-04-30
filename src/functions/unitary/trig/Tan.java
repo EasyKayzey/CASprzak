@@ -19,18 +19,18 @@ public class Tan extends UnitaryFunction {
 	}
 
 	/**
-	 * Returns the tangent of the stored {@link #function} evaluated
+	 * Returns the tangent of the stored {@link #operand} evaluated
 	 * @param variableValues The values of the variables of the {@link Function} at the point
-	 * @return the tan of {@link #function} evaluated
+	 * @return the tan of {@link #operand} evaluated
 	 */
 	@Override
 	public double evaluate(Map<Character, Double> variableValues) {
-		return Math.tan(function.evaluate(variableValues));
+		return Math.tan(operand.evaluate(variableValues));
 	}
 
 	@Override
 	public Function getDerivative(char varID) {
-		return new Product(new Pow(new Constant(2), new Sec(function)), function.getSimplifiedDerivative(varID));
+		return new Product(new Pow(new Constant(2), new Sec(operand)), operand.getSimplifiedDerivative(varID));
 	}
 
 	public UnitaryFunction me(Function operand) {

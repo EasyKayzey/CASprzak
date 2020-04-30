@@ -17,18 +17,18 @@ public class Sin extends UnitaryFunction {
 	}
 
 	/**
-	 * Returns the sine of the stored {@link #function} evaluated
+	 * Returns the sine of the stored {@link #operand} evaluated
 	 * @param variableValues The values of the variables of the {@link Function} at the point
-	 * @return the sin of {@link #function} evaluated
+	 * @return the sin of {@link #operand} evaluated
 	 */
 	@Override
 	public double evaluate(Map<Character, Double> variableValues) {
-		return Math.sin(function.evaluate(variableValues));
+		return Math.sin(operand.evaluate(variableValues));
 	}
 
 	@Override
 	public Function getDerivative(char varID) {
-		return new Product(new Cos(function), function.getSimplifiedDerivative(varID));
+		return new Product(new Cos(operand), operand.getSimplifiedDerivative(varID));
 	}
 
 	public UnitaryFunction me(Function operand) {

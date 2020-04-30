@@ -8,15 +8,36 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class InfixTokenizer {
-	private static final Pattern absoluteValueEnd = Pattern.compile("\\|(?=([^|]*\\|[^|]*\\|)*[^|]*$)");
-	private static final Pattern absoluteValueStart = Pattern.compile("(?<=\\w)\\|");
-	private static final Pattern adjacentMultiplier = Pattern.compile("(?<=\\d)(?=[a-zA-Z])(?!E-?\\d)|(?<=[a-zA-Z])(?=[\\d])(?<!\\dE)|(?<=\\))(?=[\\w(])|(?<=[\\d)])(?=\\()(?<!logb_\\d)");
-	private static final Pattern subtractionFinder = Pattern.compile("(?<!^)(?<!(?<=\\dE)(?=-\\d))(?<![\\^\\-+*/\\s(])\\s*-");
+	private static final Pattern absoluteValueEnd = Pattern.compile(
+			"\\|(?=([^|]*\\|[^|]*\\|)*" +					// Ensures an even number of following absolute value signs
+			"[^|]*$)"										// Allows for any number of following non-bar characters and asserts EOL position
+	);
+	private static final Pattern absoluteValueStart = Pattern.compile(
+			"(?<=\\w)\\|"									// Only matches if preceded by a word character so '*abs(' can be substituted
+	);
+	private static final Pattern adjacentMultiplier = Pattern.compile(
+			"(?<=\\d)(?=[a-zA-Z])(?![ECP])" +				// Matches if preceded by a digit and followed by a non-ECP letter
+			"|(?<=[a-zA-Z])(?<![ECP])(?=[\\d])" +			// Matches if preceded by a non-ECP letter and followed by a digit
+			"|(?<=\\))(?=[\\w(])" + 						// Matches if preceded by ) and followed by a word character or (
+			"|(?<=[\\d)])(?=\\()(?<!logb_\\d)"				// Matches if preceded by [a digit not preceded by logb_] or ) and followed by (
+	);
+	private static final Pattern subtractionFinder = Pattern.compile(
+			"(?<!^)(?<!E)" +								// Ensures not preceded by newline or E
+			"(?<![\\^\\-+*/\\s(])\\s*-"						// Ensures not preceded by an operation or (, then matches - signs and all spaces preceding
+	);
 	private static final Pattern openParen = Pattern.compile("\\(");
 	private static final Pattern closeParen = Pattern.compile("\\)");
 	private static final Pattern plus = Pattern.compile("\\+");
 	private static final Pattern times = Pattern.compile("\\*");
-	private static final Pattern infixSplitter = Pattern.compile("\\s+|(?<=!)|(?=!)|(((?<=\\W)(?=[\\w-])((?<!-)|(?!\\d))|(?<=\\w)(?=\\W)(?<!(?<=\\dE)(?=-?\\d)))|(?<=[()])|(?=[()]))(?<![ .])(?![ .])|(?<=[\\D-])(?=\\.)");
+	private static final Pattern infixSplitter = Pattern.compile(
+			"\\s+" + 										// Splits on spaces
+			"|(?<=!)|(?=!)" +								// Splits if preceded or followed by !
+			"|(((?<=\\W)(?=[\\w-])((?<!-)|(?!\\d))" +		// Splits if preceded by non-word and followed by word and not [preceded by - and followed by a digit]
+			"|(?<=\\w)(?=\\W)(?<!(?<=E)(?=-)))" +			// Splits if preceded by a word and followed by a non-word, unless [the word was E and the non-word was -]
+			"|(?<=[()])|(?=[()]))" +						// Splits if preceded or followed by a parenthesis
+			"(?<![ .])(?![ .])" +							// The PREVIOUS FOUR LINES ONLY WORK if not preceded or followed by a dot or space
+			"|(?<=[\\D-])(?=\\.)"							// Splits if preceded by [a character that isn't a digit or -] and followed by a dot
+	);
 
 	private InfixTokenizer(){}
 

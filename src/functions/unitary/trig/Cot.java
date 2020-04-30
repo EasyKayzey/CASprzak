@@ -19,18 +19,18 @@ public class Cot extends UnitaryFunction {
 	}
 
 	/**
-	 * Returns the cotangent of the stored {@link #function} evaluated
+	 * Returns the cotangent of the stored {@link #operand} evaluated
 	 * @param variableValues The values of the variables of the {@link Function} at the point
-	 * @return the cot of {@link #function} evaluated
+	 * @return the cot of {@link #operand} evaluated
 	 */
 	@Override
 	public double evaluate(Map<Character, Double> variableValues) {
-		return 1 / Math.tan(function.evaluate(variableValues));
+		return 1 / Math.tan(operand.evaluate(variableValues));
 	}
 
 	@Override
 	public Function getDerivative(char varID) {
-		return new Product(new Constant(-1), new Pow(new Constant(2), new Csc(function)), function.getSimplifiedDerivative(varID));
+		return new Product(new Constant(-1), new Pow(new Constant(2), new Csc(operand)), operand.getSimplifiedDerivative(varID));
 	}
 
 	public UnitaryFunction me(Function operand) {

@@ -2,7 +2,7 @@ package functions.unitary.trig;
 
 import functions.Function;
 import functions.binary.Pow;
-import functions.commutative.Multiply;
+import functions.commutative.Product;
 import functions.special.Constant;
 import functions.unitary.UnitaryFunction;
 
@@ -30,7 +30,7 @@ public class Tanh extends UnitaryFunction {
 
 	@Override
 	public Function getDerivative(char varID) {
-		return new Multiply(function.getSimplifiedDerivative(varID), new Pow(new Constant(-2), new Cosh(function)));
+		return new Product(function.getSimplifiedDerivative(varID), new Pow(new Constant(-2), new Cosh(function)));
 	}
 
 	public UnitaryFunction me(Function operand) {

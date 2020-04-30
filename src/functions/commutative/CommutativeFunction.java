@@ -192,15 +192,13 @@ public abstract class CommutativeFunction extends Function {
 
 
 	public @NotNull Iterator<Function> iterator() {
-		return new CommutativeIterator(this);
+		return new CommutativeIterator();
 	}
 
-	private static class CommutativeIterator implements Iterator<Function> {
-		private final Function[] functions;
+	private class CommutativeIterator implements Iterator<Function> {
 		private int loc;
 
-		private CommutativeIterator(CommutativeFunction function) {
-			this.functions = function.getFunctions();
+		private CommutativeIterator() {
 			loc = 0;
 		}
 

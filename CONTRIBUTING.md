@@ -13,10 +13,10 @@ Responsibilities:
 - Be respectful!
 - Do not break existing features.
 - Treat all `Function`s  as `final`, and NEVER modify their fields in runtime!
-- Discuss early, discuss often. If you want to add a major feature, don't waste your time without verifying we agree it has merit.
+- Discuss early, discuss often. If you want to sum a major feature, don't waste your time without verifying we agree it has merit.
 - Commit early, commit often. 
 - Write extensive JUnit tests for any features you implement.
-- Create issues for features you want to add, especially for bugs you find.
+- Create issues for features you want to sum, especially for bugs you find.
 - You can always contact us at `easykaysey@googlegroups.com` if you have any questions.
 
 # Getting started

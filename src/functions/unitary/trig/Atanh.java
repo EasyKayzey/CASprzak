@@ -2,8 +2,8 @@ package functions.unitary.trig;
 
 import functions.Function;
 import functions.binary.Pow;
-import functions.commutative.Add;
-import functions.commutative.Multiply;
+import functions.commutative.Sum;
+import functions.commutative.Product;
 import functions.special.Constant;
 import functions.unitary.UnitaryFunction;
 
@@ -21,7 +21,7 @@ public class Atanh extends UnitaryFunction {
 
 	@Override
 	public Function getDerivative(char varID) {
-		return new Multiply(function.getSimplifiedDerivative(varID), new Pow(new Constant(-1), new Add(new Constant(1), new Multiply(new Constant(-1), new Pow(new Constant(2), function)))));
+		return new Product(function.getSimplifiedDerivative(varID), new Pow(new Constant(-1), new Sum(new Constant(1), new Product(new Constant(-1), new Pow(new Constant(2), function)))));
 	}
 
 	/**

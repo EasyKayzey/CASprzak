@@ -2,7 +2,7 @@ package functions.unitary;
 
 import functions.Function;
 import functions.binary.Pow;
-import functions.commutative.Multiply;
+import functions.commutative.Product;
 import functions.special.Constant;
 
 import java.util.Map;
@@ -24,7 +24,7 @@ public class Ln extends UnitaryFunction {
 
 	@Override
 	public Function getDerivative(char varID) {
-		return new Multiply(function.getSimplifiedDerivative(varID), new Pow(new Constant(-1), function));
+		return new Product(function.getSimplifiedDerivative(varID), new Pow(new Constant(-1), function));
 	}
 
 	public UnitaryFunction me(Function operand) {

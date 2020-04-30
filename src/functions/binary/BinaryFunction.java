@@ -3,7 +3,6 @@ package functions.binary;
 import functions.Function;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -82,29 +81,31 @@ public abstract class BinaryFunction extends Function {
 
 
 	public @NotNull Iterator<Function> iterator() {
-		return new BinaryIterator(this);
+		return new BinaryIterator();
 	}
 
-	private static class BinaryIterator implements Iterator<Function> {
-		private final Function[] functions;
+	private class BinaryIterator implements Iterator<Function> {
 		private int loc;
 
-		private BinaryIterator(BinaryFunction function) {
-			this.functions = new Function[]{function.function1, function.function2};
+		private BinaryIterator() {
 			loc = 0;
 		}
 
 		@Override
 		public boolean hasNext() {
-			return loc < functions.length;
+			return loc < 2;
 		}
 
 		@SuppressWarnings("ValueOfIncrementOrDecrementUsed")
 		@Override
 		public Function next() {
 			if (!hasNext())
-				throw new NoSuchElementException("Out of elements in CommutativeFunction " + Arrays.toString(functions));
-			return functions[loc++];
+				throw new NoSuchElementException("Out of elements in BinaryFunction " + function2 + ", " + function1);
+			return switch(loc++) {
+				case 0 -> function2;
+				case 1 -> function1;
+				default -> throw new RuntimeException("This code should never run in BinaryIterator");
+			};
 		}
 	}
 }

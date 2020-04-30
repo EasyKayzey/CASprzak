@@ -11,12 +11,12 @@ import tools.PolynomialTools;
 import java.util.Arrays;
 import java.util.Map;
 
-public class Multiply extends CommutativeFunction {
+public class Product extends CommutativeFunction {
 	/**
 	 * Constructs a new Multiply
 	 * @param functions The terms being multiplied together
 	 */
-	public Multiply(Function... functions) {
+	public Product(Function... functions) {
 		super(functions);
 		identityValue = 1;
 		operation = (a, b) -> (a * b);
@@ -53,22 +53,22 @@ public class Multiply extends CommutativeFunction {
 				toMultiply = Arrays.copyOf(functions, functions.length);
 				toMultiply[i] = functions[i].getSimplifiedDerivative(varID);
 			}
-			toAdd[i] = new Multiply(toMultiply);
+			toAdd[i] = new Product(toMultiply);
 		}
 
-		return new Add(toAdd);
+		return new Sum(toAdd);
 	}
 
-	public Multiply clone() {
+	public Product clone() {
 		Function[] toMultiply = new Function[functions.length];
 		for (int i = 0; i < functions.length; i++)
 			toMultiply[i] = functions[i].clone();
-		return new Multiply(toMultiply);
+		return new Product(toMultiply);
 	}
 
 
 	public Function simplify() {
-		Multiply currentFunction = simplifyInternal();
+		Product currentFunction = simplifyInternal();
 		if (currentFunction.isTimesZero())
 			return new Constant((0));
 		else if (currentFunction.getFunctions().length <= 1)
@@ -77,22 +77,22 @@ public class Multiply extends CommutativeFunction {
 			return currentFunction.distributeAll();
 	}
 
-	public Multiply simplifyInternal() {
-		Multiply current = (Multiply) super.simplifyInternal();
+	public Product simplifyInternal() {
+		Product current = (Product) super.simplifyInternal();
 		current = current.addExponents();
 		return current;
 	}
 
 	@Override
-	public Multiply simplifyElements() {
+	public Product simplifyElements() {
 		Function[] toMultiply = new Function[functions.length];
 		for (int i = 0; i < functions.length; i++) toMultiply[i] = functions[i].simplify();
-		return new Multiply(toMultiply);
+		return new Product(toMultiply);
 	}
 
 	/**
-	 * Returns true if the {@link Multiply} contains a 0 {@link Constant}
-	 * @return true if the {@link Multiply} contains a 0 {@link Constant}
+	 * Returns true if the {@link Product} contains a 0 {@link Constant}
+	 * @return true if the {@link Product} contains a 0 {@link Constant}
 	 */
 	public boolean isTimesZero() {
 		for (Function function : functions) {
@@ -107,9 +107,9 @@ public class Multiply extends CommutativeFunction {
 
 	/**
 	 * If {@link #functions} contains multiple of the same {@link Variable} multiplied by each other (e.g. x*x^3) then the exponents will be added and the terms will be combined into one element of {@link #functions}
-	 * @return A new {@link Multiply} with all variable combined with added exponents
+	 * @return A new {@link Product} with all variable combined with added exponents
 	 */
-	public Multiply addExponents() {
+	public Product addExponents() {
 		Function[] simplifiedTerms = FunctionTools.deepClone(functions);
 		for (int a = 0; a < simplifiedTerms.length; a++) {
 			if (!(simplifiedTerms[a] instanceof Pow))
@@ -119,9 +119,9 @@ public class Multiply extends CommutativeFunction {
 			for (int j = 0; j < i; j++) {
 				if (simplifiedTerms[i] instanceof Pow first && simplifiedTerms[j] instanceof Pow second) {
 					if (first.getFunction2().equals(second.getFunction2())) {
-						simplifiedTerms[j] = new Pow(new Add(first.getFunction1(), second.getFunction1()), first.getFunction2());
+						simplifiedTerms[j] = new Pow(new Sum(first.getFunction1(), second.getFunction1()), first.getFunction2());
 						simplifiedTerms = FunctionTools.removeFunctionAt(simplifiedTerms, i);
-						return (new Multiply(simplifiedTerms)).simplifyInternal();
+						return (new Product(simplifiedTerms)).simplifyInternal();
 					}
 				}
 			}
@@ -133,21 +133,21 @@ public class Multiply extends CommutativeFunction {
 	}
 
 	public CommutativeFunction me(Function... functions) {
-		return new Multiply(functions);
+		return new Product(functions);
 	}
 
 	/**
-	 * Returns a {@link Function} where the rest of the multiple has been distributed to any {@link Add}. Example: {@code sin(y)*(x+2) = x*sin(y) + 2*sin(y)}
-	 * @return a {@link Function} where the rest of the multiple has been distributed to any {@link Add}
+	 * Returns a {@link Function} where the rest of the multiple has been distributed to any {@link Sum}. Example: {@code sin(y)*(x+2) = x*sin(y) + 2*sin(y)}
+	 * @return a {@link Function} where the rest of the multiple has been distributed to any {@link Sum}
 	 */
 	public Function distributeAll() {
 		Function[] multiplyTerms = getFunctions();
 		Function[] addTerms;
 		for (int i = 0; i < multiplyTerms.length; i++) {
-			if (multiplyTerms[i] instanceof Add add) {
-				addTerms = add.getFunctions();
+			if (multiplyTerms[i] instanceof Sum sum) {
+				addTerms = sum.getFunctions();
 				multiplyTerms = FunctionTools.removeFunctionAt(multiplyTerms, i);
-				return new Add(FunctionTools.distribute(multiplyTerms, addTerms)).simplify();
+				return new Sum(FunctionTools.distribute(multiplyTerms, addTerms)).simplify();
 			}
 		}
 		if (Settings.trustImmutability)

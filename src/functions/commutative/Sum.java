@@ -7,12 +7,12 @@ import tools.FunctionTools;
 
 import java.util.Map;
 
-public class Add extends CommutativeFunction {
+public class Sum extends CommutativeFunction {
 	/**
 	 * Constructs a new Add
 	 * @param functions The terms being added together
 	 */
-	public Add(Function... functions) {
+	public Sum(Function... functions) {
 		super(functions);
 		identityValue = 0;
 		operation = Double::sum;
@@ -45,48 +45,48 @@ public class Add extends CommutativeFunction {
 		for (int i = 0; i < functions.length; i++) {
 			toAdd[i] = functions[i].getSimplifiedDerivative(varID);
 		}
-		return new Add(toAdd);
+		return new Sum(toAdd);
 	}
 
-	public Add clone() {
+	public Sum clone() {
 		Function[] toAdd = new Function[functions.length];
 		for (int i = 0; i < functions.length; i++) toAdd[i] = functions[i].clone();
-		return new Add(toAdd);
+		return new Sum(toAdd);
 	}
 
 
-	public Add simplifyInternal() {
-		Add current = (Add) super.simplifyInternal();
+	public Sum simplifyInternal() {
+		Sum current = (Sum) super.simplifyInternal();
 		current = current.combineLikeTerms();
 		return current;
 	}
 
 
 	@Override
-	public Add simplifyElements() {
+	public Sum simplifyElements() {
 		Function[] toAdd = new Function[functions.length];
 		for (int i = 0; i < functions.length; i++)
 			toAdd[i] = functions[i].simplify();
-		return new Add(toAdd);
+		return new Sum(toAdd);
 	}
 
 	/**
-	 * Returns a {@link Add} where like terms are added together. Example: {@code 2x+x=3x}
-	 * @return a {@link Add} where like terms are added together
+	 * Returns a {@link Sum} where like terms are added together. Example: {@code 2x+x=3x}
+	 * @return a {@link Sum} where like terms are added together
 	 */
-	public Add combineLikeTerms() {
+	public Sum combineLikeTerms() {
 		Function[] combinedTerms = FunctionTools.deepClone(functions);
 		for (int a = 0; a < combinedTerms.length; a++) {
-			if (!(combinedTerms[a] instanceof Multiply && ((Multiply) combinedTerms[a]).getFunctions()[0] instanceof Constant))
-				combinedTerms[a] = new Multiply(new Constant(1), combinedTerms[a]).simplifyPull();
+			if (!(combinedTerms[a] instanceof Product && ((Product) combinedTerms[a]).getFunctions()[0] instanceof Constant))
+				combinedTerms[a] = new Product(new Constant(1), combinedTerms[a]).simplifyPull();
 		}
 		for (int i = 1; i < combinedTerms.length; i++) {
 			for (int j = 0; j < i; j++) {
-				if (combinedTerms[i] instanceof Multiply first && combinedTerms[j] instanceof Multiply second) {
+				if (combinedTerms[i] instanceof Product first && combinedTerms[j] instanceof Product second) {
 					if (FunctionTools.deepEquals(first.getFunctions(), second.getFunctions(), 1)) {
-						combinedTerms[j] = new Multiply(new Add(first.getFunctions()[0], second.getFunctions()[0]), new Multiply(FunctionTools.removeFunctionAt(first.getFunctions(), 0)));
+						combinedTerms[j] = new Product(new Sum(first.getFunctions()[0], second.getFunctions()[0]), new Product(FunctionTools.removeFunctionAt(first.getFunctions(), 0)));
 						combinedTerms = FunctionTools.removeFunctionAt(combinedTerms, i);
-						return (new Add(combinedTerms)).simplifyInternal();
+						return (new Sum(combinedTerms)).simplifyInternal();
 					}
 				}
 			}
@@ -98,6 +98,6 @@ public class Add extends CommutativeFunction {
 	}
 
 	public CommutativeFunction me(Function... functions) {
-		return new Add(functions);
+		return new Sum(functions);
 	}
 }

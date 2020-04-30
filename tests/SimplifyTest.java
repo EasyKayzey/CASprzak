@@ -1,7 +1,7 @@
 import config.Settings;
 import functions.Function;
 import functions.binary.Pow;
-import functions.commutative.Multiply;
+import functions.commutative.Product;
 import org.junit.jupiter.api.Test;
 import parsing.Parser;
 
@@ -49,7 +49,7 @@ public class SimplifyTest {
     void distributeTerms() {
         Function test1 = Parser.parse("sin(x)*(1+5x)");
         Function test2 = Parser.parse("sin(x)+5*x*sin(x)");
-        assertEquals(((Multiply)test1).distributeAll(), test2);
+        assertEquals(((Product)test1).distributeAll(), test2);
     }
 
     @Test

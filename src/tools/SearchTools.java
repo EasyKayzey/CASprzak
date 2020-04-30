@@ -21,4 +21,18 @@ public class SearchTools {
 					return true;
 		return false;
 	}
+
+	public static boolean existsSurface(Function input, Predicate<? super Function> test) {
+		return existsSurfaceExcluding(input, test, (a -> false));
+	}
+
+	public static boolean existsSurfaceExcluding(Function input, Predicate<? super Function> test, Predicate<? super Function> exclude) {
+		if (exclude.test(input))
+			return false;
+		else
+			for (Function f : input)
+				if (test.test(f))
+					return true;
+		return false;
+	}
 }

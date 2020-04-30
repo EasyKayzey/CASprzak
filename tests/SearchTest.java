@@ -42,7 +42,7 @@ public class SearchTest {
     void simpleSubsetExclusion() {
         CommutativeFunction test1 = (CommutativeFunction) Parser.parseSimplified("x*sin(x)*e^x");
         Function test2 = Parser.parseSimplified("x*e^x");
-        Function test3 = Parser.parseSimplified("sin x");
+        Function test3 = Parser.parseSimplified("sin(x)");
         assertFalse(SearchTools.existsInOppositeSurfaceSubsetExcluding(test1, (f -> f.equals(DefaultFunctions.X)), (f -> f.equals(test2)), (f -> f.equals(test3))));
     }
 }

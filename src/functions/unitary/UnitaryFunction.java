@@ -84,7 +84,6 @@ public abstract class UnitaryFunction extends Function {
 			return !used;
 		}
 
-		@SuppressWarnings("ValueOfIncrementOrDecrementUsed")
 		@Override
 		public Function next() {
 			if (used)

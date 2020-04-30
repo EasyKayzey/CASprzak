@@ -4,6 +4,7 @@ import functions.Function;
 
 import java.util.function.Predicate;
 
+@SuppressWarnings("unused")
 public class SearchTools {
 	public static boolean exists(Function input, Predicate<? super Function> test) {
 		return existsExcluding(input, test, (a -> false));

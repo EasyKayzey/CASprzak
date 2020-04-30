@@ -77,7 +77,16 @@ public class SearchTools {
 		return getSubsetIDs(input, test).size() > 0;
 	}
 
-	/**
+	/** //TODO FIX DOCS
+	 * Checks if this CommutativeFunction has a subset (as a Multiply) satisfying the condition, including empty and single-element products
+	 * @param test the condition to be satisfied
+	 * @return true if the condition was satisfied by a subset
+	 */
+	public static boolean existsInOppositeSurfaceSubset(CommutativeFunction input, FunctionPredicate test, FunctionPredicate excludeFromSubset) {
+		return existsInOppositeSurfaceSubsetExcluding(input, test, excludeFromSubset, (f -> false));
+	}
+
+	/** //TODO FIX DOCS
 	 * Checks if this CommutativeFunction has a subset (as a Multiply) satisfying the condition, including empty and single-element products
 	 * @param test the condition to be satisfied
 	 * @return true if the condition was satisfied by a subset

@@ -315,6 +315,7 @@ public class KeywordInterface {
 			case "defaultRangeSections" -> Settings.defaultRangeSections = Integer.parseInt(splitInput[1]);
 			case "simpsonsSegments" -> Settings.simpsonsSegments = Integer.parseInt(splitInput[1]);
 			case "zeroMargin" -> Settings.zeroMargin = Double.parseDouble(splitInput[1]);
+			case "integerMargin" -> Settings.integerMargin = Double.parseDouble(splitInput[1]);
 			case "simplifyFunctionsOfConstants" -> Settings.simplifyFunctionsOfConstants = MiscTools.parseBoolean(splitInput[1]);
 			case "distributeExponents" -> Settings.distributeExponents = MiscTools.parseBoolean(splitInput[1]);
 			case "cacheDerivatives" -> Settings.cacheDerivatives = MiscTools.parseBoolean(splitInput[1]);

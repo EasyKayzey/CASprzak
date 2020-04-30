@@ -1,5 +1,6 @@
 package tools;
 
+import config.Settings;
 import functions.Function;
 
 public class MiscTools {
@@ -47,5 +48,17 @@ public class MiscTools {
 			case "false", "f", "0", "no" -> false;
 			default -> throw new IllegalArgumentException(s + " cannot be parsed to a boolean");
 		};
+	}
+
+	/**
+	 * Converts a double within Settings.integerMargin of an integer to an integer
+	 * @param d the double to be converted
+	 * @return the double as an integer
+	 */
+	public static int toInteger(double d) {
+		if (Math.abs(((int) (d + .5)) - d) < Settings.integerMargin)
+			return (int) (d + .5);
+		else
+			throw new IllegalArgumentException("Double " + d + " is not within " + Settings.zeroMargin + " of an integer.");
 	}
 }

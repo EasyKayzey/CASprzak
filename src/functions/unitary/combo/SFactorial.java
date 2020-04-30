@@ -6,6 +6,7 @@ import functions.binary.Pow;
 import functions.commutative.Product;
 import functions.special.Constant;
 import functions.unitary.UnitaryFunction;
+import tools.MiscTools;
 
 import java.util.Map;
 
@@ -37,6 +38,8 @@ public class SFactorial extends Factorial {
 	@Override
 	public double evaluate(Map<Character, Double> variableValues) {
 		double argument = function.evaluate(variableValues);
+		if (Settings.enforceIntegerOperations)
+			argument = MiscTools.toInteger(argument);
 		double ans = Math.sqrt(2 * Math.PI * argument) * Math.pow(argument / Math.E, argument);
 		if (Settings.enforceIntegerOperations)
 			return (int) (ans + .5);

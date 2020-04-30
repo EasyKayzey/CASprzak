@@ -79,7 +79,7 @@ public class Parser {
 					functionStack.push(FunctionMaker.constant(Double.parseDouble(token)));
 				} catch (Exception e) {
 					if (token.length() > 1)
-						throw new IllegalArgumentException(token + " is not a valid function.");
+						throw new UnsupportedOperationException(token + " is not a valid function.");
 					char variableName = token.charAt(0);
 					functionStack.push(FunctionMaker.variable(variableName));
 				}
@@ -106,6 +106,6 @@ public class Parser {
 		else if (input instanceof String s)
 			return parse(s);
 		else
-			throw new IllegalArgumentException("Cannot parse " + input);
+			throw new MalformedParametersException("Cannot parse " + input);
 	}
 }

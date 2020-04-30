@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class CASDebugger {
-	public static void main(String[] args) throws IllegalArgumentException {
+	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
 		String userInput;
 

@@ -149,7 +149,7 @@ public class KeywordInterface {
 	public static Function substitute(String input) {
 		String[] splitInput = keywordSplitter.split(input);
 		if (splitInput[1].length() > 1)
-			throw new IllegalArgumentException("Variables are one character, so " + splitInput[1] + " is not valid.");
+			throw new IllegalArgumentException("Variables should be one character.");
 		return parseStored(splitInput[0]).substitute(splitInput[1].charAt(0), parseStored(splitInput[2]));
 	}
 
@@ -172,7 +172,7 @@ public class KeywordInterface {
 			case "anymin", "anyminima" -> Extrema.findAnyMinima(parseStored(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]), ConstantEvaluator.getConstant(splitInput[3]));
 			case "anymax", "anymaxima" -> Extrema.findAnyMaxima(parseStored(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]), ConstantEvaluator.getConstant(splitInput[3]));
 			case "inflect", "inflection" -> Extrema.findAnyInflectionPoints(parseStored(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]), ConstantEvaluator.getConstant(splitInput[3]));
-			default -> throw new IllegalArgumentException("Invalid setting for extrema:" + splitInput[0]);
+			default -> throw new IllegalStateException("Invalid setting for extrema:" + splitInput[0]);
 		};
 	}
 
@@ -195,7 +195,7 @@ public class KeywordInterface {
 			Variable.addFunctionVariable(splitInput[0].charAt(0));
 		try {
 			storedFunctions.put(splitInput[0], (Function) KeywordInterface.useKeywords(splitInput[1]));
-		} catch (IllegalArgumentException e) {
+		} catch (RuntimeException e) {
 			storedFunctions.put(splitInput[0], parseStored(splitInput[1]));
 		}
 		return storedFunctions.get(splitInput[0]);

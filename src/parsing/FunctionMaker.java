@@ -93,16 +93,18 @@ public class FunctionMaker {
 	 * Returns a {@link Function} corresponding to a "binary" operation string
 	 * NOTE: The functions are sometimes in a weird order for non-commutative types, so always check the constructors
 	 * @param functionName the string of the operation (e.g. "*" or "logb")
-	 * @param function1    one {@link Function} to be operated on
-	 * @param function2    another {@link Function} to be operated on
+	 * @param second    one {@link Function} to be operated on
+	 * @param first     another {@link Function} to be operated on
 	 * @return new {@link Function}
 	 */
-	public static Function makeBinary(String functionName, Function function1, Function function2) {
+	public static Function makeBinary(String functionName, Function second, Function first) {
 		return switch (functionName) {
-			case "+" -> new Sum(function1, function2);
-			case "*" -> new Product(function1, function2);
-			case "^" -> new Pow(function1, function2);
-			case "logb" -> new Logb(function1, function2);
+			case "+" -> new Sum(second, first);
+			case "*" -> new Product(second, first);
+			case "^" -> new Pow(second, first);
+			case "logb" -> new Logb(second, first);
+			case "C" -> new Product(Factorial.defaultFactorial(first), new Pow(Constant.NEGATIVE_ONE, new Product(Factorial.defaultFactorial(second), Factorial.defaultFactorial(new Sum(first, new Product(Constant.NEGATIVE_ONE, second))))));
+			case "P" -> new Product(Factorial.defaultFactorial(first), new Pow(Constant.NEGATIVE_ONE, Factorial.defaultFactorial(new Sum(first, new Product(Constant.NEGATIVE_ONE, second)))));
 			default -> throw new UnsupportedOperationException("Invalid functionName " + functionName);
 		};
 	}

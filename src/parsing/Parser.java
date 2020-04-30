@@ -16,7 +16,7 @@ public class Parser {
 	/**
 	 * A list of binary operations
 	 */
-	public static final String[] binaryOperations = {"^", "*", "+", "logb"};
+	public static final String[] binaryOperations = {"^", "*", "+", "logb", "C", "P"};
 
 	private Parser(){}
 

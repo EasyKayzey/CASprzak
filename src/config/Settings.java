@@ -16,5 +16,5 @@ public class Settings {
 	public static boolean enforceIntegerOperations = true; // Makes it so that combinatorial operations return integers
 	public static char singleVariableDefault = 'x';
 	public static SolverType defaultSolverType = SolverType.NEWTON;
-	public static FactorialType defaultFactorial = FactorialType.STIRLING;
+	public static FactorialType defaultFactorial = FactorialType.RECURSIVE;
 }

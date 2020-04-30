@@ -42,4 +42,16 @@ public class ComboTest {
 		Function test = Parser.parse("(ln(e^3))!"); // Might want to make this test use precedence when prefix precedence is added
 		assertEquals(6, test.evaluate(Map.of('x', -3.0)));
 	}
+
+	@Test
+	void test6C4() {
+		Function test = Parser.parseSimplified("6C4");
+		assertEquals(15, test.evaluate(null));
+	}
+
+	@Test
+	void test6P4() {
+		Function test = Parser.parseSimplified("6P4");
+		assertEquals(360, test.evaluate(null));
+	}
 }

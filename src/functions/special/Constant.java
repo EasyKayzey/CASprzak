@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
+@SuppressWarnings("StaticVariableOfConcreteClass")
 public class Constant extends SpecialFunction {
 	private static final HashMap<String, Double> specialConstants = new HashMap<>() {
 		{

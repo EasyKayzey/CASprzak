@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class InfixTokenizer {
 	private static final Pattern absoluteValueEnd = Pattern.compile("\\|(?=([^|]*\\|[^|]*\\|)*[^|]*$)");
 	private static final Pattern absoluteValueStart = Pattern.compile("(?<=\\w)\\|");
-	private static final Pattern adjacentMultiplier = Pattern.compile("(?<=\\d)(?=[a-zA-Z])(?!E-?\\d)|(?<=[a-zA-Z])(?=[\\d])(?<!\\dE)|(?<=\\))(?=[\\w(])|(?<=[\\d)])(?=\\()(?<!logb_\\d)");
+	private static final Pattern adjacentMultiplier = Pattern.compile("(?<=\\d)(?=[a-zA-Z])(?![ECP]-?\\d)|(?<=[a-zA-Z])(?=[\\d])(?<!\\d[ECP])|(?<=\\))(?=[\\w(])|(?<=[\\d)])(?=\\()(?<!logb_\\d)");
 	private static final Pattern subtractionFinder = Pattern.compile("(?<!^)(?<!(?<=\\dE)(?=-\\d))(?<![\\^\\-+*/\\s(])\\s*-");
 	private static final Pattern openParen = Pattern.compile("\\(");
 	private static final Pattern closeParen = Pattern.compile("\\)");

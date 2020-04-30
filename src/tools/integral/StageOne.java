@@ -19,7 +19,15 @@ public class StageOne<function> {
         Function function = stripConstant.second;
         double number = stripConstant.first;
 
-        if (!(function instanceof Product)) {
+        if (function instanceof Product product){
+            Function[] productTerms = product.getFunctions();
+            for (Function f : productTerms) {
+                if (f instanceof Pow power && power.getFunction2() instanceof Constant) {
+                    Function derivative = power.getFunction1().getSimplifiedDerivative(variableChar);
+                    if (SearchTools.existsSurface(product, (u -> u.equals(derivative))) && !SearchTools.existsExcluding(function, (u -> (u instanceof Variable v) && (v.varID == variableChar)), (u -> u.equals(power.getFunction1()))));
+                }
+            }
+        } else {
             if (function instanceof Pow power && power.getFunction2() instanceof Constant constant1 && power.getFunction1().getSimplifiedDerivative(variableChar) instanceof Constant constant2) {
                 number /= constant2.constant;
                 return exponential(number, constant1.constant, power.getFunction1());
@@ -40,16 +48,6 @@ public class StageOne<function> {
                 return cos(number, cos.operand);
             }
         }
-
-
-        for (Function f : function) {
-            if (f instanceof Pow power && power.getFunction2() instanceof Constant) {
-                Function derivative = power.getFunction1().getSimplifiedDerivative(variableChar);
-               if (SearchTools.exists(function, (u -> u.equals(derivative))) && !SearchTools.existsExcluding(function, (u -> (u instanceof Variable v) && (v.varID == variableChar)), (u -> u.equals(power.getFunction1()))));
-            }
-        }
-
-
 
         return function;
         // Let's say I want to check if all xs are in the form e^x

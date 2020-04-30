@@ -7,6 +7,7 @@ import tools.integral.Integral;
 import tools.integral.IntegralsTools;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 
 public class IntegralTest {
@@ -59,5 +60,19 @@ public class IntegralTest {
         Integral test1 = new Integral(Parser.parse("cos(x)"), 'x');
         Function test2 = Parser.parse("sin(x)");
         assertEquals(test2, test1.integrate());
+    }
+
+    @Test
+    void simpleExpUsub() {
+        Integral test1 = new Integral(Parser.parse("2x*e^(x^2)"), 'x');
+        Function test2 = Parser.parse("e^(x^2)");
+        assertEquals(test2, test1.integrate());
+    }
+
+    @Test
+    void simpleExpUsubThatNoWork() {
+        Integral test1 = new Integral(Parser.parse("2x*sin(x)*e^(x^2)"), 'x');
+        Function test2 = Parser.parse("e^(x^2)");
+        assertNotEquals(test2, test1.integrate());
     }
 }

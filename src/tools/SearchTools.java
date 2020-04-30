@@ -15,8 +15,17 @@ public class SearchTools {
 	 * Returns a {@link FunctionPredicate} describing whether a given Function is an instance of {@link Variable} with varID equal to the default specified in Settings
 	 * @return the predicate described above
 	 */
-	public static FunctionPredicate isDefaultVariable() {
-		return input -> ((input instanceof Variable v) && (v.varID == Settings.singleVariableDefault));
+	public static FunctionPredicate isVariable() {
+		return isVariable(Settings.singleVariableDefault);
+	}
+
+	/**
+	 * Returns a {@link FunctionPredicate} describing whether a given Function is an instance of {@link Variable} with varID equal to the specified variable
+	 * @param varID the variable to be checked for
+	 * @return the predicate described above
+	 */
+	public static FunctionPredicate isVariable(char varID) {
+		return input -> ((input instanceof Variable v) && (v.varID == varID));
 	}
 
 	/**

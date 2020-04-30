@@ -4,8 +4,8 @@ import functions.Function;
 import functions.binary.Pow;
 import functions.commutative.Sum;
 import functions.commutative.Product;
-import functions.special.Constant;
 import functions.unitary.UnitaryFunction;
+import tools.DefaultFunctions;
 
 import java.util.Map;
 
@@ -21,7 +21,7 @@ public class Acot extends UnitaryFunction {
 
 	@Override
 	public Function getDerivative(char varID) {
-		return new Product(Constant.NEGATIVE_ONE, operand.getSimplifiedDerivative(varID), new Pow(Constant.NEGATIVE_ONE, new Sum(Constant.ONE, new Pow(Constant.TWO, operand))));
+		return new Product(DefaultFunctions.NEGATIVE_ONE, operand.getSimplifiedDerivative(varID), new Pow(DefaultFunctions.NEGATIVE_ONE, new Sum(DefaultFunctions.ONE, new Pow(DefaultFunctions.TWO, operand))));
 	}
 
 	/**

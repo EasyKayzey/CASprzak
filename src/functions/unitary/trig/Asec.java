@@ -4,9 +4,9 @@ import functions.Function;
 import functions.binary.Pow;
 import functions.commutative.Sum;
 import functions.commutative.Product;
-import functions.special.Constant;
 import functions.unitary.Abs;
 import functions.unitary.UnitaryFunction;
+import tools.DefaultFunctions;
 
 import java.util.Map;
 
@@ -22,7 +22,7 @@ public class Asec extends UnitaryFunction {
 
 	@Override
 	public Function getDerivative(char varID) {
-		return new Product(operand.getSimplifiedDerivative(varID), new Pow(Constant.NEGATIVE_ONE, new Product(new Abs(operand), new Pow(Constant.HALF, new Sum(new Pow(Constant.TWO, operand), Constant.NEGATIVE_ONE)))));
+		return new Product(operand.getSimplifiedDerivative(varID), new Pow(DefaultFunctions.NEGATIVE_ONE, new Product(new Abs(operand), new Pow(DefaultFunctions.HALF, new Sum(new Pow(DefaultFunctions.TWO, operand), DefaultFunctions.NEGATIVE_ONE)))));
 	}
 
 	/**

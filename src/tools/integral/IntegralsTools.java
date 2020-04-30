@@ -14,7 +14,7 @@ import java.util.Map;
 public class IntegralsTools {
     public static Pair<Double, Function> stripConstants(Function function) {
         if (!(function instanceof Product))
-            return new Pair(1.0, function);
+            return new Pair<Double, Function>(1.0, function);
         else if (function instanceof Product multiply) {
             Function[] terms = multiply.simplifyConstants().getFunctions();
             double constant = 1;
@@ -25,7 +25,10 @@ public class IntegralsTools {
                     termsWithConstantRemoved = FunctionTools.removeFunctionAt(terms, i);
                 }
             }
-            return new Pair(constant, (new Product(termsWithConstantRemoved)).simplifyPull());
+            if (termsWithConstantRemoved.length == 1)
+                return new Pair<Double, Function>(constant, termsWithConstantRemoved[0]);
+            else
+                return new Pair<Double, Function>(constant, (new Product(termsWithConstantRemoved)).simplifyPull());
         } else {
             throw new RuntimeException("This should never happen");
         }

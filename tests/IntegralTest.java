@@ -32,4 +32,11 @@ public class IntegralTest {
         Function test2 = Parser.parse("e^x");
         assertEquals(test2, test1.integrate());
     }
+
+    @Test
+    void simpleExponentIntegralWithConstant() {
+        Integral test1 = new Integral(Parser.parse("2e^x"), 'x');
+        Function test2 = Parser.parse("2e^x");
+        assertEquals(test2, test1.integrate());
+    }
 }

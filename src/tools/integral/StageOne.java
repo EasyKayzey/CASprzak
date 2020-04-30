@@ -12,11 +12,16 @@ public class StageOne<function> {
     public static Function derivativeDivides(Function integrand, char variableChar) {
         Pair<Double, Function> stripConstant = IntegralsTools.stripConstants(integrand);
         Function function = stripConstant.second;
+        System.out.println(function);
+        System.out.println(function.getClass());
         double number = stripConstant.first;
+        System.out.println(number);
 
         if (!(function instanceof Product)) {
             if (function instanceof Pow power && power.getFunction2() instanceof Constant constant1 && power.getFunction1().getSimplifiedDerivative(variableChar) instanceof Constant constant2) {
+                System.out.println(number);
                 number /= constant2.constant;
+                System.out.println(number);
                 return new Product(new Constant(number), exponential(constant1.constant, power.getFunction1()));
 
             }

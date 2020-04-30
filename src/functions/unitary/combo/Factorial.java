@@ -1,5 +1,6 @@
 package functions.unitary.combo;
 
+import config.Settings;
 import functions.Function;
 import functions.unitary.UnitaryFunction;
 
@@ -17,4 +18,11 @@ public abstract class Factorial extends UnitaryFunction {
 	 * @return a {@link Function} representing the specific approximation
 	 */
 	public abstract Function classForm();
+
+	public static Function defaultFactorial(Function input) {
+		return switch (Settings.defaultFactorial) {
+			case STIRLING -> new SFactorial(input);
+			case LANCZOS -> throw new IllegalArgumentException("LFactorial not implemented");
+		};
+	}
 }

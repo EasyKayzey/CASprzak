@@ -326,6 +326,7 @@ public class KeywordInterface {
 					throw new IllegalArgumentException("This setting should only be one character");
 			}
 			default -> throw new IllegalArgumentException("Setting " + splitInput[0] + " does not exist");
+			//TODO implement Enum setting parsing
 		}
 		return splitInput[0] + " = " + splitInput[1];
 	}

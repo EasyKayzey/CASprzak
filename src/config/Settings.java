@@ -14,4 +14,5 @@ public class Settings {
 	public static boolean trustImmutability = true; // Makes it so that getFunctions and other getters don't return clone()
 	public static char singleVariableDefault = 'x';
 	public static SolverType defaultSolverType = SolverType.NEWTON;
+	public static FactorialType defaultFactorial = FactorialType.STIRLING;
 }

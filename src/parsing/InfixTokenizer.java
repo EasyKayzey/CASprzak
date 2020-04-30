@@ -13,7 +13,7 @@ public class InfixTokenizer {
 	private static final Pattern closeParen = Pattern.compile("\\)");
 	private static final Pattern plus = Pattern.compile("\\+");
 	private static final Pattern times = Pattern.compile("\\*");
-	private static final Pattern infixSplitter = Pattern.compile("\\s+|(((?<=\\W)(?=[\\w-])((?<!-)|(?!\\d))|(?<=\\w)(?=\\W)(?<!(?<=\\dE)(?=-?\\d)))|(?<=[()])|(?=[()]))(?<![ .])(?![ .])|(?<=[\\D-])(?=\\.)");
+	private static final Pattern infixSplitter = Pattern.compile("\\s+|(?<=!)|(?=!)|(((?<=\\W)(?=[\\w-])((?<!-)|(?!\\d))|(?<=\\w)(?=\\W)(?<!(?<=\\dE)(?=-?\\d)))|(?<=[()])|(?=[()]))(?<![ .])(?![ .])|(?<=[\\D-])(?=\\.)");
 
 	private InfixTokenizer(){}
 

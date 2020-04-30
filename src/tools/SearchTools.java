@@ -12,9 +12,12 @@ import java.util.List;
 public class SearchTools {
 
 	/**
-	 * A {@link FunctionPredicate} describing whether a given Function is an instance of {@link Variable} with varID equal to the default specified in Settings
+	 * Returns a {@link FunctionPredicate} describing whether a given Function is an instance of {@link Variable} with varID equal to the default specified in Settings
+	 * @return the predicate described above
 	 */
-	public static FunctionPredicate isDefaultVariable = input -> ((input instanceof Variable v) && (v.varID == Settings.singleVariableDefault));
+	public static FunctionPredicate isDefaultVariable() {
+		return input -> ((input instanceof Variable v) && (v.varID == Settings.singleVariableDefault));
+	}
 
 	/**
 	 * Returns true if a {@link Function} in the function tree satisfies the predicate test

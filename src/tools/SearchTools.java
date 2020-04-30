@@ -1,16 +1,15 @@
 package tools;
 
 import functions.Function;
-
-import java.util.function.Predicate;
+import tools.helperclasses.FunctionPredicate;
 
 @SuppressWarnings("unused")
 public class SearchTools {
-	public static boolean exists(Function input, Predicate<? super Function> test) {
+	public static boolean exists(Function input, FunctionPredicate test) {
 		return existsExcluding(input, test, (a -> false));
 	}
 
-	public static boolean existsExcluding(Function input, Predicate<? super Function> test, Predicate<? super Function> exclude) {
+	public static boolean existsExcluding(Function input, FunctionPredicate test, FunctionPredicate exclude) {
 		if (exclude.test(input))
 			return false;
 		else if (test.test(input))
@@ -22,11 +21,11 @@ public class SearchTools {
 		return false;
 	}
 
-	public static boolean existsSurface(Function input, Predicate<? super Function> test) {
+	public static boolean existsSurface(Function input, FunctionPredicate test) {
 		return existsSurfaceExcluding(input, test, (a -> false));
 	}
 
-	public static boolean existsSurfaceExcluding(Function input, Predicate<? super Function> test, Predicate<? super Function> exclude) {
+	public static boolean existsSurfaceExcluding(Function input, FunctionPredicate test, FunctionPredicate exclude) {
 		if (exclude.test(input))
 			return false;
 		else

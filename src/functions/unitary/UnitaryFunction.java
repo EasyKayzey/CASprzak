@@ -13,25 +13,24 @@ public abstract class UnitaryFunction extends Function {
 	/**
 	 * The {@link Function} which the {@link UnitaryFunction} operates on
 	 */
-	protected final Function function;
+	public final Function operand;
 
 	/**
 	 * Constructs a new UnitaryFunction
-	 * @param function The {@link Function} which will be operated on
+	 * @param operand The {@link Function} which will be operated on
 	 */
-	public UnitaryFunction(Function function) {
-		this.function = function;
+	public UnitaryFunction(Function operand) {
+		this.operand = operand;
 	}
 
 
-
 	public String toString() {
-		return this.getClass().getSimpleName().toLowerCase() + "(" + function.toString() + ")";
+		return this.getClass().getSimpleName().toLowerCase() + "(" + operand.toString() + ")";
 	}
 
 	public Function simplify() {
 		UnitaryFunction newFunction = this.simplifyInternal();
-		if (Settings.simplifyFunctionsOfConstants && newFunction.function instanceof Constant)
+		if (Settings.simplifyFunctionsOfConstants && newFunction.operand instanceof Constant)
 			return new Constant(newFunction.evaluate(null));
 		return newFunction;
 	}
@@ -44,27 +43,27 @@ public abstract class UnitaryFunction extends Function {
 	public abstract UnitaryFunction me(Function function);
 
 	public UnitaryFunction clone() {
-		return me(function.clone());
+		return me(operand.clone());
 	}
 
 	/**
-	 * Returns the {@link UnitaryFunction} with {@link #function}.{@link #simplify()}
-	 * @return the {@link UnitaryFunction} with {@link #function}.{@link #simplify()}
+	 * Returns the {@link UnitaryFunction} with {@link #operand}.{@link #simplify()}
+	 * @return the {@link UnitaryFunction} with {@link #operand}.{@link #simplify()}
 	 */
 	public UnitaryFunction simplifyInternal() {
-		return me(function.simplify());
+		return me(operand.simplify());
 	}
 
 	public UnitaryFunction substitute(char varID, Function toReplace) {
-		return me(function.substitute(varID, toReplace));
+		return me(operand.substitute(varID, toReplace));
 	}
 
 	public boolean equals(Function that) {
-		return this.getClass().equals(that.getClass()) && this.function.equals(((UnitaryFunction) that).function);
+		return this.getClass().equals(that.getClass()) && this.operand.equals(((UnitaryFunction) that).operand);
 	}
 
 	public int compareSelf(Function that) {
-		return (this.function.compareTo(((UnitaryFunction) that).function));
+		return (this.operand.compareTo(((UnitaryFunction) that).operand));
 	}
 
 
@@ -89,7 +88,7 @@ public abstract class UnitaryFunction extends Function {
 			if (used)
 				throw new NoSuchElementException("Out of elements in UnitaryFunction");
 			used = true;
-			return function;
+			return operand;
 		}
 	}
 }

@@ -19,17 +19,17 @@ public class Csch extends UnitaryFunction {
 
 	@Override
 	public Function getDerivative(char varID) {
-		return new Product(new Constant(-1), function.getSimplifiedDerivative(varID), new Csch(function), new Coth(function));
+		return new Product(new Constant(-1), operand.getSimplifiedDerivative(varID), new Csch(operand), new Coth(operand));
 	}
 
 	/**
-	 * Returns the hyperbolic cosecant of the stored {@link #function} evaluated
+	 * Returns the hyperbolic cosecant of the stored {@link #operand} evaluated
 	 * @param variableValues The values of the variables of the {@link Function} at the point
-	 * @return the csch of {@link #function} evaluated
+	 * @return the csch of {@link #operand} evaluated
 	 */
 	@Override
 	public double evaluate(Map<Character, Double> variableValues) {
-		return 1 / Math.sinh(function.evaluate(variableValues));
+		return 1 / Math.sinh(operand.evaluate(variableValues));
 	}
 
 	@Override

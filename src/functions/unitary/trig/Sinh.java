@@ -17,18 +17,18 @@ public class Sinh extends UnitaryFunction {
 	}
 
 	/**
-	 * Returns the hyperbolic sine of the stored {@link #function} evaluated
+	 * Returns the hyperbolic sine of the stored {@link #operand} evaluated
 	 * @param variableValues The values of the variables of the {@link Function} at the point
-	 * @return the sinh of {@link #function} evaluated
+	 * @return the sinh of {@link #operand} evaluated
 	 */
 	@Override
 	public double evaluate(Map<Character, Double> variableValues) {
-		return Math.sin(function.evaluate(variableValues));
+		return Math.sin(operand.evaluate(variableValues));
 	}
 
 	@Override
 	public Function getDerivative(char varID) {
-		return new Product(new Cosh(function), function.getSimplifiedDerivative(varID));
+		return new Product(new Cosh(operand), operand.getSimplifiedDerivative(varID));
 	}
 
 	public UnitaryFunction me(Function operand) {

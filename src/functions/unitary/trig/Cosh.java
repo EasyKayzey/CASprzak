@@ -17,18 +17,18 @@ public class Cosh extends UnitaryFunction {
 	}
 
 	/**
-	 * Returns the hyperbolic cosine of the stored {@link #function} evaluated
+	 * Returns the hyperbolic cosine of the stored {@link #operand} evaluated
 	 * @param variableValues The values of the variables of the {@link Function} at the point
-	 * @return the cosh of {@link #function} evaluated
+	 * @return the cosh of {@link #operand} evaluated
 	 */
 	@Override
 	public double evaluate(Map<Character, Double> variableValues) {
-		return Math.cosh(function.evaluate(variableValues));
+		return Math.cosh(operand.evaluate(variableValues));
 	}
 
 	@Override
 	public Function getDerivative(char varID) {
-		return new Product(new Sinh(function), function.getSimplifiedDerivative(varID));
+		return new Product(new Sinh(operand), operand.getSimplifiedDerivative(varID));
 	}
 
 	public UnitaryFunction me(Function operand) {

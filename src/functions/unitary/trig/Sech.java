@@ -19,17 +19,17 @@ public class Sech extends UnitaryFunction {
 
 	@Override
 	public Function getDerivative(char varID) {
-		return new Product(new Constant(-1), function.getSimplifiedDerivative(varID), new Sech(function), new Tanh(function));
+		return new Product(new Constant(-1), operand.getSimplifiedDerivative(varID), new Sech(operand), new Tanh(operand));
 	}
 
 	/**
-	 * Returns the hyperbolic secant of the stored {@link #function} evaluated
+	 * Returns the hyperbolic secant of the stored {@link #operand} evaluated
 	 * @param variableValues The values of the variables of the {@link Function} at the point
-	 * @return the sech of {@link #function} evaluated
+	 * @return the sech of {@link #operand} evaluated
 	 */
 	@Override
 	public double evaluate(Map<Character, Double> variableValues) {
-		return 1 / Math.cosh(function.evaluate(variableValues));
+		return 1 / Math.cosh(operand.evaluate(variableValues));
 	}
 
 	@Override

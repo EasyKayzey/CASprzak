@@ -21,17 +21,17 @@ public class Acot extends UnitaryFunction {
 
 	@Override
 	public Function getDerivative(char varID) {
-		return new Product(new Constant(-1), function.getSimplifiedDerivative(varID), new Pow(new Constant(-1), new Sum(new Constant(1), new Pow(new Constant(2), function))));
+		return new Product(new Constant(-1), operand.getSimplifiedDerivative(varID), new Pow(new Constant(-1), new Sum(new Constant(1), new Pow(new Constant(2), operand))));
 	}
 
 	/**
-	 * Returns the inverse cotangent of the stored {@link #function} evaluated
+	 * Returns the inverse cotangent of the stored {@link #operand} evaluated
 	 * @param variableValues The values of the variables of the {@link Function} at the point
-	 * @return the arccot of {@link #function} evaluated
+	 * @return the arccot of {@link #operand} evaluated
 	 */
 	@Override
 	public double evaluate(Map<Character, Double> variableValues) {
-		double functionEvaluated = function.evaluate(variableValues);
+		double functionEvaluated = operand.evaluate(variableValues);
 		if (functionEvaluated < 0) {
 			return -0.5 * Math.PI - Math.atan(functionEvaluated);
 		} else {

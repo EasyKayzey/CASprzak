@@ -32,7 +32,7 @@ public class RFactorial extends Factorial {
 	public double evaluate(Map<Character, Double> variableValues) {
 		if (!Settings.enforceIntegerOperations)
 			throw new IllegalStateException("RFactorial cannot be used if Settings.enforceIntegerOperations is not enabled.");
-		int argument = MiscTools.toInteger(function.evaluate(variableValues));
+		int argument = MiscTools.toInteger(operand.evaluate(variableValues));
 		int prod = 1;
 		for (int i = 1; i <= argument; i++)
 			prod *= i;

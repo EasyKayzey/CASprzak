@@ -18,12 +18,12 @@ public class Sign extends UnitaryFunction {
 
 	@Override
 	public double evaluate(Map<Character, Double> variableValues) {
-		return Math.signum(function.evaluate(variableValues));
+		return Math.signum(operand.evaluate(variableValues));
 	}
 
 	@Override
 	public Function getDerivative(char varID) {
-		return new Product(function.getSimplifiedDerivative(varID), new Constant(2), new Dirac(function));
+		return new Product(operand.getSimplifiedDerivative(varID), new Constant(2), new Dirac(operand));
 	}
 
 	@Override

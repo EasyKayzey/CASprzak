@@ -17,12 +17,12 @@ public class Abs extends UnitaryFunction {
 
 	@Override
 	public double evaluate(Map<Character, Double> variableValues) {
-		return Math.abs(function.evaluate(variableValues));
+		return Math.abs(operand.evaluate(variableValues));
 	}
 
 	@Override
 	public Function getDerivative(char varID) {
-		return new Product(function.getSimplifiedDerivative(varID), new Sign(function));
+		return new Product(operand.getSimplifiedDerivative(varID), new Sign(operand));
 	}
 
 	@Override

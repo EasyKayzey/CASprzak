@@ -22,18 +22,18 @@ public class Asec extends UnitaryFunction {
 
 	@Override
 	public Function getDerivative(char varID) {
-		return new Product(function.getSimplifiedDerivative(varID), new Pow(new Constant(-1), new Product(new Abs(function), new Pow(new Constant(0.5), new Sum(new Pow(new Constant(2), function), new Constant(-1))))));
+		return new Product(operand.getSimplifiedDerivative(varID), new Pow(new Constant(-1), new Product(new Abs(operand), new Pow(new Constant(0.5), new Sum(new Pow(new Constant(2), operand), new Constant(-1))))));
 	}
 
 	/**
-	 * Returns the inverse secant of the stored {@link #function} evaluated
+	 * Returns the inverse secant of the stored {@link #operand} evaluated
 	 * @param variableValues The values of the variables of the {@link Function} at the point
-	 * @return the arcsec of {@link #function} evaluated
+	 * @return the arcsec of {@link #operand} evaluated
 	 */
 	@SuppressWarnings({"DuplicateExpressions", "RedundantSuppression"})
 	@Override
 	public double evaluate(Map<Character, Double> variableValues) {
-		double functionEvaluated = function.evaluate(variableValues);
+		double functionEvaluated = operand.evaluate(variableValues);
 		if (functionEvaluated > 1) {
 			return Math.asin(Math.sqrt(Math.pow(functionEvaluated, 2) - 1) / functionEvaluated);
 		} else if (functionEvaluated < -1) {

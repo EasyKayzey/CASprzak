@@ -85,4 +85,28 @@ public class SearchTools {
 		}
 		return false;
 	}
+
+	/**
+	 * Checks if this CommutativeFunction has a subset (as a Multiply) satisfying the condition, including empty and single-element products
+	 * @param test the condition to be satisfied
+	 * @return true if the condition was satisfied by a subset
+	 */
+	public static boolean existsInOppositeSurfaceSubset(CommutativeFunction input, FunctionPredicate test, FunctionPredicate exclude) {
+		Function[] functions = input.getFunctions();
+		for (int run = 0; run < Math.pow(2, functions.length); run++) {
+			List<Function> subset = new ArrayList<>();
+			for (int ix = 0; ix < functions.length; ix++)
+				if (((run >> ix) & 1) > 0)
+					subset.add(functions[ix]);
+			if (exclude.test(input.me(subset.toArray(new Function[0])))) {
+				subset.clear();
+				for (int ix = 0; ix < functions.length; ix++)
+					if (((~run >> ix) & 1) > 0)
+						subset.add(functions[ix]);
+				if (existsInSurfaceSubset(input, test))
+					return true;
+			}
+		}
+		return false;
+	}
 }

@@ -78,8 +78,20 @@ public class SearchTools {
 	}
 
 	/**
-	 * Checks if this CommutativeFunction has a subset (as a Multiply) satisfying the condition, including empty and single-element products
+	 * Checks if this CommutativeFunction has a subset not including excludeFromSubset (as a Multiply) satisfying the condition, including empty and single-element products
 	 * @param test the condition to be satisfied
+	 * @param excludeFromSubset subset that should be excluded
+	 * @return true if the condition was satisfied by a subset
+	 */
+	public static boolean existsInOppositeSurfaceSubset(CommutativeFunction input, FunctionPredicate test, FunctionPredicate excludeFromSubset) {
+		return existsInOppositeSurfaceSubsetExcluding(input, test, excludeFromSubset, (f -> false));
+	}
+
+	/**
+	 * Checks if this CommutativeFunction has a subset not including excludeFromSubset (as a Multiply) satisfying the condition, including empty and single-element products, excluding any branches that satisfy excludeFromSearch
+	 * @param test the condition to be satisfied
+	 * @param excludeFromSubset subset that should be excluded
+	 * @param excludeFromSearch predicate to be excluded from the search
 	 * @return true if the condition was satisfied by a subset
 	 */
 	public static boolean existsInOppositeSurfaceSubsetExcluding(CommutativeFunction input, FunctionPredicate test, FunctionPredicate excludeFromSubset, FunctionPredicate excludeFromSearch) {

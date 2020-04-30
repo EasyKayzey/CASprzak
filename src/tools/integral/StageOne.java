@@ -3,6 +3,7 @@ package tools.integral;
 import functions.Function;
 import functions.binary.Logb;
 import functions.binary.Pow;
+import functions.commutative.CommutativeFunction;
 import functions.commutative.Product;
 import functions.commutative.Sum;
 import functions.special.Constant;
@@ -23,9 +24,16 @@ public class StageOne {
         if (function instanceof Product product){
             Function[] productTerms = product.getFunctions();
             for (Function f : productTerms) {
-                if (f instanceof Pow power && power.getFunction2() instanceof Constant) {
-                    Function derivative = power.getFunction1().getSimplifiedDerivative(variableChar);
-                    if (SearchTools.existsSurface(product, (u -> u.equals(derivative))) && !SearchTools.existsExcluding(function, (u -> (u instanceof Variable v) && (v.varID == variableChar)), (u -> u.equals(power.getFunction1()))));
+                if (f instanceof Pow power && power.getFunction2() instanceof Constant base) {
+                    Function derivativeWithConstants = power.getFunction1().getSimplifiedDerivative(variableChar);
+                    Pair<Double, Function> derivative = IntegralsTools.stripConstants(derivativeWithConstants);
+                    Function derivativeWithoutConstant = derivative.second;
+                    double constantInfront = derivative.first;
+                    Product derivativeTimesOperation = new Product(derivativeWithoutConstant, f);
+                    if (SearchTools.existsSurface(product, (u -> u.equals(derivativeWithoutConstant))) && !SearchTools.existsInOppositeSurfaceSubset((CommutativeFunction) function, (u -> (u instanceof Variable v) && (v.varID == variableChar)), (u -> u.equals(derivativeTimesOperation)))) {
+                        number /= constantInfront;
+                        return exponential(number, base.constant, power.getFunction1());
+                    }
                 }
             }
         } else {

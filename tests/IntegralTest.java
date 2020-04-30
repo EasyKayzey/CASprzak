@@ -39,4 +39,11 @@ public class IntegralTest {
         Function test2 = Parser.parse("2e^x");
         assertEquals(test2, test1.integrate());
     }
+
+    @Test
+    void simpleExponentIntegralWithLinerTermInExponent() {
+        Integral test1 = new Integral(Parser.parse("2e^(2x-3)"), 'x');
+        Function test2 = Parser.parse("e^(2x-3)");
+        assertEquals(test2, test1.integrate());
+    }
 }

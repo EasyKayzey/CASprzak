@@ -33,13 +33,13 @@ public class ComboTest {
 
 	@Test
 	void absFactorial1() {
-		Function test = Parser.parse("|x|!");
+		Function test = Parser.parse("(|x|)!"); // Might want to make this test use precedence when prefix precedence is added
 		assertEquals(6, test.evaluate(Map.of('x', -3.0)));
 	}
 
 	@Test
 	void functionFactorial1() {
-		Function test = Parser.parse("ln(e^3)!");
+		Function test = Parser.parse("(ln(e^3))!"); // Might want to make this test use precedence when prefix precedence is added
 		assertEquals(6, test.evaluate(Map.of('x', -3.0)));
 	}
 }

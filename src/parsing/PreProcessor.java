@@ -39,6 +39,9 @@ public class PreProcessor {
 		Deque<String> operators = new LinkedList<>();
 
 		for (String token : tokens) {
+//			System.out.println(operators);
+//			System.out.println(postfix);
+//			System.out.println();
 			if (Constant.isSpecialConstant(token)) {
 				postfix.add(token);
 			} else if (isAnOperator(token)) {

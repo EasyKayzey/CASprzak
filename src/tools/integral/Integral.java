@@ -2,7 +2,7 @@ package tools.integral;
 
 import config.Settings;
 import functions.Function;
-import functions.commutative.Add;
+import functions.commutative.Sum;
 import functions.special.Constant;
 import functions.unitary.UnitaryFunction;
 
@@ -80,13 +80,13 @@ public class Integral extends UnitaryFunction {
 	}
 
 	public Function integrate() {
-		if (function instanceof Add terms) {
+		if (function instanceof Sum terms) {
 			Function[] integratedTerms = new Function[terms.getFunctionsLength()];
 			for(int i = 0; i < terms.getFunctionsLength(); i++) {
 				integratedTerms[i] = new Integral(terms.getFunctions()[i], respectTo);
 			}
-			return new Add(integratedTerms);
+			return new Sum(integratedTerms);
 		}
-		return new Constant(0);
+		return StageOne.derivativeDivides(function, respectTo);
 	}
 }

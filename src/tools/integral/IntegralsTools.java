@@ -1,7 +1,8 @@
 package tools.integral;
 
 import functions.Function;
-import functions.commutative.Multiply;
+import functions.commutative.Product;
+import functions.commutative.Sum;
 import functions.special.Constant;
 import tools.FunctionTools;
 import tools.helperclasses.Pair;
@@ -12,9 +13,9 @@ import java.util.Map;
 
 public class IntegralsTools {
     public static Pair<Double, Function> stripConstants(Function function) {
-        if (!(function instanceof Multiply))
+        if (!(function instanceof Product))
             return new Pair(1.0, function);
-        else if (function instanceof Multiply multiply) {
+        else if (function instanceof Product multiply) {
             Function[] terms = multiply.simplifyConstants().getFunctions();
             double constant = 1;
             Function[] termsWithConstantRemoved = terms;
@@ -24,7 +25,7 @@ public class IntegralsTools {
                     termsWithConstantRemoved = FunctionTools.removeFunctionAt(terms, i);
                 }
             }
-            return new Pair(constant, (new Multiply(termsWithConstantRemoved)).simplifyPull());
+            return new Pair(constant, (new Product(termsWithConstantRemoved)).simplifyPull());
         } else {
             throw new RuntimeException("This should never happen");
         }

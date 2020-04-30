@@ -9,12 +9,11 @@ public class InfixTokenizer {
 	private static final Pattern absoluteValueStart = Pattern.compile("(?<=\\w)\\|");
 	private static final Pattern adjacentMultiplier = Pattern.compile("(?<=\\d)(?=[a-zA-Z])(?!E-?\\d)|(?<=[a-zA-Z])(?=[\\d])(?<!\\dE)|(?<=\\))(?=[\\w(])|(?<=[\\d)])(?=\\()(?<!logb_\\d)");
 	private static final Pattern subtractionFinder = Pattern.compile("(?<!^)(?<!(?<=\\dE)(?=-\\d))(?<![\\^\\-+*/\\s(])\\s*-");
-	//OOO is Order of Operations
-	private static final Pattern OOO1 = Pattern.compile("\\(");
-	private static final Pattern OOO2 = Pattern.compile("\\)");
-	private static final Pattern OOO3 = Pattern.compile("\\+");
-	private static final Pattern OOO4 = Pattern.compile("\\*");
-	private static final Pattern Splitter = Pattern.compile("\\s+|(((?<=\\W)(?=[\\w-])((?<!-)|(?!\\d))|(?<=\\w)(?=\\W)(?<!(?<=\\dE)(?=-?\\d)))|(?<=[()])|(?=[()]))(?<![ .])(?![ .])|(?<=[\\D-])(?=\\.)");
+	private static final Pattern openParen = Pattern.compile("\\(");
+	private static final Pattern closeParen = Pattern.compile("\\)");
+	private static final Pattern plus = Pattern.compile("\\+");
+	private static final Pattern times = Pattern.compile("\\*");
+	private static final Pattern infixSplitter = Pattern.compile("\\s+|(((?<=\\W)(?=[\\w-])((?<!-)|(?!\\d))|(?<=\\w)(?=\\W)(?<!(?<=\\dE)(?=-?\\d)))|(?<=[()])|(?=[()]))(?<![ .])(?![ .])|(?<=[\\D-])(?=\\.)");
 
 	private InfixTokenizer(){}
 
@@ -37,9 +36,9 @@ public class InfixTokenizer {
 		// Turns expressions like xyz into x*y*z
 		infix = parseVariablePairs(infix);
 		// Adds parentheses to enforce order of operations
-		infix = "((((" + OOO4.matcher(OOO3.matcher(OOO2.matcher(OOO1.matcher(infix).replaceAll("((((")).replaceAll("))))")).replaceAll("))+((")).replaceAll(")*(") + "))))";
+		infix = "((((" + times.matcher(plus.matcher(closeParen.matcher(openParen.matcher(infix).replaceAll("((((")).replaceAll("))))")).replaceAll("))+((")).replaceAll(")*(") + "))))";
 		// Splits infix into tokens
-		return Splitter.split(infix);
+		return infixSplitter.split(infix);
 	}
 
 	/**

@@ -5,9 +5,10 @@ import functions.Function;
 import functions.special.Constant;
 import org.jetbrains.annotations.NotNull;
 import tools.FunctionTools;
-import tools.helperclasses.FunctionPredicate;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.function.DoubleBinaryOperator;
 
 public abstract class CommutativeFunction extends Function {
@@ -158,22 +159,6 @@ public abstract class CommutativeFunction extends Function {
 	 */
 	public abstract CommutativeFunction me(Function... functions);
 
-	/**
-	 * Checks if this CommutativeFunction has a subset (as a Multiply) satisfying the condition, including empty and single-element products
-	 * @param test the condition to be satisfied
-	 * @return true if the condition was satisfied by a subset
-	 */
-	public boolean hasSubsetSatisfying(FunctionPredicate test) {
-		for (int run = 0; run < Math.pow(2, functions.length); run++) {
-			List<Function> subset = new ArrayList<>();
-			for (int ix = 0; ix < functions.length; ix++)
-				if (((run >> ix) & 1) > 0)
-					subset.add(functions[ix]);
-			if (test.test(me(subset.toArray(new Function[0]))))
-				return true;
-		}
-		return false;
-	}
 
 	public Function substitute(char varID, Function toReplace) {
 		Function[] newFunctions = new Function[functions.length];

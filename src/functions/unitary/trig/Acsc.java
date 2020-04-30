@@ -4,9 +4,9 @@ import functions.Function;
 import functions.binary.Pow;
 import functions.commutative.Sum;
 import functions.commutative.Product;
-import functions.special.Constant;
 import functions.unitary.Abs;
 import functions.unitary.UnitaryFunction;
+import tools.DefaultFunctions;
 
 import java.util.Map;
 
@@ -27,7 +27,7 @@ public class Acsc extends UnitaryFunction {
 
 	@Override
 	public Function getDerivative(char varID) {
-		return new Product(new Constant(-1), operand.getSimplifiedDerivative(varID), new Pow(new Constant(-1), new Product(new Abs(operand), new Pow(new Constant(0.5), new Sum(new Pow(new Constant(2), operand), new Constant(-1))))));
+		return new Product(DefaultFunctions.NEGATIVE_ONE, operand.getSimplifiedDerivative(varID), new Pow(DefaultFunctions.NEGATIVE_ONE, new Product(new Abs(operand), new Pow(DefaultFunctions.HALF, new Sum(new Pow(DefaultFunctions.TWO, operand), DefaultFunctions.NEGATIVE_ONE)))));
 	}
 
 	/**

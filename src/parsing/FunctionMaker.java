@@ -13,6 +13,7 @@ import functions.unitary.Ln;
 import functions.unitary.Sign;
 import functions.unitary.combo.Factorial;
 import functions.unitary.trig.*;
+import tools.DefaultFunctions;
 
 public class FunctionMaker {
 
@@ -103,8 +104,8 @@ public class FunctionMaker {
 			case "*" -> new Product(second, first);
 			case "^" -> new Pow(second, first);
 			case "logb" -> new Logb(second, first);
-			case "C" -> new Product(Factorial.defaultFactorial(first), new Pow(Constant.NEGATIVE_ONE, new Product(Factorial.defaultFactorial(second), Factorial.defaultFactorial(new Sum(first, new Product(Constant.NEGATIVE_ONE, second))))));
-			case "P" -> new Product(Factorial.defaultFactorial(first), new Pow(Constant.NEGATIVE_ONE, Factorial.defaultFactorial(new Sum(first, new Product(Constant.NEGATIVE_ONE, second)))));
+			case "C" -> new Product(Factorial.defaultFactorial(first), new Pow(DefaultFunctions.NEGATIVE_ONE, new Product(Factorial.defaultFactorial(second), Factorial.defaultFactorial(new Sum(first, new Product(DefaultFunctions.NEGATIVE_ONE, second))))));
+			case "P" -> new Product(Factorial.defaultFactorial(first), new Pow(DefaultFunctions.NEGATIVE_ONE, Factorial.defaultFactorial(new Sum(first, new Product(DefaultFunctions.NEGATIVE_ONE, second)))));
 			default -> throw new UnsupportedOperationException("Invalid functionName " + functionName);
 		};
 	}

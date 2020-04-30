@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-@SuppressWarnings("StaticVariableOfConcreteClass")
 public class Constant extends SpecialFunction {
 	private static final HashMap<String, Double> specialConstants = new HashMap<>() {
 		{
@@ -24,15 +23,6 @@ public class Constant extends SpecialFunction {
 	 * The string relating to this special constant (null if normal constant)
 	 */
 	public final @Nullable String constantKey;
-
-	public static final Constant NEGATIVE_ONE = new Constant(-1);
-	public static final Constant PI = new Constant("pi");
-	public static final Constant E = new Constant("e");
-	public static final Constant ZERO = new Constant(0);
-	public static final Constant ONE = new Constant(1);
-	public static final Constant TWO = new Constant(2);
-	public static final Constant HALF = new Constant(.5);
-	public static final Constant NEGATIVE_HALF = new Constant(-.5);
 
 	/**
 	 * Constructs a new Constant from the specified numerical value

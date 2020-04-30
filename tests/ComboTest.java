@@ -54,4 +54,10 @@ public class ComboTest {
 		Function test = Parser.parseSimplified("6P4");
 		assertEquals(360, test.evaluate(null));
 	}
+
+	@Test
+	void test6Cx() {
+		Function test = Parser.parseSimplified("6Cx");
+		assertEquals(20, test.evaluate(Map.of('x', 3.0)));
+	}
 }

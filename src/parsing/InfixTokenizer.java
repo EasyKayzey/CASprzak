@@ -36,6 +36,7 @@ public class InfixTokenizer {
 			"|(?<=\\w)(?=\\W)(?<!(?<=E)(?=-)))" +			// Splits if preceded by a word and followed by a non-word, unless [the word was E and the non-word was -]
 			"|(?<=[()])|(?=[()]))" +						// Splits if preceded or followed by a parenthesis
 			"(?<![ .])(?![ .])" +							// The PREVIOUS FOUR LINES ONLY WORK if not preceded or followed by a dot or space
+			"|(?<=[CP])|(?=[CP])" +							// Splits if preceded or followed by C or P
 			"|(?<=[\\D-])(?=\\.)"							// Splits if preceded by [a character that isn't a digit or -] and followed by a dot
 	);
 

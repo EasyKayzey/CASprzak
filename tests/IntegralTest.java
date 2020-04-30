@@ -53,4 +53,11 @@ public class IntegralTest {
         Function test2 = Parser.parse("1/3 * x^3");
         assertEquals(test2, test1.integrate());
     }
+
+    @Test
+    void simpleTrig() {
+        Integral test1 = new Integral(Parser.parse("cos(x)"), 'x');
+        Function test2 = Parser.parse("sin(x)");
+        assertEquals(test2, test1.integrate());
+    }
 }

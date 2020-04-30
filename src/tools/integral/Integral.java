@@ -18,23 +18,23 @@ public class Integral extends UnitaryFunction {
 
 	@Override
 	public String toString() {
-		return "∫[" + function.toString() + "]d" + respectTo;
+		return "∫[" + operand.toString() + "]d" + respectTo;
 	}
 
 	@Override
 	public UnitaryFunction clone() {
-		return new Integral(function.clone(), respectTo);
+		return new Integral(operand.clone(), respectTo);
 	}
 
 	@Override
 	public UnitaryFunction substitute(char varID, Function toReplace) {
-		return new Integral(function.substitute(varID, toReplace), respectTo);
+		return new Integral(operand.substitute(varID, toReplace), respectTo);
 	}
 
 	@Override
 	public boolean equals(Function that) {
 		if (that instanceof Integral integral)
-			return respectTo == integral.respectTo && function.equals(integral.function);
+			return respectTo == integral.respectTo && operand.equals(integral.operand);
 		else
 			return false;
 	}
@@ -43,7 +43,7 @@ public class Integral extends UnitaryFunction {
 	public int compareSelf(Function that) {
 		if (that instanceof Integral integral) {
 			if (respectTo == integral.respectTo)
-				return function.compareTo(integral.function);
+				return operand.compareTo(integral.operand);
 			else
 				return respectTo - integral.respectTo;
 		} else {
@@ -80,13 +80,13 @@ public class Integral extends UnitaryFunction {
 	}
 
 	public Function integrate() {
-		if (function instanceof Sum terms) {
+		if (operand instanceof Sum terms) {
 			Function[] integratedTerms = new Function[terms.getFunctionsLength()];
 			for(int i = 0; i < terms.getFunctionsLength(); i++) {
 				integratedTerms[i] = new Integral(terms.getFunctions()[i], respectTo);
 			}
 			return new Sum(integratedTerms);
 		}
-		return StageOne.derivativeDivides(function, respectTo);
+		return StageOne.derivativeDivides(operand, respectTo);
 	}
 }

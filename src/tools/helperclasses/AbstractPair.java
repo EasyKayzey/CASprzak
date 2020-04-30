@@ -1,6 +1,6 @@
 package tools.helperclasses;
 
-public interface AbstractPair<T, U> {
-	T getFirst();
-	U getSecond();
+public abstract class AbstractPair<T, U> {
+	public abstract T getFirst();
+	public abstract U getSecond();
 }

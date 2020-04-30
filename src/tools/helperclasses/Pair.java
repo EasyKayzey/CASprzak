@@ -1,6 +1,6 @@
 package tools.helperclasses;
 
-public class Pair<T, U> implements AbstractPair<T, U>{
+public class Pair<T, U> extends AbstractPair<T, U> {
 	public final T first;
 	public final U second;
 
@@ -11,11 +11,11 @@ public class Pair<T, U> implements AbstractPair<T, U>{
 
 	@Override
 	public T getFirst() {
-		return null;
+		return first;
 	}
 
 	@Override
 	public U getSecond() {
-		return null;
+		return second;
 	}
 }

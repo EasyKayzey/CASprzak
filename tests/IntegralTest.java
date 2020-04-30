@@ -46,4 +46,11 @@ public class IntegralTest {
         Function test2 = Parser.parse("e^(2x-3)");
         assertEquals(test2, test1.integrate());
     }
+
+    @Test
+    void simplePowers() {
+        Integral test1 = new Integral(Parser.parse("x^2"), 'x');
+        Function test2 = Parser.parse("1/3 * x^3");
+        assertEquals(test2, test1.integrate());
+    }
 }

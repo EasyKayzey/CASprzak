@@ -5,10 +5,7 @@ import functions.Function;
 import functions.unitary.UnitaryFunction;
 
 public abstract class Factorial extends UnitaryFunction {
-	/**
-	 * Constructs a new UnitaryFunction
-	 * @param function The {@link Function} which will be operated on
-	 */
+
 	public Factorial(Function function) {
 		super(function);
 	}
@@ -22,7 +19,8 @@ public abstract class Factorial extends UnitaryFunction {
 	public static Function defaultFactorial(Function input) {
 		return switch (Settings.defaultFactorial) {
 			case STIRLING -> new SFactorial(input);
-			case LANCZOS -> throw new IllegalArgumentException("LFactorial not implemented");
+			case LANCZOS -> throw new UnsupportedOperationException("LFactorial not implemented");
+			case RECURSIVE -> new RFactorial(input);
 		};
 	}
 }

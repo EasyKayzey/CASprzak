@@ -1,5 +1,6 @@
 package functions.unitary.combo;
 
+import config.Settings;
 import functions.Function;
 import functions.binary.Pow;
 import functions.commutative.Product;
@@ -36,6 +37,10 @@ public class SFactorial extends Factorial {
 	@Override
 	public double evaluate(Map<Character, Double> variableValues) {
 		double argument = function.evaluate(variableValues);
-		return Math.sqrt(2 * Math.PI * argument) * Math.pow(argument / Math.E, argument);
+		double ans = Math.sqrt(2 * Math.PI * argument) * Math.pow(argument / Math.E, argument);
+		if (Settings.enforceIntegerOperations)
+			return (int) (ans + .5);
+		else
+			return ans;
 	}
 }

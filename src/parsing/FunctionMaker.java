@@ -3,8 +3,8 @@ package parsing;
 import functions.Function;
 import functions.binary.Logb;
 import functions.binary.Pow;
-import functions.commutative.Sum;
 import functions.commutative.Product;
+import functions.commutative.Sum;
 import functions.special.Constant;
 import functions.special.Variable;
 import functions.unitary.Abs;
@@ -85,7 +85,7 @@ public class FunctionMaker {
 			case "acsch" -> new Acsch(function);
 			case "asech" -> new Asech(function);
 			case "acoth" -> new Acoth(function);
-			default -> throw new IllegalArgumentException("Invalid functionName " + functionName);
+			default -> throw new UnsupportedOperationException("Invalid functionName " + functionName);
 		};
 	}
 
@@ -103,7 +103,7 @@ public class FunctionMaker {
 			case "*" -> new Product(function1, function2);
 			case "^" -> new Pow(function1, function2);
 			case "logb" -> new Logb(function1, function2);
-			default -> throw new IllegalArgumentException("Invalid functionName " + functionName);
+			default -> throw new UnsupportedOperationException("Invalid functionName " + functionName);
 		};
 	}
 }

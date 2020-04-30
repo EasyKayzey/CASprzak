@@ -73,7 +73,7 @@ public abstract class BinaryFunction extends Function {
 			if (!this.function2.equals(binaryFunction.function2))
 				return this.function2.compareTo(binaryFunction.function2);
 		} else {
-			throw new IllegalArgumentException("Illegally called BinaryFunction.compareSelf on a non-BinaryFunction");
+			throw new IllegalCallerException("Illegally called BinaryFunction.compareSelf on a non-BinaryFunction");
 		}
 		System.out.println("This is never supposed to happen, binaryFunction compareSelf");
 		return 0;
@@ -104,7 +104,7 @@ public abstract class BinaryFunction extends Function {
 			return switch(loc++) {
 				case 0 -> function2;
 				case 1 -> function1;
-				default -> throw new RuntimeException("This code should never run in BinaryIterator");
+				default -> throw new IllegalStateException("This code should never run in BinaryIterator");
 			};
 		}
 	}

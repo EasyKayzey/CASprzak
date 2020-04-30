@@ -200,7 +200,7 @@ public abstract class CommutativeFunction extends Function {
 					return thisFunctions[i].compareTo(thatFunctions[i]);
 			}
 		} else {
-			throw new IllegalArgumentException("Illegally called CommutativeFunction.compareSelf on a non-CommutativeFunction");
+			throw new IllegalCallerException("Illegally called CommutativeFunction.compareSelf on a non-CommutativeFunction");
 		}
 		System.out.println("This isn't supposed to happen. Check CompareSelf of CommutativeFunction and Function.compareTo");
 		return 0;

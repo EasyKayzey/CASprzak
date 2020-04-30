@@ -1,7 +1,6 @@
 package tools.integral;
 
 import functions.Function;
-import functions.binary.Logb;
 import functions.binary.Pow;
 import functions.commutative.Product;
 import functions.special.Constant;

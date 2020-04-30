@@ -1,7 +1,11 @@
 package tools;
 
 import functions.Function;
+import functions.commutative.CommutativeFunction;
 import tools.helperclasses.FunctionPredicate;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @SuppressWarnings("unused")
 public class SearchTools {
@@ -63,4 +67,22 @@ public class SearchTools {
 		return false;
 	}
 
+
+	/**
+	 * Checks if this CommutativeFunction has a subset (as a Multiply) satisfying the condition, including empty and single-element products
+	 * @param test the condition to be satisfied
+	 * @return true if the condition was satisfied by a subset
+	 */
+	public static boolean existsInSurfaceSubset(CommutativeFunction input, FunctionPredicate test) {
+		Function[] functions = input.getFunctions();
+		for (int run = 0; run < Math.pow(2, functions.length); run++) {
+			List<Function> subset = new ArrayList<>();
+			for (int ix = 0; ix < functions.length; ix++)
+				if (((run >> ix) & 1) > 0)
+					subset.add(functions[ix]);
+			if (test.test(input.me(subset.toArray(new Function[0]))))
+				return true;
+		}
+		return false;
+	}
 }

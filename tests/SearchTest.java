@@ -27,7 +27,7 @@ public class SearchTest {
     void subSet() {
         CommutativeFunction test1 = (CommutativeFunction) Parser.parseSimplified("a+b+sin(x+1)");
         Function test2 = Parser.parseSimplified("a+sin(x+1)");
-        assertTrue(test1.hasSubsetSatisfying(f -> f.equals(test2)));
+        assertTrue(SearchTools.existsInSurfaceSubset(test1, f -> f.equals(test2)));
     }
 
 }

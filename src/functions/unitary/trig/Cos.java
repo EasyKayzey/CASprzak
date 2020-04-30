@@ -1,7 +1,7 @@
 package functions.unitary.trig;
 
 import functions.Function;
-import functions.commutative.Multiply;
+import functions.commutative.Product;
 import functions.special.Constant;
 import functions.unitary.UnitaryFunction;
 
@@ -29,7 +29,7 @@ public class Cos extends UnitaryFunction {
 
 	@Override
 	public Function getDerivative(char varID) {
-		return new Multiply(new Sin(function), new Constant(-1), function.getSimplifiedDerivative(varID));
+		return new Product(new Sin(function), new Constant(-1), function.getSimplifiedDerivative(varID));
 	}
 
 	public UnitaryFunction me(Function operand) {

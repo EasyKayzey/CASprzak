@@ -1,7 +1,7 @@
 package functions.unitary.trig;
 
 import functions.Function;
-import functions.commutative.Multiply;
+import functions.commutative.Product;
 import functions.special.Constant;
 import functions.unitary.UnitaryFunction;
 
@@ -19,7 +19,7 @@ public class Csch extends UnitaryFunction {
 
 	@Override
 	public Function getDerivative(char varID) {
-		return new Multiply(new Constant(-1), function.getSimplifiedDerivative(varID), new Csch(function), new Coth(function));
+		return new Product(new Constant(-1), function.getSimplifiedDerivative(varID), new Csch(function), new Coth(function));
 	}
 
 	/**

@@ -3,7 +3,7 @@ package tools.singlevariable;
 import config.Settings;
 import functions.Function;
 import functions.binary.Pow;
-import functions.commutative.Multiply;
+import functions.commutative.Product;
 import functions.special.Constant;
 import functions.unitary.Abs;
 import tools.SolverTools;
@@ -113,7 +113,7 @@ public class Solver {
 	 */
 	public static double[] getSolutionsRangeHalley(Function expression, double lower, double upper) {
 		return getSolutionsRangeNewton(
-				(new Multiply(expression, new Pow(new Constant(-.5), new Abs(expression.getDerivative(Settings.singleVariableDefault))))).simplify(),
+				(new Product(expression, new Pow(new Constant(-.5), new Abs(expression.getDerivative(Settings.singleVariableDefault))))).simplify(),
 				lower, upper
 		);
 	}

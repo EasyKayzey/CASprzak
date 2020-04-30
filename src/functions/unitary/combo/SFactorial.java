@@ -2,7 +2,7 @@ package functions.unitary.combo;
 
 import functions.Function;
 import functions.binary.Pow;
-import functions.commutative.Multiply;
+import functions.commutative.Product;
 import functions.special.Constant;
 import functions.unitary.UnitaryFunction;
 
@@ -20,7 +20,7 @@ public class SFactorial extends Factorial {
 
 	@Override
 	public Function classForm() {
-		return new Multiply(new Pow(new Constant(.5), new Multiply(new Constant(2), new Constant("pi"), function)), new Pow(function, new Multiply(function, new Pow(new Constant(-1), new Constant("e")))));
+		return new Product(new Pow(new Constant(.5), new Product(new Constant(2), new Constant("pi"), function)), new Pow(function, new Product(function, new Pow(new Constant(-1), new Constant("e")))));
 	}
 
 	@Override

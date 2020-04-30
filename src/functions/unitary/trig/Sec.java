@@ -1,7 +1,7 @@
 package functions.unitary.trig;
 
 import functions.Function;
-import functions.commutative.Multiply;
+import functions.commutative.Product;
 import functions.unitary.UnitaryFunction;
 
 import java.util.Map;
@@ -28,7 +28,7 @@ public class Sec extends UnitaryFunction {
 
 	@Override
 	public Function getDerivative(char varID) {
-		return new Multiply(new Tan(function), new Sec(function), function.getSimplifiedDerivative(varID));
+		return new Product(new Tan(function), new Sec(function), function.getSimplifiedDerivative(varID));
 	}
 
 	public UnitaryFunction me(Function operand) {

@@ -1,7 +1,7 @@
 package functions.unitary;
 
 import functions.Function;
-import functions.commutative.Multiply;
+import functions.commutative.Product;
 
 import java.util.Map;
 
@@ -22,7 +22,7 @@ public class Abs extends UnitaryFunction {
 
 	@Override
 	public Function getDerivative(char varID) {
-		return new Multiply(function.getSimplifiedDerivative(varID), new Sign(function));
+		return new Product(function.getSimplifiedDerivative(varID), new Sign(function));
 	}
 
 	@Override

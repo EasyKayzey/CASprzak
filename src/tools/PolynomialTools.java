@@ -2,8 +2,8 @@ package tools;
 
 import functions.Function;
 import functions.binary.Pow;
-import functions.commutative.Add;
-import functions.commutative.Multiply;
+import functions.commutative.Sum;
+import functions.commutative.Product;
 import functions.special.Constant;
 import functions.special.Variable;
 
@@ -20,7 +20,7 @@ public class PolynomialTools {
 	public static boolean isPolynomial(Function function) {
 		if (isMonomial(function)) {
 			return true;
-		} else if (function instanceof Add sum) {
+		} else if (function instanceof Sum sum) {
 			Function[] terms = sum.getFunctions();
 			for (Function term : terms) {
 				if (!isMonomial(term)) {
@@ -54,7 +54,7 @@ public class PolynomialTools {
 	private static boolean isGivenMonomial(Function function, DoublePredicate test) {
 		if (function instanceof Constant || function instanceof Variable || (function instanceof Pow pow && pow.getFunction2() instanceof Variable && pow.getFunction1() instanceof Constant exp && test.test(exp.evaluate(null)))) {
 			return true;
-		} else if (function instanceof Multiply product) {
+		} else if (function instanceof Product product) {
 			Function[] elements = product.getFunctions();
 			for (Function element : elements) {
 				if (!(element instanceof Constant || element instanceof Variable || element instanceof Pow))
@@ -80,7 +80,7 @@ public class PolynomialTools {
 			return 1;
 		else if (function instanceof Pow power && power.getFunction1() instanceof Constant number)
 			return number.constant;
-		else if (function instanceof Multiply product) {
+		else if (function instanceof Product product) {
 			Function[] elements = product.getFunctions();
 			double sum = 0;
 			for (Function element: elements) {

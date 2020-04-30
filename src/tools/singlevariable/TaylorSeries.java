@@ -3,8 +3,8 @@ package tools.singlevariable;
 import config.Settings;
 import functions.Function;
 import functions.binary.Pow;
-import functions.commutative.Add;
-import functions.commutative.Multiply;
+import functions.commutative.Sum;
+import functions.commutative.Product;
 import functions.special.Constant;
 import functions.special.Variable;
 import tools.MiscTools;
@@ -35,9 +35,9 @@ public class TaylorSeries {
     public static Function makeTaylorSeries(Function function, int size, double center) {
         Function[] taylorSeriesTerms = new Function[size];
         for (int i = 0; i < size; i++){
-            taylorSeriesTerms[i] = new Multiply(new Constant(function.getNthDerivative('x', i).evaluate(Map.of(Settings.singleVariableDefault, center)) / MiscTools.factorial(i)), new Pow(new Constant(i), new Add(new Variable('x'), new Constant(-center))));
+            taylorSeriesTerms[i] = new Product(new Constant(function.getNthDerivative('x', i).evaluate(Map.of(Settings.singleVariableDefault, center)) / MiscTools.factorial(i)), new Pow(new Constant(i), new Sum(new Variable('x'), new Constant(-center))));
         }
-        return new Add(taylorSeriesTerms);
+        return new Sum(taylorSeriesTerms);
     }
 }
 

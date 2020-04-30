@@ -3,8 +3,8 @@ package parsing;
 import functions.Function;
 import functions.binary.Logb;
 import functions.binary.Pow;
-import functions.commutative.Add;
-import functions.commutative.Multiply;
+import functions.commutative.Sum;
+import functions.commutative.Product;
 import functions.special.Constant;
 import functions.special.Variable;
 import functions.unitary.Abs;
@@ -52,7 +52,7 @@ public class FunctionMaker {
 	 */
 	public static Function makeUnitary(String functionName, Function function) {
 		return switch (functionName) {
-			case "-" -> new Multiply(new Constant(-1), function);
+			case "-" -> new Product(new Constant(-1), function);
 			case "/" -> new Pow(new Constant(-1), function);
 			case "dirac" -> new Dirac(function);
 			case "sqrt" -> new Pow(new Constant(.5), function);
@@ -97,8 +97,8 @@ public class FunctionMaker {
 	 */
 	public static Function makeBinary(String functionName, Function function1, Function function2) {
 		return switch (functionName) {
-			case "+" -> new Add(function1, function2);
-			case "*" -> new Multiply(function1, function2);
+			case "+" -> new Sum(function1, function2);
+			case "*" -> new Product(function1, function2);
 			case "^" -> new Pow(function1, function2);
 			case "logb" -> new Logb(function1, function2);
 			default -> throw new IllegalArgumentException("Invalid functionName " + functionName);

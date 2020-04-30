@@ -2,8 +2,8 @@ package functions.binary;
 
 import config.Settings;
 import functions.Function;
-import functions.commutative.Add;
-import functions.commutative.Multiply;
+import functions.commutative.Sum;
+import functions.commutative.Product;
 import functions.special.Constant;
 import functions.unitary.Ln;
 
@@ -23,9 +23,9 @@ public class Pow extends BinaryFunction {
 	@Override
 	public Function getDerivative(char varID) {
 		if (function1 instanceof Constant exponent)
-			return new Multiply(new Constant(exponent.constant), new Pow(new Constant(exponent.constant - 1), function2), function2.getSimplifiedDerivative(varID));
+			return new Product(new Constant(exponent.constant), new Pow(new Constant(exponent.constant - 1), function2), function2.getSimplifiedDerivative(varID));
 		else
-			return new Multiply(new Pow(function1, function2), new Add(new Multiply(function1.getSimplifiedDerivative(varID), new Ln(function2)), new Multiply(new Multiply(function1, function2.getSimplifiedDerivative(varID)), new Pow(new Constant(-1), function2))));
+			return new Product(new Pow(function1, function2), new Sum(new Product(function1.getSimplifiedDerivative(varID), new Ln(function2)), new Product(new Product(function1, function2.getSimplifiedDerivative(varID)), new Pow(new Constant(-1), function2))));
 	}
 
 	@Override
@@ -41,7 +41,7 @@ public class Pow extends BinaryFunction {
 		Pow currentPow = (new Pow(function1.simplify(), function2.simplify()));
 		currentPow = currentPow.multiplyExponents();
 		Function current = currentPow.simplifyObviousExponentsAndFOC();
-		if (current instanceof Pow pow && pow.function2 instanceof Multiply && Settings.distributeExponents)
+		if (current instanceof Pow pow && pow.function2 instanceof Product && Settings.distributeExponents)
 			current = pow.distributeExponents();
 		return current;
 	}
@@ -71,7 +71,7 @@ public class Pow extends BinaryFunction {
 	 */
 	public Pow multiplyExponents() {
 		if (function2 instanceof Pow base)
-			return new Pow(new Multiply(base.function1, function1).simplify(), base.function2);
+			return new Pow(new Product(base.function1, function1).simplify(), base.function2);
 		if (Settings.trustImmutability)
 			return this;
 		else
@@ -79,16 +79,16 @@ public class Pow extends BinaryFunction {
 	}
 
 	/**
-	 * Returns a {@link Multiply} where the exponent is on each term. Example: {@code (xy)^2 = (x^2)(y^2) }
-	 * @return a {@link Multiply} with the exponent distributed
+	 * Returns a {@link Product} where the exponent is on each term. Example: {@code (xy)^2 = (x^2)(y^2) }
+	 * @return a {@link Product} with the exponent distributed
 	 */
-	public Multiply distributeExponents() {
-		return new Multiply(distributeExponentsArray());
+	public Product distributeExponents() {
+		return new Product(distributeExponentsArray());
 	}
 
 	private Function[] distributeExponentsArray() {
-		if (function2 instanceof Multiply multiply) {
-			Function[] oldFunctions = multiply.getFunctions();
+		if (function2 instanceof Product product) {
+			Function[] oldFunctions = product.getFunctions();
 			Function[] toMultiply = new Function[oldFunctions.length];
 			for (int i = 0; i < toMultiply.length; i++) {
 				toMultiply[i] = new Pow(function1, oldFunctions[i]).simplify();
@@ -104,7 +104,7 @@ public class Pow extends BinaryFunction {
 			if ((int) constant.constant == constant.constant) {
 				Function[] toMultiply = new Function[(int)constant.constant];
 				Arrays.fill(toMultiply, function2);
-				return new Multiply(toMultiply);
+				return new Product(toMultiply);
 			}
 		}
 		if (Settings.trustImmutability)

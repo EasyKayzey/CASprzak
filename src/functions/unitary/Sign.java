@@ -1,7 +1,7 @@
 package functions.unitary;
 
 import functions.Function;
-import functions.commutative.Multiply;
+import functions.commutative.Product;
 import functions.special.Constant;
 
 import java.util.Map;
@@ -23,7 +23,7 @@ public class Sign extends UnitaryFunction {
 
 	@Override
 	public Function getDerivative(char varID) {
-		return new Multiply(function.getSimplifiedDerivative(varID), new Constant(2), new Dirac(function));
+		return new Product(function.getSimplifiedDerivative(varID), new Constant(2), new Dirac(function));
 	}
 
 	@Override

@@ -3,8 +3,8 @@ package functions;
 import config.Settings;
 import functions.binary.Logb;
 import functions.binary.Pow;
-import functions.commutative.Add;
-import functions.commutative.Multiply;
+import functions.commutative.Sum;
+import functions.commutative.Product;
 import functions.special.Constant;
 import functions.special.Variable;
 import functions.unitary.UnitaryFunction;
@@ -23,11 +23,11 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 	public static final Class<?>[] sortOrder = {
 			Constant.class,
 			Variable.class,
-			Multiply.class,
+			Product.class,
 			Pow.class,
 			Logb.class,
 			UnitaryFunction.class,
-			Add.class
+			Sum.class
 	};
 	/**
 	 * Caches derivatives with the key corresponding to the varID of the derivative

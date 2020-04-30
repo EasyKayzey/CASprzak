@@ -11,6 +11,7 @@ import functions.unitary.Abs;
 import functions.unitary.Dirac;
 import functions.unitary.Ln;
 import functions.unitary.Sign;
+import functions.unitary.combo.Factorial;
 import functions.unitary.trig.*;
 
 public class FunctionMaker {
@@ -54,6 +55,7 @@ public class FunctionMaker {
 		return switch (functionName) {
 			case "-" -> new Product(new Constant(-1), function);
 			case "/" -> new Pow(new Constant(-1), function);
+			case "!" -> Factorial.defaultFactorial(function);
 			case "dirac" -> new Dirac(function);
 			case "sqrt" -> new Pow(new Constant(.5), function);
 			case "sign" -> new Sign(function);

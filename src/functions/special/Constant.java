@@ -24,6 +24,13 @@ public class Constant extends SpecialFunction {
 	 */
 	public final @Nullable String constantKey;
 
+	public static final Constant NEGATIVE_ONE = new Constant(-1);
+	public static final Constant PI = new Constant("pi");
+	public static final Constant E = new Constant("e");
+	public static final Constant ZERO = new Constant(0);
+	public static final Constant ONE = new Constant(1);
+	public static final Constant TWO = new Constant(2);
+
 	/**
 	 * Constructs a new Constant from the specified numerical value
 	 * @param constant The numerical value of the constant

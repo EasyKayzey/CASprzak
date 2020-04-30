@@ -27,7 +27,7 @@ public class Acsc extends UnitaryFunction {
 
 	@Override
 	public Function getDerivative(char varID) {
-		return new Product(new Constant(-1), operand.getSimplifiedDerivative(varID), new Pow(new Constant(-1), new Product(new Abs(operand), new Pow(new Constant(0.5), new Sum(new Pow(new Constant(2), operand), new Constant(-1))))));
+		return new Product(Constant.NEGATIVE_ONE, operand.getSimplifiedDerivative(varID), new Pow(Constant.NEGATIVE_ONE, new Product(new Abs(operand), new Pow(Constant.HALF, new Sum(new Pow(Constant.TWO, operand), Constant.NEGATIVE_ONE)))));
 	}
 
 	/**

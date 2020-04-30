@@ -21,7 +21,7 @@ public class Acosh extends UnitaryFunction {
 
 	@Override
 	public Function getDerivative(char varID) {
-		return new Product(operand.getSimplifiedDerivative(varID), new Pow(new Constant(-0.5), new Sum(new Constant(1), new Product(new Constant(-1), new Pow(new Constant(2), operand)))));
+		return new Product(operand.getSimplifiedDerivative(varID), new Pow(Constant.NEGATIVE_HALF, new Sum(Constant.ONE, new Product(Constant.NEGATIVE_ONE, new Pow(Constant.TWO, operand)))));
 	}
 
 	/**

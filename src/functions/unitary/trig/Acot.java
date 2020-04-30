@@ -21,7 +21,7 @@ public class Acot extends UnitaryFunction {
 
 	@Override
 	public Function getDerivative(char varID) {
-		return new Product(new Constant(-1), operand.getSimplifiedDerivative(varID), new Pow(new Constant(-1), new Sum(new Constant(1), new Pow(new Constant(2), operand))));
+		return new Product(Constant.NEGATIVE_ONE, operand.getSimplifiedDerivative(varID), new Pow(Constant.NEGATIVE_ONE, new Sum(Constant.ONE, new Pow(Constant.TWO, operand))));
 	}
 
 	/**

@@ -25,7 +25,7 @@ public class Pow extends BinaryFunction {
 		if (function1 instanceof Constant exponent)
 			return new Product(new Constant(exponent.constant), new Pow(new Constant(exponent.constant - 1), function2), function2.getSimplifiedDerivative(varID));
 		else
-			return new Product(new Pow(function1, function2), new Sum(new Product(function1.getSimplifiedDerivative(varID), new Ln(function2)), new Product(new Product(function1, function2.getSimplifiedDerivative(varID)), new Pow(new Constant(-1), function2))));
+			return new Product(new Pow(function1, function2), new Sum(new Product(function1.getSimplifiedDerivative(varID), new Ln(function2)), new Product(new Product(function1, function2.getSimplifiedDerivative(varID)), new Pow(Constant.NEGATIVE_ONE, function2))));
 	}
 
 	@Override

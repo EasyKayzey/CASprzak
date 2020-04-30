@@ -1,5 +1,5 @@
 ---
-name: Bug report
+name: Bug Report
 about: Create a report to help us improve
 title: "[BUG] Title here"
 labels: ''
@@ -21,7 +21,7 @@ Steps to reproduce the behavior:
 A clear and concise description of what you expected to happen.
 
 **Screenshots**
-If applicable, sum screenshots to help explain your problem.
+If applicable, add screenshots to help explain your problem.
 
 **Version**
 Please let us know which branch and version (or most recent commit) you're running

@@ -7,15 +7,10 @@ import functions.commutative.Product;
 import functions.commutative.Sum;
 import functions.special.Constant;
 import functions.special.Variable;
-import functions.unitary.Abs;
 import functions.unitary.Ln;
-import functions.unitary.UnitaryFunction;
 import functions.unitary.trig.*;
-import parsing.FunctionMaker;
-import tools.DefaultFunctions;
 import tools.SearchTools;
 import tools.exceptions.IntegrationFailedException;
-import tools.exceptions.NotYetImplementedException;
 import tools.helperclasses.Pair;
 
 @SuppressWarnings("ChainOfInstanceofChecks")
@@ -68,7 +63,7 @@ public class StageOne {
                         number /= (constantInFront * Math.log(constant1.constant));
                         return naturalLog(number, logb.getFunction2());
                     }
-                } else if (f instanceof UnitaryFunction unit) {
+                } else if (f instanceof TrigFunction unit) {
                     Function derivativeWithConstants = unit.operand.getSimplifiedDerivative(variableChar);
                     Pair<Double, Function> derivative = IntegralsTools.stripConstants(derivativeWithConstants);
                     Function derivativeWithoutConstant = derivative.second;
@@ -76,7 +71,7 @@ public class StageOne {
                     Product derivativeTimesOperation = new Product(derivativeWithoutConstant, f);
                     if (SearchTools.existsInSurfaceSubset(product, derivativeTimesOperation::equals) && !SearchTools.existsInOppositeSurfaceSubset(product, (u -> SearchTools.exists(u, SearchTools.isVariable(variableChar))), derivativeTimesOperation::equals)) {
                         number /= (constantInFront);
-                       return unitaryFunctionSwitchCase(unit.getClass().getSimpleName().toLowerCase(), unit.operand, number);
+                        return new Product(new Constant(number), unit.integrate());
                     }
                 }
                 Function derivativeWithConstants = f.getSimplifiedDerivative(variableChar);
@@ -106,44 +101,14 @@ public class StageOne {
                 return new Product(new Constant(constant1.constant * number), new Variable(variableChar));
             } else if (function instanceof Variable variable) {
                 return power(number, 1, variable);
-            } else if (function instanceof UnitaryFunction unit && unit.operand.getSimplifiedDerivative(variableChar) instanceof Constant constant1) {
+            } else if (function instanceof TrigFunction unit && unit.operand.getSimplifiedDerivative(variableChar) instanceof Constant constant1) {
                 number /= constant1.constant;
-                return unitaryFunctionSwitchCase(unit.getClass().getSimpleName().toLowerCase(), unit.operand, number);
+                return new Product(new Constant(number), unit.integrate());
             }
         }
         throw new IntegrationFailedException("Integration failed");
     }
 
-    private static Function unitaryFunctionSwitchCase(String className, Function operand, double number) {
-        return switch (className) {
-            case "sin" -> sin(number, operand);
-            case "cos" -> cos(number, operand);
-            case "tan" -> tan(number, operand);
-            case "csc" -> csc(number, operand);
-            case "sec" -> sec(number, operand);
-            case "cot" -> cot(number, operand);
-            case "sinh" -> sinh(number, operand);
-            case "cosh" -> cosh(number, operand);
-            case "tanh" -> tanh(number, operand);
-            case "csch" -> csch(number, operand);
-            case "sech" -> sech(number, operand);
-            case "coth" -> coth(number, operand);
-            case "asin" -> asin(number, operand);
-            case "acos" -> acos(number, operand);
-            case "atan" -> atan(number, operand);
-            case "acsc" -> acsc(number, operand);
-            case "asec" -> asec(number, operand);
-            case "acot" -> acot(number, operand);
-            case "asinh" -> asinh(number, operand);
-            case "acosh" -> acosh(number, operand);
-            case "atanh" -> atanh(number, operand);
-            case "acsch" -> acsch(number, operand);
-            case "asech" -> asech(number, operand);
-            case "acoth" -> acoth(number, operand);
-            case "PLACEHOLDER FOR INV TRIG" -> inverseTrig(className, number, operand);
-            default -> throw new NotYetImplementedException("Unexpected class: " + className);
-        };
-    }
 
     private static Function exponential(double number, double base, Function exponent) {
         return new Product(new Constant(number/Math.log(base)), new Pow(exponent, new Constant(base)));
@@ -158,105 +123,5 @@ public class StageOne {
 
     private static Function naturalLog(double number, Function operand) {
         return new Product(new Constant(number), new Sum(new Product(operand, new Ln(operand)), new Product(new Constant(-1), operand)));
-    }
-
-    private static Function sin(double number, Function operand) {
-        return new Product(new Constant(-1*number), new Cos(operand));
-    }
-
-    private static Function cos(double number, Function operand) {
-        return new Product(new Constant(number), new Sin(operand));
-    }
-
-    private static Function tan(double number, Function operand) {
-        return new Product(new Constant(number), new Ln(new Abs(new Sec(operand))));
-    }
-
-    private static Function csc(double number, Function operand) {
-        return new Product(new Constant(-1 * number), new Ln(new Abs(new Sum(new Csc(operand), new Cot(operand)))));
-    }
-
-    private static Function cot(double number, Function operand) {
-        return new Product(new Constant(-1 * number), new Ln(new Abs(new Csc(operand))));
-    }
-
-    private static Function sec(double number, Function operand) {
-        return new Product(new Constant(number), new Ln(new Abs(new Sum(new Sec(operand), new Tan(operand)))));
-    }
-
-    private static Function sinh(double number, Function operand) {
-        return new Product(new Constant(number), new Cosh(operand));
-    }
-
-    private static Function cosh(double number, Function operand) {
-        return new Product(new Constant(number), new Sinh(operand));
-    }
-
-    private static Function tanh(double number, Function operand) {
-        return new Product(new Constant(number), new Ln(new Cosh(operand)));
-    }
-
-    private static Function csch(double number, Function operand) {
-        return new Product(new Constant(number), new Ln(new Abs(new Tanh(new Product(DefaultFunctions.HALF, operand)))));
-    }
-
-    private static Function coth(double number, Function operand) {
-        return new Product(new Constant(number), new Ln(new Abs(new Sinh(operand))));
-    }
-
-    private static Function sech(double number, Function operand) {
-        return new Product(new Constant(number), new Atan(new Abs(new Sinh(operand))));
-    }
-
-    private static Function asin(double number, Function operand) {
-        return new Product(new Constant(number), new Sum(new Product(operand, new Asin(operand)), new Product(DefaultFunctions.NEGATIVE_ONE, sin(1, new Asin(operand)))));
-    }
-
-    private static Function acos(double number, Function operand) {
-        return new Product(new Constant(number), new Sum(new Product(operand, new Acos(operand)), new Product(DefaultFunctions.NEGATIVE_ONE, cos(1, new Acos(operand)))));
-    }
-
-    private static Function atan(double number, Function operand) {
-        return new Product(new Constant(number), new Sum(new Product(operand, new Atan(operand)), new Product(DefaultFunctions.NEGATIVE_ONE, tan(1, new Atan(operand)))));
-    }
-
-    private static Function acsc(double number, Function operand) {
-        return new Product(new Constant(number), new Sum(new Product(operand, new Acsc(operand)), new Product(DefaultFunctions.NEGATIVE_ONE, csc(1, new Acsc(operand)))));
-    }
-
-    private static Function acot(double number, Function operand) {
-        return new Product(new Constant(number), new Sum(new Product(operand, new Acot(operand)), new Product(DefaultFunctions.NEGATIVE_ONE, cot(1, new Acot(operand)))));
-    }
-
-    private static Function asec(double number, Function operand) {
-        return new Product(new Constant(number), new Sum(new Product(operand, new Asec(operand)), new Product(DefaultFunctions.NEGATIVE_ONE, sec(1, new Asec(operand)))));
-    }
-
-    private static Function asinh(double number, Function operand) {
-        return new Product(new Constant(number), new Sum(new Product(operand, new Asinh(operand)), new Product(DefaultFunctions.NEGATIVE_ONE, sinh(1, new Asinh(operand)))));
-    }
-
-    private static Function acosh(double number, Function operand) {
-        return new Product(new Constant(number), new Sum(new Product(operand, new Acosh(operand)), new Product(DefaultFunctions.NEGATIVE_ONE, cosh(1, new Acosh(operand)))));
-    }
-
-    private static Function atanh(double number, Function operand) {
-        return new Product(new Constant(number), new Sum(new Product(operand, new Atanh(operand)), new Product(DefaultFunctions.NEGATIVE_ONE, tanh(1, new Atanh(operand)))));
-    }
-
-    private static Function acsch(double number, Function operand) {
-        return new Product(new Constant(number), new Sum(new Product(operand, new Acsch(operand)), new Product(DefaultFunctions.NEGATIVE_ONE, csch(1, new Acsch(operand)))));
-    }
-
-    private static Function acoth(double number, Function operand) {
-        return new Product(new Constant(number), new Sum(new Product(operand, new Acoth(operand)), new Product(DefaultFunctions.NEGATIVE_ONE, coth(1, new Acoth(operand)))));
-    }
-
-    private static Function asech(double number, Function operand) {
-        return new Product(new Constant(number), new Sum(new Product(operand, new Asech(operand)), new Product(DefaultFunctions.NEGATIVE_ONE, sech(1, new Asech(operand)))));
-    }
-
-    public static Function inverseTrig(String className, double number, Function operand) {
-        return new Product(new Constant(number), new Sum(new Product(operand, FunctionMaker.makeUnitary(className, operand)), new Product(DefaultFunctions.NEGATIVE_ONE, unitaryFunctionSwitchCase(className.substring(1), FunctionMaker.makeUnitary(className, operand), 1))));
     }
 }

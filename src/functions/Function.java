@@ -10,7 +10,7 @@ import functions.special.Variable;
 import functions.unitary.UnitaryFunction;
 import org.jetbrains.annotations.NotNull;
 import tools.MiscTools;
-import tools.integral.Integral;
+import functions.unitary.Integral;
 
 import java.util.HashMap;
 import java.util.Map;

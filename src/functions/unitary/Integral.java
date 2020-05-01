@@ -1,10 +1,9 @@
-package tools.integral;
+package functions.unitary;
 
 import config.Settings;
 import functions.Function;
 import functions.commutative.Sum;
-import functions.special.Constant;
-import functions.unitary.UnitaryFunction;
+import tools.integration.StageOne;
 
 import java.util.Map;
 

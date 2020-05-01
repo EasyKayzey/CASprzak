@@ -12,6 +12,10 @@ import java.util.Map;
 
 
 public class Acsc extends InverseTrigFunction {
+	static {
+		inverse = Csc.class;
+	}
+
 	/**
 	 * Constructs a new Acsc
 	 * @param operand The function which arccsc is operating on

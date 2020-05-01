@@ -11,6 +11,10 @@ import java.util.Map;
 
 
 public class Acot extends InverseTrigFunction {
+	static {
+		inverse = Cot.class;
+	}
+
 	/**
 	 * Constructs a new Acot
 	 * @param operand The function which arccot is operating on

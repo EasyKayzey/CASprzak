@@ -11,6 +11,10 @@ import java.util.Map;
 
 
 public class Atan extends InverseTrigFunction {
+	static {
+		inverse = Tan.class;
+	}
+
 	/**
 	 * Constructs a new Atan
 	 * @param operand The function which arctan is operating on

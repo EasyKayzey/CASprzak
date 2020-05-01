@@ -11,6 +11,10 @@ import java.util.Map;
 
 
 public class Asech extends InverseTrigFunction {
+	static {
+		inverse = Sech.class;
+	}
+
 	/**
 	 * Constructs a new Asech
 	 * @param operand The function which arcsech is operating on

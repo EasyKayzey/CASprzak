@@ -9,6 +9,10 @@ import java.util.Map;
 
 
 public class Csc extends TrigFunction {
+	static {
+		inverse = Acsc.class;
+	}
+
 	/**
 	 * Constructs a new Csc
 	 * @param operand The function which csc is operating on

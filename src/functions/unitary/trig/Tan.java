@@ -10,6 +10,10 @@ import java.util.Map;
 
 
 public class Tan extends TrigFunction {
+	static {
+		inverse = Atan.class;
+	}
+
 	/**
 	 * Constructs a new Tan
 	 * @param operand The function which tan is operating on

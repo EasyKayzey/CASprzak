@@ -10,6 +10,10 @@ import java.util.Map;
 
 
 public class Cot extends TrigFunction {
+	static {
+		inverse = Acot.class;
+	}
+
 	/**
 	 * Constructs a new Cot
 	 * @param operand The function which cot is operating on

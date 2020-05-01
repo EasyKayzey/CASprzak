@@ -8,6 +8,10 @@ import java.util.Map;
 
 
 public class Sinh extends TrigFunction {
+	static {
+		inverse = Asinh.class;
+	}
+
 	/**
 	 * Constructs a new Sinh
 	 * @param operand The function which sinh is operating on

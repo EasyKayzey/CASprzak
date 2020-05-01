@@ -11,6 +11,10 @@ import java.util.Map;
 
 
 public class Asinh extends InverseTrigFunction {
+	static {
+		inverse = Sinh.class;
+	}
+
 	/**
 	 * Constructs a new Asinh
 	 * @param operand The function which arcsinh is operating on

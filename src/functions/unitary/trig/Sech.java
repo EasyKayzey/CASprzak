@@ -9,6 +9,10 @@ import java.util.Map;
 
 
 public class Sech extends TrigFunction {
+	static {
+		inverse = Asech.class;
+	}
+
 	/**
 	 * Constructs a new Sech
 	 * @param operand The function which sech is operating on

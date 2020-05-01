@@ -11,6 +11,10 @@ import java.util.Map;
 
 
 public class Atanh extends InverseTrigFunction {
+	static {
+		inverse = Tanh.class;
+	}
+
 	/**
 	 * Constructs a new Atanh
 	 * @param operand The function which arctanh is operating on

@@ -11,6 +11,10 @@ import java.util.Map;
 
 
 public class Acos extends InverseTrigFunction {
+	static {
+		inverse = Cos.class;
+	}
+
 	/**
 	 * Constructs a new Acos
 	 * @param operand The function which arccos is operating on

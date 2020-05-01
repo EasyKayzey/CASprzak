@@ -11,6 +11,10 @@ import java.util.Map;
 
 
 public class Acoth extends InverseTrigFunction {
+	static {
+		inverse = Coth.class;
+	}
+
 	/**
 	 * Constructs a new Acoth
 	 * @param operand The function which arccoth is operating on

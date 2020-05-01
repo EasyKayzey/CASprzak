@@ -11,6 +11,10 @@ import java.util.Map;
 
 
 public class Asin extends InverseTrigFunction {
+	static {
+		inverse = Sin.class;
+	}
+
 	/**
 	 * Constructs a new Asin
 	 * @param operand The function which arcsin is operating on

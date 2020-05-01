@@ -94,9 +94,8 @@ public class StageOne {
             } else if (function instanceof UnitaryFunction unit && unit.operand.getSimplifiedDerivative(variableChar) instanceof Constant constant1) {
                 number /= constant1.constant;
                 return unitaryFunctionSwitchCase(unit, unit.operand, number);
-             }
+            }
         }
-
         return integrand;
     }
 

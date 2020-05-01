@@ -12,6 +12,7 @@ import functions.unitary.Abs;
 import functions.unitary.Ln;
 import functions.unitary.UnitaryFunction;
 import functions.unitary.trig.*;
+import parsing.FunctionMaker;
 import tools.DefaultFunctions;
 import tools.SearchTools;
 import tools.helperclasses.Pair;
@@ -74,7 +75,7 @@ public class StageOne {
                     Product derivativeTimesOperation = new Product(derivativeWithoutConstant, f);
                     if (SearchTools.existsSurface(product, (u -> u.equals(derivativeWithoutConstant))) && !SearchTools.existsInOppositeSurfaceSubset((CommutativeFunction) function, (u -> (u instanceof Variable v) && (v.varID == variableChar)), (u -> u.equals(derivativeTimesOperation)))) {
                         number /= (constantInFront);
-                       return unitaryFunctionSwitchCase(unit, unit.operand, number);
+                       return unitaryFunctionSwitchCase(unit.getClass().getSimpleName().toLowerCase(), unit.operand, number);
                     }
                 }
                 Function derivativeWithConstants = f.getSimplifiedDerivative(variableChar);
@@ -106,14 +107,14 @@ public class StageOne {
                 return power(number, 1, variable);
             } else if (function instanceof UnitaryFunction unit && unit.operand.getSimplifiedDerivative(variableChar) instanceof Constant constant1) {
                 number /= constant1.constant;
-                return unitaryFunctionSwitchCase(unit, unit.operand, number);
+                return unitaryFunctionSwitchCase(unit.getClass().getSimpleName().toLowerCase(), unit.operand, number);
             }
         }
         return integrand;
     }
 
-    private static Function unitaryFunctionSwitchCase(Function function, Function operand, double number) {
-        return switch (function.getClass().getSimpleName().toLowerCase()) {
+    private static Function unitaryFunctionSwitchCase(String className, Function operand, double number) {
+        return switch (className) {
             case "sin" -> sin(number, operand);
             case "cos" -> cos(number, operand);
             case "tan" -> tan(number, operand);
@@ -138,7 +139,8 @@ public class StageOne {
             case "acsch" -> acsch(number, operand);
             case "asech" -> asech(number, operand);
             case "acoth" -> acoth(number, operand);
-            default -> throw new UnsupportedOperationException("Unexpected value: " + function.getClass().getSimpleName().toLowerCase());
+            case "PLACEHOLDER FOR INV TRIG" -> inverseTrig(className, number, operand);
+            default -> throw new UnsupportedOperationException("Unexpected class: " + className);
         };
     }
 
@@ -251,5 +253,9 @@ public class StageOne {
 
     private static Function asech(double number, Function operand) {
         return new Product(new Constant(number), new Sum(new Product(operand, new Asech(operand)), new Product(DefaultFunctions.NEGATIVE_ONE, sech(1, new Asech(operand)))));
+    }
+
+    public static Function inverseTrig(String className, double number, Function operand) {
+        return new Product(new Constant(number), new Sum(new Product(operand, FunctionMaker.makeUnitary(className, operand)), new Product(DefaultFunctions.NEGATIVE_ONE, unitaryFunctionSwitchCase(className, FunctionMaker.makeUnitary(className, operand), 1))));
     }
 }

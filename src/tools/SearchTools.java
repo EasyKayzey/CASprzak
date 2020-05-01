@@ -120,7 +120,8 @@ public class SearchTools {
 			for (int ix = 0; ix < functions.length; ix++)
 				if (((~run >> ix) & 1) > 0)
 					subset.add(functions[ix]);
-			if (existsExcluding(input.me(subset.toArray(new Function[0])), test, excludeFromSearch))
+			CommutativeFunction thisFunction = input.me(subset.toArray(new Function[0]));
+			if (!excludeFromSearch.test(thisFunction) && test.test(thisFunction))
 				return true;
 		}
 		return false;

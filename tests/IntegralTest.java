@@ -101,9 +101,7 @@ public class IntegralTest {
         Function test1 = new Integral(Parser.parse("cos(x)*sin(x)"), 'x').integrate();
         Function test2 = Parser.parse("1/2*(sin(x))^2");
         Function test3 = Parser.parse("-1/2*(cos(x))^2");
-        System.out.println(test1);
-        System.out.println(test3.simplify());
-        assertTrue(test1.equals(test2) || test1.equals(test3));
+        assertTrue(test1.equals((Object)test2) || test1.equals((Object)test3)); // TODO fix that this requires a cast (this is an equals problem)
     }
 
     @Test

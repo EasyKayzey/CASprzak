@@ -2,10 +2,10 @@ import functions.Function;
 import functions.commutative.CommutativeFunction;
 import org.junit.jupiter.api.Test;
 import parsing.Parser;
-import tools.DefaultFunctions;
 import tools.SearchTools;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SearchTest {
 
@@ -13,7 +13,7 @@ public class SearchTest {
     void basicSearch() {
         Function test1 = Parser.parse("sin(x+1)");
         Function test2 = Parser.parse("x");
-        assertTrue(SearchTools.exists(test1, f -> f.equals(test2)));
+        assertTrue(SearchTools.exists(test1, test2::equals));
     }
 
     @Test
@@ -21,21 +21,21 @@ public class SearchTest {
         Function test1 = Parser.parse("sin(x+1)");
         Function test2 = Parser.parse("x");
         Function test3 = Parser.parse("x+1");
-        assertFalse(SearchTools.existsExcluding(test1, f -> f.equals(test2), f -> f.equals(test3)));
+        assertFalse(SearchTools.existsExcluding(test1, test2::equals, test3::equals));
     }
 
     @Test
     void surfaceSubset() {
         CommutativeFunction test1 = (CommutativeFunction) Parser.parseSimplified("a+b+sin(x+1)");
         Function test2 = Parser.parseSimplified("a+sin(x+1)");
-        assertTrue(SearchTools.existsInSurfaceSubset(test1, f -> f.equals(test2)));
+        assertTrue(SearchTools.existsInSurfaceSubset(test1, test2::equals));
     }
 
     @Test
     void simpleSubsetNoExclusion() {
         CommutativeFunction test1 = (CommutativeFunction) Parser.parseSimplified("x*sin(x)*e^x");
         Function test2 = Parser.parseSimplified("x*e^x");
-        assertTrue(SearchTools.existsInOppositeSurfaceSubset(test1, (f -> f.equals(DefaultFunctions.X)), (f -> f.equals(test2))));
+        assertTrue(SearchTools.existsInOppositeSurfaceSubset(test1, (f -> SearchTools.exists(f, SearchTools.isVariable('x'))), test2::equals));
     }
 
     @Test
@@ -43,6 +43,6 @@ public class SearchTest {
         CommutativeFunction test1 = (CommutativeFunction) Parser.parseSimplified("x*sin(x)*e^x");
         Function test2 = Parser.parseSimplified("x*e^x");
         Function test3 = Parser.parseSimplified("sin(x)");
-        assertFalse(SearchTools.existsInOppositeSurfaceSubsetExcluding(test1, (f -> f.equals(DefaultFunctions.X)), (f -> f.equals(test2)), (f -> f.equals(test3))));
+        assertFalse(SearchTools.existsInOppositeSurfaceSubsetExcluding(test1, (f -> SearchTools.exists(f, SearchTools.isVariable('x'))), test2::equals, (f -> SearchTools.exists(f, test3::equals))));
     }
 }

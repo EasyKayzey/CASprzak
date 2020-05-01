@@ -102,7 +102,7 @@ public class SearchTools {
 	 * @return true if the condition was satisfied by a subset
 	 */
 	public static boolean existsInOppositeSurfaceSubset(CommutativeFunction input, FunctionPredicate test, FunctionPredicate excludeFromSubset) {
-		return existsInOppositeSurfaceSubsetExcluding(input, test, excludeFromSubset, (f -> true));
+		return existsInOppositeSurfaceSubsetExcluding(input, test, excludeFromSubset, (f -> false));
 	}
 
 	/**
@@ -120,7 +120,8 @@ public class SearchTools {
 			for (int ix = 0; ix < functions.length; ix++)
 				if (((~run >> ix) & 1) > 0)
 					subset.add(functions[ix]);
-			if (test.test(input.me(subset.toArray(new Function[0]))))
+			CommutativeFunction thisFunction = input.me(subset.toArray(new Function[0]));
+			if (!excludeFromSearch.test(thisFunction) && test.test(thisFunction))
 				return true;
 		}
 		return false;

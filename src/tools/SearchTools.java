@@ -102,7 +102,7 @@ public class SearchTools {
 	 * @return true if the condition was satisfied by a subset
 	 */
 	public static boolean existsInOppositeSurfaceSubset(CommutativeFunction input, FunctionPredicate test, FunctionPredicate excludeFromSubset) {
-		return existsInOppositeSurfaceSubsetExcluding(input, test, excludeFromSubset, (f -> false));
+		return existsInOppositeSurfaceSubsetExcluding(input, test, excludeFromSubset, (f -> true));
 	}
 
 	/**

@@ -4,8 +4,8 @@ import config.Settings;
 import functions.Function;
 import functions.special.Constant;
 import functions.special.Variable;
-import functions.unitary.Ln;
 import tools.MiscTools;
+import tools.integral.Integral;
 import tools.singlevariable.Extrema;
 import tools.singlevariable.NumericalIntegration;
 import tools.singlevariable.Solver;
@@ -365,6 +365,6 @@ public class KeywordInterface {
 	 */
 	private static Function integral(String input) {
 		String[] splitInput = keywordSplitter.split(input);
-		return (new Ln.Integral(parseStored(splitInput[0]), splitInput[1].charAt(1)).integrate().simplify());
+		return (new Integral(parseStored(splitInput[0]), splitInput[1].charAt(1)).integrate().simplify());
 	}
 }

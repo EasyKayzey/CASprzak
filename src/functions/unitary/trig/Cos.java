@@ -11,10 +11,10 @@ import java.util.Map;
 public class Cos extends TrigFunction {
 	/**
 	 * Constructs a new Cos
-	 * @param function The function which cos is operating on
+	 * @param operand The function which cos is operating on
 	 */
-	public Cos(Function function) {
-		super(function);
+	public Cos(Function operand) {
+		super(operand);
 	}
 
 	/**

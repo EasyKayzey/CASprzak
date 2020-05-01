@@ -10,10 +10,10 @@ import java.util.Map;
 public class Sign extends UnitaryFunction {
 	/**
 	 * Constructs a new Sign
-	 * @param function The function which sign is operating on
+	 * @param operand The function which sign is operating on
 	 */
-	public Sign(Function function) {
-		super(function);
+	public Sign(Function operand) {
+		super(operand);
 	}
 
 	@Override

@@ -13,10 +13,10 @@ import java.util.Map;
 public class Acoth extends TrigFunction {
 	/**
 	 * Constructs a new Acoth
-	 * @param function The function which arccoth is operating on
+	 * @param operand The function which arccoth is operating on
 	 */
-	public Acoth(Function function) {
-		super(function);
+	public Acoth(Function operand) {
+		super(operand);
 	}
 
 	@Override

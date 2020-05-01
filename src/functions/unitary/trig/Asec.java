@@ -14,10 +14,10 @@ import java.util.Map;
 public class Asec extends TrigFunction {
 	/**
 	 * Constructs a new Asec
-	 * @param function The function which arcsec is operating on
+	 * @param operand The function which arcsec is operating on
 	 */
-	public Asec(Function function) {
-		super(function);
+	public Asec(Function operand) {
+		super(operand);
 	}
 
 	@Override

@@ -13,10 +13,10 @@ import java.util.Map;
 public class Asinh extends TrigFunction {
 	/**
 	 * Constructs a new Asinh
-	 * @param function The function which arcsinh is operating on
+	 * @param operand The function which arcsinh is operating on
 	 */
-	public Asinh(Function function) {
-		super(function);
+	public Asinh(Function operand) {
+		super(operand);
 	}
 
 	@Override

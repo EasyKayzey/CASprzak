@@ -14,10 +14,10 @@ import java.util.Map;
 public class Acsc extends TrigFunction {
 	/**
 	 * Constructs a new Acsc
-	 * @param function The function which arccsc is operating on
+	 * @param operand The function which arccsc is operating on
 	 */
-	public Acsc(Function function) {
-		super(function);
+	public Acsc(Function operand) {
+		super(operand);
 	}
 
 	@Override

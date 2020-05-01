@@ -7,8 +7,8 @@ import tools.exceptions.NotYetImplementedException;
 
 public abstract class Factorial extends UnitaryFunction {
 
-	public Factorial(Function function) {
-		super(function);
+	public Factorial(Function operand) {
+		super(operand);
 	}
 
 	/**

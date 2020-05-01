@@ -37,10 +37,10 @@ public abstract class UnitaryFunction extends Function {
 
 	/**
 	 * Returns an instance of this {@link Function}
-	 * @param function Constructor parameter
+	 * @param operand Constructor parameter
 	 * @return an instance of this Function
 	 */
-	public abstract UnitaryFunction me(Function function);
+	public abstract UnitaryFunction me(Function operand);
 
 	public UnitaryFunction clone() {
 		return me(operand.clone());

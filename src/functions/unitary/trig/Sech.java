@@ -11,10 +11,10 @@ import java.util.Map;
 public class Sech extends TrigFunction {
 	/**
 	 * Constructs a new Sech
-	 * @param function The function which sech is operating on
+	 * @param operand The function which sech is operating on
 	 */
-	public Sech(Function function) {
-		super(function);
+	public Sech(Function operand) {
+		super(operand);
 	}
 
 	@Override

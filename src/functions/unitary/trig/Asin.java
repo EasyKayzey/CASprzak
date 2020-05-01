@@ -13,10 +13,10 @@ import java.util.Map;
 public class Asin extends TrigFunction {
 	/**
 	 * Constructs a new Asin
-	 * @param function The function which arcsin is operating on
+	 * @param operand The function which arcsin is operating on
 	 */
-	public Asin(Function function) {
-		super(function);
+	public Asin(Function operand) {
+		super(operand);
 	}
 
 	/**

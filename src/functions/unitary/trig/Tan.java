@@ -12,10 +12,10 @@ import java.util.Map;
 public class Tan extends TrigFunction {
 	/**
 	 * Constructs a new Tan
-	 * @param function The function which tan is operating on
+	 * @param operand The function which tan is operating on
 	 */
-	public Tan(Function function) {
-		super(function);
+	public Tan(Function operand) {
+		super(operand);
 	}
 
 	/**

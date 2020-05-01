@@ -14,10 +14,10 @@ public class SFactorial extends Factorial {
 	/**
 	 * Constructs a new UnitaryFunction
 	 *
-	 * @param function The {@link Function} which will be operated on
+	 * @param operand The {@link Function} which will be operated on
 	 */
-	public SFactorial(Function function) {
-		super(function);
+	public SFactorial(Function operand) {
+		super(operand);
 	}
 
 	@Override

@@ -12,10 +12,10 @@ import java.util.Map;
 public class Coth extends TrigFunction {
 	/**
 	 * Constructs a new Coth
-	 * @param function The function which coth is operating on
+	 * @param operand The function which coth is operating on
 	 */
-	public Coth(Function function) {
-		super(function);
+	public Coth(Function operand) {
+		super(operand);
 	}
 
 	@Override

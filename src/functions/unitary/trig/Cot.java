@@ -12,10 +12,10 @@ import java.util.Map;
 public class Cot extends TrigFunction {
 	/**
 	 * Constructs a new Cot
-	 * @param function The function which cot is operating on
+	 * @param operand The function which cot is operating on
 	 */
-	public Cot(Function function) {
-		super(function);
+	public Cot(Function operand) {
+		super(operand);
 	}
 
 	/**

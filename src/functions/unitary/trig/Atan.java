@@ -13,10 +13,10 @@ import java.util.Map;
 public class Atan extends TrigFunction {
 	/**
 	 * Constructs a new Atan
-	 * @param function The function which arctan is operating on
+	 * @param operand The function which arctan is operating on
 	 */
-	public Atan(Function function) {
-		super(function);
+	public Atan(Function operand) {
+		super(operand);
 	}
 
 	/**

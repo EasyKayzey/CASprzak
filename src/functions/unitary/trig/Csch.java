@@ -11,10 +11,10 @@ import java.util.Map;
 public class Csch extends TrigFunction {
 	/**
 	 * Constructs a new Csch
-	 * @param function The function which csch is operating on
+	 * @param operand The function which csch is operating on
 	 */
-	public Csch(Function function) {
-		super(function);
+	public Csch(Function operand) {
+		super(operand);
 	}
 
 	@Override

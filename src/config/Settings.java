@@ -9,6 +9,7 @@ public class Settings {
 	public static double simpsonsSegments = 500; // MUST BE EVEN
 	public static double zeroMargin = 1e-3;
 	public static double integerMargin = 1e-4;
+	public static double equalsMargin = 1e-12;
 	public static boolean simplifyFunctionsOfConstants = true;
 	public static boolean distributeExponents = true;
 	public static boolean cacheDerivatives = true;

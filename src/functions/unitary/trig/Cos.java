@@ -36,4 +36,8 @@ public class Cos extends TrigFunction {
 		return new Cos(operand);
 	}
 
+	@Override
+	public Function integrate() {
+		return new Sin(operand);
+	}
 }

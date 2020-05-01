@@ -2,6 +2,9 @@ package functions.unitary.trig;
 
 import functions.Function;
 import functions.commutative.Product;
+import functions.commutative.Sum;
+import functions.unitary.Abs;
+import functions.unitary.Ln;
 import functions.unitary.UnitaryFunction;
 
 import java.util.Map;
@@ -35,4 +38,8 @@ public class Sec extends TrigFunction {
 		return new Sec(operand);
 	}
 
+	@Override
+	public Function integrate() {
+		return new Ln(new Abs(new Sum(new Sec(operand), new Tan(operand))));
+	}
 }

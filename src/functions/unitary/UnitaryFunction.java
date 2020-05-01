@@ -67,6 +67,16 @@ public abstract class UnitaryFunction extends Function {
 	}
 
 
+	public static UnitaryFunction newInstanceOf(Class<? extends UnitaryFunction> type, Function operand) {
+		try {
+			return (UnitaryFunction) type.getConstructors()[0].newInstance(operand);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+
 	public @NotNull Iterator<Function> iterator() {
 		return new UnitaryIterator();
 	}

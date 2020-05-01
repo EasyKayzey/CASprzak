@@ -9,10 +9,10 @@ import java.util.Map;
 public class Dirac extends UnitaryFunction {
 	/**
 	 * Constructs a new Dirac
-	 * @param function The function which the Dirac-Delta function is operating on
+	 * @param operand The function which the Dirac-Delta function is operating on
 	 */
-	public Dirac(Function function) {
-		super(function);
+	public Dirac(Function operand) {
+		super(operand);
 	}
 
 	@Override

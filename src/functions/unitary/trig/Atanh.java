@@ -10,13 +10,17 @@ import functions.unitary.UnitaryFunction;
 import java.util.Map;
 
 
-public class Atanh extends TrigFunction {
+public class Atanh extends InverseTrigFunction {
+	static {
+		inverse = Tanh.class;
+	}
+
 	/**
 	 * Constructs a new Atanh
-	 * @param function The function which arctanh is operating on
+	 * @param operand The function which arctanh is operating on
 	 */
-	public Atanh(Function function) {
-		super(function);
+	public Atanh(Function operand) {
+		super(operand);
 	}
 
 	@Override

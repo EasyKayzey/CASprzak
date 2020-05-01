@@ -10,13 +10,17 @@ import tools.DefaultFunctions;
 import java.util.Map;
 
 
-public class Acot extends TrigFunction {
+public class Acot extends InverseTrigFunction {
+	static {
+		inverse = Cot.class;
+	}
+
 	/**
 	 * Constructs a new Acot
-	 * @param function The function which arccot is operating on
+	 * @param operand The function which arccot is operating on
 	 */
-	public Acot(Function function) {
-		super(function);
+	public Acot(Function operand) {
+		super(operand);
 	}
 
 	@Override

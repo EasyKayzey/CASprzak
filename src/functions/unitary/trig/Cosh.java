@@ -8,12 +8,16 @@ import java.util.Map;
 
 
 public class Cosh extends TrigFunction {
+	static {
+		inverse = Acosh.class;
+	}
+
 	/**
 	 * Constructs a new Cosh
-	 * @param function The function which cosh is operating on
+	 * @param operand The function which cosh is operating on
 	 */
-	public Cosh(Function function) {
-		super(function);
+	public Cosh(Function operand) {
+		super(operand);
 	}
 
 	/**

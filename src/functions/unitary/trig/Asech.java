@@ -10,13 +10,17 @@ import functions.unitary.UnitaryFunction;
 import java.util.Map;
 
 
-public class Asech extends TrigFunction {
+public class Asech extends InverseTrigFunction {
+	static {
+		inverse = Sech.class;
+	}
+
 	/**
 	 * Constructs a new Asech
-	 * @param function The function which arcsech is operating on
+	 * @param operand The function which arcsech is operating on
 	 */
-	public Asech(Function function) {
-		super(function);
+	public Asech(Function operand) {
+		super(operand);
 	}
 
 	@Override

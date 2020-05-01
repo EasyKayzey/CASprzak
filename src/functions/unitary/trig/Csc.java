@@ -13,12 +13,16 @@ import java.util.Map;
 
 
 public class Csc extends TrigFunction {
+	static {
+		inverse = Acsc.class;
+	}
+
 	/**
 	 * Constructs a new Csc
-	 * @param function The function which csc is operating on
+	 * @param operand The function which csc is operating on
 	 */
-	public Csc(Function function) {
-		super(function);
+	public Csc(Function operand) {
+		super(operand);
 	}
 
 	/**

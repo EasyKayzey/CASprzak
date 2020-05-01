@@ -9,8 +9,8 @@ import java.util.Map;
 
 public class RFactorial extends Factorial {
 
-	public RFactorial(Function function) {
-		super(function);
+	public RFactorial(Function operand) {
+		super(operand);
 	}
 
 	@Override

@@ -11,13 +11,17 @@ import tools.DefaultFunctions;
 import java.util.Map;
 
 
-public class Acsc extends TrigFunction {
+public class Acsc extends InverseTrigFunction {
+	static {
+		inverse = Csc.class;
+	}
+
 	/**
 	 * Constructs a new Acsc
-	 * @param function The function which arccsc is operating on
+	 * @param operand The function which arccsc is operating on
 	 */
-	public Acsc(Function function) {
-		super(function);
+	public Acsc(Function operand) {
+		super(operand);
 	}
 
 	@Override

@@ -6,27 +6,27 @@ import functions.commutative.Product;
 import java.util.Map;
 
 
-public class Abs extends UnitaryFunction {
+public class Exp extends UnitaryFunction {
 	/**
-	 * Constructs a new Abs
-	 * @param operand The function which absolute value is operating on
+	 * Constructs a new Ln
+	 * @param operand The function which the exponential is operating on
 	 */
-	public Abs(Function operand) {
+	public Exp(Function operand) {
 		super(operand);
 	}
 
 	@Override
 	public double evaluate(Map<Character, Double> variableValues) {
-		return Math.abs(operand.evaluate(variableValues));
+		return Math.exp(operand.evaluate(variableValues));
 	}
 
 	@Override
 	public Function getDerivative(char varID) {
-		return new Product(operand.getSimplifiedDerivative(varID), new Sign(operand));
+		return new Product(clone(), operand.getDerivative(varID));
 	}
 
-	@Override
 	public UnitaryFunction me(Function operand) {
-		return new Abs(operand);
+		return new Exp(operand);
 	}
+
 }

@@ -10,13 +10,17 @@ import functions.unitary.UnitaryFunction;
 import java.util.Map;
 
 
-public class Asin extends TrigFunction {
+public class Asin extends InverseTrigFunction {
+	static {
+		inverse = Sin.class;
+	}
+
 	/**
 	 * Constructs a new Asin
-	 * @param function The function which arcsin is operating on
+	 * @param operand The function which arcsin is operating on
 	 */
-	public Asin(Function function) {
-		super(function);
+	public Asin(Function operand) {
+		super(operand);
 	}
 
 	/**

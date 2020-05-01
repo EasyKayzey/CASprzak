@@ -11,12 +11,16 @@ import java.util.Map;
 
 
 public class Tanh extends TrigFunction {
+	static {
+		inverse = Atanh.class;
+	}
+
 	/**
 	 * Constructs a new Tanh
-	 * @param function The function which tanh is operating on
+	 * @param operand The function which tanh is operating on
 	 */
-	public Tanh(Function function) {
-		super(function);
+	public Tanh(Function operand) {
+		super(operand);
 	}
 
 	/**

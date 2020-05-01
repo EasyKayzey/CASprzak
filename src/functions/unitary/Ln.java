@@ -11,10 +11,10 @@ import java.util.Map;
 public class Ln extends UnitaryFunction {
 	/**
 	 * Constructs a new Ln
-	 * @param function The function which natural log is operating on
+	 * @param operand The function which natural log is operating on
 	 */
-	public Ln(Function function) {
-		super(function);
+	public Ln(Function operand) {
+		super(operand);
 	}
 
 	@Override

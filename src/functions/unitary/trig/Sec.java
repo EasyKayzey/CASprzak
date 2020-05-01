@@ -11,12 +11,16 @@ import java.util.Map;
 
 
 public class Sec extends TrigFunction {
+	static {
+		inverse = Asec.class;
+	}
+
 	/**
 	 * Constructs a new Sec
-	 * @param function The function which sec is operating on
+	 * @param operand The function which sec is operating on
 	 */
-	public Sec(Function function) {
-		super(function);
+	public Sec(Function operand) {
+		super(operand);
 	}
 
 	/**

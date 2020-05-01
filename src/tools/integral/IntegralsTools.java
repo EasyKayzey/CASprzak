@@ -1,4 +1,4 @@
-package tools.integration;
+package tools.integral;
 
 import functions.Function;
 import functions.commutative.Product;

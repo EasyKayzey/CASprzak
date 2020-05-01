@@ -2,12 +2,12 @@ import functions.Function;
 import functions.commutative.Sum;
 import org.junit.jupiter.api.Test;
 import parsing.Parser;
+import tools.exceptions.IntegrationFailedException;
 import tools.helperclasses.Pair;
 import tools.integral.Integral;
 import tools.integral.IntegralsTools;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class IntegralTest {
@@ -93,15 +93,17 @@ public class IntegralTest {
     @Test
     void simpleExpUSubThatNoWork() {
         Integral test1 = new Integral(Parser.parse("2x*sin(x)*e^(x^2)"), 'x');
-        Function test2 = Parser.parse("e^(x^2)");
-        assertNotEquals(test2, test1.integrate());
+        assertThrows(IntegrationFailedException.class, test1::integrate);
     }
 
     @Test
     void simpleOPIsOne() {
-        Integral test1 = new Integral(Parser.parse("cos(x)*sin(x)"), 'x');
+        Function test1 = new Integral(Parser.parse("cos(x)*sin(x)"), 'x').integrate();
         Function test2 = Parser.parse("1/2*(sin(x))^2");
-        assertEquals(test2, test1.integrate());
+        Function test3 = Parser.parse("-1/2*(cos(x))^2");
+        System.out.println(test1);
+        System.out.println(test3.simplify());
+        assertTrue(test1.equals(test2) || test1.equals(test3));
     }
 
     @Test

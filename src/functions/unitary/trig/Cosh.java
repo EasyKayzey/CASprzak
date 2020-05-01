@@ -35,4 +35,8 @@ public class Cosh extends TrigFunction {
 		return new Cosh(operand);
 	}
 
+	@Override
+	public Function integrate() {
+		return new Sinh(operand);
+	}
 }

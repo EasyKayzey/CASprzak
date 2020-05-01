@@ -36,4 +36,9 @@ public class Csch extends TrigFunction {
 	public UnitaryFunction me(Function operand) {
 		return new Csch(operand);
 	}
+
+	@Override
+	public Function integrate() {
+		return null;
+	}
 }

@@ -10,6 +10,7 @@ import functions.special.Constant;
 import functions.special.Variable;
 import functions.unitary.Abs;
 import functions.unitary.Ln;
+import functions.unitary.UnitaryFunction;
 import functions.unitary.trig.*;
 import tools.DefaultFunctions;
 import tools.SearchTools;
@@ -50,13 +51,81 @@ public class StageOne {
             } else if (function instanceof Logb logb && logb.getFunction2() instanceof Constant constant1 && logb.getFunction1().getSimplifiedDerivative(variableChar) instanceof Constant constant2) {
                 number /= (constant2.constant * Math.log(constant1.constant));
                 return naturalLog(number, logb.getFunction1());
-            } else if (function instanceof Sin sin && sin.operand.getSimplifiedDerivative(variableChar) instanceof Constant constant1) {
-                number /= constant1.constant;
-                return sin(number, sin.operand);
-            } else if (function instanceof Cos cos && cos.operand.getSimplifiedDerivative(variableChar) instanceof Constant constant1) {
-                number /= constant1.constant;
-                return cos(number, cos.operand);
-            }
+            } else if (function instanceof UnitaryFunction unit && unit.operand.getSimplifiedDerivative(variableChar) instanceof Constant constant1) {
+                if (function instanceof Sin sin) {
+                    number /= constant1.constant;
+                    return sin(number, sin.operand);
+                } else if (function instanceof Cos cos) {
+                    number /= constant1.constant;
+                    return cos(number, cos.operand);
+                } else if (function instanceof Tan tan) {
+                    number /= constant1.constant;
+                    return tan(number, tan.operand);
+                } else if (function instanceof Csc csc) {
+                    number /= constant1.constant;
+                    return csc(number, csc.operand);
+                } else if (function instanceof Sec sec) {
+                    number /= constant1.constant;
+                    return sec(number, sec.operand);
+                } else if (function instanceof Cot cot) {
+                    number /= constant1.constant;
+                    return cot(number, cot.operand);
+                } else if (function instanceof Sinh sinh) {
+                    number /= constant1.constant;
+                    return sinh(number, sinh.operand);
+                } else if (function instanceof Cosh cosh) {
+                    number /= constant1.constant;
+                    return cosh(number, cosh.operand);
+                } else if (function instanceof Tanh tanh) {
+                    number /= constant1.constant;
+                    return tanh(number, tanh.operand);
+                } else if (function instanceof Csch csch) {
+                    number /= constant1.constant;
+                    return csch(number, csch.operand);
+                } else if (function instanceof Sech sech) {
+                    number /= constant1.constant;
+                    return sech(number, sech.operand);
+                } else if (function instanceof Coth coth) {
+                    number /= constant1.constant;
+                    return coth(number, coth.operand);
+                } else if (function instanceof Asin asin) {
+                    number /= constant1.constant;
+                    return asin(number, asin.operand);
+                } else if (function instanceof Acos acos) {
+                    number /= constant1.constant;
+                    return acos(number, acos.operand);
+                } else if (function instanceof Atan atan) {
+                    number /= constant1.constant;
+                    return atan(number, atan.operand);
+                } else if (function instanceof Acsc acsc) {
+                    number /= constant1.constant;
+                    return acsc(number, acsc.operand);
+                } else if (function instanceof Asec asec) {
+                    number /= constant1.constant;
+                    return asec(number, asec.operand);
+                } else if (function instanceof Acot acot) {
+                    number /= constant1.constant;
+                    return acot(number, acot.operand);
+                } else if (function instanceof Asinh asinh) {
+                    number /= constant1.constant;
+                    return asinh(number, asinh.operand);
+                } else if (function instanceof Acosh acosh) {
+                    number /= constant1.constant;
+                    return acosh(number, acosh.operand);
+                } else if (function instanceof Atanh atanh) {
+                    number /= constant1.constant;
+                    return atanh(number, atanh.operand);
+                } else if (function instanceof Acsch acsch) {
+                    number /= constant1.constant;
+                    return acsch(number, acsch.operand);
+                } else if (function instanceof Asech asech) {
+                    number /= constant1.constant;
+                    return asech(number, asech.operand);
+                } else if (function instanceof Acoth acoth) {
+                    number /= constant1.constant;
+                    return acoth(number, acoth.operand);
+                }
+             }
         }
 
         return function;

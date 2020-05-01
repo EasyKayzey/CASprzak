@@ -79,8 +79,7 @@ public class IntegralTest {
     @Test
     void simpleOPIsOne() {
         Integral test1 = new Integral(Parser.parse("cos(x)*sin(x)"), 'x');
-        Function test2 = Parser.parse("-1/2*(cos(x))^2");
-        Function test3 = Parser.parse("1/2*(sin(x))^2");
+        Function test2 = Parser.parse("1/2*(sin(x))^2");
         assertEquals(test2, test1.integrate());
     }
 

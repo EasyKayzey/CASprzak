@@ -8,9 +8,10 @@ import functions.commutative.Product;
 import functions.commutative.Sum;
 import functions.special.Constant;
 import functions.special.Variable;
+import functions.unitary.Abs;
 import functions.unitary.Ln;
-import functions.unitary.trig.Cos;
-import functions.unitary.trig.Sin;
+import functions.unitary.trig.*;
+import tools.DefaultFunctions;
 import tools.SearchTools;
 import tools.helperclasses.Pair;
 
@@ -84,5 +85,93 @@ public class StageOne {
 
     private static Function cos(double number, Function operand) {
         return new Product(new Constant(number), new Sin(operand));
+    }
+
+    private static Function tan(double number, Function operand) {
+        return new Product(new Constant(number), new Ln(new Abs(new Sec(operand))));
+    }
+
+    private static Function csc(double number, Function operand) {
+        return new Product(new Constant(-1 * number), new Ln(new Abs(new Sum(new Csc(operand), new Cot(operand)))));
+    }
+
+    private static Function cot(double number, Function operand) {
+        return new Product(new Constant(-1 * number), new Ln(new Abs(new Csc(operand))));
+    }
+
+    private static Function sec(double number, Function operand) {
+        return new Product(new Constant(number), new Ln(new Abs(new Sum(new Sec(operand), new Tan(operand)))));
+    }
+
+    private static Function sinh(double number, Function operand) {
+        return new Product(new Constant(number), new Cosh(operand));
+    }
+
+    private static Function cosh(double number, Function operand) {
+        return new Product(new Constant(number), new Sinh(operand));
+    }
+
+    private static Function tanh(double number, Function operand) {
+        return new Product(new Constant(number), new Ln(new Cosh(operand)));
+    }
+
+    private static Function csch(double number, Function operand) {
+        return new Product(new Constant(number), new Ln(new Abs(new Tanh(new Product(DefaultFunctions.HALF, operand)))));
+    }
+
+    private static Function coth(double number, Function operand) {
+        return new Product(new Constant(number), new Ln(new Abs(new Sinh(operand))));
+    }
+
+    private static Function sech(double number, Function operand) {
+        return new Product(new Constant(number), new Atan(new Abs(new Sinh(operand))));
+    }
+
+    private static Function asin(double number, Function operand) {
+        return new Product(new Constant(number), new Sum(new Product(operand, new Asin(operand)), new Product(DefaultFunctions.NEGATIVE_ONE, sin(1, new Asin(operand)))));
+    }
+
+    private static Function acos(double number, Function operand) {
+        return new Product(new Constant(number), new Sum(new Product(operand, new Acos(operand)), new Product(DefaultFunctions.NEGATIVE_ONE, cos(1, new Acos(operand)))));
+    }
+
+    private static Function atan(double number, Function operand) {
+        return new Product(new Constant(number), new Sum(new Product(operand, new Atan(operand)), new Product(DefaultFunctions.NEGATIVE_ONE, tan(1, new Atan(operand)))));
+    }
+
+    private static Function acsc(double number, Function operand) {
+        return new Product(new Constant(number), new Sum(new Product(operand, new Acsc(operand)), new Product(DefaultFunctions.NEGATIVE_ONE, csc(1, new Acsc(operand)))));
+    }
+
+    private static Function acot(double number, Function operand) {
+        return new Product(new Constant(number), new Sum(new Product(operand, new Acot(operand)), new Product(DefaultFunctions.NEGATIVE_ONE, cot(1, new Acot(operand)))));
+    }
+
+    private static Function asec(double number, Function operand) {
+        return new Product(new Constant(number), new Sum(new Product(operand, new Asec(operand)), new Product(DefaultFunctions.NEGATIVE_ONE, sec(1, new Asec(operand)))));
+    }
+
+    private static Function asinh(double number, Function operand) {
+        return new Product(new Constant(number), new Sum(new Product(operand, new Asinh(operand)), new Product(DefaultFunctions.NEGATIVE_ONE, sinh(1, new Asinh(operand)))));
+    }
+
+    private static Function acosh(double number, Function operand) {
+        return new Product(new Constant(number), new Sum(new Product(operand, new Acosh(operand)), new Product(DefaultFunctions.NEGATIVE_ONE, cosh(1, new Acosh(operand)))));
+    }
+
+    private static Function atanh(double number, Function operand) {
+        return new Product(new Constant(number), new Sum(new Product(operand, new Atanh(operand)), new Product(DefaultFunctions.NEGATIVE_ONE, tanh(1, new Atanh(operand)))));
+    }
+
+    private static Function acsch(double number, Function operand) {
+        return new Product(new Constant(number), new Sum(new Product(operand, new Acsch(operand)), new Product(DefaultFunctions.NEGATIVE_ONE, csch(1, new Acsch(operand)))));
+    }
+
+    private static Function acoth(double number, Function operand) {
+        return new Product(new Constant(number), new Sum(new Product(operand, new Acoth(operand)), new Product(DefaultFunctions.NEGATIVE_ONE, coth(1, new Acoth(operand)))));
+    }
+
+    private static Function asech(double number, Function operand) {
+        return new Product(new Constant(number), new Sum(new Product(operand, new Asech(operand)), new Product(DefaultFunctions.NEGATIVE_ONE, sech(1, new Asech(operand)))));
     }
 }

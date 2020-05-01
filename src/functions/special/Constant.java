@@ -1,5 +1,6 @@
 package functions.special;
 
+import config.Settings;
 import functions.Function;
 import org.jetbrains.annotations.Nullable;
 
@@ -117,7 +118,7 @@ public class Constant extends SpecialFunction {
 
 
 	public boolean equalsFunction(Function that) {
-		return (that instanceof Constant) && (constant == ((Constant) that).constant);
+		return (that instanceof Constant) && (Math.abs(constant - ((Constant) that).constant) < Settings.equalsMargin);
 	}
 
 	public int compareSelf(Function that) {

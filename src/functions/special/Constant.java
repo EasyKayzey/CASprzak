@@ -2,7 +2,6 @@ package functions.special;
 
 import functions.Function;
 import org.jetbrains.annotations.Nullable;
-import tools.DefaultFunctions;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -104,12 +103,11 @@ public class Constant extends SpecialFunction {
 	}
 
 	public Function simplify() {
-		if (constant == Math.PI)
-			return DefaultFunctions.PI;
-		else if (constant == Math.E)
-			return DefaultFunctions.E;
-		else
-			return this;
+		if (constantKey == null)
+			for (Map.Entry<String, Double> entry : specialConstants.entrySet())
+				if (constant == entry.getValue())
+					return new Constant(entry.getKey());
+		return this;
 	}
 
 

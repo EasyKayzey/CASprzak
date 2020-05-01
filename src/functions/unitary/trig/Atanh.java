@@ -11,9 +11,6 @@ import java.util.Map;
 
 
 public class Atanh extends InverseTrigFunction {
-	static {
-		inverse = Tanh.class;
-	}
 
 	/**
 	 * Constructs a new Atanh
@@ -42,5 +39,9 @@ public class Atanh extends InverseTrigFunction {
 	@Override
 	public UnitaryFunction me(Function operand) {
 		return new Atanh(operand);
+	}
+
+	public Class<? extends TrigFunction> getInverse() {
+		return Tanh.class;
 	}
 }

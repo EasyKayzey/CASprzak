@@ -11,9 +11,6 @@ import java.util.Map;
 
 
 public class Acot extends InverseTrigFunction {
-	static {
-		inverse = Cot.class;
-	}
 
 	/**
 	 * Constructs a new Acot
@@ -46,5 +43,9 @@ public class Acot extends InverseTrigFunction {
 	@Override
 	public UnitaryFunction me(Function operand) {
 		return new Acot(operand);
+	}
+
+	public Class<? extends TrigFunction> getInverse() {
+		return Cot.class;
 	}
 }

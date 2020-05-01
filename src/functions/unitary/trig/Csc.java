@@ -2,12 +2,8 @@ package functions.unitary.trig;
 
 import functions.Function;
 import functions.commutative.Product;
-import functions.commutative.Sum;
 import functions.special.Constant;
-import functions.unitary.Abs;
-import functions.unitary.Ln;
 import functions.unitary.UnitaryFunction;
-import tools.DefaultFunctions;
 
 import java.util.Map;
 
@@ -47,5 +43,8 @@ public class Csc extends TrigFunction {
 	@Override
 	public Function integrate() {
 		return new Product(DefaultFunctions.NEGATIVE_ONE, new Ln(new Abs(new Sum(new Csc(operand), new Cot(operand)))));
+	}
+	public Class<? extends TrigFunction> getInverse() {
+		return Acsc.class;
 	}
 }

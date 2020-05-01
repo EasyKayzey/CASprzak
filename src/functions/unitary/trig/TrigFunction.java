@@ -11,7 +11,8 @@ public abstract class TrigFunction extends UnitaryFunction implements Integrable
 	}
 
 	/**
-	 * The class representing the inverse of this function
+	 * Returns the Class corresponding to the inverse of this trig function
+	 * @return the inverse class
 	 */
-	public static Class<? extends TrigFunction> inverse;
+	public abstract Class<? extends TrigFunction> getInverse();
 }

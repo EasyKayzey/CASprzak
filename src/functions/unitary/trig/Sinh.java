@@ -43,4 +43,7 @@ public class Sinh extends TrigFunction {
 	public Function integrate() {
 		return new Cosh(operand);
 	}
+	public Class<? extends TrigFunction> getInverse() {
+		return Asinh.class;
+	}
 }

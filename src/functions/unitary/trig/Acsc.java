@@ -12,9 +12,6 @@ import java.util.Map;
 
 
 public class Acsc extends InverseTrigFunction {
-	static {
-		inverse = Csc.class;
-	}
 
 	/**
 	 * Constructs a new Acsc
@@ -52,5 +49,9 @@ public class Acsc extends InverseTrigFunction {
 		} else {
 			return Double.NaN;
 		}
+	}
+
+	public Class<? extends TrigFunction> getInverse() {
+		return Csc.class;
 	}
 }

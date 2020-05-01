@@ -45,4 +45,8 @@ public class Csch extends TrigFunction {
 	public Function integrate() {
 		return null;
 	}
+
+	public Class<? extends TrigFunction> getInverse() {
+		return Acsch.class;
+	}
 }

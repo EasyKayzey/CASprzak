@@ -11,9 +11,6 @@ import java.util.Map;
 
 
 public class Acos extends InverseTrigFunction {
-	static {
-		inverse = Cos.class;
-	}
 
 	/**
 	 * Constructs a new Acos
@@ -42,4 +39,7 @@ public class Acos extends InverseTrigFunction {
 		return new Acos(operand);
 	}
 
+	public Class<? extends TrigFunction> getInverse() {
+		return Cos.class;
+	}
 }

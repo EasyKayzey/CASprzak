@@ -11,9 +11,6 @@ import java.util.Map;
 
 
 public class Asin extends InverseTrigFunction {
-	static {
-		inverse = Sin.class;
-	}
 
 	/**
 	 * Constructs a new Asin
@@ -42,4 +39,7 @@ public class Asin extends InverseTrigFunction {
 		return new Asin(operand);
 	}
 
+	public Class<? extends TrigFunction> getInverse() {
+		return Sin.class;
+	}
 }

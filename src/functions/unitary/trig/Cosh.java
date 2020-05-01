@@ -8,9 +8,6 @@ import java.util.Map;
 
 
 public class Cosh extends TrigFunction {
-	static {
-		inverse = Acosh.class;
-	}
 
 	/**
 	 * Constructs a new Cosh
@@ -39,6 +36,9 @@ public class Cosh extends TrigFunction {
 		return new Cosh(operand);
 	}
 
+	public Class<? extends TrigFunction> getInverse() {
+		return Acosh.class;
+	}
 	@Override
 	public Function integrate() {
 		return new Sinh(operand);

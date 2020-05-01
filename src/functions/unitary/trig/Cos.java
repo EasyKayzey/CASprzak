@@ -40,6 +40,9 @@ public class Cos extends TrigFunction {
 		return new Cos(operand);
 	}
 
+	public Class<? extends TrigFunction> getInverse() {
+		return Acos.class;
+	}
 	@Override
 	public Function integrate() {
 		return new Sin(operand);

@@ -3,7 +3,6 @@ package functions.unitary.trig;
 import functions.Function;
 import functions.commutative.Product;
 import functions.special.Constant;
-import functions.unitary.Abs;
 import functions.unitary.UnitaryFunction;
 
 import java.util.Map;
@@ -45,5 +44,9 @@ public class Sech extends TrigFunction {
 	@Override
 	public Function integrate() {
 		return new Atan(new Abs(new Sinh(operand)));
+	}
+
+	public Class<? extends TrigFunction> getInverse() {
+		return Asech.class;
 	}
 }

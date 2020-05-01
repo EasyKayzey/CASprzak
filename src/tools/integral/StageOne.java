@@ -33,7 +33,7 @@ public class StageOne {
                     Function derivativeWithoutConstant = derivative.second;
                     double constantInFront = derivative.first;
                     Product derivativeTimesOperation = new Product(derivativeWithoutConstant, f);
-                    if (SearchTools.existsSurface(product, (u -> u.equals(derivativeWithoutConstant))) && !SearchTools.existsInOppositeSurfaceSubset((CommutativeFunction) function, SearchTools.isVariable(variableChar), (u -> u.equals(derivativeTimesOperation)))) {
+                    if (SearchTools.existsSurface(product, derivativeWithoutConstant::equals) && !SearchTools.existsInOppositeSurfaceSubset(product, (u -> SearchTools.exists(u, SearchTools.isVariable(variableChar))), derivativeTimesOperation::equals)) {
                         number /= constantInFront;
                         return exponential(number, base.constant, power.getFunction1());
                     }
@@ -43,7 +43,7 @@ public class StageOne {
                     Function derivativeWithoutConstant = derivative.second;
                     double constantInFront = derivative.first;
                     Product derivativeTimesOperation = new Product(derivativeWithoutConstant, f);
-                    if (SearchTools.existsSurface(product, (u -> u.equals(derivativeWithoutConstant))) && !SearchTools.existsInOppositeSurfaceSubset((CommutativeFunction) function, SearchTools.isVariable(variableChar), (u -> u.equals(derivativeTimesOperation)))) {
+                    if (SearchTools.existsSurface(product, derivativeWithoutConstant::equals) && !SearchTools.existsInOppositeSurfaceSubset(product, (u -> SearchTools.exists(u, SearchTools.isVariable(variableChar))), derivativeTimesOperation::equals)) {
                         number /= constantInFront;
                         return power(number, exponent.constant, power.getFunction2());
                     }
@@ -53,7 +53,7 @@ public class StageOne {
                     Function derivativeWithoutConstant = derivative.second;
                     double constantInFront = derivative.first;
                     Product derivativeTimesOperation = new Product(derivativeWithoutConstant, f);
-                    if (SearchTools.existsSurface(product, (u -> u.equals(derivativeWithoutConstant))) && !SearchTools.existsInOppositeSurfaceSubset((CommutativeFunction) function, SearchTools.isVariable(variableChar), (u -> u.equals(derivativeTimesOperation)))) {
+                    if (SearchTools.existsSurface(product, derivativeWithoutConstant::equals) && !SearchTools.existsInOppositeSurfaceSubset(product, (u -> SearchTools.exists(u, SearchTools.isVariable(variableChar))), derivativeTimesOperation::equals)) {
                         number /= constantInFront;
                         return naturalLog(number, ln.operand);
                     }
@@ -63,7 +63,7 @@ public class StageOne {
                     Function derivativeWithoutConstant = derivative.second;
                     double constantInFront = derivative.first;
                     Product derivativeTimesOperation = new Product(derivativeWithoutConstant, f);
-                    if (SearchTools.existsSurface(product, (u -> u.equals(derivativeWithoutConstant))) && !SearchTools.existsInOppositeSurfaceSubset((CommutativeFunction) function, SearchTools.isVariable(variableChar), (u -> u.equals(derivativeTimesOperation)))) {
+                    if (SearchTools.existsSurface(product, derivativeWithoutConstant::equals) && !SearchTools.existsInOppositeSurfaceSubset(product, (u -> SearchTools.exists(u, SearchTools.isVariable(variableChar))), derivativeTimesOperation::equals)) {
                         number /= (constantInFront * Math.log(constant1.constant));
                         return naturalLog(number, logb.getFunction2());
                     }
@@ -73,7 +73,7 @@ public class StageOne {
                     Function derivativeWithoutConstant = derivative.second;
                     double constantInFront = derivative.first;
                     Product derivativeTimesOperation = new Product(derivativeWithoutConstant, f);
-                    if (SearchTools.existsSurface(product, (u -> u.equals(derivativeWithoutConstant))) && !SearchTools.existsInOppositeSurfaceSubset((CommutativeFunction) function, SearchTools.isVariable(variableChar), (u -> u.equals(derivativeTimesOperation)))) {
+                    if (SearchTools.existsSurface(product, derivativeWithoutConstant::equals) && !SearchTools.existsInOppositeSurfaceSubset(product, (u -> SearchTools.exists(u, SearchTools.isVariable(variableChar))), derivativeTimesOperation::equals)) {
                         number /= (constantInFront);
                        return unitaryFunctionSwitchCase(unit.getClass().getSimpleName().toLowerCase(), unit.operand, number);
                     }

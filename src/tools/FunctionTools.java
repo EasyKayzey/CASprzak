@@ -41,7 +41,7 @@ public class FunctionTools {
 		if (functionArray1.length != functionArray2.length)
 			return false;
 		for (int i = start; i < functionArray1.length; i++) {
-			if (!functionArray1[i].equals(functionArray2[i]))
+			if (!functionArray1[i].equalsFunction(functionArray2[i]))
 				return false;
 		}
 		return true;

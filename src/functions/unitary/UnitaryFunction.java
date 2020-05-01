@@ -58,8 +58,8 @@ public abstract class UnitaryFunction extends Function {
 		return me(operand.substitute(varID, toReplace));
 	}
 
-	public boolean equals(Function that) {
-		return this.getClass().equals(that.getClass()) && this.operand.equals(((UnitaryFunction) that).operand);
+	public boolean equalsFunction(Function that) {
+		return this.getClass().equals(that.getClass()) && this.operand.equalsFunction(((UnitaryFunction) that).operand);
 	}
 
 	public int compareSelf(Function that) {

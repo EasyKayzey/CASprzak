@@ -106,7 +106,7 @@ public class Variable extends SpecialFunction {
 	}
 
 
-	public boolean equals(Function that) {
+	public boolean equalsFunction(Function that) {
 		return (that instanceof Variable) && (varID == ((Variable) that).varID);
 	}
 

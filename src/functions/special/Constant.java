@@ -116,7 +116,7 @@ public class Constant extends SpecialFunction {
 	}
 
 
-	public boolean equals(Function that) {
+	public boolean equalsFunction(Function that) {
 		return (that instanceof Constant) && (constant == ((Constant) that).constant);
 	}
 

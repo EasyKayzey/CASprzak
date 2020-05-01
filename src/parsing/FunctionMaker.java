@@ -7,10 +7,7 @@ import functions.commutative.Product;
 import functions.commutative.Sum;
 import functions.special.Constant;
 import functions.special.Variable;
-import functions.unitary.Abs;
-import functions.unitary.Dirac;
-import functions.unitary.Ln;
-import functions.unitary.Sign;
+import functions.unitary.*;
 import functions.unitary.combo.Factorial;
 import functions.unitary.trig.*;
 import tools.DefaultFunctions;
@@ -54,13 +51,14 @@ public class FunctionMaker {
 	 */
 	public static Function makeUnitary(String functionName, Function function) {
 		return switch (functionName) {
-			case "-" -> new Product(new Constant(-1), function);
-			case "/" -> new Pow(new Constant(-1), function);
+			case "-" -> new Product(DefaultFunctions.NEGATIVE_ONE, function);
+			case "/" -> new Pow(DefaultFunctions.NEGATIVE_ONE, function);
 			case "!" -> Factorial.defaultFactorial(function);
 			case "dirac" -> new Dirac(function);
-			case "sqrt" -> new Pow(new Constant(.5), function);
+			case "sqrt" -> new Pow(DefaultFunctions.HALF, function);
 			case "sign" -> new Sign(function);
 			case "abs" -> new Abs(function);
+			case "exp" -> new Exp(function);
 			case "ln" -> new Ln(function);
 			case "sin" -> new Sin(function);
 			case "cos" -> new Cos(function);

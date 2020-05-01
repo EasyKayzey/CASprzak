@@ -32,7 +32,7 @@ public class Integral extends UnitaryFunction {
 	}
 
 	@Override
-	public boolean equals(Function that) {
+	public boolean equalsFunction(Function that) {
 		if (that instanceof Integral integral)
 			return respectTo == integral.respectTo && operand.equals(integral.operand);
 		else

@@ -48,7 +48,8 @@ public class KeywordInterface {
 			case "rmv", "rmvar", "removevar", "removevariable" -> removeVariables(splitInput[1]);
 			case "addc", "addconstant", "defc", "defcon", "defconstant" -> defineConstant(splitInput[1]);
 			case "rmc", "rmconstant", "removeconstant" -> removeConstant(splitInput[1]);
-			case "vars", "printvars" -> printVariables();
+			case "pc", "printc", "printconstants" -> printConstants();
+			case "pv", "vars", "printvars" -> printVariables();
 			case "cv", "clearvars" -> clearVariables();
 			case "pf", "printfun", "printfunctions" -> printFunctions();
 			case "cf", "clearfun", "clearfunctions" -> clearFunctions();
@@ -257,6 +258,14 @@ public class KeywordInterface {
 		return Constant.removeSpecialConstant(input);
 
 	}
+
+	/**
+	 * printconstants
+	 */
+	private static Object printConstants() {
+		return Constant.specialConstants;
+	}
+
 	/**
 	 * printvars
 	 */

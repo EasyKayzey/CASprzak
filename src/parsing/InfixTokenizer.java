@@ -61,14 +61,12 @@ public class InfixTokenizer {
 		infix = subtractionFinder.matcher(infix).replaceAll("+-").replace("/", "*/");
 		// Turns expressions like xyz into x*y*z
 		infix = parseVariablePairs(infix);
-		System.out.println(infix);
 		// Adds parentheses to enforce order of operations
 		infix = "((((" + times.matcher(plus.matcher(closeParen.matcher(openParen.matcher(infix).replaceAll("((((")).replaceAll("))))")).replaceAll("))+((")).replaceAll(")*(") + "))))";
 		// Splits infix into tokens
 		List<String> tokens = infixSplitter.splitAsStream(infix).collect(Collectors.toCollection(LinkedList::new));
 		// Move postfix operations like ! to infix
 		movePostfix(tokens);
-		System.out.println(tokens);
 		// Return tokens
 		return tokens;
 	}

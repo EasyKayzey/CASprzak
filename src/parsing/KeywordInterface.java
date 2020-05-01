@@ -5,6 +5,7 @@ import functions.Function;
 import functions.special.Constant;
 import functions.special.Variable;
 import tools.MiscTools;
+import functions.unitary.Integral;
 import tools.singlevariable.Extrema;
 import tools.singlevariable.NumericalIntegration;
 import tools.singlevariable.Solver;
@@ -55,6 +56,7 @@ public class KeywordInterface {
 			case "cv", "clearvars" -> clearVariables();
 			case "ss", "sset", "sets", "setsetting" -> setSettings(splitInput[1]);
 			case "ps", "settings", "printsettings" -> printSettings();
+			case "int", "integral" -> integral(splitInput[1]);
 			default -> null;
 		};
 		if (ret == null) {
@@ -357,5 +359,13 @@ public class KeywordInterface {
 		+ "trustImmutability = " + Settings.trustImmutability + "\n"
 		+ "singleVariableDefault = " + Settings.singleVariableDefault + "\n"
 		+ "defaultSolverType = " + Settings.defaultSolverType;
+	}
+
+	/**
+	 * integral [function] d[variable]
+	 */
+	private static Function integral(String input) {
+		String[] splitInput = keywordSplitter.split(input);
+		return (new Integral(parseStored(splitInput[0]), splitInput[1].charAt(1)).integrate().simplify());
 	}
 }

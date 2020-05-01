@@ -3,6 +3,7 @@ package functions.unitary.trig;
 import functions.Function;
 import functions.commutative.Product;
 import functions.unitary.UnitaryFunction;
+import tools.DefaultFunctions;
 
 import java.util.Map;
 
@@ -34,6 +35,10 @@ public class Sin extends TrigFunction {
 
 	public UnitaryFunction me(Function operand) {
 		return new Sin(operand);
+	}
+
+	public Function integrate() {
+		return new Product(DefaultFunctions.NEGATIVE_ONE, new Cos(operand));
 	}
 
 	public Class<? extends TrigFunction> getInverse() {

@@ -4,6 +4,8 @@ import functions.Function;
 import functions.binary.Pow;
 import functions.commutative.Product;
 import functions.special.Constant;
+import functions.unitary.Abs;
+import functions.unitary.Ln;
 import functions.unitary.UnitaryFunction;
 
 import java.util.Map;
@@ -38,6 +40,10 @@ public class Tan extends TrigFunction {
 		return new Tan(operand);
 	}
 
+	@Override
+	public Function integrate() {
+		return new Ln(new Abs(new Sec(operand)));
+	}
 	public Class<? extends TrigFunction> getInverse() {
 		return Atan.class;
 	}

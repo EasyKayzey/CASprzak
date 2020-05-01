@@ -38,6 +38,11 @@ public class Csch extends TrigFunction {
 		return new Csch(operand);
 	}
 
+	@Override
+	public Function integrate() {
+		return null;
+	}
+
 	public Class<? extends TrigFunction> getInverse() {
 		return Acsch.class;
 	}

@@ -62,15 +62,15 @@ public abstract class BinaryFunction extends Function {
 	}
 
 
-	public boolean equals(Function that) {
-		return this.getClass().equals(that.getClass()) && this.function1.equals(((BinaryFunction) that).function1) && this.function2.equals(((BinaryFunction) that).function2);
+	public boolean equalsFunction(Function that) {
+		return this.getClass().equals(that.getClass()) && this.function1.equalsFunction(((BinaryFunction) that).function1) && this.function2.equalsFunction(((BinaryFunction) that).function2);
 	}
 
 	public int compareSelf(Function that) {
 		if (that instanceof BinaryFunction binaryFunction) {
-			if (!this.function1.equals(binaryFunction.function1))
+			if (!this.function1.equalsFunction(binaryFunction.function1))
 				return this.function1.compareTo(binaryFunction.function1);
-			if (!this.function2.equals(binaryFunction.function2))
+			if (!this.function2.equalsFunction(binaryFunction.function2))
 				return this.function2.compareTo(binaryFunction.function2);
 		} else {
 			throw new IllegalCallerException("Illegally called BinaryFunction.compareSelf on a non-BinaryFunction");

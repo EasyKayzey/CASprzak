@@ -118,7 +118,7 @@ public class Product extends CommutativeFunction {
 		for (int i = 1; i < simplifiedTerms.length; i++) {
 			for (int j = 0; j < i; j++) {
 				if (simplifiedTerms[i] instanceof Pow first && simplifiedTerms[j] instanceof Pow second) {
-					if (first.getFunction2().equals(second.getFunction2())) {
+					if (first.getFunction2().equalsFunction(second.getFunction2())) {
 						simplifiedTerms[j] = new Pow(new Sum(first.getFunction1(), second.getFunction1()), first.getFunction2());
 						simplifiedTerms = FunctionTools.removeFunctionAt(simplifiedTerms, i);
 						return (new Product(simplifiedTerms)).simplifyInternal();

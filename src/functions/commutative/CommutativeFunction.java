@@ -168,7 +168,7 @@ public abstract class CommutativeFunction extends Function {
 	}
 
 
-	public boolean equals(Function that) {
+	public boolean equalsFunction(Function that) {
 		if (that instanceof CommutativeFunction function && this.getClass().equals(that.getClass()))
 			return FunctionTools.deepEquals(functions, function.getFunctions());
 		return false;
@@ -181,7 +181,7 @@ public abstract class CommutativeFunction extends Function {
 			Function[] thisFunctions = functions;
 			Function[] thatFunctions = function.getFunctions();
 			for (int i = 0; i < thisFunctions.length; i++) {
-				if (!thisFunctions[i].equals(thatFunctions[i]))
+				if (!thisFunctions[i].equalsFunction(thatFunctions[i]))
 					return thisFunctions[i].compareTo(thatFunctions[i]);
 			}
 		} else {

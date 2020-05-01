@@ -102,17 +102,6 @@ public class SearchTools {
 	 * @return true if the condition was satisfied by a subset
 	 */
 	public static boolean existsInOppositeSurfaceSubset(CommutativeFunction input, FunctionPredicate test, FunctionPredicate excludeFromSubset) {
-		return existsInOppositeSurfaceSubsetExcluding(input, test, excludeFromSubset, (f -> false));
-	}
-
-	/**
-	 * Checks if this CommutativeFunction has a subset not including excludeFromSubset (as a Multiply) satisfying the condition, including empty and single-element products, excluding any branches that satisfy excludeFromSearch
-	 * @param test the condition to be satisfied
-	 * @param excludeFromSubset subset that should be excluded
-	 * @param excludeFromSearch predicate to be excluded from the search
-	 * @return true if the condition was satisfied by a subset
-	 */
-	public static boolean existsInOppositeSurfaceSubsetExcluding(CommutativeFunction input, FunctionPredicate test, FunctionPredicate excludeFromSubset, FunctionPredicate excludeFromSearch) {
 		Function[] functions = input.getFunctions();
 		List<Integer> excludedIDs = getSubsetIDs(input, excludeFromSubset);
 		for (int run : excludedIDs) {
@@ -121,7 +110,7 @@ public class SearchTools {
 				if (((~run >> ix) & 1) > 0)
 					subset.add(functions[ix]);
 			CommutativeFunction thisFunction = input.me(subset.toArray(new Function[0]));
-			if (!excludeFromSearch.test(thisFunction) && test.test(thisFunction))
+			if (test.test(thisFunction))
 				return true;
 		}
 		return false;

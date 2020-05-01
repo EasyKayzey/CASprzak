@@ -129,8 +129,6 @@ public class StageOne {
         }
 
         return function;
-        // Let's say I want to check if all xs are in the form e^x
-//        SearchTools.exists(integrand, (f -> f.equals(toFind))) && !SearchTools.existsExcluding(integrand, (f -> f instanceof Variable), (f -> f.equals(toFind)))
     }
 
     private static Function exponential(double number, double base, Function exponent) {

@@ -5,6 +5,7 @@ import functions.Function;
 import functions.special.Constant;
 import org.jetbrains.annotations.NotNull;
 
+import java.lang.reflect.Constructor;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -69,7 +70,11 @@ public abstract class UnitaryFunction extends Function {
 
 	public static UnitaryFunction newInstanceOf(Class<? extends UnitaryFunction> type, Function operand) {
 		try {
-			return (UnitaryFunction) type.getConstructors()[0].newInstance(operand);
+			Constructor<?>[] constructors = type.getConstructors();
+			for (Constructor<?> constructor : constructors)
+				if (constructor.getParameterCount() == 1)
+					return (UnitaryFunction) constructor.newInstance(operand);
+			return null;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;

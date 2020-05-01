@@ -15,6 +15,7 @@ public class CommandUI extends KeywordInterface {
 		scan.useDelimiter("\\n");
 		boolean flag = true;
 		while (flag) {
+			System.out.print(">>> ");
 			String input = scan.next();
 			if  (input.length() == 0)
 				continue;

@@ -11,7 +11,7 @@ import tools.DefaultFunctions;
 import java.util.Map;
 
 
-public class Asec extends UnitaryFunction {
+public class Asec extends TrigFunction {
 	/**
 	 * Constructs a new Asec
 	 * @param function The function which arcsec is operating on

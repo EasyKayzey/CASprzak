@@ -7,7 +7,7 @@ import functions.unitary.UnitaryFunction;
 import java.util.Map;
 
 
-public class Sec extends UnitaryFunction {
+public class Sec extends TrigFunction {
 	/**
 	 * Constructs a new Sec
 	 * @param function The function which sec is operating on

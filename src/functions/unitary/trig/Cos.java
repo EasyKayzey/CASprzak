@@ -8,7 +8,7 @@ import functions.unitary.UnitaryFunction;
 import java.util.Map;
 
 
-public class Cos extends UnitaryFunction {
+public class Cos extends TrigFunction {
 	/**
 	 * Constructs a new Cos
 	 * @param function The function which cos is operating on

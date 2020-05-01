@@ -8,7 +8,7 @@ import functions.unitary.UnitaryFunction;
 import java.util.Map;
 
 
-public class Csc extends UnitaryFunction {
+public class Csc extends TrigFunction {
 	/**
 	 * Constructs a new Csc
 	 * @param function The function which csc is operating on

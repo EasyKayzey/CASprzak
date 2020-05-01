@@ -7,7 +7,7 @@ import functions.unitary.UnitaryFunction;
 import java.util.Map;
 
 
-public class Cosh extends UnitaryFunction {
+public class Cosh extends TrigFunction {
 	/**
 	 * Constructs a new Cosh
 	 * @param function The function which cosh is operating on

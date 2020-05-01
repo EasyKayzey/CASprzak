@@ -9,7 +9,7 @@ import functions.unitary.UnitaryFunction;
 import java.util.Map;
 
 
-public class Cot extends UnitaryFunction {
+public class Cot extends TrigFunction {
 	/**
 	 * Constructs a new Cot
 	 * @param function The function which cot is operating on

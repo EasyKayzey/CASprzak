@@ -10,7 +10,7 @@ import tools.DefaultFunctions;
 import java.util.Map;
 
 
-public class Acsch extends UnitaryFunction {
+public class Acsch extends TrigFunction {
 	/**
 	 * Constructs a new Acsch
 	 * @param function The function which arccsch is operating on

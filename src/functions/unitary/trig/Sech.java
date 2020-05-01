@@ -8,7 +8,7 @@ import functions.unitary.UnitaryFunction;
 import java.util.Map;
 
 
-public class Sech extends UnitaryFunction {
+public class Sech extends TrigFunction {
 	/**
 	 * Constructs a new Sech
 	 * @param function The function which sech is operating on

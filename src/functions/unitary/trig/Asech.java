@@ -10,7 +10,7 @@ import functions.unitary.UnitaryFunction;
 import java.util.Map;
 
 
-public class Asech extends UnitaryFunction {
+public class Asech extends TrigFunction {
 	/**
 	 * Constructs a new Asech
 	 * @param function The function which arcsech is operating on

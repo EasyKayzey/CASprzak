@@ -10,7 +10,7 @@ import tools.DefaultFunctions;
 import java.util.Map;
 
 
-public class Acot extends UnitaryFunction {
+public class Acot extends TrigFunction {
 	/**
 	 * Constructs a new Acot
 	 * @param function The function which arccot is operating on

@@ -9,7 +9,7 @@ import functions.unitary.UnitaryFunction;
 import java.util.Map;
 
 
-public class Coth extends UnitaryFunction {
+public class Coth extends TrigFunction {
 	/**
 	 * Constructs a new Coth
 	 * @param function The function which coth is operating on

@@ -7,7 +7,7 @@ import functions.unitary.UnitaryFunction;
 import java.util.Map;
 
 
-public class Sinh extends UnitaryFunction {
+public class Sinh extends TrigFunction {
 	/**
 	 * Constructs a new Sinh
 	 * @param function The function which sinh is operating on

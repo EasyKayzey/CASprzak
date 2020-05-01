@@ -10,9 +10,6 @@ import java.util.Map;
 
 
 public class Tan extends TrigFunction {
-	static {
-		inverse = Atan.class;
-	}
 
 	/**
 	 * Constructs a new Tan
@@ -41,4 +38,7 @@ public class Tan extends TrigFunction {
 		return new Tan(operand);
 	}
 
+	public Class<? extends TrigFunction> getInverse() {
+		return Atan.class;
+	}
 }

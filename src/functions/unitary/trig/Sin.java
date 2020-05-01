@@ -8,9 +8,6 @@ import java.util.Map;
 
 
 public class Sin extends TrigFunction {
-	static {
-		inverse = Asin.class;
-	}
 
 	/**
 	 * Constructs a new Sin
@@ -39,4 +36,7 @@ public class Sin extends TrigFunction {
 		return new Sin(operand);
 	}
 
+	public Class<? extends TrigFunction> getInverse() {
+		return Asin.class;
+	}
 }

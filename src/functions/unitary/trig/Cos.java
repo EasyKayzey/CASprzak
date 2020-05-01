@@ -9,9 +9,6 @@ import java.util.Map;
 
 
 public class Cos extends TrigFunction {
-	static {
-		inverse = Acos.class;
-	}
 
 	/**
 	 * Constructs a new Cos
@@ -40,4 +37,7 @@ public class Cos extends TrigFunction {
 		return new Cos(operand);
 	}
 
+	public Class<? extends TrigFunction> getInverse() {
+		return Acos.class;
+	}
 }

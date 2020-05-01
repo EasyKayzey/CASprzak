@@ -9,9 +9,6 @@ import java.util.Map;
 
 
 public class Sech extends TrigFunction {
-	static {
-		inverse = Asech.class;
-	}
 
 	/**
 	 * Constructs a new Sech
@@ -39,5 +36,9 @@ public class Sech extends TrigFunction {
 	@Override
 	public UnitaryFunction me(Function operand) {
 		return new Sech(operand);
+	}
+
+	public Class<? extends TrigFunction> getInverse() {
+		return Asech.class;
 	}
 }

@@ -9,9 +9,6 @@ import java.util.Map;
 
 
 public class Csc extends TrigFunction {
-	static {
-		inverse = Acsc.class;
-	}
 
 	/**
 	 * Constructs a new Csc
@@ -40,4 +37,7 @@ public class Csc extends TrigFunction {
 		return new Csc(operand);
 	}
 
+	public Class<? extends TrigFunction> getInverse() {
+		return Acsc.class;
+	}
 }

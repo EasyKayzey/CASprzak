@@ -11,9 +11,6 @@ import java.util.Map;
 
 
 public class Asech extends InverseTrigFunction {
-	static {
-		inverse = Sech.class;
-	}
 
 	/**
 	 * Constructs a new Asech
@@ -42,5 +39,9 @@ public class Asech extends InverseTrigFunction {
 	@Override
 	public UnitaryFunction me(Function operand) {
 		return new Asech(operand);
+	}
+
+	public Class<? extends TrigFunction> getInverse() {
+		return Sech.class;
 	}
 }

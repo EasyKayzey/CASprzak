@@ -10,9 +10,6 @@ import java.util.Map;
 
 
 public class Cot extends TrigFunction {
-	static {
-		inverse = Acot.class;
-	}
 
 	/**
 	 * Constructs a new Cot
@@ -41,4 +38,7 @@ public class Cot extends TrigFunction {
 		return new Cot(operand);
 	}
 
+	public Class<? extends TrigFunction> getInverse() {
+		return Acot.class;
+	}
 }

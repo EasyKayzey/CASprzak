@@ -8,9 +8,6 @@ import java.util.Map;
 
 
 public class Sec extends TrigFunction {
-	static {
-		inverse = Asec.class;
-	}
 
 	/**
 	 * Constructs a new Sec
@@ -39,4 +36,7 @@ public class Sec extends TrigFunction {
 		return new Sec(operand);
 	}
 
+	public Class<? extends TrigFunction> getInverse() {
+		return Asec.class;
+	}
 }

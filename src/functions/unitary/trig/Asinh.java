@@ -10,7 +10,7 @@ import functions.unitary.UnitaryFunction;
 import java.util.Map;
 
 
-public class Asinh extends TrigFunction {
+public class Asinh extends InverseTrigFunction {
 	/**
 	 * Constructs a new Asinh
 	 * @param operand The function which arcsinh is operating on

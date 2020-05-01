@@ -10,7 +10,7 @@ import functions.unitary.UnitaryFunction;
 import java.util.Map;
 
 
-public class Atan extends TrigFunction {
+public class Atan extends InverseTrigFunction {
 	/**
 	 * Constructs a new Atan
 	 * @param operand The function which arctan is operating on

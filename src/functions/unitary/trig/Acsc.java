@@ -11,7 +11,7 @@ import tools.DefaultFunctions;
 import java.util.Map;
 
 
-public class Acsc extends TrigFunction {
+public class Acsc extends InverseTrigFunction {
 	/**
 	 * Constructs a new Acsc
 	 * @param operand The function which arccsc is operating on

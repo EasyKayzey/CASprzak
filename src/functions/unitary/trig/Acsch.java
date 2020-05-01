@@ -10,7 +10,7 @@ import tools.DefaultFunctions;
 import java.util.Map;
 
 
-public class Acsch extends TrigFunction {
+public class Acsch extends InverseTrigFunction {
 	/**
 	 * Constructs a new Acsch
 	 * @param operand The function which arccsch is operating on

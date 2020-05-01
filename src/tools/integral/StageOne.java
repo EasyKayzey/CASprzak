@@ -76,6 +76,16 @@ public class StageOne {
                         number /= (constantInFront);
                        return unitaryFunctionSwitchCase(unit, unit.operand, number);
                     }
+                } else { //TODO Fix
+                    Function derivativeOfWholeThing = f.getSimplifiedDerivative(variableChar);
+                    Pair<Double, Function> derivativePairOfWholeThing = IntegralsTools.stripConstants(derivativeOfWholeThing);
+                    Function derivativeWithoutConstantOfWholeThing = derivativePairOfWholeThing.second;
+                    double constantInFrontOfWhole = derivativePairOfWholeThing.first;
+                    Product derivativeTimesOperationOfWhole = new Product(derivativeWithoutConstantOfWholeThing, f);
+                    if (SearchTools.existsSurface(product, (u -> u.equals(derivativeWithoutConstantOfWholeThing))) && !SearchTools.existsInOppositeSurfaceSubset((CommutativeFunction) function, (u -> (u instanceof Variable v) && (v.varID == variableChar)), (u -> u.equals(derivativeTimesOperationOfWhole)))) {
+                        number /= (constantInFrontOfWhole);
+                        return power(number, 1, f);
+                    }
                 }
             }
         } else {

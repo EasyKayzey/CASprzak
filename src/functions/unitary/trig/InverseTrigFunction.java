@@ -3,7 +3,6 @@ package functions.unitary.trig;
 import functions.Function;
 import functions.commutative.Product;
 import functions.commutative.Sum;
-import functions.special.Constant;
 import functions.unitary.UnitaryFunction;
 import tools.DefaultFunctions;
 

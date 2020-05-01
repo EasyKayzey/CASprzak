@@ -30,11 +30,31 @@ public class StageOne {
                     Function derivativeWithConstants = power.getFunction1().getSimplifiedDerivative(variableChar);
                     Pair<Double, Function> derivative = IntegralsTools.stripConstants(derivativeWithConstants);
                     Function derivativeWithoutConstant = derivative.second;
-                    double constantInfront = derivative.first;
+                    double constantInFront = derivative.first;
                     Product derivativeTimesOperation = new Product(derivativeWithoutConstant, f);
                     if (SearchTools.existsSurface(product, (u -> u.equals(derivativeWithoutConstant))) && !SearchTools.existsInOppositeSurfaceSubset((CommutativeFunction) function, (u -> (u instanceof Variable v) && (v.varID == variableChar)), (u -> u.equals(derivativeTimesOperation)))) {
-                        number /= constantInfront;
+                        number /= constantInFront;
                         return exponential(number, base.constant, power.getFunction1());
+                    }
+                } else if (f instanceof Pow power && power.getFunction1() instanceof Constant exponent) {
+                    Function derivativeWithConstants = power.getFunction2().getSimplifiedDerivative(variableChar);
+                    Pair<Double, Function> derivative = IntegralsTools.stripConstants(derivativeWithConstants);
+                    Function derivativeWithoutConstant = derivative.second;
+                    double constantInFront = derivative.first;
+                    Product derivativeTimesOperation = new Product(derivativeWithoutConstant, f);
+                    if (SearchTools.existsSurface(product, (u -> u.equals(derivativeWithoutConstant))) && !SearchTools.existsInOppositeSurfaceSubset((CommutativeFunction) function, (u -> (u instanceof Variable v) && (v.varID == variableChar)), (u -> u.equals(derivativeTimesOperation)))) {
+                        number /= constantInFront;
+                        return power(number, exponent.constant, power.getFunction2());
+                    }
+                } else if (f instanceof Ln ln) {
+                    Function derivativeWithConstants = ln.operand.getSimplifiedDerivative(variableChar);
+                    Pair<Double, Function> derivative = IntegralsTools.stripConstants(derivativeWithConstants);
+                    Function derivativeWithoutConstant = derivative.second;
+                    double constantInFront = derivative.first;
+                    Product derivativeTimesOperation = new Product(derivativeWithoutConstant, f);
+                    if (SearchTools.existsSurface(product, (u -> u.equals(derivativeWithoutConstant))) && !SearchTools.existsInOppositeSurfaceSubset((CommutativeFunction) function, (u -> (u instanceof Variable v) && (v.varID == variableChar)), (u -> u.equals(derivativeTimesOperation)))) {
+                        number /= constantInFront;
+                        return naturalLog(number, ln.operand);
                     }
                 }
             }
@@ -128,11 +148,13 @@ public class StageOne {
             }
         }
 
-        return function;
+        return integrand;
+        // Let's say I want to check if all xs are in the form e^x
+//        SearchTools.exists(integrand, (f -> f.equals(toFind))) && !SearchTools.existsExcluding(integrand, (f -> f instanceof Variable), (f -> f.equals(toFind)))
     }
 
     private static Function exponential(double number, double base, Function exponent) {
-        return new Product(new Constant(1 / Math.log(base)), new Pow(exponent, new Constant(base)));
+        return new Product(new Constant(number/Math.log(base)), new Pow(exponent, new Constant(base)));
     }
 
     private static Function power(double number, double exponent, Function base) {

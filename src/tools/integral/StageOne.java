@@ -91,6 +91,10 @@ public class StageOne {
             } else if (function instanceof Logb logb && logb.getFunction2() instanceof Constant constant1 && logb.getFunction1().getSimplifiedDerivative(variableChar) instanceof Constant constant2) {
                 number /= (constant2.constant * Math.log(constant1.constant));
                 return naturalLog(number, logb.getFunction1());
+            } else if (function instanceof Constant constant1) {
+                return new Product(new Constant(constant1.constant * number), new Variable(variableChar));
+            } else if (function instanceof Variable variable) {
+                return power(number, 1, variable);
             } else if (function instanceof UnitaryFunction unit && unit.operand.getSimplifiedDerivative(variableChar) instanceof Constant constant1) {
                 number /= constant1.constant;
                 return unitaryFunctionSwitchCase(unit, unit.operand, number);

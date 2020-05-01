@@ -120,7 +120,7 @@ public class SearchTools {
 			for (int ix = 0; ix < functions.length; ix++)
 				if (((~run >> ix) & 1) > 0)
 					subset.add(functions[ix]);
-			if (existsExcluding(input.me(subset.toArray(new Function[0])), test, excludeFromSearch))
+			if (test.test(input.me(subset.toArray(new Function[0]))))
 				return true;
 		}
 		return false;

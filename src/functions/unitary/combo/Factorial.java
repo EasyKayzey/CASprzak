@@ -11,12 +11,6 @@ public abstract class Factorial extends UnitaryFunction {
 		super(operand);
 	}
 
-	/**
-	 * Returns the specific approximation used for this factorial in the form of a {@link Function}
-	 * @return a {@link Function} representing the specific approximation
-	 */
-	public abstract Function classForm();
-
 	public static Function defaultFactorial(Function input) {
 		return switch (Settings.defaultFactorial) {
 			case STIRLING -> new SFactorial(input);

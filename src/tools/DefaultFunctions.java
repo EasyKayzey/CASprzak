@@ -10,6 +10,7 @@ import functions.special.Variable;
 public class DefaultFunctions {
 	public static final Constant PI = new Constant("pi");
 	public static final Constant E = new Constant("e");
+	public static final Constant NEGATIVE_TWO = new Constant(-2);
 	public static final Constant NEGATIVE_ONE = new Constant(-1);
 	public static final Constant ZERO = new Constant(0);
 	public static final Constant ONE = new Constant(1);

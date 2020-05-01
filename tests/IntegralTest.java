@@ -63,21 +63,21 @@ public class IntegralTest {
     }
 
     @Test
-    void simpleExpUsub() {
+    void simpleExpUSub() {
         Integral test1 = new Integral(Parser.parse("2x*e^(x^2)"), 'x');
         Function test2 = Parser.parse("e^(x^2)");
         assertEquals(test2, test1.integrate());
     }
 
     @Test
-    void simpleExpUsubThatNoWork() {
+    void simpleExpUSubThatNoWork() {
         Integral test1 = new Integral(Parser.parse("2x*sin(x)*e^(x^2)"), 'x');
         Function test2 = Parser.parse("e^(x^2)");
         assertNotEquals(test2, test1.integrate());
     }
 
     @Test
-    void complexUsub() {
+    void complexUSub() {
         Integral test1 = new Integral(Parser.parse("(cos(e^x))^2*sin(e^x)*e^x"), 'x');
         Function test2 = Parser.parse("1/3*(cos(e^x))^3");
         assertNotEquals(test2, test1.integrate());

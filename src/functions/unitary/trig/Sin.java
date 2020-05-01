@@ -3,14 +3,12 @@ package functions.unitary.trig;
 import functions.Function;
 import functions.commutative.Product;
 import functions.unitary.UnitaryFunction;
+import tools.DefaultFunctions;
 
 import java.util.Map;
 
 
 public class Sin extends TrigFunction {
-	static {
-		inverse = Asin.class;
-	}
 
 	/**
 	 * Constructs a new Sin

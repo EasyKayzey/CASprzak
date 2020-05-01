@@ -9,9 +9,6 @@ import java.util.Map;
 
 
 public class Csch extends TrigFunction {
-	static {
-		inverse = Acsch.class;
-	}
 
 	/**
 	 * Constructs a new Csch

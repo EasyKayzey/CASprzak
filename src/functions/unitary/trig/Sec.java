@@ -2,15 +2,15 @@ package functions.unitary.trig;
 
 import functions.Function;
 import functions.commutative.Product;
+import functions.commutative.Sum;
+import functions.unitary.Abs;
+import functions.unitary.Ln;
 import functions.unitary.UnitaryFunction;
 
 import java.util.Map;
 
 
 public class Sec extends TrigFunction {
-	static {
-		inverse = Asec.class;
-	}
 
 	/**
 	 * Constructs a new Sec

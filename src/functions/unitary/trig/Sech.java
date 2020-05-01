@@ -3,15 +3,13 @@ package functions.unitary.trig;
 import functions.Function;
 import functions.commutative.Product;
 import functions.special.Constant;
+import functions.unitary.Abs;
 import functions.unitary.UnitaryFunction;
 
 import java.util.Map;
 
 
 public class Sech extends TrigFunction {
-	static {
-		inverse = Asech.class;
-	}
 
 	/**
 	 * Constructs a new Sech

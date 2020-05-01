@@ -4,15 +4,13 @@ import functions.Function;
 import functions.binary.Pow;
 import functions.commutative.Product;
 import functions.special.Constant;
+import functions.unitary.Ln;
 import functions.unitary.UnitaryFunction;
 
 import java.util.Map;
 
 
 public class Tanh extends TrigFunction {
-	static {
-		inverse = Atanh.class;
-	}
 
 	/**
 	 * Constructs a new Tanh

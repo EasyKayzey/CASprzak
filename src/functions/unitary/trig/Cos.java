@@ -9,9 +9,6 @@ import java.util.Map;
 
 
 public class Cos extends TrigFunction {
-	static {
-		inverse = Acos.class;
-	}
 
 	/**
 	 * Constructs a new Cos

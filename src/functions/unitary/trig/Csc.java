@@ -2,16 +2,18 @@ package functions.unitary.trig;
 
 import functions.Function;
 import functions.commutative.Product;
+import functions.commutative.Sum;
 import functions.special.Constant;
+import functions.unitary.Abs;
+import functions.unitary.Ln;
 import functions.unitary.UnitaryFunction;
+import tools.DefaultFunctions;
 
 import java.util.Map;
 
 
 public class Csc extends TrigFunction {
-	static {
-		inverse = Acsc.class;
-	}
+
 
 	/**
 	 * Constructs a new Csc

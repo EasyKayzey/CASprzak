@@ -8,9 +8,6 @@ import java.util.Map;
 
 
 public class Sinh extends TrigFunction {
-	static {
-		inverse = Asinh.class;
-	}
 
 	/**
 	 * Constructs a new Sinh

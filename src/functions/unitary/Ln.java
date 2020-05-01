@@ -6,7 +6,7 @@ import functions.binary.Pow;
 import functions.commutative.Product;
 import functions.commutative.Sum;
 import functions.special.Constant;
-import tools.integral.StageOne;
+import tools.integration.StageOne;
 
 import java.util.Map;
 

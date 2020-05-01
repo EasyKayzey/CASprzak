@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import parsing.Parser;
 import tools.exceptions.IntegrationFailedException;
 import tools.helperclasses.Pair;
-import tools.integral.IntegralsTools;
+import tools.integration.IntegralsTools;
 
 import static org.junit.jupiter.api.Assertions.*;
 

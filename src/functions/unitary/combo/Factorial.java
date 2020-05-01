@@ -23,4 +23,8 @@ public abstract class Factorial extends UnitaryFunction {
 			case RECURSIVE -> new RFactorial(input);
 		};
 	}
+
+	public String toString() {
+		return operand + "!";
+	}
 }

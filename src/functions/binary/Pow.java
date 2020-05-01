@@ -122,20 +122,6 @@ public class Pow extends BinaryFunction {
 
 	@Override
 	public String toString() {
-		StringBuilder out = new StringBuilder();
-		boolean parenF1 = function1 instanceof BinaryFunction;
-		boolean parenF2 = function2 instanceof BinaryFunction;
-		if (parenF2)
-			out.append("(");
-		out.append(function2.toString());
-		if (parenF2)
-			out.append(")");
-		out.append("^");
-		if (parenF1)
-			out.append("(");
-		out.append(function1.toString());
-		if (parenF1)
-			out.append(")");
-		return out.toString();
+		return "(" + function2 + "^" + function1 + ")";
 	}
 }

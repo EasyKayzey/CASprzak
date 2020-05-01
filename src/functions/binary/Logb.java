@@ -22,7 +22,7 @@ public class Logb extends BinaryFunction {
 
 	@Override
 	public String toString() {
-		return "log_{" + function2.toString() + "}(" + function1.toString() + ")";
+		return "(log_{" + function2.toString() + "}(" + function1.toString() + "))";
 	}
 
 	@Override

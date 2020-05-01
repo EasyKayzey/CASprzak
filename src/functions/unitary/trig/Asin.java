@@ -10,7 +10,7 @@ import functions.unitary.UnitaryFunction;
 import java.util.Map;
 
 
-public class Asin extends UnitaryFunction {
+public class Asin extends TrigFunction {
 	/**
 	 * Constructs a new Asin
 	 * @param function The function which arcsin is operating on

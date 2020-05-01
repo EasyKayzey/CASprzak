@@ -8,7 +8,7 @@ import functions.unitary.UnitaryFunction;
 import java.util.Map;
 
 
-public class Csch extends UnitaryFunction {
+public class Csch extends TrigFunction {
 	/**
 	 * Constructs a new Csch
 	 * @param function The function which csch is operating on

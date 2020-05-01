@@ -9,7 +9,7 @@ import functions.unitary.UnitaryFunction;
 import java.util.Map;
 
 
-public class Tan extends UnitaryFunction {
+public class Tan extends TrigFunction {
 	/**
 	 * Constructs a new Tan
 	 * @param function The function which tan is operating on

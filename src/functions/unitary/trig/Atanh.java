@@ -10,7 +10,7 @@ import functions.unitary.UnitaryFunction;
 import java.util.Map;
 
 
-public class Atanh extends UnitaryFunction {
+public class Atanh extends TrigFunction {
 	/**
 	 * Constructs a new Atanh
 	 * @param function The function which arctanh is operating on

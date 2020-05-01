@@ -11,7 +11,7 @@ import tools.DefaultFunctions;
 import java.util.Map;
 
 
-public class Acsc extends UnitaryFunction {
+public class Acsc extends TrigFunction {
 	/**
 	 * Constructs a new Acsc
 	 * @param function The function which arccsc is operating on

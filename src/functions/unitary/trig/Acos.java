@@ -10,7 +10,7 @@ import tools.DefaultFunctions;
 import java.util.Map;
 
 
-public class Acos extends UnitaryFunction {
+public class Acos extends TrigFunction {
 	/**
 	 * Constructs a new Acos
 	 * @param function The function which arccos is operating on

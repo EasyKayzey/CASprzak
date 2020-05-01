@@ -125,7 +125,7 @@ public class StageOne {
                     number /= constant1.constant;
                     return acoth(number, unit.operand);
                 }
-             }
+            }
         }
 
         return function;

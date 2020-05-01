@@ -14,6 +14,8 @@ import functions.unitary.trig.*;
 import parsing.FunctionMaker;
 import tools.DefaultFunctions;
 import tools.SearchTools;
+import tools.exceptions.IntegrationFailedException;
+import tools.exceptions.NotYetImplementedException;
 import tools.helperclasses.Pair;
 
 @SuppressWarnings("ChainOfInstanceofChecks")
@@ -109,7 +111,7 @@ public class StageOne {
                 return unitaryFunctionSwitchCase(unit.getClass().getSimpleName().toLowerCase(), unit.operand, number);
             }
         }
-        throw new UnsupportedOperationException("Integration failed");
+        throw new IntegrationFailedException("Integration failed");
     }
 
     private static Function unitaryFunctionSwitchCase(String className, Function operand, double number) {
@@ -139,7 +141,7 @@ public class StageOne {
             case "asech" -> asech(number, operand);
             case "acoth" -> acoth(number, operand);
             case "PLACEHOLDER FOR INV TRIG" -> inverseTrig(className, number, operand);
-            default -> throw new UnsupportedOperationException("Unexpected class: " + className);
+            default -> throw new NotYetImplementedException("Unexpected class: " + className);
         };
     }
 

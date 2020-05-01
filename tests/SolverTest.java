@@ -62,8 +62,13 @@ public class SolverTest {
         assertEquals(-1, Solver.getSolutionPointNewton(test, 23));
     }
 
-    @Test void chemTest() {
+    @Test void chemTest1() {
         Function test = Parser.parse("x^2/(.2-x)-.013");
         assertArrayEquals(new double[]{-.057, .045}, Solver.getSolutionsRangeHalley(test, -10, 10), .05);
+    }
+
+    @Test void chemTest2() {
+        Function test = Parser.parse("(.12x)^2/((1-x).12)-6.3E-5");
+        assertEquals(1, Solver.getSolutionsRangeHalley(test, 0, 1).length);
     }
 }

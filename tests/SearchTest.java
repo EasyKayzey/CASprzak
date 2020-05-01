@@ -43,6 +43,7 @@ public class SearchTest {
         CommutativeFunction test1 = (CommutativeFunction) Parser.parseSimplified("x*sin(x)*e^x");
         Function test2 = Parser.parseSimplified("x*e^x");
         Function test3 = Parser.parseSimplified("sin(x)");
-        assertFalse(SearchTools.existsInOppositeSurfaceSubset(test1, (f -> SearchTools.existsExcluding(f, SearchTools.isVariable('x'), test3::equals)), test2::equals));
+        assertFalse(SearchTools.existsInOppositeSurfaceSubset(test1, (f -> SearchTools.existsExcluding(f, SearchTools.isVariable('x'), test3::equals
+        )), test2::equals));
     }
 }

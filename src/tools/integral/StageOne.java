@@ -134,14 +134,14 @@ public class StageOne {
     }
 
     private static Function exponential(double number, double base, Function exponent) {
-        return new Product(new Constant(1/Math.log(base)), new Pow(exponent, new Constant(base)));
+        return new Product(new Constant(1 / Math.log(base)), new Pow(exponent, new Constant(base)));
     }
 
     private static Function power(double number, double exponent, Function base) {
         if (exponent == -1)
             return new Product(new Constant(number), new Ln(base));
         else
-            return new Product(new Constant(number/(exponent+1)), new Pow(new Constant(exponent+1), base));
+            return new Product(new Constant(number / (exponent + 1)), new Pow(new Constant(exponent + 1), base));
     }
 
     private static Function naturalLog(double number, Function operand) {
@@ -149,7 +149,7 @@ public class StageOne {
     }
 
     private static Function sin(double number, Function operand) {
-        return new Product(new Constant(-1*number), new Cos(operand));
+        return new Product(new Constant(-1 * number), new Cos(operand));
     }
 
     private static Function cos(double number, Function operand) {

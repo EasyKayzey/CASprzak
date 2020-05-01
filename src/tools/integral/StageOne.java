@@ -56,6 +56,26 @@ public class StageOne {
                         number /= constantInFront;
                         return naturalLog(number, ln.operand);
                     }
+                } else if (f instanceof Logb logb && logb.getFunction2() instanceof Constant constant1) {
+                    Function derivativeWithConstants = logb.getFunction1().getSimplifiedDerivative(variableChar);
+                    Pair<Double, Function> derivative = IntegralsTools.stripConstants(derivativeWithConstants);
+                    Function derivativeWithoutConstant = derivative.second;
+                    double constantInFront = derivative.first;
+                    Product derivativeTimesOperation = new Product(derivativeWithoutConstant, f);
+                    if (SearchTools.existsSurface(product, (u -> u.equals(derivativeWithoutConstant))) && !SearchTools.existsInOppositeSurfaceSubset((CommutativeFunction) function, (u -> (u instanceof Variable v) && (v.varID == variableChar)), (u -> u.equals(derivativeTimesOperation)))) {
+                        number /= (constantInFront * Math.log(constant1.constant));
+                        return naturalLog(number, logb.getFunction2());
+                    }
+                } else if (f instanceof UnitaryFunction unit) {
+                    Function derivativeWithConstants = unit.operand.getSimplifiedDerivative(variableChar);
+                    Pair<Double, Function> derivative = IntegralsTools.stripConstants(derivativeWithConstants);
+                    Function derivativeWithoutConstant = derivative.second;
+                    double constantInFront = derivative.first;
+                    Product derivativeTimesOperation = new Product(derivativeWithoutConstant, f);
+                    if (SearchTools.existsSurface(product, (u -> u.equals(derivativeWithoutConstant))) && !SearchTools.existsInOppositeSurfaceSubset((CommutativeFunction) function, (u -> (u instanceof Variable v) && (v.varID == variableChar)), (u -> u.equals(derivativeTimesOperation)))) {
+                        number /= (constantInFront);
+                       return unitaryFunctionSwitchCase(unit, unit.operand, number);
+                    }
                 }
             }
         } else {
@@ -72,85 +92,42 @@ public class StageOne {
                 number /= (constant2.constant * Math.log(constant1.constant));
                 return naturalLog(number, logb.getFunction1());
             } else if (function instanceof UnitaryFunction unit && unit.operand.getSimplifiedDerivative(variableChar) instanceof Constant constant1) {
-                if (function instanceof Sin) {
-                    number /= constant1.constant;
-                    return sin(number, unit.operand);
-                } else if (function instanceof Cos) {
-                    number /= constant1.constant;
-                    return cos(number, unit.operand);
-                } else if (function instanceof Tan) {
-                    number /= constant1.constant;
-                    return tan(number, unit.operand);
-                } else if (function instanceof Csc) {
-                    number /= constant1.constant;
-                    return csc(number, unit.operand);
-                } else if (function instanceof Sec) {
-                    number /= constant1.constant;
-                    return sec(number, unit.operand);
-                } else if (function instanceof Cot) {
-                    number /= constant1.constant;
-                    return cot(number, unit.operand);
-                } else if (function instanceof Sinh) {
-                    number /= constant1.constant;
-                    return sinh(number, unit.operand);
-                } else if (function instanceof Cosh) {
-                    number /= constant1.constant;
-                    return cosh(number, unit.operand);
-                } else if (function instanceof Tanh) {
-                    number /= constant1.constant;
-                    return tanh(number, unit.operand);
-                } else if (function instanceof Csch) {
-                    number /= constant1.constant;
-                    return csch(number, unit.operand);
-                } else if (function instanceof Sech) {
-                    number /= constant1.constant;
-                    return sech(number, unit.operand);
-                } else if (function instanceof Coth) {
-                    number /= constant1.constant;
-                    return coth(number, unit.operand);
-                } else if (function instanceof Asin) {
-                    number /= constant1.constant;
-                    return asin(number, unit.operand);
-                } else if (function instanceof Acos) {
-                    number /= constant1.constant;
-                    return acos(number, unit.operand);
-                } else if (function instanceof Atan) {
-                    number /= constant1.constant;
-                    return atan(number, unit.operand);
-                } else if (function instanceof Acsc) {
-                    number /= constant1.constant;
-                    return acsc(number, unit.operand);
-                } else if (function instanceof Asec) {
-                    number /= constant1.constant;
-                    return asec(number, unit.operand);
-                } else if (function instanceof Acot) {
-                    number /= constant1.constant;
-                    return acot(number, unit.operand);
-                } else if (function instanceof Asinh) {
-                    number /= constant1.constant;
-                    return asinh(number, unit.operand);
-                } else if (function instanceof Acosh) {
-                    number /= constant1.constant;
-                    return acosh(number, unit.operand);
-                } else if (function instanceof Atanh) {
-                    number /= constant1.constant;
-                    return atanh(number, unit.operand);
-                } else if (function instanceof Acsch) {
-                    number /= constant1.constant;
-                    return acsch(number, unit.operand);
-                } else if (function instanceof Asech) {
-                    number /= constant1.constant;
-                    return asech(number, unit.operand);
-                } else if (function instanceof Acoth) {
-                    number /= constant1.constant;
-                    return acoth(number, unit.operand);
-                }
-            }
+                number /= constant1.constant;
+                return unitaryFunctionSwitchCase(unit, unit.operand, number);
+             }
         }
 
         return integrand;
-        // Let's say I want to check if all xs are in the form e^x
-//        SearchTools.exists(integrand, (f -> f.equals(toFind))) && !SearchTools.existsExcluding(integrand, (f -> f instanceof Variable), (f -> f.equals(toFind)))
+    }
+
+    private static Function unitaryFunctionSwitchCase(Function function, Function operand, double number) {
+        return switch (function.getClass().getSimpleName().toLowerCase()) {
+            case "sin" -> sin(number, operand);
+            case "cos" -> cos(number, operand);
+            case "tan" -> tan(number, operand);
+            case "csc" -> csc(number, operand);
+            case "sec" -> sec(number, operand);
+            case "cot" -> cot(number, operand);
+            case "sinh" -> sinh(number, operand);
+            case "cosh" -> cosh(number, operand);
+            case "tanh" -> tanh(number, operand);
+            case "csch" -> csch(number, operand);
+            case "sech" -> sech(number, operand);
+            case "coth" -> coth(number, operand);
+            case "asin" -> asin(number, operand);
+            case "acos" -> acos(number, operand);
+            case "atan" -> atan(number, operand);
+            case "acsc" -> acsc(number, operand);
+            case "asec" -> asec(number, operand);
+            case "acot" -> acot(number, operand);
+            case "asinh" -> asinh(number, operand);
+            case "acosh" -> acosh(number, operand);
+            case "atanh" -> atanh(number, operand);
+            case "acsch" -> acsch(number, operand);
+            case "asech" -> asech(number, operand);
+            case "acoth" -> acoth(number, operand);
+            default -> throw new UnsupportedOperationException("Unexpected value: " + function.getClass().getSimpleName().toLowerCase());
+        };
     }
 
     private static Function exponential(double number, double base, Function exponent) {
@@ -161,7 +138,7 @@ public class StageOne {
         if (exponent == -1)
             return new Product(new Constant(number), new Ln(base));
         else
-            return new Product(new Constant(number / (exponent + 1)), new Pow(new Constant(exponent + 1), base));
+            return new Product(new Constant(number/(exponent+1)), new Pow(new Constant(exponent+1), base));
     }
 
     private static Function naturalLog(double number, Function operand) {
@@ -169,7 +146,7 @@ public class StageOne {
     }
 
     private static Function sin(double number, Function operand) {
-        return new Product(new Constant(-1 * number), new Cos(operand));
+        return new Product(new Constant(-1*number), new Cos(operand));
     }
 
     private static Function cos(double number, Function operand) {

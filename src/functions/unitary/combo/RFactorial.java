@@ -14,11 +14,6 @@ public class RFactorial extends Factorial {
 	}
 
 	@Override
-	public Function classForm() {
-		throw new UnsupportedOperationException("RFactorial has no class form.");
-	}
-
-	@Override
 	public UnitaryFunction me(Function function) {
 		return new RFactorial(function);
 	}

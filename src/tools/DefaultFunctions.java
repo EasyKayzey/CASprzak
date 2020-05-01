@@ -6,7 +6,7 @@ import functions.commutative.Product;
 import functions.special.Constant;
 import functions.special.Variable;
 
-@SuppressWarnings("StaticVariableOfConcreteClass")
+@SuppressWarnings({"StaticVariableOfConcreteClass", "unused"})
 public class DefaultFunctions {
 	public static final Constant PI = new Constant("pi");
 	public static final Constant E = new Constant("e");

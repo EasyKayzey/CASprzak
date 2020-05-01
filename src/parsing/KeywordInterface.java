@@ -264,6 +264,7 @@ public class KeywordInterface {
 	/**
 	 * printconstants
 	 */
+	@SuppressWarnings("SameReturnValue")
 	private static Object printConstants() {
 		return Constant.specialConstants;
 	}

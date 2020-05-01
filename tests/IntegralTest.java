@@ -107,7 +107,7 @@ public class IntegralTest {
     @Test
     void complexUSub() {
         Integral test1 = new Integral(Parser.parse("(cos(e^x))^2*sin(e^x)*e^x"), 'x');
-        Function test2 = Parser.parse("1/3*(cos(e^x))^3");
+        Function test2 = Parser.parse("-1/3*(cos(e^x))^3");
         assertEquals(test2, test1.integrate());
     }
 }

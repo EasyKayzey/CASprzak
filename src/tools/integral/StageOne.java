@@ -256,6 +256,6 @@ public class StageOne {
     }
 
     public static Function inverseTrig(String className, double number, Function operand) {
-        return new Product(new Constant(number), new Sum(new Product(operand, FunctionMaker.makeUnitary(className, operand)), new Product(DefaultFunctions.NEGATIVE_ONE, unitaryFunctionSwitchCase(className, FunctionMaker.makeUnitary(className, operand), 1))));
+        return new Product(new Constant(number), new Sum(new Product(operand, FunctionMaker.makeUnitary(className, operand)), new Product(DefaultFunctions.NEGATIVE_ONE, unitaryFunctionSwitchCase(className.substring(1), FunctionMaker.makeUnitary(className, operand), 1))));
     }
 }

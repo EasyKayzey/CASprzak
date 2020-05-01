@@ -19,6 +19,7 @@ public class InfixTokenizer {
 			"(?<=\\d)(?=[a-zA-Z])(?![ECP])" +				// Matches if preceded by a digit and followed by a non-ECP letter
 			"|(?<=[a-zA-Z])(?<![ECP])(?=[\\d])" +			// Matches if preceded by a non-ECP letter and followed by a digit
 			"|(?<=\\))(?=[\\w(])" + 						// Matches if preceded by ) and followed by a word character or (
+			"|(?<=[a-zA-Z)])(?=\\.)" +						// Matches if preceded by a letter or ) and followed by a dot
 			"|(?<=[\\d)])(?=\\()(?<!logb_\\d)"				// Matches if preceded by [a digit not preceded by logb_] or ) and followed by (
 	);
 	private static final Pattern subtractionFinder = Pattern.compile(

@@ -22,11 +22,11 @@ public class CASDebugger {
 //		else
 //			throw new IllegalArgumentException(userInput + " is not Y/N.");
 
-		System.out.println("Would you like to exit (E), run CASUI (1), or directly use ParserXYZ (2)?");
+		System.out.println("Would you like to exit (E), run CASDemo (1), or directly use ParserXYZ (2)?");
 		userInput = in.nextLine().toUpperCase();
 		switch (userInput) {
 			case "E" -> System.exit(0);
-			case "1" -> CASUI.main(args);
+			case "1" -> CASDemo.main(args);
 			case "2" -> {
 				System.out.println("Input?");
 				Function function = Parser.parse(in.nextLine());

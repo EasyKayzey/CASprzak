@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-public class CASUI {
+public class CASDemo {
 	private static final Pattern commaSpaces = Pattern.compile("(?<=\\w)(,\\s*|\\s+)(?=\\w)");
 
 	public static void main(String[] args) {

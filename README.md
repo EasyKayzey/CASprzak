@@ -1,5 +1,5 @@
-# Z_CASprzak
-Z_CASprzak is a Computer Algebra System (CAS) written by The EasyKayzey Show (Erez Israeli Miller and Michael Kasprzak)
+# CASprzak
+CASprzak is a Computer Algebra System (CAS) written by The EasyKayzey Show (Erez Israeli Miller and Michael Kasprzak)
 
 Hello, and welcome to our CAS. This is a joint project by The EasyKayzey Show started at HackBCA V, 2020. Z_CASprzak is a computer-algebra framework mainly for storing, modifying, and applying mathematical functions and functionals, and it currently has a small command-line demo.
 

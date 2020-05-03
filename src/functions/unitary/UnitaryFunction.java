@@ -1,7 +1,7 @@
 package functions.unitary;
 
 import config.Settings;
-import functions.Function;
+import functions.GeneralFunction;
 import functions.special.Constant;
 import org.jetbrains.annotations.NotNull;
 
@@ -10,17 +10,17 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 
-public abstract class UnitaryFunction extends Function {
+public abstract class UnitaryFunction extends GeneralFunction {
 	/**
-	 * The {@link Function} which the {@link UnitaryFunction} operates on
+	 * The {@link GeneralFunction} which the {@link UnitaryFunction} operates on
 	 */
-	public final Function operand;
+	public final GeneralFunction operand;
 
 	/**
 	 * Constructs a new UnitaryFunction
-	 * @param operand The {@link Function} which will be operated on
+	 * @param operand The {@link GeneralFunction} which will be operated on
 	 */
-	public UnitaryFunction(Function operand) {
+	public UnitaryFunction(GeneralFunction operand) {
 		this.operand = operand;
 	}
 
@@ -29,7 +29,7 @@ public abstract class UnitaryFunction extends Function {
 		return this.getClass().getSimpleName().toLowerCase() + "(" + operand.toString() + ")";
 	}
 
-	public Function simplify() {
+	public GeneralFunction simplify() {
 		UnitaryFunction newFunction = this.simplifyInternal();
 		if (Settings.simplifyFunctionsOfConstants && newFunction.operand instanceof Constant)
 			return new Constant(newFunction.evaluate(null));
@@ -37,11 +37,11 @@ public abstract class UnitaryFunction extends Function {
 	}
 
 	/**
-	 * Returns an instance of this {@link Function}
+	 * Returns an instance of this {@link GeneralFunction}
 	 * @param operand Constructor parameter
-	 * @return an instance of this Function
+	 * @return an instance of this GeneralFunction
 	 */
-	public abstract UnitaryFunction me(Function operand);
+	public abstract UnitaryFunction me(GeneralFunction operand);
 
 	public UnitaryFunction clone() {
 		return me(operand.clone());
@@ -55,20 +55,20 @@ public abstract class UnitaryFunction extends Function {
 		return me(operand.simplify());
 	}
 
-	public UnitaryFunction substitute(char varID, Function toReplace) {
+	public UnitaryFunction substitute(char varID, GeneralFunction toReplace) {
 		return me(operand.substitute(varID, toReplace));
 	}
 
-	public boolean equalsFunction(Function that) {
+	public boolean equalsFunction(GeneralFunction that) {
 		return this.getClass().equals(that.getClass()) && this.operand.equalsFunction(((UnitaryFunction) that).operand);
 	}
 
-	public int compareSelf(Function that) {
+	public int compareSelf(GeneralFunction that) {
 		return (this.operand.compareTo(((UnitaryFunction) that).operand));
 	}
 
 
-	public static UnitaryFunction newInstanceOf(Class<? extends UnitaryFunction> type, Function operand) {
+	public static UnitaryFunction newInstanceOf(Class<? extends UnitaryFunction> type, GeneralFunction operand) {
 		try {
 			Constructor<?>[] constructors = type.getConstructors();
 			for (Constructor<?> constructor : constructors)
@@ -82,11 +82,11 @@ public abstract class UnitaryFunction extends Function {
 	}
 
 
-	public @NotNull Iterator<Function> iterator() {
+	public @NotNull Iterator<GeneralFunction> iterator() {
 		return new UnitaryIterator();
 	}
 
-	private class UnitaryIterator implements Iterator<Function> {
+	private class UnitaryIterator implements Iterator<GeneralFunction> {
 		private boolean used;
 
 		private UnitaryIterator() {
@@ -99,7 +99,7 @@ public abstract class UnitaryFunction extends Function {
 		}
 
 		@Override
-		public Function next() {
+		public GeneralFunction next() {
 			if (used)
 				throw new NoSuchElementException("Out of elements in UnitaryFunction");
 			used = true;

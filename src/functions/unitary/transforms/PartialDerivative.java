@@ -1,6 +1,6 @@
 package functions.unitary.transforms;
 
-import functions.Function;
+import functions.GeneralFunction;
 import functions.unitary.UnitaryFunction;
 
 import java.util.Map;
@@ -11,7 +11,7 @@ public class PartialDerivative extends TransformFunction {
 	 * @param operand The operand on the PartialDerivative
 	 * @param respectTo The variable that the PartialDerivative is with respect to
 	 */
-	public PartialDerivative(Function operand, char respectTo) {
+	public PartialDerivative(GeneralFunction operand, char respectTo) {
 		super(operand, respectTo);
 	}
 
@@ -26,14 +26,14 @@ public class PartialDerivative extends TransformFunction {
 	}
 
 	@Override
-	public UnitaryFunction substitute(char varID, Function toReplace) {
+	public UnitaryFunction substitute(char varID, GeneralFunction toReplace) {
 		if (varID == respectTo)
 			throw new UnsupportedOperationException("You cannot substitute the variable you are working with respect to");
 		return new PartialDerivative(operand.substitute(varID, toReplace), respectTo);
 	}
 
 	@Override
-	public boolean equalsFunction(Function that) {
+	public boolean equalsFunction(GeneralFunction that) {
 		if (that instanceof PartialDerivative pd)
 			return respectTo == pd.respectTo && operand.equals(pd.operand);
 		else
@@ -41,7 +41,7 @@ public class PartialDerivative extends TransformFunction {
 	}
 
 	@Override
-	public int compareSelf(Function that) {
+	public int compareSelf(GeneralFunction that) {
 		if (that instanceof PartialDerivative pd) {
 			if (respectTo == pd.respectTo)
 				return operand.compareTo(pd.operand);
@@ -53,7 +53,7 @@ public class PartialDerivative extends TransformFunction {
 	}
 
 	@Override
-	public Function getDerivative(char varID) {
+	public GeneralFunction getDerivative(char varID) {
 		return new PartialDerivative(operand.getSimplifiedDerivative(varID), respectTo);
 	}
 
@@ -63,7 +63,7 @@ public class PartialDerivative extends TransformFunction {
 	}
 
 	@Override
-	public Function simplify() {
+	public GeneralFunction simplify() {
 		return simplifyInternal();
 	}
 
@@ -73,11 +73,11 @@ public class PartialDerivative extends TransformFunction {
 	}
 
 
-	public UnitaryFunction me(Function function) {
+	public UnitaryFunction me(GeneralFunction function) {
 		return new PartialDerivative(function, respectTo);
 	}
 
-	public Function execute() {
+	public GeneralFunction execute() {
 		return operand.getSimplifiedDerivative(respectTo);
 	}
 }

@@ -1,6 +1,6 @@
 package functions.unitary.trig;
 
-import functions.Function;
+import functions.GeneralFunction;
 import functions.binary.Pow;
 import functions.commutative.Sum;
 import functions.commutative.Product;
@@ -16,13 +16,13 @@ public class Asin extends InverseTrigFunction {
 	 * Constructs a new Asin
 	 * @param operand The function which arcsin is operating on
 	 */
-	public Asin(Function operand) {
+	public Asin(GeneralFunction operand) {
 		super(operand);
 	}
 
 	/**
 	 * Returns the inverse sine of the stored {@link #operand} evaluated
-	 * @param variableValues The values of the variables of the {@link Function} at the point
+	 * @param variableValues The values of the variables of the {@link GeneralFunction} at the point
 	 * @return the sin of {@link #operand} evaluated
 	 */
 	@Override
@@ -31,12 +31,12 @@ public class Asin extends InverseTrigFunction {
 	}
 
 	@Override
-	public Function getDerivative(char varID) {
+	public GeneralFunction getDerivative(char varID) {
 		return new Product(operand.getSimplifiedDerivative(varID), new Pow(new Constant(-0.5), (new Sum(new Constant(1), new Product(new Constant(-1), new Pow(new Constant(2), operand))))));
 	}
 
 
-	public UnitaryFunction me(Function operand) {
+	public UnitaryFunction me(GeneralFunction operand) {
 		return new Asin(operand);
 	}
 

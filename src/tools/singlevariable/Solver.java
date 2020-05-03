@@ -1,7 +1,7 @@
 package tools.singlevariable;
 
 import config.Settings;
-import functions.Function;
+import functions.GeneralFunction;
 import functions.binary.Pow;
 import functions.commutative.Product;
 import functions.special.Constant;
@@ -17,23 +17,23 @@ public class Solver {
 	private Solver(){}
 
 	/**
-	 * Does one iteration of Newton's method for a given {@link Function} at an given point
+	 * Does one iteration of Newton's method for a given {@link GeneralFunction} at an given point
 	 * @param expression the function that is iterated on
 	 * @param value      the initial approximation of the root
 	 * @return a better approximate of the root based on the value provided
 	 */
-	private static double newtonsMethod(Function expression, double value) {
+	private static double newtonsMethod(GeneralFunction expression, double value) {
 		return value - expression.evaluate(Map.of(Settings.singleVariableDefault, value)) / expression.getSimplifiedDerivative(Settings.singleVariableDefault).evaluate(Map.of(Settings.singleVariableDefault, value));
 	}
 
 	/**
-	 * Gives an approximate root of a {@link Function} using {@link #newtonsMethod} for the initialPoint after a specified amount of runs
+	 * Gives an approximate root of a {@link GeneralFunction} using {@link #newtonsMethod} for the initialPoint after a specified amount of runs
 	 * @param expression   the function whose root is being found
 	 * @param initialPoint the initial approximation of the root
 	 * @param runs         the amount of times that {@link #newtonsMethod} is ran recursively
 	 * @return the approximate solution for a root of the function
 	 */
-	public static double getSolutionPointNewton(Function expression, double initialPoint, int runs) {
+	public static double getSolutionPointNewton(GeneralFunction expression, double initialPoint, int runs) {
 		if (expression.evaluate(Map.of(Settings.singleVariableDefault, 0.0)) == 0) //Temporary but probably best fix
 			return 0;
 		if (expression.evaluate(Map.of(Settings.singleVariableDefault, initialPoint)) == 0)
@@ -56,24 +56,24 @@ public class Solver {
 	}
 
 	/**
-	 * Gives an approximate root of a {@link Function} using {@link #newtonsMethod} for the initialPoint after 100 runs
+	 * Gives an approximate root of a {@link GeneralFunction} using {@link #newtonsMethod} for the initialPoint after 100 runs
 	 * @param expression   the function whose root is being found
 	 * @param initialPoint the initial approximation of the root
 	 * @return the approximate solution for a root of the function
 	 */
-	public static double getSolutionPointNewton(Function expression, double initialPoint) {
+	public static double getSolutionPointNewton(GeneralFunction expression, double initialPoint) {
 		return getSolutionPointNewton(expression, initialPoint, Settings.defaultSolverIterations);
 	}
 
 	/**
-	 * Gives approximate roots of a {@link Function} in a range of values after
+	 * Gives approximate roots of a {@link GeneralFunction} in a range of values after
 	 * @param expression the function whose roots are being found
 	 * @param lower      the lower bound of the values that will be searched for roots
 	 * @param upper      the upper bound of the values that will be searched for roots
 	 * @return an array of all the approximate roots found
 	 */
 	@SuppressWarnings("UnnecessaryDefault")
-	public static double[] getSolutionsRange(Function expression, double lower, double upper) {
+	public static double[] getSolutionsRange(GeneralFunction expression, double lower, double upper) {
 		return switch (Settings.defaultSolverType) {
 			case NEWTON -> getSolutionsRangeNewton(expression, lower, upper);
 			case HALLEY -> getSolutionsRangeHalley(expression, lower, upper);
@@ -82,14 +82,14 @@ public class Solver {
 	}
 
 	/**
-	 * Gives approximate roots of a {@link Function} using {@link #newtonsMethod} in a range of values after a specified amount of runs
+	 * Gives approximate roots of a {@link GeneralFunction} using {@link #newtonsMethod} in a range of values after a specified amount of runs
 	 * @param expression the function whose roots are being found
 	 * @param lower      the lower bound of the values that will be searched for roots
 	 * @param upper      the upper bound of the values that will be searched for roots
 	 * @param runs       the amount of times that {@link #newtonsMethod} is ran recursively
 	 * @return an array of all the approximate roots found
 	 */
-	public static double[] getSolutionsRangeNewton(Function expression, double lower, double upper, int runs) {
+	public static double[] getSolutionsRangeNewton(GeneralFunction expression, double lower, double upper, int runs) {
 		List<Double> solutions = SolverTools.createRange(upper, lower, Settings.defaultRangeSections);
 		ListIterator<Double> iter = solutions.listIterator();
 		while (iter.hasNext()) {
@@ -106,13 +106,13 @@ public class Solver {
 	}
 
 	/**
-	 * Gives approximate roots of a {@link Function} using Halley's method in a range of values after the amount of runs specified in {@link Settings}
+	 * Gives approximate roots of a {@link GeneralFunction} using Halley's method in a range of values after the amount of runs specified in {@link Settings}
 	 * @param expression the function whose roots are being found
 	 * @param lower      the lower bound of the values that will be searched for roots
 	 * @param upper      the upper bound of the values that will be searched for roots
 	 * @return an array of all the approximate roots found
 	 */
-	public static double[] getSolutionsRangeHalley(Function expression, double lower, double upper) {
+	public static double[] getSolutionsRangeHalley(GeneralFunction expression, double lower, double upper) {
 		return getSolutionsRangeNewton(
 				(new Product(expression, new Pow(new Constant(-.5), new Abs(expression.getDerivative(Settings.singleVariableDefault))))).simplify(),
 				lower, upper
@@ -120,13 +120,13 @@ public class Solver {
 	}
 
 	/**
-	 * Gives approximate roots of a {@link Function} using {@link #newtonsMethod} in a range of values after the amount of runs specified in {@link Settings}
+	 * Gives approximate roots of a {@link GeneralFunction} using {@link #newtonsMethod} in a range of values after the amount of runs specified in {@link Settings}
 	 * @param expression the function whose roots are being found
 	 * @param lower      the lower bound of the values that will be searched for roots
 	 * @param upper      the upper bound of the values that will be searched for roots
 	 * @return an array of all the approximate roots found
 	 */
-	public static double[] getSolutionsRangeNewton(Function expression, double lower, double upper) {
+	public static double[] getSolutionsRangeNewton(GeneralFunction expression, double lower, double upper) {
 		return getSolutionsRangeNewton(expression, lower, upper, Settings.defaultSolverIterations);
 	}
 }

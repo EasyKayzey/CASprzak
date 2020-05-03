@@ -1,6 +1,6 @@
 package tools;
 
-import functions.Function;
+import functions.GeneralFunction;
 import functions.commutative.CommutativeFunction;
 import functions.special.Variable;
 import tools.helperclasses.FunctionPredicate;
@@ -11,7 +11,7 @@ import java.util.List;
 public class SearchTools {
 
 	/**
-	 * Returns a {@link FunctionPredicate} describing whether a given Function is an instance of {@link Variable} with varID equal to the specified variable
+	 * Returns a {@link FunctionPredicate} describing whether a given GeneralFunction is an instance of {@link Variable} with varID equal to the specified variable
 	 * @param varID the variable to be checked for
 	 * @return the predicate described above
 	 */
@@ -20,29 +20,29 @@ public class SearchTools {
 	}
 
 	/**
-	 * Returns true if a {@link Function} in the function tree satisfies the predicate test
-	 * @param input the Function to be searched in
+	 * Returns true if a {@link GeneralFunction} in the function tree satisfies the predicate test
+	 * @param input the GeneralFunction to be searched in
 	 * @param test the predicate to be tested
 	 * @return true if found
 	 */
-	public static boolean exists(Function input, FunctionPredicate test) {
+	public static boolean exists(GeneralFunction input, FunctionPredicate test) {
 		return existsExcluding(input, test, (a -> false));
 	}
 
 	/**
-	 * Returns true if a {@link  Function} in the function tree satisfies the predicate test, excluding all Functions on branches satisfying the predicate exclude
-	 * @param input the Function to be searched in
+	 * Returns true if a {@link  GeneralFunction} in the function tree satisfies the predicate test, excluding all Functions on branches satisfying the predicate exclude
+	 * @param input the GeneralFunction to be searched in
 	 * @param test the predicate to be tested
 	 * @param exclude the predicate to exclude
 	 * @return true if found
 	 */
-	public static boolean existsExcluding(Function input, FunctionPredicate test, FunctionPredicate exclude) {
+	public static boolean existsExcluding(GeneralFunction input, FunctionPredicate test, FunctionPredicate exclude) {
 		if (exclude.test(input))
 			return false;
 		else if (test.test(input))
 			return true;
 		else
-			for (Function f : input)
+			for (GeneralFunction f : input)
 				if (existsExcluding(f, test, exclude))
 					return true;
 		return false;
@@ -50,27 +50,27 @@ public class SearchTools {
 
 
 	/**
-	 * Returns true if a direct child of this {@link Function} satisfies the predicate test
+	 * Returns true if a direct child of this {@link GeneralFunction} satisfies the predicate test
 	 * @param input the function to be searched in
 	 * @param test the predicate to be tested
 	 * @return true if found
 	 */
-	public static boolean existsSurface(Function input, FunctionPredicate test) {
+	public static boolean existsSurface(GeneralFunction input, FunctionPredicate test) {
 		return existsSurfaceExcluding(input, test, (a -> false));
 	}
 
 	/**
-	 * Returns true if a direct child of this {@link  Function} satisfies the predicate test, excluding all Functions satisfying the predicate exclude
-	 * @param input the Function to be searched in
+	 * Returns true if a direct child of this {@link  GeneralFunction} satisfies the predicate test, excluding all Functions satisfying the predicate exclude
+	 * @param input the GeneralFunction to be searched in
 	 * @param test the predicate to be tested
 	 * @param exclude the predicate to exclude
 	 * @return true if found
 	 */
-	public static boolean existsSurfaceExcluding(Function input, FunctionPredicate test, FunctionPredicate exclude) {
+	public static boolean existsSurfaceExcluding(GeneralFunction input, FunctionPredicate test, FunctionPredicate exclude) {
 		if (exclude.test(input))
 			return false;
 		else
-			for (Function f : input)
+			for (GeneralFunction f : input)
 				if (test.test(f))
 					return true;
 		return false;
@@ -93,14 +93,14 @@ public class SearchTools {
 	 * @return true if the condition was satisfied by a subset
 	 */
 	public static boolean existsInOppositeSurfaceSubset(CommutativeFunction input, FunctionPredicate test, FunctionPredicate excludeFromSubset) {
-		Function[] functions = input.getFunctions();
+		GeneralFunction[] functions = input.getFunctions();
 		List<Integer> excludedIDs = getSubsetIDs(input, excludeFromSubset);
 		for (int run : excludedIDs) {
-			List<Function> subset = new ArrayList<>();
+			List<GeneralFunction> subset = new ArrayList<>();
 			for (int ix = 0; ix < functions.length; ix++)
 				if (((~run >> ix) & 1) > 0)
 					subset.add(functions[ix]);
-			CommutativeFunction thisFunction = input.me(subset.toArray(new Function[0]));
+			CommutativeFunction thisFunction = input.me(subset.toArray(new GeneralFunction[0]));
 			if (test.test(thisFunction))
 				return true;
 		}
@@ -108,14 +108,14 @@ public class SearchTools {
 	}
 
 	private static List<Integer> getSubsetIDs(CommutativeFunction input, FunctionPredicate test) {
-		Function[] functions = input.getFunctions();
+		GeneralFunction[] functions = input.getFunctions();
 		List<Integer> ids = new ArrayList<>();
 		for (int run = 0; run < Math.pow(2, functions.length); run++) {
-			List<Function> subset = new ArrayList<>();
+			List<GeneralFunction> subset = new ArrayList<>();
 			for (int ix = 0; ix < functions.length; ix++)
 				if (((run >> ix) & 1) > 0)
 					subset.add(functions[ix]);
-			if (test.test(input.me(subset.toArray(new Function[0]))))
+			if (test.test(input.me(subset.toArray(new GeneralFunction[0]))))
 				ids.add(run);
 		}
 		return ids;

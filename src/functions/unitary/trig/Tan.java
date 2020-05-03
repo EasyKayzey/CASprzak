@@ -1,6 +1,6 @@
 package functions.unitary.trig;
 
-import functions.Function;
+import functions.GeneralFunction;
 import functions.binary.Pow;
 import functions.commutative.Product;
 import functions.special.Constant;
@@ -17,13 +17,13 @@ public class Tan extends TrigFunction {
 	 * Constructs a new Tan
 	 * @param operand The function which tan is operating on
 	 */
-	public Tan(Function operand) {
+	public Tan(GeneralFunction operand) {
 		super(operand);
 	}
 
 	/**
 	 * Returns the tangent of the stored {@link #operand} evaluated
-	 * @param variableValues The values of the variables of the {@link Function} at the point
+	 * @param variableValues The values of the variables of the {@link GeneralFunction} at the point
 	 * @return the tan of {@link #operand} evaluated
 	 */
 	@Override
@@ -32,16 +32,16 @@ public class Tan extends TrigFunction {
 	}
 
 	@Override
-	public Function getDerivative(char varID) {
+	public GeneralFunction getDerivative(char varID) {
 		return new Product(new Pow(new Constant(2), new Sec(operand)), operand.getSimplifiedDerivative(varID));
 	}
 
-	public UnitaryFunction me(Function operand) {
+	public UnitaryFunction me(GeneralFunction operand) {
 		return new Tan(operand);
 	}
 
 
-	public Function getElementaryIntegral() {
+	public GeneralFunction getElementaryIntegral() {
 		return new Ln(new Abs(new Sec(operand)));
 	}
 

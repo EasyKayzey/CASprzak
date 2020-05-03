@@ -1,6 +1,6 @@
 package functions.unitary.trig;
 
-import functions.Function;
+import functions.GeneralFunction;
 import functions.commutative.Product;
 import functions.commutative.Sum;
 import functions.unitary.Abs;
@@ -16,13 +16,13 @@ public class Sec extends TrigFunction {
 	 * Constructs a new Sec
 	 * @param operand The function which sec is operating on
 	 */
-	public Sec(Function operand) {
+	public Sec(GeneralFunction operand) {
 		super(operand);
 	}
 
 	/**
 	 * Returns the secant of the stored {@link #operand} evaluated
-	 * @param variableValues The values of the variables of the {@link Function} at the point
+	 * @param variableValues The values of the variables of the {@link GeneralFunction} at the point
 	 * @return the sec of {@link #operand} evaluated
 	 */
 	@Override
@@ -31,16 +31,16 @@ public class Sec extends TrigFunction {
 	}
 
 	@Override
-	public Function getDerivative(char varID) {
+	public GeneralFunction getDerivative(char varID) {
 		return new Product(new Tan(operand), new Sec(operand), operand.getSimplifiedDerivative(varID));
 	}
 
-	public UnitaryFunction me(Function operand) {
+	public UnitaryFunction me(GeneralFunction operand) {
 		return new Sec(operand);
 	}
 
 
-	public Function getElementaryIntegral() {
+	public GeneralFunction getElementaryIntegral() {
 		return new Ln(new Abs(new Sum(new Sec(operand), new Tan(operand))));
 	}
 

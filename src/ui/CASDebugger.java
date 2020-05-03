@@ -1,6 +1,6 @@
 package ui;
 
-import functions.Function;
+import functions.GeneralFunction;
 import parsing.Parser;
 
 import java.util.HashMap;
@@ -28,7 +28,7 @@ public class CASDebugger {
 			case "1" -> CASDemo.main(args);
 			case "2" -> {
 				System.out.println("Input?");
-				Function function = Parser.parse(in.nextLine());
+				GeneralFunction function = Parser.parse(in.nextLine());
 				System.out.println("toString:");
 				System.out.println(function);
 				System.out.println("Simplified once:");

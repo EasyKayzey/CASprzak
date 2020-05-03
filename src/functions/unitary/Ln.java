@@ -1,6 +1,6 @@
 package functions.unitary;
 
-import functions.Function;
+import functions.GeneralFunction;
 import functions.binary.Pow;
 import functions.commutative.Product;
 import functions.special.Constant;
@@ -13,7 +13,7 @@ public class Ln extends UnitaryFunction {
 	 * Constructs a new Ln
 	 * @param operand The function which natural log is operating on
 	 */
-	public Ln(Function operand) {
+	public Ln(GeneralFunction operand) {
 		super(operand);
 	}
 
@@ -23,11 +23,11 @@ public class Ln extends UnitaryFunction {
 	}
 
 	@Override
-	public Function getDerivative(char varID) {
+	public GeneralFunction getDerivative(char varID) {
 		return new Product(operand.getSimplifiedDerivative(varID), new Pow(new Constant(-1), operand));
 	}
 
-	public UnitaryFunction me(Function operand) {
+	public UnitaryFunction me(GeneralFunction operand) {
 		return new Ln(operand);
 	}
 

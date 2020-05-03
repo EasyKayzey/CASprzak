@@ -1,7 +1,7 @@
 package parsing;
 
 import config.Settings;
-import functions.Function;
+import functions.GeneralFunction;
 import functions.special.Constant;
 import functions.special.Variable;
 import functions.unitary.transforms.Integral;
@@ -22,7 +22,7 @@ public class KeywordInterface {
 	public static final Pattern keywordSplitter = Pattern.compile("\"\\s+\"|\"\\s+|\\s+\"|\"$|\\s+(?=[^\"]*(\"[^\"]*\"[^\"]*)*$)");
 	public static final Pattern spacesAndDdx = Pattern.compile("\\s+|(?<=^d/d)(?=[a-zA-Z])");
 	public static final Pattern equals = Pattern.compile("=");
-	public static final HashMap<String, Function> storedFunctions = new HashMap<>();
+	public static final HashMap<String, GeneralFunction> storedFunctions = new HashMap<>();
 	public static Object prev;
 
 
@@ -85,9 +85,9 @@ public class KeywordInterface {
 	/**
 	 * Parses input using {@link #useKeywords(String)} and {@link #storedFunctions}
 	 * @param input input string
-	 * @return a {@link Function}
+	 * @return a {@link GeneralFunction}
 	 */
-	public static Function parseStored(String input) {
+	public static GeneralFunction parseStored(String input) {
 		if ("_".equals(input))
 			return Parser.toFunction(prev);
 		if (input.chars().filter(ch -> ch == '\"').count() % 2 == 1) // this is a really janky fix
@@ -100,16 +100,16 @@ public class KeywordInterface {
 		else if (Constant.isSpecialConstant(input))
 			return new Constant(input);
 		else
-			return (Function) useKeywords(input);
+			return (GeneralFunction) useKeywords(input);
 	}
 
 	/**
-	 * Substitutes everything stored in {@link #storedFunctions} into the input {@link functions.Function}
+	 * Substitutes everything stored in {@link #storedFunctions} into the input {@link GeneralFunction}
 	 * @param function the function to be substituted into
 	 * @return input with all substitutions
 	 */
-	public static Function substituteAll(Function function) {
-		for (Map.Entry<String, Function>  entry : storedFunctions.entrySet())
+	public static GeneralFunction substituteAll(GeneralFunction function) {
+		for (Map.Entry<String, GeneralFunction>  entry : storedFunctions.entrySet())
 			function = function.substitute(Parser.getCharacter(entry.getKey()), entry.getValue());
 		return function;
 	}
@@ -118,14 +118,14 @@ public class KeywordInterface {
 	/**
 	 * pd [variable] [function]
 	 */
-	public static Function partialDiff(String input) {
+	public static GeneralFunction partialDiff(String input) {
 		String[] splitInput = keywordSplitter.split(input, 2);
 		return parseStored(splitInput[1]).getSimplifiedDerivative(Parser.getCharacter(splitInput[0]));
 	}
 	/**
 	 * pdn [variable] [times] [function]
 	 */
-	private static Function partialDiffNth(String input) {
+	private static GeneralFunction partialDiffNth(String input) {
 		String[] splitInput = keywordSplitter.split(input, 3);
 		return parseStored(splitInput[2]).getNthDerivative(Parser.getCharacter(splitInput[0]), Integer.parseInt(splitInput[1]));
 	}
@@ -145,7 +145,7 @@ public class KeywordInterface {
 	/**
 	 * simp [function]
 	 */
-	public static Function simplify(String input) {
+	public static GeneralFunction simplify(String input) {
 		String[] splitInput = keywordSplitter.split(input);
 		return parseStored(splitInput[0]).simplify();
 	}
@@ -153,7 +153,7 @@ public class KeywordInterface {
 	/**
 	 * sub [function] [variable] [replacementfunction]
 	 */
-	public static Function substitute(String input) {
+	public static GeneralFunction substitute(String input) {
 		String[] splitInput = keywordSplitter.split(input);
 		return parseStored(splitInput[0]).substitute(Parser.getCharacter(splitInput[1]), parseStored(splitInput[2]));
 	}
@@ -184,7 +184,7 @@ public class KeywordInterface {
 	/**
 	 * tay [function] [terms] [center]
 	 */
-	public static Function taylor(String input) {
+	public static GeneralFunction taylor(String input) {
 		String[] splitInput = keywordSplitter.split(input);
 		return TaylorSeries.makeTaylorSeries(parseStored(splitInput[0]), (int) Parser.getConstant(splitInput[1]), Parser.getConstant(splitInput[2]));
 	}
@@ -197,7 +197,7 @@ public class KeywordInterface {
 		if (!storedFunctions.containsKey(splitInput[0]))
 			Variable.addFunctionVariable(Parser.getCharacter(splitInput[0]));
 		try {
-			storedFunctions.put(splitInput[0], (Function) KeywordInterface.useKeywords(splitInput[1]));
+			storedFunctions.put(splitInput[0], (GeneralFunction) KeywordInterface.useKeywords(splitInput[1]));
 		} catch (RuntimeException e) {
 			storedFunctions.put(splitInput[0], parseStored(splitInput[1]));
 		}
@@ -239,7 +239,7 @@ public class KeywordInterface {
 	private static Object defineConstant(String input) {
 		String[] splitInput = keywordSplitter.split(input, 2);
 		try {
-			return Constant.addSpecialConstant(splitInput[0], ((Function) KeywordInterface.useKeywords(splitInput[1])).evaluate(null));
+			return Constant.addSpecialConstant(splitInput[0], ((GeneralFunction) KeywordInterface.useKeywords(splitInput[1])).evaluate(null));
 		} catch (Exception e) {
 			return Constant.addSpecialConstant(splitInput[0], parseStored(splitInput[1]).evaluate(null));
 		}
@@ -362,7 +362,7 @@ public class KeywordInterface {
 	/**
 	 * integral [function] d[variable]
 	 */
-	private static Function integral(String input) {
+	private static GeneralFunction integral(String input) {
 		String[] splitInput = keywordSplitter.split(input);
 		return (new Integral(parseStored(splitInput[0]), splitInput[1].charAt(1)).execute().simplify());
 	}

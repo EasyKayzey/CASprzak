@@ -1,6 +1,6 @@
 package functions.unitary.trig;
 
-import functions.Function;
+import functions.GeneralFunction;
 import functions.binary.Pow;
 import functions.commutative.Sum;
 import functions.commutative.Product;
@@ -16,18 +16,18 @@ public class Asech extends InverseTrigFunction {
 	 * Constructs a new Asech
 	 * @param operand The function which arcsech is operating on
 	 */
-	public Asech(Function operand) {
+	public Asech(GeneralFunction operand) {
 		super(operand);
 	}
 
 	@Override
-	public Function getDerivative(char varID) {
+	public GeneralFunction getDerivative(char varID) {
 		return new Product(new Constant(-1), operand.getSimplifiedDerivative(varID), new Pow(new Constant(-1), new Product(operand, new Pow(new Constant(0.5), new Sum(new Constant(1), new Product(new Constant(-1), new Pow(new Constant(2), operand)))))));
 	}
 
 	/**
 	 * Returns the inverse hyperbolic secant of the stored {@link #operand} evaluated
-	 * @param variableValues The values of the variables of the {@link Function} at the point
+	 * @param variableValues The values of the variables of the {@link GeneralFunction} at the point
 	 * @return the arcsech of {@link #operand} evaluated
 	 */
 	@Override
@@ -37,7 +37,7 @@ public class Asech extends InverseTrigFunction {
 	}
 
 
-	public UnitaryFunction me(Function operand) {
+	public UnitaryFunction me(GeneralFunction operand) {
 		return new Asech(operand);
 	}
 

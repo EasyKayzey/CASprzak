@@ -1,7 +1,7 @@
 package functions.unitary.transforms;
 
 import config.Settings;
-import functions.Function;
+import functions.GeneralFunction;
 import functions.unitary.UnitaryFunction;
 import tools.integration.StageOne;
 import tools.singlevariable.NumericalIntegration;
@@ -15,7 +15,7 @@ public class Integral extends TransformFunction {
 	 * @param integrand The integrand on the Integral
 	 * @param respectTo The variable that the Integral is with respect to
 	 */
-	public Integral(Function integrand, char respectTo) {
+	public Integral(GeneralFunction integrand, char respectTo) {
 		super(integrand, respectTo);
 	}
 
@@ -30,14 +30,14 @@ public class Integral extends TransformFunction {
 	}
 
 	@Override
-	public UnitaryFunction substitute(char varID, Function toReplace) {
+	public UnitaryFunction substitute(char varID, GeneralFunction toReplace) {
 		if (varID == respectTo)
 			throw new UnsupportedOperationException("You cannot substitute the variable you are working with respect to");
 		return new Integral(operand.substitute(varID, toReplace), respectTo);
 	}
 
 	@Override
-	public boolean equalsFunction(Function that) {
+	public boolean equalsFunction(GeneralFunction that) {
 		if (that instanceof Integral integral)
 			return respectTo == integral.respectTo && operand.equals(integral.operand);
 		else
@@ -45,7 +45,7 @@ public class Integral extends TransformFunction {
 	}
 
 	@Override
-	public int compareSelf(Function that) {
+	public int compareSelf(GeneralFunction that) {
 		if (that instanceof Integral integral) {
 			if (respectTo == integral.respectTo)
 				return operand.compareTo(integral.operand);
@@ -57,7 +57,7 @@ public class Integral extends TransformFunction {
 	}
 
 	@Override
-	public Function getDerivative(char varID) {
+	public GeneralFunction getDerivative(char varID) {
 		if (varID == respectTo)
 			return operand;
 		else
@@ -66,7 +66,7 @@ public class Integral extends TransformFunction {
 
 	/**
 	 * Integrates the operand numerically from 0 to the value specified in the HashMap corresponding to respectTo
-	 * @param variableValues the values of the variables of the {@link Function} at the point
+	 * @param variableValues the values of the variables of the {@link GeneralFunction} at the point
 	 * @return the operand integrated numerically
 	 */
 	@Override
@@ -77,7 +77,7 @@ public class Integral extends TransformFunction {
 	}
 
 	@Override
-	public Function simplify() {
+	public GeneralFunction simplify() {
 		return clone();
 	}
 
@@ -90,7 +90,7 @@ public class Integral extends TransformFunction {
 	}
 
 
-	public UnitaryFunction me(Function function) {
+	public UnitaryFunction me(GeneralFunction function) {
 		return new Integral(function, respectTo);
 	}
 
@@ -98,7 +98,7 @@ public class Integral extends TransformFunction {
 	 * Returns the Integral of the integrand if it can be found.
 	 * @return the Integral of the integrand
 	 */
-	public Function execute() {
+	public GeneralFunction execute() {
 		return StageOne.derivativeDivides(operand, respectTo).simplify();
 	}
 }

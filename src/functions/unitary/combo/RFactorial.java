@@ -1,7 +1,7 @@
 package functions.unitary.combo;
 
 import config.Settings;
-import functions.Function;
+import functions.GeneralFunction;
 import functions.unitary.UnitaryFunction;
 import tools.MiscTools;
 
@@ -9,17 +9,17 @@ import java.util.Map;
 
 public class RFactorial extends Factorial {
 
-	public RFactorial(Function operand) {
+	public RFactorial(GeneralFunction operand) {
 		super(operand);
 	}
 
 
-	public UnitaryFunction me(Function function) {
+	public UnitaryFunction me(GeneralFunction function) {
 		return new RFactorial(function);
 	}
 
 	@Override
-	public Function getDerivative(char varID) {
+	public GeneralFunction getDerivative(char varID) {
 		throw new UnsupportedOperationException("RFactorial has no derivative.");
 	}
 

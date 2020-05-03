@@ -1,6 +1,6 @@
 package functions.unitary;
 
-import functions.Function;
+import functions.GeneralFunction;
 import functions.commutative.Product;
 
 import java.util.Map;
@@ -11,7 +11,7 @@ public class Exp extends UnitaryFunction {
 	 * Constructs a new Ln
 	 * @param operand The function which the exponential is operating on
 	 */
-	public Exp(Function operand) {
+	public Exp(GeneralFunction operand) {
 		super(operand);
 	}
 
@@ -21,11 +21,11 @@ public class Exp extends UnitaryFunction {
 	}
 
 	@Override
-	public Function getDerivative(char varID) {
+	public GeneralFunction getDerivative(char varID) {
 		return new Product(clone(), operand.getDerivative(varID));
 	}
 
-	public UnitaryFunction me(Function operand) {
+	public UnitaryFunction me(GeneralFunction operand) {
 		return new Exp(operand);
 	}
 

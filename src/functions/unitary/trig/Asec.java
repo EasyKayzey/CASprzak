@@ -1,6 +1,6 @@
 package functions.unitary.trig;
 
-import functions.Function;
+import functions.GeneralFunction;
 import functions.binary.Pow;
 import functions.commutative.Sum;
 import functions.commutative.Product;
@@ -17,18 +17,18 @@ public class Asec extends InverseTrigFunction {
 	 * Constructs a new Asec
 	 * @param operand The function which arcsec is operating on
 	 */
-	public Asec(Function operand) {
+	public Asec(GeneralFunction operand) {
 		super(operand);
 	}
 
 	@Override
-	public Function getDerivative(char varID) {
+	public GeneralFunction getDerivative(char varID) {
 		return new Product(operand.getSimplifiedDerivative(varID), new Pow(DefaultFunctions.NEGATIVE_ONE, new Product(new Abs(operand), new Pow(DefaultFunctions.HALF, new Sum(new Pow(DefaultFunctions.TWO, operand), DefaultFunctions.NEGATIVE_ONE)))));
 	}
 
 	/**
 	 * Returns the inverse secant of the stored {@link #operand} evaluated
-	 * @param variableValues The values of the variables of the {@link Function} at the point
+	 * @param variableValues The values of the variables of the {@link GeneralFunction} at the point
 	 * @return the arcsec of {@link #operand} evaluated
 	 */
 	@SuppressWarnings({"DuplicateExpressions", "RedundantSuppression"})
@@ -45,7 +45,7 @@ public class Asec extends InverseTrigFunction {
 	}
 
 
-	public UnitaryFunction me(Function operand) {
+	public UnitaryFunction me(GeneralFunction operand) {
 		return new Asec(operand);
 	}
 

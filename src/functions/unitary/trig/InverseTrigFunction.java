@@ -1,17 +1,17 @@
 package functions.unitary.trig;
 
-import functions.Function;
+import functions.GeneralFunction;
 import functions.commutative.Product;
 import functions.commutative.Sum;
 import functions.unitary.UnitaryFunction;
 import tools.DefaultFunctions;
 
 public abstract class InverseTrigFunction extends TrigFunction {
-	public InverseTrigFunction(Function operand) {
+	public InverseTrigFunction(GeneralFunction operand) {
 		super(operand);
 	}
 
-	public Function getElementaryIntegral() {
+	public GeneralFunction getElementaryIntegral() {
 		return new Sum(new Product(operand, me(operand)), new Product(DefaultFunctions.NEGATIVE_ONE, UnitaryFunction.newInstanceOf(getInverse(), me(operand))));
 	}
 }

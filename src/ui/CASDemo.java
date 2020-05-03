@@ -1,7 +1,7 @@
 package ui;
 
 import config.Settings;
-import functions.Function;
+import functions.GeneralFunction;
 import functions.special.Variable;
 import parsing.Parser;
 import parsing.PreProcessor;
@@ -46,7 +46,7 @@ public class CASDemo {
 		for (int i = 0; i < variables.length; i++)
 			map.put(variables[i], inputs[i]);
 
-		Function currentFunction = Parser.parse(PreProcessor.toPostfix(rawInput));
+		GeneralFunction currentFunction = Parser.parse(PreProcessor.toPostfix(rawInput));
 		System.out.println("Here is your parsed function: " + currentFunction);
 		System.out.println("Here is the simplified toString of your function: " + currentFunction.simplifyTimes(10));
 		System.out.println("Here is your output: " + currentFunction.evaluate(map));

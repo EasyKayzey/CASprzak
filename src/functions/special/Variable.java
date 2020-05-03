@@ -1,7 +1,7 @@
 package functions.special;
 
 import config.Settings;
-import functions.Function;
+import functions.GeneralFunction;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -80,7 +80,7 @@ public class Variable extends SpecialFunction {
 	}
 
 
-	public Function getDerivative(char varID) {
+	public GeneralFunction getDerivative(char varID) {
 		return new Constant((this.varID == varID ? 1 : 0));
 	}
 
@@ -89,16 +89,16 @@ public class Variable extends SpecialFunction {
 	}
 
 
-	public Function clone() {
+	public GeneralFunction clone() {
 		return new Variable(varID);
 	}
 
-	public Function simplify() {
+	public GeneralFunction simplify() {
 		return clone();
 	}
 
 
-	public Function substitute(char varID, Function toReplace) {
+	public GeneralFunction substitute(char varID, GeneralFunction toReplace) {
 		if (this.varID == varID)
 			return toReplace;
 		else if (Settings.trustImmutability)
@@ -108,11 +108,11 @@ public class Variable extends SpecialFunction {
 	}
 
 
-	public boolean equalsFunction(Function that) {
+	public boolean equalsFunction(GeneralFunction that) {
 		return (that instanceof Variable) && (varID == ((Variable) that).varID);
 	}
 
-	public int compareSelf(Function that) {
+	public int compareSelf(GeneralFunction that) {
 		return this.varID - ((Variable) that).varID;
 	}
 }

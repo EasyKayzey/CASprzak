@@ -1,6 +1,6 @@
 package functions.unitary.trig;
 
-import functions.Function;
+import functions.GeneralFunction;
 import functions.binary.Pow;
 import functions.commutative.Sum;
 import functions.commutative.Product;
@@ -16,13 +16,13 @@ public class Atan extends InverseTrigFunction {
 	 * Constructs a new Atan
 	 * @param operand The function which arctan is operating on
 	 */
-	public Atan(Function operand) {
+	public Atan(GeneralFunction operand) {
 		super(operand);
 	}
 
 	/**
 	 * Returns the inverse tangent of the stored {@link #operand} evaluated
-	 * @param variableValues The values of the variables of the {@link Function} at the point
+	 * @param variableValues The values of the variables of the {@link GeneralFunction} at the point
 	 * @return the arctan of {@link #operand} evaluated
 	 */
 	@Override
@@ -31,12 +31,12 @@ public class Atan extends InverseTrigFunction {
 	}
 
 	@Override
-	public Function getDerivative(char varID) {
+	public GeneralFunction getDerivative(char varID) {
 		return new Product(operand.getSimplifiedDerivative(varID), new Pow(new Constant(-1), new Sum(new Constant(1), new Pow(new Constant(2), operand))));
 	}
 
 	@Override
-	public UnitaryFunction me(Function operand) {
+	public UnitaryFunction me(GeneralFunction operand) {
 		return new Atan(operand);
 	}
 

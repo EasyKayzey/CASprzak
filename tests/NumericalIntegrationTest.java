@@ -1,4 +1,4 @@
-import functions.Function;
+import functions.GeneralFunction;
 import org.junit.jupiter.api.Test;
 import parsing.Parser;
 import tools.singlevariable.NumericalIntegration;
@@ -10,21 +10,21 @@ public class NumericalIntegrationTest {
 
     @Test
     void simpleTrigIntegral() {
-        Function function = Parser.parse("sin(x)");
+        GeneralFunction function = Parser.parse("sin(x)");
         double test = NumericalIntegration.simpsonsRule(function, 0, Math.PI);
         assertEquals(2, test, 0.0001);
     }
 
     @Test
     void simplePolynomialIntegral() {
-        Function function = Parser.parse("x^2");
+        GeneralFunction function = Parser.parse("x^2");
         double test = NumericalIntegration.simpsonsRule(function, 0, 1);
         assertEquals(0.33333333333333333333333333333333333333, test, 0.0001);
     }
 
     @Test
     void simpleTrigIntegralWithError() {
-        Function function = Parser.parse("sin(x)");
+        GeneralFunction function = Parser.parse("sin(x)");
         double[] test = NumericalIntegration.simpsonsRuleWithError(function, 0, Math.PI);
         assertArrayEquals(new double[]{2, 1e-15}, test, 0.0001);
     }

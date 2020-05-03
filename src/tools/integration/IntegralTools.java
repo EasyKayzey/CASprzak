@@ -1,6 +1,6 @@
 package tools.integration;
 
-import functions.Function;
+import functions.GeneralFunction;
 import functions.commutative.Product;
 import functions.special.Variable;
 import tools.DefaultFunctions;
@@ -16,36 +16,36 @@ import java.util.ListIterator;
 public class IntegralTools {
 
     /**
-     * Strips a {@link Function} of any Constants and returns a {@link Pair} of the constant and the stripped Function
-     * @param function The Function whose Constant is being Stripped
-     * @return A {@link Pair} of the constant and the stripped Function
+     * Strips a {@link GeneralFunction} of any Constants and returns a {@link Pair} of the constant and the stripped GeneralFunction
+     * @param function The GeneralFunction whose Constant is being Stripped
+     * @return A {@link Pair} of the constant and the stripped GeneralFunction
      */
-    public static Pair<Function, Function> stripConstants(Function function, char varID) {
+    public static Pair<GeneralFunction, GeneralFunction> stripConstants(GeneralFunction function, char varID) {
         if (function instanceof Product multiply) {
-            Function[] terms = multiply.simplifyConstants().getFunctions();
-            List<Function> constants = new ArrayList<>();
-            List<Function> termsWithConstantRemoved = new ArrayList<>(Arrays.asList(terms));
-            ListIterator<Function> iter = termsWithConstantRemoved.listIterator();
+            GeneralFunction[] terms = multiply.simplifyConstants().getFunctions();
+            List<GeneralFunction> constants = new ArrayList<>();
+            List<GeneralFunction> termsWithConstantRemoved = new ArrayList<>(Arrays.asList(terms));
+            ListIterator<GeneralFunction> iter = termsWithConstantRemoved.listIterator();
             while (iter.hasNext()) {
-                Function current = iter.next();
+                GeneralFunction current = iter.next();
                 if (doesNotContainsVariable(current, varID)) {
                     constants.add(current);
                     iter.remove();
                 }
             }
-            return new Pair<>((new Product(constants.toArray(new Function[0]))).simplify(), (new Product(termsWithConstantRemoved.toArray(new Function[0]))).simplifyPull().simplifyTrivialElement());
+            return new Pair<>((new Product(constants.toArray(new GeneralFunction[0]))).simplify(), (new Product(termsWithConstantRemoved.toArray(new GeneralFunction[0]))).simplifyPull().simplifyTrivialElement());
         } else {
             return new Pair<>(DefaultFunctions.ONE, function);
         }
     }
 
     /**
-     * Returns true if the {@link Variable} is found in the {@link Function}
-     * @param function The Function that is being searched
+     * Returns true if the {@link Variable} is found in the {@link GeneralFunction}
+     * @param function The GeneralFunction that is being searched
      * @param varID The variable ID of the variable that is being looked for
-     * @return true if the {@link Variable} is found in the {@link Function}
+     * @return true if the {@link Variable} is found in the {@link GeneralFunction}
      */
-    public static boolean doesNotContainsVariable(Function function, char varID) {
+    public static boolean doesNotContainsVariable(GeneralFunction function, char varID) {
         Variable variable = new Variable(varID);
         return !SearchTools.exists(function, variable::equals);
     }

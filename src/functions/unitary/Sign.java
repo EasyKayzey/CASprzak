@@ -1,6 +1,6 @@
 package functions.unitary;
 
-import functions.Function;
+import functions.GeneralFunction;
 import functions.commutative.Product;
 import functions.special.Constant;
 
@@ -12,7 +12,7 @@ public class Sign extends UnitaryFunction {
 	 * Constructs a new Sign
 	 * @param operand The function which sign is operating on
 	 */
-	public Sign(Function operand) {
+	public Sign(GeneralFunction operand) {
 		super(operand);
 	}
 
@@ -22,12 +22,12 @@ public class Sign extends UnitaryFunction {
 	}
 
 	@Override
-	public Function getDerivative(char varID) {
+	public GeneralFunction getDerivative(char varID) {
 		return new Product(operand.getSimplifiedDerivative(varID), new Constant(2), new Dirac(operand));
 	}
 
 
-	public UnitaryFunction me(Function operand) {
+	public UnitaryFunction me(GeneralFunction operand) {
 		return new Sign(operand);
 	}
 }

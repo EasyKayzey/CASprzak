@@ -1,7 +1,7 @@
 package tools;
 
 import config.Settings;
-import functions.Function;
+import functions.GeneralFunction;
 
 import java.lang.reflect.MalformedParametersException;
 
@@ -24,14 +24,14 @@ public class MiscTools {
 	}
 
 	/**
-	 * Returns the location of a {@link Function} in its class-based sort order (see {@link Function#sortOrder})
+	 * Returns the location of a {@link GeneralFunction} in its class-based sort order (see {@link GeneralFunction#sortOrder})
 	 * @param function the function whose class order is to be found
-	 * @return location in {@link Function#sortOrder}
+	 * @return location in {@link GeneralFunction#sortOrder}
 	 */
-	public static int findClassValue(Function function) {
+	public static int findClassValue(GeneralFunction function) {
 		Class<?> functionClass = function.getClass();
-		for (int i = 0; i < Function.sortOrder.length; i++) {
-			if (Function.sortOrder[i].isAssignableFrom(functionClass))
+		for (int i = 0; i < GeneralFunction.sortOrder.length; i++) {
+			if (GeneralFunction.sortOrder[i].isAssignableFrom(functionClass))
 				return i;
 		}
 		throw new UnsupportedOperationException("Class " + function.getClass().getSimpleName() + " not supported.");

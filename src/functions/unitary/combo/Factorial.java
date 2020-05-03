@@ -1,17 +1,17 @@
 package functions.unitary.combo;
 
 import config.Settings;
-import functions.Function;
+import functions.GeneralFunction;
 import functions.unitary.UnitaryFunction;
 import tools.exceptions.NotYetImplementedException;
 
 public abstract class Factorial extends UnitaryFunction {
 
-	public Factorial(Function operand) {
+	public Factorial(GeneralFunction operand) {
 		super(operand);
 	}
 
-	public static Function defaultFactorial(Function input) {
+	public static GeneralFunction defaultFactorial(GeneralFunction input) {
 		return switch (Settings.defaultFactorial) {
 			case STIRLING -> new SFactorial(input);
 			case LANCZOS -> throw new NotYetImplementedException("LFactorial not implemented");

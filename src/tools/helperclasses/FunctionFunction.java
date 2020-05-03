@@ -1,4 +1,6 @@
 package tools.helperclasses;
 
-public interface FunctionFunction extends java.util.function.Function<functions.Function, functions.Function>{
+import functions.GeneralFunction;
+
+public interface FunctionFunction extends java.util.function.Function<GeneralFunction, GeneralFunction>{
 }

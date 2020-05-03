@@ -1,6 +1,6 @@
 package functions.unitary.trig;
 
-import functions.Function;
+import functions.GeneralFunction;
 import functions.commutative.Product;
 import functions.special.Constant;
 import functions.unitary.UnitaryFunction;
@@ -14,18 +14,18 @@ public class Csch extends TrigFunction {
 	 * Constructs a new Csch
 	 * @param operand The function which csch is operating on
 	 */
-	public Csch(Function operand) {
+	public Csch(GeneralFunction operand) {
 		super(operand);
 	}
 
 	@Override
-	public Function getDerivative(char varID) {
+	public GeneralFunction getDerivative(char varID) {
 		return new Product(new Constant(-1), operand.getSimplifiedDerivative(varID), new Csch(operand), new Coth(operand));
 	}
 
 	/**
 	 * Returns the hyperbolic cosecant of the stored {@link #operand} evaluated
-	 * @param variableValues The values of the variables of the {@link Function} at the point
+	 * @param variableValues The values of the variables of the {@link GeneralFunction} at the point
 	 * @return the csch of {@link #operand} evaluated
 	 */
 	@Override
@@ -34,12 +34,12 @@ public class Csch extends TrigFunction {
 	}
 
 
-	public UnitaryFunction me(Function operand) {
+	public UnitaryFunction me(GeneralFunction operand) {
 		return new Csch(operand);
 	}
 
 
-	public Function getElementaryIntegral() {
+	public GeneralFunction getElementaryIntegral() {
 		return null;
 	}
 

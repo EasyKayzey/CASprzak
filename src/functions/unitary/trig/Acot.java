@@ -1,6 +1,6 @@
 package functions.unitary.trig;
 
-import functions.Function;
+import functions.GeneralFunction;
 import functions.binary.Pow;
 import functions.commutative.Sum;
 import functions.commutative.Product;
@@ -16,18 +16,18 @@ public class Acot extends InverseTrigFunction {
 	 * Constructs a new Acot
 	 * @param operand The function which arccot is operating on
 	 */
-	public Acot(Function operand) {
+	public Acot(GeneralFunction operand) {
 		super(operand);
 	}
 
 	@Override
-	public Function getDerivative(char varID) {
+	public GeneralFunction getDerivative(char varID) {
 		return new Product(DefaultFunctions.NEGATIVE_ONE, operand.getSimplifiedDerivative(varID), new Pow(DefaultFunctions.NEGATIVE_ONE, new Sum(DefaultFunctions.ONE, new Pow(DefaultFunctions.TWO, operand))));
 	}
 
 	/**
 	 * Returns the inverse cotangent of the stored {@link #operand} evaluated
-	 * @param variableValues The values of the variables of the {@link Function} at the point
+	 * @param variableValues The values of the variables of the {@link GeneralFunction} at the point
 	 * @return the arccot of {@link #operand} evaluated
 	 */
 	@Override
@@ -41,7 +41,7 @@ public class Acot extends InverseTrigFunction {
 	}
 
 
-	public UnitaryFunction me(Function operand) {
+	public UnitaryFunction me(GeneralFunction operand) {
 		return new Acot(operand);
 	}
 

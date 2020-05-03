@@ -1,7 +1,7 @@
 package functions.special;
 
 import config.Settings;
-import functions.Function;
+import functions.GeneralFunction;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
@@ -93,17 +93,17 @@ public class Constant extends SpecialFunction {
 		return String.valueOf(constant);
 	}
 
-	public Function getDerivative(char varID) {
+	public GeneralFunction getDerivative(char varID) {
 		return new Constant(0);
 	}
 
-	public Function clone() {
+	public GeneralFunction clone() {
 		if (constantKey == null)
 			return new Constant(constant);
 		else return new Constant(constantKey);
 	}
 
-	public Function simplify() {
+	public GeneralFunction simplify() {
 		if (constantKey == null)
 			for (Map.Entry<String, Double> entry : specialConstants.entrySet())
 				if (constant == entry.getValue())
@@ -112,16 +112,16 @@ public class Constant extends SpecialFunction {
 	}
 
 
-	public Function substitute(char varID, Function toReplace) {
+	public GeneralFunction substitute(char varID, GeneralFunction toReplace) {
 		return this;
 	}
 
 
-	public boolean equalsFunction(Function that) {
+	public boolean equalsFunction(GeneralFunction that) {
 		return (that instanceof Constant) && (Math.abs(constant - ((Constant) that).constant) < Settings.equalsMargin);
 	}
 
-	public int compareSelf(Function that) {
+	public int compareSelf(GeneralFunction that) {
 		if (constantKey != null) {
 			if (((Constant) that).constantKey != null)
 				//noinspection ConstantConditions

@@ -1,7 +1,7 @@
 package functions.commutative;
 
 import config.Settings;
-import functions.Function;
+import functions.GeneralFunction;
 import functions.special.Constant;
 import org.jetbrains.annotations.NotNull;
 import tools.FunctionTools;
@@ -11,12 +11,12 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.function.DoubleBinaryOperator;
 
-public abstract class CommutativeFunction extends Function {
+public abstract class CommutativeFunction extends GeneralFunction {
 
 	/**
-	 * Array of {@link Function}s operated on by the {@link CommutativeFunction}
+	 * Array of {@link GeneralFunction}s operated on by the {@link CommutativeFunction}
 	 */
-	protected final Function[] functions;
+	protected final GeneralFunction[] functions;
 
 	/**
 	 * The identity of the {@link CommutativeFunction} (e.g. 1 for * and 0 for +)
@@ -30,15 +30,15 @@ public abstract class CommutativeFunction extends Function {
 
 	/**
 	 * Constructs a new CommutativeFunction
-	 * @param functions The {@link Function}s that will be acted on
+	 * @param functions The {@link GeneralFunction}s that will be acted on
 	 */
-	public CommutativeFunction(Function... functions) {
+	public CommutativeFunction(GeneralFunction... functions) {
 		this.functions = functions;
 		Arrays.sort(this.functions);
 	}
 
 
-	public Function simplify() {
+	public GeneralFunction simplify() {
 		return this.simplifyInternal().simplifyTrivialElement();
 	}
 
@@ -56,8 +56,8 @@ public abstract class CommutativeFunction extends Function {
 	}
 
 	/**
-	 * Returns current {@link CommutativeFunction} after simplifying each {@link Function} in {@link #functions}
-	 * @return current {@link CommutativeFunction} after simplifying each {@link Function} in {@link #functions}
+	 * Returns current {@link CommutativeFunction} after simplifying each {@link GeneralFunction} in {@link #functions}
+	 * @return current {@link CommutativeFunction} after simplifying each {@link GeneralFunction} in {@link #functions}
 	 */
 	public abstract CommutativeFunction simplifyElements();
 
@@ -66,7 +66,7 @@ public abstract class CommutativeFunction extends Function {
 	 * @return current {@link CommutativeFunction} after simplifying the {@link #identityValue}
 	 */
 	public CommutativeFunction simplifyIdentity() {
-		Function[] toPut = getFunctions();
+		GeneralFunction[] toPut = getFunctions();
 		for (int i = 0; i < toPut.length; i++) {
 			if (toPut[i] instanceof Constant constant) {
 				if (constant.constant == identityValue) {
@@ -86,7 +86,7 @@ public abstract class CommutativeFunction extends Function {
 		for (int i = 1; i < functions.length; i++) {
 			for (int j = 0; j < i; j++) {
 				if (functions[i] instanceof Constant first && functions[j] instanceof Constant second) {
-					Function[] toOperate = FunctionTools.deepClone(functions);
+					GeneralFunction[] toOperate = FunctionTools.deepClone(functions);
 					toOperate[i] = new Constant(operation.applyAsDouble(first.constant, second.constant));
 					toOperate = FunctionTools.removeFunctionAt(toOperate, j);
 					return me(toOperate).simplifyConstants();
@@ -117,10 +117,10 @@ public abstract class CommutativeFunction extends Function {
 	}
 
 	/**
-	 * Returns identity {@link Constant} if {@link #functions} length is 0 or the {@link Function} if {@link #functions} length is 1
-	 * @return identity {@link Constant} if {@link #functions} length is 0 or the {@link Function} if {@link #functions} length is 1
+	 * Returns identity {@link Constant} if {@link #functions} length is 0 or the {@link GeneralFunction} if {@link #functions} length is 1
+	 * @return identity {@link Constant} if {@link #functions} length is 0 or the {@link GeneralFunction} if {@link #functions} length is 1
 	 */
-	public Function simplifyTrivialElement() {
+	public GeneralFunction simplifyTrivialElement() {
 		if (functions.length == 0)
 			return new Constant(identityValue);
 		if (functions.length == 1)
@@ -136,7 +136,7 @@ public abstract class CommutativeFunction extends Function {
 	 * Returns {@link #functions}
 	 * @return {@link #functions}
 	 */
-	public Function[] getFunctions() {
+	public GeneralFunction[] getFunctions() {
 		if (Settings.trustImmutability)
 			return functions;
 		else
@@ -153,33 +153,33 @@ public abstract class CommutativeFunction extends Function {
 
 
 	/**
-	 * Returns an instance of this {@link Function}
+	 * Returns an instance of this {@link GeneralFunction}
 	 * @param functions Constructor parameter
-	 * @return an instance of this Function
+	 * @return an instance of this GeneralFunction
 	 */
-	public abstract CommutativeFunction me(Function... functions);
+	public abstract CommutativeFunction me(GeneralFunction... functions);
 
 
-	public Function substitute(char varID, Function toReplace) {
-		Function[] newFunctions = new Function[functions.length];
+	public GeneralFunction substitute(char varID, GeneralFunction toReplace) {
+		GeneralFunction[] newFunctions = new GeneralFunction[functions.length];
 		for (int i = 0; i < functions.length; i++)
 			newFunctions[i] = functions[i].substitute(varID, toReplace);
 		return me(newFunctions);
 	}
 
 
-	public boolean equalsFunction(Function that) {
+	public boolean equalsFunction(GeneralFunction that) {
 		if (that instanceof CommutativeFunction function && this.getClass().equals(that.getClass()))
 			return FunctionTools.deepEquals(functions, function.getFunctions());
 		return false;
 	}
 
-	public int compareSelf(Function that) {
+	public int compareSelf(GeneralFunction that) {
 		if (that instanceof CommutativeFunction function) {
 			if (functions.length != function.getFunctionsLength())
 				return functions.length - function.getFunctionsLength();
-			Function[] thisFunctions = functions;
-			Function[] thatFunctions = function.getFunctions();
+			GeneralFunction[] thisFunctions = functions;
+			GeneralFunction[] thatFunctions = function.getFunctions();
 			for (int i = 0; i < thisFunctions.length; i++) {
 				if (!thisFunctions[i].equalsFunction(thatFunctions[i]))
 					return thisFunctions[i].compareTo(thatFunctions[i]);
@@ -187,16 +187,16 @@ public abstract class CommutativeFunction extends Function {
 		} else {
 			throw new IllegalCallerException("Illegally called CommutativeFunction.compareSelf on a non-CommutativeFunction");
 		}
-		System.out.println("This isn't supposed to happen. Check CompareSelf of CommutativeFunction and Function.compareTo");
+		System.out.println("This isn't supposed to happen. Check CompareSelf of CommutativeFunction and GeneralFunction.compareTo");
 		return 0;
 	}
 
 
-	public @NotNull Iterator<Function> iterator() {
+	public @NotNull Iterator<GeneralFunction> iterator() {
 		return new CommutativeIterator();
 	}
 
-	private class CommutativeIterator implements Iterator<Function> {
+	private class CommutativeIterator implements Iterator<GeneralFunction> {
 		private int loc;
 
 		private CommutativeIterator() {
@@ -210,7 +210,7 @@ public abstract class CommutativeFunction extends Function {
 
 		@SuppressWarnings("ValueOfIncrementOrDecrementUsed")
 		@Override
-		public Function next() {
+		public GeneralFunction next() {
 			if (!hasNext())
 				throw new NoSuchElementException("Out of elements in CommutativeFunction " + Arrays.toString(functions));
 			return functions[loc++];

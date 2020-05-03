@@ -1,72 +1,72 @@
 package functions.binary;
 
-import functions.Function;
+import functions.GeneralFunction;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public abstract class BinaryFunction extends Function {
+public abstract class BinaryFunction extends GeneralFunction {
 	/**
-	 * The first {@link Function} in the binary operation
+	 * The first {@link GeneralFunction} in the binary operation
 	 */
-	protected final Function function1;
+	protected final GeneralFunction function1;
 	/**
-	 * The second {@link Function} in the binary operation
+	 * The second {@link GeneralFunction} in the binary operation
 	 */
-	protected final Function function2;
+	protected final GeneralFunction function2;
 
 	/**
 	 * Constructs a new BinaryFunction
-	 * @param function1 The first {@link Function} in the binary operation
-	 * @param function2 The second {@link Function} in the binary operation
+	 * @param function1 The first {@link GeneralFunction} in the binary operation
+	 * @param function2 The second {@link GeneralFunction} in the binary operation
 	 */
-	public BinaryFunction(Function function1, Function function2) {
+	public BinaryFunction(GeneralFunction function1, GeneralFunction function2) {
 		this.function1 = function1;
 		this.function2 = function2;
 	}
 
 
 	/**
-	 * Returns the {@link Function} stored in {@link #function1}
-	 * @return the {@link Function} stored in {@link #function1}
+	 * Returns the {@link GeneralFunction} stored in {@link #function1}
+	 * @return the {@link GeneralFunction} stored in {@link #function1}
 	 */
-	public Function getFunction1() {
+	public GeneralFunction getFunction1() {
 		return function1;
 	}
 
 	/**
-	 * Returns the {@link Function} stored in {@link #function2}
-	 * @return the {@link Function} stored in {@link #function2}
+	 * Returns the {@link GeneralFunction} stored in {@link #function2}
+	 * @return the {@link GeneralFunction} stored in {@link #function2}
 	 */
-	public Function getFunction2() {
+	public GeneralFunction getFunction2() {
 		return function2;
 	}
 
 	/**
-	 * Returns an instance of this {@link Function}, using the correct subclass
+	 * Returns an instance of this {@link GeneralFunction}, using the correct subclass
 	 * @param function1 Constructor parameter 1
 	 * @param function2 Constructor parameter 2
-	 * @return an instance of this Function
+	 * @return an instance of this GeneralFunction
 	 */
-	public abstract BinaryFunction me(Function function1, Function function2);
+	public abstract BinaryFunction me(GeneralFunction function1, GeneralFunction function2);
 
 	/**
-	 * Substitutes all {@link functions.special.Variable} in the function with a specified {@link Function}
+	 * Substitutes all {@link functions.special.Variable} in the function with a specified {@link GeneralFunction}
 	 * @param varID     the variable to be substituted into
-	 * @param toReplace the {@link Function} that will be substituted
+	 * @param toReplace the {@link GeneralFunction} that will be substituted
 	 * @return the function after the given substitution was made
 	 */
-	public Function substitute(char varID, Function toReplace) {
+	public GeneralFunction substitute(char varID, GeneralFunction toReplace) {
 		return me(function1.substitute(varID, toReplace), function2.substitute(varID, toReplace));
 	}
 
 
-	public boolean equalsFunction(Function that) {
+	public boolean equalsFunction(GeneralFunction that) {
 		return this.getClass().equals(that.getClass()) && this.function1.equalsFunction(((BinaryFunction) that).function1) && this.function2.equalsFunction(((BinaryFunction) that).function2);
 	}
 
-	public int compareSelf(Function that) {
+	public int compareSelf(GeneralFunction that) {
 		if (that instanceof BinaryFunction binaryFunction) {
 			if (!this.function1.equalsFunction(binaryFunction.function1))
 				return this.function1.compareTo(binaryFunction.function1);
@@ -80,11 +80,11 @@ public abstract class BinaryFunction extends Function {
 	}
 
 
-	public @NotNull Iterator<Function> iterator() {
+	public @NotNull Iterator<GeneralFunction> iterator() {
 		return new BinaryIterator();
 	}
 
-	private class BinaryIterator implements Iterator<Function> {
+	private class BinaryIterator implements Iterator<GeneralFunction> {
 		private int loc;
 
 		private BinaryIterator() {
@@ -98,7 +98,7 @@ public abstract class BinaryFunction extends Function {
 
 		@SuppressWarnings("ValueOfIncrementOrDecrementUsed")
 		@Override
-		public Function next() {
+		public GeneralFunction next() {
 			if (!hasNext())
 				throw new NoSuchElementException("Out of elements in BinaryFunction " + function2 + ", " + function1);
 			return switch(loc++) {

@@ -1,6 +1,6 @@
 package functions.unitary.trig;
 
-import functions.Function;
+import functions.GeneralFunction;
 import functions.binary.Pow;
 import functions.commutative.Sum;
 import functions.commutative.Product;
@@ -16,13 +16,13 @@ public class Acos extends InverseTrigFunction {
 	 * Constructs a new Acos
 	 * @param operand The function which arccos is operating on
 	 */
-	public Acos(Function operand) {
+	public Acos(GeneralFunction operand) {
 		super(operand);
 	}
 
 	/**
 	 * Returns the inverse cosine of the stored {@link #operand} evaluated
-	 * @param variableValues The values of the variables of the {@link Function} at the point
+	 * @param variableValues The values of the variables of the {@link GeneralFunction} at the point
 	 * @return the arccos of {@link #operand} evaluated
 	 */
 	@Override
@@ -31,11 +31,11 @@ public class Acos extends InverseTrigFunction {
 	}
 
 	@Override
-	public Function getDerivative(char varID) {
+	public GeneralFunction getDerivative(char varID) {
 		return new Product(DefaultFunctions.NEGATIVE_ONE, operand.getSimplifiedDerivative(varID), new Pow(DefaultFunctions.NEGATIVE_HALF, (new Sum(DefaultFunctions.ONE, new Product(DefaultFunctions.NEGATIVE_ONE, new Pow(DefaultFunctions.TWO, operand))))));
 	}
 
-	public UnitaryFunction me(Function operand) {
+	public UnitaryFunction me(GeneralFunction operand) {
 		return new Acos(operand);
 	}
 

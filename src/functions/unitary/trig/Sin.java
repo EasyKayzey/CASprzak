@@ -1,6 +1,6 @@
 package functions.unitary.trig;
 
-import functions.Function;
+import functions.GeneralFunction;
 import functions.commutative.Product;
 import functions.unitary.UnitaryFunction;
 import tools.DefaultFunctions;
@@ -14,13 +14,13 @@ public class Sin extends TrigFunction {
 	 * Constructs a new Sin
 	 * @param operand The function which sin is operating on
 	 */
-	public Sin(Function operand) {
+	public Sin(GeneralFunction operand) {
 		super(operand);
 	}
 
 	/**
 	 * Returns the sine of the stored {@link #operand} evaluated
-	 * @param variableValues The values of the variables of the {@link Function} at the point
+	 * @param variableValues The values of the variables of the {@link GeneralFunction} at the point
 	 * @return the sin of {@link #operand} evaluated
 	 */
 	@Override
@@ -29,15 +29,15 @@ public class Sin extends TrigFunction {
 	}
 
 	@Override
-	public Function getDerivative(char varID) {
+	public GeneralFunction getDerivative(char varID) {
 		return new Product(new Cos(operand), operand.getSimplifiedDerivative(varID));
 	}
 
-	public UnitaryFunction me(Function operand) {
+	public UnitaryFunction me(GeneralFunction operand) {
 		return new Sin(operand);
 	}
 
-	public Function getElementaryIntegral() {
+	public GeneralFunction getElementaryIntegral() {
 		return new Product(DefaultFunctions.NEGATIVE_ONE, new Cos(operand));
 	}
 

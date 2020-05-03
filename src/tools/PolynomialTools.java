@@ -1,6 +1,6 @@
 package tools;
 
-import functions.Function;
+import functions.GeneralFunction;
 import functions.binary.Pow;
 import functions.commutative.Sum;
 import functions.commutative.Product;
@@ -13,16 +13,16 @@ import java.util.function.DoublePredicate;
 public class PolynomialTools {
 
 	/**
-	 * Checks if a given {@link Function} is a polynomial. Must call {@link Function#simplify()} before using.
+	 * Checks if a given {@link GeneralFunction} is a polynomial. Must call {@link GeneralFunction#simplify()} before using.
 	 * @param function the function to be checked
 	 * @return true if function is a polynomial
 	 */
-	public static boolean isPolynomial(Function function) {
+	public static boolean isPolynomial(GeneralFunction function) {
 		if (isMonomial(function)) {
 			return true;
 		} else if (function instanceof Sum sum) {
-			Function[] terms = sum.getFunctions();
-			for (Function term : terms) {
+			GeneralFunction[] terms = sum.getFunctions();
+			for (GeneralFunction term : terms) {
 				if (!isMonomial(term)) {
 					return false;
 				}
@@ -34,29 +34,29 @@ public class PolynomialTools {
 	}
 
 	/**
-	 * Checks if a given {@link Function} is a monomial (positive integer powers). Must call {@link Function#simplify()} before using.
+	 * Checks if a given {@link GeneralFunction} is a monomial (positive integer powers). Must call {@link GeneralFunction#simplify()} before using.
 	 * @param function the function to be checked
 	 * @return true if function is a monomial
 	 */
-	public static boolean isMonomial(Function function) {
+	public static boolean isMonomial(GeneralFunction function) {
 		return isGivenMonomial(function, (a -> ((int) a == a && a > 0)));
 	}
 
 	/**
-	 * Checks if a given {@link Function} is a generalized monomial (any constant powers). Must call {@link Function#simplify()} before using.
+	 * Checks if a given {@link GeneralFunction} is a generalized monomial (any constant powers). Must call {@link GeneralFunction#simplify()} before using.
 	 * @param function the function to be checked
 	 * @return true if function is a generalized monomial
 	 */
-	public static boolean isGeneralMonomial(Function function) {
+	public static boolean isGeneralMonomial(GeneralFunction function) {
 		return isGivenMonomial(function, a -> true);
 	}
 
-	private static boolean isGivenMonomial(Function function, DoublePredicate test) {
+	private static boolean isGivenMonomial(GeneralFunction function, DoublePredicate test) {
 		if (function instanceof Constant || function instanceof Variable || (function instanceof Pow pow && pow.getFunction2() instanceof Variable && pow.getFunction1() instanceof Constant exp && test.test(exp.evaluate(null)))) {
 			return true;
 		} else if (function instanceof Product product) {
-			Function[] elements = product.getFunctions();
-			for (Function element : elements) {
+			GeneralFunction[] elements = product.getFunctions();
+			for (GeneralFunction element : elements) {
 				if (!(element instanceof Constant || element instanceof Variable || element instanceof Pow))
 					return false;
 				if (element instanceof Pow pow && !(pow.getFunction2() instanceof Variable && pow.getFunction1() instanceof Constant exp && test.test(exp.evaluate(null))))
@@ -74,7 +74,7 @@ public class PolynomialTools {
 	 * @return the degree of the monomial
 	 * @throws IllegalArgumentException when input is not a monomial
 	 */
-	public static double getDegree(Function function) throws IllegalArgumentException {
+	public static double getDegree(GeneralFunction function) throws IllegalArgumentException {
 		if (!isGeneralMonomial(function))
 			throw new IllegalArgumentException(function + " is not a monomial");
 		else if (function instanceof Variable)
@@ -82,9 +82,9 @@ public class PolynomialTools {
 		else if (function instanceof Pow power && power.getFunction1() instanceof Constant number)
 			return number.constant;
 		else if (function instanceof Product product) {
-			Function[] elements = product.getFunctions();
+			GeneralFunction[] elements = product.getFunctions();
 			double sum = 0;
-			for (Function element: elements) {
+			for (GeneralFunction element: elements) {
 				if (element instanceof Pow power && power.getFunction1() instanceof Constant number)
 					sum += number.constant;
 				else if (element instanceof Variable)

@@ -1,7 +1,7 @@
 package functions.binary;
 
 import config.Settings;
-import functions.Function;
+import functions.GeneralFunction;
 import functions.commutative.Sum;
 import functions.commutative.Product;
 import functions.special.Constant;
@@ -18,12 +18,12 @@ public class Pow extends BinaryFunction {
 	 * @param exponent The exponent of the exponent
 	 * @param base The base of the exponent
 	 */
-	public Pow(Function exponent, Function base) {
+	public Pow(GeneralFunction exponent, GeneralFunction base) {
 		super(exponent, base);
 	}
 
 	@Override
-	public Function getDerivative(char varID) {
+	public GeneralFunction getDerivative(char varID) {
 		if (function1 instanceof Constant exponent)
 			return new Product(new Constant(exponent.constant), new Pow(new Constant(exponent.constant - 1), function2), function2.getSimplifiedDerivative(varID));
 		else
@@ -35,24 +35,24 @@ public class Pow extends BinaryFunction {
 		return Math.pow(function2.evaluate(variableValues), function1.evaluate(variableValues));
 	}
 
-	public Function clone() {
+	public GeneralFunction clone() {
 		return new Pow(function1.clone(), function2.clone());
 	}
 
-	public Function simplify() {
+	public GeneralFunction simplify() {
 		Pow currentPow = (new Pow(function1.simplify(), function2.simplify()));
 		currentPow = currentPow.multiplyExponents();
-		Function current = currentPow.simplifyObviousExponentsAndFOC();
+		GeneralFunction current = currentPow.simplifyObviousExponentsAndFOC();
 		if (current instanceof Pow pow && pow.function2 instanceof Product && Settings.distributeExponents)
 			current = pow.distributeExponents();
 		return current;
 	}
 
 	/**
-	 * Returns a {@link Function} where obvious exponents (ex: {@code (x+1)^1 or (x-1)^0}) have been simplified and {@link Constant} bases and {@link Constant} exponents (ex: {@code 2^7}) are simplified
-	 * @return a {@link Function} where obvious exponents and Functions of Constants are simplified
+	 * Returns a {@link GeneralFunction} where obvious exponents (ex: {@code (x+1)^1 or (x-1)^0}) have been simplified and {@link Constant} bases and {@link Constant} exponents (ex: {@code 2^7}) are simplified
+	 * @return a {@link GeneralFunction} where obvious exponents and Functions of Constants are simplified
 	 */
-	public Function simplifyObviousExponentsAndFOC() { //FOC means Functions of Constants
+	public GeneralFunction simplifyObviousExponentsAndFOC() { //FOC means Functions of Constants
 		if (function1 instanceof Constant constant) {
 			if (constant.constant == 0)
 				return new Constant(1);
@@ -88,10 +88,10 @@ public class Pow extends BinaryFunction {
 		return new Product(distributeExponentsArray());
 	}
 
-	private Function[] distributeExponentsArray() {
+	private GeneralFunction[] distributeExponentsArray() {
 		if (function2 instanceof Product product) {
-			Function[] oldFunctions = product.getFunctions();
-			Function[] toMultiply = new Function[oldFunctions.length];
+			GeneralFunction[] oldFunctions = product.getFunctions();
+			GeneralFunction[] toMultiply = new GeneralFunction[oldFunctions.length];
 			for (int i = 0; i < toMultiply.length; i++) {
 				toMultiply[i] = new Pow(function1, oldFunctions[i]).simplify();
 			}
@@ -103,9 +103,9 @@ public class Pow extends BinaryFunction {
 
 	/**
 	 * Given a Pow, checks if the exponent is a positive integer then unwraps it into a multiply
-	 * @return a new unwrapped Function
+	 * @return a new unwrapped GeneralFunction
 	 */
-	public Function unwrapIntegerPowerSafe() {
+	public GeneralFunction unwrapIntegerPowerSafe() {
 		if (function1 instanceof Constant constant && constant.constant >= 0) {
 			try {
 				return unwrapIntegerPower();
@@ -126,13 +126,13 @@ public class Pow extends BinaryFunction {
 	 */
 	public Product unwrapIntegerPower() throws RuntimeException {
 		int intConstant = MiscTools.toInteger(((Constant) function1).constant);
-		Function[] toMultiply = new Function[intConstant];
+		GeneralFunction[] toMultiply = new GeneralFunction[intConstant];
 		Arrays.fill(toMultiply, function2);
 		return new Product(toMultiply);
 	}
 
 
-	public BinaryFunction me(Function function1, Function function2) {
+	public BinaryFunction me(GeneralFunction function1, GeneralFunction function2) {
 		return new Pow(function1, function2);
 	}
 

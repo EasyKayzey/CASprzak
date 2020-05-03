@@ -1,6 +1,6 @@
 package functions.unitary.trig;
 
-import functions.Function;
+import functions.GeneralFunction;
 import functions.commutative.Product;
 import functions.commutative.Sum;
 import functions.special.Constant;
@@ -19,13 +19,13 @@ public class Csc extends TrigFunction {
 	 * Constructs a new Csc
 	 * @param operand The function which csc is operating on
 	 */
-	public Csc(Function operand) {
+	public Csc(GeneralFunction operand) {
 		super(operand);
 	}
 
 	/**
 	 * Returns the cosecant of the stored {@link #operand} evaluated
-	 * @param variableValues The values of the variables of the {@link Function} at the point
+	 * @param variableValues The values of the variables of the {@link GeneralFunction} at the point
 	 * @return the csc of {@link #operand} evaluated
 	 */
 	@Override
@@ -34,15 +34,15 @@ public class Csc extends TrigFunction {
 	}
 
 	@Override
-	public Function getDerivative(char varID) {
+	public GeneralFunction getDerivative(char varID) {
 		return new Product(new Constant(-1), new Cot(operand), new Csc(operand), operand.getSimplifiedDerivative(varID));
 	}
 
-	public UnitaryFunction me(Function operand) {
+	public UnitaryFunction me(GeneralFunction operand) {
 		return new Csc(operand);
 	}
 
-	public Function getElementaryIntegral() {
+	public GeneralFunction getElementaryIntegral() {
 		return new Product(DefaultFunctions.NEGATIVE_ONE, new Ln(new Abs(new Sum(new Csc(operand), new Cot(operand)))));
 	}
 

@@ -1,6 +1,6 @@
 package functions.unitary.trig;
 
-import functions.Function;
+import functions.GeneralFunction;
 import functions.commutative.Product;
 import functions.unitary.UnitaryFunction;
 
@@ -13,13 +13,13 @@ public class Sinh extends TrigFunction {
 	 * Constructs a new Sinh
 	 * @param operand The function which sinh is operating on
 	 */
-	public Sinh(Function operand) {
+	public Sinh(GeneralFunction operand) {
 		super(operand);
 	}
 
 	/**
 	 * Returns the hyperbolic sine of the stored {@link #operand} evaluated
-	 * @param variableValues The values of the variables of the {@link Function} at the point
+	 * @param variableValues The values of the variables of the {@link GeneralFunction} at the point
 	 * @return the sinh of {@link #operand} evaluated
 	 */
 	@Override
@@ -28,16 +28,16 @@ public class Sinh extends TrigFunction {
 	}
 
 	@Override
-	public Function getDerivative(char varID) {
+	public GeneralFunction getDerivative(char varID) {
 		return new Product(new Cosh(operand), operand.getSimplifiedDerivative(varID));
 	}
 
-	public UnitaryFunction me(Function operand) {
+	public UnitaryFunction me(GeneralFunction operand) {
 		return new Sinh(operand);
 	}
 
 
-	public Function getElementaryIntegral() {
+	public GeneralFunction getElementaryIntegral() {
 		return new Cosh(operand);
 	}
 

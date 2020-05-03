@@ -1,6 +1,6 @@
 package parsing;
 
-import functions.Function;
+import functions.GeneralFunction;
 import functions.special.Constant;
 
 import java.lang.reflect.MalformedParametersException;
@@ -48,28 +48,28 @@ public class Parser {
 	/**
 	 * Parses infix using {@link parsing.PreProcessor} and {@link #parse(String[])}
 	 * @param infix infix string
-	 * @return a {@link functions.Function} corresponding to the infix string
+	 * @return a {@link GeneralFunction} corresponding to the infix string
 	 */
-	public static Function parse(String infix) {
+	public static GeneralFunction parse(String infix) {
 		return Parser.parse(PreProcessor.toPostfix(infix));
 	}
 
 	/**
 	 * Parses infix using {@link parsing.PreProcessor} and {@link #parse(String[])}, then simplifies the output
 	 * @param infix infix string
-	 * @return a {@link functions.Function} corresponding to the infix string, simplified
+	 * @return a {@link GeneralFunction} corresponding to the infix string, simplified
 	 */
-	public static Function parseSimplified(String infix) {
+	public static GeneralFunction parseSimplified(String infix) {
 		return parse(infix).simplify();
 	}
 
 	/**
-	 * Parses an array of postfix tokens into a {@link functions.Function}
+	 * Parses an array of postfix tokens into a {@link GeneralFunction}
 	 * @param postfix array of tokens in postfix
-	 * @return a {@link functions.Function} corresponding to the postfix string
+	 * @return a {@link GeneralFunction} corresponding to the postfix string
 	 */
-	public static Function parse(String[] postfix) {
-		Deque<Function> functionStack = new LinkedList<>();
+	public static GeneralFunction parse(String[] postfix) {
+		Deque<GeneralFunction> functionStack = new LinkedList<>();
 		for (String token : postfix) {
 			if (Constant.isSpecialConstant(token)) {
 				functionStack.push(new Constant(token));
@@ -82,11 +82,11 @@ public class Parser {
 					functionStack.push(FunctionMaker.variable(variableName));
 				}
 			} else if (isBinaryOperator(token)) {
-				Function a = functionStack.pop();
-				Function b = functionStack.pop();
+				GeneralFunction a = functionStack.pop();
+				GeneralFunction b = functionStack.pop();
 				functionStack.push(FunctionMaker.makeBinary(token, a, b));
 			} else if (isUnitaryOperator(token)) {
-				Function c = functionStack.pop();
+				GeneralFunction c = functionStack.pop();
 				functionStack.push(FunctionMaker.makeUnitary(token, c));
 			}
 		}
@@ -96,8 +96,8 @@ public class Parser {
 	}
 
 	@SuppressWarnings("ChainOfInstanceofChecks")
-	public static Function toFunction(Object input) {
-		if (input instanceof Function f)
+	public static GeneralFunction toFunction(Object input) {
+		if (input instanceof GeneralFunction f)
 			return f;
 		else if (input instanceof Double d)
 			return new Constant(d);

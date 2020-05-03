@@ -1,6 +1,6 @@
 package functions.unitary.trig;
 
-import functions.Function;
+import functions.GeneralFunction;
 import functions.commutative.Product;
 import functions.unitary.UnitaryFunction;
 
@@ -13,13 +13,13 @@ public class Cosh extends TrigFunction {
 	 * Constructs a new Cosh
 	 * @param operand The function which cosh is operating on
 	 */
-	public Cosh(Function operand) {
+	public Cosh(GeneralFunction operand) {
 		super(operand);
 	}
 
 	/**
 	 * Returns the hyperbolic cosine of the stored {@link #operand} evaluated
-	 * @param variableValues The values of the variables of the {@link Function} at the point
+	 * @param variableValues The values of the variables of the {@link GeneralFunction} at the point
 	 * @return the cosh of {@link #operand} evaluated
 	 */
 	@Override
@@ -28,11 +28,11 @@ public class Cosh extends TrigFunction {
 	}
 
 	@Override
-	public Function getDerivative(char varID) {
+	public GeneralFunction getDerivative(char varID) {
 		return new Product(new Sinh(operand), operand.getSimplifiedDerivative(varID));
 	}
 
-	public UnitaryFunction me(Function operand) {
+	public UnitaryFunction me(GeneralFunction operand) {
 		return new Cosh(operand);
 	}
 
@@ -40,7 +40,7 @@ public class Cosh extends TrigFunction {
 		return Acosh.class;
 	}
 
-	public Function getElementaryIntegral() {
+	public GeneralFunction getElementaryIntegral() {
 		return new Sinh(operand);
 	}
 }

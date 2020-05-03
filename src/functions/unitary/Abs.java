@@ -1,6 +1,6 @@
 package functions.unitary;
 
-import functions.Function;
+import functions.GeneralFunction;
 import functions.commutative.Product;
 
 import java.util.Map;
@@ -11,7 +11,7 @@ public class Abs extends UnitaryFunction {
 	 * Constructs a new Abs
 	 * @param operand The function which absolute value is operating on
 	 */
-	public Abs(Function operand) {
+	public Abs(GeneralFunction operand) {
 		super(operand);
 	}
 
@@ -21,12 +21,12 @@ public class Abs extends UnitaryFunction {
 	}
 
 	@Override
-	public Function getDerivative(char varID) {
+	public GeneralFunction getDerivative(char varID) {
 		return new Product(operand.getSimplifiedDerivative(varID), new Sign(operand));
 	}
 
 
-	public UnitaryFunction me(Function operand) {
+	public UnitaryFunction me(GeneralFunction operand) {
 		return new Abs(operand);
 	}
 }

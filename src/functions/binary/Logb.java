@@ -1,6 +1,6 @@
 package functions.binary;
 
-import functions.Function;
+import functions.GeneralFunction;
 import functions.commutative.Sum;
 import functions.commutative.Product;
 import functions.special.Constant;
@@ -15,7 +15,7 @@ public class Logb extends BinaryFunction {
 	 * @param argument The argument of the logarithm
 	 * @param base The base of the logarithm
 	 */
-	public Logb(Function argument, Function base) {
+	public Logb(GeneralFunction argument, GeneralFunction base) {
 		super(argument, base);
 	}
 
@@ -26,7 +26,7 @@ public class Logb extends BinaryFunction {
 	}
 
 	@Override
-	public Function getDerivative(char varID) {
+	public GeneralFunction getDerivative(char varID) {
 		if (function2 instanceof Constant base)
 			return new Product(function1.getSimplifiedDerivative(varID), new Pow(DefaultFunctions.NEGATIVE_ONE, new Product(new Ln(new Constant(base.constant)), function1)));
 		else
@@ -38,16 +38,16 @@ public class Logb extends BinaryFunction {
 		return Math.log(function1.evaluate(variableValues)) / Math.log(function2.evaluate(variableValues));
 	}
 
-	public Function clone() {
+	public GeneralFunction clone() {
 		return new Logb(function1.clone(), function2.clone());
 	}
 
-	public Function simplify() {
+	public GeneralFunction simplify() {
 		return new Logb(function1.simplify(), function2.simplify());
 	}
 
 
-	public BinaryFunction me(Function function1, Function function2) {
+	public BinaryFunction me(GeneralFunction function1, GeneralFunction function2) {
 		return new Logb(function1, function2);
 	}
 

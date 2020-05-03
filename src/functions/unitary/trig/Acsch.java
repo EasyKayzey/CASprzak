@@ -1,6 +1,6 @@
 package functions.unitary.trig;
 
-import functions.Function;
+import functions.GeneralFunction;
 import functions.binary.Pow;
 import functions.commutative.Sum;
 import functions.commutative.Product;
@@ -16,18 +16,18 @@ public class Acsch extends InverseTrigFunction {
 	 * Constructs a new Acsch
 	 * @param operand The function which arccsch is operating on
 	 */
-	public Acsch(Function operand) {
+	public Acsch(GeneralFunction operand) {
 		super(operand);
 	}
 
 	@Override
-	public Function getDerivative(char varID) {
+	public GeneralFunction getDerivative(char varID) {
 		return new Product(DefaultFunctions.NEGATIVE_ONE, operand.getSimplifiedDerivative(varID), new Pow(DefaultFunctions.NEGATIVE_ONE, new Product(operand, new Pow(DefaultFunctions.HALF, new Sum(DefaultFunctions.ONE, new Product(DefaultFunctions.NEGATIVE_ONE, new Pow(DefaultFunctions.TWO, operand)))))));
 	}
 
 	/**
 	 * Returns the inverse hyperbolic cosecant of the stored {@link #operand} evaluated
-	 * @param variableValues The values of the variables of the {@link Function} at the point
+	 * @param variableValues The values of the variables of the {@link GeneralFunction} at the point
 	 * @return the arccsch of {@link #operand} evaluated
 	 */
 	@Override
@@ -37,7 +37,7 @@ public class Acsch extends InverseTrigFunction {
 	}
 
 
-	public UnitaryFunction me(Function operand) {
+	public UnitaryFunction me(GeneralFunction operand) {
 		return new Acsch(operand);
 	}
 

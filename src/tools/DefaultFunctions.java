@@ -1,6 +1,6 @@
 package tools;
 
-import functions.Function;
+import functions.GeneralFunction;
 import functions.binary.Pow;
 import functions.commutative.Product;
 import functions.special.Constant;
@@ -22,19 +22,19 @@ public class DefaultFunctions {
 	public static final Variable Y = new Variable('y');
 	public static final Variable Z = new Variable('z');
 
-	public static Product negative(Function input) {
+	public static Product negative(GeneralFunction input) {
 		return new Product(NEGATIVE_ONE, input);
 	}
 
-	public static Pow reciprocal(Function input) {
+	public static Pow reciprocal(GeneralFunction input) {
 		return new Pow(NEGATIVE_ONE, input);
 	}
 
-	public static Pow sqrt(Function input) {
+	public static Pow sqrt(GeneralFunction input) {
 		return new Pow(HALF, input);
 	}
 
-	public static Pow square(Function input) {
+	public static Pow square(GeneralFunction input) {
 		return new Pow(TWO, input);
 	}
 }

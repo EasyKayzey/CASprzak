@@ -3,8 +3,8 @@ package functions;
 public interface Simplifiable {
 
 	/**
-	 * Returns this Function, simplified
+	 * Returns this GeneralFunction, simplified
 	 * @return the simplified function
 	 */
-	Function simplify();
+	GeneralFunction simplify();
 }

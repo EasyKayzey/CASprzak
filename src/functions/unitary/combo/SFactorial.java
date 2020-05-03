@@ -1,7 +1,7 @@
 package functions.unitary.combo;
 
 import config.Settings;
-import functions.Function;
+import functions.GeneralFunction;
 import functions.binary.Pow;
 import functions.commutative.Product;
 import functions.special.Constant;
@@ -14,23 +14,23 @@ public class SFactorial extends Factorial {
 	/**
 	 * Constructs a new UnitaryFunction
 	 *
-	 * @param operand The {@link Function} which will be operated on
+	 * @param operand The {@link GeneralFunction} which will be operated on
 	 */
-	public SFactorial(Function operand) {
+	public SFactorial(GeneralFunction operand) {
 		super(operand);
 	}
 
-	private Function classForm() {
+	private GeneralFunction classForm() {
 		return new Product(new Pow(new Constant(.5), new Product(new Constant(2), new Constant("pi"), operand)), new Pow(operand, new Product(operand, new Pow(new Constant(-1), new Constant("e")))));
 	}
 
 
-	public UnitaryFunction me(Function function) {
+	public UnitaryFunction me(GeneralFunction function) {
 			return new SFactorial(function);
 	}
 
 	@Override
-	public Function getDerivative(char varID) {
+	public GeneralFunction getDerivative(char varID) {
 		return classForm().getDerivative(varID);
 	}
 

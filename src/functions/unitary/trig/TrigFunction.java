@@ -1,12 +1,12 @@
 package functions.unitary.trig;
 
-import functions.Function;
+import functions.GeneralFunction;
 import functions.Integrable;
 import functions.unitary.UnitaryFunction;
 
 public abstract class TrigFunction extends UnitaryFunction implements Integrable {
 
-	public TrigFunction(Function operand) {
+	public TrigFunction(GeneralFunction operand) {
 		super(operand);
 	}
 

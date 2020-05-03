@@ -1,7 +1,7 @@
 package functions.commutative;
 
 import config.Settings;
-import functions.Function;
+import functions.GeneralFunction;
 import functions.special.Constant;
 import tools.DefaultFunctions;
 import tools.FunctionTools;
@@ -13,7 +13,7 @@ public class Sum extends CommutativeFunction {
 	 * Constructs a new Add
 	 * @param functions The terms being added together
 	 */
-	public Sum(Function... functions) {
+	public Sum(GeneralFunction... functions) {
 		super(functions);
 		identityValue = 0;
 		operation = Double::sum;
@@ -21,7 +21,7 @@ public class Sum extends CommutativeFunction {
 
 	public double evaluate(Map<Character, Double> variableValues) {
 		double accumulator = identityValue;
-		for (Function f : functions)
+		for (GeneralFunction f : functions)
 			accumulator += f.evaluate(variableValues);
 		return accumulator;
 	}
@@ -41,8 +41,8 @@ public class Sum extends CommutativeFunction {
 	}
 
 	@Override
-	public Function getDerivative(char varID) {
-		Function[] toAdd = new Function[functions.length];
+	public GeneralFunction getDerivative(char varID) {
+		GeneralFunction[] toAdd = new GeneralFunction[functions.length];
 		for (int i = 0; i < functions.length; i++) {
 			toAdd[i] = functions[i].getSimplifiedDerivative(varID);
 		}
@@ -50,7 +50,7 @@ public class Sum extends CommutativeFunction {
 	}
 
 	public Sum clone() {
-		Function[] toAdd = new Function[functions.length];
+		GeneralFunction[] toAdd = new GeneralFunction[functions.length];
 		for (int i = 0; i < functions.length; i++) toAdd[i] = functions[i].clone();
 		return new Sum(toAdd);
 	}
@@ -65,7 +65,7 @@ public class Sum extends CommutativeFunction {
 
 	@Override
 	public Sum simplifyElements() {
-		Function[] toAdd = new Function[functions.length];
+		GeneralFunction[] toAdd = new GeneralFunction[functions.length];
 		for (int i = 0; i < functions.length; i++)
 			toAdd[i] = functions[i].simplify();
 		return new Sum(toAdd);
@@ -76,7 +76,7 @@ public class Sum extends CommutativeFunction {
 	 * @return a {@link Sum} where like terms are added together
 	 */
 	public Sum combineLikeTerms() {
-		Function[] combinedTerms = FunctionTools.deepClone(functions);
+		GeneralFunction[] combinedTerms = FunctionTools.deepClone(functions);
 		for (int a = 0; a < combinedTerms.length; a++)
 			if (!(combinedTerms[a] instanceof Product product && product.getFunctions()[0] instanceof Constant))
 				combinedTerms[a] = new Product(DefaultFunctions.ONE, combinedTerms[a]).simplifyPull();
@@ -84,8 +84,8 @@ public class Sum extends CommutativeFunction {
 		for (int i = 1; i < combinedTerms.length; i++) {
 			for (int j = 0; j < i; j++) {
 				if (combinedTerms[i] instanceof Product first && combinedTerms[j] instanceof Product second) {
-					Function[] firstFunctions = first.getFunctions();
-					Function[] secondFunctions = second.getFunctions();
+					GeneralFunction[] firstFunctions = first.getFunctions();
+					GeneralFunction[] secondFunctions = second.getFunctions();
 					if (!((firstFunctions[0] instanceof Constant) && (secondFunctions[0] instanceof Constant)))
 						throw new IllegalStateException("Constants should always be first in a Multiply.");
 					if (FunctionTools.deepEquals(firstFunctions, secondFunctions, 1)) {
@@ -104,7 +104,7 @@ public class Sum extends CommutativeFunction {
 			return clone();
 	}
 
-	public CommutativeFunction me(Function... functions) {
+	public CommutativeFunction me(GeneralFunction... functions) {
 		return new Sum(functions);
 	}
 }

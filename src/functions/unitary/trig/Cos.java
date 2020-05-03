@@ -1,6 +1,6 @@
 package functions.unitary.trig;
 
-import functions.Function;
+import functions.GeneralFunction;
 import functions.commutative.Product;
 import functions.special.Constant;
 import functions.unitary.UnitaryFunction;
@@ -14,13 +14,13 @@ public class Cos extends TrigFunction {
 	 * Constructs a new Cos
 	 * @param operand The function which cos is operating on
 	 */
-	public Cos(Function operand) {
+	public Cos(GeneralFunction operand) {
 		super(operand);
 	}
 
 	/**
 	 * Returns the cosine of the stored {@link #operand} evaluated
-	 * @param variableValues The values of the variables of the {@link Function} at the point
+	 * @param variableValues The values of the variables of the {@link GeneralFunction} at the point
 	 * @return the cos of {@link #operand} evaluated
 	 */
 	@Override
@@ -29,11 +29,11 @@ public class Cos extends TrigFunction {
 	}
 
 	@Override
-	public Function getDerivative(char varID) {
+	public GeneralFunction getDerivative(char varID) {
 		return new Product(new Sin(operand), new Constant(-1), operand.getSimplifiedDerivative(varID));
 	}
 
-	public UnitaryFunction me(Function operand) {
+	public UnitaryFunction me(GeneralFunction operand) {
 		return new Cos(operand);
 	}
 
@@ -41,7 +41,7 @@ public class Cos extends TrigFunction {
 		return Acos.class;
 	}
 
-	public Function getElementaryIntegral() {
+	public GeneralFunction getElementaryIntegral() {
 		return new Sin(operand);
 	}
 }

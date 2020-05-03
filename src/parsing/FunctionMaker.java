@@ -1,6 +1,6 @@
 package parsing;
 
-import functions.Function;
+import functions.GeneralFunction;
 import functions.binary.Logb;
 import functions.binary.Pow;
 import functions.commutative.Product;
@@ -21,7 +21,7 @@ public class FunctionMaker {
 	 * @param constant value of constant
 	 * @return new {@link Constant}
 	 */
-	public static Function constant(double constant) {
+	public static GeneralFunction constant(double constant) {
 		return new Constant(constant);
 	}
 
@@ -30,7 +30,7 @@ public class FunctionMaker {
 	 * @param constantString string of constant
 	 * @return new {@link Constant}
 	 */
-	public static Function specialConstant(String constantString) {
+	public static GeneralFunction specialConstant(String constantString) {
 		return new Constant(constantString);
 	}
 
@@ -39,17 +39,17 @@ public class FunctionMaker {
 	 * @param varID    ID of variable
 	 * @return new {@link Variable}
 	 */
-	public static Function variable(char varID) {
+	public static GeneralFunction variable(char varID) {
 		return new Variable(varID);
 	}
 
 	/**
-	 * Returns a {@link Function} corresponding to a "unitary" operation string
+	 * Returns a {@link GeneralFunction} corresponding to a "unitary" operation string
 	 * @param functionName the string of the operation (e.g. "-" or "csc")
-	 * @param function     the {@link Function} to be operated on
-	 * @return new {@link Function}
+	 * @param function     the {@link GeneralFunction} to be operated on
+	 * @return new {@link GeneralFunction}
 	 */
-	public static Function makeUnitary(String functionName, Function function) {
+	public static GeneralFunction makeUnitary(String functionName, GeneralFunction function) {
 		return switch (functionName) {
 			case "-" -> new Product(DefaultFunctions.NEGATIVE_ONE, function);
 			case "/" -> new Pow(DefaultFunctions.NEGATIVE_ONE, function);
@@ -89,14 +89,14 @@ public class FunctionMaker {
 	}
 
 	/**
-	 * Returns a {@link Function} corresponding to a "binary" operation string
+	 * Returns a {@link GeneralFunction} corresponding to a "binary" operation string
 	 * NOTE: The functions are sometimes in a weird order for non-commutative types, so always check the constructors
 	 * @param functionName the string of the operation (e.g. "*" or "logb")
-	 * @param second    one {@link Function} to be operated on
-	 * @param first     another {@link Function} to be operated on
-	 * @return new {@link Function}
+	 * @param second    one {@link GeneralFunction} to be operated on
+	 * @param first     another {@link GeneralFunction} to be operated on
+	 * @return new {@link GeneralFunction}
 	 */
-	public static Function makeBinary(String functionName, Function second, Function first) {
+	public static GeneralFunction makeBinary(String functionName, GeneralFunction second, GeneralFunction first) {
 		return switch (functionName) {
 			case "+" -> new Sum(second, first);
 			case "*" -> new Product(second, first);

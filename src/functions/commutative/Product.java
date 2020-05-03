@@ -1,7 +1,7 @@
 package functions.commutative;
 
 import config.Settings;
-import functions.Function;
+import functions.GeneralFunction;
 import functions.binary.Pow;
 import functions.special.Constant;
 import functions.special.Variable;
@@ -17,7 +17,7 @@ public class Product extends CommutativeFunction {
 	 * Constructs a new Multiply
 	 * @param functions The terms being multiplied together
 	 */
-	public Product(Function... functions) {
+	public Product(GeneralFunction... functions) {
 		super(functions);
 		identityValue = 1;
 		operation = (a, b) -> (a * b);
@@ -25,7 +25,7 @@ public class Product extends CommutativeFunction {
 
 	public double evaluate(Map<Character, Double> variableValues) {
 		double accumulator = identityValue;
-		for (Function f : functions)
+		for (GeneralFunction f : functions)
 			accumulator *= f.evaluate(variableValues);
 		return accumulator;
 	}
@@ -45,11 +45,11 @@ public class Product extends CommutativeFunction {
 	}
 
 	@Override
-	public Function getDerivative(char varID) {
-		Function[] toAdd = new Function[functions.length];
+	public GeneralFunction getDerivative(char varID) {
+		GeneralFunction[] toAdd = new GeneralFunction[functions.length];
 
 		for (int i = 0; i < toAdd.length; i++) {
-			Function[] toMultiply = new Function[functions.length];
+			GeneralFunction[] toMultiply = new GeneralFunction[functions.length];
 			for (int j = 0; j < functions.length; j++) {
 				toMultiply = Arrays.copyOf(functions, functions.length);
 				toMultiply[i] = functions[i].getSimplifiedDerivative(varID);
@@ -61,14 +61,14 @@ public class Product extends CommutativeFunction {
 	}
 
 	public Product clone() {
-		Function[] toMultiply = new Function[functions.length];
+		GeneralFunction[] toMultiply = new GeneralFunction[functions.length];
 		for (int i = 0; i < functions.length; i++)
 			toMultiply[i] = functions[i].clone();
 		return new Product(toMultiply);
 	}
 
 
-	public Function simplify() {
+	public GeneralFunction simplify() {
 		Product currentFunction = simplifyInternal();
 		if (currentFunction.isTimesZero())
 			return new Constant((0));
@@ -86,7 +86,7 @@ public class Product extends CommutativeFunction {
 
 	@Override
 	public Product simplifyElements() {
-		Function[] toMultiply = new Function[functions.length];
+		GeneralFunction[] toMultiply = new GeneralFunction[functions.length];
 		for (int i = 0; i < functions.length; i++) toMultiply[i] = functions[i].simplify();
 		return new Product(toMultiply);
 	}
@@ -96,7 +96,7 @@ public class Product extends CommutativeFunction {
 	 * @return true if the {@link Product} contains a 0 {@link Constant}
 	 */
 	public boolean isTimesZero() {
-		for (Function function : functions) {
+		for (GeneralFunction function : functions) {
 			if (function instanceof Constant constant) {
 				if (constant.constant == 0) {
 					return true;
@@ -111,7 +111,7 @@ public class Product extends CommutativeFunction {
 	 * @return A new {@link Product} with all variable combined with added exponents
 	 */
 	public Product addExponents() {
-		Function[] simplifiedTerms = FunctionTools.deepClone(functions);
+		GeneralFunction[] simplifiedTerms = FunctionTools.deepClone(functions);
 		for (int a = 0; a < simplifiedTerms.length; a++)
 			if (!(simplifiedTerms[a] instanceof Pow))
 				simplifiedTerms[a] = new Pow(DefaultFunctions.ONE, simplifiedTerms[a]);
@@ -135,17 +135,17 @@ public class Product extends CommutativeFunction {
 			return clone();
 	}
 
-	public CommutativeFunction me(Function... functions) {
+	public CommutativeFunction me(GeneralFunction... functions) {
 		return new Product(functions);
 	}
 
 	/**
-	 * Returns a {@link Function} where the rest of the multiple has been distributed to any {@link Sum}. Example: {@code sin(y)*(x+2) = x*sin(y) + 2*sin(y)}
-	 * @return a {@link Function} where the rest of the multiple has been distributed to any {@link Sum}
+	 * Returns a {@link GeneralFunction} where the rest of the multiple has been distributed to any {@link Sum}. Example: {@code sin(y)*(x+2) = x*sin(y) + 2*sin(y)}
+	 * @return a {@link GeneralFunction} where the rest of the multiple has been distributed to any {@link Sum}
 	 */
-	public Function distributeAll() {
-		Function[] multiplyTerms = getFunctions();
-		Function[] addTerms;
+	public GeneralFunction distributeAll() {
+		GeneralFunction[] multiplyTerms = getFunctions();
+		GeneralFunction[] addTerms;
 		for (int i = 0; i < multiplyTerms.length; i++) {
 			if (multiplyTerms[i] instanceof Sum sum) {
 				addTerms = sum.getFunctions();
@@ -159,7 +159,7 @@ public class Product extends CommutativeFunction {
 			return clone();
 	}
 
-	public int compareSelf(Function that) {
+	public int compareSelf(GeneralFunction that) {
 		boolean thisIsMonomial = PolynomialTools.isMonomial(this);
 		boolean thatIsMonomial = PolynomialTools.isMonomial(that);
 		if (thisIsMonomial && !thatIsMonomial) {

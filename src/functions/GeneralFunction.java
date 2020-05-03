@@ -15,10 +15,10 @@ import functions.unitary.transforms.Integral;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class Function implements Evaluable, Differentiable, Simplifiable, Comparable<Function>, Iterable<Function> {
+public abstract class GeneralFunction implements Evaluable, Differentiable, Simplifiable, Comparable<GeneralFunction>, Iterable<GeneralFunction> {
 
 	/**
-	 * Describes the order that a {@link Function} should appear in a sorted array (used in {@link #compareTo(Function)})
+	 * Describes the order that a {@link GeneralFunction} should appear in a sorted array (used in {@link #compareTo(GeneralFunction)})
 	 */
 	@SuppressWarnings("ClassReferencesSubclass")
 	public static final Class<?>[] sortOrder = {
@@ -35,27 +35,27 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 	/**
 	 * Caches derivatives with the key corresponding to the varID of the derivative
 	 */
-	protected final HashMap<Character, Function> derivatives = new HashMap<>();
+	protected final HashMap<Character, GeneralFunction> derivatives = new HashMap<>();
 
 	/**
-	 * Returns a String representation of the Function
+	 * Returns a String representation of the GeneralFunction
 	 * @return String representation of function
 	 */
 	public abstract String toString();
 
 	/**
-	 * Returns a clone of the {@link Function}
-	 * @return a clone of the Function
+	 * Returns a clone of the {@link GeneralFunction}
+	 * @return a clone of the GeneralFunction
 	 */
-	public abstract Function clone();
+	public abstract GeneralFunction clone();
 
 	/**
-	 * Simplifies a {@link Function} multiple times
+	 * Simplifies a {@link GeneralFunction} multiple times
 	 * @param times the amount of times it is simplified
-	 * @return the simplified {@link Function}
+	 * @return the simplified {@link GeneralFunction}
 	 */
-	public Function simplifyTimes(int times) {
-		Function newFunction, currentFunction = this;
+	public GeneralFunction simplifyTimes(int times) {
+		GeneralFunction newFunction, currentFunction = this;
 		for (int i = 0; i < times; i++) {
 			newFunction = currentFunction.simplify();
 			if (newFunction.toString().equals(currentFunction.toString()))
@@ -68,12 +68,12 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 	/**
 	 * Returns the derivative of the function, simplified
 	 * @param varID the ID of the variable being differentiated
-	 * @return the derivative of the {@link Function} it is called on, simplified
+	 * @return the derivative of the {@link GeneralFunction} it is called on, simplified
 	 */
-	public Function getSimplifiedDerivative(char varID) {
+	public GeneralFunction getSimplifiedDerivative(char varID) {
 		if (Settings.cacheDerivatives && derivatives.containsKey(varID))
 			return derivatives.get(varID);
-		Function derivative = getDerivative(varID).simplify();
+		GeneralFunction derivative = getDerivative(varID).simplify();
 		if (Settings.cacheDerivatives)
 			derivatives.put(varID, derivative);
 		return derivative;
@@ -84,10 +84,10 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 	 * Returns the Nth derivative of the function, simplified
 	 * @param varID the ID of the variable being differentiated
 	 * @param N     the amount of times to differentiate
-	 * @return the Nth derivative of the {@link Function} it is called on, simplified
+	 * @return the Nth derivative of the {@link GeneralFunction} it is called on, simplified
 	 */
-	public Function getNthDerivative(char varID, int N) {
-		Function currentFunction = this;
+	public GeneralFunction getNthDerivative(char varID, int N) {
+		GeneralFunction currentFunction = this;
 		while (N > 0) {
 			currentFunction = currentFunction.getSimplifiedDerivative(varID);
 			N--;
@@ -107,20 +107,20 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 	}
 
 	/**
-	 * Substitutes a new {@link Function} into a variable
+	 * Substitutes a new {@link GeneralFunction} into a variable
 	 * @param varID     the variable to be substituted into
-	 * @param toReplace the {@link Function} that will be substituted
-	 * @return the new {@link Function} after all substitutions are preformed
+	 * @param toReplace the {@link GeneralFunction} that will be substituted
+	 * @return the new {@link GeneralFunction} after all substitutions are preformed
 	 */
-	public abstract Function substitute(char varID, Function toReplace);
+	public abstract GeneralFunction substitute(char varID, GeneralFunction toReplace);
 
 	/**
 	 * Fixes some variables to the values given in the map by substituting in a {@link Constant} for those {@link Variable}s
 	 * @param values the map defining the substitutions to be made
 	 * @return a new function with the substitutions made
 	 */
-	public Function setVariables(Map<Character, Double> values) {
-		Function current = this;
+	public GeneralFunction setVariables(Map<Character, Double> values) {
+		GeneralFunction current = this;
 		for (Map.Entry<Character, Double> entry : values.entrySet())
 			current = current.substitute(entry.getKey(), new Constant(entry.getValue()));
 		return current;
@@ -129,35 +129,35 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 
 	/**
 	 * Returns true when the two functions simplified are equal
-	 * @param that The {@link Function} that the current function is being checked equal to
+	 * @param that The {@link GeneralFunction} that the current function is being checked equal to
 	 * @return true when the two functions are equal
 	 */
-	public abstract boolean equalsFunction(Function that);
+	public abstract boolean equalsFunction(GeneralFunction that);
 
 	/**
-	 * Simplifies the two functions, then compares them with {@link #equalsFunction(Function)}
+	 * Simplifies the two functions, then compares them with {@link #equalsFunction(GeneralFunction)}
 	 * @param that the object compared to
 	 * @return true if they're equal
 	 */
 	public boolean equals(Object that) {
-		if (!(that instanceof Function))
+		if (!(that instanceof GeneralFunction))
 			return false;
-		return this.simplify().equalsFunction(((Function) that).simplify());
+		return this.simplify().equalsFunction(((GeneralFunction) that).simplify());
 	}
 
 	/**
 	 * Used internally for comparing two functions of **the same exact type**
-	 * @param that the {@link Function} compared to
+	 * @param that the {@link GeneralFunction} compared to
 	 * @return comparison
 	 */
-	protected abstract int compareSelf(Function that);
+	protected abstract int compareSelf(GeneralFunction that);
 
 	/**
-	 * Two different Function types are sorted according to {@link #sortOrder} and {@link MiscTools#findClassValue(Function)}, and same types are sorted using {@link #compareSelf(Function)}
-	 * @param that the {@link Function} compared to
+	 * Two different GeneralFunction types are sorted according to {@link #sortOrder} and {@link MiscTools#findClassValue(GeneralFunction)}, and same types are sorted using {@link #compareSelf(GeneralFunction)}
+	 * @param that the {@link GeneralFunction} compared to
 	 * @return comparison
 	 */
-	public int compareTo(@NotNull Function that) {
+	public int compareTo(@NotNull GeneralFunction that) {
 		if (this.equalsFunction(that))
 			return 0;
 		else if (this.getClass().equals(that.getClass()))

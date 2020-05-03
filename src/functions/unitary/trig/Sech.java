@@ -1,6 +1,6 @@
 package functions.unitary.trig;
 
-import functions.Function;
+import functions.GeneralFunction;
 import functions.commutative.Product;
 import functions.special.Constant;
 import functions.unitary.Abs;
@@ -15,18 +15,18 @@ public class Sech extends TrigFunction {
 	 * Constructs a new Sech
 	 * @param operand The function which sech is operating on
 	 */
-	public Sech(Function operand) {
+	public Sech(GeneralFunction operand) {
 		super(operand);
 	}
 
 	@Override
-	public Function getDerivative(char varID) {
+	public GeneralFunction getDerivative(char varID) {
 		return new Product(new Constant(-1), operand.getSimplifiedDerivative(varID), new Sech(operand), new Tanh(operand));
 	}
 
 	/**
 	 * Returns the hyperbolic secant of the stored {@link #operand} evaluated
-	 * @param variableValues The values of the variables of the {@link Function} at the point
+	 * @param variableValues The values of the variables of the {@link GeneralFunction} at the point
 	 * @return the sech of {@link #operand} evaluated
 	 */
 	@Override
@@ -35,12 +35,12 @@ public class Sech extends TrigFunction {
 	}
 
 
-	public UnitaryFunction me(Function operand) {
+	public UnitaryFunction me(GeneralFunction operand) {
 		return new Sech(operand);
 	}
 
 
-	public Function getElementaryIntegral() {
+	public GeneralFunction getElementaryIntegral() {
 		return new Atan(new Abs(new Sinh(operand)));
 	}
 

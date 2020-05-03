@@ -1,7 +1,7 @@
 package tools.singlevariable;
 
 import config.Settings;
-import functions.Function;
+import functions.GeneralFunction;
 import functions.binary.Pow;
 import functions.commutative.Sum;
 import functions.commutative.Product;
@@ -21,7 +21,7 @@ public class TaylorSeries {
      * @param size The amount of terms in the polynomial (this includes zero terms like {@code 0*x^2}
      * @return Maclaurin series of the specified function
      */
-    public static Function makeTaylorSeries(Function function, int size) {
+    public static GeneralFunction makeTaylorSeries(GeneralFunction function, int size) {
         return makeTaylorSeries(function, size, 0);
     }
 
@@ -32,8 +32,8 @@ public class TaylorSeries {
      * @param center Where the Taylor series is centered
      * @return Taylor series of the specified function
      */
-    public static Function makeTaylorSeries(Function function, int size, double center) {
-        Function[] taylorSeriesTerms = new Function[size];
+    public static GeneralFunction makeTaylorSeries(GeneralFunction function, int size, double center) {
+        GeneralFunction[] taylorSeriesTerms = new GeneralFunction[size];
         for (int i = 0; i < size; i++){
             taylorSeriesTerms[i] = new Product(new Constant(function.getNthDerivative('x', i).evaluate(Map.of(Settings.singleVariableDefault, center)) / MiscTools.factorial(i)), new Pow(new Constant(i), new Sum(new Variable('x'), new Constant(-center))));
         }

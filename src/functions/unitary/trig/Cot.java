@@ -1,6 +1,6 @@
 package functions.unitary.trig;
 
-import functions.Function;
+import functions.GeneralFunction;
 import functions.binary.Pow;
 import functions.commutative.Product;
 import functions.special.Constant;
@@ -18,13 +18,13 @@ public class Cot extends TrigFunction {
 	 * Constructs a new Cot
 	 * @param operand The function which cot is operating on
 	 */
-	public Cot(Function operand) {
+	public Cot(GeneralFunction operand) {
 		super(operand);
 	}
 
 	/**
 	 * Returns the cotangent of the stored {@link #operand} evaluated
-	 * @param variableValues The values of the variables of the {@link Function} at the point
+	 * @param variableValues The values of the variables of the {@link GeneralFunction} at the point
 	 * @return the cot of {@link #operand} evaluated
 	 */
 	@Override
@@ -33,15 +33,15 @@ public class Cot extends TrigFunction {
 	}
 
 	@Override
-	public Function getDerivative(char varID) {
+	public GeneralFunction getDerivative(char varID) {
 		return new Product(new Constant(-1), new Pow(new Constant(2), new Csc(operand)), operand.getSimplifiedDerivative(varID));
 	}
 
-	public UnitaryFunction me(Function operand) {
+	public UnitaryFunction me(GeneralFunction operand) {
 		return new Cot(operand);
 	}
 
-	public Function getElementaryIntegral() {
+	public GeneralFunction getElementaryIntegral() {
 		return new Product(DefaultFunctions.NEGATIVE_ONE, new Ln(new Abs(new Csc(operand))));
 	}
 

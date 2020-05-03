@@ -22,11 +22,6 @@ public class Acsc extends InverseTrigFunction {
 	}
 
 	@Override
-	public UnitaryFunction me(Function operand) {
-		return new Acsc(operand);
-	}
-
-	@Override
 	public Function getDerivative(char varID) {
 		return new Product(DefaultFunctions.NEGATIVE_ONE, operand.getSimplifiedDerivative(varID), new Pow(DefaultFunctions.NEGATIVE_ONE, new Product(new Abs(operand), new Pow(DefaultFunctions.HALF, new Sum(new Pow(DefaultFunctions.TWO, operand), DefaultFunctions.NEGATIVE_ONE)))));
 	}
@@ -49,6 +44,11 @@ public class Acsc extends InverseTrigFunction {
 		} else {
 			return Double.NaN;
 		}
+	}
+
+
+	public UnitaryFunction me(Function operand) {
+		return new Acsc(operand);
 	}
 
 	public Class<? extends TrigFunction> getInverse() {

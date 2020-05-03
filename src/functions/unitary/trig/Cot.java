@@ -41,10 +41,10 @@ public class Cot extends TrigFunction {
 		return new Cot(operand);
 	}
 
-	@Override
 	public Function integrate() {
 		return new Product(DefaultFunctions.NEGATIVE_ONE, new Ln(new Abs(new Csc(operand))));
 	}
+
 	public Class<? extends TrigFunction> getInverse() {
 		return Acot.class;
 	}

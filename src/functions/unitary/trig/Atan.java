@@ -35,6 +35,7 @@ public class Atan extends InverseTrigFunction {
 		return new Product(operand.getSimplifiedDerivative(varID), new Pow(new Constant(-1), new Sum(new Constant(1), new Pow(new Constant(2), operand))));
 	}
 
+	@Override
 	public UnitaryFunction me(Function operand) {
 		return new Atan(operand);
 	}

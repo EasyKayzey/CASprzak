@@ -42,10 +42,10 @@ public class Csc extends TrigFunction {
 		return new Csc(operand);
 	}
 
-	@Override
 	public Function integrate() {
 		return new Product(DefaultFunctions.NEGATIVE_ONE, new Ln(new Abs(new Sum(new Csc(operand), new Cot(operand)))));
 	}
+
 	public Class<? extends TrigFunction> getInverse() {
 		return Acsc.class;
 	}

@@ -34,12 +34,12 @@ public class Sech extends TrigFunction {
 		return 1 / Math.cosh(operand.evaluate(variableValues));
 	}
 
-	@Override
+
 	public UnitaryFunction me(Function operand) {
 		return new Sech(operand);
 	}
 
-	@Override
+
 	public Function integrate() {
 		return new Atan(new Abs(new Sinh(operand)));
 	}

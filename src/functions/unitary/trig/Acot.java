@@ -40,7 +40,7 @@ public class Acot extends InverseTrigFunction {
 		}
 	}
 
-	@Override
+
 	public UnitaryFunction me(Function operand) {
 		return new Acot(operand);
 	}

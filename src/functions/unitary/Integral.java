@@ -84,7 +84,7 @@ public class Integral extends UnitaryFunction {
 			return clone();
 	}
 
-	@Override
+
 	public UnitaryFunction me(Function function) {
 		return new Integral(function, respectTo);
 	}

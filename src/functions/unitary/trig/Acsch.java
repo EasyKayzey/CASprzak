@@ -36,7 +36,7 @@ public class Acsch extends InverseTrigFunction {
 		return Math.log((1 + Math.sqrt(functionEvaluated * functionEvaluated + 1)) / functionEvaluated);
 	}
 
-	@Override
+
 	public UnitaryFunction me(Function operand) {
 		return new Acsch(operand);
 	}

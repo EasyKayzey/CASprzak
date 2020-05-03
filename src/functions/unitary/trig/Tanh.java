@@ -39,10 +39,11 @@ public class Tanh extends TrigFunction {
 		return new Tanh(operand);
 	}
 
-	@Override
+
 	public Function integrate() {
 		return new Ln(new Cosh(operand));
 	}
+
 	public Class<? extends TrigFunction> getInverse() {
 		return Atanh.class;
 	}

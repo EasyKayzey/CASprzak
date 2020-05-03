@@ -40,10 +40,11 @@ public class Tan extends TrigFunction {
 		return new Tan(operand);
 	}
 
-	@Override
+
 	public Function integrate() {
 		return new Ln(new Abs(new Sec(operand)));
 	}
+
 	public Class<? extends TrigFunction> getInverse() {
 		return Atan.class;
 	}

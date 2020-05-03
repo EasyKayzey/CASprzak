@@ -24,7 +24,7 @@ public class SFactorial extends Factorial {
 		return new Product(new Pow(new Constant(.5), new Product(new Constant(2), new Constant("pi"), operand)), new Pow(operand, new Product(operand, new Pow(new Constant(-1), new Constant("e")))));
 	}
 
-	@Override
+
 	public UnitaryFunction me(Function function) {
 			return new SFactorial(function);
 	}

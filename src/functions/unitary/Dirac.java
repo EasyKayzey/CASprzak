@@ -28,7 +28,6 @@ public class Dirac extends UnitaryFunction {
 		return new Constant(0);
 	}
 
-	@Override
 	public UnitaryFunction me(Function operand) {
 		return new Dirac(operand);
 	}

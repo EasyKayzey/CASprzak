@@ -35,6 +35,7 @@ public class Asin extends InverseTrigFunction {
 		return new Product(operand.getSimplifiedDerivative(varID), new Pow(new Constant(-0.5), (new Sum(new Constant(1), new Product(new Constant(-1), new Pow(new Constant(2), operand))))));
 	}
 
+
 	public UnitaryFunction me(Function operand) {
 		return new Asin(operand);
 	}

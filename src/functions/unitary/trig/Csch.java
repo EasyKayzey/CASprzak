@@ -33,12 +33,12 @@ public class Csch extends TrigFunction {
 		return 1 / Math.sinh(operand.evaluate(variableValues));
 	}
 
-	@Override
+
 	public UnitaryFunction me(Function operand) {
 		return new Csch(operand);
 	}
 
-	@Override
+
 	public Function integrate() {
 		return null;
 	}

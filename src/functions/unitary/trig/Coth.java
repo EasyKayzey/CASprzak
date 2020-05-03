@@ -36,12 +36,11 @@ public class Coth extends TrigFunction {
 		return 1 / Math.tanh(operand.evaluate(variableValues));
 	}
 
-	@Override
+
 	public UnitaryFunction me(Function operand) {
 		return new Coth(operand);
 	}
 
-	@Override
 	public Function integrate() {
 		return new Ln(new Abs(new Sinh(operand)));
 	}

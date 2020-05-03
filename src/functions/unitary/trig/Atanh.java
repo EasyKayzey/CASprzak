@@ -36,7 +36,7 @@ public class Atanh extends InverseTrigFunction {
 		return 0.5 * Math.log((1 + functionEvaluated) / (1 + functionEvaluated));
 	}
 
-	@Override
+
 	public UnitaryFunction me(Function operand) {
 		return new Atanh(operand);
 	}

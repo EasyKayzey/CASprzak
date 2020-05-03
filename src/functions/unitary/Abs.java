@@ -25,7 +25,7 @@ public class Abs extends UnitaryFunction {
 		return new Product(operand.getSimplifiedDerivative(varID), new Sign(operand));
 	}
 
-	@Override
+
 	public UnitaryFunction me(Function operand) {
 		return new Abs(operand);
 	}

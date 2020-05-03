@@ -39,7 +39,7 @@ public class Cosh extends TrigFunction {
 	public Class<? extends TrigFunction> getInverse() {
 		return Acosh.class;
 	}
-	@Override
+
 	public Function integrate() {
 		return new Sinh(operand);
 	}

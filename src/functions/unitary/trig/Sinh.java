@@ -36,10 +36,11 @@ public class Sinh extends TrigFunction {
 		return new Sinh(operand);
 	}
 
-	@Override
+
 	public Function integrate() {
 		return new Cosh(operand);
 	}
+
 	public Class<? extends TrigFunction> getInverse() {
 		return Asinh.class;
 	}

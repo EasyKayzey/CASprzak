@@ -44,7 +44,7 @@ public class Asec extends InverseTrigFunction {
 		}
 	}
 
-	@Override
+
 	public UnitaryFunction me(Function operand) {
 		return new Asec(operand);
 	}

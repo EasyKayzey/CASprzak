@@ -26,7 +26,7 @@ public class Sign extends UnitaryFunction {
 		return new Product(operand.getSimplifiedDerivative(varID), new Constant(2), new Dirac(operand));
 	}
 
-	@Override
+
 	public UnitaryFunction me(Function operand) {
 		return new Sign(operand);
 	}

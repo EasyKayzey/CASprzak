@@ -13,7 +13,7 @@ public class RFactorial extends Factorial {
 		super(operand);
 	}
 
-	@Override
+
 	public UnitaryFunction me(Function function) {
 		return new RFactorial(function);
 	}

@@ -39,10 +39,11 @@ public class Sec extends TrigFunction {
 		return new Sec(operand);
 	}
 
-	@Override
+
 	public Function integrate() {
 		return new Ln(new Abs(new Sum(new Sec(operand), new Tan(operand))));
 	}
+
 	public Class<? extends TrigFunction> getInverse() {
 		return Asec.class;
 	}

@@ -23,8 +23,8 @@ public class IntegralTest {
     @Test
     void unwrapsExponents() {
         Integral test1 = new Integral(Parser.parse("(x^2+2)^2"), 'x');
-        Function test2 = new Sum(Parser.parse("(x^5)/5"), Parser.parse("4/3*x^2"), Parser.parse("4x"));
-        assertEquals(test1.execute() , test2);
+        Function test2 = new Sum(Parser.parse("(x^5)/5"), Parser.parse("4/3*x^3"), Parser.parse("4x"));
+        assertEquals(test2, test1.execute());
     }
 
     @Test

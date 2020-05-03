@@ -76,4 +76,8 @@ public class PartialDerivative extends TransformFunction {
 	public UnitaryFunction me(Function function) {
 		return new PartialDerivative(function, respectTo);
 	}
+
+	public Function execute() {
+		return operand.getSimplifiedDerivative(respectTo);
+	}
 }

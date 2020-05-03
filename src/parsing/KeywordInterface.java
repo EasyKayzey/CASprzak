@@ -364,6 +364,6 @@ public class KeywordInterface {
 	 */
 	private static Function integral(String input) {
 		String[] splitInput = keywordSplitter.split(input);
-		return (new Integral(parseStored(splitInput[0]), splitInput[1].charAt(1)).integrate().simplify());
+		return (new Integral(parseStored(splitInput[0]), splitInput[1].charAt(1)).execute().simplify());
 	}
 }

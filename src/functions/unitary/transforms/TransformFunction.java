@@ -18,4 +18,6 @@ public abstract class TransformFunction extends UnitaryFunction {
 		super(integrand);
 		this.respectTo = respectTo;
 	}
+
+	public abstract Function execute();
 }

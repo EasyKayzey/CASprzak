@@ -99,7 +99,7 @@ public class Integral extends TransformFunction {
 	 * Returns the Integral of the integrand if it can be found.
 	 * @return the Integral of the integrand
 	 */
-	public Function integrate() {
+	public Function execute() {
 		if (operand instanceof Sum terms) {
 			Function[] integratedTerms = new Function[terms.getFunctionsLength()];
 			for(int i = 0; i < terms.getFunctionsLength(); i++) {

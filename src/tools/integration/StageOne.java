@@ -23,7 +23,7 @@ public class StageOne {
      * @return The integral of the function if one is found.
      */
     public static Function derivativeDivides(Function integrand, char variableChar) {
-        Pair<Double, Function> stripConstant = IntegralsTools.stripConstants(integrand);
+        Pair<Double, Function> stripConstant = IntegralsTools.stripConstants(integrand, variableChar);
         Function function = stripConstant.second;
         double number = stripConstant.first;
 
@@ -32,7 +32,7 @@ public class StageOne {
             for (Function f : productTerms) {
                 if (f instanceof Pow power && power.getFunction2() instanceof Constant base) {
                     Function derivativeWithConstants = power.getFunction1().getSimplifiedDerivative(variableChar);
-                    Pair<Double, Function> derivative = IntegralsTools.stripConstants(derivativeWithConstants);
+                    Pair<Double, Function> derivative = IntegralsTools.stripConstants(derivativeWithConstants, variableChar);
                     Function derivativeWithoutConstant = derivative.second;
                     double constantInFront = derivative.first;
                     Product derivativeTimesOperation = new Product(derivativeWithoutConstant, f);
@@ -42,7 +42,7 @@ public class StageOne {
                     }
                 } else if (f instanceof Pow power && power.getFunction1() instanceof Constant exponent) {
                     Function derivativeWithConstants = power.getFunction2().getSimplifiedDerivative(variableChar);
-                    Pair<Double, Function> derivative = IntegralsTools.stripConstants(derivativeWithConstants);
+                    Pair<Double, Function> derivative = IntegralsTools.stripConstants(derivativeWithConstants, variableChar);
                     Function derivativeWithoutConstant = derivative.second;
                     double constantInFront = derivative.first;
                     Product derivativeTimesOperation = new Product(derivativeWithoutConstant, f);
@@ -52,7 +52,7 @@ public class StageOne {
                     }
                 } else if (f instanceof Ln ln) {
                     Function derivativeWithConstants = ln.operand.getSimplifiedDerivative(variableChar);
-                    Pair<Double, Function> derivative = IntegralsTools.stripConstants(derivativeWithConstants);
+                    Pair<Double, Function> derivative = IntegralsTools.stripConstants(derivativeWithConstants, variableChar);
                     Function derivativeWithoutConstant = derivative.second;
                     double constantInFront = derivative.first;
                     Product derivativeTimesOperation = new Product(derivativeWithoutConstant, f);
@@ -62,7 +62,7 @@ public class StageOne {
                     }
                 } else if (f instanceof Logb logb && logb.getFunction2() instanceof Constant constant1) {
                     Function derivativeWithConstants = logb.getFunction1().getSimplifiedDerivative(variableChar);
-                    Pair<Double, Function> derivative = IntegralsTools.stripConstants(derivativeWithConstants);
+                    Pair<Double, Function> derivative = IntegralsTools.stripConstants(derivativeWithConstants, variableChar);
                     Function derivativeWithoutConstant = derivative.second;
                     double constantInFront = derivative.first;
                     Product derivativeTimesOperation = new Product(derivativeWithoutConstant, f);
@@ -72,7 +72,7 @@ public class StageOne {
                     }
                 } else if (f instanceof TrigFunction unit) {
                     Function derivativeWithConstants = unit.operand.getSimplifiedDerivative(variableChar);
-                    Pair<Double, Function> derivative = IntegralsTools.stripConstants(derivativeWithConstants);
+                    Pair<Double, Function> derivative = IntegralsTools.stripConstants(derivativeWithConstants, variableChar);
                     Function derivativeWithoutConstant = derivative.second;
                     double constantInFront = derivative.first;
                     Product derivativeTimesOperation = new Product(derivativeWithoutConstant, f);
@@ -82,7 +82,7 @@ public class StageOne {
                     }
                 }
                 Function derivativeWithConstants = f.getSimplifiedDerivative(variableChar);
-                Pair<Double, Function> derivative = IntegralsTools.stripConstants(derivativeWithConstants);
+                Pair<Double, Function> derivative = IntegralsTools.stripConstants(derivativeWithConstants, variableChar);
                 Function derivativeWithoutConstant = derivative.second;
                 double constantInFront = derivative.first;
                 Product derivativeTimesOperation = new Product(derivativeWithoutConstant, f);

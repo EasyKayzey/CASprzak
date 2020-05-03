@@ -4,6 +4,7 @@ import functions.Function;
 import functions.commutative.Product;
 import functions.special.Constant;
 import functions.special.Variable;
+import tools.DefaultFunctions;
 import tools.FunctionTools;
 import tools.SearchTools;
 import tools.helperclasses.Pair;
@@ -16,23 +17,23 @@ public class IntegralsTools {
      * @param function The Function whose Constant is being Stripped
      * @return A {@link Pair} of the constant and the stripped Function
      */
-    public static Pair<Double, Function> stripConstants(Function function) {
+    public static Pair<Function, Function> stripConstants(Function function, char varID) {
         if (function instanceof Product multiply) {
             Function[] terms = multiply.simplifyConstants().getFunctions();
-            double constant = 1;
+            Product constants = new Product();
             Function[] termsWithConstantRemoved = terms;
             for (int i = 0; i < multiply.getFunctions().length; i++) {
-                if (terms[i] instanceof Constant number) {
-                    constant *= number.constant;
+                if (!containsVariable(terms[i], varID)) {
+                    constants = new Product(constants, terms[i]);
                     termsWithConstantRemoved = FunctionTools.removeFunctionAt(terms, i);
                 }
             }
             if (termsWithConstantRemoved.length == 1)
-                return new Pair<>(constant, termsWithConstantRemoved[0]);
+                return new Pair<>(constants, termsWithConstantRemoved[0]);
             else
-                return new Pair<>(constant, (new Product(termsWithConstantRemoved)).simplifyPull());
+                return new Pair<>(constants, (new Product(termsWithConstantRemoved)).simplifyPull());
         } else {
-            return new Pair<>(1.0, function);
+            return new Pair<>(DefaultFunctions.ONE, function);
         }
     }
 

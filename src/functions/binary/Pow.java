@@ -7,6 +7,7 @@ import functions.commutative.Product;
 import functions.special.Constant;
 import functions.unitary.Ln;
 import tools.DefaultFunctions;
+import tools.MiscTools;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -102,10 +103,13 @@ public class Pow extends BinaryFunction {
 
 	public Function unwrapIntegerPower() {
 		if (function1 instanceof Constant constant) {
-			if ((int) constant.constant == constant.constant) {
-				Function[] toMultiply = new Function[(int)constant.constant];
+			try {
+				int intConstant = MiscTools.toInteger(constant.constant);
+				Function[] toMultiply = new Function[intConstant];
 				Arrays.fill(toMultiply, function2);
 				return new Product(toMultiply);
+			} catch (IllegalArgumentException ignored) {
+				// Do nothing
 			}
 		}
 		if (Settings.trustImmutability)

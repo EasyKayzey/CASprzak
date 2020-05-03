@@ -53,15 +53,24 @@ public class MiscTools {
 	}
 
 	/**
-	 * Converts a double within Settings.integerMargin of an integer to an integer
+	 * Converts a double within {@link Settings#integerMargin} of an integer to an integer
 	 * @param d the double to be converted
 	 * @return the double as an integer
-	 * @throws IllegalArgumentException if the exponent is never an integer
+	 * @throws IllegalArgumentException if the double is not within {@link Settings#integerMargin} of an integer
 	 */
 	public static int toInteger(double d) throws IllegalArgumentException{
-		if (Math.abs(((int) (d + .5)) - d) < Settings.integerMargin)
+		if (isAlmostInteger(d))
 			return (int) (d + .5);
 		else
 			throw new IllegalArgumentException("Double " + d + " is not within " + Settings.zeroMargin + " of an integer.");
+	}
+
+	/**
+	 * Checks if a double is within Settings.integerMargin of an integer
+	 * @param d the double to be converted
+	 * @return true if the double is within {@link Settings#integerMargin} of an integer
+	 */
+	public static boolean isAlmostInteger(double d) throws IllegalArgumentException{
+		return Math.abs(((int) (d + .5)) - d) < Settings.integerMargin;
 	}
 }

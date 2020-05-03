@@ -9,8 +9,10 @@ import functions.commutative.Sum;
 import functions.special.Constant;
 import functions.special.Variable;
 import functions.unitary.Ln;
+import functions.unitary.transforms.Integral;
 import functions.unitary.trig.*;
 import tools.DefaultFunctions;
+import tools.MiscTools;
 import tools.SearchTools;
 import tools.exceptions.IntegrationFailedException;
 import tools.helperclasses.Pair;
@@ -25,6 +27,17 @@ public class StageOne {
      * @return The integral of the function if one is found.
      */
     public static Function derivativeDivides(Function integrand, char variableChar) {
+        if (integrand instanceof Sum terms) {
+            Function[] integratedTerms = new Function[terms.getFunctionsLength()];
+            for(int i = 0; i < terms.getFunctionsLength(); i++) {
+                integratedTerms[i] = new Integral(terms.getFunctions()[i], variableChar).execute();
+            }
+            return new Sum(integratedTerms);
+        }
+        if (integrand instanceof Pow power && power.getFunction2() instanceof Sum && power.getFunction1() instanceof Constant constant && MiscTools.isAlmostInteger(constant.constant)) {
+            return new Integral(power.unwrapIntegerPower().distributeAll(), variableChar).execute();
+        }
+
         Pair<Function, Function> stripConstant = IntegralTools.stripConstants(integrand, variableChar);
         Function function = stripConstant.second;
         Function number = stripConstant.first;

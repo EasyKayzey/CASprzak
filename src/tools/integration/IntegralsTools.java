@@ -36,6 +36,12 @@ public class IntegralsTools {
         }
     }
 
+    /**
+     * Returns true if the {@link Variable} is found in the {@link Function}
+     * @param function The Function that is being searched
+     * @param varID The variable ID of the variable that is being looked for
+     * @return true if the {@link Variable} is found in the {@link Function}
+     */
     public static boolean containsVariable(Function function, char varID) {
         Variable variable = new Variable(varID);
         return SearchTools.exists(function, variable:: equals);

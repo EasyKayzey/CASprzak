@@ -78,9 +78,7 @@ public class Parser {
 				try {
 					functionStack.push(FunctionMaker.constant(Double.parseDouble(token)));
 				} catch (Exception e) {
-					if (token.length() > 1)
-						throw new UnsupportedOperationException(token + " is not a valid function.");
-					char variableName = token.charAt(0);
+					char variableName = Parser.getCharacter(token);
 					functionStack.push(FunctionMaker.variable(variableName));
 				}
 			} else if (isBinaryOperator(token)) {

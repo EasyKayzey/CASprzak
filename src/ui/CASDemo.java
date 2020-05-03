@@ -26,7 +26,7 @@ public class CASDemo {
 		String[] variableStrings = commaSpaces.split(scanner.next());
 		Character[] variables = new Character[variableStrings.length];
 		for (int i = 0; i < variables.length; i++)
-			variables[i] = variableStrings[i].charAt(0);
+			variables[i] = Parser.getCharacter(variableStrings[i]);
 
 		System.out.println("Enter your function to be stored:");
 		String rawInput = scanner.next();

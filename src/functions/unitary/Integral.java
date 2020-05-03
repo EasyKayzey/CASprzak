@@ -73,7 +73,7 @@ public class Integral extends UnitaryFunction {
 
 	@Override
 	public Function simplify() {
-		return integrate(); //TODO implement
+		return clone();
 	}
 
 	@Override

@@ -76,15 +76,19 @@ public class Sum extends CommutativeFunction {
 	 */
 	public Sum combineLikeTerms() {
 		Function[] combinedTerms = FunctionTools.deepClone(functions);
-		for (int a = 0; a < combinedTerms.length; a++) {
-			if (!(combinedTerms[a] instanceof Product && ((Product) combinedTerms[a]).getFunctions()[0] instanceof Constant))
+		for (int a = 0; a < combinedTerms.length; a++)
+			if (!(combinedTerms[a] instanceof Product product && product.getFunctions()[0] instanceof Constant))
 				combinedTerms[a] = new Product(new Constant(1), combinedTerms[a]).simplifyPull();
-		}
+
 		for (int i = 1; i < combinedTerms.length; i++) {
 			for (int j = 0; j < i; j++) {
 				if (combinedTerms[i] instanceof Product first && combinedTerms[j] instanceof Product second) {
-					if (FunctionTools.deepEquals(first.getFunctions(), second.getFunctions(), 1)) {
-						combinedTerms[j] = new Product(new Sum(first.getFunctions()[0], second.getFunctions()[0]), new Product(FunctionTools.removeFunctionAt(first.getFunctions(), 0)));
+					Function[] firstFunctions = first.getFunctions();
+					Function[] secondFunctions = second.getFunctions();
+					if (!((firstFunctions[0] instanceof Constant) && (secondFunctions[0] instanceof Constant)))
+						throw new IllegalStateException("Constants should always be first in a Multiply.");
+					if (FunctionTools.deepEquals(firstFunctions, secondFunctions, 1)) {
+						combinedTerms[j] = new Product(new Sum(firstFunctions[0], secondFunctions[0]), new Product(FunctionTools.removeFunctionAt(firstFunctions, 0)));
 						combinedTerms = FunctionTools.removeFunctionAt(combinedTerms, i);
 						return (new Sum(combinedTerms)).simplifyInternal();
 					}

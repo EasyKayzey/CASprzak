@@ -3,7 +3,9 @@ package tools.integration;
 import functions.Function;
 import functions.commutative.Product;
 import functions.special.Constant;
+import functions.special.Variable;
 import tools.FunctionTools;
+import tools.SearchTools;
 import tools.helperclasses.Pair;
 
 
@@ -32,5 +34,10 @@ public class IntegralsTools {
         } else {
             return new Pair<>(1.0, function);
         }
+    }
+
+    public static boolean containsVariable(Function function, char varID) {
+        Variable variable = new Variable(varID);
+        return SearchTools.exists(function, variable:: equals);
     }
 }

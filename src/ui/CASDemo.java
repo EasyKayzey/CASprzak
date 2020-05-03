@@ -41,7 +41,7 @@ public class CASDemo {
 
 		System.out.println("Processing...");
 
-		Variable.setVariables(variables);
+		Variable.setVariablesArray(variables);
 		Settings.singleVariableDefault = variables[0];
 		Map<Character, Double> map = new HashMap<>();
 		for (int i = 0; i < variables.length; i++)

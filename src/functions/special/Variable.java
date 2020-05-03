@@ -40,7 +40,7 @@ public class Variable extends SpecialFunction {
 	 * Sets the variable names
 	 * @param variables array of variable names
 	 */
-	public static void setVariables(Character... variables) {
+	public static void setVariablesArray(Character... variables) {
 		Variable.variables = Arrays.asList(variables);
 	}
 

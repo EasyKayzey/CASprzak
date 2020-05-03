@@ -9,6 +9,7 @@ import functions.special.Constant;
 import functions.special.Variable;
 import functions.unitary.Ln;
 import functions.unitary.trig.*;
+import tools.DefaultFunctions;
 import tools.SearchTools;
 import tools.exceptions.IntegrationFailedException;
 import tools.helperclasses.Pair;
@@ -23,112 +24,112 @@ public class StageOne {
      * @return The integral of the function if one is found.
      */
     public static Function derivativeDivides(Function integrand, char variableChar) {
-        Pair<Double, Function> stripConstant = IntegralsTools.stripConstants(integrand, variableChar);
+        Pair<Function, Function> stripConstant = IntegralsTools.stripConstants(integrand, variableChar);
         Function function = stripConstant.second;
-        double number = stripConstant.first;
+        Function number = stripConstant.first;
 
         if (function instanceof Product product){
             Function[] productTerms = product.getFunctions();
             for (Function f : productTerms) {
-                if (f instanceof Pow power && power.getFunction2() instanceof Constant base) {
+                if (f instanceof Pow power && !IntegralsTools.containsVariable(power.getFunction2(), variableChar)) {
                     Function derivativeWithConstants = power.getFunction1().getSimplifiedDerivative(variableChar);
-                    Pair<Double, Function> derivative = IntegralsTools.stripConstants(derivativeWithConstants, variableChar);
+                    Pair<Function, Function> derivative = IntegralsTools.stripConstants(derivativeWithConstants, variableChar);
                     Function derivativeWithoutConstant = derivative.second;
-                    double constantInFront = derivative.first;
+                    Function constantInFront = derivative.first;
                     Product derivativeTimesOperation = new Product(derivativeWithoutConstant, f);
                     if (SearchTools.existsInSurfaceSubset(product, derivativeTimesOperation::equals) && !SearchTools.existsInOppositeSurfaceSubset(product, (u -> SearchTools.exists(u, SearchTools.isVariable(variableChar))), derivativeTimesOperation::equals)) {
-                        number /= constantInFront;
-                        return exponential(number, base.constant, power.getFunction1());
+                        number = new Product(number, DefaultFunctions.reciprocal(constantInFront));
+                        return exponential(number, power.getFunction2(), power.getFunction1());
                     }
-                } else if (f instanceof Pow power && power.getFunction1() instanceof Constant exponent) {
+                } else if (f instanceof Pow power && !IntegralsTools.containsVariable(power.getFunction1(), variableChar)) {
                     Function derivativeWithConstants = power.getFunction2().getSimplifiedDerivative(variableChar);
-                    Pair<Double, Function> derivative = IntegralsTools.stripConstants(derivativeWithConstants, variableChar);
+                    Pair<Function, Function> derivative = IntegralsTools.stripConstants(derivativeWithConstants, variableChar);
                     Function derivativeWithoutConstant = derivative.second;
-                    double constantInFront = derivative.first;
+                    Function constantInFront = derivative.first;
                     Product derivativeTimesOperation = new Product(derivativeWithoutConstant, f);
                     if (SearchTools.existsInSurfaceSubset(product, derivativeTimesOperation::equals) && !SearchTools.existsInOppositeSurfaceSubset(product, (u -> SearchTools.exists(u, SearchTools.isVariable(variableChar))), derivativeTimesOperation::equals)) {
-                        number /= constantInFront;
-                        return power(number, exponent.constant, power.getFunction2());
+                        number = new Product(number, DefaultFunctions.reciprocal(constantInFront));
+                        return power(number, power.getFunction1(), power.getFunction2());
                     }
                 } else if (f instanceof Ln ln) {
                     Function derivativeWithConstants = ln.operand.getSimplifiedDerivative(variableChar);
-                    Pair<Double, Function> derivative = IntegralsTools.stripConstants(derivativeWithConstants, variableChar);
+                    Pair<Function, Function> derivative = IntegralsTools.stripConstants(derivativeWithConstants, variableChar);
                     Function derivativeWithoutConstant = derivative.second;
-                    double constantInFront = derivative.first;
+                    Function constantInFront = derivative.first;
                     Product derivativeTimesOperation = new Product(derivativeWithoutConstant, f);
                     if (SearchTools.existsInSurfaceSubset(product, derivativeTimesOperation::equals) && !SearchTools.existsInOppositeSurfaceSubset(product, (u -> SearchTools.exists(u, SearchTools.isVariable(variableChar))), derivativeTimesOperation::equals)) {
-                        number /= constantInFront;
+                        number = new Product(number, DefaultFunctions.reciprocal(constantInFront));
                         return naturalLog(number, ln.operand);
                     }
-                } else if (f instanceof Logb logb && logb.getFunction2() instanceof Constant constant1) {
+                } else if (f instanceof Logb logb && !IntegralsTools.containsVariable(logb.getFunction2(), variableChar)) {
                     Function derivativeWithConstants = logb.getFunction1().getSimplifiedDerivative(variableChar);
-                    Pair<Double, Function> derivative = IntegralsTools.stripConstants(derivativeWithConstants, variableChar);
+                    Pair<Function, Function> derivative = IntegralsTools.stripConstants(derivativeWithConstants, variableChar);
                     Function derivativeWithoutConstant = derivative.second;
-                    double constantInFront = derivative.first;
+                    Function constantInFront = derivative.first;
                     Product derivativeTimesOperation = new Product(derivativeWithoutConstant, f);
                     if (SearchTools.existsInSurfaceSubset(product, derivativeTimesOperation::equals) && !SearchTools.existsInOppositeSurfaceSubset(product, (u -> SearchTools.exists(u, SearchTools.isVariable(variableChar))), derivativeTimesOperation::equals)) {
-                        number /= (constantInFront * Math.log(constant1.constant));
+                        number = new Product(number, DefaultFunctions.reciprocal(new Product(constantInFront, new Ln(logb.getFunction2()))));
                         return naturalLog(number, logb.getFunction2());
                     }
                 } else if (f instanceof TrigFunction unit) {
                     Function derivativeWithConstants = unit.operand.getSimplifiedDerivative(variableChar);
-                    Pair<Double, Function> derivative = IntegralsTools.stripConstants(derivativeWithConstants, variableChar);
+                    Pair<Function, Function> derivative = IntegralsTools.stripConstants(derivativeWithConstants, variableChar);
                     Function derivativeWithoutConstant = derivative.second;
-                    double constantInFront = derivative.first;
+                    Function constantInFront = derivative.first;
                     Product derivativeTimesOperation = new Product(derivativeWithoutConstant, f);
                     if (SearchTools.existsInSurfaceSubset(product, derivativeTimesOperation::equals) && !SearchTools.existsInOppositeSurfaceSubset(product, (u -> SearchTools.exists(u, SearchTools.isVariable(variableChar))), derivativeTimesOperation::equals)) {
-                        number /= (constantInFront);
-                        return new Product(new Constant(number), unit.getElementaryIntegral());
+                        number = new Product(number, DefaultFunctions.reciprocal(constantInFront));
+                        return new Product(number, unit.getElementaryIntegral());
                     }
                 }
                 Function derivativeWithConstants = f.getSimplifiedDerivative(variableChar);
-                Pair<Double, Function> derivative = IntegralsTools.stripConstants(derivativeWithConstants, variableChar);
+                Pair<Function, Function> derivative = IntegralsTools.stripConstants(derivativeWithConstants, variableChar);
                 Function derivativeWithoutConstant = derivative.second;
-                double constantInFront = derivative.first;
+                Function constantInFront = derivative.first;
                 Product derivativeTimesOperation = new Product(derivativeWithoutConstant, f);
                 if (SearchTools.existsInSurfaceSubset(product, derivativeTimesOperation::equals) && !SearchTools.existsInOppositeSurfaceSubset(product, (u -> SearchTools.exists(u, SearchTools.isVariable(variableChar))), derivativeTimesOperation::equals)) {
-                    number /= (constantInFront);
-                    return power(number, 1, f);
+                    number = new Product(number, DefaultFunctions.reciprocal(constantInFront));
+                    return power(number, DefaultFunctions.ONE, f);
                 }
             }
         } else {
-            if (function instanceof Pow power && power.getFunction2() instanceof Constant constant1 && power.getFunction1().getSimplifiedDerivative(variableChar) instanceof Constant constant2) {
-                number /= constant2.constant;
-                return exponential(number, constant1.constant, power.getFunction1());
-            } else if (function instanceof Pow power && power.getFunction1() instanceof Constant constant1 && power.getFunction2().getSimplifiedDerivative(variableChar) instanceof Constant constant2) {
-                number /= constant2.constant;
-                return power(number, constant1.constant, power.getFunction2());
-            } else if (function instanceof Ln log && log.operand.getSimplifiedDerivative(variableChar) instanceof Constant constant1) {
-                number /= constant1.constant;
+            if (function instanceof Pow power && !IntegralsTools.containsVariable(power.getFunction2(), variableChar) && !IntegralsTools.containsVariable(power.getFunction1().getSimplifiedDerivative(variableChar), variableChar)) {
+                number = new Product(number, DefaultFunctions.reciprocal(power.getFunction1().getSimplifiedDerivative(variableChar)));
+                return exponential(number, power.getFunction2(), power.getFunction1());
+            } else if (function instanceof Pow power && !IntegralsTools.containsVariable(power.getFunction1(), variableChar) && !IntegralsTools.containsVariable(power.getFunction2().getSimplifiedDerivative(variableChar), variableChar)) {
+                number = new Product(number, DefaultFunctions.reciprocal(power.getFunction2().getSimplifiedDerivative(variableChar)));
+                return power(number, power.getFunction1(), power.getFunction2());
+            } else if (function instanceof Ln log && !IntegralsTools.containsVariable(log.operand.getSimplifiedDerivative(variableChar), variableChar)) {
+                number = new Product(number, DefaultFunctions.reciprocal(log.operand.getSimplifiedDerivative(variableChar)));
                 return naturalLog(number, log.operand);
-            } else if (function instanceof Logb logb && logb.getFunction2() instanceof Constant constant1 && logb.getFunction1().getSimplifiedDerivative(variableChar) instanceof Constant constant2) {
-                number /= (constant2.constant * Math.log(constant1.constant));
+            } else if (function instanceof Logb logb && !IntegralsTools.containsVariable(logb.getFunction2(), variableChar) && !IntegralsTools.containsVariable(logb.getFunction1().getSimplifiedDerivative(variableChar), variableChar)) {
+                number = new Product(number, DefaultFunctions.reciprocal(new Product(logb.getFunction1().getSimplifiedDerivative(variableChar), new Ln(logb.getFunction2()))));
                 return naturalLog(number, logb.getFunction1());
-            } else if (function instanceof Constant constant1) {
-                return new Product(new Constant(constant1.constant * number), new Variable(variableChar));
+            } else if (!IntegralsTools.containsVariable(function, variableChar)) {
+                return new Product(number, function, new Variable(variableChar));
             } else if (function instanceof Variable variable) {
-                return power(number, 1, variable);
-            } else if (function instanceof TrigFunction unit && unit.operand.getSimplifiedDerivative(variableChar) instanceof Constant constant1) {
-                number /= constant1.constant;
-                return new Product(new Constant(number), unit.getElementaryIntegral());
+                return power(number, DefaultFunctions.ONE, variable);
+            } else if (function instanceof TrigFunction unit && !IntegralsTools.containsVariable(unit.operand.getSimplifiedDerivative(variableChar), variableChar)) {
+                number = new Product(number, DefaultFunctions.reciprocal(unit.operand.getSimplifiedDerivative(variableChar)));
+                return new Product(number, unit.getElementaryIntegral());
             }
         }
         throw new IntegrationFailedException("Integration failed");
     }
 
 
-    private static Function exponential(double number, double base, Function exponent) {
-        return new Product(new Constant(number/Math.log(base)), new Pow(exponent, new Constant(base)));
+    private static Function exponential(Function number, Function base, Function exponent) {
+        return new Product(number, new Pow(DefaultFunctions.NEGATIVE_ONE, new Ln(base)), new Pow(exponent, base));
     }
 
-    private static Function power(double number, double exponent, Function base) {
-        if (exponent == -1)
-            return new Product(new Constant(number), new Ln(base));
+    private static Function power(Function number, Function exponent, Function base) {
+        if (exponent instanceof Constant constant && constant.constant == -1)
+            return new Product(number, new Ln(base));
         else
-            return new Product(new Constant(number/(exponent+1)), new Pow(new Constant(exponent+1), base));
+            return new Product(number, DefaultFunctions.reciprocal(new Sum(exponent, DefaultFunctions.ONE)), new Pow(new Sum(exponent, DefaultFunctions.ONE), base));
     }
 
-    private static Function naturalLog(double number, Function operand) {
-        return new Product(new Constant(number), new Sum(new Product(operand, new Ln(operand)), new Product(new Constant(-1), operand)));
+    private static Function naturalLog(Function number, Function operand) {
+        return new Product(number, new Sum(new Product(operand, new Ln(operand)), DefaultFunctions.negative(operand)));
     }
 }

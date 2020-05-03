@@ -1,5 +1,6 @@
 import functions.Function;
 import functions.commutative.Sum;
+import functions.special.Constant;
 import org.junit.jupiter.api.Test;
 import parsing.Parser;
 import tools.exceptions.IntegrationFailedException;
@@ -22,8 +23,8 @@ public class IntegralTest {
     @Test
     void stripConstantsSimple() {
         Function test1 = Parser.parse("3sin(x)");
-        Pair<Double, Function> test2 = IntegralsTools.stripConstants(test1);
-        assertEquals(3, test2.first);
+        Pair<Function, Function> test2 = IntegralsTools.stripConstants(test1, 'x');
+        assertEquals(new Constant(3), test2.first);
         assertEquals(Parser.parse("sin(x)"), test2.second);
     }
 

@@ -2,7 +2,6 @@ package tools.integration;
 
 import functions.Function;
 import functions.commutative.Product;
-import functions.special.Constant;
 import functions.special.Variable;
 import tools.DefaultFunctions;
 import tools.FunctionTools;

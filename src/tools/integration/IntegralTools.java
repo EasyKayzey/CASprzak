@@ -33,7 +33,7 @@ public class IntegralTools {
                     iter.remove();
                 }
             }
-            return new Pair<>((new Product(constants.toArray(new Function[0]))).simplify(), (new Product(termsWithConstantRemoved.toArray(new Function[0]))).simplifyPull());
+            return new Pair<>((new Product(constants.toArray(new Function[0]))).simplify(), (new Product(termsWithConstantRemoved.toArray(new Function[0]))).simplifyPull().simplifyTrivialElement());
         } else {
             return new Pair<>(DefaultFunctions.ONE, function);
         }

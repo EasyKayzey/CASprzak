@@ -1,7 +1,7 @@
 # CASprzak
 CASprzak is a Computer Algebra System (CAS) written by The EasyKayzey Show (Erez Israeli Miller and Michael Kasprzak)
 
-Hello, and welcome to our CAS. This is a joint project by The EasyKayzey Show started at HackBCA V, 2020. Z_CASprzak is a computer-algebra framework mainly for storing, modifying, and applying mathematical functions and functionals, and it currently has a small command-line demo.
+Hello, and welcome to our CAS. This is a joint project by The EasyKayzey Show started at HackBCA V, 2020. Z_CASprzak is a computer-algebra framework mainly for storing, modifying, and applying mathematical functions and functionals, and it is written completely in native Java 14 with no external libraries (except JUnit for testing purposes only).
 
 ## Functionality
 ### Core
@@ -15,7 +15,7 @@ Hello, and welcome to our CAS. This is a joint project by The EasyKayzey Show st
   - Finding the local maxima or minima of functions on a range
 - Generating Taylor Series from functions
 - Numerical integration via Simpson's rule
-- Basic symbolic integration using only derivative divides
+- Basic symbolic integration using only "derivative divides" substitution
 ### Other
 - Parsing and storing infix expressions like `x^2-3y+sin(1/z)`
 - Command-line interface

@@ -68,7 +68,7 @@ public class Integral extends UnitaryFunction {
 
 	@Override
 	public double evaluate(Map<Character, Double> variableValues) {
-		return 0; //TODO implement
+		return 0;
 	}
 
 	@Override

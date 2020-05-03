@@ -1,7 +1,6 @@
 package ui;
 
 import functions.Function;
-import parsing.ConstantEvaluator;
 import parsing.Parser;
 
 import java.util.HashMap;
@@ -43,7 +42,7 @@ public class CASDebugger {
 					char[] chars = {'x', 'y', 'z'};
 					Map<Character, Double> values = new HashMap<>();
 					for (int i = 0; i < unparsedValues.length; i++)
-						values.put(chars[i], ConstantEvaluator.getConstant(unparsedValues[i]));
+						values.put(chars[i], Parser.getConstant(unparsedValues[i]));
 					System.out.println(function.evaluate(values));
 				}
 			}

@@ -135,7 +135,7 @@ public class KeywordInterface {
 	 */
 	public static double evaluate(String input) {
 		String[] splitInput = keywordSplitter.split(input, 2);
-		double[] values = Arrays.stream(keywordSplitter.split(splitInput[1])).mapToDouble(ConstantEvaluator::getConstant).toArray();
+		double[] values = Arrays.stream(keywordSplitter.split(splitInput[1])).mapToDouble(Parser::getConstant).toArray();
 		Map<Character, Double> map = new HashMap<>();
 		for (int i = 0; i < values.length; i++)
 			map.put(Variable.variables.get(i), values[i]);
@@ -165,7 +165,7 @@ public class KeywordInterface {
 	 */
 	public static double[] solve(String input) {
 		String[] splitInput = keywordSplitter.split(input);
-		return Solver.getSolutionsRange(parseStored(splitInput[0]), ConstantEvaluator.getConstant(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]));
+		return Solver.getSolutionsRange(parseStored(splitInput[0]), Parser.getConstant(splitInput[1]), Parser.getConstant(splitInput[2]));
 	}
 
 	/**
@@ -174,11 +174,11 @@ public class KeywordInterface {
 	public static Object extrema(String input) {
 		String[] splitInput = keywordSplitter.split(input);
 		return switch (splitInput[0]) {
-			case "min", "minima" -> Extrema.findLocalMinimum(parseStored(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]), ConstantEvaluator.getConstant(splitInput[3]));
-			case "max", "maxima" -> Extrema.findLocalMaximum(parseStored(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]), ConstantEvaluator.getConstant(splitInput[3]));
-			case "anymin", "anyminima" -> Extrema.findAnyMinima(parseStored(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]), ConstantEvaluator.getConstant(splitInput[3]));
-			case "anymax", "anymaxima" -> Extrema.findAnyMaxima(parseStored(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]), ConstantEvaluator.getConstant(splitInput[3]));
-			case "inflect", "inflection" -> Extrema.findAnyInflectionPoints(parseStored(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]), ConstantEvaluator.getConstant(splitInput[3]));
+			case "min", "minima" -> Extrema.findLocalMinimum(parseStored(splitInput[1]), Parser.getConstant(splitInput[2]), Parser.getConstant(splitInput[3]));
+			case "max", "maxima" -> Extrema.findLocalMaximum(parseStored(splitInput[1]), Parser.getConstant(splitInput[2]), Parser.getConstant(splitInput[3]));
+			case "anymin", "anyminima" -> Extrema.findAnyMinima(parseStored(splitInput[1]), Parser.getConstant(splitInput[2]), Parser.getConstant(splitInput[3]));
+			case "anymax", "anymaxima" -> Extrema.findAnyMaxima(parseStored(splitInput[1]), Parser.getConstant(splitInput[2]), Parser.getConstant(splitInput[3]));
+			case "inflect", "inflection" -> Extrema.findAnyInflectionPoints(parseStored(splitInput[1]), Parser.getConstant(splitInput[2]), Parser.getConstant(splitInput[3]));
 			default -> throw new IllegalStateException("Invalid setting for extrema:" + splitInput[0]);
 		};
 	}
@@ -188,7 +188,7 @@ public class KeywordInterface {
 	 */
 	public static Function taylor(String input) {
 		String[] splitInput = keywordSplitter.split(input);
-		return TaylorSeries.makeTaylorSeries(parseStored(splitInput[0]), (int) ConstantEvaluator.getConstant(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]));
+		return TaylorSeries.makeTaylorSeries(parseStored(splitInput[0]), (int) Parser.getConstant(splitInput[1]), Parser.getConstant(splitInput[2]));
 	}
 
 	/**
@@ -310,7 +310,7 @@ public class KeywordInterface {
 	 */
 	public static double integrateNumeric(String input) {
 		String[] splitInput = keywordSplitter.split(input);
-		return NumericalIntegration.simpsonsRule(parseStored(splitInput[0]), ConstantEvaluator.getConstant(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]));
+		return NumericalIntegration.simpsonsRule(parseStored(splitInput[0]), Parser.getConstant(splitInput[1]), Parser.getConstant(splitInput[2]));
 	}
 
 	/**
@@ -318,7 +318,7 @@ public class KeywordInterface {
 	 */
 	private static double[] integrateNumericError(String input) {
 		String[] splitInput = keywordSplitter.split(input);
-		return NumericalIntegration.simpsonsRuleWithError(parseStored(splitInput[0]), ConstantEvaluator.getConstant(splitInput[1]), ConstantEvaluator.getConstant(splitInput[2]));
+		return NumericalIntegration.simpsonsRuleWithError(parseStored(splitInput[0]), Parser.getConstant(splitInput[1]), Parser.getConstant(splitInput[2]));
 	}
 
 	/**
@@ -371,7 +371,7 @@ public class KeywordInterface {
 	 */
 	private static Object setVariablesTo(String input) {
 		String[] splitInput = keywordSplitter.split(input, 2);
-		return parseStored(splitInput[0]).setVariables(Arrays.stream(keywordSplitter.split(splitInput[1])).map(equals::split).collect(Collectors.toMap(e -> e[0].charAt(0), e -> ConstantEvaluator.getConstant(e[1]))));
+		return parseStored(splitInput[0]).setVariables(Arrays.stream(keywordSplitter.split(splitInput[1])).map(equals::split).collect(Collectors.toMap(e -> Parser.getCharacter(e[0]), e -> Parser.getConstant(e[1]))));
 	}
 
 

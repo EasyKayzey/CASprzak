@@ -3,7 +3,6 @@ package ui;
 import config.Settings;
 import functions.Function;
 import functions.special.Variable;
-import parsing.ConstantEvaluator;
 import parsing.Parser;
 import parsing.PreProcessor;
 import tools.singlevariable.NumericalIntegration;
@@ -34,7 +33,7 @@ public class CASDemo {
 
 		System.out.println("What are your inputs? Separate with commas and/or spaces, and order them with your variables.");
 		String[] inputStrings = commaSpaces.split(scanner.next());
-		double[] inputs = Arrays.stream(inputStrings).mapToDouble(ConstantEvaluator::getConstant).toArray();
+		double[] inputs = Arrays.stream(inputStrings).mapToDouble(Parser::getConstant).toArray();
 
 		if (inputs.length != variables.length)
 			throw new IllegalArgumentException("Amount of values and amount of variables do not match!");

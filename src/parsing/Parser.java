@@ -108,4 +108,25 @@ public class Parser {
 		else
 			throw new MalformedParametersException("Cannot parse " + input);
 	}
+
+	/**
+	 * Evaluates infix corresponding to a constant, like {@code pi/3}
+	 * @param infix infix string of constant
+	 * @return a double corresponding to the evaluated constant to be evaluated
+	 */
+	public static double getConstant(String infix) {
+		return parse(infix).evaluate(null);
+	}
+
+	/**
+	 * Converts the string to a character,
+	 * @param input the string containing the character
+	 * @return the character in the string
+	 * @throws IllegalArgumentException if the input is not one character
+	 */
+	public static char getCharacter(String input) {
+		if (input.length() != 1)
+			throw new IllegalArgumentException("Input length should be 1 for Parser.toCharacter");
+		return input.charAt(0);
+	}
 }

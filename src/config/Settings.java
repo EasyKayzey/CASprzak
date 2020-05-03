@@ -15,7 +15,7 @@ public class Settings {
 	public static boolean cacheDerivatives = true;
 	public static boolean trustImmutability = true; // Makes it so that getFunctions and other getters don't return clone()
 	public static boolean enforceIntegerOperations = true; // Makes it so that combinatorial operations return integers
-	public static boolean exitSolverOnProximity = false;
+	public static boolean exitSolverOnProximity = false; // Makes it so that solvers exit when f(x) is within equalsMargin of 0
 	public static char singleVariableDefault = 'x';
 	public static SolverType defaultSolverType = SolverType.NEWTON;
 	public static FactorialType defaultFactorial = FactorialType.RECURSIVE;

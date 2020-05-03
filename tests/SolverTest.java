@@ -17,7 +17,7 @@ public class SolverTest {
     @Test
     void moreAdvancedPolynomial() {
         Function test = Parser.parse("x^4-5x^2+4");
-        assertArrayEquals(new double[]{-2, -1, 1, 2}, Solver.getSolutionsRangeNewton(test, -10, 10));
+        assertArrayEquals(new double[]{-2, -1, 1, 2}, Solver.getSolutionsRangeNewton(test, -10, 10), 1e-10);
     }
 
     @Test
@@ -59,7 +59,7 @@ public class SolverTest {
     @Test
     void simpleExponent() {
         Function test = Parser.parse("(x+1)^2");
-        assertEquals(-1, Solver.getSolutionPointNewton(test, 23));
+        assertEquals(-1, Solver.getSolutionPointNewton(test, 23), 1e-6);
     }
 
     @Test void chemTest1() {

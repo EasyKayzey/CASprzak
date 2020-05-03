@@ -15,7 +15,7 @@ Hello, and welcome to our CAS. This is a joint project by The EasyKayzey Show st
   - Finding the local maxima or minima of functions on a range
 - Generating Taylor Series from functions
 - Numerical integration via Simpson's rule
-- Basic symbolic integration using only derivative divides.
+- Basic symbolic integration using only derivative divides
 ### Other
 - Parsing and storing infix expressions like `x^2-3y+sin(1/z)`
 - Command-line interface

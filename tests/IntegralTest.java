@@ -111,4 +111,18 @@ public class IntegralTest {
         Function test2 = Parser.parse("-1/3*(cos(e^x))^3");
         assertEquals(test2, test1.integrate());
     }
+
+    @Test
+    void severalVariableBasic() {
+        Integral test1 = new Integral(Parser.parse("x^y"), 'x');
+        Function test2 = Parser.parse("1/(y+1)*x^(y+1)");
+        assertEquals(test2, test1.integrate());
+    }
+
+    @Test
+    void severalVariableBasicWithNoX() {
+        Integral test1 = new Integral(Parser.parse("y*z^y*ln(y)"), 'x');
+        Function test2 = Parser.parse("y*z^y*ln(y)*x");
+        assertEquals(test2.simplify(), test1.integrate().simplify());
+    }
 }

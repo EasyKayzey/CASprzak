@@ -74,6 +74,7 @@ public class Variable extends SpecialFunction {
 		variables = variables.subList(0, variablesEnd);
 	}
 
+
 	public String toString() {
 		return String.valueOf(varID);
 	}
@@ -86,6 +87,7 @@ public class Variable extends SpecialFunction {
 	public double evaluate(Map<Character, Double> variableValues) {
 		return variableValues.get(varID);
 	}
+
 
 	public Function clone() {
 		return new Variable(varID);

@@ -4,8 +4,8 @@ import config.Settings;
 import functions.Function;
 import functions.special.Constant;
 import functions.special.Variable;
-import tools.MiscTools;
 import functions.unitary.transforms.Integral;
+import tools.MiscTools;
 import tools.singlevariable.Extrema;
 import tools.singlevariable.NumericalIntegration;
 import tools.singlevariable.Solver;
@@ -15,10 +15,13 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 @SuppressWarnings("SpellCheckingInspection")
 public class KeywordInterface {
 	public static final Pattern keywordSplitter = Pattern.compile("(?<=^d/d)(?=[a-zA-Z])|\"\\s+\"|\"\\s+|\\s+\"|\"$|\\s+(?=[^\"]*(\"[^\"]*\"[^\"]*)*$)");
+	public static final Pattern spaces = Pattern.compile("\\s+");
+	public static final Pattern equals = Pattern.compile("=");
 	public static final HashMap<String, Function> storedFunctions = new HashMap<>();
 	public static Object prev;
 
@@ -56,6 +59,7 @@ public class KeywordInterface {
 			case "cv", "clearvars" -> clearVariables();
 			case "ss", "sset", "sets", "setsetting" -> setSettings(splitInput[1]);
 			case "ps", "settings", "printsettings" -> printSettings();
+			case "svt", "setvarsto", "setvariablesto" -> setVariablesTo(splitInput[1]);
 			case "int", "integral" -> integral(splitInput[1]);
 			default -> null;
 		};
@@ -360,6 +364,16 @@ public class KeywordInterface {
 		+ "singleVariableDefault = " + Settings.singleVariableDefault + "\n"
 		+ "defaultSolverType = " + Settings.defaultSolverType;
 	}
+
+
+	/**
+	 * svt [function] ([char]=[value])*
+	 */
+	private static Object setVariablesTo(String input) {
+		String[] splitInput = keywordSplitter.split(input, 2);
+		return parseStored(splitInput[0]).setVariables(Arrays.stream(keywordSplitter.split(splitInput[1])).map(equals::split).collect(Collectors.toMap(e -> e[0].charAt(0), e -> ConstantEvaluator.getConstant(e[1]))));
+	}
+
 
 	/**
 	 * integral [function] d[variable]

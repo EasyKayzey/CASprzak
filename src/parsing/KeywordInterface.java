@@ -110,7 +110,7 @@ public class KeywordInterface {
 	 */
 	public static Function substituteAll(Function function) {
 		for (Map.Entry<String, Function>  entry : storedFunctions.entrySet())
-			function = function.substitute(entry.getKey().charAt(0), entry.getValue());
+			function = function.substitute(Parser.getCharacter(entry.getKey()), entry.getValue());
 		return function;
 	}
 
@@ -120,14 +120,14 @@ public class KeywordInterface {
 	 */
 	public static Function partialDiff(String input) {
 		String[] splitInput = keywordSplitter.split(input, 2);
-		return parseStored(splitInput[1]).getSimplifiedDerivative(splitInput[0].charAt(0));
+		return parseStored(splitInput[1]).getSimplifiedDerivative(Parser.getCharacter(splitInput[0]));
 	}
 	/**
 	 * pdn [variable] [times] [function]
 	 */
 	private static Function partialDiffNth(String input) {
 		String[] splitInput = keywordSplitter.split(input, 3);
-		return parseStored(splitInput[2]).getNthDerivative(splitInput[0].charAt(0), Integer.parseInt(splitInput[1]));
+		return parseStored(splitInput[2]).getNthDerivative(Parser.getCharacter(splitInput[0]), Integer.parseInt(splitInput[1]));
 	}
 
 	/**
@@ -155,9 +155,7 @@ public class KeywordInterface {
 	 */
 	public static Function substitute(String input) {
 		String[] splitInput = keywordSplitter.split(input);
-		if (splitInput[1].length() > 1)
-			throw new IllegalArgumentException("Variables should be one character.");
-		return parseStored(splitInput[0]).substitute(splitInput[1].charAt(0), parseStored(splitInput[2]));
+		return parseStored(splitInput[0]).substitute(Parser.getCharacter(splitInput[1]), parseStored(splitInput[2]));
 	}
 
 	/**
@@ -196,10 +194,8 @@ public class KeywordInterface {
 	 */
 	public static Object storeFunction(String input) {
 		String[] splitInput = keywordSplitter.split(input, 2);
-		if (splitInput[0].length() != 1)
-			throw new IllegalArgumentException("Functions should be one character.");
 		if (!storedFunctions.containsKey(splitInput[0]))
-			Variable.addFunctionVariable(splitInput[0].charAt(0));
+			Variable.addFunctionVariable(Parser.getCharacter(splitInput[0]));
 		try {
 			storedFunctions.put(splitInput[0], (Function) KeywordInterface.useKeywords(splitInput[1]));
 		} catch (RuntimeException e) {
@@ -212,9 +208,7 @@ public class KeywordInterface {
 	 * rmfun [functionname]
 	 */
 	private static Object removeFunction(String input) {
-		if (input.length() > 1)
-			throw new IllegalArgumentException("Variables should be one character.");
-		Variable.removeFunctionVariable(input.charAt(0));
+		Variable.removeFunctionVariable(Parser.getCharacter(input));
 		return printVariables();
 	}
 
@@ -224,11 +218,8 @@ public class KeywordInterface {
 	 */
 	public static String addVariables(String input) {
 		String[] splitInput = keywordSplitter.split(input);
-		for (String var : splitInput) {
-			if (var.length() > 1)
-				throw new IllegalArgumentException("Variables should be one character.");
-			Variable.addVariable(var.charAt(0));
-		}
+		for (String var : splitInput)
+			Variable.addVariable(Parser.getCharacter(var));
 		return printVariables();
 	}
 
@@ -237,11 +228,8 @@ public class KeywordInterface {
 	 */
 	private static Object removeVariables(String input) {
 		String[] splitInput = keywordSplitter.split(input);
-		for (String var : splitInput) {
-			if (var.length() > 1)
-				throw new IllegalArgumentException("Variables should be one character.");
-			Variable.removeVariable(var.charAt(0));
-		}
+		for (String var : splitInput)
+			Variable.removeVariable(Parser.getCharacter(var));
 		return printVariables();
 	}
 
@@ -337,12 +325,7 @@ public class KeywordInterface {
 			case "cacheDerivatives" -> Settings.cacheDerivatives = MiscTools.parseBoolean(splitInput[1]);
 			case "trustImmutability" -> Settings.trustImmutability = MiscTools.parseBoolean(splitInput[1]);
 			case "enforceIntegerOperations" -> Settings.enforceIntegerOperations = MiscTools.parseBoolean(splitInput[1]);
-			case "singleVariableDefault" -> {
-				if (splitInput[1].length() == 1)
-					Settings.singleVariableDefault = splitInput[1].charAt(0);
-				else
-					throw new IllegalArgumentException("This setting should only be one character");
-			}
+			case "singleVariableDefault" -> Settings.singleVariableDefault = Parser.getCharacter(splitInput[1]);
 			default -> throw new IllegalArgumentException("Setting " + splitInput[0] + " does not exist");
 			//TODO implement Enum setting parsing
 		}

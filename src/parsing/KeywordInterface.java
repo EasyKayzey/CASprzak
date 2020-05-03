@@ -5,7 +5,7 @@ import functions.Function;
 import functions.special.Constant;
 import functions.special.Variable;
 import tools.MiscTools;
-import functions.unitary.Integral;
+import functions.unitary.transforms.Integral;
 import tools.singlevariable.Extrema;
 import tools.singlevariable.NumericalIntegration;
 import tools.singlevariable.Solver;

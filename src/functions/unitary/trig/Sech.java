@@ -40,7 +40,7 @@ public class Sech extends TrigFunction {
 	}
 
 
-	public Function integrate() {
+	public Function getElementaryIntegral() {
 		return new Atan(new Abs(new Sinh(operand)));
 	}
 

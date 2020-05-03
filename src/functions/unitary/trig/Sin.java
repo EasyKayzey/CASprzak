@@ -37,7 +37,7 @@ public class Sin extends TrigFunction {
 		return new Sin(operand);
 	}
 
-	public Function integrate() {
+	public Function getElementaryIntegral() {
 		return new Product(DefaultFunctions.NEGATIVE_ONE, new Cos(operand));
 	}
 

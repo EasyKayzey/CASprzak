@@ -37,7 +37,7 @@ public class Sinh extends TrigFunction {
 	}
 
 
-	public Function integrate() {
+	public Function getElementaryIntegral() {
 		return new Cosh(operand);
 	}
 

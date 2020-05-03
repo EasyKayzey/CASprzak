@@ -1,26 +1,21 @@
-package functions.unitary;
+package functions.unitary.transforms;
 
 import config.Settings;
 import functions.Function;
 import functions.commutative.Sum;
+import functions.unitary.UnitaryFunction;
 import tools.integration.StageOne;
 
 import java.util.Map;
 
-public class Integral extends UnitaryFunction {
-	/**
-	 * The character of the variable that the Integral is with respect to
-	 */
-	public final char respectTo;
-
+public class Integral extends TransformFunction {
 	/**
 	 * Constructs a new Integral
 	 * @param integrand The integrand on the Integral
 	 * @param respectTo The variable that the Integral is with respect to
 	 */
 	public Integral(Function integrand, char respectTo) {
-		super(integrand);
-		this.respectTo = respectTo;
+		super(integrand, respectTo);
 	}
 
 	@Override
@@ -35,6 +30,8 @@ public class Integral extends UnitaryFunction {
 
 	@Override
 	public UnitaryFunction substitute(char varID, Function toReplace) {
+		if (varID == respectTo)
+			throw new UnsupportedOperationException("You cannot substitute the variable you are working with respect to");
 		return new Integral(operand.substitute(varID, toReplace), respectTo);
 	}
 

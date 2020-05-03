@@ -11,7 +11,7 @@ public abstract class InverseTrigFunction extends TrigFunction {
 		super(operand);
 	}
 
-	public Function integrate() {
+	public Function getElementaryIntegral() {
 		return new Sum(new Product(operand, me(operand)), new Product(DefaultFunctions.NEGATIVE_ONE, UnitaryFunction.newInstanceOf(getInverse(), me(operand))));
 	}
 }

@@ -40,7 +40,7 @@ public class Sec extends TrigFunction {
 	}
 
 
-	public Function integrate() {
+	public Function getElementaryIntegral() {
 		return new Ln(new Abs(new Sum(new Sec(operand), new Tan(operand))));
 	}
 

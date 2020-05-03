@@ -41,7 +41,7 @@ public class Coth extends TrigFunction {
 		return new Coth(operand);
 	}
 
-	public Function integrate() {
+	public Function getElementaryIntegral() {
 		return new Ln(new Abs(new Sinh(operand)));
 	}
 

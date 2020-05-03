@@ -6,5 +6,5 @@ public interface Integrable {
      * Returns the integral of the function
      * @return the integral of the function
      */
-    Function integrate();
+    Function getElementaryIntegral();
 }

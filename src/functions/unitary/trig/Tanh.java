@@ -40,7 +40,7 @@ public class Tanh extends TrigFunction {
 	}
 
 
-	public Function integrate() {
+	public Function getElementaryIntegral() {
 		return new Ln(new Cosh(operand));
 	}
 

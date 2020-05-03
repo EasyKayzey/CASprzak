@@ -41,7 +41,7 @@ public class Cot extends TrigFunction {
 		return new Cot(operand);
 	}
 
-	public Function integrate() {
+	public Function getElementaryIntegral() {
 		return new Product(DefaultFunctions.NEGATIVE_ONE, new Ln(new Abs(new Csc(operand))));
 	}
 

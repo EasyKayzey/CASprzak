@@ -40,7 +40,7 @@ public class Cosh extends TrigFunction {
 		return Acosh.class;
 	}
 
-	public Function integrate() {
+	public Function getElementaryIntegral() {
 		return new Sinh(operand);
 	}
 }

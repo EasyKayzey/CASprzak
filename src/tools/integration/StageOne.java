@@ -78,7 +78,7 @@ public class StageOne {
                     Product derivativeTimesOperation = new Product(derivativeWithoutConstant, f);
                     if (SearchTools.existsInSurfaceSubset(product, derivativeTimesOperation::equals) && !SearchTools.existsInOppositeSurfaceSubset(product, (u -> SearchTools.exists(u, SearchTools.isVariable(variableChar))), derivativeTimesOperation::equals)) {
                         number /= (constantInFront);
-                        return new Product(new Constant(number), unit.integrate());
+                        return new Product(new Constant(number), unit.getElementaryIntegral());
                     }
                 }
                 Function derivativeWithConstants = f.getSimplifiedDerivative(variableChar);
@@ -110,7 +110,7 @@ public class StageOne {
                 return power(number, 1, variable);
             } else if (function instanceof TrigFunction unit && unit.operand.getSimplifiedDerivative(variableChar) instanceof Constant constant1) {
                 number /= constant1.constant;
-                return new Product(new Constant(number), unit.integrate());
+                return new Product(new Constant(number), unit.getElementaryIntegral());
             }
         }
         throw new IntegrationFailedException("Integration failed");

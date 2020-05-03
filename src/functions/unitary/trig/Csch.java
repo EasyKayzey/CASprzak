@@ -39,7 +39,7 @@ public class Csch extends TrigFunction {
 	}
 
 
-	public Function integrate() {
+	public Function getElementaryIntegral() {
 		return null;
 	}
 

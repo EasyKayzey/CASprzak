@@ -41,7 +41,7 @@ public class Tan extends TrigFunction {
 	}
 
 
-	public Function integrate() {
+	public Function getElementaryIntegral() {
 		return new Ln(new Abs(new Sec(operand)));
 	}
 

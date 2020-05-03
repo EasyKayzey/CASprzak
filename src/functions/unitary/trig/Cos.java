@@ -41,7 +41,7 @@ public class Cos extends TrigFunction {
 		return Acos.class;
 	}
 
-	public Function integrate() {
+	public Function getElementaryIntegral() {
 		return new Sin(operand);
 	}
 }

@@ -42,7 +42,7 @@ public class Csc extends TrigFunction {
 		return new Csc(operand);
 	}
 
-	public Function integrate() {
+	public Function getElementaryIntegral() {
 		return new Product(DefaultFunctions.NEGATIVE_ONE, new Ln(new Abs(new Sum(new Csc(operand), new Cot(operand)))));
 	}
 

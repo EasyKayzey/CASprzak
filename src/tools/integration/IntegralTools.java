@@ -4,9 +4,13 @@ import functions.Function;
 import functions.commutative.Product;
 import functions.special.Variable;
 import tools.DefaultFunctions;
-import tools.FunctionTools;
 import tools.SearchTools;
 import tools.helperclasses.Pair;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.ListIterator;
 
 
 public class IntegralTools {
@@ -19,18 +23,17 @@ public class IntegralTools {
     public static Pair<Function, Function> stripConstants(Function function, char varID) {
         if (function instanceof Product multiply) {
             Function[] terms = multiply.simplifyConstants().getFunctions();
-            Product constants = new Product();
-            Function[] termsWithConstantRemoved = terms;
-            for (int i = 0; i < multiply.getFunctions().length; i++) {
-                if (doesNotContainsVariable(terms[i], varID)) {
-                    constants = new Product(constants, terms[i]);
-                    termsWithConstantRemoved = FunctionTools.removeFunctionAt(terms, i);
+            List<Function> constants = new ArrayList<>();
+            List<Function> termsWithConstantRemoved = new ArrayList<>(Arrays.asList(terms));
+            ListIterator<Function> iter = termsWithConstantRemoved.listIterator();
+            while (iter.hasNext()) {
+                Function current = iter.next();
+                if (doesNotContainsVariable(current, varID)) {
+                    constants.add(current);
+                    iter.remove();
                 }
             }
-            if (termsWithConstantRemoved.length == 1)
-                return new Pair<>(constants, termsWithConstantRemoved[0]);
-            else
-                return new Pair<>(constants, (new Product(termsWithConstantRemoved)).simplifyPull());
+            return new Pair<>((new Product(constants.toArray(new Function[0]))).simplify(), (new Product(termsWithConstantRemoved.toArray(new Function[0]))).simplifyPull());
         } else {
             return new Pair<>(DefaultFunctions.ONE, function);
         }

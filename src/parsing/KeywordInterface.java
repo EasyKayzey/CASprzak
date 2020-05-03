@@ -325,6 +325,7 @@ public class KeywordInterface {
 			case "cacheDerivatives" -> Settings.cacheDerivatives = MiscTools.parseBoolean(splitInput[1]);
 			case "trustImmutability" -> Settings.trustImmutability = MiscTools.parseBoolean(splitInput[1]);
 			case "enforceIntegerOperations" -> Settings.enforceIntegerOperations = MiscTools.parseBoolean(splitInput[1]);
+			case "exitSolverOnProximity" -> Settings.exitSolverOnProximity = MiscTools.parseBoolean(splitInput[1]);
 			case "singleVariableDefault" -> Settings.singleVariableDefault = Parser.getCharacter(splitInput[1]);
 			default -> throw new IllegalArgumentException("Setting " + splitInput[0] + " does not exist");
 			//TODO implement Enum setting parsing

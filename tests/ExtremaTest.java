@@ -1,3 +1,4 @@
+import config.Settings;
 import functions.Function;
 import org.junit.jupiter.api.Test;
 import parsing.Parser;
@@ -16,7 +17,7 @@ public class ExtremaTest {
     @Test
     void lessSimpleMinima() {
         Function test = Parser.parse("x^2-6x+8");
-        assertEquals(3, Extrema.findLocalMinimum(test, -5,5));
+        assertEquals(3, Extrema.findLocalMinimum(test, -5,5), Settings.equalsMargin);
     }
 
     @Test

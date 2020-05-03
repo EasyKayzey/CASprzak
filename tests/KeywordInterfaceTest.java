@@ -1,3 +1,4 @@
+import config.Settings;
 import functions.Function;
 import org.junit.jupiter.api.Test;
 import parsing.KeywordInterface;
@@ -85,7 +86,7 @@ public class KeywordInterfaceTest {
     @Test
     void basicSolve() {
         double[] test = (double[]) KeywordInterface.useKeywords("solve 5-5x 0 2");
-        assertArrayEquals(new double[]{1}, test);
+        assertArrayEquals(new double[]{1}, test, Settings.equalsMargin);
     }
 
     @Test

@@ -45,9 +45,10 @@ public class Solver {
 			if (Double.isNaN(nextPoint))
 				return initialPoint;
 			initialPoint = nextPoint;
-			if (i % 25 == 0)
-				if (initialPoint < 1E-10 && initialPoint > -1E-10)
-					return 0;
+			if (i % 25 == 0 && initialPoint < 1E-10 && initialPoint > -1E-10)
+				return 0;
+			if (Settings.exitSolverOnProximity && i % 100 == 0 && Math.abs(expression.evaluate(Map.of(Settings.singleVariableDefault, nextPoint))) < Settings.equalsMargin)
+				return nextPoint;
 		}
 		if (expression.evaluate(Map.of(Settings.singleVariableDefault, initialPoint)) < Settings.zeroMargin && expression.evaluate(Map.of(Settings.singleVariableDefault, initialPoint)) > -Settings.zeroMargin)
 			return initialPoint;

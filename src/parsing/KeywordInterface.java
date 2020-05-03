@@ -19,8 +19,8 @@ import java.util.stream.Collectors;
 
 @SuppressWarnings("SpellCheckingInspection")
 public class KeywordInterface {
-	public static final Pattern keywordSplitter = Pattern.compile("(?<=^d/d)(?=[a-zA-Z])|\"\\s+\"|\"\\s+|\\s+\"|\"$|\\s+(?=[^\"]*(\"[^\"]*\"[^\"]*)*$)");
-	public static final Pattern spaces = Pattern.compile("\\s+");
+	public static final Pattern keywordSplitter = Pattern.compile("\"\\s+\"|\"\\s+|\\s+\"|\"$|\\s+(?=[^\"]*(\"[^\"]*\"[^\"]*)*$)");
+	public static final Pattern spacesAndDdx = Pattern.compile("\\s+|(?<=^d/d)(?=[a-zA-Z])");
 	public static final Pattern equals = Pattern.compile("=");
 	public static final HashMap<String, Function> storedFunctions = new HashMap<>();
 	public static Object prev;
@@ -34,7 +34,7 @@ public class KeywordInterface {
 	public static Object useKeywords(String input) {
 		if ("_".equals(input))
 			return prev;
-		String[] splitInput = spaces.split(input, 2);
+		String[] splitInput = spacesAndDdx.split(input, 2);
 		Object ret = switch (splitInput[0]) {
 			case "pd", "pdiff", "partial", "pdifferentiate", "d/d" -> partialDiff(splitInput[1]);
 			case "pdn", "pdiffn", "partialn", "pdifferentiaten" -> partialDiffNth(splitInput[1]);

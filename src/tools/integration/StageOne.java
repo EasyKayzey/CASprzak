@@ -38,50 +38,25 @@ public class StageOne {
                         return exponential(new Product(number, DefaultFunctions.reciprocal(results.getSecond())), power.getFunction2(), power.getFunction1());
 
                 } else if (term instanceof Pow power && IntegralTools.doesNotContainsVariable(power.getFunction1(), variableChar)) {
-                    Function derivativeWithConstants = power.getFunction2().getSimplifiedDerivative(variableChar);
-                    Pair<Function, Function> derivative = IntegralTools.stripConstants(derivativeWithConstants, variableChar);
-                    Function derivativeWithoutConstant = derivative.second;
-                    Function constantInFront = derivative.first;
-                    Product derivativeTimesOperation = new Product(derivativeWithoutConstant, term);
-                    if (SearchTools.existsInSurfaceSubset(product, derivativeTimesOperation::equals) && !SearchTools.existsInOppositeSurfaceSubset(product, (u -> SearchTools.exists(u, SearchTools.isVariable(variableChar))), derivativeTimesOperation::equals)) {
-                        return power(new Product(number, DefaultFunctions.reciprocal(constantInFront)), power.getFunction1(), power.getFunction2());
-                    }
+                    Pair<Boolean, Function> results = derivativeDividesSearcher(product, term, power.getFunction2(), variableChar);
+                    if (results.getFirst())
+                        return power(new Product(number, DefaultFunctions.reciprocal(results.getSecond())), power.getFunction1(), power.getFunction2());
                 } else if (term instanceof Ln ln) {
-                    Function derivativeWithConstants = ln.operand.getSimplifiedDerivative(variableChar);
-                    Pair<Function, Function> derivative = IntegralTools.stripConstants(derivativeWithConstants, variableChar);
-                    Function derivativeWithoutConstant = derivative.second;
-                    Function constantInFront = derivative.first;
-                    Product derivativeTimesOperation = new Product(derivativeWithoutConstant, term);
-                    if (SearchTools.existsInSurfaceSubset(product, derivativeTimesOperation::equals) && !SearchTools.existsInOppositeSurfaceSubset(product, (u -> SearchTools.exists(u, SearchTools.isVariable(variableChar))), derivativeTimesOperation::equals)) {
-                        return naturalLog(new Product(number, DefaultFunctions.reciprocal(constantInFront)), ln.operand);
-                    }
+                    Pair<Boolean, Function> results = derivativeDividesSearcher(product, term, ln.operand, variableChar);
+                    if (results.getFirst())
+                        return naturalLog(new Product(number, DefaultFunctions.reciprocal(results.getSecond())), ln.operand);
                 } else if (term instanceof Logb logb && IntegralTools.doesNotContainsVariable(logb.getFunction2(), variableChar)) {
-                    Function derivativeWithConstants = logb.getFunction1().getSimplifiedDerivative(variableChar);
-                    Pair<Function, Function> derivative = IntegralTools.stripConstants(derivativeWithConstants, variableChar);
-                    Function derivativeWithoutConstant = derivative.second;
-                    Function constantInFront = derivative.first;
-                    Product derivativeTimesOperation = new Product(derivativeWithoutConstant, term);
-                    if (SearchTools.existsInSurfaceSubset(product, derivativeTimesOperation::equals) && !SearchTools.existsInOppositeSurfaceSubset(product, (u -> SearchTools.exists(u, SearchTools.isVariable(variableChar))), derivativeTimesOperation::equals)) {
-                        return naturalLog(new Product(number, DefaultFunctions.reciprocal(new Product(constantInFront, new Ln(logb.getFunction2())))), logb.getFunction2());
-                    }
+                    Pair<Boolean, Function> results = derivativeDividesSearcher(product, term, logb.getFunction1(), variableChar);
+                    if (results.getFirst())
+                        return naturalLog(new Product(number, DefaultFunctions.reciprocal(new Product(results.getSecond(), new Ln(logb.getFunction2())))), logb.getFunction2());
                 } else if (term instanceof TrigFunction trig) {
-                    Function derivativeWithConstants = trig.operand.getSimplifiedDerivative(variableChar);
-                    Pair<Function, Function> derivative = IntegralTools.stripConstants(derivativeWithConstants, variableChar);
-                    Function derivativeWithoutConstant = derivative.second;
-                    Function constantInFront = derivative.first;
-                    Product derivativeTimesOperation = new Product(derivativeWithoutConstant, term);
-                    if (SearchTools.existsInSurfaceSubset(product, derivativeTimesOperation::equals) && !SearchTools.existsInOppositeSurfaceSubset(product, (u -> SearchTools.exists(u, SearchTools.isVariable(variableChar))), derivativeTimesOperation::equals)) {
-                        return new Product(new Product(number, DefaultFunctions.reciprocal(constantInFront)), trig.getElementaryIntegral());
-                    }
+                    Pair<Boolean, Function> results = derivativeDividesSearcher(product, term, trig.operand, variableChar);
+                    if (results.getFirst())
+                        return new Product(new Product(number, DefaultFunctions.reciprocal(results.getSecond())), trig.getElementaryIntegral());
                 }
-                Function derivativeWithConstants = term.getSimplifiedDerivative(variableChar);
-                Pair<Function, Function> derivative = IntegralTools.stripConstants(derivativeWithConstants, variableChar);
-                Function derivativeWithoutConstant = derivative.second;
-                Function constantInFront = derivative.first;
-                Product derivativeTimesOperation = new Product(derivativeWithoutConstant, term);
-                if (SearchTools.existsInSurfaceSubset(product, derivativeTimesOperation::equals) && !SearchTools.existsInOppositeSurfaceSubset(product, (u -> SearchTools.exists(u, SearchTools.isVariable(variableChar))), derivativeTimesOperation::equals)) {
-                    return power(new Product(number, DefaultFunctions.reciprocal(constantInFront)), DefaultFunctions.ONE, term);
-                }
+                Pair<Boolean, Function> results = derivativeDividesSearcher(product, term, term, variableChar);
+                if (results.getFirst())
+                    return power(new Product(number, DefaultFunctions.reciprocal(results.getSecond())), DefaultFunctions.ONE, term);
             }
         } else {
             if (function instanceof Pow power && IntegralTools.doesNotContainsVariable(power.getFunction2(), variableChar) && IntegralTools.doesNotContainsVariable(power.getFunction1().getSimplifiedDerivative(variableChar), variableChar)) {

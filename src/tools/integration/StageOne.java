@@ -36,7 +36,6 @@ public class StageOne {
                     Pair<Boolean, Function> results = derivativeDividesSearcher(product, term, power.getFunction1(), variableChar);
                     if (results.getFirst())
                         return exponential(new Product(number, DefaultFunctions.reciprocal(results.getSecond())), power.getFunction2(), power.getFunction1());
-
                 } else if (term instanceof Pow power && IntegralTools.doesNotContainsVariable(power.getFunction1(), variableChar)) {
                     Pair<Boolean, Function> results = derivativeDividesSearcher(product, term, power.getFunction2(), variableChar);
                     if (results.getFirst())

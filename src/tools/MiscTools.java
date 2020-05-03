@@ -56,8 +56,9 @@ public class MiscTools {
 	 * Converts a double within Settings.integerMargin of an integer to an integer
 	 * @param d the double to be converted
 	 * @return the double as an integer
+	 * @throws IllegalArgumentException if the exponent is never an integer
 	 */
-	public static int toInteger(double d) {
+	public static int toInteger(double d) throws IllegalArgumentException{
 		if (Math.abs(((int) (d + .5)) - d) < Settings.integerMargin)
 			return (int) (d + .5);
 		else

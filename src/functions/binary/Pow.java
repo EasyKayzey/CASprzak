@@ -101,13 +101,14 @@ public class Pow extends BinaryFunction {
 		}
 	}
 
-	public Function unwrapIntegerPower() {
-		if (function1 instanceof Constant constant) {
+	/**
+	 * Given a Pow, checks if the exponent is a positive integer then unwraps it into a multiply
+	 * @return a new unwrapped Function
+	 */
+	public Function unwrapIntegerPowerSafe() {
+		if (function1 instanceof Constant constant && constant.constant >= 0) {
 			try {
-				int intConstant = MiscTools.toInteger(constant.constant);
-				Function[] toMultiply = new Function[intConstant];
-				Arrays.fill(toMultiply, function2);
-				return new Product(toMultiply);
+				return unwrapIntegerPower();
 			} catch (IllegalArgumentException ignored) {
 				// Do nothing
 			}
@@ -116,6 +117,18 @@ public class Pow extends BinaryFunction {
 			return this;
 		else
 			return clone();
+	}
+
+	/**
+	 * Given a Pow with positive integer exponent, unwraps it into a multiply
+	 * @return a new unwrapped Multiply
+	 * @throws RuntimeException if the exponent is not a positive integer
+	 */
+	public Product unwrapIntegerPower() throws RuntimeException {
+		int intConstant = MiscTools.toInteger(((Constant) function1).constant);
+		Function[] toMultiply = new Function[intConstant];
+		Arrays.fill(toMultiply, function2);
+		return new Product(toMultiply);
 	}
 
 

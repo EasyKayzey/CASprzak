@@ -34,7 +34,7 @@ public class KeywordInterface {
 	public static Object useKeywords(String input) {
 		if ("_".equals(input))
 			return prev;
-		String[] splitInput = keywordSplitter.split(input, 2);
+		String[] splitInput = spaces.split(input, 2);
 		Object ret = switch (splitInput[0]) {
 			case "pd", "pdiff", "partial", "pdifferentiate", "d/d" -> partialDiff(splitInput[1]);
 			case "pdn", "pdiffn", "partialn", "pdifferentiaten" -> partialDiffNth(splitInput[1]);

@@ -22,15 +22,16 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 	 */
 	@SuppressWarnings("ClassReferencesSubclass")
 	public static final Class<?>[] sortOrder = {
-			Integral.class,
 			Constant.class,
 			Variable.class,
 			Product.class,
 			Pow.class,
 			Logb.class,
 			UnitaryFunction.class,
-			Sum.class
+			Sum.class,
+			Integral.class,
 	};
+
 	/**
 	 * Caches derivatives with the key corresponding to the varID of the derivative
 	 */

@@ -40,7 +40,7 @@ public class KeywordInterfaceTest {
 
     @Test
     void partialDerivativeNTimes() {
-        Function test1 = (Function) KeywordInterface.useKeywords("pdn x 4 sin(x)"); //TODO Why does this take forever?
+        Function test1 = (Function) KeywordInterface.useKeywords("pdn x 4 sin(x)");
         Function test2 = Parser.parse("sin(x)");
         assertEquals(test2, test1);
     }

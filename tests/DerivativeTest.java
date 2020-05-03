@@ -73,4 +73,9 @@ public class DerivativeTest {
         assertEquals(test2.evaluate(Map.of('x', 2.0)), test1.evaluate(Map.of('x', 2.0)), 0.001);
     }
 
+    @Test
+    void get4thSinDerivative() {
+        Function test = Parser.parse("sin(x)");
+        assertEquals(test, test.getNthDerivative('x', 4));
+    }
 }

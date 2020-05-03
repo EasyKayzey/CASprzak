@@ -15,6 +15,13 @@ import tools.helperclasses.Pair;
 
 @SuppressWarnings("ChainOfInstanceofChecks")
 public class StageOne {
+
+    /**
+     * Performs the derivative divides method on the integrand and returns the integral
+     * @param integrand The {@link Function} who is being integrated
+     * @param variableChar The {@link Variable#varID} the function is integrated with respect to.
+     * @return The integral of the function if one is found.\
+     */
     public static Function derivativeDivides(Function integrand, char variableChar) {
         Pair<Double, Function> stripConstant = IntegralsTools.stripConstants(integrand);
         Function function = stripConstant.second;

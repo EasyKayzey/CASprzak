@@ -22,7 +22,7 @@ public class IntegralsTools {
             Product constants = new Product();
             Function[] termsWithConstantRemoved = terms;
             for (int i = 0; i < multiply.getFunctions().length; i++) {
-                if (!containsVariable(terms[i], varID)) {
+                if (doesNotContainsVariable(terms[i], varID)) {
                     constants = new Product(constants, terms[i]);
                     termsWithConstantRemoved = FunctionTools.removeFunctionAt(terms, i);
                 }
@@ -42,8 +42,8 @@ public class IntegralsTools {
      * @param varID The variable ID of the variable that is being looked for
      * @return true if the {@link Variable} is found in the {@link Function}
      */
-    public static boolean containsVariable(Function function, char varID) {
+    public static boolean doesNotContainsVariable(Function function, char varID) {
         Variable variable = new Variable(varID);
-        return SearchTools.exists(function, variable:: equals);
+        return !SearchTools.exists(function, variable::equals);
     }
 }

@@ -13,8 +13,8 @@ public class DefaultFunctions {
 	public static final Constant NEGATIVE_TWO = new Constant(-2);
 	public static final Constant NEGATIVE_ONE = new Constant(-1);
 	public static final Constant NEGATIVE_HALF = new Constant(-.5);
-	public static final Constant HALF = new Constant(.5);
 	public static final Constant ZERO = new Constant(0);
+	public static final Constant HALF = new Constant(.5);
 	public static final Constant ONE = new Constant(1);
 	public static final Constant TWO = new Constant(2);
 

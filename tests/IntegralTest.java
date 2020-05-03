@@ -6,7 +6,7 @@ import parsing.Parser;
 import tools.exceptions.IntegrationFailedException;
 import tools.helperclasses.Pair;
 import functions.unitary.transforms.Integral;
-import tools.integration.IntegralsTools;
+import tools.integration.IntegralTools;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -23,7 +23,7 @@ public class IntegralTest {
     @Test
     void stripConstantsSimple() {
         Function test1 = Parser.parse("3sin(x)");
-        Pair<Function, Function> test2 = IntegralsTools.stripConstants(test1, 'x');
+        Pair<Function, Function> test2 = IntegralTools.stripConstants(test1, 'x');
         assertEquals(new Constant(3), test2.first);
         assertEquals(Parser.parse("sin(x)"), test2.second);
     }

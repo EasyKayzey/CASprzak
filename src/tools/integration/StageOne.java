@@ -24,25 +24,25 @@ public class StageOne {
      * @return The integral of the function if one is found.
      */
     public static Function derivativeDivides(Function integrand, char variableChar) {
-        Pair<Function, Function> stripConstant = IntegralsTools.stripConstants(integrand, variableChar);
+        Pair<Function, Function> stripConstant = IntegralTools.stripConstants(integrand, variableChar);
         Function function = stripConstant.second;
         Function number = stripConstant.first;
 
         if (function instanceof Product product){
             Function[] productTerms = product.getFunctions();
             for (Function f : productTerms) {
-                if (f instanceof Pow power && IntegralsTools.doesNotContainsVariable(power.getFunction2(), variableChar)) {
+                if (f instanceof Pow power && IntegralTools.doesNotContainsVariable(power.getFunction2(), variableChar)) {
                     Function derivativeWithConstants = power.getFunction1().getSimplifiedDerivative(variableChar);
-                    Pair<Function, Function> derivative = IntegralsTools.stripConstants(derivativeWithConstants, variableChar);
+                    Pair<Function, Function> derivative = IntegralTools.stripConstants(derivativeWithConstants, variableChar);
                     Function derivativeWithoutConstant = derivative.second;
                     Function constantInFront = derivative.first;
                     Product derivativeTimesOperation = new Product(derivativeWithoutConstant, f);
                     if (SearchTools.existsInSurfaceSubset(product, derivativeTimesOperation::equals) && !SearchTools.existsInOppositeSurfaceSubset(product, (u -> SearchTools.exists(u, SearchTools.isVariable(variableChar))), derivativeTimesOperation::equals)) {
                         return exponential(new Product(number, DefaultFunctions.reciprocal(constantInFront)), power.getFunction2(), power.getFunction1());
                     }
-                } else if (f instanceof Pow power && IntegralsTools.doesNotContainsVariable(power.getFunction1(), variableChar)) {
+                } else if (f instanceof Pow power && IntegralTools.doesNotContainsVariable(power.getFunction1(), variableChar)) {
                     Function derivativeWithConstants = power.getFunction2().getSimplifiedDerivative(variableChar);
-                    Pair<Function, Function> derivative = IntegralsTools.stripConstants(derivativeWithConstants, variableChar);
+                    Pair<Function, Function> derivative = IntegralTools.stripConstants(derivativeWithConstants, variableChar);
                     Function derivativeWithoutConstant = derivative.second;
                     Function constantInFront = derivative.first;
                     Product derivativeTimesOperation = new Product(derivativeWithoutConstant, f);
@@ -51,16 +51,16 @@ public class StageOne {
                     }
                 } else if (f instanceof Ln ln) {
                     Function derivativeWithConstants = ln.operand.getSimplifiedDerivative(variableChar);
-                    Pair<Function, Function> derivative = IntegralsTools.stripConstants(derivativeWithConstants, variableChar);
+                    Pair<Function, Function> derivative = IntegralTools.stripConstants(derivativeWithConstants, variableChar);
                     Function derivativeWithoutConstant = derivative.second;
                     Function constantInFront = derivative.first;
                     Product derivativeTimesOperation = new Product(derivativeWithoutConstant, f);
                     if (SearchTools.existsInSurfaceSubset(product, derivativeTimesOperation::equals) && !SearchTools.existsInOppositeSurfaceSubset(product, (u -> SearchTools.exists(u, SearchTools.isVariable(variableChar))), derivativeTimesOperation::equals)) {
                         return naturalLog(new Product(number, DefaultFunctions.reciprocal(constantInFront)), ln.operand);
                     }
-                } else if (f instanceof Logb logb && IntegralsTools.doesNotContainsVariable(logb.getFunction2(), variableChar)) {
+                } else if (f instanceof Logb logb && IntegralTools.doesNotContainsVariable(logb.getFunction2(), variableChar)) {
                     Function derivativeWithConstants = logb.getFunction1().getSimplifiedDerivative(variableChar);
-                    Pair<Function, Function> derivative = IntegralsTools.stripConstants(derivativeWithConstants, variableChar);
+                    Pair<Function, Function> derivative = IntegralTools.stripConstants(derivativeWithConstants, variableChar);
                     Function derivativeWithoutConstant = derivative.second;
                     Function constantInFront = derivative.first;
                     Product derivativeTimesOperation = new Product(derivativeWithoutConstant, f);
@@ -69,7 +69,7 @@ public class StageOne {
                     }
                 } else if (f instanceof TrigFunction unit) {
                     Function derivativeWithConstants = unit.operand.getSimplifiedDerivative(variableChar);
-                    Pair<Function, Function> derivative = IntegralsTools.stripConstants(derivativeWithConstants, variableChar);
+                    Pair<Function, Function> derivative = IntegralTools.stripConstants(derivativeWithConstants, variableChar);
                     Function derivativeWithoutConstant = derivative.second;
                     Function constantInFront = derivative.first;
                     Product derivativeTimesOperation = new Product(derivativeWithoutConstant, f);
@@ -78,7 +78,7 @@ public class StageOne {
                     }
                 }
                 Function derivativeWithConstants = f.getSimplifiedDerivative(variableChar);
-                Pair<Function, Function> derivative = IntegralsTools.stripConstants(derivativeWithConstants, variableChar);
+                Pair<Function, Function> derivative = IntegralTools.stripConstants(derivativeWithConstants, variableChar);
                 Function derivativeWithoutConstant = derivative.second;
                 Function constantInFront = derivative.first;
                 Product derivativeTimesOperation = new Product(derivativeWithoutConstant, f);
@@ -87,19 +87,19 @@ public class StageOne {
                 }
             }
         } else {
-            if (function instanceof Pow power && IntegralsTools.doesNotContainsVariable(power.getFunction2(), variableChar) && IntegralsTools.doesNotContainsVariable(power.getFunction1().getSimplifiedDerivative(variableChar), variableChar)) {
+            if (function instanceof Pow power && IntegralTools.doesNotContainsVariable(power.getFunction2(), variableChar) && IntegralTools.doesNotContainsVariable(power.getFunction1().getSimplifiedDerivative(variableChar), variableChar)) {
                 return exponential(new Product(number, DefaultFunctions.reciprocal(power.getFunction1().getSimplifiedDerivative(variableChar))), power.getFunction2(), power.getFunction1());
-            } else if (function instanceof Pow power && IntegralsTools.doesNotContainsVariable(power.getFunction1(), variableChar) && IntegralsTools.doesNotContainsVariable(power.getFunction2().getSimplifiedDerivative(variableChar), variableChar)) {
+            } else if (function instanceof Pow power && IntegralTools.doesNotContainsVariable(power.getFunction1(), variableChar) && IntegralTools.doesNotContainsVariable(power.getFunction2().getSimplifiedDerivative(variableChar), variableChar)) {
                 return power(new Product(number, DefaultFunctions.reciprocal(power.getFunction2().getSimplifiedDerivative(variableChar))), power.getFunction1(), power.getFunction2());
-            } else if (function instanceof Ln log && IntegralsTools.doesNotContainsVariable(log.operand.getSimplifiedDerivative(variableChar), variableChar)) {
+            } else if (function instanceof Ln log && IntegralTools.doesNotContainsVariable(log.operand.getSimplifiedDerivative(variableChar), variableChar)) {
                 return naturalLog(new Product(number, DefaultFunctions.reciprocal(log.operand.getSimplifiedDerivative(variableChar))), log.operand);
-            } else if (function instanceof Logb logb && IntegralsTools.doesNotContainsVariable(logb.getFunction2(), variableChar) && IntegralsTools.doesNotContainsVariable(logb.getFunction1().getSimplifiedDerivative(variableChar), variableChar)) {
+            } else if (function instanceof Logb logb && IntegralTools.doesNotContainsVariable(logb.getFunction2(), variableChar) && IntegralTools.doesNotContainsVariable(logb.getFunction1().getSimplifiedDerivative(variableChar), variableChar)) {
                 return naturalLog(new Product(number, DefaultFunctions.reciprocal(new Product(logb.getFunction1().getSimplifiedDerivative(variableChar), new Ln(logb.getFunction2())))), logb.getFunction1());
-            } else if (IntegralsTools.doesNotContainsVariable(function, variableChar)) {
+            } else if (IntegralTools.doesNotContainsVariable(function, variableChar)) {
                 return new Product(number, function, new Variable(variableChar));
             } else if (function instanceof Variable variable) {
                 return power(number, DefaultFunctions.ONE, variable);
-            } else if (function instanceof TrigFunction unit && IntegralsTools.doesNotContainsVariable(unit.operand.getSimplifiedDerivative(variableChar), variableChar)) {
+            } else if (function instanceof TrigFunction unit && IntegralTools.doesNotContainsVariable(unit.operand.getSimplifiedDerivative(variableChar), variableChar)) {
                 return new Product(new Product(number, DefaultFunctions.reciprocal(unit.operand.getSimplifiedDerivative(variableChar))), unit.getElementaryIntegral());
             }
         }

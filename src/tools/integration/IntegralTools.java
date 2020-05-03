@@ -9,7 +9,7 @@ import tools.SearchTools;
 import tools.helperclasses.Pair;
 
 
-public class IntegralsTools {
+public class IntegralTools {
 
     /**
      * Strips a {@link Function} of any Constants and returns a {@link Pair} of the constant and the stripped Function

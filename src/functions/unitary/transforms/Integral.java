@@ -2,7 +2,10 @@ package functions.unitary.transforms;
 
 import config.Settings;
 import functions.Function;
+import functions.binary.Pow;
+import functions.commutative.Product;
 import functions.commutative.Sum;
+import functions.special.Constant;
 import functions.unitary.UnitaryFunction;
 import tools.integration.StageOne;
 import tools.singlevariable.NumericalIntegration;
@@ -103,9 +106,12 @@ public class Integral extends TransformFunction {
 		if (operand instanceof Sum terms) {
 			Function[] integratedTerms = new Function[terms.getFunctionsLength()];
 			for(int i = 0; i < terms.getFunctionsLength(); i++) {
-				integratedTerms[i] = new Integral(terms.getFunctions()[i], respectTo);
+				integratedTerms[i] = new Integral(terms.getFunctions()[i], respectTo).execute();
 			}
 			return new Sum(integratedTerms);
+		}
+		if (operand instanceof Pow power && power.getFunction2() instanceof Sum && power.getFunction1() instanceof Constant constant && ((int)constant.constant == constant.constant)) {
+			return new Integral(((Product)power.unwrapIntegerPower()).distributeAll(), respectTo).execute();
 		}
 		return StageOne.derivativeDivides(operand, respectTo);
 	}

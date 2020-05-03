@@ -107,7 +107,7 @@ public abstract class CommutativeFunction extends Function {
 	public CommutativeFunction simplifyPull() {
 		for (int i = 0; i < functions.length; i++) {
 			if (this.getClass().equals(functions[i].getClass())) {
-				return (me(FunctionTools.pullUp(functions, ((CommutativeFunction) functions[i]).getFunctions(), i))).simplifyInternal();
+				return (me(FunctionTools.pullUp(functions, ((CommutativeFunction) functions[i]).getFunctions(), i))).simplifyPull();
 			}
 		}
 		if (Settings.trustImmutability)

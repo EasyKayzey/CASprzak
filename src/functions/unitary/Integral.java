@@ -8,8 +8,16 @@ import tools.integration.StageOne;
 import java.util.Map;
 
 public class Integral extends UnitaryFunction {
+	/**
+	 * The character of the variable that the Integral is with respect to
+	 */
 	public final char respectTo;
 
+	/**
+	 * Constructs a new Integral
+	 * @param integrand The integrand on the Integral
+	 * @param respectTo The variable that the Integral is with respect to
+	 */
 	public Integral(Function integrand, char respectTo) {
 		super(integrand);
 		this.respectTo = respectTo;
@@ -78,6 +86,10 @@ public class Integral extends UnitaryFunction {
 		return new Integral(function, respectTo);
 	}
 
+	/**
+	 * Returns the Integral of the integrand if it can be found.
+	 * @return the Integral of the integrand
+	 */
 	public Function integrate() {
 		if (operand instanceof Sum terms) {
 			Function[] integratedTerms = new Function[terms.getFunctionsLength()];

@@ -3,6 +3,7 @@ package functions.commutative;
 import config.Settings;
 import functions.Function;
 import functions.special.Constant;
+import tools.DefaultFunctions;
 import tools.FunctionTools;
 
 import java.util.Map;
@@ -78,7 +79,7 @@ public class Sum extends CommutativeFunction {
 		Function[] combinedTerms = FunctionTools.deepClone(functions);
 		for (int a = 0; a < combinedTerms.length; a++)
 			if (!(combinedTerms[a] instanceof Product product && product.getFunctions()[0] instanceof Constant))
-				combinedTerms[a] = new Product(new Constant(1), combinedTerms[a]).simplifyPull();
+				combinedTerms[a] = new Product(DefaultFunctions.ONE, combinedTerms[a]).simplifyPull();
 
 		for (int i = 1; i < combinedTerms.length; i++) {
 			for (int j = 0; j < i; j++) {
@@ -92,6 +93,8 @@ public class Sum extends CommutativeFunction {
 						combinedTerms = FunctionTools.removeFunctionAt(combinedTerms, i);
 						return (new Sum(combinedTerms)).simplifyInternal();
 					}
+				} else {
+					throw new IllegalStateException("All Functions should have been converted to products");
 				}
 			}
 		}

@@ -5,6 +5,7 @@ import functions.Function;
 import functions.binary.Pow;
 import functions.special.Constant;
 import functions.special.Variable;
+import tools.DefaultFunctions;
 import tools.FunctionTools;
 import tools.PolynomialTools;
 
@@ -111,10 +112,10 @@ public class Product extends CommutativeFunction {
 	 */
 	public Product addExponents() {
 		Function[] simplifiedTerms = FunctionTools.deepClone(functions);
-		for (int a = 0; a < simplifiedTerms.length; a++) {
+		for (int a = 0; a < simplifiedTerms.length; a++)
 			if (!(simplifiedTerms[a] instanceof Pow))
-				simplifiedTerms[a] = new Pow(new Constant(1), simplifiedTerms[a]);
-		}
+				simplifiedTerms[a] = new Pow(DefaultFunctions.ONE, simplifiedTerms[a]);
+
 		for (int i = 1; i < simplifiedTerms.length; i++) {
 			for (int j = 0; j < i; j++) {
 				if (simplifiedTerms[i] instanceof Pow first && simplifiedTerms[j] instanceof Pow second) {
@@ -123,6 +124,8 @@ public class Product extends CommutativeFunction {
 						simplifiedTerms = FunctionTools.removeFunctionAt(simplifiedTerms, i);
 						return (new Product(simplifiedTerms)).simplifyInternal();
 					}
+				} else {
+					throw new IllegalStateException("All functions should have been converted to powers.");
 				}
 			}
 		}

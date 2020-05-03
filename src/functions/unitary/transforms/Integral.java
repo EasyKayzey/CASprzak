@@ -5,7 +5,9 @@ import functions.Function;
 import functions.commutative.Sum;
 import functions.unitary.UnitaryFunction;
 import tools.integration.StageOne;
+import tools.singlevariable.NumericalIntegration;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Integral extends TransformFunction {
@@ -63,9 +65,16 @@ public class Integral extends TransformFunction {
 			return new Integral(operand.getSimplifiedDerivative(varID), respectTo);
 	}
 
+	/**
+	 * Integrates the operand numerically from 0 to the value specified in the HashMap corresponding to respectTo
+	 * @param variableValues the values of the variables of the {@link Function} at the point
+	 * @return the operand integrated numerically
+	 */
 	@Override
 	public double evaluate(Map<Character, Double> variableValues) {
-		return 0;
+		Map<Character, Double> newMap = new HashMap<>(variableValues);
+		double bound = newMap.remove(respectTo);
+		return NumericalIntegration.simpsonsRule(operand.setVariables(newMap), 0, bound);
 	}
 
 	@Override

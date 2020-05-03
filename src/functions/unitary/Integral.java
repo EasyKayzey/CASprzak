@@ -60,7 +60,10 @@ public class Integral extends UnitaryFunction {
 
 	@Override
 	public Function getDerivative(char varID) {
-		return null; //TODO implement
+		if (varID == respectTo)
+			return operand;
+		else
+			return new Integral(operand.getSimplifiedDerivative(varID), respectTo);
 	}
 
 	@Override

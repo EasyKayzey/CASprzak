@@ -113,6 +113,6 @@ public class Integral extends TransformFunction {
 		if (operand instanceof Pow power && power.getFunction2() instanceof Sum && power.getFunction1() instanceof Constant constant && ((int)constant.constant == constant.constant)) {
 			return new Integral(((Product)power.unwrapIntegerPower()).distributeAll(), respectTo).execute();
 		}
-		return StageOne.derivativeDivides(operand, respectTo);
+		return StageOne.derivativeDivides(operand, respectTo).simplify();
 	}
 }

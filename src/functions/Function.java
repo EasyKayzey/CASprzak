@@ -115,6 +115,19 @@ public abstract class Function implements Evaluable, Differentiable, Simplifiabl
 	public abstract Function substitute(char varID, Function toReplace);
 
 	/**
+	 * Fixes some variables to the values given in the map by substituting in a {@link Constant} for those {@link Variable}s
+	 * @param values the map defining the substitutions to be made
+	 * @return a new function with the substitutions made
+	 */
+	public Function setVariables(Map<Character, Double> values) {
+		Function current = this;
+		for (Map.Entry<Character, Double> entry : values.entrySet())
+			current = current.substitute(entry.getKey(), new Constant(entry.getValue()));
+		return current;
+	}
+
+
+	/**
 	 * Returns true when the two functions simplified are equal
 	 * @param that The {@link Function} that the current function is being checked equal to
 	 * @return true when the two functions are equal

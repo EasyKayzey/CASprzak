@@ -25,6 +25,15 @@ public class SearchTest {
     }
 
     @Test
+    void searchSurface() {
+        Function test1 = Parser.parse("2sin(x+1)");
+        Function test2 = Parser.parse("x+1");
+        Function test3 = Parser.parse("sin(x+1)");
+        assertFalse(SearchTools.existsSurface(test1, test2::equalsFunction));
+        assertTrue(SearchTools.existsSurface(test1, test3::equalsFunction));
+    }
+
+    @Test
     void surfaceSubset() {
         CommutativeFunction test1 = (CommutativeFunction) Parser.parseSimplified("a+b+sin(x+1)");
         Function test2 = Parser.parseSimplified("a+sin(x+1)");
@@ -44,5 +53,13 @@ public class SearchTest {
         Function test2 = Parser.parseSimplified("x*e^x");
         Function test3 = Parser.parseSimplified("sin(x)");
         assertFalse(SearchTools.existsInOppositeSurfaceSubset(test1, (f -> SearchTools.existsExcluding(f, SearchTools.isVariable('x'), test3::equalsFunction)), test2::equalsFunction));
+    }
+
+    @Test
+    void isVariable() {
+        assertTrue(SearchTools.isVariable('y').test(Parser.parseSimplified("y")));
+        assertFalse(SearchTools.isVariable('x').test(Parser.parseSimplified("y")));
+        assertFalse(SearchTools.isVariable('x').test(Parser.parseSimplified("x+1")));
+        assertFalse(SearchTools.isVariable('x').test(Parser.parseSimplified("2x")));
     }
 }

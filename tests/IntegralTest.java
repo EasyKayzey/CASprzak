@@ -125,4 +125,18 @@ public class IntegralTest {
         Function test2 = Parser.parse("y*z^y*ln(y)*x");
         assertEquals(test2.simplify(), test1.integrate().simplify());
     }
+
+    @Test
+    void severalVariableBasicFunctionOfXAndY1() {
+        Integral test1 = new Integral(Parser.parse("e^(3x+y)"), 'x');
+        Function test2 = Parser.parse("1/3*e^(3x+y)");
+        assertEquals(test2, test1.integrate());
+    }
+
+    @Test
+    void severalVariableBasicFunctionOfXAndY2() {
+        Integral test1 = new Integral(Parser.parse("e^(3xy+y)"), 'x');
+        Function test2 = Parser.parse("1/(3y)*e^(3xy+y)");
+        assertEquals(test2, test1.integrate());
+    }
 }

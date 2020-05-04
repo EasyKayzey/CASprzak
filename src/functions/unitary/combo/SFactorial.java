@@ -42,7 +42,7 @@ public class SFactorial extends Factorial {
 			argument = MiscTools.toInteger(argument);
 		double ans = Math.sqrt(2 * Math.PI * argument) * Math.pow(argument / Math.E, argument);
 		if (Settings.enforceIntegerOperations)
-			return (int) (ans + .5);
+			return Math.round(ans);
 		else
 			return ans;
 	}

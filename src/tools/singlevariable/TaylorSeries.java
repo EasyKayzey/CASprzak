@@ -1,6 +1,5 @@
 package tools.singlevariable;
 
-import config.Settings;
 import functions.GeneralFunction;
 import functions.binary.Pow;
 import functions.commutative.Product;
@@ -11,7 +10,6 @@ import tools.MiscTools;
 import tools.SearchTools;
 
 import java.util.Map;
-import java.util.Set;
 
 public class TaylorSeries {
 
@@ -36,13 +34,7 @@ public class TaylorSeries {
      */
     public static GeneralFunction makeTaylorSeries(GeneralFunction function, int size, double center) { // TODO rename size to degree in all methods/docs
         GeneralFunction[] taylorSeriesTerms = new GeneralFunction[size];
-        char var;
-        Set<Character> vars = SearchTools.getAllVariables(function);
-        if (vars.size() == 1)
-            var = vars.iterator().next();
-        else
-            var = Settings.singleVariableDefault;
-
+        char var = SearchTools.getSingleVariable(function);
         for (int i = 0; i < size; i++){
             taylorSeriesTerms[i] = new Product(new Constant(function.getNthDerivative('x', i).evaluate(Map.of(var, center)) / MiscTools.factorial(i)), new Pow(new Constant(i), new Sum(new Variable('x'), new Constant(-center))));
         }

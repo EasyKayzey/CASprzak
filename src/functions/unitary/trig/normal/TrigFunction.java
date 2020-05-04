@@ -6,6 +6,7 @@ import functions.unitary.trig.GeneralTrigFunction;
 
 public abstract class TrigFunction extends GeneralTrigFunction implements Integrable {
 
+	//TODO Document this
 	public TrigFunction(GeneralFunction operand) {
 		super(operand);
 	}

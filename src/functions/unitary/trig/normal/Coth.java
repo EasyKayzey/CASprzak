@@ -8,6 +8,7 @@ import functions.unitary.piecewise.Abs;
 import functions.unitary.specialcases.Ln;
 import functions.unitary.UnitaryFunction;
 import functions.unitary.trig.inverse.Acoth;
+import tools.DefaultFunctions;
 
 import java.util.Map;
 
@@ -24,7 +25,7 @@ public class Coth extends TrigFunction {
 
 	@Override
 	public GeneralFunction getDerivative(char varID) {
-		return new Product(new Constant(-1), operand.getSimplifiedDerivative(varID), new Pow(new Constant(2), new Csch(operand)));
+		return DefaultFunctions.negative(new Product(operand.getSimplifiedDerivative(varID), new Pow(DefaultFunctions.TWO, new Csch(operand))));
 	}
 
 	/**

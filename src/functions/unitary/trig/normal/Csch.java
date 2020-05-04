@@ -5,6 +5,7 @@ import functions.commutative.Product;
 import functions.special.Constant;
 import functions.unitary.UnitaryFunction;
 import functions.unitary.trig.inverse.Acsch;
+import tools.DefaultFunctions;
 
 import java.util.Map;
 
@@ -21,7 +22,7 @@ public class Csch extends TrigFunction {
 
 	@Override
 	public GeneralFunction getDerivative(char varID) {
-		return new Product(new Constant(-1), operand.getSimplifiedDerivative(varID), new Csch(operand), new Coth(operand));
+		return DefaultFunctions.negative(new Product(operand.getSimplifiedDerivative(varID), new Csch(operand), new Coth(operand)));
 	}
 
 	/**

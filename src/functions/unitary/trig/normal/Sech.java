@@ -7,6 +7,7 @@ import functions.unitary.piecewise.Abs;
 import functions.unitary.UnitaryFunction;
 import functions.unitary.trig.inverse.Asech;
 import functions.unitary.trig.inverse.Atan;
+import tools.DefaultFunctions;
 
 import java.util.Map;
 
@@ -23,7 +24,7 @@ public class Sech extends TrigFunction {
 
 	@Override
 	public GeneralFunction getDerivative(char varID) {
-		return new Product(new Constant(-1), operand.getSimplifiedDerivative(varID), new Sech(operand), new Tanh(operand));
+		return DefaultFunctions.negative(new Product(operand.getSimplifiedDerivative(varID), new Sech(operand), new Tanh(operand)));
 	}
 
 	/**

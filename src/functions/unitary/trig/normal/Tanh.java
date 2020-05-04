@@ -7,6 +7,7 @@ import functions.special.Constant;
 import functions.unitary.specialcases.Ln;
 import functions.unitary.UnitaryFunction;
 import functions.unitary.trig.inverse.Atanh;
+import tools.DefaultFunctions;
 
 import java.util.Map;
 
@@ -33,7 +34,7 @@ public class Tanh extends TrigFunction {
 
 	@Override
 	public GeneralFunction getDerivative(char varID) {
-		return new Product(operand.getSimplifiedDerivative(varID), new Pow(new Constant(-2), new Cosh(operand)));
+		return new Product(operand.getSimplifiedDerivative(varID), new Pow(DefaultFunctions.NEGATIVE_TWO, new Cosh(operand)));
 	}
 
 	public UnitaryFunction me(GeneralFunction operand) {

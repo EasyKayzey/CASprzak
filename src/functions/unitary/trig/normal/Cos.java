@@ -5,6 +5,7 @@ import functions.commutative.Product;
 import functions.special.Constant;
 import functions.unitary.UnitaryFunction;
 import functions.unitary.trig.inverse.Acos;
+import tools.DefaultFunctions;
 
 import java.util.Map;
 
@@ -31,7 +32,7 @@ public class Cos extends TrigFunction {
 
 	@Override
 	public GeneralFunction getDerivative(char varID) {
-		return new Product(new Sin(operand), new Constant(-1), operand.getSimplifiedDerivative(varID));
+		return DefaultFunctions.negative(new Product(new Sin(operand), operand.getSimplifiedDerivative(varID)));
 	}
 
 	public UnitaryFunction me(GeneralFunction operand) {

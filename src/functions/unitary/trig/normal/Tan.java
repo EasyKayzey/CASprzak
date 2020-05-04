@@ -8,6 +8,7 @@ import functions.unitary.piecewise.Abs;
 import functions.unitary.specialcases.Ln;
 import functions.unitary.UnitaryFunction;
 import functions.unitary.trig.inverse.Atan;
+import tools.DefaultFunctions;
 
 import java.util.Map;
 
@@ -34,7 +35,7 @@ public class Tan extends TrigFunction {
 
 	@Override
 	public GeneralFunction getDerivative(char varID) {
-		return new Product(new Pow(new Constant(2), new Sec(operand)), operand.getSimplifiedDerivative(varID));
+		return new Product(new Pow(DefaultFunctions.TWO, new Sec(operand)), operand.getSimplifiedDerivative(varID));
 	}
 
 	public UnitaryFunction me(GeneralFunction operand) {

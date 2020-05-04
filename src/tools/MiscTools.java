@@ -39,8 +39,8 @@ public class MiscTools {
 
 	/**
 	 * Parses a string to a boolean using the following rules, ignoring case:
-	 * TRUE: true, 1, yes, t
-	 * FALSE: false, 0, no, f
+	 * TRUE:  true, t, 1, yes, y
+	 * FALSE: false, f, 0, no, n
 	 * @param s the string to be parsed
 	 * @return the string parsed to a boolean
 	 */
@@ -55,7 +55,7 @@ public class MiscTools {
 	/**
 	 * Converts a double within {@link Settings#integerMargin} of an integer to an integer
 	 * @param d the double to be converted
-	 * @return the double as an integer
+	 * @return the double rounded to an integer
 	 * @throws IllegalArgumentException if the double is not within {@link Settings#integerMargin} of an integer
 	 */
 	public static int toInteger(double d) throws IllegalArgumentException{

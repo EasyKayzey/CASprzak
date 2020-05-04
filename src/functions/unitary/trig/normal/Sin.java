@@ -3,7 +3,6 @@ package functions.unitary.trig.normal;
 import functions.GeneralFunction;
 import functions.commutative.Product;
 import functions.unitary.UnitaryFunction;
-import functions.unitary.trig.GeneralTrigFunction;
 import functions.unitary.trig.inverse.Asin;
 import tools.DefaultFunctions;
 
@@ -43,7 +42,7 @@ public class Sin extends TrigFunction {
 		return new Product(DefaultFunctions.NEGATIVE_ONE, new Cos(operand));
 	}
 
-	public Class<? extends GeneralTrigFunction> getInverse() {
+	public Class<?> getInverse() {
 		return Asin.class;
 	}
 }

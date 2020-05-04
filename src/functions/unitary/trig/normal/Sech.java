@@ -5,7 +5,6 @@ import functions.commutative.Product;
 import functions.special.Constant;
 import functions.unitary.piecewise.Abs;
 import functions.unitary.UnitaryFunction;
-import functions.unitary.trig.GeneralTrigFunction;
 import functions.unitary.trig.inverse.Asech;
 import functions.unitary.trig.inverse.Atan;
 
@@ -47,7 +46,7 @@ public class Sech extends TrigFunction {
 		return new Atan(new Abs(new Sinh(operand)));
 	}
 
-	public Class<? extends GeneralTrigFunction> getInverse() {
+	public Class<?> getInverse() {
 		return Asech.class;
 	}
 }

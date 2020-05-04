@@ -7,7 +7,6 @@ import functions.special.Constant;
 import functions.unitary.piecewise.Abs;
 import functions.unitary.specialcases.Ln;
 import functions.unitary.UnitaryFunction;
-import functions.unitary.trig.GeneralTrigFunction;
 import functions.unitary.trig.inverse.Acsc;
 import tools.DefaultFunctions;
 
@@ -48,7 +47,7 @@ public class Csc extends TrigFunction {
 		return new Product(DefaultFunctions.NEGATIVE_ONE, new Ln(new Abs(new Sum(new Csc(operand), new Cot(operand)))));
 	}
 
-	public Class<? extends GeneralTrigFunction> getInverse() {
+	public Class<?> getInverse() {
 		return Acsc.class;
 	}
 }

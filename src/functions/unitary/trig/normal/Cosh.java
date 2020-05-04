@@ -3,7 +3,6 @@ package functions.unitary.trig.normal;
 import functions.GeneralFunction;
 import functions.commutative.Product;
 import functions.unitary.UnitaryFunction;
-import functions.unitary.trig.GeneralTrigFunction;
 import functions.unitary.trig.inverse.Acosh;
 
 import java.util.Map;
@@ -38,7 +37,7 @@ public class Cosh extends TrigFunction {
 		return new Cosh(operand);
 	}
 
-	public Class<? extends GeneralTrigFunction> getInverse() {
+	public Class<?> getInverse() {
 		return Acosh.class;
 	}
 

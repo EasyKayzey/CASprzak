@@ -1,7 +1,6 @@
 package functions.unitary.specialcases;
 
 import functions.GeneralFunction;
-import functions.Invertible;
 import functions.binary.BinaryFunction;
 import functions.binary.Pow;
 import functions.commutative.Product;
@@ -38,7 +37,7 @@ public class Exp extends SpecialCaseBinaryFunction {
 		return new Pow(operand, DefaultFunctions.E);
 	}
 
-	public Class<? extends Invertible> getInverse() {
+	public Class<?> getInverse() {
 		return Ln.class;
 	}
 }

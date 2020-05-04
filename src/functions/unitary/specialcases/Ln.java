@@ -1,7 +1,6 @@
 package functions.unitary.specialcases;
 
 import functions.GeneralFunction;
-import functions.Invertible;
 import functions.binary.BinaryFunction;
 import functions.binary.Logb;
 import functions.binary.Pow;
@@ -40,7 +39,7 @@ public class Ln extends SpecialCaseBinaryFunction {
 		return new Logb(operand, DefaultFunctions.E);
 	}
 
-	public Class<? extends Invertible> getInverse() {
+	public Class<?> getInverse() {
 		return Exp.class;
 	}
 }

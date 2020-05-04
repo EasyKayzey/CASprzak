@@ -7,7 +7,6 @@ import functions.commutative.Product;
 import functions.unitary.piecewise.Abs;
 import functions.unitary.UnitaryFunction;
 import functions.unitary.trig.normal.Csc;
-import functions.unitary.trig.GeneralTrigFunction;
 import tools.DefaultFunctions;
 
 import java.util.Map;
@@ -53,7 +52,7 @@ public class Acsc extends InverseTrigFunction {
 		return new Acsc(operand);
 	}
 
-	public Class<? extends GeneralTrigFunction> getInverse() {
+	public Class<?> getInverse() {
 		return Csc.class;
 	}
 }

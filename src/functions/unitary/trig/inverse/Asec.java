@@ -6,7 +6,6 @@ import functions.commutative.Sum;
 import functions.commutative.Product;
 import functions.unitary.piecewise.Abs;
 import functions.unitary.UnitaryFunction;
-import functions.unitary.trig.GeneralTrigFunction;
 import functions.unitary.trig.normal.Sec;
 import tools.DefaultFunctions;
 
@@ -51,7 +50,7 @@ public class Asec extends InverseTrigFunction {
 		return new Asec(operand);
 	}
 
-	public Class<? extends GeneralTrigFunction> getInverse() {
+	public Class<?> getInverse() {
 		return Sec.class;
 	}
 }

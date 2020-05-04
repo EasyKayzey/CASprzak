@@ -7,7 +7,6 @@ import functions.special.Constant;
 import functions.unitary.piecewise.Abs;
 import functions.unitary.specialcases.Ln;
 import functions.unitary.UnitaryFunction;
-import functions.unitary.trig.GeneralTrigFunction;
 import functions.unitary.trig.inverse.Acoth;
 
 import java.util.Map;
@@ -47,7 +46,7 @@ public class Coth extends TrigFunction {
 		return new Ln(new Abs(new Sinh(operand)));
 	}
 
-	public Class<? extends GeneralTrigFunction> getInverse() {
+	public Class<?> getInverse() {
 		return Acoth.class;
 	}
 }

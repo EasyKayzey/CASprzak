@@ -6,7 +6,6 @@ import functions.commutative.Sum;
 import functions.commutative.Product;
 import functions.special.Constant;
 import functions.unitary.UnitaryFunction;
-import functions.unitary.trig.GeneralTrigFunction;
 import functions.unitary.trig.normal.Sech;
 
 import java.util.Map;
@@ -43,7 +42,7 @@ public class Asech extends InverseTrigFunction {
 		return new Asech(operand);
 	}
 
-	public Class<? extends GeneralTrigFunction> getInverse() {
+	public Class<?> getInverse() {
 		return Sech.class;
 	}
 }

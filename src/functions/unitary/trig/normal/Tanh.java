@@ -6,7 +6,6 @@ import functions.commutative.Product;
 import functions.special.Constant;
 import functions.unitary.specialcases.Ln;
 import functions.unitary.UnitaryFunction;
-import functions.unitary.trig.GeneralTrigFunction;
 import functions.unitary.trig.inverse.Atanh;
 
 import java.util.Map;
@@ -46,7 +45,7 @@ public class Tanh extends TrigFunction {
 		return new Ln(new Cosh(operand));
 	}
 
-	public Class<? extends GeneralTrigFunction> getInverse() {
+	public Class<?> getInverse() {
 		return Atanh.class;
 	}
 }

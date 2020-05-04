@@ -4,7 +4,6 @@ import functions.GeneralFunction;
 import functions.commutative.Product;
 import functions.special.Constant;
 import functions.unitary.UnitaryFunction;
-import functions.unitary.trig.GeneralTrigFunction;
 import functions.unitary.trig.inverse.Acsch;
 
 import java.util.Map;
@@ -45,7 +44,7 @@ public class Csch extends TrigFunction {
 		return null;
 	}
 
-	public Class<? extends GeneralTrigFunction> getInverse() {
+	public Class<?> getInverse() {
 		return Acsch.class;
 	}
 }

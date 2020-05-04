@@ -6,7 +6,6 @@ import functions.commutative.Sum;
 import functions.unitary.piecewise.Abs;
 import functions.unitary.specialcases.Ln;
 import functions.unitary.UnitaryFunction;
-import functions.unitary.trig.GeneralTrigFunction;
 import functions.unitary.trig.inverse.Asec;
 
 import java.util.Map;
@@ -46,7 +45,7 @@ public class Sec extends TrigFunction {
 		return new Ln(new Abs(new Sum(new Sec(operand), new Tan(operand))));
 	}
 
-	public Class<? extends GeneralTrigFunction> getInverse() {
+	public Class<?> getInverse() {
 		return Asec.class;
 	}
 }

@@ -6,7 +6,6 @@ import functions.commutative.Sum;
 import functions.commutative.Product;
 import functions.unitary.UnitaryFunction;
 import functions.unitary.trig.normal.Csch;
-import functions.unitary.trig.GeneralTrigFunction;
 import tools.DefaultFunctions;
 
 import java.util.Map;
@@ -43,7 +42,7 @@ public class Acsch extends InverseTrigFunction {
 		return new Acsch(operand);
 	}
 
-	public Class<? extends GeneralTrigFunction> getInverse() {
+	public Class<?> getInverse() {
 		return Csch.class;
 	}
 }

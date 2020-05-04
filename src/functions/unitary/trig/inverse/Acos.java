@@ -6,7 +6,6 @@ import functions.commutative.Sum;
 import functions.commutative.Product;
 import functions.unitary.UnitaryFunction;
 import functions.unitary.trig.normal.Cos;
-import functions.unitary.trig.GeneralTrigFunction;
 import tools.DefaultFunctions;
 
 import java.util.Map;
@@ -41,7 +40,7 @@ public class Acos extends InverseTrigFunction {
 		return new Acos(operand);
 	}
 
-	public Class<? extends GeneralTrigFunction> getInverse() {
+	public Class<?> getInverse() {
 		return Cos.class;
 	}
 }

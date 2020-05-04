@@ -6,7 +6,6 @@ import functions.commutative.Sum;
 import functions.commutative.Product;
 import functions.special.Constant;
 import functions.unitary.UnitaryFunction;
-import functions.unitary.trig.GeneralTrigFunction;
 import functions.unitary.trig.normal.Tan;
 
 import java.util.Map;
@@ -42,7 +41,7 @@ public class Atan extends InverseTrigFunction {
 		return new Atan(operand);
 	}
 
-	public Class<? extends GeneralTrigFunction> getInverse() {
+	public Class<?> getInverse() {
 		return Tan.class;
 	}
 }

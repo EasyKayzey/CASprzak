@@ -27,7 +27,7 @@ public class StageOne {
      * @param variableChar The {@link Variable#varID} the function is integrated with respect to.
      * @return The integral of the function if one is found.
      */
-    public static GeneralFunction derivativeDivides(GeneralFunction integrand, char variableChar) {
+    public static GeneralFunction derivativeDivides(GeneralFunction integrand, char variableChar) { //TODO implement exp
         if (integrand instanceof Sum terms) {
             GeneralFunction[] integratedTerms = new GeneralFunction[terms.getFunctionsLength()];
             for(int i = 0; i < terms.getFunctionsLength(); i++) {

@@ -6,5 +6,5 @@ public interface Simplifiable {
 	 * Returns this GeneralFunction, simplified
 	 * @return the simplified function
 	 */
-	GeneralFunction simplify();
+	GeneralFunction simplify(); //TODO implement simplification of inverse functions
 }

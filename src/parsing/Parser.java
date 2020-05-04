@@ -122,7 +122,7 @@ public class Parser {
 	 * @return the character in the string
 	 * @throws IllegalArgumentException if the input is not one character or three characters in the format 'c'
 	 */
-	public static char getCharacter(String input) {
+	public static char getCharacter(String input) { // TODO maybe move this to tools
 		if (input.length() == 1)
 			return input.charAt(0);
 		else if (input.length() == 3 && input.charAt(0) == '\'' && input.charAt(2) == '\'')

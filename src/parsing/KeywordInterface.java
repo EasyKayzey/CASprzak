@@ -25,7 +25,6 @@ public class KeywordInterface {
 	public static final HashMap<String, GeneralFunction> storedFunctions = new HashMap<>();
 	public static Object prev;
 
-
 	/**
 	 * Takes input as a string with command, arguments...
 	 * @param input contains the command and arguments
@@ -81,7 +80,6 @@ public class KeywordInterface {
 		return ret;
 	}
 
-
 	/**
 	 * Parses input using {@link #useKeywords(String)} and {@link #storedFunctions}
 	 * @param input input string
@@ -114,7 +112,6 @@ public class KeywordInterface {
 		return function;
 	}
 
-
 	/**
 	 * pd [variable] [function]
 	 */
@@ -122,6 +119,7 @@ public class KeywordInterface {
 		String[] splitInput = keywordSplitter.split(input, 2);
 		return parseStored(splitInput[1]).getSimplifiedDerivative(Parser.getCharacter(splitInput[0]));
 	}
+
 	/**
 	 * pdn [variable] [times] [function]
 	 */
@@ -211,7 +209,6 @@ public class KeywordInterface {
 		Variable.removeFunctionVariable(Parser.getCharacter(input));
 		return printVariables();
 	}
-
 
 	/**
 	 * var(s) [variablename(s)]
@@ -349,7 +346,6 @@ public class KeywordInterface {
 		+ "defaultSolverType = " + Settings.defaultSolverType;
 	}
 
-
 	/**
 	 * svt [function] ([char]=[value])*
 	 */
@@ -357,7 +353,6 @@ public class KeywordInterface {
 		String[] splitInput = keywordSplitter.split(input, 2);
 		return parseStored(splitInput[0]).setVariables(Arrays.stream(keywordSplitter.split(splitInput[1])).map(equals::split).collect(Collectors.toMap(e -> Parser.getCharacter(e[0]), e -> Parser.getConstant(e[1]))));
 	}
-
 
 	/**
 	 * integral [function] d[variable]

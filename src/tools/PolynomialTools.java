@@ -13,7 +13,7 @@ import java.util.function.DoublePredicate;
 public class PolynomialTools {
 
 	/**
-	 * Checks if a given {@link GeneralFunction} is a polynomial. Must call {@link GeneralFunction#simplify()} before using.
+	 * Checks if a given {@link GeneralFunction} is a polynomial. {@link GeneralFunction#simplify()} MUST be used on {@code function} before calling this method.
 	 * @param function the function to be checked
 	 * @return true if function is a polynomial
 	 */
@@ -34,16 +34,16 @@ public class PolynomialTools {
 	}
 
 	/**
-	 * Checks if a given {@link GeneralFunction} is a monomial (positive integer powers). Must call {@link GeneralFunction#simplify()} before using.
+	 * Checks if a given {@link GeneralFunction} is a monomial (positive integer powers). {@link GeneralFunction#simplify()} MUST be used on {@code function} before calling this method.
 	 * @param function the function to be checked
 	 * @return true if function is a monomial
 	 */
 	public static boolean isMonomial(GeneralFunction function) {
-		return isGivenMonomial(function, (a -> ((int) a == a && a > 0)));
+		return isGivenMonomial(function, (a -> (MiscTools.isAlmostInteger(a) && a > 0)));
 	}
 
 	/**
-	 * Checks if a given {@link GeneralFunction} is a generalized monomial (any constant powers). Must call {@link GeneralFunction#simplify()} before using.
+	 * Checks if a given {@link GeneralFunction} is a generalized monomial (any constant powers). {@link GeneralFunction#simplify()} MUST be used on {@code function} before calling this method.
 	 * @param function the function to be checked
 	 * @return true if function is a generalized monomial
 	 */
@@ -69,7 +69,7 @@ public class PolynomialTools {
 	}
 
 	/**
-	 * Returns the degree a monomial.
+	 * Returns the degree a monomial. {@link GeneralFunction#simplify()} MUST be used on {@code function} before calling this method.
 	 * @param function The monomial whose degree is being found
 	 * @return the degree of the monomial
 	 * @throws IllegalArgumentException when input is not a monomial

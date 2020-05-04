@@ -1,16 +1,34 @@
 package config;
 
+import functions.GeneralFunction;
+
 @SuppressWarnings("CanBeFinal")
 public class Settings {
 	private Settings(){}
+
+	/**
+	 * The amount of times that {@link tools.singlevariable.Solver} will run unless the exit conditions are met beforehand
+	 */
 	public static int defaultSolverIterations = 100;
+
+	/**
+	 * The amount of segments which {@link tools.singlevariable.Solver} splits a given range into
+	 */
 	public static int defaultRangeSections = 29;
 
 	/**
 	 * The variable to be used in {@link tools.singlevariable} when none is specified
 	 */
 	public static char singleVariableDefault = 'x';
+
+	/**
+	 * The number of segments that {@link tools.singlevariable.NumericalIntegration#simpsonsRule(GeneralFunction, double, double)} uses when performing numerical integration. **MUST BE EVEN**
+	 */
 	public static double simpsonsSegments = 500; // MUST BE EVEN
+
+	/**
+	 * The margin that {@link tools.singlevariable.Solver} uses to determine if a values is close enough to zero to considered zero
+	 */
 	public static double zeroMargin = 1e-3;
 
 	/**

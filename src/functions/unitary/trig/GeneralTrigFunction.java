@@ -1,17 +1,13 @@
 package functions.unitary.trig;
 
 import functions.GeneralFunction;
+import functions.Invertible;
 import functions.unitary.UnitaryFunction;
 
-public abstract class GeneralTrigFunction extends UnitaryFunction {
+public abstract class GeneralTrigFunction extends UnitaryFunction implements Invertible {
 
 	public GeneralTrigFunction(GeneralFunction operand) {
 		super(operand);
 	}
 
-	/**
-	 * Returns the Class corresponding to the inverse of this trig function
-	 * @return the inverse class
-	 */
-	public abstract Class<? extends GeneralTrigFunction> getInverse();
 }

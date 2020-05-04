@@ -1,10 +1,11 @@
 package functions.unitary.specialcases;
 
 import functions.GeneralFunction;
+import functions.Invertible;
 import functions.binary.BinaryFunction;
 import functions.unitary.UnitaryFunction;
 
-public abstract class SpecialCaseBinaryFunction extends UnitaryFunction {
+public abstract class SpecialCaseBinaryFunction extends UnitaryFunction implements Invertible {
 
 	public SpecialCaseBinaryFunction(GeneralFunction operand) {
 		super(operand);

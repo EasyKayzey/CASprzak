@@ -5,6 +5,7 @@ import functions.commutative.CommutativeFunction;
 import functions.special.Variable;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -28,7 +29,7 @@ public class SearchTools {
 	 * @return true if found
 	 */
 	public static boolean exists(GeneralFunction input, Predicate<? super GeneralFunction> test) {
-		return existsExcluding(input, test, (a -> false));
+		return existsExcluding(input, test, a -> false);
 	}
 
 	/**
@@ -123,11 +124,20 @@ public class SearchTools {
 		return ids;
 	}
 
-	public static void consumeIf(GeneralFunction input, Predicate<? super GeneralFunction> test, Consumer<? super GeneralFunction> consumer) {
+	public static void consumeIf(GeneralFunction input, Consumer<? super GeneralFunction> consumer, Predicate<? super GeneralFunction> test) {
 		if (test.test(input))
 			consumer.accept(input);
 		for (GeneralFunction f : input)
-			consumeIf(f, test, consumer);
+			consumeIf(f, consumer, test);
 	}
 
+	public static void consumeAll(GeneralFunction input, Consumer<? super GeneralFunction> consumer) {
+		consumeIf(input, consumer, f -> true);
+	}
+
+	public static Set<Character> getAllVariables(GeneralFunction input) {
+		Set<Character> vars = new HashSet<>();
+		consumeIf(input, f -> vars.add(((Variable) f).varID), f -> (f instanceof Variable));
+		return vars;
+	}
 }

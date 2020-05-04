@@ -56,7 +56,7 @@ public class Pow extends BinaryFunction {
 	public GeneralFunction simplifyObviousExponentsAndFOC() { //FOC means Functions of Constants
 		if (function1 instanceof Constant constant) {
 			if (constant.constant == 0)
-				return new Constant(1);
+				return DefaultFunctions.ONE;
 			if (constant.constant == 1)
 				return function2.simplify();
 			if (Settings.simplifyFunctionsOfConstants && function2 instanceof Constant)
@@ -126,7 +126,7 @@ public class Pow extends BinaryFunction {
 	 * @throws RuntimeException if the exponent is not a positive integer
 	 */
 	public Product unwrapIntegerPower() throws RuntimeException {
-		int intConstant = MiscTools.toInteger(((Constant) function1).constant);
+		int intConstant = MiscTools.toInteger(((Constant) function1).constant);//TODO this throws an error when not an int, nowhere is it just checked and ignored
 		GeneralFunction[] toMultiply = new GeneralFunction[intConstant];
 		Arrays.fill(toMultiply, function2);
 		return new Product(toMultiply);

@@ -1,6 +1,11 @@
 import functions.GeneralFunction;
+import functions.commutative.Product;
+import functions.unitary.UnitaryFunction;
+import functions.unitary.trig.normal.Cos;
+import functions.unitary.trig.normal.Sin;
 import org.junit.jupiter.api.Test;
 import parsing.Parser;
+import tools.DefaultFunctions;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -28,5 +33,13 @@ public class SubstituteTest {
         GeneralFunction test2 = Parser.parse("x^2");
         GeneralFunction test3 = Parser.parse("sin(x)");
         assertEquals(test1.substituteVariable('y',test2), test3);
+    }
+
+    @Test
+    void complexSubstituteAll() {
+        GeneralFunction test1 = Parser.parseSimplified("x+sin(x)+sin(2x+y)");
+        GeneralFunction test2 = Parser.parseSimplified("x+cos(2x)+cos(4x+2y)");
+        GeneralFunction substituted = test1.substituteAll(f -> f instanceof Sin, f -> new Cos(new Product(DefaultFunctions.TWO, ((UnitaryFunction) f).operand)));
+        assertEquals(substituted, test2);
     }
 }

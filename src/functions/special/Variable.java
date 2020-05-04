@@ -98,7 +98,7 @@ public class Variable extends SpecialFunction {
 
 
 	public boolean equalsFunction(GeneralFunction that) {
-		return (that instanceof Variable) && (varID == ((Variable) that).varID);
+		return (that instanceof Variable variable) && (varID == variable.varID);
 	}
 
 	public int compareSelf(GeneralFunction that) {

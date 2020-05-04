@@ -124,6 +124,12 @@ public class SearchTools {
 		return ids;
 	}
 
+	/**
+	 * Applies the specified consumer recursively down the function tree for every node satisfying the test
+	 * @param input the GeneralFunction to be recursively consumed
+	 * @param consumer the consumer
+	 * @param test the test to be satisfied
+	 */
 	public static void consumeIf(GeneralFunction input, Consumer<? super GeneralFunction> consumer, Predicate<? super GeneralFunction> test) {
 		if (test.test(input))
 			consumer.accept(input);
@@ -131,10 +137,11 @@ public class SearchTools {
 			consumeIf(f, consumer, test);
 	}
 
-	public static void consumeAll(GeneralFunction input, Consumer<? super GeneralFunction> consumer) {
-		consumeIf(input, consumer, f -> true);
-	}
-
+	/**
+	 * Returns a set of characters representing all variables used in this function
+	 * @param input the function to be tested
+	 * @return the set of variables
+	 */
 	public static Set<Character> getAllVariables(GeneralFunction input) {
 		Set<Character> vars = new HashSet<>();
 		consumeIf(input, f -> vars.add(((Variable) f).varID), f -> (f instanceof Variable));

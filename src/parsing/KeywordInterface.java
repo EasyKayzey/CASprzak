@@ -110,7 +110,7 @@ public class KeywordInterface {
 	 */
 	public static GeneralFunction substituteAll(GeneralFunction function) {
 		for (Map.Entry<String, GeneralFunction>  entry : storedFunctions.entrySet())
-			function = function.substitute(Parser.getCharacter(entry.getKey()), entry.getValue());
+			function = function.substituteVariable(Parser.getCharacter(entry.getKey()), entry.getValue());
 		return function;
 	}
 
@@ -155,7 +155,7 @@ public class KeywordInterface {
 	 */
 	public static GeneralFunction substitute(String input) {
 		String[] splitInput = keywordSplitter.split(input);
-		return parseStored(splitInput[0]).substitute(Parser.getCharacter(splitInput[1]), parseStored(splitInput[2]));
+		return parseStored(splitInput[0]).substituteVariable(Parser.getCharacter(splitInput[1]), parseStored(splitInput[2]));
 	}
 
 	/**

@@ -107,12 +107,22 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 	}
 
 	/**
-	 * Substitutes a new {@link GeneralFunction} into a variable
+	 * Converts GeneralFunctions
 	 * @param varID     the variable to be substituted into
 	 * @param toReplace the {@link GeneralFunction} that will be substituted
 	 * @return the new {@link GeneralFunction} after all substitutions are preformed
 	 */
 	public abstract GeneralFunction substitute(char varID, GeneralFunction toReplace);
+
+	/**
+	 * Substitutes a new {@link GeneralFunction} into a variable
+	 * @param varID     the variable to be substituted into
+	 * @param toReplace the {@link GeneralFunction} that will be substituted
+	 * @return the new {@link GeneralFunction} after all substitutions are preformed
+	 */
+	public GeneralFunction substituteVariable(char varID, GeneralFunction toReplace) {
+		return substitute(varID, toReplace);
+	}
 
 	/**
 	 * Fixes some variables to the values given in the map by substituting in a {@link Constant} for those {@link Variable}s

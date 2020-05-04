@@ -19,4 +19,5 @@ public class Settings {
 	public static boolean exitSolverOnProximity = false; // Makes it so that solvers exit when f(x) is within equalsMargin of 0
 	public static SolverType defaultSolverType = SolverType.NEWTON;
 	public static FactorialType defaultFactorial = FactorialType.RECURSIVE;
+	//TODO Only sum of these are documented and not others
 }

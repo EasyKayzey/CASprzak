@@ -12,11 +12,11 @@ public class SolverTools {
 	private SolverTools(){}
 
 	/**
-	 * Returns a list of Doubles which is a range split into a certain amount of sections
+	 * Returns a list of Doubles which is a range slit into a certain amount of sections
 	 * @param upper    the upper bound of the range
 	 * @param lower    the lower bound of the range
 	 * @param sections the amount of sections that the range is split into
-	 * @return the specified list
+	 * @return the specified range
 	 */
 	public static List<Double> createRange(double upper, double lower, int sections) {
 		List<Double> range = new LinkedList<>();
@@ -27,10 +27,10 @@ public class SolverTools {
 
 	/**
 	 * Removes all NaNs from a specified List
-	 * @param list the List from which the NaNs will be removed
+	 * @param values the List from which the NaNs will be removed
 	 */
-	public static void nanRemover(List<Double> list) {
-		list.removeIf(value -> value.isNaN());
+	public static void nanRemover(List<Double> values) {
+		values.removeIf(value -> value.isNaN());
 	}
 
 	/**
@@ -48,7 +48,7 @@ public class SolverTools {
 		while (iter.hasNext()) {
 			previous = current;
 			current = iter.next();
-			if (current == previous || Math.abs(current - previous) < Settings.equalsMargin)
+			if (current == previous || (current - previous < 1e-10 && previous - current < 1e-10))
 				iter.remove();
 		}
 	}

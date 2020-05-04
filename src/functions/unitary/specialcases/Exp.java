@@ -1,5 +1,6 @@
 package functions.unitary.specialcases;
 
+import config.Settings;
 import functions.GeneralFunction;
 import functions.binary.BinaryFunction;
 import functions.binary.Pow;
@@ -26,7 +27,10 @@ public class Exp extends SpecialCaseBinaryFunction {
 
 	@Override
 	public GeneralFunction getDerivative(char varID) {
-		return new Product(clone(), operand.getDerivative(varID));
+		if (Settings.trustImmutability)
+			return new Product(this, operand.getDerivative(varID));
+		else
+			return new Product(clone(), operand.getDerivative(varID));
 	}
 
 	public UnitaryFunction me(GeneralFunction operand) {

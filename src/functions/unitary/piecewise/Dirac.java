@@ -3,6 +3,7 @@ package functions.unitary.piecewise;
 import functions.GeneralFunction;
 import functions.special.Constant;
 import functions.unitary.UnitaryFunction;
+import tools.DefaultFunctions;
 
 import java.util.Map;
 
@@ -26,7 +27,7 @@ public class Dirac extends UnitaryFunction {
 
 	@Override
 	public GeneralFunction getDerivative(char varID) {
-		return new Constant(0);
+		return DefaultFunctions.ZERO;
 	}
 
 	public UnitaryFunction me(GeneralFunction operand) {

@@ -29,7 +29,7 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 			Logb.class,
 			UnitaryFunction.class,
 			Sum.class,
-			Integral.class,
+			Integral.class,//TODO integral is part of Unitary Function
 	};
 
 	/**

@@ -5,7 +5,7 @@ import functions.GeneralFunction;
 import functions.commutative.Sum;
 import functions.commutative.Product;
 import functions.special.Constant;
-import functions.unitary.Ln;
+import functions.unitary.specialcases.Ln;
 import tools.DefaultFunctions;
 import tools.MiscTools;
 

@@ -7,9 +7,14 @@ import functions.commutative.Product;
 import functions.commutative.Sum;
 import functions.special.Constant;
 import functions.special.Variable;
-import functions.unitary.*;
 import functions.unitary.combo.Factorial;
-import functions.unitary.trig.*;
+import functions.unitary.discontinuous.Abs;
+import functions.unitary.discontinuous.Dirac;
+import functions.unitary.discontinuous.Sign;
+import functions.unitary.specialcases.Exp;
+import functions.unitary.specialcases.Ln;
+import functions.unitary.trig.inverse.*;
+import functions.unitary.trig.normal.*;
 import tools.DefaultFunctions;
 
 public class FunctionMaker {

@@ -94,7 +94,8 @@ public class Solver {
 		ListIterator<Double> iter = solutions.listIterator();
 		while (iter.hasNext()) {
 			double nextLocation = getSolutionPointNewton(expression, iter.next(), runs);
-			if (!(expression.evaluate(Map.of(Settings.singleVariableDefault, nextLocation)) < Settings.zeroMargin && expression.evaluate(Map.of(Settings.singleVariableDefault, nextLocation)) > -Settings.zeroMargin))
+			double nextResult = expression.evaluate(Map.of(Settings.singleVariableDefault, nextLocation));
+			if (Double.isNaN(nextResult) || Math.abs(nextResult) > Settings.zeroMargin)
 				iter.remove();
 			else
 				iter.set(nextLocation);

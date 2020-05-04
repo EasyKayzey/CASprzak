@@ -28,9 +28,9 @@ public class Logb extends BinaryFunction {
 	@Override
 	public GeneralFunction getDerivative(char varID) {
 		if (function2 instanceof Constant base)
-			return new Product(function1.getSimplifiedDerivative(varID), new Pow(DefaultFunctions.NEGATIVE_ONE, new Product(new Ln(new Constant(base.constant)), function1)));
+			return new Product(function1.getSimplifiedDerivative(varID), DefaultFunctions.reciprocal(new Product(new Ln(new Constant(base.constant)), function1)));
 		else
-			return new Product(new Sum(new Product(function1.getSimplifiedDerivative(varID), new Ln(function2), new Pow(DefaultFunctions.NEGATIVE_ONE, function1)), new Product(DefaultFunctions.NEGATIVE_ONE, function2.getSimplifiedDerivative(varID), new Ln(function1), new Pow(DefaultFunctions.NEGATIVE_ONE, function2))), new Pow(new Constant(-2), new Ln(function2)));
+			return new Product(new Sum(new Product(function1.getSimplifiedDerivative(varID), new Ln(function2), DefaultFunctions.reciprocal(function1)), new Product(DefaultFunctions.NEGATIVE_ONE, function2.getSimplifiedDerivative(varID), new Ln(function1), DefaultFunctions.reciprocal(function2))), new Pow(DefaultFunctions.NEGATIVE_TWO, new Ln(function2)));
 	}
 
 	@Override

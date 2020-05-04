@@ -14,7 +14,7 @@ public class SearchTest {
     void basicSearch() {
         GeneralFunction test1 = Parser.parse("sin(x+1)");
         GeneralFunction test2 = Parser.parse("x");
-        assertTrue(SearchTools.exists(test1, test2::equalsFunction));
+        assertTrue(SearchTools.existsAny(test1, test2::equalsFunction));
     }
 
     @Test
@@ -45,7 +45,7 @@ public class SearchTest {
     void simpleSubsetNoExclusion() {
         CommutativeFunction test1 = (CommutativeFunction) Parser.parseSimplified("x*sin(x)*e^x");
         GeneralFunction test2 = Parser.parseSimplified("x*e^x");
-        assertTrue(SearchTools.existsInOppositeSurfaceSubset(test1, (f -> SearchTools.exists(f, SearchTools.isVariable('x'))), test2::equalsFunction));
+        assertTrue(SearchTools.existsInOppositeSurfaceSubset(test1, (f -> SearchTools.existsAny(f, SearchTools.isVariable('x'))), test2::equalsFunction));
     }
 
     @Test

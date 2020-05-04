@@ -119,6 +119,6 @@ public class StageOne {
         GeneralFunction derivativeWithoutConstant = derivative.second;
         GeneralFunction constantInFront = derivative.first;
         Product derivativeTimesOperation = new Product(derivativeWithoutConstant, term);
-        return new Pair<>(SearchTools.existsInSurfaceSubset(product, derivativeTimesOperation::equals) && !SearchTools.existsInOppositeSurfaceSubset(product, (u -> SearchTools.exists(u, SearchTools.isVariable(variableChar))), derivativeTimesOperation::equals), constantInFront);
+        return new Pair<>(SearchTools.existsInSurfaceSubset(product, derivativeTimesOperation::equals) && !SearchTools.existsInOppositeSurfaceSubset(product, (u -> SearchTools.existsAny(u, SearchTools.isVariable(variableChar))), derivativeTimesOperation::equals), constantInFront);
         }
 }

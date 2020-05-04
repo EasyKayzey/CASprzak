@@ -14,21 +14,21 @@ import java.util.function.Predicate;
 public class SearchTools {
 
 	/**
-	 * Returns a {@link Predicate<GeneralFunction>} describing whether a given GeneralFunction is an instance of {@link Variable} with varID equal to the specified variable
-	 * @param varID the variable to be checked for
+	 * Returns a {@link Predicate<GeneralFunction>} describing whether a given GeneralFunction is an instance of {@link Variable} with varID equal to the specified character
+	 * @param varID the character of the variable to be checked for
 	 * @return the predicate described above
 	 */
 	public static Predicate<GeneralFunction> isVariable(char varID) {
-		return input -> ((input instanceof Variable v) && (v.varID == varID));
+		return input -> (input instanceof Variable v) && (v.varID == varID);
 	}
 
 	/**
-	 * Returns true if a {@link GeneralFunction} in the function tree satisfies the predicate test
+	 * Returns true if any {@link GeneralFunction} in the function tree satisfies the predicate test
 	 * @param input the GeneralFunction to be searched in
 	 * @param test the predicate to be tested
 	 * @return true if found
 	 */
-	public static boolean exists(GeneralFunction input, Predicate<? super GeneralFunction> test) {
+	public static boolean existsAny(GeneralFunction input, Predicate<? super GeneralFunction> test) {
 		return existsExcluding(input, test, a -> false);
 	}
 
@@ -53,17 +53,17 @@ public class SearchTools {
 
 
 	/**
-	 * Returns true if a direct child of this {@link GeneralFunction} satisfies the predicate test
+	 * Returns true if a single direct child of this {@link GeneralFunction} satisfies the predicate test
 	 * @param input the function to be searched in
 	 * @param test the predicate to be tested
 	 * @return true if found
 	 */
 	public static boolean existsSurface(GeneralFunction input, Predicate<? super GeneralFunction> test) {
-		return existsSurfaceExcluding(input, test, (a -> false));
+		return existsSurfaceExcluding(input, test, a -> false);
 	}
 
 	/**
-	 * Returns true if a direct child of this {@link  GeneralFunction} satisfies the predicate test, excluding all Functions satisfying the predicate exclude
+	 * Returns true if a single direct child of this {@link  GeneralFunction} satisfies the predicate test, excluding all Functions satisfying the predicate exclude
 	 * @param input the GeneralFunction to be searched in
 	 * @param test the predicate to be tested
 	 * @param exclude the predicate to exclude
@@ -81,7 +81,7 @@ public class SearchTools {
 
 
 	/**
-	 * Checks if this CommutativeFunction has a subset (as a Multiply) satisfying the condition, including empty and single-element products
+	 * Checks if this CommutativeFunction has a subset (as a new instance of its class) satisfying the condition, including empty and single-element products
 	 * @param test the condition to be satisfied
 	 * @return true if the condition was satisfied by a subset
 	 */
@@ -90,7 +90,7 @@ public class SearchTools {
 	}
 
 	/**
-	 * Checks if this CommutativeFunction has a subset not including excludeFromSubset (as a Multiply) satisfying the condition, including empty and single-element products
+	 * Checks if this CommutativeFunction has a subset (as a new instance of its class) not including one or more of its children satisfying excludeFromSubset that satisfies the condition, including empty and single-element products
 	 * @param test the condition to be satisfied
 	 * @param excludeFromSubset subset that should be excluded
 	 * @return true if the condition was satisfied by a subset

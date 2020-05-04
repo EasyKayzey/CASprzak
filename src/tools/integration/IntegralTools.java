@@ -47,6 +47,6 @@ public class IntegralTools {
      */
     public static boolean doesNotContainsVariable(GeneralFunction function, char varID) {
         Variable variable = new Variable(varID);
-        return !SearchTools.exists(function, variable::equals);
+        return !SearchTools.existsAny(function, variable::equals);
     }
 }

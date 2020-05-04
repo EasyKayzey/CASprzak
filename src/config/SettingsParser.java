@@ -11,7 +11,7 @@ import java.util.Properties;
 public class SettingsParser {
 	public static void parseConfig() throws IOException {
 		Properties properties = new Properties();
-		properties.load(new FileReader(".\\src\\config\\settings.config"));
+		properties.load(new FileReader(".\\src\\config\\cas.properties"));
 		for (Map.Entry<Object, Object> entry : properties.entrySet()) {
 			switch ((String) entry.getKey()) {
 				case "defaultSolverIterations" -> Settings.defaultSolverIterations = Integer.parseInt((String) entry.getValue());

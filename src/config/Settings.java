@@ -28,14 +28,14 @@ public class Settings {
 	public static int defaultRangeSections = 29;
 
 	/**
+	 * The number of segments that {@link tools.singlevariable.NumericalIntegration#simpsonsRule(GeneralFunction, double, double)} uses when performing numerical integration. **MUST BE EVEN**
+	 */
+	public static int simpsonsSegments = 500; // MUST BE EVEN
+
+	/**
 	 * The variable to be used in {@link tools.singlevariable} when none is specified
 	 */
 	public static char singleVariableDefault = 'x';
-
-	/**
-	 * The number of segments that {@link tools.singlevariable.NumericalIntegration#simpsonsRule(GeneralFunction, double, double)} uses when performing numerical integration. **MUST BE EVEN**
-	 */
-	public static double simpsonsSegments = 500; // MUST BE EVEN
 
 	/**
 	 * The margin that {@link tools.singlevariable.Solver} uses to determine if a values is close enough to zero to considered zero

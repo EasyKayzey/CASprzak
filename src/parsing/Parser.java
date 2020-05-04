@@ -120,11 +120,14 @@ public class Parser {
 	 * Converts the string to a character,
 	 * @param input the string containing the character
 	 * @return the character in the string
-	 * @throws IllegalArgumentException if the input is not one character
+	 * @throws IllegalArgumentException if the input is not one character or three characters in the format 'c'
 	 */
-	public static char getCharacter(String input) {//TODO move this to a tools of some kind
-		if (input.length() != 1)
+	public static char getCharacter(String input) {
+		if (input.length() == 1)
+			return input.charAt(0);
+		else if (input.length() == 3 && input.charAt(0) == '\'' && input.charAt(2) == '\'')
+			return input.charAt(1);
+		else
 			throw new IllegalArgumentException("Input length should be 1 for Parser.toCharacter");
-		return input.charAt(0);
 	}
 }

@@ -48,6 +48,23 @@ public class FunctionTools {
 	}
 
 	/**
+	 * Checks if two {@link GeneralFunction} arrays have equal Functions at each index, excluding one
+	 * @param functionArray1 first array
+	 * @param functionArray2 second array
+	 * @param excluding      index to exclude
+	 * @return true if equal
+	 */
+	public static boolean deepEqualsExcluding(GeneralFunction[] functionArray1, GeneralFunction[] functionArray2, int excluding) {
+		if (functionArray1.length != functionArray2.length)
+			return false;
+		for (int i = 0; i < functionArray1.length; i++) {
+			if (i != excluding && !functionArray1[i].equalsFunction(functionArray2[i]))
+				return false;
+		}
+		return true;
+	}
+
+	/**
 	 * Removes a {@link GeneralFunction} from a GeneralFunction[] and returns the new array (does not modify)
 	 * @param functionArray the array of Functions
 	 * @param index         index of the GeneralFunction to be removed

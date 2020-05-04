@@ -130,7 +130,7 @@ public class IntegralTest {
     void severalVariableBasicWithNoX() {
         Integral test1 = new Integral(Parser.parse("y*z^y*ln(y)"), 'x');
         GeneralFunction test2 = Parser.parse("y*z^y*ln(y)*x");
-        assertEquals(test2.simplify(), test1.execute().simplify());
+        assertEquals(test2, test1.execute());
     }
 
     @Test

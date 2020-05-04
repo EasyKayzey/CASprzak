@@ -1,15 +1,17 @@
 package functions.unitary.specialcases;
 
 import functions.GeneralFunction;
+import functions.binary.Logb;
 import functions.binary.Pow;
 import functions.commutative.Product;
 import functions.special.Constant;
 import functions.unitary.UnitaryFunction;
+import tools.DefaultFunctions;
 
 import java.util.Map;
 
 
-public class Ln extends UnitaryFunction {
+public class Ln extends SpecialCaseBinaryFunction {
 	/**
 	 * Constructs a new Ln
 	 * @param operand The function which natural log is operating on
@@ -32,4 +34,7 @@ public class Ln extends UnitaryFunction {
 		return new Ln(operand);
 	}
 
+	public GeneralFunction getClassForm() {
+		return new Logb(operand, DefaultFunctions.E);
+	}
 }

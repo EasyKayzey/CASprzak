@@ -1,13 +1,15 @@
 package functions.unitary.specialcases;
 
 import functions.GeneralFunction;
+import functions.binary.Pow;
 import functions.commutative.Product;
 import functions.unitary.UnitaryFunction;
+import tools.DefaultFunctions;
 
 import java.util.Map;
 
 
-public class Exp extends UnitaryFunction {
+public class Exp extends SpecialCaseBinaryFunction {
 	/**
 	 * Constructs a new Ln
 	 * @param operand The function which the exponential is operating on
@@ -30,4 +32,7 @@ public class Exp extends UnitaryFunction {
 		return new Exp(operand);
 	}
 
+	public GeneralFunction getClassForm() {
+		return new Pow(operand, DefaultFunctions.E);
+	}
 }

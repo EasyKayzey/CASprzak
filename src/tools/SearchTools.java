@@ -1,5 +1,6 @@
 package tools;
 
+import config.Settings;
 import functions.GeneralFunction;
 import functions.commutative.CommutativeFunction;
 import functions.special.Variable;
@@ -146,5 +147,13 @@ public class SearchTools {
 		Set<Character> vars = new HashSet<>();
 		consumeIf(input, f -> vars.add(((Variable) f).varID), f -> (f instanceof Variable));
 		return vars;
+	}
+
+	public static char getSingleVariable(GeneralFunction input) {
+		Set<Character> vars = SearchTools.getAllVariables(input);
+		if (vars.size() == 1)
+			return vars.iterator().next();
+		else
+			return Settings.singleVariableDefault;
 	}
 }

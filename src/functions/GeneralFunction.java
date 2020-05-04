@@ -52,22 +52,6 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 	public abstract GeneralFunction clone();
 
 	/**
-	 * Simplifies a {@link GeneralFunction} multiple times
-	 * @param times the amount of times it is simplified
-	 * @return the simplified {@link GeneralFunction}
-	 */
-	public GeneralFunction simplifyTimes(int times) {
-		GeneralFunction newFunction, currentFunction = this;
-		for (int i = 0; i < times; i++) {
-			newFunction = currentFunction.simplify();
-			if (newFunction.toString().equals(currentFunction.toString()))
-				return newFunction;
-			currentFunction = newFunction;
-		}
-		return currentFunction;
-	}
-
-	/**
 	 * Returns the derivative of the function, simplified
 	 * @param varID the ID of the variable being differentiated
 	 * @return the derivative of the {@link GeneralFunction} it is called on, simplified

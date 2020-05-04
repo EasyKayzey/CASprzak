@@ -48,16 +48,16 @@ public class CASDemo {
 
 		GeneralFunction currentFunction = Parser.parse(PreProcessor.toPostfix(rawInput));
 		System.out.println("Here is your parsed function: " + currentFunction);
-		System.out.println("Here is the simplified toString of your function: " + currentFunction.simplifyTimes(10));
+		System.out.println("Here is the simplified toString of your function: " + currentFunction.simplify());
 		System.out.println("Here is your output: " + currentFunction.evaluate(map));
 
 		System.out.println("Here is the derivative with respect to " + Variable.variables.get(0) + ", simplified once:");
 		System.out.println(currentFunction.getSimplifiedDerivative(Variable.variables.get(0)));
 		System.out.println("Here is the derivative with respect to " + Variable.variables.get(0) + ", simplified completely:");
-		System.out.println(currentFunction.getSimplifiedDerivative(Variable.variables.get(0)).simplifyTimes(10));
+		System.out.println(currentFunction.getSimplifiedDerivative(Variable.variables.get(0)).simplify());
 
 		System.out.println("Here is the derivative with respect to " + Variable.variables.get(0) + ", evaluated:");
-		System.out.println(currentFunction.getSimplifiedDerivative(Variable.variables.get(0)).simplifyTimes(10).evaluate(map));
+		System.out.println(currentFunction.getSimplifiedDerivative(Variable.variables.get(0)).simplify().evaluate(map));
 
 		if (Variable.variables.size() == 1) {
 			double solution = Solver.getSolutionPointNewton(currentFunction, -10);

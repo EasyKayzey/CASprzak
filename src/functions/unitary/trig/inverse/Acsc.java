@@ -4,7 +4,7 @@ import functions.GeneralFunction;
 import functions.binary.Pow;
 import functions.commutative.Sum;
 import functions.commutative.Product;
-import functions.unitary.discontinuous.Abs;
+import functions.unitary.piecewise.Abs;
 import functions.unitary.UnitaryFunction;
 import functions.unitary.trig.normal.Csc;
 import functions.unitary.trig.GeneralTrigFunction;

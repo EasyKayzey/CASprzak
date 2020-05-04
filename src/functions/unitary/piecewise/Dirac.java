@@ -1,4 +1,4 @@
-package functions.unitary.discontinuous;
+package functions.unitary.piecewise;
 
 import functions.GeneralFunction;
 import functions.special.Constant;

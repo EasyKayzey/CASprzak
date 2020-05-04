@@ -5,7 +5,7 @@ import functions.GeneralFunction;
 import functions.binary.Pow;
 import functions.commutative.Product;
 import functions.special.Constant;
-import functions.unitary.discontinuous.Abs;
+import functions.unitary.piecewise.Abs;
 import tools.SolverTools;
 
 import java.util.List;

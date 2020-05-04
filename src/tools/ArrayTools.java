@@ -21,7 +21,7 @@ public class ArrayTools {
 
 
 	/**
-	 * Checks if two {@link GeneralFunction} arrays have equal GeneralFunctions at each index (assumes sorted)
+	 * Checks if two {@link GeneralFunction} arrays have equal GeneralFunctions at each index
 	 * @param functionArray1 first array
 	 * @param functionArray2 second array
 	 * @return true if equal
@@ -40,15 +40,15 @@ public class ArrayTools {
 	public static boolean deepEqualsExcluding(GeneralFunction[] functionArray1, GeneralFunction[] functionArray2, int excluding) {
 		if (functionArray1.length != functionArray2.length)
 			return false;
-		for (int i = 0; i < functionArray1.length; i++) {
+		for (int i = 0; i < functionArray1.length; i++)
 			if (i != excluding && !functionArray1[i].equalsFunction(functionArray2[i]))
 				return false;
-		}
+
 		return true;
 	}
 
 	/**
-	 * Removes a {@link GeneralFunction} from a GeneralFunction[] and returns the new array (does not modify)
+	 * Returns a copy of the input array with the {@link GeneralFunction} at index removed
 	 * @param functionArray the array of Functions
 	 * @param index         index of the GeneralFunction to be removed
 	 * @return the new array
@@ -61,7 +61,7 @@ public class ArrayTools {
 	}
 
 	/**
-	 * Creates a new {@link GeneralFunction}[] out of two GeneralFunction arrays, including all elements from both except for one in the first.
+	 * Takes two {@link GeneralFunction} arrays as inputs, one of which contains a {@link functions.commutative.CommutativeFunction} containing the other. Creates a new array with all elements from both arrays, excluding the aforementioned {@link functions.commutative.CommutativeFunction} at indexInOuter.
 	 * @param outer        first GeneralFunction[]
 	 * @param inner        second GeneralFunction[]
 	 * @param indexInOuter index to not include in the first GeneralFunction[]
@@ -78,7 +78,7 @@ public class ArrayTools {
 	}
 
 	/**
-	 * Returns a GeneralFunction[] where every element in add is now a {@link Product} of multiply and the function that was previously there in add
+	 * Returns a GeneralFunction[] where every element in add is now a {@link Product} of multiply and the function that was previously at its location in add
 	 * @param multiply the GeneralFunction[] which is distributed to every element in add
 	 * @param add      the GeneralFunction[] which is being distributed to
 	 * @return GeneralFunction[] where the multiply has been distributed to the add

@@ -4,6 +4,7 @@ import functions.GeneralFunction;
 import functions.commutative.Product;
 import functions.special.Constant;
 import functions.unitary.UnitaryFunction;
+import tools.DefaultFunctions;
 
 import java.util.Map;
 
@@ -24,7 +25,7 @@ public class Sign extends UnitaryFunction {
 
 	@Override
 	public GeneralFunction getDerivative(char varID) {
-		return new Product(operand.getSimplifiedDerivative(varID), new Constant(2), new Dirac(operand));
+		return new Product(operand.getSimplifiedDerivative(varID), DefaultFunctions.TWO, new Dirac(operand));
 	}
 
 

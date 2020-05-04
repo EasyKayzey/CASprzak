@@ -14,7 +14,7 @@ public abstract class Factorial extends UnitaryFunction {
 	public static GeneralFunction defaultFactorial(GeneralFunction input) {
 		return switch (Settings.defaultFactorial) {
 			case STIRLING -> new SFactorial(input);
-			case LANCZOS -> throw new NotYetImplementedException("LFactorial not implemented");
+			case LANCZOS -> throw new NotYetImplementedException("LFactorial not implemented");//TODO ass this or delete it
 			case RECURSIVE -> new RFactorial(input);
 		};
 	}

@@ -33,7 +33,7 @@ public class Product extends CommutativeFunction {
 
 	public String toString() {
 		if (functions.length < 1)
-			return "(empty product)";
+			return "()";
 		StringBuilder string = new StringBuilder("(");
 		for (int i = 0; i < functions.length - 1; i++) {
 			string.append(functions[i].toString());

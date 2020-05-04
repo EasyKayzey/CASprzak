@@ -29,7 +29,7 @@ public class Sum extends CommutativeFunction {
 
 	public String toString() {
 		if (functions.length < 1)
-			return "(empty sum)";
+			return "()";
 		StringBuilder string = new StringBuilder("(");
 		for (int i = functions.length - 1; i >= 1; i--) {
 			string.append(functions[i].toString());

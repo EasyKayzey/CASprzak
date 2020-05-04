@@ -14,7 +14,7 @@ public class MiscTools {
 	 * @param n the number
 	 * @return n!
 	 */
-	public static int factorial(int n) {
+	public static long factorial(int n) {
 		if (n < 0)
 			throw new UnsupportedOperationException("Cannot take the factorial of a negative number.");
 		else if (n <= 1)

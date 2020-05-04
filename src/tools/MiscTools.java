@@ -46,7 +46,7 @@ public class MiscTools {
 	 */
 	public static boolean parseBoolean(String s) {
 		return switch (s.toLowerCase()) {
-		case "true", "t", "1", "yes", "y" -> true;
+			case "true", "t", "1", "yes", "y" -> true;
 			case "false", "f", "0", "no", "n" -> false;
 			default -> throw new MalformedParametersException(s + " cannot be parsed to a boolean");
 		};

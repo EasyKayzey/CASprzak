@@ -10,6 +10,8 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.function.DoubleBinaryOperator;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 public abstract class CommutativeFunction extends GeneralFunction {
 
@@ -160,10 +162,12 @@ public abstract class CommutativeFunction extends GeneralFunction {
 	public abstract CommutativeFunction me(GeneralFunction... functions);
 
 
-	public GeneralFunction substitute(char varID, GeneralFunction toReplace) {
+	public GeneralFunction substituteAll(Predicate<? super GeneralFunction> test, Function<? super GeneralFunction, ? extends GeneralFunction> replacer) {
+		if (test.test(this))
+			return replacer.apply(this);
 		GeneralFunction[] newFunctions = new GeneralFunction[functions.length];
 		for (int i = 0; i < functions.length; i++)
-			newFunctions[i] = functions[i].substitute(varID, toReplace);
+			newFunctions[i] = functions[i].substituteAll(test, replacer);
 		return me(newFunctions);
 	}
 

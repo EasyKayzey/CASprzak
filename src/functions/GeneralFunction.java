@@ -14,6 +14,8 @@ import functions.unitary.transforms.Integral;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 public abstract class GeneralFunction implements Evaluable, Differentiable, Simplifiable, Comparable<GeneralFunction>, Iterable<GeneralFunction> {
 
@@ -107,12 +109,12 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 	}
 
 	/**
-	 * Converts GeneralFunctions
-	 * @param varID     the variable to be substituted into
-	 * @param toReplace the {@link GeneralFunction} that will be substituted
-	 * @return the new {@link GeneralFunction} after all substitutions are preformed
+	 * Replaces every GeneralFunction that satisfies the predicate using the action specified by the replacer
+	 * @param test checks if the function should be replaced
+	 * @param replacer replaces the function
+	 * @return a new function with all replacements made
 	 */
-	public abstract GeneralFunction substitute(char varID, GeneralFunction toReplace);
+	public abstract GeneralFunction substituteAll(Predicate<? super GeneralFunction> test, Function<? super GeneralFunction, ? extends GeneralFunction> replacer);
 
 	/**
 	 * Substitutes a new {@link GeneralFunction} into a variable
@@ -121,7 +123,7 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 	 * @return the new {@link GeneralFunction} after all substitutions are preformed
 	 */
 	public GeneralFunction substituteVariable(char varID, GeneralFunction toReplace) {
-		return substitute(varID, toReplace);
+		return substituteAll(f -> (f instanceof Variable v && v.varID == varID), f -> toReplace);
 	}
 
 	/**
@@ -132,7 +134,7 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 	public GeneralFunction setVariables(Map<Character, Double> values) {
 		GeneralFunction current = this;
 		for (Map.Entry<Character, Double> entry : values.entrySet())
-			current = current.substitute(entry.getKey(), new Constant(entry.getValue()));
+			current = current.substituteVariable(entry.getKey(), new Constant(entry.getValue()));
 		return current;
 	}
 

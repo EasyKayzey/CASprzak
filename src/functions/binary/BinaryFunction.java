@@ -5,6 +5,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 public abstract class BinaryFunction extends GeneralFunction {
 	/**
@@ -53,12 +55,15 @@ public abstract class BinaryFunction extends GeneralFunction {
 
 	/**
 	 * Substitutes all {@link functions.special.Variable} in the function with a specified {@link GeneralFunction}
-	 * @param varID     the variable to be substituted into
-	 * @param toReplace the {@link GeneralFunction} that will be substituted
+	 * @param test     the variable to be substituted into
+	 * @param replacer the {@link GeneralFunction} that will be substituted
 	 * @return the function after the given substitution was made
 	 */
-	public GeneralFunction substitute(char varID, GeneralFunction toReplace) {
-		return me(function1.substitute(varID, toReplace), function2.substitute(varID, toReplace));
+	public GeneralFunction substituteAll(Predicate<? super GeneralFunction> test, Function<? super GeneralFunction, ? extends GeneralFunction> replacer) {
+		if (test.test(this))
+			return replacer.apply(this);
+		else
+			return me(function1.substituteAll(test, replacer), function2.substituteAll(test, replacer));
 	}
 
 

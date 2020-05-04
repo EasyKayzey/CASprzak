@@ -6,6 +6,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 
 public class Constant extends SpecialFunction {
@@ -112,7 +114,7 @@ public class Constant extends SpecialFunction {
 	}
 
 
-	public GeneralFunction substitute(char varID, GeneralFunction toReplace) {
+	public GeneralFunction substituteAll(Predicate<? super GeneralFunction> test, Function<? super GeneralFunction, ? extends GeneralFunction> replacer) {
 		return this;
 	}
 

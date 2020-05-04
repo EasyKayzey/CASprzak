@@ -1,6 +1,5 @@
 package functions.special;
 
-import config.Settings;
 import functions.GeneralFunction;
 
 import java.util.ArrayList;
@@ -95,16 +94,6 @@ public class Variable extends SpecialFunction {
 
 	public GeneralFunction simplify() {
 		return clone();
-	}
-
-
-	public GeneralFunction substitute(char varID, GeneralFunction toReplace) {
-		if (this.varID == varID)
-			return toReplace;
-		else if (Settings.trustImmutability)
-			return this;
-		else
-			return clone();
 	}
 
 

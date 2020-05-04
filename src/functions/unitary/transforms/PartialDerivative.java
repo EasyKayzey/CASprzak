@@ -26,11 +26,11 @@ public class PartialDerivative extends TransformFunction {
 	}
 
 	@Override
-	public UnitaryFunction substitute(char varID, GeneralFunction toReplace) {
+	public GeneralFunction substituteVariable(char varID, GeneralFunction toReplace) {
 		if (varID == respectTo)
 			throw new UnsupportedOperationException("You cannot substitute the variable you are working with respect to");
-		return new PartialDerivative(operand.substitute(varID, toReplace), respectTo);
-	}
+		return new PartialDerivative(operand.substituteVariable(varID, toReplace), respectTo);
+	} // TODO implement replaceALl
 
 	@Override
 	public boolean equalsFunction(GeneralFunction that) {

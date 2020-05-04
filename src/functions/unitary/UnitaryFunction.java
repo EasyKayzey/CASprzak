@@ -8,6 +8,8 @@ import org.jetbrains.annotations.NotNull;
 import java.lang.reflect.Constructor;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 
 public abstract class UnitaryFunction extends GeneralFunction {
@@ -55,8 +57,11 @@ public abstract class UnitaryFunction extends GeneralFunction {
 		return me(operand.simplify());
 	}
 
-	public UnitaryFunction substitute(char varID, GeneralFunction toReplace) {
-		return me(operand.substitute(varID, toReplace));
+	public GeneralFunction substituteAll(Predicate<? super GeneralFunction> test, Function<? super GeneralFunction, ? extends GeneralFunction> replacer) {
+		if (test.test(this))
+			return replacer.apply(this);
+		else
+			return me(operand.substituteAll(test, replacer));
 	}
 
 	public boolean equalsFunction(GeneralFunction that) {

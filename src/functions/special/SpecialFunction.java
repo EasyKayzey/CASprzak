@@ -5,8 +5,18 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 public abstract class SpecialFunction extends GeneralFunction {
+
+	public GeneralFunction substituteAll(Predicate<? super GeneralFunction> test, Function<? super GeneralFunction, ? extends GeneralFunction> replacer) {
+		if (test.test(this))
+			return replacer.apply(this);
+		else
+			return this;
+	}
+
 	public @NotNull Iterator<GeneralFunction> iterator() {
 		return new SpecialIterator();
 	}

@@ -69,10 +69,10 @@ public class PolynomialTools {
 	}
 
 	/**
-	 * Returns the degree a monomial. {@link GeneralFunction#simplify()} MUST be used on {@code function} before calling this method.
+	 * Returns the degree of a monomial. {@link GeneralFunction#simplify()} MUST be used on {@code function} before calling this method, and input should be tested by the caller using {@link #isGeneralMonomial(GeneralFunction)}.
 	 * @param function The monomial whose degree is being found
 	 * @return the degree of the monomial
-	 * @throws IllegalArgumentException when input is not a monomial
+	 * @throws IllegalArgumentException when the input is not a monomial
 	 */
 	public static double getDegree(GeneralFunction function) throws IllegalArgumentException {
 		if (!isGeneralMonomial(function))
@@ -84,7 +84,7 @@ public class PolynomialTools {
 		else if (function instanceof Product product) {
 			GeneralFunction[] elements = product.getFunctions();
 			double sum = 0;
-			for (GeneralFunction element: elements) {
+			for (GeneralFunction element : elements) {
 				if (element instanceof Pow power && power.getFunction1() instanceof Constant number)
 					sum += number.constant;
 				else if (element instanceof Variable)

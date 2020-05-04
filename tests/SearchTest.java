@@ -4,8 +4,9 @@ import org.junit.jupiter.api.Test;
 import parsing.Parser;
 import tools.SearchTools;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.Set;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class SearchTest {
 
@@ -61,5 +62,11 @@ public class SearchTest {
         assertFalse(SearchTools.isVariable('x').test(Parser.parseSimplified("y")));
         assertFalse(SearchTools.isVariable('x').test(Parser.parseSimplified("x+1")));
         assertFalse(SearchTools.isVariable('x').test(Parser.parseSimplified("2x")));
+    }
+
+    @Test
+    void findVariables() {
+        GeneralFunction test = Parser.parseSimplified("x+2a+3pi^2-17x");
+        assertEquals(SearchTools.getAllVariables(test), Set.of('a', 'x'));
     }
 }

@@ -3,7 +3,6 @@ package functions.unitary.trig.normal;
 import functions.GeneralFunction;
 import functions.binary.Pow;
 import functions.commutative.Product;
-import functions.special.Constant;
 import functions.unitary.piecewise.Abs;
 import functions.unitary.specialcases.Ln;
 import functions.unitary.UnitaryFunction;

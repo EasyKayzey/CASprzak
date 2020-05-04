@@ -2,7 +2,6 @@ package functions.unitary.trig.normal;
 
 import functions.GeneralFunction;
 import functions.commutative.Product;
-import functions.special.Constant;
 import functions.unitary.UnitaryFunction;
 import functions.unitary.trig.inverse.Acsch;
 import tools.DefaultFunctions;

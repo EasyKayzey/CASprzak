@@ -2,7 +2,6 @@ package functions.unitary.piecewise;
 
 import functions.GeneralFunction;
 import functions.commutative.Product;
-import functions.special.Constant;
 import functions.unitary.UnitaryFunction;
 import tools.DefaultFunctions;
 

@@ -3,9 +3,7 @@ package functions.unitary.specialcases;
 import functions.GeneralFunction;
 import functions.binary.BinaryFunction;
 import functions.binary.Logb;
-import functions.binary.Pow;
 import functions.commutative.Product;
-import functions.special.Constant;
 import functions.unitary.UnitaryFunction;
 import tools.DefaultFunctions;
 

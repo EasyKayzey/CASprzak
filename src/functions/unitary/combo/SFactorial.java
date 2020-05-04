@@ -4,7 +4,6 @@ import config.Settings;
 import functions.GeneralFunction;
 import functions.binary.Pow;
 import functions.commutative.Product;
-import functions.special.Constant;
 import functions.unitary.UnitaryFunction;
 import tools.DefaultFunctions;
 import tools.MiscTools;

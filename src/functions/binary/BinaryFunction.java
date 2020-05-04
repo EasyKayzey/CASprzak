@@ -75,7 +75,7 @@ public abstract class BinaryFunction extends GeneralFunction {
 		} else {
 			throw new IllegalCallerException("Illegally called BinaryFunction.compareSelf on a non-BinaryFunction");
 		}
-		System.out.println("This is never supposed to happen, binaryFunction compareSelf");
+		System.out.println("This is never supposed to happen, binaryFunction compareSelf"); //TODO I think that this is bad, is this really needed
 		return 0;
 	}
 

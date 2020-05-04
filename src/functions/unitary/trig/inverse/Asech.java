@@ -7,6 +7,7 @@ import functions.commutative.Product;
 import functions.special.Constant;
 import functions.unitary.UnitaryFunction;
 import functions.unitary.trig.normal.Sech;
+import tools.DefaultFunctions;
 
 import java.util.Map;
 
@@ -23,7 +24,7 @@ public class Asech extends InverseTrigFunction {
 
 	@Override
 	public GeneralFunction getDerivative(char varID) {
-		return new Product(new Constant(-1), operand.getSimplifiedDerivative(varID), new Pow(new Constant(-1), new Product(operand, new Pow(new Constant(0.5), new Sum(new Constant(1), new Product(new Constant(-1), new Pow(new Constant(2), operand)))))));
+		return DefaultFunctions.negative(new Product(operand.getSimplifiedDerivative(varID), DefaultFunctions.reciprocal(new Product(operand, DefaultFunctions.sqrt(new Sum(DefaultFunctions.ONE, DefaultFunctions.negative(new Pow(new Constant(2), operand))))))));
 	}
 
 	/**

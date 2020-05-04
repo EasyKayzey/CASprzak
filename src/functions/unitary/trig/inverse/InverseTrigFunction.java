@@ -12,6 +12,7 @@ public abstract class InverseTrigFunction extends GeneralTrigFunction {
 		super(operand);
 	}
 
+	//TODO document
 	public GeneralFunction getElementaryIntegral() {
 		return new Sum(new Product(operand, me(operand)), new Product(DefaultFunctions.NEGATIVE_ONE, UnitaryFunction.newInstanceOf(getInverse(), me(operand))));
 	}

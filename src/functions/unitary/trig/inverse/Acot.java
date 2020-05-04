@@ -23,7 +23,7 @@ public class Acot extends InverseTrigFunction {
 
 	@Override
 	public GeneralFunction getDerivative(char varID) {
-		return new Product(DefaultFunctions.NEGATIVE_ONE, operand.getSimplifiedDerivative(varID), new Pow(DefaultFunctions.NEGATIVE_ONE, new Sum(DefaultFunctions.ONE, new Pow(DefaultFunctions.TWO, operand))));
+		return DefaultFunctions.negative(new Product(operand.getSimplifiedDerivative(varID), DefaultFunctions.reciprocal(new Sum(DefaultFunctions.ONE, new Pow(DefaultFunctions.TWO, operand)))));
 	}
 
 	/**

@@ -7,6 +7,7 @@ import functions.commutative.Product;
 import functions.special.Constant;
 import functions.unitary.UnitaryFunction;
 import functions.unitary.trig.normal.Sin;
+import tools.DefaultFunctions;
 
 import java.util.Map;
 
@@ -33,7 +34,7 @@ public class Asin extends InverseTrigFunction {
 
 	@Override
 	public GeneralFunction getDerivative(char varID) {
-		return new Product(operand.getSimplifiedDerivative(varID), new Pow(new Constant(-0.5), (new Sum(new Constant(1), new Product(new Constant(-1), new Pow(new Constant(2), operand))))));
+		return new Product(operand.getSimplifiedDerivative(varID), new Pow(DefaultFunctions.NEGATIVE_HALF, (new Sum(DefaultFunctions.ONE, DefaultFunctions.negative(new Pow(DefaultFunctions.TWO, operand))))));
 	}
 
 

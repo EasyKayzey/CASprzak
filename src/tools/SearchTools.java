@@ -3,19 +3,19 @@ package tools;
 import functions.GeneralFunction;
 import functions.commutative.CommutativeFunction;
 import functions.special.Variable;
-import tools.helperclasses.FunctionPredicate;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class SearchTools {
 
 	/**
-	 * Returns a {@link FunctionPredicate} describing whether a given GeneralFunction is an instance of {@link Variable} with varID equal to the specified variable
+	 * Returns a {@link Predicate<GeneralFunction>} describing whether a given GeneralFunction is an instance of {@link Variable} with varID equal to the specified variable
 	 * @param varID the variable to be checked for
 	 * @return the predicate described above
 	 */
-	public static FunctionPredicate isVariable(char varID) {
+	public static Predicate<GeneralFunction> isVariable(char varID) {
 		return input -> ((input instanceof Variable v) && (v.varID == varID));
 	}
 
@@ -25,7 +25,7 @@ public class SearchTools {
 	 * @param test the predicate to be tested
 	 * @return true if found
 	 */
-	public static boolean exists(GeneralFunction input, FunctionPredicate test) {
+	public static boolean exists(GeneralFunction input, Predicate<GeneralFunction> test) {
 		return existsExcluding(input, test, (a -> false));
 	}
 
@@ -36,7 +36,7 @@ public class SearchTools {
 	 * @param exclude the predicate to exclude
 	 * @return true if found
 	 */
-	public static boolean existsExcluding(GeneralFunction input, FunctionPredicate test, FunctionPredicate exclude) {
+	public static boolean existsExcluding(GeneralFunction input, Predicate<GeneralFunction> test, Predicate<GeneralFunction> exclude) {
 		if (exclude.test(input))
 			return false;
 		else if (test.test(input))
@@ -55,7 +55,7 @@ public class SearchTools {
 	 * @param test the predicate to be tested
 	 * @return true if found
 	 */
-	public static boolean existsSurface(GeneralFunction input, FunctionPredicate test) {
+	public static boolean existsSurface(GeneralFunction input, Predicate<GeneralFunction> test) {
 		return existsSurfaceExcluding(input, test, (a -> false));
 	}
 
@@ -66,7 +66,7 @@ public class SearchTools {
 	 * @param exclude the predicate to exclude
 	 * @return true if found
 	 */
-	public static boolean existsSurfaceExcluding(GeneralFunction input, FunctionPredicate test, FunctionPredicate exclude) {
+	public static boolean existsSurfaceExcluding(GeneralFunction input, Predicate<GeneralFunction> test, Predicate<GeneralFunction> exclude) {
 		if (exclude.test(input))
 			return false;
 		else
@@ -82,7 +82,7 @@ public class SearchTools {
 	 * @param test the condition to be satisfied
 	 * @return true if the condition was satisfied by a subset
 	 */
-	public static boolean existsInSurfaceSubset(CommutativeFunction input, FunctionPredicate test) {
+	public static boolean existsInSurfaceSubset(CommutativeFunction input, Predicate<GeneralFunction> test) {
 		return getSubsetIDs(input, test).size() > 0;
 	}
 
@@ -92,7 +92,7 @@ public class SearchTools {
 	 * @param excludeFromSubset subset that should be excluded
 	 * @return true if the condition was satisfied by a subset
 	 */
-	public static boolean existsInOppositeSurfaceSubset(CommutativeFunction input, FunctionPredicate test, FunctionPredicate excludeFromSubset) {
+	public static boolean existsInOppositeSurfaceSubset(CommutativeFunction input, Predicate<GeneralFunction> test, Predicate<GeneralFunction> excludeFromSubset) {
 		GeneralFunction[] functions = input.getFunctions();
 		List<Integer> excludedIDs = getSubsetIDs(input, excludeFromSubset);
 		for (int run : excludedIDs) {
@@ -107,7 +107,7 @@ public class SearchTools {
 		return false;
 	}
 
-	private static List<Integer> getSubsetIDs(CommutativeFunction input, FunctionPredicate test) {
+	private static List<Integer> getSubsetIDs(CommutativeFunction input, Predicate<GeneralFunction> test) {
 		GeneralFunction[] functions = input.getFunctions();
 		List<Integer> ids = new ArrayList<>();
 		for (int run = 0; run < Math.pow(2, functions.length); run++) {

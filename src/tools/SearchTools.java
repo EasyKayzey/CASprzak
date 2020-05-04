@@ -6,6 +6,8 @@ import functions.special.Variable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 public class SearchTools {
@@ -120,4 +122,12 @@ public class SearchTools {
 		}
 		return ids;
 	}
+
+	public static void consumeIf(GeneralFunction input, Predicate<? super GeneralFunction> test, Consumer<? super GeneralFunction> consumer) {
+		if (test.test(input))
+			consumer.accept(input);
+		for (GeneralFunction f : input)
+			consumeIf(f, test, consumer);
+	}
+
 }

@@ -1,5 +1,7 @@
 package tools;
 
+import config.Settings;
+
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -18,7 +20,7 @@ public class SolverTools {
 	 */
 	public static List<Double> createRange(double upper, double lower, int sections) {
 		List<Double> range = new LinkedList<>();
-		for (int i = 0; i < sections + 1; i++)
+		for (int i = 0; i <= sections; i++)
 			range.add(lower + i * (upper - lower) / sections);
 		return range;
 	}
@@ -46,7 +48,7 @@ public class SolverTools {
 		while (iter.hasNext()) {
 			previous = current;
 			current = iter.next();
-			if (current == previous || Math.abs(current - previous) < 1e-10)
+			if (current == previous || Math.abs(current - previous) < Settings.equalsMargin)
 				iter.remove();
 		}
 	}

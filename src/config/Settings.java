@@ -3,7 +3,7 @@ package config;
 @SuppressWarnings("CanBeFinal")
 public class Settings {
 	private Settings(){}
-	//	public static boolean debug = true;
+	//	public static boolean debug = true; //TODO commenting out code we dont use is bad form
 	public static int defaultSolverIterations = 100;
 	public static int defaultRangeSections = 29;
 	public static char singleVariableDefault = 'x';

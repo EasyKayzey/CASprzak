@@ -10,6 +10,7 @@ import functions.special.Constant;
 import functions.special.Variable;
 import functions.unitary.Ln;
 import functions.unitary.transforms.Integral;
+import functions.unitary.transforms.PartialDerivative;
 import functions.unitary.trig.*;
 import tools.DefaultFunctions;
 import tools.MiscTools;
@@ -36,6 +37,12 @@ public class StageOne {
         }
         if (integrand instanceof Pow power && power.getFunction2() instanceof Sum && power.getFunction1() instanceof Constant constant && MiscTools.isAlmostInteger(constant.constant)) {
             return new Integral(power.unwrapIntegerPower().distributeAll(), variableChar).execute();
+        }
+        if (integrand instanceof PartialDerivative derivative) {
+            if (derivative.respectTo == variableChar)
+                return integrand;
+            else
+                integrand = integrand.getSimplifiedDerivative(derivative.respectTo);
         }
 
         Pair<GeneralFunction, GeneralFunction> stripConstant = IntegralTools.stripConstants(integrand, variableChar);

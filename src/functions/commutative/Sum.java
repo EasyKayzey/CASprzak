@@ -88,7 +88,7 @@ public class Sum extends CommutativeFunction {
 					GeneralFunction[] secondFunctions = second.getFunctions();
 					if (!((firstFunctions[0] instanceof Constant) && (secondFunctions[0] instanceof Constant)))
 						throw new IllegalStateException("Constants should always be first in a Multiply.");
-					if (FunctionTools.deepEquals(firstFunctions, secondFunctions, 1)) {
+					if (FunctionTools.deepEqualsExcluding(firstFunctions, secondFunctions, 0)) {
 						combinedTerms[j] = new Product(new Sum(firstFunctions[0], secondFunctions[0]), new Product(FunctionTools.removeFunctionAt(firstFunctions, 0)));
 						combinedTerms = FunctionTools.removeFunctionAt(combinedTerms, i);
 						return (new Sum(combinedTerms)).simplifyInternal();

@@ -21,34 +21,17 @@ public class FunctionTools {
 
 
 	/**
-	 * Checks if two {@link GeneralFunction} arrays have equal Functions at each index (assumes sorted)
+	 * Checks if two {@link GeneralFunction} arrays have equal GeneralFunctions at each index (assumes sorted)
 	 * @param functionArray1 first array
 	 * @param functionArray2 second array
 	 * @return true if equal
 	 */
 	public static boolean deepEquals(GeneralFunction[] functionArray1, GeneralFunction[] functionArray2) {
-		return deepEquals(functionArray1, functionArray2, 0);
+		return deepEqualsExcluding(functionArray1, functionArray2, -1);
 	}
 
 	/**
-	 * Checks if two {@link GeneralFunction} arrays have equal Functions at each index, starting at a point (assumes sorted)
-	 * @param functionArray1 first array
-	 * @param functionArray2 second array
-	 * @param start          index to begin at
-	 * @return true if equal
-	 */
-	public static boolean deepEquals(GeneralFunction[] functionArray1, GeneralFunction[] functionArray2, int start) {
-		if (functionArray1.length != functionArray2.length)
-			return false;
-		for (int i = start; i < functionArray1.length; i++) {
-			if (!functionArray1[i].equalsFunction(functionArray2[i]))
-				return false;
-		}
-		return true;
-	}
-
-	/**
-	 * Checks if two {@link GeneralFunction} arrays have equal Functions at each index, excluding one
+	 * Checks if two {@link GeneralFunction} arrays have equal Functions at each index, excluding one at a specified index
 	 * @param functionArray1 first array
 	 * @param functionArray2 second array
 	 * @param excluding      index to exclude

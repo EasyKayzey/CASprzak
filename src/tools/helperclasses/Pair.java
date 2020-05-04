@@ -9,6 +9,11 @@ public class Pair<T, U> extends AbstractPair<T, U> {
 		this.second = second;
 	}
 
+	public Pair(AbstractPair<T, U> pair) {
+		this.first = pair.getFirst();
+		this.second = pair.getSecond();
+	}
+
 	@Override
 	public T getFirst() {
 		return first;

@@ -9,6 +9,11 @@ public class MutablePair<T, U> extends AbstractMutablePair<T, U> {
 		this.second = second;
 	}
 
+	public MutablePair(AbstractPair<T, U> pair) {
+		this.first = pair.getFirst();
+		this.second = pair.getSecond();
+	}
+
 	@Override
 	public T getFirst() {
 		return first;

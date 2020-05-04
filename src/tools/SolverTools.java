@@ -26,14 +26,6 @@ public class SolverTools {
 	}
 
 	/**
-	 * Removes all NaNs from a specified List
-	 * @param values the List from which the NaNs will be removed
-	 */
-	public static void nanRemover(List<Double> values) {
-		values.removeIf(value -> value.isNaN());
-	}
-
-	/**
 	 * Removes a number from a List if that number is adjacent to the same number within a tolerance of 1E-10
 	 * @param values the List from which the repeated values are removed
 	 */

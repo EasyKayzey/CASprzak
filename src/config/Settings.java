@@ -2,8 +2,19 @@ package config;
 
 import functions.GeneralFunction;
 
+import java.io.IOException;
+
 @SuppressWarnings("CanBeFinal")
 public class Settings {
+
+	static {
+		try {
+			SettingsParser.parseConfig();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 	private Settings(){}
 
 	/**

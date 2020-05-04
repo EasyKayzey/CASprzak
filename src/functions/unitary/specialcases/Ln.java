@@ -28,7 +28,7 @@ public class Ln extends SpecialCaseBinaryFunction {
 
 	@Override
 	public GeneralFunction getDerivative(char varID) {
-		return new Product(operand.getSimplifiedDerivative(varID), new Pow(new Constant(-1), operand));
+		return new Product(operand.getSimplifiedDerivative(varID), DefaultFunctions.reciprocal(operand));
 	}
 
 	public UnitaryFunction me(GeneralFunction operand) {

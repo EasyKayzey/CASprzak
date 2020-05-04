@@ -122,7 +122,7 @@ public class Parser {
 	 * @return the character in the string
 	 * @throws IllegalArgumentException if the input is not one character
 	 */
-	public static char getCharacter(String input) {
+	public static char getCharacter(String input) {//TODO move this to a tools of some kind
 		if (input.length() != 1)
 			throw new IllegalArgumentException("Input length should be 1 for Parser.toCharacter");
 		return input.charAt(0);

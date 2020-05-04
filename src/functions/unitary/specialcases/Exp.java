@@ -1,6 +1,7 @@
 package functions.unitary.specialcases;
 
 import functions.GeneralFunction;
+import functions.binary.BinaryFunction;
 import functions.binary.Pow;
 import functions.commutative.Product;
 import functions.unitary.UnitaryFunction;
@@ -32,7 +33,7 @@ public class Exp extends SpecialCaseBinaryFunction {
 		return new Exp(operand);
 	}
 
-	public GeneralFunction getClassForm() {
+	public BinaryFunction getClassForm() {
 		return new Pow(operand, DefaultFunctions.E);
 	}
 }

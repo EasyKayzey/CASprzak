@@ -21,11 +21,6 @@ public class Logb extends BinaryFunction {
 
 
 	@Override
-	public String toString() {
-		return "(log_{" + function2.toString() + "}(" + function1.toString() + "))";
-	}
-
-	@Override
 	public GeneralFunction getDerivative(char varID) {
 		if (function2 instanceof Constant base)
 			return new Product(function1.getSimplifiedDerivative(varID), DefaultFunctions.reciprocal(new Product(new Ln(new Constant(base.constant)), function1)));
@@ -51,4 +46,13 @@ public class Logb extends BinaryFunction {
 		return new Logb(function1, function2);
 	}
 
+	public GeneralFunction toSpecialCase() {
+		return new Product(new Ln(function1), DefaultFunctions.reciprocal(new Ln(function2)));
+	}
+
+
+	@Override
+	public String toString() {
+		return "(log_{" + function2.toString() + "}(" + function1.toString() + "))";
+	}
 }

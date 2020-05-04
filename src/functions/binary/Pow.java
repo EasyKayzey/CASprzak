@@ -2,9 +2,10 @@ package functions.binary;
 
 import config.Settings;
 import functions.GeneralFunction;
-import functions.commutative.Sum;
 import functions.commutative.Product;
+import functions.commutative.Sum;
 import functions.special.Constant;
+import functions.unitary.specialcases.Exp;
 import functions.unitary.specialcases.Ln;
 import tools.DefaultFunctions;
 import tools.MiscTools;
@@ -134,6 +135,10 @@ public class Pow extends BinaryFunction {
 
 	public BinaryFunction me(GeneralFunction function1, GeneralFunction function2) {
 		return new Pow(function1, function2);
+	}
+
+	public GeneralFunction toSpecialCase() {
+		return new Exp(new Product(new Ln(function2), function1));
 	}
 
 

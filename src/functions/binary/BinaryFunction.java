@@ -79,6 +79,12 @@ public abstract class BinaryFunction extends GeneralFunction {
 		return 0;
 	}
 
+	/**
+	 * Converts the binary function to a combination of its special cases, e.g. 2^x -> e^((ln2)x)
+	 * @return the special-case-converted function
+	 */
+	public abstract GeneralFunction toSpecialCase();
+
 
 	public @NotNull Iterator<GeneralFunction> iterator() {
 		return new BinaryIterator();

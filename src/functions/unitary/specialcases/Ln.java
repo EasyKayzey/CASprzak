@@ -1,6 +1,7 @@
 package functions.unitary.specialcases;
 
 import functions.GeneralFunction;
+import functions.binary.BinaryFunction;
 import functions.binary.Logb;
 import functions.binary.Pow;
 import functions.commutative.Product;
@@ -34,7 +35,7 @@ public class Ln extends SpecialCaseBinaryFunction {
 		return new Ln(operand);
 	}
 
-	public GeneralFunction getClassForm() {
+	public BinaryFunction getClassForm() {
 		return new Logb(operand, DefaultFunctions.E);
 	}
 }

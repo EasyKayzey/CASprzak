@@ -1,6 +1,7 @@
 package functions.unitary.specialcases;
 
 import functions.GeneralFunction;
+import functions.binary.BinaryFunction;
 import functions.unitary.UnitaryFunction;
 
 public abstract class SpecialCaseBinaryFunction extends UnitaryFunction {
@@ -9,5 +10,9 @@ public abstract class SpecialCaseBinaryFunction extends UnitaryFunction {
 		super(operand);
 	}
 
-	public abstract GeneralFunction getClassForm();
+	/**
+	 * Returns the BinaryFunction this function is a special case of
+	 * @return a BinaryFunction
+	 */
+	public abstract BinaryFunction getClassForm();
 }

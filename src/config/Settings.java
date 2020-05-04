@@ -3,21 +3,63 @@ package config;
 @SuppressWarnings("CanBeFinal")
 public class Settings {
 	private Settings(){}
-	//	public static boolean debug = true; //TODO commenting out code we dont use is bad form
 	public static int defaultSolverIterations = 100;
 	public static int defaultRangeSections = 29;
+
+	/**
+	 * The variable to be used in {@link tools.singlevariable} when none is specified
+	 */
 	public static char singleVariableDefault = 'x';
 	public static double simpsonsSegments = 500; // MUST BE EVEN
 	public static double zeroMargin = 1e-3;
+
+	/**
+	 * The margin used in {@link tools.MiscTools#toInteger(double)} when deciding when a double is close enough to an integer
+	 */
 	public static double integerMargin = 1e-4;
+
+	/**
+	 * The default margin to be used when checking if two doubles are equal
+	 */
 	public static double equalsMargin = 1e-12;
+
+	/**
+	 * Denotes whether functions of constants should be simplified, e.g. sin(pi/2) -> 1
+	 */
 	public static boolean simplifyFunctionsOfConstants = true;
+
+	/**
+	 * Denotes whether exponents should be distributed over multiplication in a normal simplify(), e.g. (2x)^2 -> 4x^2
+	 */
 	public static boolean distributeExponents = true;
+
+	/**
+	 * Denotes whether or not the derivatives of functions should be cached when created
+	 */
 	public static boolean cacheDerivatives = true;
-	public static boolean trustImmutability = true; // Makes it so that getFunctions and other getters don't return clone()
-	public static boolean enforceIntegerOperations = true; // Makes it so that combinatorial operations return integers
-	public static boolean exitSolverOnProximity = false; // Makes it so that solvers exit when f(x) is within equalsMargin of 0
+
+	/**
+	 * Denotes whether or not function immutability should be trusted when using getters or performing simplifications. There should be no reason to turn this off.
+	 */
+	public static boolean trustImmutability = true;
+
+	/**
+	 * Forces functions in {@link functions.unitary.combo} to return integers when using approximations
+	 */
+	public static boolean enforceIntegerOperations = true;
+
+	/**
+	 * Denotes whether methods in {@link tools.singlevariable} should exit if the result is within a certain proximity of the target. Improves performance at the cost of accuracy.
+	 */
+	public static boolean exitSolverOnProximity = false;
+
+	/**
+	 * Denotes the default method used to solve equations
+	 */
 	public static SolverType defaultSolverType = SolverType.NEWTON;
+
+	/**
+	 * Denotes the default implementation of factorial to be used
+	 */
 	public static FactorialType defaultFactorial = FactorialType.RECURSIVE;
-	//TODO Only sum of these are documented and not others
 }

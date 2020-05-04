@@ -37,8 +37,8 @@ public class SubstituteTest {
 
     @Test
     void complexSubstituteAll() {
-        GeneralFunction test1 = Parser.parseSimplified("x+sin(x)+sin(2x+y)");
-        GeneralFunction test2 = Parser.parseSimplified("x+cos(2x)+cos(4x+2y)");
+        GeneralFunction test1 = Parser.parseSimplified("x+sin(x)+2sin(2x+y)");
+        GeneralFunction test2 = Parser.parseSimplified("x+cos(2x)+2cos(4x+2y)");
         GeneralFunction substituted = test1.substituteAll(f -> f instanceof Sin, f -> new Cos(new Product(DefaultFunctions.TWO, ((UnitaryFunction) f).operand)));
         assertEquals(substituted, test2);
     }

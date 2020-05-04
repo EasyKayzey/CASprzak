@@ -24,7 +24,8 @@ public class Extrema {
         double minimum = findSmallestOrLargest(function, secondDerivativeIsPositive, (a, b) -> (a < b));
         if (minimum > upperBound || minimum < lowerBound)
             return Double.NaN;
-        return minimum;
+        else
+            return minimum;
     }
 
 
@@ -40,7 +41,8 @@ public class Extrema {
         double maximum = findSmallestOrLargest(function, secondDerivativeIsNegative, (a, b) -> (a > b));
         if (maximum > upperBound || maximum < lowerBound)
             return Double.NaN;
-        return maximum;
+        else
+           return maximum;
     }
 
     /**
@@ -108,7 +110,7 @@ public class Extrema {
      * @return any inflection point of function on the specified range
      */
     public static double[] findAnyInflectionPoints(GeneralFunction function, double lowerBound, double upperBound) {
-        return findPoints(function, lowerBound, upperBound, (a, b) -> (a - b < Settings.zeroMargin && b - a < Settings.zeroMargin));
+        return findPoints(function, lowerBound, upperBound, (a, b) -> (Math.abs(a - b) < Settings.zeroMargin));
     }
 
     private static double[] findPoints(GeneralFunction function, double lowerBound, double upperBound, BiPredicate<? super Double, ? super Double> strategy) {
@@ -117,34 +119,31 @@ public class Extrema {
             return new double[0];
 
         List<Double> secondDerivative = new LinkedList<>();
-        for (double criticalPoint : criticalPoints) {
+        for (double criticalPoint : criticalPoints)
             if (strategy.test(function.getNthDerivative(Settings.singleVariableDefault, 2).evaluate(Map.of(Settings.singleVariableDefault, criticalPoint)), 0.0))
                 secondDerivative.add(criticalPoint);
-        }
+
         return secondDerivative.stream().mapToDouble(i -> i).toArray();
     }
 
     private static double findSmallestOrLargest(GeneralFunction function, double[] numbers, BiPredicate<? super Double, ? super Double> strategy) {
-        if (numbers.length == 1) {
-            return numbers[0];
-        }
-        if (numbers.length == 0) {
+        if (numbers.length == 0)
             return Double.NaN;
-        }
-        double[] functionAtPoints = new double[numbers.length];
-        for (int i = 0; i < functionAtPoints.length; i++) {
-            functionAtPoints[i] = function.evaluate(Map.of(Settings.singleVariableDefault, numbers[i]));
-        }
+        else if (numbers.length == 1)
+            return numbers[0];
 
-        int index = 0;
-        for (int i = 1; i < functionAtPoints.length; i++) {
-            if (functionAtPoints[i] == functionAtPoints[index]) {
+        double[] functionAtPoints = new double[numbers.length];
+        for (int i = 0; i < functionAtPoints.length; i++)
+            functionAtPoints[i] = function.evaluate(Map.of(Settings.singleVariableDefault, numbers[i]));
+
+        int bestIndex = 0;
+        for (int i = 1; i < functionAtPoints.length; i++)
+            if (functionAtPoints[i] == functionAtPoints[bestIndex])
                 return Double.NaN;
-            } else if (strategy.test(functionAtPoints[i], functionAtPoints[index])) {
-                index = i;
-            }
-        }
-        return numbers[index];
+            else if (strategy.test(functionAtPoints[i], functionAtPoints[bestIndex]))
+                bestIndex = i;
+
+        return numbers[bestIndex];
     }
 
 }

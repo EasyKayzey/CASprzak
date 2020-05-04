@@ -22,7 +22,7 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 	 */
 	@SuppressWarnings("ClassReferencesSubclass")
 	public static final Class<?>[] sortOrder = {
-			Constant.class,
+			Constant.class, // Must always be first
 			Variable.class,
 			Product.class,
 			Pow.class,

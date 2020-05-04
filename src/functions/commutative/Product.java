@@ -6,7 +6,7 @@ import functions.binary.Pow;
 import functions.special.Constant;
 import functions.special.Variable;
 import tools.DefaultFunctions;
-import tools.FunctionTools;
+import tools.ArrayTools;
 import tools.PolynomialTools;
 
 import java.util.Arrays;
@@ -111,7 +111,7 @@ public class Product extends CommutativeFunction {
 	 * @return A new {@link Product} with all variable combined with added exponents
 	 */
 	public Product addExponents() {
-		GeneralFunction[] simplifiedTerms = FunctionTools.deepClone(functions);
+		GeneralFunction[] simplifiedTerms = ArrayTools.deepClone(functions);
 		for (int a = 0; a < simplifiedTerms.length; a++)
 			if (!(simplifiedTerms[a] instanceof Pow))
 				simplifiedTerms[a] = new Pow(DefaultFunctions.ONE, simplifiedTerms[a]);
@@ -121,7 +121,7 @@ public class Product extends CommutativeFunction {
 				if (simplifiedTerms[i] instanceof Pow first && simplifiedTerms[j] instanceof Pow second) {
 					if (first.getFunction2().equalsFunction(second.getFunction2())) {
 						simplifiedTerms[j] = new Pow(new Sum(first.getFunction1(), second.getFunction1()), first.getFunction2());
-						simplifiedTerms = FunctionTools.removeFunctionAt(simplifiedTerms, i);
+						simplifiedTerms = ArrayTools.removeFunctionAt(simplifiedTerms, i);
 						return (new Product(simplifiedTerms)).simplifyInternal();
 					}
 				} else {
@@ -149,8 +149,8 @@ public class Product extends CommutativeFunction {
 		for (int i = 0; i < multiplyTerms.length; i++) {
 			if (multiplyTerms[i] instanceof Sum sum) {
 				addTerms = sum.getFunctions();
-				multiplyTerms = FunctionTools.removeFunctionAt(multiplyTerms, i);
-				return new Sum(FunctionTools.distribute(multiplyTerms, addTerms)).simplify();
+				multiplyTerms = ArrayTools.removeFunctionAt(multiplyTerms, i);
+				return new Sum(ArrayTools.distribute(multiplyTerms, addTerms)).simplify();
 			}
 		}
 		if (Settings.trustImmutability)

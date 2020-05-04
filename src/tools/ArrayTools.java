@@ -3,9 +3,9 @@ package tools;
 import functions.GeneralFunction;
 import functions.commutative.Product;
 
-public class FunctionTools {
+public class ArrayTools {
 
-	private FunctionTools(){}
+	private ArrayTools(){}
 
 	/**
 	 * Deep-clones an array of Functions

@@ -4,7 +4,7 @@ import config.Settings;
 import functions.GeneralFunction;
 import functions.special.Constant;
 import tools.DefaultFunctions;
-import tools.FunctionTools;
+import tools.ArrayTools;
 
 import java.util.Map;
 
@@ -76,7 +76,7 @@ public class Sum extends CommutativeFunction {
 	 * @return a {@link Sum} where like terms are added together
 	 */
 	public Sum combineLikeTerms() {
-		GeneralFunction[] combinedTerms = FunctionTools.deepClone(functions);
+		GeneralFunction[] combinedTerms = ArrayTools.deepClone(functions);
 		for (int a = 0; a < combinedTerms.length; a++)
 			if (!(combinedTerms[a] instanceof Product product && product.getFunctions()[0] instanceof Constant))
 				combinedTerms[a] = new Product(DefaultFunctions.ONE, combinedTerms[a]).simplifyPull();
@@ -88,9 +88,9 @@ public class Sum extends CommutativeFunction {
 					GeneralFunction[] secondFunctions = second.getFunctions();
 					if (!((firstFunctions[0] instanceof Constant) && (secondFunctions[0] instanceof Constant)))
 						throw new IllegalStateException("Constants should always be first in a Multiply.");
-					if (FunctionTools.deepEqualsExcluding(firstFunctions, secondFunctions, 0)) {
-						combinedTerms[j] = new Product(new Sum(firstFunctions[0], secondFunctions[0]), new Product(FunctionTools.removeFunctionAt(firstFunctions, 0)));
-						combinedTerms = FunctionTools.removeFunctionAt(combinedTerms, i);
+					if (ArrayTools.deepEqualsExcluding(firstFunctions, secondFunctions, 0)) {
+						combinedTerms[j] = new Product(new Sum(firstFunctions[0], secondFunctions[0]), new Product(ArrayTools.removeFunctionAt(firstFunctions, 0)));
+						combinedTerms = ArrayTools.removeFunctionAt(combinedTerms, i);
 						return (new Sum(combinedTerms)).simplifyInternal();
 					}
 				} else {

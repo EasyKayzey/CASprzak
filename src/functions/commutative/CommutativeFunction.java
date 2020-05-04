@@ -4,7 +4,7 @@ import config.Settings;
 import functions.GeneralFunction;
 import functions.special.Constant;
 import org.jetbrains.annotations.NotNull;
-import tools.FunctionTools;
+import tools.ArrayTools;
 
 import java.util.Arrays;
 import java.util.Iterator;
@@ -72,7 +72,7 @@ public abstract class CommutativeFunction extends GeneralFunction {
 		for (int i = 0; i < toPut.length; i++) {
 			if (toPut[i] instanceof Constant constant) {
 				if (constant.constant == identityValue) {
-					toPut = FunctionTools.removeFunctionAt(toPut, i);
+					toPut = ArrayTools.removeFunctionAt(toPut, i);
 					i--;
 				}
 			}
@@ -88,9 +88,9 @@ public abstract class CommutativeFunction extends GeneralFunction {
 		for (int i = 1; i < functions.length; i++) {
 			for (int j = 0; j < i; j++) {
 				if (functions[i] instanceof Constant first && functions[j] instanceof Constant second) {
-					GeneralFunction[] toOperate = FunctionTools.deepClone(functions);
+					GeneralFunction[] toOperate = ArrayTools.deepClone(functions);
 					toOperate[i] = new Constant(operation.applyAsDouble(first.constant, second.constant));
-					toOperate = FunctionTools.removeFunctionAt(toOperate, j);
+					toOperate = ArrayTools.removeFunctionAt(toOperate, j);
 					return me(toOperate).simplifyConstants();
 				}
 			}
@@ -109,7 +109,7 @@ public abstract class CommutativeFunction extends GeneralFunction {
 	public CommutativeFunction simplifyPull() {
 		for (int i = 0; i < functions.length; i++) {
 			if (this.getClass().equals(functions[i].getClass())) {//TODO can this be pattern matched
-				return (me(FunctionTools.pullUp(functions, ((CommutativeFunction) functions[i]).getFunctions(), i))).simplifyPull();
+				return (me(ArrayTools.pullUp(functions, ((CommutativeFunction) functions[i]).getFunctions(), i))).simplifyPull();
 			}
 		}
 		if (Settings.trustImmutability)
@@ -142,7 +142,7 @@ public abstract class CommutativeFunction extends GeneralFunction {
 		if (Settings.trustImmutability)
 			return functions;
 		else
-			return FunctionTools.deepClone(functions);
+			return ArrayTools.deepClone(functions);
 	}
 
 	/**
@@ -174,7 +174,7 @@ public abstract class CommutativeFunction extends GeneralFunction {
 
 	public boolean equalsFunction(GeneralFunction that) {
 		if (that instanceof CommutativeFunction function && this.getClass().equals(that.getClass()))
-			return FunctionTools.deepEquals(functions, function.getFunctions());
+			return ArrayTools.deepEquals(functions, function.getFunctions());
 		return false;
 	}
 

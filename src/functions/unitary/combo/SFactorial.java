@@ -6,6 +6,7 @@ import functions.binary.Pow;
 import functions.commutative.Product;
 import functions.special.Constant;
 import functions.unitary.UnitaryFunction;
+import tools.DefaultFunctions;
 import tools.MiscTools;
 
 import java.util.Map;
@@ -21,7 +22,7 @@ public class SFactorial extends Factorial {
 	}
 
 	private GeneralFunction classForm() {
-		return new Product(new Pow(new Constant(.5), new Product(new Constant(2), new Constant("pi"), operand)), new Pow(operand, new Product(operand, new Pow(new Constant(-1), new Constant("e")))));
+		return new Product(new Pow(DefaultFunctions.HALF, new Product(DefaultFunctions.TWO, DefaultFunctions.PI, operand)), new Pow(operand, new Product(operand, DefaultFunctions.reciprocal(DefaultFunctions.E))));
 	}
 
 

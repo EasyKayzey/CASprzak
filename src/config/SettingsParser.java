@@ -1,6 +1,7 @@
 package config;
 
 import tools.MiscTools;
+import tools.helperclasses.Pair;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -16,24 +17,28 @@ public class SettingsParser {
 		Properties properties = new Properties();
 		properties.load(new FileReader(".\\src\\config\\cas.properties"));
 		for (Map.Entry<Object, Object> entry : properties.entrySet()) {
-			switch ((String) entry.getKey()) {
-				case "defaultSolverIterations" -> Settings.defaultSolverIterations = Integer.parseInt((String) entry.getValue());
-				case "defaultRangeSections" -> Settings.defaultRangeSections = Integer.parseInt((String) entry.getValue());
-				case "simpsonsSegments" -> Settings.simpsonsSegments = Integer.parseInt((String) entry.getValue());
-				case "singleVariableDefault" -> Settings.singleVariableDefault = MiscTools.getCharacter((String) entry.getValue());
-				case "zeroMargin" -> Settings.zeroMargin = Double.parseDouble((String) entry.getValue());
-				case "integerMargin" -> Settings.integerMargin = Double.parseDouble(((String) entry.getValue()));
-				case "equalsMargin" -> Settings.equalsMargin = Double.parseDouble(((String) entry.getValue()));
-				case "simplifyFunctionsOfConstants" -> Settings.simplifyFunctionsOfConstants = MiscTools.parseBoolean((String) entry.getValue());
-				case "distributeExponents" -> Settings.distributeExponents =  MiscTools.parseBoolean((String) entry.getValue());
-				case "cacheDerivatives" -> Settings.cacheDerivatives =  MiscTools.parseBoolean((String) entry.getValue());
-				case "trustImmutability" -> Settings.trustImmutability =  MiscTools.parseBoolean((String) entry.getValue());
-				case "enforceIntegerOperations" -> Settings.enforceIntegerOperations =  MiscTools.parseBoolean((String) entry.getValue());
-				case "exitSolverOnProximity" -> Settings.exitSolverOnProximity =  MiscTools.parseBoolean((String) entry.getValue());
-				case "defaultSolverType" -> Settings.defaultSolverType = SolverType.valueOf((String) entry.getValue());
-				case "defaultFactorial" -> Settings.defaultFactorial = FactorialType.valueOf((String) entry.getValue());
-				default -> throw new IllegalStateException("Setting " + entry.getKey() + "does not exist.");
-			}
+			parseSingleSetting(new Pair<>((String) entry.getKey(), (String) entry.getValue()));
+		}
+	}
+
+	public static void parseSingleSetting(Pair<String, String> pair) {
+		switch (pair.getFirst()) {
+			case "defaultSolverIterations" -> Settings.defaultSolverIterations = Integer.parseInt(pair.getSecond());
+			case "defaultRangeSections" -> Settings.defaultRangeSections = Integer.parseInt(pair.getSecond());
+			case "simpsonsSegments" -> Settings.simpsonsSegments = Integer.parseInt(pair.getSecond());
+			case "singleVariableDefault" -> Settings.singleVariableDefault = MiscTools.getCharacter(pair.getSecond());
+			case "zeroMargin" -> Settings.zeroMargin = Double.parseDouble(pair.getSecond());
+			case "integerMargin" -> Settings.integerMargin = Double.parseDouble((pair.getSecond()));
+			case "equalsMargin" -> Settings.equalsMargin = Double.parseDouble((pair.getSecond()));
+			case "simplifyFunctionsOfConstants" -> Settings.simplifyFunctionsOfConstants = MiscTools.parseBoolean(pair.getSecond());
+			case "distributeExponents" -> Settings.distributeExponents =  MiscTools.parseBoolean(pair.getSecond());
+			case "cacheDerivatives" -> Settings.cacheDerivatives =  MiscTools.parseBoolean(pair.getSecond());
+			case "trustImmutability" -> Settings.trustImmutability =  MiscTools.parseBoolean(pair.getSecond());
+			case "enforceIntegerOperations" -> Settings.enforceIntegerOperations =  MiscTools.parseBoolean(pair.getSecond());
+			case "exitSolverOnProximity" -> Settings.exitSolverOnProximity =  MiscTools.parseBoolean(pair.getSecond());
+			case "defaultSolverType" -> Settings.defaultSolverType = SolverType.valueOf(pair.getSecond());
+			case "defaultFactorial" -> Settings.defaultFactorial = FactorialType.valueOf(pair.getSecond());
+			default -> throw new IllegalStateException("Setting " + pair.getFirst() + "does not exist.");
 		}
 	}
 }

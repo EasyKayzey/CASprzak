@@ -1,9 +1,11 @@
 package functions.binary;
 
+import config.Settings;
 import functions.GeneralFunction;
 import functions.commutative.Sum;
 import functions.commutative.Product;
 import functions.special.Constant;
+import functions.unitary.specialcases.Exp;
 import functions.unitary.specialcases.Ln;
 import tools.DefaultFunctions;
 
@@ -54,5 +56,25 @@ public class Logb extends BinaryFunction {
 	@Override
 	public String toString() {
 		return "(log_{" + function2.toString() + "}(" + function1.toString() + "))";
+	}
+
+	public GeneralFunction simplifyPowers() {
+		if (function1 instanceof Pow power)
+			return new Product(power.function1, new Logb(power.function2, function2).simplifyIdentity());
+		else if (function1 instanceof Exp exp)
+			return new Product(exp.operand, new Logb(function2, DefaultFunctions.E));
+		else if (Settings.trustImmutability)
+			return this;
+		else
+			return clone();
+	}
+
+	public GeneralFunction simplifyIdentity() {
+		if (function2.equals(function1))
+			return DefaultFunctions.ONE;
+		else if (Settings.trustImmutability)
+			return this;
+		else
+			return clone();
 	}
 }

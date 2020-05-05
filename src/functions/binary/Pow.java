@@ -147,7 +147,7 @@ public class Pow extends BinaryFunction {
 		return "(" + function2 + "^" + function1 + ")";
 	}
 
-	public GeneralFunction simplifyLogsOfSameBase() {
+	public GeneralFunction simplifyLogsOfSameBase() { //TODO add this method to simplify
 		if (function1 instanceof Logb logb && logb.getFunction2().equals(function2))
 			return logb.getFunction1();
 		else if (function1 instanceof Ln ln && function2 instanceof Constant constant && constant.constant == Math.E)

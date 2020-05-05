@@ -12,6 +12,7 @@ import tools.singlevariable.NumericalIntegration;
 import tools.singlevariable.Solver;
 import tools.singlevariable.TaylorSeries;
 
+import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -320,16 +321,19 @@ public class KeywordInterface {
 	 * settings
 	 */
 	private static String printSettings() {
-		return "simpsonsSegments = " + Settings.simpsonsSegments + "\n"
-		+ "defaultSolverIterations = " + Settings.defaultSolverIterations + "\n"
-		+ "defaultRangeSections = " + Settings.defaultRangeSections + "\n"
-		+ "zeroMargin = " + Settings.zeroMargin + "\n"
-		+ "simplifyFunctionsOfConstants = " + Settings.simplifyFunctionsOfConstants + "\n"
-		+ "distributeExponents = " + Settings.distributeExponents + "\n"
-		+ "cacheDerivatives = " + Settings.cacheDerivatives + "\n"
-		+ "trustImmutability = " + Settings.trustImmutability + "\n"
-		+ "singleVariableDefault = " + Settings.singleVariableDefault + "\n"
-		+ "defaultSolverType = " + Settings.defaultSolverType;
+		Field[] settings = Settings.class.getDeclaredFields();
+		StringBuilder stringBuilder = new StringBuilder();
+		for (Field setting : settings) {
+			stringBuilder.append(setting.getName());
+			stringBuilder.append(" = ");
+			try {
+				stringBuilder.append(setting.get(null));
+			} catch (IllegalAccessException e) {
+				stringBuilder.append(e.getMessage());
+			}
+			stringBuilder.append("\n");
+		}
+		return stringBuilder.toString();
 	}
 
 	/**

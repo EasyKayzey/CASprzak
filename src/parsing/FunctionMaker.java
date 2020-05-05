@@ -5,8 +5,6 @@ import functions.binary.Logb;
 import functions.binary.Pow;
 import functions.commutative.Product;
 import functions.commutative.Sum;
-import functions.special.Constant;
-import functions.special.Variable;
 import functions.unitary.combo.Factorial;
 import functions.unitary.piecewise.Abs;
 import functions.unitary.piecewise.Dirac;
@@ -20,33 +18,6 @@ import tools.DefaultFunctions;
 public class FunctionMaker {
 
 	private FunctionMaker(){}
-
-	/**
-	 * Returns a new  {@link Constant}
-	 * @param constant value of constant
-	 * @return new {@link Constant}
-	 */
-	public static GeneralFunction constant(double constant) {
-		return new Constant(constant);
-	}
-
-	/**
-	 * Returns a new special {@link Constant} like "e" or "pi"
-	 * @param constantString string of constant
-	 * @return new {@link Constant}
-	 */
-	public static GeneralFunction specialConstant(String constantString) {
-		return new Constant(constantString);
-	}
-
-	/**
-	 * Returns a new {@link Variable} with a varID
-	 * @param varID    ID of variable
-	 * @return new {@link Variable}
-	 */
-	public static GeneralFunction variable(char varID) {
-		return new Variable(varID);
-	}
 
 	/**
 	 * Returns a {@link GeneralFunction} corresponding to a "unitary" operation string

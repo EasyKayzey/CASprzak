@@ -2,6 +2,7 @@ package parsing;
 
 import functions.GeneralFunction;
 import functions.special.Constant;
+import functions.special.Variable;
 import tools.MiscTools;
 
 import java.lang.reflect.MalformedParametersException;
@@ -112,12 +113,14 @@ public class Parser {
 				try {
 					functionStack.push(new Constant(Double.parseDouble(token)));
 				} catch (NumberFormatException e) {
-					functionStack.push(FunctionMaker.variable(MiscTools.getCharacter(token)));
+					functionStack.push(new Variable(MiscTools.getCharacter(token)));
 				}
 			}
 		}
+
 		if (functionStack.size() != 1)
-			throw new IndexOutOfBoundsException("functionStack size is " + functionStack.size() + ", current stack is " +functionStack);
+			throw new IndexOutOfBoundsException("functionStack size is " + functionStack.size() + ", current stack is " + functionStack);
+
 		return functionStack.pop();
 	}
 

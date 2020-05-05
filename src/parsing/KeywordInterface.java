@@ -1,6 +1,7 @@
 package parsing;
 
 import config.Settings;
+import config.SettingsParser;
 import functions.GeneralFunction;
 import functions.special.Constant;
 import functions.special.Variable;
@@ -311,22 +312,7 @@ public class KeywordInterface {
 	 */
 	private static String setSettings(String input) {
 		String[] splitInput = keywordSplitter.split(input);
-		switch (splitInput[0]) {
-			case "defaultSolverIterations" -> Settings.defaultSolverIterations = Integer.parseInt(splitInput[1]);
-			case "defaultRangeSections" -> Settings.defaultRangeSections = Integer.parseInt(splitInput[1]);
-			case "simpsonsSegments" -> Settings.simpsonsSegments = Integer.parseInt(splitInput[1]);
-			case "zeroMargin" -> Settings.zeroMargin = Double.parseDouble(splitInput[1]);
-			case "integerMargin" -> Settings.integerMargin = Double.parseDouble(splitInput[1]);
-			case "simplifyFunctionsOfConstants" -> Settings.simplifyFunctionsOfConstants = MiscTools.parseBoolean(splitInput[1]);
-			case "distributeExponents" -> Settings.distributeExponents = MiscTools.parseBoolean(splitInput[1]);
-			case "cacheDerivatives" -> Settings.cacheDerivatives = MiscTools.parseBoolean(splitInput[1]);
-			case "trustImmutability" -> Settings.trustImmutability = MiscTools.parseBoolean(splitInput[1]);
-			case "enforceIntegerOperations" -> Settings.enforceIntegerOperations = MiscTools.parseBoolean(splitInput[1]);
-			case "exitSolverOnProximity" -> Settings.exitSolverOnProximity = MiscTools.parseBoolean(splitInput[1]);
-			case "singleVariableDefault" -> Settings.singleVariableDefault = MiscTools.getCharacter(splitInput[1]);
-			default -> throw new IllegalArgumentException("Setting " + splitInput[0] + " does not exist");
-			//TODO implement Enum setting parsing
-		}
+		SettingsParser.parseSingleSetting(splitInput[0], splitInput[1]);
 		return splitInput[0] + " = " + splitInput[1];
 	}
 

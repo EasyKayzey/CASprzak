@@ -16,26 +16,26 @@ public class TaylorSeries {
     private TaylorSeries(){}
 
     /**
-     * Returns a Maclaurin series of the specified function with the specified amount of terms
+     * Returns a Maclaurin series of the specified function of a given degree
      * @param function The function whose Maclaurin series is being found
-     * @param size The amount of terms in the polynomial (this includes zero terms like {@code 0*x^2}
+     * @param degree The amount of terms in the polynomial (this includes zero terms like {@code 0*x^2}
      * @return Maclaurin series of the specified function
      */
-    public static GeneralFunction makeTaylorSeries(GeneralFunction function, int size) { // TODO rename size to degree in all methods/docs
-        return makeTaylorSeries(function, size, 0);
+    public static GeneralFunction makeTaylorSeries(GeneralFunction function, int degree) {
+        return makeTaylorSeries(function, degree, 0);
     }
 
     /**
-     * Returns a Taylor series of the specified function at the specified center with the specified amount of terms
+     * Returns a Taylor series of the specified function at the specified center of a given degree
      * @param function The function whose Taylor series is being found
-     * @param size The amount of terms in the polynomial (this includes zero terms like {@code 0*x^2}
+     * @param degree The amount of terms in the polynomial (this includes zero terms like {@code 0*x^2}
      * @param center Where the Taylor series is centered
      * @return Taylor series of the specified function
      */
-    public static GeneralFunction makeTaylorSeries(GeneralFunction function, int size, double center) { // TODO rename size to degree in all methods/docs
-        GeneralFunction[] taylorSeriesTerms = new GeneralFunction[size];
+    public static GeneralFunction makeTaylorSeries(GeneralFunction function, int degree, double center) {
+        GeneralFunction[] taylorSeriesTerms = new GeneralFunction[degree];
         char var = SearchTools.getSingleVariable(function);
-        for (int i = 0; i < size; i++){
+        for (int i = 0; i < degree; i++){
             taylorSeriesTerms[i] = new Product(new Constant(function.getNthDerivative('x', i).evaluate(Map.of(var, center)) / MiscTools.factorial(i)), new Pow(new Constant(i), new Sum(new Variable('x'), new Constant(-center))));
         }
         return new Sum(taylorSeriesTerms);

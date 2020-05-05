@@ -5,7 +5,7 @@ Hello, and welcome to our CAS. This is a joint project by The EasyKayzey Show st
 
 ## Functionality
 ### Core
-- Storage of functions in an artifical data type
+- Storage of functions in an artificial data type
 - Expression simplification
 - Differentiation of functions 
   - Storing derivatives as new functions

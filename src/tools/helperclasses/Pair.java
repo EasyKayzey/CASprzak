@@ -1,5 +1,7 @@
 package tools.helperclasses;
 
+import java.util.Map;
+
 public class Pair<T, U> extends AbstractPair<T, U> {
 	public final T first;
 	public final U second;
@@ -12,6 +14,11 @@ public class Pair<T, U> extends AbstractPair<T, U> {
 	public Pair(AbstractPair<T, U> pair) {
 		this.first = pair.getFirst();
 		this.second = pair.getSecond();
+	}
+
+	public Pair(Map.Entry<T, U> entry) {
+		this.first = entry.getKey();
+		this.second = entry.getValue();
 	}
 
 	@Override

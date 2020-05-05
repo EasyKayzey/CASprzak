@@ -84,7 +84,7 @@ public class Parser {
 	 */
 	public static double getConstant(String infix) {
 		return parse(infix).evaluate(null);
-	}
+	} // TODO consolidate all of these to one class (from MiscTools as well)
 
 	/**
 	 * A list of unitary operations

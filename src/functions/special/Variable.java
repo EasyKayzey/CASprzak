@@ -18,7 +18,7 @@ public class Variable extends SpecialFunction {
 			add('y');
 			add('z');
 		}
-	};
+	}; //TODO implement sortVariables here and in KeywordInterface, and possibly remove FunctionVariables
 
 	private static int variablesEnd = 3;
 

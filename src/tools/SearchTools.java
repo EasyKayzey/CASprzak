@@ -15,15 +15,6 @@ import java.util.function.Predicate;
 public class SearchTools {
 
 	/**
-	 * Returns a {@link Predicate<GeneralFunction>} describing whether a given GeneralFunction is an instance of {@link Variable} with varID equal to the specified character
-	 * @param varID the character of the variable to be checked for
-	 * @return the predicate described above
-	 */
-	public static Predicate<GeneralFunction> isVariable(char varID) {
-		return input -> (input instanceof Variable v) && (v.varID == varID);
-	}
-
-	/**
 	 * Returns true if any {@link GeneralFunction} in the function tree satisfies the predicate test
 	 * @param input the GeneralFunction to be searched in
 	 * @param test the predicate to be tested
@@ -139,6 +130,15 @@ public class SearchTools {
 	}
 
 	/**
+	 * Returns a {@link Predicate<GeneralFunction>} describing whether a given GeneralFunction is an instance of {@link Variable} with varID equal to the specified character
+	 * @param varID the character of the variable to be checked for
+	 * @return the predicate described above
+	 */
+	public static Predicate<GeneralFunction> isVariable(char varID) {
+		return input -> (input instanceof Variable v) && (v.varID == varID);
+	}
+
+	/**
 	 * Returns a set of characters representing all variables used in this function
 	 * @param input the function to be tested
 	 * @return the set of variables
@@ -149,11 +149,26 @@ public class SearchTools {
 		return vars;
 	}
 
+	/**
+	 * If the input is in terms of only one variable, returns that variable's character; otherwise, returns {@link Settings#singleVariableDefault}
+	 * @param input the function to be read from
+	 * @return the variable requested
+	 */
 	public static char getSingleVariable(GeneralFunction input) {
 		Set<Character> vars = SearchTools.getAllVariables(input);
 		if (vars.size() == 1)
 			return vars.iterator().next();
 		else
 			return Settings.singleVariableDefault;
+	}
+
+	/**
+	 * Returns true if the {@link Variable} specified is found in the {@link GeneralFunction}
+	 * @param function The GeneralFunction that is being searched
+	 * @param varID The variable ID of the variable that is being looked for
+	 * @return true if the {@link Variable} specified is found in the {@link GeneralFunction}
+	 */
+	public static boolean doesNotContainsVariable(GeneralFunction function, char varID) {
+		return !existsAny(function, isVariable(varID));
 	}
 }

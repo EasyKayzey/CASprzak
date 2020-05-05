@@ -8,6 +8,10 @@ import java.util.Map;
 import java.util.Properties;
 
 public class SettingsParser {
+	/**
+	 * Parses the configuration file cas.properties and stores the read values in {@link Settings}
+	 * @throws IOException if the file cannot be found
+	 */
 	public static void parseConfig() throws IOException {
 		Properties properties = new Properties();
 		properties.load(new FileReader(".\\src\\config\\cas.properties"));

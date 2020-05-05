@@ -7,12 +7,19 @@ import java.io.IOException;
 @SuppressWarnings("CanBeFinal")
 public class Settings {
 
+	/**
+	 * When this setting is enabled, Settings uses {@link SettingsParser} to read cas.properties and those values are stored in this class.
+	 */
+	public static boolean readProperties = true;
+
 	static {
-		try {
-			SettingsParser.parseConfig();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		//noinspection ConstantConditions
+		if (readProperties)
+			try {
+				SettingsParser.parseConfig();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 	}
 
 	private Settings(){}

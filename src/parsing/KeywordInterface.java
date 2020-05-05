@@ -23,6 +23,7 @@ import java.util.stream.Collectors;
 public class KeywordInterface {
 	public static final Pattern keywordSplitter = Pattern.compile("\"\\s+\"|\"\\s+|\\s+\"|\"$|\\s+(?=[^\"]*(\"[^\"]*\"[^\"]*)*$)");
 	public static final Pattern spacesAndDdx = Pattern.compile("\\s+|(?<=^d/d)(?=[a-zA-Z])");
+	public static final Pattern spaces = Pattern.compile("\\s+");
 	public static final Pattern equals = Pattern.compile("=");
 	public static final HashMap<String, GeneralFunction> storedFunctions = new HashMap<>();
 	public static Object prev;
@@ -32,7 +33,7 @@ public class KeywordInterface {
 	 * @param input contains the command and arguments
 	 * @return the Object requested
 	 */
-	public static Object useKeywords(String input) { // TODO Erez and Michael need to go over this
+	public static Object useKeywords(String input) { // TODO Michael needs to go over this
 		if ("_".equals(input))
 			return prev;
 		String[] splitInput = spacesAndDdx.split(input, 2);
@@ -90,11 +91,13 @@ public class KeywordInterface {
 	public static GeneralFunction parseStored(String input) {
 		if ("_".equals(input))
 			return Parser.toFunction(prev);
-		if (input.chars().filter(ch -> ch == '\"').count() % 2 == 1) // this is a really janky fix
+
+		if (input.chars().filter(ch -> ch == '\"').count() % 2 == 1) // this is a really janky fix TODO fix this by adding quotes-stripper and removing quotes from keywordsplitter
 			if (input.charAt(input.length() - 1) == '\"')
 				input = input.substring(0, input.length() - 1);
 			else
 				throw new IllegalArgumentException("Unmatched quotes in " + input);
+
 		if (storedFunctions.containsKey(input))
 			return storedFunctions.get(input);
 		else if (Constant.isSpecialConstant(input))
@@ -118,7 +121,7 @@ public class KeywordInterface {
 	 * pd [variable] [function]
 	 */
 	public static GeneralFunction partialDiff(String input) {
-		String[] splitInput = keywordSplitter.split(input, 2);
+		String[] splitInput = spaces.split(input, 2);
 		return parseStored(splitInput[1]).getSimplifiedDerivative(MiscTools.getCharacter(splitInput[0]));
 	}
 
@@ -134,7 +137,7 @@ public class KeywordInterface {
 	 * eval [function] [values]
 	 */
 	public static double evaluate(String input) {
-		String[] splitInput = keywordSplitter.split(input, 2);
+		String[] splitInput = spaces.split(input, 2);
 		double[] values = Arrays.stream(keywordSplitter.split(splitInput[1])).mapToDouble(Parser::getConstant).toArray();
 		Map<Character, Double> map = new HashMap<>();
 		for (int i = 0; i < values.length; i++)
@@ -146,8 +149,7 @@ public class KeywordInterface {
 	 * simp [function]
 	 */
 	public static GeneralFunction simplify(String input) {
-		String[] splitInput = keywordSplitter.split(input);
-		return parseStored(splitInput[0]).simplify();
+		return parseStored(input).simplify();
 	}
 
 	/**
@@ -177,7 +179,7 @@ public class KeywordInterface {
 			case "anymin", "anyminima"				-> Extrema.findAnyMinima(parseStored(splitInput[1]), Parser.getConstant(splitInput[2]), Parser.getConstant(splitInput[3]));
 			case "anymax", "anymaxima"				-> Extrema.findAnyMaxima(parseStored(splitInput[1]), Parser.getConstant(splitInput[2]), Parser.getConstant(splitInput[3]));
 			case "inflect", "inflection"			-> Extrema.findAnyInflectionPoints(parseStored(splitInput[1]), Parser.getConstant(splitInput[2]), Parser.getConstant(splitInput[3]));
-			default 								-> throw new IllegalStateException("Invalid setting for extrema:" + splitInput[0]);
+			default 								-> throw new IllegalStateException("Invalid setting for extrema: " + splitInput[0]);
 		};
 	}
 
@@ -193,8 +195,8 @@ public class KeywordInterface {
 	 * sto [locationstring] [input]
 	 */
 	public static Object storeFunction(String input) {
-		String[] splitInput = keywordSplitter.split(input, 2);
-		if (!storedFunctions.containsKey(splitInput[0]))
+		String[] splitInput = spaces.split(input, 2);
+		if (!storedFunctions.containsKey(splitInput[0])) // TODO Make Variable.isFunctionVariable or something
 			Variable.addFunctionVariable(MiscTools.getCharacter(splitInput[0]));
 		try {
 			storedFunctions.put(splitInput[0], (GeneralFunction) KeywordInterface.useKeywords(splitInput[1]));
@@ -236,7 +238,7 @@ public class KeywordInterface {
 	 * defcon [constantstring] [value]
 	 */
 	private static Object defineConstant(String input) {
-		String[] splitInput = keywordSplitter.split(input, 2);
+		String[] splitInput = spaces.split(input, 2);
 		try {
 			return Constant.addSpecialConstant(splitInput[0], ((GeneralFunction) KeywordInterface.useKeywords(splitInput[1])).evaluate(null));
 		} catch (Exception e) {
@@ -249,15 +251,14 @@ public class KeywordInterface {
 	 */
 	private static double removeConstant(String input) {
 		return Constant.removeSpecialConstant(input);
-
 	}
 
 	/**
 	 * printconstants
 	 */
 	@SuppressWarnings("SameReturnValue")
-	private static Object printConstants() {
-		return Constant.specialConstants;
+	private static String printConstants() { //TODO maybe replace all print___ functions with get___ and have them have flexible return types
+		return String.valueOf(Constant.specialConstants);
 	}
 
 	/**
@@ -340,8 +341,12 @@ public class KeywordInterface {
 	 * svt [function] ([char]=[value])*
 	 */
 	private static Object setVariablesTo(String input) {
-		String[] splitInput = keywordSplitter.split(input, 2);
-		return parseStored(splitInput[0]).setVariables(Arrays.stream(keywordSplitter.split(splitInput[1])).map(equals::split).collect(Collectors.toMap(e -> MiscTools.getCharacter(e[0]), e -> Parser.getConstant(e[1]))));
+		String[] splitInput = spaces.split(input, 2);
+		return parseStored(splitInput[0]).setVariables(
+				Arrays.stream(keywordSplitter.split(splitInput[1]))
+				.map(equals::split)
+				.collect(Collectors.toMap(e -> MiscTools.getCharacter(e[0]), e -> Parser.getConstant(e[1])))
+		);
 	}
 
 	/**
@@ -349,6 +354,6 @@ public class KeywordInterface {
 	 */
 	private static GeneralFunction integral(String input) {
 		String[] splitInput = keywordSplitter.split(input);
-		return (new Integral(parseStored(splitInput[0]), splitInput[1].charAt(1)).execute().simplify());
+		return new Integral(parseStored(splitInput[0]), splitInput[1].charAt(1)).execute().simplify(); //TODO maybe remove simplify
 	}
 }

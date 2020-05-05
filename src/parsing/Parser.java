@@ -109,14 +109,10 @@ public class Parser {
 				GeneralFunction c = functionStack.pop();
 				functionStack.push(FunctionMaker.makeUnitary(token, c));
 			} else {
-				if (Constant.isSpecialConstant(token))
-					return FunctionMaker.specialConstant(token);
-				else {
-					try {
-						functionStack.push(FunctionMaker.constant(Double.parseDouble(token)));
-					} catch (NumberFormatException e) {
-						functionStack.push(FunctionMaker.variable(MiscTools.getCharacter(token)));
-					}
+				try {
+					functionStack.push(new Constant(Double.parseDouble(token)));
+				} catch (NumberFormatException e) {
+					functionStack.push(FunctionMaker.variable(MiscTools.getCharacter(token)));
 				}
 			}
 		}

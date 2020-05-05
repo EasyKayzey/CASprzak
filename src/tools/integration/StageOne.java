@@ -8,6 +8,7 @@ import functions.commutative.Product;
 import functions.commutative.Sum;
 import functions.special.Constant;
 import functions.special.Variable;
+import functions.unitary.specialcases.Exp;
 import functions.unitary.specialcases.Ln;
 import functions.unitary.transforms.Integral;
 import functions.unitary.transforms.PartialDerivative;
@@ -27,7 +28,7 @@ public class StageOne {
      * @param variableChar The {@link Variable#varID} the function is integrated with respect to.
      * @return The integral of the function if one is found.
      */
-    public static GeneralFunction derivativeDivides(GeneralFunction integrand, char variableChar) { //TODO implement exp
+    public static GeneralFunction derivativeDivides(GeneralFunction integrand, char variableChar) {
         if (integrand instanceof Sum terms) {
             GeneralFunction[] integratedTerms = new GeneralFunction[terms.getFunctionsLength()];
             for(int i = 0; i < terms.getFunctionsLength(); i++) {
@@ -64,6 +65,10 @@ public class StageOne {
                     Pair<Boolean, GeneralFunction> results = derivativeDividesSearcher(product, term, ln.operand, variableChar);
                     if (results.getFirst())
                         return naturalLog(new Product(number, DefaultFunctions.reciprocal(results.getSecond())), ln.operand);
+                } else if (term instanceof Exp exp) {
+                    Pair<Boolean, GeneralFunction> results = derivativeDividesSearcher(product, term, exp.operand, variableChar);
+                    if (results.getFirst())
+                        return naturalExponential(new Product(number, DefaultFunctions.reciprocal(results.getSecond())), exp.operand);
                 } else if (term instanceof Logb logb && IntegralTools.doesNotContainsVariable(logb.getFunction2(), variableChar)) {
                     Pair<Boolean, GeneralFunction> results = derivativeDividesSearcher(product, term, logb.getFunction1(), variableChar);
                     if (results.getFirst())
@@ -84,6 +89,8 @@ public class StageOne {
                 return power(new Product(number, DefaultFunctions.reciprocal(power.getFunction2().getSimplifiedDerivative(variableChar))), power.getFunction1(), power.getFunction2());
             } else if (function instanceof Ln log && IntegralTools.doesNotContainsVariable(log.operand.getSimplifiedDerivative(variableChar), variableChar)) {
                 return naturalLog(new Product(number, DefaultFunctions.reciprocal(log.operand.getSimplifiedDerivative(variableChar))), log.operand);
+            } else if (function instanceof Exp exp && IntegralTools.doesNotContainsVariable(exp.operand.getSimplifiedDerivative(variableChar), variableChar)) {
+                return naturalExponential(new Product(number, DefaultFunctions.reciprocal(exp.operand.getSimplifiedDerivative(variableChar))), exp.operand);
             } else if (function instanceof Logb logb && IntegralTools.doesNotContainsVariable(logb.getFunction2(), variableChar) && IntegralTools.doesNotContainsVariable(logb.getFunction1().getSimplifiedDerivative(variableChar), variableChar)) {
                 return naturalLog(new Product(number, DefaultFunctions.reciprocal(new Product(logb.getFunction1().getSimplifiedDerivative(variableChar), new Ln(logb.getFunction2())))), logb.getFunction1());
             } else if (IntegralTools.doesNotContainsVariable(function, variableChar)) {
@@ -111,6 +118,10 @@ public class StageOne {
 
     private static GeneralFunction naturalLog(GeneralFunction number, GeneralFunction operand) {
         return new Product(number, new Sum(new Product(operand, new Ln(operand)), DefaultFunctions.negative(operand)));
+    }
+
+    private static GeneralFunction naturalExponential(GeneralFunction number, GeneralFunction operand) {
+        return new Product(number, new Exp(operand));
     }
 
     private static Pair<Boolean, GeneralFunction> derivativeDividesSearcher(CommutativeFunction product, GeneralFunction term, GeneralFunction toTakeDerivative, char variableChar) {

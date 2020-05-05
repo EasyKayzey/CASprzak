@@ -1,8 +1,10 @@
 package functions.unitary.specialcases;
 
+import config.Settings;
 import functions.GeneralFunction;
 import functions.binary.BinaryFunction;
 import functions.binary.Logb;
+import functions.binary.Pow;
 import functions.commutative.Product;
 import functions.unitary.UnitaryFunction;
 import tools.DefaultFunctions;
@@ -39,5 +41,16 @@ public class Ln extends SpecialCaseBinaryFunction {
 
 	public Class<?> getInverse() {
 		return Exp.class;
+	}
+
+	public GeneralFunction simplifyPowersInTheOperand() {
+		if (operand instanceof Pow pow)
+			return new Product(pow.getFunction1(), new Ln(pow.getFunction2()));
+		else if (operand instanceof Exp exp)
+			return exp.operand;
+		else if (Settings.trustImmutability)
+			return this;
+		else
+			return clone();
 	}
 }

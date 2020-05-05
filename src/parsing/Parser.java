@@ -111,10 +111,12 @@ public class Parser {
 			} else {
 				if (Constant.isSpecialConstant(token))
 					return FunctionMaker.specialConstant(token);
-				try {
-					functionStack.push(FunctionMaker.constant(Double.parseDouble(token)));
-				} catch (Exception e) {
-					functionStack.push(FunctionMaker.variable(MiscTools.getCharacter(token)));
+				else {
+					try {
+						functionStack.push(FunctionMaker.constant(Double.parseDouble(token)));
+					} catch (Exception e) {
+						functionStack.push(FunctionMaker.variable(MiscTools.getCharacter(token)));
+					}
 				}
 			}
 		}

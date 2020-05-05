@@ -42,4 +42,4 @@ Erez Israeli Miller: erez.m.israeli@gmail.com
 Michael Kasprzak: michaelkasprzak522@gmail.com
 
 ### Site
-https://easykayzey.github.io/Z_CASprzak/
+https://easykayzey.github.io/CASprzak/

@@ -50,7 +50,7 @@ public class InfixTokenizer {
 	 */
 	public static List<String> tokenizeInfix(String infix) {
 		// Remove LaTeX escapes
-		infix = infix.replace("\\", "");
+		infix = infix.replace("\\", ""); // TODO use latex escapes with adjacent multiplication
 		// Make absolute values into unitary functions
 		infix = absoluteValueStart.matcher(absoluteValueEnd.matcher(infix).replaceAll(")")).replaceAll("*abs(").replace("|", " abs(");
 		// Insert multiplication in expressions like 2x and 7(x*y+1)sin(3y)
@@ -73,11 +73,10 @@ public class InfixTokenizer {
 	 * @return infix string with inserted asterisks
 	 */
 	private static String parseVariablePairs(String infix) {
-		for (char a : Variable.variables) {
-			for (char b : Variable.variables) {
+		for (char a : Variable.variables)
+			for (char b : Variable.variables)
 				infix = infix.replaceAll("(?<=" + a + ")\\s*(?=" + b + ")", "*");
-			}
-		}
+
 		return infix;
 	}
 }

@@ -114,7 +114,7 @@ public class Parser {
 				else {
 					try {
 						functionStack.push(FunctionMaker.constant(Double.parseDouble(token)));
-					} catch (Exception e) {
+					} catch (NumberFormatException e) {
 						functionStack.push(FunctionMaker.variable(MiscTools.getCharacter(token)));
 					}
 				}

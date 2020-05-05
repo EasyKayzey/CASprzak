@@ -146,4 +146,15 @@ public class Pow extends BinaryFunction {
 	public String toString() {
 		return "(" + function2 + "^" + function1 + ")";
 	}
+
+	public GeneralFunction simplifyLogsOfSameBase() {
+		if (function1 instanceof Logb logb && logb.getFunction2().equals(function2))
+			return logb.getFunction1();
+		else if (function1 instanceof Ln ln && function2 instanceof Constant constant && constant.constant == Math.E)
+			return ln.operand;
+		else if (Settings.trustImmutability)
+			return this;
+		else
+			return clone();
+	}
 }

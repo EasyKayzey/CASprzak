@@ -24,8 +24,6 @@ public class PreProcessor {
 		for (String token : tokens) {
 			if (Constant.isSpecialConstant(token)) {
 				postfix.add(token);
-			} else if (Parser.unitaryOperations.contains(token) || Parser.binaryOperations.contains(token)) {
-				operators.push(token);
 			} else if ("(".equals(token)) {
 				operators.push(token);
 			} else if (")".equals(token)) {
@@ -33,6 +31,8 @@ public class PreProcessor {
 					postfix.add(operators.pop());
 				}
 				operators.pop();
+			} else if (Parser.unitaryOperations.contains(token) || Parser.binaryOperations.contains(token)) {
+				operators.push(token);
 			} else {
 				postfix.add(token);
 			}

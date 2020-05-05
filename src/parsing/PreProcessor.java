@@ -23,9 +23,9 @@ public class PreProcessor {
 	 * @return true if in {@link #operations}
 	 */
 	public static boolean isAnOperator(String input) {
-		for (String x : operations) {
+		for (String x : operations)
 			if (x.equals(input)) return true;
-		}
+		
 		return false;
 	}
 
@@ -40,9 +40,6 @@ public class PreProcessor {
 		Deque<String> operators = new LinkedList<>();
 
 		for (String token : tokens) {
-//			System.out.println(operators);
-//			System.out.println(postfix);
-//			System.out.println();
 			if (Constant.isSpecialConstant(token)) {
 				postfix.add(token);
 			} else if (isAnOperator(token)) {
@@ -59,9 +56,9 @@ public class PreProcessor {
 			}
 		}
 
-		while (operators.size() != 0) {
+		while (operators.size() != 0)
 			postfix.add(operators.pop());
-		}
+
 		return postfix.toArray(new String[0]);
 	}
 

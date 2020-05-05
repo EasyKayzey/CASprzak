@@ -5,49 +5,76 @@ import functions.special.Constant;
 import tools.MiscTools;
 
 import java.lang.reflect.MalformedParametersException;
+import java.util.ArrayList;
 import java.util.Deque;
 import java.util.LinkedList;
+import java.util.List;
 
 public class Parser {
 	/**
 	 * A list of unitary operations
 	 */
-	public static final String[] unitaryOperations = {"-", "/", "!", "sin", "cos", "tan", "log", "ln", "sqrt", "exp", "abs", "sign", "dirac", "sin", "cos", "tan", "csc", "sec", "cot", "asin", "acos", "atan", "acsc", "asec", "acot", "sinh", "cosh", "tanh", "csch", "sech", "coth", "asinh", "acosh", "atanh", "acsch", "asech", "acoth"};
+	public static final List<String> unitaryOperations = new ArrayList<>(){
+			{
+				add("-");
+				add("/");
+				add("!");
+				add("sin");
+				add("cos");
+				add("tan");
+				add("log");
+				add("ln");
+				add("sqrt");
+				add("exp");
+				add("abs");
+				add("sign");
+				add("dirac");
+				add("sin");
+				add("cos");
+				add("tan");
+				add("csc");
+				add("sec");
+				add("cot");
+				add("asin");
+				add("acos");
+				add("atan");
+				add("acsc");
+				add("asec");
+				add("acot");
+				add("sinh");
+				add("cosh");
+				add("tanh");
+				add("csch");
+				add("sech");
+				add("coth");
+				add("asinh");
+				add("acosh");
+				add("atanh");
+				add("acsch");
+				add("asech");
+				add("acoth");
+			}
+	};
 
 	/**
 	 * A list of binary operations
 	 */
-	public static final String[] binaryOperations = {"^", "*", "+", "logb", "C", "P"};
+	public static final List<String> binaryOperations = new ArrayList<>() {
+		{
+			add("^");
+			add("*");
+			add("+");
+			add("logb");
+			add("C");
+			add("P");
+		}
+	};
 
 	private Parser(){}
 
-	/**
-	 * Checks if a string is in {@link #unitaryOperations}
-	 * @param input operation
-	 * @return true if unitary
-	 */
-	public static boolean isUnitaryOperator(String input) {
-		for (String x : unitaryOperations) {
-			if (x.equals(input)) return true;
-		}
-		return false;
-	}
 
 	/**
-	 * Checks if a string is in {@link #binaryOperations}
-	 * @param input operation
-	 * @return true if binary
-	 */
-	public static boolean isBinaryOperator(String input) {
-		for (String x : binaryOperations) {
-			if (x.equals(input)) return true;
-		}
-		return false;
-	}
-
-
-	/**
-	 * Parses infix using {@link parsing.PreProcessor} and {@link #parse(String[])}
+	 * Parses infix using {@link parsing.PreProcessor} and {@link #parse(List)}
 	 * @param infix infix string
 	 * @return a {@link GeneralFunction} corresponding to the infix string
 	 */
@@ -56,7 +83,7 @@ public class Parser {
 	}
 
 	/**
-	 * Parses infix using {@link parsing.PreProcessor} and {@link #parse(String[])}, then simplifies the output
+	 * Parses infix using {@link parsing.PreProcessor} and {@link #parse(List)}, then simplifies the output
 	 * @param infix infix string
 	 * @return a {@link GeneralFunction} corresponding to the infix string, simplified
 	 */
@@ -69,12 +96,19 @@ public class Parser {
 	 * @param postfix array of tokens in postfix
 	 * @return a {@link GeneralFunction} corresponding to the postfix string
 	 */
-	public static GeneralFunction parse(String[] postfix) {
+	public static GeneralFunction parse(List<String> postfix) {
 		Deque<GeneralFunction> functionStack = new LinkedList<>();
 		for (String token : postfix) {
 			if (Constant.isSpecialConstant(token)) {
 				functionStack.push(new Constant(token));
-			} else if (!isUnitaryOperator(token) && !isBinaryOperator(token)) {
+			} else if (binaryOperations.contains(token)) {
+				GeneralFunction a = functionStack.pop();
+				GeneralFunction b = functionStack.pop();
+				functionStack.push(FunctionMaker.makeBinary(token, a, b));
+			} else if (unitaryOperations.contains(token)) {
+				GeneralFunction c = functionStack.pop();
+				functionStack.push(FunctionMaker.makeUnitary(token, c));
+			} else {
 				if (Constant.isSpecialConstant(token)) return FunctionMaker.specialConstant(token);
 				try {
 					functionStack.push(FunctionMaker.constant(Double.parseDouble(token)));
@@ -82,13 +116,6 @@ public class Parser {
 					char variableName = MiscTools.getCharacter(token);
 					functionStack.push(FunctionMaker.variable(variableName));
 				}
-			} else if (isBinaryOperator(token)) {
-				GeneralFunction a = functionStack.pop();
-				GeneralFunction b = functionStack.pop();
-				functionStack.push(FunctionMaker.makeBinary(token, a, b));
-			} else if (isUnitaryOperator(token)) {
-				GeneralFunction c = functionStack.pop();
-				functionStack.push(FunctionMaker.makeUnitary(token, c));
 			}
 		}
 		if (functionStack.size() != 1)

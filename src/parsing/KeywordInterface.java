@@ -36,32 +36,32 @@ public class KeywordInterface {
 			return prev;
 		String[] splitInput = spacesAndDdx.split(input, 2);
 		Object ret = switch (splitInput[0]) {
-			case "pd", "pdiff", "partial", "pdifferentiate", "d/d" -> partialDiff(splitInput[1]);
-			case "pdn", "pdiffn", "partialn", "pdifferentiaten" -> partialDiffNth(splitInput[1]);
-			case "eval", "evaluate" -> evaluate(splitInput[1]);
-			case "simp", "simplify" -> simplify(splitInput[1]);
-			case "sub", "substitute" -> substitute(splitInput[1]);
-			case "sol", "solve" -> solve(splitInput[1]);
-			case "ext", "extrema" -> extrema(splitInput[1]);
-			case "tay", "taylor" -> taylor(splitInput[1]);
-			case "intn", "intnumeric" -> integrateNumeric(splitInput[1]);
-			case "intne", "intnumericerror" -> integrateNumericError(splitInput[1]);
-			case "addf", "sto", "store", "new", "def", "addfunction" -> storeFunction(splitInput[1]);
-			case "addv", "addvar", "addvars" -> addVariables(splitInput[1]);
-			case "addc", "addconstant", "defc", "defcon", "defconstant" -> defineConstant(splitInput[1]);
-			case "rmf", "rmfun", "removefun", "removefunction" -> removeFunction(splitInput[1]);
-			case "rmv", "rmvar", "removevar", "removevariable" -> removeVariables(splitInput[1]);
-			case "rmc", "rmconstant", "removeconstant" -> removeConstant(splitInput[1]);
-			case "pf", "printfun", "printfunctions" -> printFunctions();
-			case "pv", "vars", "printvars" -> printVariables();
-			case "pc", "printc", "printconstants" -> printConstants();
-			case "cf", "clearfun", "clearfunctions" -> clearFunctions();
-			case "cv", "clearvars" -> clearVariables();
-			case "ss", "sset", "sets", "setsetting" -> setSettings(splitInput[1]);
-			case "ps", "settings", "printsettings" -> printSettings();
-			case "svt", "setvarsto", "setvariablesto" -> setVariablesTo(splitInput[1]);
-			case "int", "integral" -> integral(splitInput[1]);
-			default -> null;
+			case "pd", "pdiff", "partial", "pdifferentiate", "d/d"				-> partialDiff(splitInput[1]);
+			case "pdn", "pdiffn", "partialn", "pdifferentiaten"					-> partialDiffNth(splitInput[1]);
+			case "eval", "evaluate"												-> evaluate(splitInput[1]);
+			case "simp", "simplify"												-> simplify(splitInput[1]);
+			case "sub", "substitute"											-> substitute(splitInput[1]);
+			case "sol", "solve"													-> solve(splitInput[1]);
+			case "ext", "extrema"												-> extrema(splitInput[1]);
+			case "tay", "taylor"												-> taylor(splitInput[1]);
+			case "intn", "intnumeric"											-> integrateNumeric(splitInput[1]);
+			case "intne", "intnumericerror"										-> integrateNumericError(splitInput[1]);
+			case "addf", "sto", "store", "new", "def", "addfunction"			-> storeFunction(splitInput[1]);
+			case "addv", "addvar", "addvars"									-> addVariables(splitInput[1]);
+			case "addc", "addconstant", "defc", "defcon", "defconstant"			-> defineConstant(splitInput[1]);
+			case "rmf", "rmfun", "removefun", "removefunction"					-> removeFunction(splitInput[1]);
+			case "rmv", "rmvar", "removevar", "removevariable"					-> removeVariables(splitInput[1]);
+			case "rmc", "rmconstant", "removeconstant"							-> removeConstant(splitInput[1]);
+			case "pf", "printfun", "printfunctions"								-> printFunctions();
+			case "pv", "vars", "printvars"										-> printVariables();
+			case "pc", "printc", "printconstants"								-> printConstants();
+			case "cf", "clearfun", "clearfunctions"								-> clearFunctions();
+			case "cv", "clearvars"												-> clearVariables();
+			case "ss", "sset", "sets", "setsetting"								-> setSettings(splitInput[1]);
+			case "ps", "settings", "printsettings"								-> printSettings();
+			case "svt", "setvarsto", "setvariablesto"							-> setVariablesTo(splitInput[1]);
+			case "int", "integral"												-> integral(splitInput[1]);
+			default 															-> null;
 		};
 		if (ret == null) {
 			if (storedFunctions.containsKey(input)) {
@@ -171,12 +171,12 @@ public class KeywordInterface {
 	public static Object extrema(String input) {
 		String[] splitInput = keywordSplitter.split(input);
 		return switch (splitInput[0]) {
-			case "min", "minima" -> Extrema.findLocalMinimum(parseStored(splitInput[1]), Parser.getConstant(splitInput[2]), Parser.getConstant(splitInput[3]));
-			case "max", "maxima" -> Extrema.findLocalMaximum(parseStored(splitInput[1]), Parser.getConstant(splitInput[2]), Parser.getConstant(splitInput[3]));
-			case "anymin", "anyminima" -> Extrema.findAnyMinima(parseStored(splitInput[1]), Parser.getConstant(splitInput[2]), Parser.getConstant(splitInput[3]));
-			case "anymax", "anymaxima" -> Extrema.findAnyMaxima(parseStored(splitInput[1]), Parser.getConstant(splitInput[2]), Parser.getConstant(splitInput[3]));
-			case "inflect", "inflection" -> Extrema.findAnyInflectionPoints(parseStored(splitInput[1]), Parser.getConstant(splitInput[2]), Parser.getConstant(splitInput[3]));
-			default -> throw new IllegalStateException("Invalid setting for extrema:" + splitInput[0]);
+			case "min", "minima"					-> Extrema.findLocalMinimum(parseStored(splitInput[1]), Parser.getConstant(splitInput[2]), Parser.getConstant(splitInput[3]));
+			case "max", "maxima"					-> Extrema.findLocalMaximum(parseStored(splitInput[1]), Parser.getConstant(splitInput[2]), Parser.getConstant(splitInput[3]));
+			case "anymin", "anyminima"				-> Extrema.findAnyMinima(parseStored(splitInput[1]), Parser.getConstant(splitInput[2]), Parser.getConstant(splitInput[3]));
+			case "anymax", "anymaxima"				-> Extrema.findAnyMaxima(parseStored(splitInput[1]), Parser.getConstant(splitInput[2]), Parser.getConstant(splitInput[3]));
+			case "inflect", "inflection"			-> Extrema.findAnyInflectionPoints(parseStored(splitInput[1]), Parser.getConstant(splitInput[2]), Parser.getConstant(splitInput[3]));
+			default 								-> throw new IllegalStateException("Invalid setting for extrema:" + splitInput[0]);
 		};
 	}
 
@@ -185,7 +185,7 @@ public class KeywordInterface {
 	 */
 	public static GeneralFunction taylor(String input) {
 		String[] splitInput = keywordSplitter.split(input);
-		return TaylorSeries.makeTaylorSeries(parseStored(splitInput[0]), (int) Parser.getConstant(splitInput[1]), Parser.getConstant(splitInput[2]));
+		return TaylorSeries.makeTaylorSeries(parseStored(splitInput[0]), MiscTools.toInteger(Parser.getConstant(splitInput[1])), Parser.getConstant(splitInput[2]));
 	}
 
 	/**

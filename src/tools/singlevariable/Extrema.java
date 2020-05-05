@@ -2,6 +2,7 @@ package tools.singlevariable;
 
 import config.Settings;
 import functions.GeneralFunction;
+import tools.SearchTools;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -70,12 +71,13 @@ public class Extrema {
     }
 
     private static double findExtremumOnRange(GeneralFunction function, double lowerBound, double upperBound, BiPredicate<? super Double, ? super Double> strategy, double extremum) {
+        char var = SearchTools.getSingleVariable(function);
         if (Double.isNaN(extremum))
             extremum = lowerBound;
-        else if (strategy.test(function.evaluate(Map.of(Settings.singleVariableDefault, lowerBound)), function.evaluate(Map.of(Settings.singleVariableDefault, extremum))))
+        else if (strategy.test(function.evaluate(Map.of(var, lowerBound)), function.evaluate(Map.of(var, extremum))))
             extremum = lowerBound;
 
-        if (strategy.test(function.evaluate(Map.of(Settings.singleVariableDefault, upperBound)), function.evaluate(Map.of(Settings.singleVariableDefault, extremum))))
+        if (strategy.test(function.evaluate(Map.of(var, upperBound)), function.evaluate(Map.of(var, extremum))))
             extremum = upperBound;
         return extremum;
     }
@@ -114,19 +116,21 @@ public class Extrema {
     }
 
     private static double[] findPoints(GeneralFunction function, double lowerBound, double upperBound, BiPredicate<? super Double, ? super Double> strategy) {
-        double[] criticalPoints = Solver.getSolutionsRange(function.getSimplifiedDerivative(Settings.singleVariableDefault), lowerBound, upperBound);
+        char var = SearchTools.getSingleVariable(function);
+        double[] criticalPoints = Solver.getSolutionsRange(function.getSimplifiedDerivative(var), lowerBound, upperBound);
         if (criticalPoints.length == 0)
             return new double[0];
 
         List<Double> secondDerivative = new LinkedList<>();
         for (double criticalPoint : criticalPoints)
-            if (strategy.test(function.getNthDerivative(Settings.singleVariableDefault, 2).evaluate(Map.of(Settings.singleVariableDefault, criticalPoint)), 0.0))
+            if (strategy.test(function.getNthDerivative(var, 2).evaluate(Map.of(var, criticalPoint)), 0.0))
                 secondDerivative.add(criticalPoint);
 
         return secondDerivative.stream().mapToDouble(i -> i).toArray();
     }
 
     private static double findSmallestOrLargest(GeneralFunction function, double[] numbers, BiPredicate<? super Double, ? super Double> strategy) {
+        char var = SearchTools.getSingleVariable(function);
         if (numbers.length == 0)
             return Double.NaN;
         else if (numbers.length == 1)
@@ -134,7 +138,7 @@ public class Extrema {
 
         double[] functionAtPoints = new double[numbers.length];
         for (int i = 0; i < functionAtPoints.length; i++)
-            functionAtPoints[i] = function.evaluate(Map.of(Settings.singleVariableDefault, numbers[i]));
+            functionAtPoints[i] = function.evaluate(Map.of(var, numbers[i]));
 
         int bestIndex = 0;
         for (int i = 1; i < functionAtPoints.length; i++)

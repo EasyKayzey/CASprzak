@@ -2,7 +2,7 @@ package tools.singlevariable;
 
 import config.Settings;
 import functions.GeneralFunction;
-import tools.SearchTools;
+import tools.VariableTools;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -71,7 +71,7 @@ public class Extrema {
     }
 
     private static double findExtremumOnRange(GeneralFunction function, double lowerBound, double upperBound, BiPredicate<? super Double, ? super Double> strategy, double extremum) {
-        char var = SearchTools.getSingleVariable(function);
+        char var = VariableTools.getSingleVariable(function);
         if (Double.isNaN(extremum))
             extremum = lowerBound;
         else if (strategy.test(function.evaluate(Map.of(var, lowerBound)), function.evaluate(Map.of(var, extremum))))
@@ -116,7 +116,7 @@ public class Extrema {
     }
 
     private static double[] findPoints(GeneralFunction function, double lowerBound, double upperBound, BiPredicate<? super Double, ? super Double> strategy) {
-        char var = SearchTools.getSingleVariable(function);
+        char var = VariableTools.getSingleVariable(function);
         double[] criticalPoints = Solver.getSolutionsRange(function.getSimplifiedDerivative(var), lowerBound, upperBound);
         if (criticalPoints.length == 0)
             return new double[0];
@@ -130,7 +130,7 @@ public class Extrema {
     }
 
     private static double findSmallestOrLargest(GeneralFunction function, double[] numbers, BiPredicate<? super Double, ? super Double> strategy) {
-        char var = SearchTools.getSingleVariable(function);
+        char var = VariableTools.getSingleVariable(function);
         if (numbers.length == 0)
             return Double.NaN;
         else if (numbers.length == 1)

@@ -16,6 +16,7 @@ import functions.unitary.trig.normal.TrigFunction;
 import tools.DefaultFunctions;
 import tools.MiscTools;
 import tools.SearchTools;
+import tools.VariableTools;
 import tools.exceptions.IntegrationFailedException;
 import tools.helperclasses.Pair;
 
@@ -53,11 +54,11 @@ public class StageOne {
         if (function instanceof Product product){
             GeneralFunction[] productTerms = product.getFunctions();
             for (GeneralFunction term : productTerms) {
-                if (term instanceof Pow power && SearchTools.doesNotContainsVariable(power.getFunction2(), variableChar)) {
+                if (term instanceof Pow power && VariableTools.doesNotContainsVariable(power.getFunction2(), variableChar)) {
                     Pair<Boolean, GeneralFunction> results = derivativeDividesSearcher(product, term, power.getFunction1(), variableChar);
                     if (results.getFirst())
                         return exponential(new Product(number, DefaultFunctions.reciprocal(results.getSecond())), power.getFunction2(), power.getFunction1());
-                } else if (term instanceof Pow power && SearchTools.doesNotContainsVariable(power.getFunction1(), variableChar)) {
+                } else if (term instanceof Pow power && VariableTools.doesNotContainsVariable(power.getFunction1(), variableChar)) {
                     Pair<Boolean, GeneralFunction> results = derivativeDividesSearcher(product, term, power.getFunction2(), variableChar);
                     if (results.getFirst())
                         return power(new Product(number, DefaultFunctions.reciprocal(results.getSecond())), power.getFunction1(), power.getFunction2());
@@ -69,7 +70,7 @@ public class StageOne {
                     Pair<Boolean, GeneralFunction> results = derivativeDividesSearcher(product, term, exp.operand, variableChar);
                     if (results.getFirst())
                         return naturalExponential(new Product(number, DefaultFunctions.reciprocal(results.getSecond())), exp.operand);
-                } else if (term instanceof Logb logb && SearchTools.doesNotContainsVariable(logb.getFunction2(), variableChar)) {
+                } else if (term instanceof Logb logb && VariableTools.doesNotContainsVariable(logb.getFunction2(), variableChar)) {
                     Pair<Boolean, GeneralFunction> results = derivativeDividesSearcher(product, term, logb.getFunction1(), variableChar);
                     if (results.getFirst())
                         return naturalLog(new Product(number, DefaultFunctions.reciprocal(new Product(results.getSecond(), new Ln(logb.getFunction2())))), logb.getFunction2());
@@ -83,21 +84,21 @@ public class StageOne {
                     return power(new Product(number, DefaultFunctions.reciprocal(results.getSecond())), DefaultFunctions.ONE, term);
             }
         } else {
-            if (function instanceof Pow power && SearchTools.doesNotContainsVariable(power.getFunction2(), variableChar) && SearchTools.doesNotContainsVariable(power.getFunction1().getSimplifiedDerivative(variableChar), variableChar)) {
+            if (function instanceof Pow power && VariableTools.doesNotContainsVariable(power.getFunction2(), variableChar) && VariableTools.doesNotContainsVariable(power.getFunction1().getSimplifiedDerivative(variableChar), variableChar)) {
                 return exponential(new Product(number, DefaultFunctions.reciprocal(power.getFunction1().getSimplifiedDerivative(variableChar))), power.getFunction2(), power.getFunction1());
-            } else if (function instanceof Pow power && SearchTools.doesNotContainsVariable(power.getFunction1(), variableChar) && SearchTools.doesNotContainsVariable(power.getFunction2().getSimplifiedDerivative(variableChar), variableChar)) {
+            } else if (function instanceof Pow power && VariableTools.doesNotContainsVariable(power.getFunction1(), variableChar) && VariableTools.doesNotContainsVariable(power.getFunction2().getSimplifiedDerivative(variableChar), variableChar)) {
                 return power(new Product(number, DefaultFunctions.reciprocal(power.getFunction2().getSimplifiedDerivative(variableChar))), power.getFunction1(), power.getFunction2());
-            } else if (function instanceof Ln log && SearchTools.doesNotContainsVariable(log.operand.getSimplifiedDerivative(variableChar), variableChar)) {
+            } else if (function instanceof Ln log && VariableTools.doesNotContainsVariable(log.operand.getSimplifiedDerivative(variableChar), variableChar)) {
                 return naturalLog(new Product(number, DefaultFunctions.reciprocal(log.operand.getSimplifiedDerivative(variableChar))), log.operand);
-            } else if (function instanceof Exp exp && SearchTools.doesNotContainsVariable(exp.operand.getSimplifiedDerivative(variableChar), variableChar)) {
+            } else if (function instanceof Exp exp && VariableTools.doesNotContainsVariable(exp.operand.getSimplifiedDerivative(variableChar), variableChar)) {
                 return naturalExponential(new Product(number, DefaultFunctions.reciprocal(exp.operand.getSimplifiedDerivative(variableChar))), exp.operand);
-            } else if (function instanceof Logb logb && SearchTools.doesNotContainsVariable(logb.getFunction2(), variableChar) && SearchTools.doesNotContainsVariable(logb.getFunction1().getSimplifiedDerivative(variableChar), variableChar)) {
+            } else if (function instanceof Logb logb && VariableTools.doesNotContainsVariable(logb.getFunction2(), variableChar) && VariableTools.doesNotContainsVariable(logb.getFunction1().getSimplifiedDerivative(variableChar), variableChar)) {
                 return naturalLog(new Product(number, DefaultFunctions.reciprocal(new Product(logb.getFunction1().getSimplifiedDerivative(variableChar), new Ln(logb.getFunction2())))), logb.getFunction1());
-            } else if (SearchTools.doesNotContainsVariable(function, variableChar)) {
+            } else if (VariableTools.doesNotContainsVariable(function, variableChar)) {
                 return new Product(number, function, new Variable(variableChar));
             } else if (function instanceof Variable variable) {
                 return power(number, DefaultFunctions.ONE, variable);
-            } else if (function instanceof TrigFunction unit && SearchTools.doesNotContainsVariable(unit.operand.getSimplifiedDerivative(variableChar), variableChar)) {
+            } else if (function instanceof TrigFunction unit && VariableTools.doesNotContainsVariable(unit.operand.getSimplifiedDerivative(variableChar), variableChar)) {
                 return new Product(new Product(number, DefaultFunctions.reciprocal(unit.operand.getSimplifiedDerivative(variableChar))), unit.getElementaryIntegral());
             }
         }
@@ -130,6 +131,6 @@ public class StageOne {
         GeneralFunction derivativeWithoutConstant = derivative.second;
         GeneralFunction constantInFront = derivative.first;
         Product derivativeTimesOperation = new Product(derivativeWithoutConstant, term);
-        return new Pair<>(SearchTools.existsInSurfaceSubset(product, derivativeTimesOperation::equals) && !SearchTools.existsInOppositeSurfaceSubset(product, (u -> SearchTools.existsAny(u, SearchTools.isVariable(variableChar))), derivativeTimesOperation::equals), constantInFront);
+        return new Pair<>(SearchTools.existsInSurfaceSubset(product, derivativeTimesOperation::equals) && !SearchTools.existsInOppositeSurfaceSubset(product, (u -> SearchTools.existsAny(u, VariableTools.isVariable(variableChar))), derivativeTimesOperation::equals), constantInFront);
         }
 }

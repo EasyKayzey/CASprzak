@@ -3,7 +3,7 @@ package tools.integration;
 import functions.GeneralFunction;
 import functions.commutative.Product;
 import tools.DefaultFunctions;
-import tools.SearchTools;
+import tools.VariableTools;
 import tools.helperclasses.Pair;
 
 import java.util.ArrayList;
@@ -27,7 +27,7 @@ public class IntegralTools {
             ListIterator<GeneralFunction> iter = termsWithConstantRemoved.listIterator();
             while (iter.hasNext()) {
                 GeneralFunction current = iter.next();
-                if (SearchTools.doesNotContainsVariable(current, varID)) {
+                if (VariableTools.doesNotContainsVariable(current, varID)) {
                     constants.add(current);
                     iter.remove();
                 }
@@ -37,5 +37,4 @@ public class IntegralTools {
             return new Pair<>(DefaultFunctions.ONE, function);
         }
     }
-
 }

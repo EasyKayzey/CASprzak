@@ -7,8 +7,8 @@ import functions.commutative.Product;
 import functions.special.Constant;
 import functions.unitary.piecewise.Abs;
 import tools.DefaultFunctions;
-import tools.SearchTools;
 import tools.SolverTools;
+import tools.VariableTools;
 
 import java.util.List;
 import java.util.ListIterator;
@@ -25,7 +25,7 @@ public class Solver {
 	 * @return a better approximation of the root based on the value provided
 	 */
 	private static double newtonsMethod(GeneralFunction expression, double value) {
-		char var = SearchTools.getSingleVariable(expression);
+		char var = VariableTools.getSingleVariable(expression);
 		return value - expression.evaluate(Map.of(var, value)) / expression.getSimplifiedDerivative(var).evaluate(Map.of(var, value));
 	}
 
@@ -37,7 +37,7 @@ public class Solver {
 	 * @return the approximate solution for a root of the function
 	 */
 	public static double getSolutionPointNewton(GeneralFunction expression, double initialPoint, int runs) {
-		char var = SearchTools.getSingleVariable(expression);
+		char var = VariableTools.getSingleVariable(expression);
 		if (expression.evaluate(Map.of(var, 0.0)) == 0) //Temporary but probably best fix
 			return 0;
 		if (expression.evaluate(Map.of(var, initialPoint)) == 0)
@@ -94,7 +94,7 @@ public class Solver {
 	 * @return an array of all the approximate roots found
 	 */
 	public static double[] getSolutionsRangeNewton(GeneralFunction expression, double lower, double upper, int runs) {
-		char var = SearchTools.getSingleVariable(expression);
+		char var = VariableTools.getSingleVariable(expression);
 		List<Double> solutions = SolverTools.createRange(upper, lower, Settings.defaultRangeSections);
 		ListIterator<Double> iter = solutions.listIterator();
 		while (iter.hasNext()) {
@@ -118,7 +118,7 @@ public class Solver {
 	 * @return an array of all the approximate roots found
 	 */
 	public static double[] getSolutionsRangeHalley(GeneralFunction expression, double lower, double upper) {
-		char var = SearchTools.getSingleVariable(expression);
+		char var = VariableTools.getSingleVariable(expression);
 		return getSolutionsRangeNewton(
 				(new Product(expression, new Pow(DefaultFunctions.NEGATIVE_HALF, new Abs(expression.getDerivative(var))))).simplify(),
 				lower, upper

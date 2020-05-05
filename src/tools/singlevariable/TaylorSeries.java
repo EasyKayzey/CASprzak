@@ -7,7 +7,7 @@ import functions.commutative.Sum;
 import functions.special.Constant;
 import functions.special.Variable;
 import tools.MiscTools;
-import tools.SearchTools;
+import tools.VariableTools;
 
 import java.util.Map;
 
@@ -34,7 +34,7 @@ public class TaylorSeries {
      */
     public static GeneralFunction makeTaylorSeries(GeneralFunction function, int degree, double center) {
         GeneralFunction[] taylorSeriesTerms = new GeneralFunction[degree];
-        char var = SearchTools.getSingleVariable(function);
+        char var = VariableTools.getSingleVariable(function);
         for (int i = 0; i < degree; i++){
             taylorSeriesTerms[i] = new Product(new Constant(function.getNthDerivative('x', i).evaluate(Map.of(var, center)) / MiscTools.factorial(i)), new Pow(new Constant(i), new Sum(new Variable('x'), new Constant(-center))));
         }

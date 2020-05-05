@@ -18,7 +18,7 @@ public class Settings {
 			try {
 				SettingsParser.parseConfig();
 			} catch (IOException e) {
-				e.printStackTrace();
+				System.out.println("Properties file not found. Using defaults...");
 			}
 	}
 

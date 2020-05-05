@@ -43,7 +43,7 @@ public class Ln extends SpecialCaseBinaryFunction {
 		return Exp.class;
 	}
 
-	public GeneralFunction simplifyPowersInTheOperand() {
+	public GeneralFunction simplifyPowersInTheOperand() {//TODO add this to the simplify
 		if (operand instanceof Pow pow)
 			return new Product(pow.getFunction1(), new Ln(pow.getFunction2()));
 		else if (operand instanceof Exp exp)

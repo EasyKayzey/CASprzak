@@ -108,7 +108,7 @@ public class KeywordInterface {
 	 */
 	public static GeneralFunction substituteAll(GeneralFunction function) {
 		for (Map.Entry<String, GeneralFunction>  entry : storedFunctions.entrySet())
-			function = function.substituteVariable(Parser.getCharacter(entry.getKey()), entry.getValue());
+			function = function.substituteVariable(MiscTools.getCharacter(entry.getKey()), entry.getValue());
 		return function;
 	}
 
@@ -117,7 +117,7 @@ public class KeywordInterface {
 	 */
 	public static GeneralFunction partialDiff(String input) {
 		String[] splitInput = keywordSplitter.split(input, 2);
-		return parseStored(splitInput[1]).getSimplifiedDerivative(Parser.getCharacter(splitInput[0]));
+		return parseStored(splitInput[1]).getSimplifiedDerivative(MiscTools.getCharacter(splitInput[0]));
 	}
 
 	/**
@@ -125,7 +125,7 @@ public class KeywordInterface {
 	 */
 	private static GeneralFunction partialDiffNth(String input) {
 		String[] splitInput = keywordSplitter.split(input, 3);
-		return parseStored(splitInput[2]).getNthDerivative(Parser.getCharacter(splitInput[0]), Integer.parseInt(splitInput[1]));
+		return parseStored(splitInput[2]).getNthDerivative(MiscTools.getCharacter(splitInput[0]), Integer.parseInt(splitInput[1]));
 	}
 
 	/**
@@ -153,7 +153,7 @@ public class KeywordInterface {
 	 */
 	public static GeneralFunction substitute(String input) {
 		String[] splitInput = keywordSplitter.split(input);
-		return parseStored(splitInput[0]).substituteVariable(Parser.getCharacter(splitInput[1]), parseStored(splitInput[2]));
+		return parseStored(splitInput[0]).substituteVariable(MiscTools.getCharacter(splitInput[1]), parseStored(splitInput[2]));
 	}
 
 	/**
@@ -193,7 +193,7 @@ public class KeywordInterface {
 	public static Object storeFunction(String input) {
 		String[] splitInput = keywordSplitter.split(input, 2);
 		if (!storedFunctions.containsKey(splitInput[0]))
-			Variable.addFunctionVariable(Parser.getCharacter(splitInput[0]));
+			Variable.addFunctionVariable(MiscTools.getCharacter(splitInput[0]));
 		try {
 			storedFunctions.put(splitInput[0], (GeneralFunction) KeywordInterface.useKeywords(splitInput[1]));
 		} catch (RuntimeException e) {
@@ -206,7 +206,7 @@ public class KeywordInterface {
 	 * rmfun [functionname]
 	 */
 	private static Object removeFunction(String input) {
-		Variable.removeFunctionVariable(Parser.getCharacter(input));
+		Variable.removeFunctionVariable(MiscTools.getCharacter(input));
 		return printVariables();
 	}
 
@@ -216,7 +216,7 @@ public class KeywordInterface {
 	public static String addVariables(String input) {
 		String[] splitInput = keywordSplitter.split(input);
 		for (String var : splitInput)
-			Variable.addVariable(Parser.getCharacter(var));
+			Variable.addVariable(MiscTools.getCharacter(var));
 		return printVariables();
 	}
 
@@ -226,7 +226,7 @@ public class KeywordInterface {
 	private static Object removeVariables(String input) {
 		String[] splitInput = keywordSplitter.split(input);
 		for (String var : splitInput)
-			Variable.removeVariable(Parser.getCharacter(var));
+			Variable.removeVariable(MiscTools.getCharacter(var));
 		return printVariables();
 	}
 
@@ -323,7 +323,7 @@ public class KeywordInterface {
 			case "trustImmutability" -> Settings.trustImmutability = MiscTools.parseBoolean(splitInput[1]);
 			case "enforceIntegerOperations" -> Settings.enforceIntegerOperations = MiscTools.parseBoolean(splitInput[1]);
 			case "exitSolverOnProximity" -> Settings.exitSolverOnProximity = MiscTools.parseBoolean(splitInput[1]);
-			case "singleVariableDefault" -> Settings.singleVariableDefault = Parser.getCharacter(splitInput[1]);
+			case "singleVariableDefault" -> Settings.singleVariableDefault = MiscTools.getCharacter(splitInput[1]);
 			default -> throw new IllegalArgumentException("Setting " + splitInput[0] + " does not exist");
 			//TODO implement Enum setting parsing
 		}
@@ -351,7 +351,7 @@ public class KeywordInterface {
 	 */
 	private static Object setVariablesTo(String input) {
 		String[] splitInput = keywordSplitter.split(input, 2);
-		return parseStored(splitInput[0]).setVariables(Arrays.stream(keywordSplitter.split(splitInput[1])).map(equals::split).collect(Collectors.toMap(e -> Parser.getCharacter(e[0]), e -> Parser.getConstant(e[1]))));
+		return parseStored(splitInput[0]).setVariables(Arrays.stream(keywordSplitter.split(splitInput[1])).map(equals::split).collect(Collectors.toMap(e -> MiscTools.getCharacter(e[0]), e -> Parser.getConstant(e[1]))));
 	}
 
 	/**

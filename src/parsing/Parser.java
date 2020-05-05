@@ -2,6 +2,7 @@ package parsing;
 
 import functions.GeneralFunction;
 import functions.special.Constant;
+import tools.MiscTools;
 
 import java.lang.reflect.MalformedParametersException;
 import java.util.Deque;
@@ -78,7 +79,7 @@ public class Parser {
 				try {
 					functionStack.push(FunctionMaker.constant(Double.parseDouble(token)));
 				} catch (Exception e) {
-					char variableName = Parser.getCharacter(token);
+					char variableName = MiscTools.getCharacter(token);
 					functionStack.push(FunctionMaker.variable(variableName));
 				}
 			} else if (isBinaryOperator(token)) {
@@ -116,18 +117,4 @@ public class Parser {
 		return parse(infix).evaluate(null);
 	}
 
-	/**
-	 * Converts the string to a character,
-	 * @param input the string containing the character
-	 * @return the character in the string
-	 * @throws IllegalArgumentException if the input is not one character or three characters in the format 'c'
-	 */
-	public static char getCharacter(String input) { // TODO maybe move this to tools
-		if (input.length() == 1)
-			return input.charAt(0);
-		else if (input.length() == 3 && input.charAt(0) == '\'' && input.charAt(2) == '\'')
-			return input.charAt(1);
-		else
-			throw new IllegalArgumentException("Input length should be 1 for Parser.toCharacter");
-	}
 }

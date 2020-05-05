@@ -1,6 +1,5 @@
 package config;
 
-import parsing.Parser;
 import tools.MiscTools;
 
 import java.io.FileReader;
@@ -17,7 +16,7 @@ public class SettingsParser {
 				case "defaultSolverIterations" -> Settings.defaultSolverIterations = Integer.parseInt((String) entry.getValue());
 				case "defaultRangeSections" -> Settings.defaultRangeSections = Integer.parseInt((String) entry.getValue());
 				case "simpsonsSegments" -> Settings.simpsonsSegments = Integer.parseInt((String) entry.getValue());
-				case "singleVariableDefault" -> Settings.singleVariableDefault = Parser.getCharacter((String) entry.getValue());
+				case "singleVariableDefault" -> Settings.singleVariableDefault = MiscTools.getCharacter((String) entry.getValue());
 				case "zeroMargin" -> Settings.zeroMargin = Double.parseDouble((String) entry.getValue());
 				case "integerMargin" -> Settings.integerMargin = Double.parseDouble(((String) entry.getValue()));
 				case "equalsMargin" -> Settings.equalsMargin = Double.parseDouble(((String) entry.getValue()));

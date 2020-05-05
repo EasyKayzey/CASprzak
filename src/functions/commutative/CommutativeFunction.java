@@ -108,7 +108,7 @@ public abstract class CommutativeFunction extends GeneralFunction {
 	 */
 	public CommutativeFunction simplifyPull() {
 		for (int i = 0; i < functions.length; i++) {
-			if (this.getClass().equals(functions[i].getClass())) {//TODO can this be pattern matched
+			if (this.getClass().equals(functions[i].getClass())) {
 				return (me(ArrayTools.pullUp(functions, ((CommutativeFunction) functions[i]).getFunctions(), i))).simplifyPull();
 			}
 		}

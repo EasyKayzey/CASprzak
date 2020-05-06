@@ -17,6 +17,7 @@ public class CASDemo {
 	public static DemoState currentState = DemoState.INTRO;
 	protected static Scanner scanner;
 
+	@SuppressWarnings("SameReturnValue")
 	public static String runDemo() {
 		scanner = new Scanner(System.in);
 		scanner.useDelimiter("\n");

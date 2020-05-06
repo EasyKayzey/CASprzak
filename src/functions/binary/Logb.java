@@ -58,6 +58,7 @@ public class Logb extends BinaryFunction {
 		return "(log_{" + function2.toString() + "}(" + function1.toString() + "))";
 	}
 
+	@SuppressWarnings("ChainOfInstanceofChecks")
 	public GeneralFunction simplifyPowers() {
 		if (function1 instanceof Pow power)
 			return new Product(power.function1, new Logb(power.function2, function2).simplifyIdentity());

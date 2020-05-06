@@ -147,6 +147,7 @@ public class Pow extends BinaryFunction {
 		return "(" + function2 + "^" + function1 + ")";
 	}
 
+	@SuppressWarnings("ChainOfInstanceofChecks")
 	public GeneralFunction simplifyLogsOfSameBase() { //TODO add this method to simplify
 		if (function1 instanceof Logb logb && logb.getFunction2().equals(function2))
 			return logb.getFunction1();

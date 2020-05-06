@@ -3,7 +3,6 @@ package functions.unitary.combo;
 import config.Settings;
 import functions.GeneralFunction;
 import functions.unitary.UnitaryFunction;
-import tools.exceptions.NotYetImplementedException;
 
 public abstract class Factorial extends UnitaryFunction {
 

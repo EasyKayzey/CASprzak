@@ -112,4 +112,11 @@ public class EqualsTest {
         assertEquals(test1, test2);
     }
 
+    @Test
+    void switchedOrderTrig() {
+        GeneralFunction test1 = Parser.parse("sin(x)+cos(x)");
+        GeneralFunction test2 = Parser.parse("cos(x)+sin(x)");
+        assertEquals(test1, test2);
+    }
+
 }

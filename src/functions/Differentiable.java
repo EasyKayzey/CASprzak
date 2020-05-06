@@ -3,7 +3,7 @@ package functions;
 public interface Differentiable {
 
 	/**
-	 * Returns the derivative of a {@link GeneralFunction} with respect to a variable
+	 * Returns the derivative of a {@link GeneralFunction} with respect to a variable. Should not be used in general; {@link GeneralFunction#getSimplifiedDerivative(char)} is strongly preferred.
 	 * @param varID the ID of the variable that is differentiated against
 	 * @return the derivative of the function with respect to varID
 	 */

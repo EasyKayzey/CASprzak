@@ -42,14 +42,13 @@ public class PartialDerivative extends TransformFunction {
 
 	@Override
 	public int compareSelf(GeneralFunction that) {
-		if (that instanceof PartialDerivative pd) {
+		if (that instanceof PartialDerivative pd)
 			if (respectTo == pd.respectTo)
 				return operand.compareTo(pd.operand);
 			else
 				return respectTo - pd.respectTo;
-		} else {
+		else
 			throw new IllegalStateException("Comparing a " + this.getClass().getSimpleName() + " with a " + that.getClass().getSimpleName() + " using compareSelf");
-		}
 	}
 
 	@Override

@@ -43,16 +43,13 @@ public class Sum extends CommutativeFunction {
 	@Override
 	public GeneralFunction getDerivative(char varID) {
 		GeneralFunction[] toAdd = new GeneralFunction[functions.length];
-		for (int i = 0; i < functions.length; i++) {
+		for (int i = 0; i < functions.length; i++)
 			toAdd[i] = functions[i].getSimplifiedDerivative(varID);
-		}
 		return new Sum(toAdd);
 	}
 
 	public Sum clone() {
-		GeneralFunction[] toAdd = new GeneralFunction[functions.length];
-		for (int i = 0; i < functions.length; i++) toAdd[i] = functions[i].clone();
-		return new Sum(toAdd);
+		return new Sum(ArrayTools.deepClone(functions));
 	}
 
 
@@ -98,6 +95,7 @@ public class Sum extends CommutativeFunction {
 				}
 			}
 		}
+
 		if (Settings.trustImmutability)
 			return this;
 		else

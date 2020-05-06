@@ -16,7 +16,7 @@ public class PreProcessor {
 	 * @param infix input string in infix
 	 * @return array of postfix tokens
 	 */
-	public static List<String> toPostfix(String infix) {
+	public static List<String> toPostfix(String infix) { // TODO add unicode support
 		List<String> tokens = InfixTokenizer.tokenizeInfix(infix);
 		Deque<String> postfix = new LinkedList<>();
 		Deque<String> operators = new LinkedList<>();

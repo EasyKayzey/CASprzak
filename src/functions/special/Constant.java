@@ -130,9 +130,9 @@ public class Constant extends SpecialFunction {
 		if (constantKey != null && ((Constant) that).constantKey != null)
 			return this.constantKey.compareTo(((Constant) that).constantKey);
 		else if (constantKey != null) // && ((Constant) that).constantKey == null
-			return -1;
-		else if (((Constant) that).constantKey != null) // && constantKey == null
 			return 1;
+		else if (((Constant) that).constantKey != null) // && constantKey == null
+			return -1;
 		else
 			return (int) Math.signum(this.constant - ((Constant) that).constant);
 	}

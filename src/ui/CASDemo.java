@@ -3,6 +3,7 @@ package ui;
 import parsing.KeywordInterface;
 
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Predicate;
 
 public class CASDemo {
@@ -52,23 +53,40 @@ public class CASDemo {
 		}
 	}
 
+	private static void sleep(double seconds) {
+		try {
+			TimeUnit.MILLISECONDS.sleep((long) (seconds*1000));
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
 	private static void exit() {
 	}
 
 	private static void intro() {
-		System.out.println("This is an intro. Actual help and intro would go here.");
-		System.out.println("Demo user input");
+		System.out.println("Hello user. Welcome to the CASprzak!");
+		sleep(1.5);
+		System.out.println("This is a quick demo to help get you started.");
+		sleep(2);
+		System.out.println("First, try typing in a function like x^2 or cos(x).");
 		if (!tryInput(s -> true, null))
 			return;
-		System.out.println("Demo prev, enter underscore to use your previous output as the next input or smth");
+		sleep(1);
+		System.out.println("Congratulations, you have just inputted a function");
+		sleep(1);
+		System.out.println("Now, enter an underscore to call your previous output");
 		if (!tryInput("_"::equals, "Please enter an underscore to demonstrate the previous-output feature of the UI."))
 			return;
-		System.out.println("Do other things in intro to demo");
+		sleep(1);
+		System.out.println("You can see that it called the function that you last typed in.");
+		sleep(1);
 		currentState = DemoState.EVAL;
 	}
 
 	private static void eval() {
-		System.out.println("eval things");
+		System.out.println("Now, lets do something with our function like evaluating it.");
+		System.out.println("Try tying in \"eval _ 2\" for example to evaluate your function at point 2");
 		if (!tryInput(s -> "eval".equals(s.substring(0, 4)), "Begin your input with 'eval' to demonstrate the evaluation feature of the UI."))
 			return;
 		System.out.println("more eval things");

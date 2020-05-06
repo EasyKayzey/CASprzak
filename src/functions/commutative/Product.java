@@ -5,8 +5,8 @@ import functions.GeneralFunction;
 import functions.binary.Pow;
 import functions.special.Constant;
 import functions.special.Variable;
-import tools.DefaultFunctions;
 import tools.ArrayTools;
+import tools.DefaultFunctions;
 import tools.PolynomialTools;
 
 import java.util.Arrays;
@@ -47,35 +47,27 @@ public class Product extends CommutativeFunction {
 	@Override
 	public GeneralFunction getDerivative(char varID) {
 		GeneralFunction[] toAdd = new GeneralFunction[functions.length];
-
 		for (int i = 0; i < toAdd.length; i++) {
-			GeneralFunction[] toMultiply = new GeneralFunction[functions.length];
-			for (int j = 0; j < functions.length; j++) {
-				toMultiply = Arrays.copyOf(functions, functions.length);
-				toMultiply[i] = functions[i].getSimplifiedDerivative(varID);
-			}
+			GeneralFunction[] toMultiply = Arrays.copyOf(functions, functions.length);
+			toMultiply[i] = functions[i].getSimplifiedDerivative(varID);
 			toAdd[i] = new Product(toMultiply);
 		}
-
 		return new Sum(toAdd);
 	}
 
 	public Product clone() {
-		GeneralFunction[] toMultiply = new GeneralFunction[functions.length];
-		for (int i = 0; i < functions.length; i++)
-			toMultiply[i] = functions[i].clone();
-		return new Product(toMultiply);
+		return new Product(ArrayTools.deepClone(functions));
 	}
 
 
 	public GeneralFunction simplify() {
 		Product currentFunction = simplifyInternal();
 		if (currentFunction.isTimesZero())
-			return new Constant((0));
+			return new Constant(0);
 		else if (currentFunction.getFunctions().length <= 1)
 			return currentFunction.simplifyTrivialElement();
 		else
-			return currentFunction.distributeAll();
+			return currentFunction.distributeAll(); // TODO maybe make this a setting?
 	}
 
 	public Product simplifyInternal() {
@@ -96,13 +88,10 @@ public class Product extends CommutativeFunction {
 	 * @return true if the {@link Product} contains a 0 {@link Constant}
 	 */
 	public boolean isTimesZero() {
-		for (GeneralFunction function : functions) {
-			if (function instanceof Constant constant) {
-				if (constant.constant == 0) {
-					return true;
-				}
-			}
-		}
+		for (GeneralFunction function : functions)
+			if (function instanceof Constant constant && constant.constant == 0)
+				return true;
+
 		return false;
 	}
 
@@ -122,13 +111,14 @@ public class Product extends CommutativeFunction {
 					if (first.getFunction2().equalsFunction(second.getFunction2())) {
 						simplifiedTerms[j] = new Pow(new Sum(first.getFunction1(), second.getFunction1()), first.getFunction2());
 						simplifiedTerms = ArrayTools.removeFunctionAt(simplifiedTerms, i);
-						return (new Product(simplifiedTerms)).simplifyInternal();
+						return new Product(simplifiedTerms).simplifyInternal();
 					}
 				} else {
 					throw new IllegalStateException("All functions should have been converted to powers.");
 				}
 			}
 		}
+
 		if (Settings.trustImmutability)
 			return this;
 		else

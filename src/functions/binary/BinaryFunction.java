@@ -72,16 +72,15 @@ public abstract class BinaryFunction extends GeneralFunction {
 	}
 
 	public int compareSelf(GeneralFunction that) {
-		if (that instanceof BinaryFunction binaryFunction) {
+		if (that instanceof BinaryFunction binaryFunction)
 			if (!this.function1.equalsFunction(binaryFunction.function1))
 				return this.function1.compareTo(binaryFunction.function1);
-			if (!this.function2.equalsFunction(binaryFunction.function2))
+			else if (!this.function2.equalsFunction(binaryFunction.function2))
 				return this.function2.compareTo(binaryFunction.function2);
-		} else {
+			else
+				throw new IllegalStateException("This code in BinaryFunction.compareSelf should never run");
+		else
 			throw new IllegalCallerException("Illegally called BinaryFunction.compareSelf on a non-BinaryFunction");
-		}
-		System.out.println("This is never supposed to happen, binaryFunction compareSelf"); //TODO I think that this is bad, is this really needed
-		return 0;
 	}
 
 	/**

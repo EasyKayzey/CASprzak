@@ -46,14 +46,13 @@ public class Integral extends TransformFunction {
 
 	@Override
 	public int compareSelf(GeneralFunction that) {
-		if (that instanceof Integral integral) {
+		if (that instanceof Integral integral)
 			if (respectTo == integral.respectTo)
 				return operand.compareTo(integral.operand);
 			else
 				return respectTo - integral.respectTo;
-		} else {
-			return 1;
-		}
+		else
+			throw new IllegalStateException("Comparing a " + this.getClass().getSimpleName() + " with a " + that.getClass().getSimpleName() + " using compareSelf");
 	}
 
 	@Override

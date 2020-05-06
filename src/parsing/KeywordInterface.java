@@ -142,7 +142,7 @@ public class KeywordInterface {
 		String[] splitInput = spaces.split(input, 2);
 		double[] values = Arrays.stream(keywordSplitter.split(splitInput[1])).mapToDouble(Parser::getConstant).toArray();
 		Map<Character, Double> map = new HashMap<>();
-		for (int i = 0; i < values.length; i++)
+		for (int i = 0; i < values.length; i++) // TODO make this use "eval x x=1" notation
 			map.put(Variable.variables.get(i), values[i]);
 		return parseStored(splitInput[0]).evaluate(map);
 	}

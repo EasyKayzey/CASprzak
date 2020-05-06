@@ -60,7 +60,7 @@ public class KeywordInterface {
 			case "pv", "vars", "printvars"										-> printVariables();
 			case "pc", "printc", "printconstants"								-> printConstants();
 			case "cf", "clearfun", "clearfunctions"								-> clearFunctions();
-			case "cv", "clearvars"												-> clearVariables();
+			case "cv", "clearvars", "clearvariables"							-> clearVariables();
 			case "ss", "sset", "sets", "setsetting"								-> setSettings(splitInput[1]);
 			case "ps", "settings", "printsettings"								-> printSettings();
 			case "svt", "setvarsto", "setvariablesto"							-> setVariablesTo(splitInput[1]);

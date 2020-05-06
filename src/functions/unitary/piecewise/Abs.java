@@ -26,7 +26,6 @@ public class Abs extends PiecewiseFunction {
 		return new Product(operand.getSimplifiedDerivative(varID), new Sign(operand));
 	}
 
-
 	public UnitaryFunction me(GeneralFunction operand) {
 		return new Abs(operand);
 	}

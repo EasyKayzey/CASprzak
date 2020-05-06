@@ -6,9 +6,7 @@ import functions.special.Constant;
 import org.jetbrains.annotations.NotNull;
 import tools.ArrayTools;
 
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
+import java.util.*;
 import java.util.function.DoubleBinaryOperator;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -68,16 +66,9 @@ public abstract class CommutativeFunction extends GeneralFunction {
 	 * @return current {@link CommutativeFunction} after simplifying the {@link #identityValue}
 	 */
 	public CommutativeFunction simplifyIdentity() {
-		GeneralFunction[] toPut = getFunctions();
-		for (int i = 0; i < toPut.length; i++) {
-			if (toPut[i] instanceof Constant constant) {
-				if (constant.constant == identityValue) {
-					toPut = ArrayTools.removeFunctionAt(toPut, i);
-					i--;
-				}
-			}
-		}
-		return me(toPut);
+		List<GeneralFunction> toPut = new ArrayList<>(Arrays.asList(functions));
+		toPut.removeIf(generalFunction -> generalFunction instanceof Constant constant && constant.constant == identityValue);
+		return me(toPut.toArray(new GeneralFunction[0]));
 	}
 
 	/**
@@ -87,14 +78,19 @@ public abstract class CommutativeFunction extends GeneralFunction {
 	public CommutativeFunction simplifyConstants() {
 		for (int i = 1; i < functions.length; i++) {
 			for (int j = 0; j < i; j++) {
-				if (functions[i] instanceof Constant first && functions[j] instanceof Constant second) {
-					GeneralFunction[] toOperate = ArrayTools.deepClone(functions);
+				if (functions[i] instanceof Constant first && functions[j] instanceof Constant second) { // TODO maybe make this not recurse? not sure
+					GeneralFunction[] toOperate;
+					if (Settings.trustImmutability)
+						toOperate = functions.clone();
+					else
+						toOperate = ArrayTools.deepClone(functions);
 					toOperate[i] = new Constant(operation.applyAsDouble(first.constant, second.constant));
 					toOperate = ArrayTools.removeFunctionAt(toOperate, j);
 					return me(toOperate).simplifyConstants();
 				}
 			}
 		}
+
 		if (Settings.trustImmutability)
 			return this;
 		else
@@ -107,11 +103,9 @@ public abstract class CommutativeFunction extends GeneralFunction {
 	 * @return current {@link CommutativeFunction} after instance of the same {@link CommutativeFunction} have been pulled out and each term added to {@link #functions}
 	 */
 	public CommutativeFunction simplifyPull() {
-		for (int i = 0; i < functions.length; i++) {
-			if (this.getClass().equals(functions[i].getClass())) {
-				return (me(ArrayTools.pullUp(functions, ((CommutativeFunction) functions[i]).getFunctions(), i))).simplifyPull();
-			}
-		}
+		for (int i = 0; i < functions.length; i++)
+			if (this.getClass().equals(functions[i].getClass()))
+				return me(ArrayTools.pullUp(functions, ((CommutativeFunction) functions[i]).getFunctions(), i)).simplifyPull();
 		if (Settings.trustImmutability)
 			return this;
 		else
@@ -125,9 +119,9 @@ public abstract class CommutativeFunction extends GeneralFunction {
 	public GeneralFunction simplifyTrivialElement() {
 		if (functions.length == 0)
 			return new Constant(identityValue);
-		if (functions.length == 1)
+		else if (functions.length == 1)
 			return functions[0].simplify();
-		if (Settings.trustImmutability)
+		else if (Settings.trustImmutability)
 			return this;
 		else
 			return clone();
@@ -165,6 +159,7 @@ public abstract class CommutativeFunction extends GeneralFunction {
 	public GeneralFunction substituteAll(Predicate<? super GeneralFunction> test, Function<? super GeneralFunction, ? extends GeneralFunction> replacer) {
 		if (test.test(this))
 			return replacer.apply(this);
+
 		GeneralFunction[] newFunctions = new GeneralFunction[functions.length];
 		for (int i = 0; i < functions.length; i++)
 			newFunctions[i] = functions[i].substituteAll(test, replacer);
@@ -175,7 +170,8 @@ public abstract class CommutativeFunction extends GeneralFunction {
 	public boolean equalsFunction(GeneralFunction that) {
 		if (that instanceof CommutativeFunction function && this.getClass().equals(that.getClass()))
 			return ArrayTools.deepEquals(functions, function.getFunctions());
-		return false;
+		else
+			return false;
 	}
 
 	public int compareSelf(GeneralFunction that) {
@@ -184,15 +180,13 @@ public abstract class CommutativeFunction extends GeneralFunction {
 				return functions.length - function.getFunctionsLength();
 			GeneralFunction[] thisFunctions = functions;
 			GeneralFunction[] thatFunctions = function.getFunctions();
-			for (int i = 0; i < thisFunctions.length; i++) {
+			for (int i = 0; i < thisFunctions.length; i++)
 				if (!thisFunctions[i].equalsFunction(thatFunctions[i]))
 					return thisFunctions[i].compareTo(thatFunctions[i]);
-			}
 		} else {
 			throw new IllegalCallerException("Illegally called CommutativeFunction.compareSelf on a non-CommutativeFunction");
 		}
-		System.out.println("This isn't supposed to happen. Check CompareSelf of CommutativeFunction and GeneralFunction.compareTo");
-		return 0;
+		throw new IllegalStateException("This code in CommutativeFunction.compareSelf should never run.");
 	}
 
 

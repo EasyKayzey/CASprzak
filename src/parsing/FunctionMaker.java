@@ -29,7 +29,7 @@ public class FunctionMaker {
 		return switch (functionName) {
 			case "-" 		-> new Product(DefaultFunctions.NEGATIVE_ONE, function);
 			case "/" 		-> new Pow(DefaultFunctions.NEGATIVE_ONE, function);
-			case "!" 		-> Factorial.defaultFactorial(function);
+			case "!" 		-> Factorial.defaultFactorial(function); //TODO implement integral and d/dx here
 			case "dirac" 	-> new Dirac(function);
 			case "sqrt" 	-> new Pow(DefaultFunctions.HALF, function);
 			case "sign" 	-> new Sign(function);

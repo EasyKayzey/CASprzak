@@ -40,7 +40,7 @@ public class KeywordInterface {
 		String[] splitInput = spacesAndDdx.split(input, 2);
 		Object ret = switch (splitInput[0]) {
 			case "demo"															-> CASDemo.runDemo();
-			case "pd", "pdiff", "partial", "pdifferentiate", "d/d"				-> partialDiff(splitInput[1]);
+			case "pd", "pdiff", "partial", "pdifferentiate", "d/d"				-> partialDiff(splitInput[1]); // TODO make it so that d/d gives a PartialDerivative instead of running pd
 			case "pdn", "pdiffn", "partialn", "pdifferentiaten"					-> partialDiffNth(splitInput[1]);
 			case "eval", "evaluate"												-> evaluate(splitInput[1]);
 			case "simp", "simplify"												-> simplify(splitInput[1]);

@@ -34,7 +34,7 @@ public class Cot extends TrigFunction {
 
 	@Override
 	public GeneralFunction getDerivative(char varID) {
-		return DefaultFunctions.negative(new Product(new Pow(DefaultFunctions.TWO, new Csc(operand)), operand.getSimplifiedDerivative(varID)));
+		return new Product(DefaultFunctions.NEGATIVE_ONE, new Pow(DefaultFunctions.TWO, new Csc(operand)), operand.getSimplifiedDerivative(varID));
 	}
 
 	public UnitaryFunction me(GeneralFunction operand) {

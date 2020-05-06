@@ -23,7 +23,7 @@ public class Acsch extends InverseTrigFunction {
 
 	@Override
 	public GeneralFunction getDerivative(char varID) {
-		return DefaultFunctions.negative(new Product(operand.getSimplifiedDerivative(varID), DefaultFunctions.reciprocal(new Product(operand, DefaultFunctions.sqrt(new Sum(DefaultFunctions.ONE, DefaultFunctions.negative(new Pow(DefaultFunctions.TWO, operand))))))));
+		return new Product(DefaultFunctions.NEGATIVE_ONE, operand.getSimplifiedDerivative(varID), DefaultFunctions.reciprocal(new Product(operand, DefaultFunctions.sqrt(new Sum(DefaultFunctions.ONE, DefaultFunctions.negative(new Pow(DefaultFunctions.TWO, operand)))))));
 	}
 
 	/**

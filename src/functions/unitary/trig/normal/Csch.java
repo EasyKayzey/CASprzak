@@ -21,7 +21,7 @@ public class Csch extends TrigFunction {
 
 	@Override
 	public GeneralFunction getDerivative(char varID) {
-		return DefaultFunctions.negative(new Product(operand.getSimplifiedDerivative(varID), new Csch(operand), new Coth(operand)));
+		return new Product(DefaultFunctions.NEGATIVE_ONE, operand.getSimplifiedDerivative(varID), new Csch(operand), new Coth(operand));
 	}
 
 	/**

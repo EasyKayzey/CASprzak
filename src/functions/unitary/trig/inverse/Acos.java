@@ -33,7 +33,7 @@ public class Acos extends InverseTrigFunction {
 
 	@Override
 	public GeneralFunction getDerivative(char varID) {
-		return DefaultFunctions.negative(new Product(operand.getSimplifiedDerivative(varID), new Pow(DefaultFunctions.NEGATIVE_HALF, (new Sum(DefaultFunctions.ONE, DefaultFunctions.negative(new Pow(DefaultFunctions.TWO, operand)))))));
+		return new Product(DefaultFunctions.NEGATIVE_ONE, operand.getSimplifiedDerivative(varID), new Pow(DefaultFunctions.NEGATIVE_HALF, (new Sum(DefaultFunctions.ONE, DefaultFunctions.negative(new Pow(DefaultFunctions.TWO, operand))))));
 	}
 
 	public UnitaryFunction me(GeneralFunction operand) {

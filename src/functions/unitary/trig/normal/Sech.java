@@ -23,7 +23,7 @@ public class Sech extends TrigFunction {
 
 	@Override
 	public GeneralFunction getDerivative(char varID) {
-		return DefaultFunctions.negative(new Product(operand.getSimplifiedDerivative(varID), new Sech(operand), new Tanh(operand)));
+		return new Product(DefaultFunctions.NEGATIVE_ONE, operand.getSimplifiedDerivative(varID), new Sech(operand), new Tanh(operand));
 	}
 
 	/**

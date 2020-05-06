@@ -12,6 +12,8 @@ public class CASDemo {
 		EVAL,
 		STO,
 		SIMP,
+		VAR,
+		SUB,
 		PD,
 		EXIT,
 	}
@@ -35,6 +37,8 @@ public class CASDemo {
 			case EVAL -> eval();
 			case STO -> sto();
 			case SIMP -> simp();
+			case VAR -> var();
+			case SUB -> sub();
 			case PD -> pd();
 		}
 	}
@@ -130,6 +134,32 @@ public class CASDemo {
 	}
 
 	private static void simp() {
+		System.out.println("Now, one of the most important features of our CAS is its ability to simplify expressions.");
+		sleep(2);
+		System.out.println("For example");
+		sleep(1);
+		System.out.println("sto d x^2*(0*ln(x)+(2*1)/x)");
+		sleep(1.5);
+		System.out.println(KeywordInterface.useKeywords("sto d x^2*(0*ln(x)+(2*1)/x)"));
+		sleep(2);
+		System.out.println("This expression looks complicated, right?");
+		sleep(2);
+		System.out.println("Try typing \"simp d\" to return a simplified form of the expression");
+		if (!tryInput(s -> "simp".equals(s.substring(0, 4)), "Begin your input with 'simp' to demonstrate the simplification feature of the UI."))
+			return;
+		sleep(1);
+		System.out.println("Wow!, quite an improvement");
+		sleep(2);
+		System.out.println("For those who are curious, that was the general formula of the derivative of f(x)^g(x) applied to x^2.");
+		sleep(3);
+
+	}
+
+	private static void var() {
+
+	}
+
+	private static void sub() {
 
 	}
 

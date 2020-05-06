@@ -18,9 +18,9 @@ public class Variable extends SpecialFunction {
 			add('y');
 			add('z');
 		}
-	}; //TODO implement sortVariables here and in KeywordInterface, and possibly remove FunctionVariables
+	}; //TODO implement sortVariables here and in KeywordInterface
 
-	private static int variablesEnd = 3;
+	private static int variablesEnd = 3; // TODO possible remove FunctionVariables
 
 	/**
 	 * The index of this variable in {@link #variables}
@@ -40,7 +40,7 @@ public class Variable extends SpecialFunction {
 	 * @param variables array of variable names
 	 */
 	public static void setVariablesArray(Character... variables) {
-		Variable.variables = Arrays.asList(variables);
+		Variable.variables = new ArrayList<>(Arrays.asList(variables));
 	}
 
 
@@ -80,7 +80,7 @@ public class Variable extends SpecialFunction {
 
 
 	public GeneralFunction getDerivative(char varID) {
-		return new Constant((this.varID == varID ? 1 : 0));
+		return new Constant(this.varID == varID ? 1 : 0);
 	}
 
 	public double evaluate(Map<Character, Double> variableValues) {

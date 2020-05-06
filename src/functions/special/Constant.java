@@ -16,7 +16,7 @@ public class Constant extends SpecialFunction {
 			put("pi", Math.PI);
 			put("e", Math.E);
 		}
-	};
+	}; // TODO when unicode support is implemented, possibly migrate to using characters and implement /pi
 
 	/**
 	 * The numerical value of the constant
@@ -38,13 +38,13 @@ public class Constant extends SpecialFunction {
 
 	/**
 	 * Constructs a new special Constant from its String
-	 * @param constantString The string of the special Constant
+	 * @param constantKey The string of the special Constant
 	 */
 	@SuppressWarnings("NullableProblems")
-	public Constant(String constantString) {
-		if (!isSpecialConstant(constantString))
-			throw new IllegalArgumentException(constantString + " is not a special constant.");
-		constantKey = constantString;
+	public Constant(String constantKey) {
+		if (!isSpecialConstant(constantKey))
+			throw new IllegalArgumentException(constantKey + " is not a special constant.");
+		this.constantKey = constantKey;
 		constant = specialConstants.get(constantKey);
 	}
 
@@ -92,7 +92,8 @@ public class Constant extends SpecialFunction {
 	public String toString() {
 		if (constantKey != null)
 			return constantKey;
-		return String.valueOf(constant);
+		else
+			return String.valueOf(constant);
 	}
 
 	public GeneralFunction getDerivative(char varID) {
@@ -102,13 +103,14 @@ public class Constant extends SpecialFunction {
 	public GeneralFunction clone() {
 		if (constantKey == null)
 			return new Constant(constant);
-		else return new Constant(constantKey);
+		else
+			return new Constant(constantKey);
 	}
 
 	public GeneralFunction simplify() {
 		if (constantKey == null)
 			for (Map.Entry<String, Double> entry : specialConstants.entrySet())
-				if (constant == entry.getValue())
+				if (Math.abs(constant - entry.getValue()) < Settings.equalsMargin)
 					return new Constant(entry.getKey());
 		return this;
 	}
@@ -123,16 +125,15 @@ public class Constant extends SpecialFunction {
 		return (that instanceof Constant) && (Math.abs(constant - ((Constant) that).constant) < Settings.equalsMargin);
 	}
 
+	@SuppressWarnings({"VariableNotUsedInsideIf", "ConstantConditions"})
 	public int compareSelf(GeneralFunction that) {
-		if (constantKey != null) {
-			if (((Constant) that).constantKey != null)
-				//noinspection ConstantConditions
-				return this.constantKey.compareTo(((Constant) that).constantKey);
+		if (constantKey != null && ((Constant) that).constantKey != null)
+			return this.constantKey.compareTo(((Constant) that).constantKey);
+		else if (constantKey != null) // && ((Constant) that).constantKey == null
 			return -1;
-		}
-		//noinspection VariableNotUsedInsideIf
-		if (((Constant) that).constantKey != null)
+		else if (((Constant) that).constantKey != null) // && constantKey == null
 			return 1;
-		return (int) Math.signum(this.constant - ((Constant) that).constant);
+		else
+			return (int) Math.signum(this.constant - ((Constant) that).constant);
 	}
 }

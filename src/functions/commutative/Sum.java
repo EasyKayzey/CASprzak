@@ -73,7 +73,7 @@ public class Sum extends CommutativeFunction {
 	 * @return a {@link Sum} where like terms are added together
 	 */
 	public Sum combineLikeTerms() {
-		GeneralFunction[] combinedTerms = ArrayTools.deepClone(functions);
+		GeneralFunction[] combinedTerms = ArrayTools.deepClone(functions);// TODO possibly make this use StripConstants or something similar
 		for (int a = 0; a < combinedTerms.length; a++)
 			if (!(combinedTerms[a] instanceof Product product && product.getFunctions()[0] instanceof Constant))
 				combinedTerms[a] = new Product(DefaultFunctions.ONE, combinedTerms[a]).simplifyPull();

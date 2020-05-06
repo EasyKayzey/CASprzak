@@ -27,9 +27,8 @@ public class PreProcessor {
 			} else if ("(".equals(token)) {
 				operators.push(token);
 			} else if (")".equals(token)) {
-				while (!"(".equals(operators.peek())) {
+				while (!"(".equals(operators.peek()))
 					postfix.add(operators.pop());
-				}
 				operators.pop();
 			} else if (Parser.unitaryOperations.contains(token) || Parser.binaryOperations.contains(token)) {
 				operators.push(token);

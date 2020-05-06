@@ -50,8 +50,8 @@ public abstract class UnitaryFunction extends GeneralFunction {
 	}
 
 	/**
-	 * Returns the {@link UnitaryFunction} with {@link #operand}.{@link #simplify()}
-	 * @return the {@link UnitaryFunction} with {@link #operand}.{@link #simplify()}
+	 * Returns a copy of this {@link UnitaryFunction} with the {@link #operand} simplified using {@link GeneralFunction#simplify()}
+	 * @return a copy of this {@link UnitaryFunction} with the {@link #operand} simplified using {@link GeneralFunction#simplify()}
 	 */
 	public UnitaryFunction simplifyInternal() {
 		return me(operand.simplify());
@@ -73,7 +73,7 @@ public abstract class UnitaryFunction extends GeneralFunction {
 	}
 
 
-	public static UnitaryFunction newInstanceOf(Class<?> type, GeneralFunction operand) {
+	public static UnitaryFunction newInstanceOf(Class<? extends UnitaryFunction> type, GeneralFunction operand) {
 		try {
 			Constructor<?>[] constructors = type.getConstructors();
 			for (Constructor<?> constructor : constructors)

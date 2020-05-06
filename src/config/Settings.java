@@ -14,12 +14,13 @@ public class Settings {
 
 	static {
 		//noinspection ConstantConditions
-		if (readProperties)
+		if (readProperties) {
 			try {
 				SettingsParser.parseConfig();
 			} catch (IOException e) {
 				System.out.println("Properties file not found. Using defaults...");
 			}
+		}
 	}
 
 	private Settings(){}

@@ -11,6 +11,7 @@ public class CASDemo {
 		EXIT,
 		INTRO,
 		EVAL,
+		STO,
 		PD,
 	}
 
@@ -70,7 +71,7 @@ public class CASDemo {
 		sleep(1.5);
 		System.out.println("This is a quick demo to help get you started.");
 		sleep(2);
-		System.out.println("First, try typing in a function like x^2 or cos(x).");
+		System.out.println("First, try typing in a function like \"x^2\" or \"cos(x)\".");
 		if (!tryInput(s -> true, null))
 			return;
 		sleep(1);
@@ -87,10 +88,18 @@ public class CASDemo {
 
 	private static void eval() {
 		System.out.println("Now, lets do something with our function like evaluating it.");
-		System.out.println("Try tying in \"eval _ 2\" for example to evaluate your function at point 2");
+		sleep(1);
+		System.out.println("Try typing in \"eval _ 2\" for example to evaluate your function at point 2");
 		if (!tryInput(s -> "eval".equals(s.substring(0, 4)), "Begin your input with 'eval' to demonstrate the evaluation feature of the UI."))
 			return;
-		System.out.println("more eval things");
+		sleep(1);
+		System.out.println("Now, try entering an underscore");
+		if (!tryInput("_"::equals, "Please enter an underscore"))
+			return;
+		sleep(1);
+		System.out.println("Notice how underscore now saves the result from the evaluation");
+		sleep(1);
+		currentState = DemoState.STO;
 	}
 
 	private static void pd() {

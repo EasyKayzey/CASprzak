@@ -11,6 +11,7 @@ import tools.singlevariable.Extrema;
 import tools.singlevariable.NumericalIntegration;
 import tools.singlevariable.Solver;
 import tools.singlevariable.TaylorSeries;
+import ui.CASDemo;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
@@ -38,6 +39,7 @@ public class KeywordInterface {
 			return prev;
 		String[] splitInput = spacesAndDdx.split(input, 2);
 		Object ret = switch (splitInput[0]) {
+			case "demo"															-> CASDemo.runDemo();
 			case "pd", "pdiff", "partial", "pdifferentiate", "d/d"				-> partialDiff(splitInput[1]);
 			case "pdn", "pdiffn", "partialn", "pdifferentiaten"					-> partialDiffNth(splitInput[1]);
 			case "eval", "evaluate"												-> evaluate(splitInput[1]);

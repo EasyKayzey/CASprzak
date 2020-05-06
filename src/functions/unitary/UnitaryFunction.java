@@ -73,7 +73,7 @@ public abstract class UnitaryFunction extends GeneralFunction {
 	}
 
 
-	public static UnitaryFunction newInstanceOf(Class<? extends UnitaryFunction> type, GeneralFunction operand) {
+	public static UnitaryFunction newInstanceOf(Class<?> type, GeneralFunction operand) {
 		try {
 			Constructor<?>[] constructors = type.getConstructors();
 			for (Constructor<?> constructor : constructors)

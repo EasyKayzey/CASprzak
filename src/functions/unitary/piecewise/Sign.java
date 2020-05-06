@@ -8,7 +8,7 @@ import tools.DefaultFunctions;
 import java.util.Map;
 
 
-public class Sign extends UnitaryFunction {
+public class Sign extends PiecewiseFunction {
 	/**
 	 * Constructs a new Sign
 	 * @param operand The function which sign is operating on

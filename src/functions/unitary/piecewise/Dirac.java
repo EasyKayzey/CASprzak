@@ -7,7 +7,7 @@ import tools.DefaultFunctions;
 import java.util.Map;
 
 
-public class Dirac extends UnitaryFunction {
+public class Dirac extends PiecewiseFunction {
 	/**
 	 * Constructs a new Dirac
 	 * @param operand The function which the Dirac-Delta function is operating on

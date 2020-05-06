@@ -7,7 +7,7 @@ import functions.unitary.UnitaryFunction;
 import java.util.Map;
 
 
-public class Abs extends UnitaryFunction {
+public class Abs extends PiecewiseFunction {
 	/**
 	 * Constructs a new Abs
 	 * @param operand The function which absolute value is operating on

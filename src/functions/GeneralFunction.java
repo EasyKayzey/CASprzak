@@ -7,7 +7,8 @@ import functions.commutative.Product;
 import functions.commutative.Sum;
 import functions.special.Constant;
 import functions.special.Variable;
-import functions.unitary.UnitaryFunction;
+import functions.unitary.combo.Factorial;
+import functions.unitary.piecewise.PiecewiseFunction;
 import functions.unitary.specialcases.SpecialCaseBinaryFunction;
 import functions.unitary.transforms.Integral;
 import functions.unitary.transforms.TransformFunction;
@@ -33,11 +34,12 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 			Product.class,
 			Pow.class,
 			Logb.class,
+			PiecewiseFunction.class,
+			Factorial.class,
 			SpecialCaseBinaryFunction.class, //TODO add the rest of unitary functions
 			TransformFunction.class,
 			InverseTrigFunction.class,
 			TrigFunction.class,
-			UnitaryFunction.class,
 			Sum.class,
 			Integral.class,//TODO integral is part of TransformFunction
 	};

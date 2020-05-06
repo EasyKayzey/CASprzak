@@ -48,7 +48,7 @@ public class PartialDerivative extends TransformFunction {
 			else
 				return respectTo - pd.respectTo;
 		} else {
-			return 1;
+			throw new IllegalStateException("Comparing a " + this.getClass().getSimpleName() + " with a " + that.getClass().getSimpleName() + " using compareSelf");
 		}
 	}
 

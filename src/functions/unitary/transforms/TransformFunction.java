@@ -11,11 +11,11 @@ public abstract class TransformFunction extends UnitaryFunction {
 
 	/**
 	 * Constructs a new CalcFunction
-	 * @param integrand The operand of the CalcFunction
+	 * @param operand The operand of the CalcFunction
 	 * @param respectTo The variable that the CalcFunction operates with respect to
 	 */
-	public TransformFunction(GeneralFunction integrand, char respectTo) {
-		super(integrand);
+	public TransformFunction(GeneralFunction operand, char respectTo) {
+		super(operand);
 		this.respectTo = respectTo;
 	}
 

@@ -138,7 +138,7 @@ public class KeywordInterface {
 	/**
 	 * eval [function] [values]
 	 */
-	public static double evaluate(String input) {
+	public static double evaluate(String input) {//TODO make eval y 1 works cause y isnt first variable
 		String[] splitInput = spaces.split(input, 2);
 		double[] values = Arrays.stream(keywordSplitter.split(splitInput[1])).mapToDouble(Parser::getConstant).toArray();
 		Map<Character, Double> map = new HashMap<>();

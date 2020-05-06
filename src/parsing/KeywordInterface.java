@@ -63,7 +63,7 @@ public class KeywordInterface {
 			case "ps", "settings", "printsettings"								-> printSettings();
 			case "svt", "setvarsto", "setvariablesto"							-> setVariablesTo(splitInput[1]);
 			case "int", "integral"												-> integral(splitInput[1]);
-			default 															-> null;
+			default 															-> null; //TODO add "help" and "demo"
 		};
 		if (ret == null) {
 			if (storedFunctions.containsKey(input)) {

@@ -3,14 +3,18 @@ package functions;
 import config.Settings;
 import functions.binary.Logb;
 import functions.binary.Pow;
-import functions.commutative.Sum;
 import functions.commutative.Product;
+import functions.commutative.Sum;
 import functions.special.Constant;
 import functions.special.Variable;
 import functions.unitary.UnitaryFunction;
+import functions.unitary.specialcases.SpecialCaseBinaryFunction;
+import functions.unitary.transforms.Integral;
+import functions.unitary.transforms.TransformFunction;
+import functions.unitary.trig.inverse.InverseTrigFunction;
+import functions.unitary.trig.normal.TrigFunction;
 import org.jetbrains.annotations.NotNull;
 import tools.MiscTools;
-import functions.unitary.transforms.Integral;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,9 +33,13 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 			Product.class,
 			Pow.class,
 			Logb.class,
+			SpecialCaseBinaryFunction.class, //TODO add the rest of unitary functions
+			TransformFunction.class,
+			InverseTrigFunction.class,
+			TrigFunction.class,
 			UnitaryFunction.class,
 			Sum.class,
-			Integral.class,//TODO integral is part of Unitary Function
+			Integral.class,//TODO integral is part of TransformFunction
 	};
 
 	/**
@@ -146,7 +154,7 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 	 * @param that the {@link GeneralFunction} compared to
 	 * @return comparison
 	 */
-	protected abstract int compareSelf(GeneralFunction that);
+	protected abstract int compareSelf(GeneralFunction that); //TODO make compareTos inside each abstract class actually check between classes
 
 	/**
 	 * Two different GeneralFunction types are sorted according to {@link #sortOrder} and {@link MiscTools#findClassValue(GeneralFunction)}, and same types are sorted using {@link #compareSelf(GeneralFunction)}

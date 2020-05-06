@@ -48,21 +48,21 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 	protected final HashMap<Character, GeneralFunction> derivatives = new HashMap<>();
 
 	/**
-	 * Returns a String representation of the GeneralFunction
-	 * @return String representation of function
+	 * Returns a String representation of this GeneralFunction
+	 * @return String representation of this function
 	 */
 	public abstract String toString();
 
 	/**
-	 * Returns a clone of the {@link GeneralFunction}
-	 * @return a clone of the GeneralFunction
+	 * Returns a clone of this {@link GeneralFunction}
+	 * @return a clone of the function
 	 */
 	public abstract GeneralFunction clone();
 
 	/**
-	 * Returns the derivative of the function, simplified
+	 * Returns the derivative of this {@link GeneralFunction}, simplified
 	 * @param varID the ID of the variable being differentiated
-	 * @return the derivative of the {@link GeneralFunction} it is called on, simplified
+	 * @return the derivative of this function , simplified
 	 */
 	public GeneralFunction getSimplifiedDerivative(char varID) {
 		if (Settings.cacheDerivatives && derivatives.containsKey(varID))
@@ -82,12 +82,11 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 	 */
 	public GeneralFunction getNthDerivative(char varID, int N) {
 		GeneralFunction currentFunction = this;
-		while (N > 0) {
+		for (int i = 0; i < N; i++)
 			currentFunction = currentFunction.getSimplifiedDerivative(varID);
-			N--;
-		}
+
 		return currentFunction;
-	}
+}
 
 	/**
 	 * Returns the value of the derivative at point
@@ -119,7 +118,7 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 	}
 
 	/**
-	 * Fixes some variables to the values given in the map by substituting in a {@link Constant} for those {@link Variable}s
+	 * Fixes some variables to the values given in the map by substituting in a {@link Constant} for each of those {@link Variable}s
 	 * @param values the map defining the substitutions to be made
 	 * @return a new function with the substitutions made
 	 */
@@ -166,7 +165,12 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 			return 0;
 		else if (this.getClass().equals(that.getClass()))
 			return compareSelf(that);
-		else
-			return (MiscTools.findClassValue(this) - MiscTools.findClassValue(that));
+		else {
+			int classDelta = MiscTools.findClassValue(this) - MiscTools.findClassValue(that);
+			if (classDelta != 0)
+				return classDelta;
+			else
+				return this.getClass().getSimpleName().compareTo(that.getClass().getSimpleName()); // TODO this isn't a great fix for the comparison problem
+		}
 	}
 }

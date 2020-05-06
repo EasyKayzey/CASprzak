@@ -14,6 +14,10 @@ public class RFactorial extends Factorial {
 	}
 
 
+	public GeneralFunction classForm() throws UnsupportedOperationException {
+		throw new UnsupportedOperationException("RFactorial has no class form.");
+	}
+
 	public UnitaryFunction me(GeneralFunction function) {
 		return new RFactorial(function);
 	}
@@ -29,7 +33,7 @@ public class RFactorial extends Factorial {
 			throw new IllegalStateException("RFactorial cannot be used if Settings.enforceIntegerOperations is not enabled.");
 		int argument = MiscTools.toInteger(operand.evaluate(variableValues));
 		long prod = 1;
-		for (int i = 1; i <= argument; i++)
+		for (int i = 2; i <= argument; i++)
 			prod *= i;
 		return prod;
 	}

@@ -11,19 +11,15 @@ import tools.MiscTools;
 import java.util.Map;
 
 public class SFactorial extends Factorial {
-	/**
-	 * Constructs a new UnitaryFunction
-	 *
-	 * @param operand The {@link GeneralFunction} which will be operated on
-	 */
+
 	public SFactorial(GeneralFunction operand) {
 		super(operand);
 	}
 
-	private GeneralFunction classForm() {
+
+	public GeneralFunction classForm() {
 		return new Product(new Pow(DefaultFunctions.HALF, new Product(DefaultFunctions.TWO, DefaultFunctions.PI, operand)), new Pow(operand, new Product(operand, DefaultFunctions.reciprocal(DefaultFunctions.E))));
 	}
-
 
 	public UnitaryFunction me(GeneralFunction function) {
 			return new SFactorial(function);

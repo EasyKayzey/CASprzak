@@ -7,14 +7,24 @@ import tools.exceptions.NotYetImplementedException;
 
 public abstract class Factorial extends UnitaryFunction {
 
+	/**
+	 * Constructs a new Factorial
+	 * @param operand the argument of the factorial
+	 */
 	public Factorial(GeneralFunction operand) {
 		super(operand);
 	}
 
+	/**
+	 * Returns this approximation of factorial in the form of a composition of other raw classes
+	 * @return the approximation as a composition of other raw classes
+	 * @throws UnsupportedOperationException if no such representation exists, e.g. in the case of recursive factorial {@link RFactorial}
+	 */
+	public abstract GeneralFunction classForm() throws UnsupportedOperationException;
+
 	public static GeneralFunction defaultFactorial(GeneralFunction input) {
 		return switch (Settings.defaultFactorial) {
 			case STIRLING -> new SFactorial(input);
-			case LANCZOS -> throw new NotYetImplementedException("LFactorial not implemented");//TODO add this or delete it
 			case RECURSIVE -> new RFactorial(input);
 		};
 	}

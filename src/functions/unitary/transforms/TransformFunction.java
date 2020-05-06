@@ -23,5 +23,6 @@ public abstract class TransformFunction extends UnitaryFunction {
 	 * Returns the transformation of the {@link UnitaryFunction#operand}
 	 * @return The the transformation of the {@link UnitaryFunction#operand}
 	 */
+	@SuppressWarnings("unused")
 	public abstract GeneralFunction execute();
 }

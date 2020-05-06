@@ -19,6 +19,9 @@ public abstract class TransformFunction extends UnitaryFunction {
 		this.respectTo = respectTo;
 	}
 
-	//TODO document execute
+	/**
+	 * Returns the transformation of the {@link UnitaryFunction#operand}
+	 * @return The the transformation of the {@link UnitaryFunction#operand}
+	 */
 	public abstract GeneralFunction execute();
 }

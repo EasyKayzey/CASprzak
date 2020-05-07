@@ -1,6 +1,7 @@
 package ui;
 
 import parsing.KeywordInterface;
+import tools.DefaultFunctions;
 
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
@@ -96,7 +97,7 @@ public class CASDemo {
 	private static void eval() {
 		System.out.println("Now, lets do something with our function like evaluating it.");
 		sleep(2.25);
-		System.out.println("Try typing in \"eval _ 2\" for example to evaluate your function at point 2.");
+		System.out.println("Try typing in \"eval _ x=2\" for example to evaluate your function at point 2.");
 		if (!tryInput(s -> "eval".equals(s.substring(0, 4)), "Begin your input with 'eval' to demonstrate the evaluation feature of the UI."))
 			return;
 		sleep(1);
@@ -119,9 +120,9 @@ public class CASDemo {
 		System.out.println("Great, we can now use the function stored whenever we want");
 		sleep(2);
 		System.out.println("As a quick example, evaluate the function that you have stored by using the character that you stored in place of the underscore");
-		sleep(2);
 		if (!tryInput(s -> "eval".equals(s.substring(0, 4)), "Begin your input with 'eval'"))
 			return;
+		sleep(2);
 		System.out.println("Good. Now here are some quick tips for using the storage feature:");
 		sleep(2);
 		System.out.println("If you store a function to character that is already used, it will be overwritten.");
@@ -151,12 +152,42 @@ public class CASDemo {
 		System.out.println("Wow!, quite an improvement");
 		sleep(2);
 		System.out.println("For those who are curious, that was the general formula of the derivative of f(x)^g(x) applied to x^2.");
-		sleep(3);
-
+		sleep(4);
+		currentState = DemoState.VAR;
 	}
 
 	private static void var() {
-
+		System.out.println("Until this point, all the expressions that we have been using have only contained one variable.");
+		sleep(2);
+		System.out.println("Type in \"vars\" to see all current variables");
+		if (!tryInput(s -> "vars".equals(s.substring(0, 4)), "Please type in 'vars' to see the variables."))
+			return;
+		sleep(1);
+		System.out.println("These are all the current variables.");
+		sleep(2);
+		System.out.println("Try adding a variable by using \"addvar t\" for example to add the variable \"t\".");
+		if (!tryInput(s -> "addvar".equals(s.substring(0, 6)), "Begin your input with 'addvar' to add variables."))
+			return;
+		sleep(1);
+		System.out.println("Now we will construct a construct a function using more than one variable.");
+		sleep(2);
+		System.out.println("Store a multivariable function using the \"sto\" command");
+		if (!tryInput(s -> "sto".equals(s.substring(0, 3)), "Begin your input with 'sto' to demonstrate the storage feature of the UI."))
+			return;
+		sleep(1);
+		System.out.println("Now, when we evaluate we are going to have to set all the variables equal to values, for example \"eval x-y x=2 y=3\".");
+		sleep(3.5);
+		System.out.println("Try evaluating your multivariable function using \"eval\"");
+		if (!tryInput(s -> "eval".equals(s.substring(0, 4)), "Begin your input with 'eval'"))
+			return;
+		sleep(1.5);
+		System.out.println("Now, some more  quick tips:");
+		sleep(2);
+		System.out.println("\"addvar\" can add several variables at a time.");
+		sleep(2);
+		System.out.println("and variables can be removed using \"removevar\" or all cleared using \"clearvars\".");
+		sleep(4);
+		currentState = DemoState.SUB;
 	}
 
 	private static void sub() {

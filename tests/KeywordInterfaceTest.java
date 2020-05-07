@@ -47,7 +47,7 @@ public class KeywordInterfaceTest {
 
     @Test
     void basicEval() {
-        double test = (double) KeywordInterface.useKeywords("eval x^2 2");
+        double test = (double) KeywordInterface.useKeywords("eval x^2 x=2");
         assertEquals(4, test);
     }
 
@@ -56,7 +56,7 @@ public class KeywordInterfaceTest {
     void basicEvalWithNewVariable() {
         KeywordInterface.useKeywords("clearvars");
         KeywordInterface.useKeywords("addvar y");
-        double test = (double) KeywordInterface.useKeywords("eval y^2 2");
+        double test = (double) KeywordInterface.useKeywords("eval y^2 y=2");
         assertEquals(4, test);
         KeywordInterface.useKeywords("clearvars");
         KeywordInterface.useKeywords("addvars x y z");
@@ -64,7 +64,7 @@ public class KeywordInterfaceTest {
 
     @Test
     void basicEvalWithThreeVariables() {
-        double test = (double) KeywordInterface.useKeywords("eval y+x+z 3 2 1");
+        double test = (double) KeywordInterface.useKeywords("eval y+x+z x=3 z=1 y=2");
         assertEquals(6, test);
     }
 

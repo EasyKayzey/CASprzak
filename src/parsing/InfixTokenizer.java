@@ -54,7 +54,7 @@ public class InfixTokenizer {
 	 */
 	public static List<String> tokenizeInfix(String infix) {
 		// Make absolute values into unitary functions
-		infix = absoluteValueStart.matcher(absoluteValueEnd.matcher(infix).replaceAll(")")).replaceAll("*\\abs(").replace("|", " abs(");
+		infix = absoluteValueStart.matcher(absoluteValueEnd.matcher(infix).replaceAll(")")).replaceAll("*\\abs(").replace("|", " \\abs(");
 		// Insert multiplication in expressions like 2x and 7(x*y+1)sin(3y)
 		infix = adjacentMultiplier.matcher(infix).replaceAll(" * ");
 		// Replace curly braces and underscores with parentheses and spaces

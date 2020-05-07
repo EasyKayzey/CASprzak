@@ -67,7 +67,7 @@ public class SearchTest {
 
     @Test
     void findVariables() {
-        GeneralFunction test = Parser.parseSimplified("x+2a+3pi^2-17x");
+        GeneralFunction test = Parser.parseSimplified("x+2a+3\\pi^2-17x");
         assertEquals(VariableTools.getAllVariables(test), Set.of('a', 'x'));
     }
 }

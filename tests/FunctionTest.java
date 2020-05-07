@@ -117,7 +117,7 @@ public class FunctionTest {
 	}
 
 	@Test void multiplyingByAdjacencyThreeTerms1() {
-		GeneralFunction test = Parser.parse("sin(pi/2)2(x)");
+		GeneralFunction test = Parser.parse("sin(\\pi/2)2(x)");
 		assertEquals(2, test.evaluate(Map.of('x',1.0)), 0.01);
 	}
 

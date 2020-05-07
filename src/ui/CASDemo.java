@@ -15,6 +15,11 @@ public class CASDemo {
 		VAR,
 		SUB,
 		PD,
+		TAY,
+		INT,
+		INTN,
+		SOL,
+		EXT,
 		EXIT,
 	}
 
@@ -40,6 +45,11 @@ public class CASDemo {
 			case VAR -> var();
 			case SUB -> sub();
 			case PD -> pd();
+			case TAY -> tay();
+			case INT -> ints();
+			case INTN -> intn();
+			case SOL -> sol();
+			case EXT -> ext();
 		}
 	}
 
@@ -128,7 +138,7 @@ public class CASDemo {
 		sleep(3);
 		System.out.println("You can see all your function characters by typing in \"printfunctions\"");
 		sleep(3);
-		System.out.println("You can also remove a function by using the \"removefunction\" command or remove all functions by using\"clearfunctions\"");
+		System.out.println("You can also remove a function by using the \"removefunction\" command or remove all functions by using \"clearfunctions\"");
 		sleep(5);
 		currentState = DemoState.SIMP;
 	}
@@ -216,8 +226,49 @@ public class CASDemo {
 	}
 
 	private static void pd() {
+		System.out.println("Another feature of our CAS is the ability to find the partial derivative of any function.");
+		sleep(3);
+		System.out.println("d/dx x^2");
+		System.out.println(KeywordInterface.useKeywords("d/dx x^2"));
+		sleep(2);
+		System.out.println("d/dx sin(x)");
+		System.out.println(KeywordInterface.useKeywords("d/dx sin(x)"));
+		sleep(2);
+		System.out.println("d/dx e^(x+y)");
+		System.out.println(KeywordInterface.useKeywords("d/dx e^(x+y)"));
+		sleep(2);
+		System.out.println("d/dx x^(x^(x^x))");
+		System.out.println(KeywordInterface.useKeywords("d/dx x^(x^(x^x))"));
+		sleep(2);
+		System.out.println("d/dy logb_{x^y+z}(2sin(y))");
+		System.out.println(KeywordInterface.useKeywords("d/dy logb_{x^y+z}(2sin(y))"));
+		sleep(4);
+		System.out.println("Now try it yourself using the \"d/d\" command.");
+		if (!tryInput(s -> "d/d".equals(s.substring(0, 3)), "Begin your input with 'd/d' to demonstrate the derivative feature of the UI."))
+			return;
+		sleep(3);
+		System.out.println("Great, you have taken the derivative of a function.");
+		currentState = DemoState.EXIT;
+	}
+
+	private static void tay() {
 
 	}
 
+	private static void ints() {
+
+	}
+
+	private static void intn() {
+
+	}
+
+	private static void sol() {
+
+	}
+
+	private static void ext() {
+
+	}
 }
 

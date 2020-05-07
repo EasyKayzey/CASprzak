@@ -181,7 +181,7 @@ public class CASDemo {
 		if (!tryInput(s -> "eval".equals(s.substring(0, 4)), "Begin your input with 'eval'"))
 			return;
 		sleep(1.5);
-		System.out.println("Now, some more  quick tips:");
+		System.out.println("Now, some more quick tips:");
 		sleep(2);
 		System.out.println("\"addvar\" can add several variables at a time.");
 		sleep(2);
@@ -191,7 +191,27 @@ public class CASDemo {
 	}
 
 	private static void sub() {
-
+		System.out.println("Now, with several variables, we can begin to substitute.");
+		sleep(2.5);
+		System.out.println("It is probably best to explain with an example:");
+		System.out.println("sub x^y y sin(y)");
+		sleep(3);
+		System.out.println(KeywordInterface.useKeywords("sub x^y y sin(x)"));
+		sleep(2.25);
+		System.out.println("As you can see it replaces all \"y\"s in the function with \"sin(x)\"");
+		sleep(2);
+		System.out.println("Now, lets try this for yourself:");
+		sleep(2);
+		System.out.println("Take your multivariable function from before and replace a variable with a function using \"sub\".");
+		if (!tryInput(s -> "sub".equals(s.substring(0, 3)), "Begin your input with 'sto' to demonstrate the substitution feature of the UI."))
+			return;
+		System.out.println("Congratulations, you have just substituted a variable for a function.");
+		sleep(2);
+		System.out.println("An important to remembers is that these changes are not saved in the function.");
+		sleep(3);
+		System.out.println("You would have to do \"sto g sub g x x^2\" for example.");
+		sleep(4);
+		currentState = DemoState.PD;
 	}
 
 	private static void pd() {

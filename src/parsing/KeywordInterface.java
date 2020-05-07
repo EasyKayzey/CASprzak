@@ -136,14 +136,16 @@ public class KeywordInterface {
 	}
 
 	/**
-	 * eval [function] [values]
+	 * eval [function] [var=val]*
 	 */
-	public static double evaluate(String input) {//TODO make eval y 1 works cause y isnt first variable
+	public static double evaluate(String input) {
 		String[] splitInput = spaces.split(input, 2);
-		double[] values = Arrays.stream(keywordSplitter.split(splitInput[1])).mapToDouble(Parser::getConstant).toArray();
+		String[] entries = keywordSplitter.split(splitInput[1]);
 		Map<Character, Double> map = new HashMap<>();
-		for (int i = 0; i < values.length; i++) // TODO make this use "eval x x=1" notation
-			map.put(Variable.variables.get(i), values[i]);
+		for (String entry : entries) {
+			String[] splitEntry = equals.split(entry);
+			map.put(MiscTools.getCharacter(splitEntry[0]), Parser.getConstant(splitEntry[1]));
+		}
 		return parseStored(splitInput[0]).evaluate(map);
 	}
 

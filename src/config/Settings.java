@@ -61,6 +61,11 @@ public class Settings {
 	public static double equalsMargin = 1e-12;
 
 	/**
+	 * Denotes whether or not expressions like sin(pi/2) must be escaped to \sin(\pi/2). Enabling this will significantly reduce issues.
+	 */
+	public static boolean enforceEscapes = false;
+
+	/**
 	 * Denotes whether functions of constants should be simplified, e.g. \sin(\pi/2) -> 1
 	 */
 	public static boolean simplifyFunctionsOfConstants = true;

@@ -1,3 +1,4 @@
+import config.Settings;
 import functions.GeneralFunction;
 import org.junit.jupiter.api.Test;
 import parsing.Parser;
@@ -50,4 +51,14 @@ public class LatexTest {
 		GeneralFunction test = Parser.parse("\\pi (1+1)");
 		assertEquals(6.3, test.evaluate(Map.of('x', 3.2)), .3);
 	}
+
+	@Test
+	void noEscape() {
+		boolean temp = Settings.enforceEscapes;
+		Settings.enforceEscapes = false;
+		GeneralFunction test = Parser.parse("pi (1+1)+sin(pi/2)");
+		assertEquals(6.3, test.evaluate(Map.of('x', 3.2)), .3);
+		Settings.enforceEscapes = temp;
+	}
+
 }

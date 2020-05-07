@@ -1,5 +1,6 @@
 package parsing;
 
+import config.Settings;
 import functions.special.Constant;
 
 import java.util.*;
@@ -15,6 +16,8 @@ public class PreProcessor {
 	 */
 	public static List<String> toPostfix(String infix) { // TODO add unicode support
 		infix = LatexReplacer.encodeGreek(infix);
+		if (!Settings.enforceEscapes)
+			infix = LatexReplacer.addEscapes(infix);
 		List<String> tokens = InfixTokenizer.tokenizeInfix(infix);
 		Deque<String> postfix = new LinkedList<>();
 		Deque<String> operators = new LinkedList<>();

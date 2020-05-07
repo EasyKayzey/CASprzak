@@ -68,7 +68,7 @@ public class DerivativeTest {
 
     @Test
     void hardTrig() {
-        GeneralFunction test1 = (GeneralFunction) KeywordInterface.useKeywords("pdn x 3 sec(x)");
+        GeneralFunction test1 = (GeneralFunction) KeywordInterface.useKeywords("pdn x 3 \\sec(x)");
         GeneralFunction test2 = Parser.parse("\\sec(x)*\\tan(x)*(5*(\\sec(x))^2+(\\tan(x))^2)");
         assertEquals(test2.evaluate(Map.of('x', 2.0)), test1.evaluate(Map.of('x', 2.0)), 0.001);
     }

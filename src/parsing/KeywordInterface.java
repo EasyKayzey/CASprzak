@@ -140,13 +140,11 @@ public class KeywordInterface {
 	 */
 	public static double evaluate(String input) {
 		String[] splitInput = spaces.split(input, 2);
-		String[] entries = keywordSplitter.split(splitInput[1]);
-		Map<Character, Double> map = new HashMap<>();
-		for (String entry : entries) {
-			String[] splitEntry = equals.split(entry);
-			map.put(MiscTools.getCharacter(splitEntry[0]), Parser.getConstant(splitEntry[1]));
-		}
-		return parseStored(splitInput[0]).evaluate(map);
+		return parseStored(splitInput[0]).evaluate(
+				Arrays.stream(keywordSplitter.split(splitInput[1]))
+				.map(equals::split)
+				.collect(Collectors.toMap(e -> MiscTools.getCharacter(e[0]), e -> Parser.getConstant(e[1])))
+		);
 	}
 
 	/**

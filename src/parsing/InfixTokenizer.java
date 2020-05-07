@@ -38,13 +38,16 @@ public class InfixTokenizer {
 			"(?<![ .\\\\])(?![ .])" +								// The PREVIOUS FOUR LINES ONLY WORK if not preceded or followed by a dot or space, and not preceded by a LaTeX escape
 			"|(?<=[CP])|(?=[CP])" +									// Splits if preceded or followed by C or P
 			"|(?<=[A-Za-z(])(?=\\.)" //+								// Splits if preceded by a letter or open parenthesis and followed by a dot
-//			"|(?<=-)(?!=[\\d.])"									// Splits if preceded by a - and not followed by a digit or dot TODO uncomment things
+//			"|(?<=-)(?![\\d.])"										// Splits if preceded by a - and not followed by a digit or dot TODO uncomment things
 	);
-	private static final Pattern characterPairs = Pattern.compile( //TODO write LatexTest
+	private static final Pattern characterPairsToMultiply = Pattern.compile( //TODO write LatexTest
 			"(?<!\\\\[a-zA-Z]{0,15})" +								// Ensures that the character is not LaTeX-escaped (up to 15 characters)
-			"((?<=[a-zABDF-OQ-Z)])(?=[0-9a-zABDF-OQ-Z\\\\(])" +		// Matches the empty space between any two non-escaped characters and/or parentheses, possibly followed by a digit, excluding C, E, P
-			"|(?<=[0-9a-zABDF-OQ-Z)])(?=[a-zABDF-OQ-Z\\\\(]))" +		// Matches the empty space between any two non-escaped characters and/or parentheses, possibly preceded by a digit, excluding C, E, P
-			"|(?=\\\\[a-zA-Z]{0,15})\\s+(?=[\\w(\\\\])"				// Matches any spaces between an escaped word and a character, escape, or parenthesis
+			"(?<![CEP])(?![CEP])" +									// Ensures the spaces before and after C, E, and P are not matched
+			"((?<!\\d)|(?!\\d))" +									// Ensures that spaces both preceded and followed by a digit are not matched
+			"((?<=[a-zA-Z)\\d])|(?<=[^\\x00-\\x7F]))" +				// Preceded by a digit, alphabetic char, or non-ascii character
+			"\\s*" + 												// Allows for spaces
+			"((?=[a-zA-Z\\\\(\\d])|(?=[^\\x00-\\x7F]))" //+			// Followed by a digit, alphabetic char, or non-ascii character
+//			"|(?=\\\\[a-zA-Z]{0,15})\\s+(?=[\\w(\\\\])"				// Matches any spaces between an escaped word and a character, escape, or parenthesis
 	);
 
 	private InfixTokenizer(){}
@@ -64,7 +67,7 @@ public class InfixTokenizer {
 		// Turns expressions like x-y into x+-y, and turns expressions like x*y into x*/y (the '/' operator represents reciprocals)
 		infix = subtractionFinder.matcher(infix).replaceAll("+-").replace("/", "*/");
 		// Turns expressions like xyz into x*y*z
-		infix = characterPairs.matcher(infix).replaceAll(" * ");
+		infix = characterPairsToMultiply.matcher(infix).replaceAll(" * ");
 		// Adds parentheses to enforce order of operations
 		infix = "((((" + times.matcher(plus.matcher(closeParen.matcher(openParen.matcher(infix).replaceAll("((((")).replaceAll("))))")).replaceAll("))+((")).replaceAll(")*(") + "))))";
 		// Splits infix into tokens

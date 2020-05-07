@@ -1,7 +1,6 @@
 package ui;
 
 import parsing.KeywordInterface;
-import tools.DefaultFunctions;
 
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
@@ -117,20 +116,20 @@ public class CASDemo {
 		if (!tryInput(s -> "sto".equals(s.substring(0, 3)), "Begin your input with 'sto' to demonstrate the storage feature of the UI."))
 			return;
 		sleep(1);
-		System.out.println("Great, we can now use the function stored whenever we want");
+		System.out.println("Great, we can now use the function stored whenever we want.");
 		sleep(2);
-		System.out.println("As a quick example, evaluate the function that you have stored by using the character that you stored in place of the underscore");
+		System.out.println("As a quick example, evaluate the function that you have stored by using the character that you stored in place of the underscore.");
 		if (!tryInput(s -> "eval".equals(s.substring(0, 4)), "Begin your input with 'eval'"))
 			return;
 		sleep(2);
 		System.out.println("Good. Now here are some quick tips for using the storage feature:");
-		sleep(2);
+		sleep(3);
 		System.out.println("If you store a function to character that is already used, it will be overwritten.");
-		sleep(2);
+		sleep(3);
 		System.out.println("You can see all your function characters by typing in \"printfunctions\"");
-		sleep(2);
+		sleep(3);
 		System.out.println("You can also remove a function by using the \"removefunction\" command or remove all functions by using\"clearfunctions\"");
-		sleep(4);
+		sleep(5);
 		currentState = DemoState.SIMP;
 	}
 
@@ -194,6 +193,7 @@ public class CASDemo {
 		System.out.println("Now, with several variables, we can begin to substitute.");
 		sleep(2.5);
 		System.out.println("It is probably best to explain with an example:");
+		sleep(2.5);
 		System.out.println("sub x^y y sin(y)");
 		sleep(3);
 		System.out.println(KeywordInterface.useKeywords("sub x^y y sin(x)"));
@@ -205,6 +205,7 @@ public class CASDemo {
 		System.out.println("Take your multivariable function from before and replace a variable with a function using \"sub\".");
 		if (!tryInput(s -> "sub".equals(s.substring(0, 3)), "Begin your input with 'sto' to demonstrate the substitution feature of the UI."))
 			return;
+		sleep(2);
 		System.out.println("Congratulations, you have just substituted a variable for a function.");
 		sleep(2);
 		System.out.println("An important to remembers is that these changes are not saved in the function.");

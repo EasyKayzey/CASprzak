@@ -171,4 +171,10 @@ public class FunctionTest {
 		GeneralFunction test = Parser.parse("16E-6*1E6");
 		assertEquals(16, test.evaluate(null));
 	}
+
+	@Test void negativeEscape() {
+		GeneralFunction test = Parser.parse("-\\sin(\\pi/2)");
+		assertEquals(-1, test.evaluate(null), .01);
+	}
+
 }

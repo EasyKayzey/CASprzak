@@ -29,16 +29,17 @@ public class InfixTokenizer {
 	private static final Pattern plus = Pattern.compile("\\+");
 	private static final Pattern times = Pattern.compile("\\*");
 	private static final Pattern infixSplitter = Pattern.compile(
-			"\\s+" + 												// Splits on spaces
-			"|(?<=!)|(?=!)" +										// Splits if preceded or followed by !
+			"\\s+|(?<!\\s)(" + 										// Splits on spaces, and ensured spaces are not including in following splits
+			"(?<=!)|(?=!)" +										// Splits if preceded or followed by !
 			"|(?<!\\s)(?=\\\\)" +									// Splits if followed by a LaTeX escape
 			"|(((?<=\\W)(?=[\\w-])((?<!-)|(?!\\d))" +				// Splits if preceded by non-word and followed by word and not [preceded by - and followed by a digit]
 			"|(?<=\\w)(?=\\W)(?<!(?<=E)(?=-)))" +					// Splits if preceded by a word and followed by a non-word, unless [the word was E and the non-word was -] //TODO maybe make this use the notation of prev line
 			"|(?<=[()])|(?=[()]))" +								// Splits if preceded or followed by a parenthesis
 			"(?<![ .\\\\])(?![ .])" +								// The PREVIOUS FOUR LINES ONLY WORK if not preceded or followed by a dot or space, and not preceded by a LaTeX escape
 			"|(?<=[CP])|(?=[CP])" +									// Splits if preceded or followed by C or P
-			"|(?<=[A-Za-z(])(?=\\.)" //+								// Splits if preceded by a letter or open parenthesis and followed by a dot
-//			"|(?<=-)(?![\\d.])"										// Splits if preceded by a - and not followed by a digit or dot TODO uncomment things
+			"|(?<=[^\\x00-\\x7F])|(?=[^\\x00-\\x7F])" +
+			"|(?<=[A-Za-z(])(?=\\.))" //+							// Splits if preceded by a letter or open parenthesis and followed by a dot
+//			"|(?<=-)(?![\\d.])"										// Splits if preceded by a - and not followed by a digit or dot TODO uncomment things and move ending paren
 	);
 	private static final Pattern characterPairsToMultiply = Pattern.compile( //TODO write LatexTest
 			"(?<!\\\\[a-zA-Z]{0,15})" +								// Ensures that the character is not LaTeX-escaped (up to 15 characters)

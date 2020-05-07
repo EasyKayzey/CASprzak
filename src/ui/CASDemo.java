@@ -131,12 +131,12 @@ public class CASDemo {
 		System.out.println("As a quick example, evaluate the function that you have stored by using the character that you stored in place of the underscore.");
 		if (!tryInput(s -> "eval".equals(s.substring(0, 4)), "Begin your input with 'eval'"))
 			return;
-		sleep(2);
+		sleep(1);
 		System.out.println("Good. Now here are some quick tips for using the storage feature:");
 		sleep(3);
 		System.out.println("If you store a function to character that is already used, it will be overwritten.");
 		sleep(3);
-		System.out.println("You can see all your function characters by typing in \"printfunctions\"");
+		System.out.println("You can see all your function characters by typing in \"printfunctions\""); // TODO always introduce the shortcuts, like pf
 		sleep(3);
 		System.out.println("You can also remove a function by using the \"removefunction\" command or remove all functions by using \"clearfunctions\"");
 		sleep(5);
@@ -180,12 +180,12 @@ public class CASDemo {
 		sleep(1);
 		System.out.println("Now we will construct a construct a function using more than one variable.");
 		sleep(2);
-		System.out.println("Store a multivariable function using the \"sto\" command");
+		System.out.println("Store a multivariable function using the \"sto\" command"); // TODO make this more descriptive
 		if (!tryInput(s -> "sto".equals(s.substring(0, 3)), "Begin your input with 'sto' to demonstrate the storage feature of the UI."))
 			return;
 		sleep(1);
 		System.out.println("Now, when we evaluate we are going to have to set all the variables equal to values, for example \"eval x-y x=2 y=3\".");
-		sleep(3.5);
+		sleep(2.5);
 		System.out.println("Try evaluating your multivariable function using \"eval\"");
 		if (!tryInput(s -> "eval".equals(s.substring(0, 4)), "Begin your input with 'eval'"))
 			return;
@@ -227,14 +227,14 @@ public class CASDemo {
 
 	private static void pd() {
 		System.out.println("Another feature of our CAS is the ability to find the partial derivative of any function.");
-		sleep(3);
+		sleep(3); // TODO d/dx will no longer return the derivative soon; use pd or partialderivative
 		System.out.println("d/dx x^2");
 		System.out.println(KeywordInterface.useKeywords("d/dx x^2"));
 		sleep(2);
 		System.out.println("d/dx sin(x)");
 		System.out.println(KeywordInterface.useKeywords("d/dx sin(x)"));
 		sleep(2);
-		System.out.println("d/dx e^(x+y)");
+		System.out.println("d/dx e^(x+y)"); // TODO five of these is too much IMO
 		System.out.println(KeywordInterface.useKeywords("d/dx e^(x+y)"));
 		sleep(2);
 		System.out.println("d/dx x^(x^(x^x))");
@@ -252,7 +252,7 @@ public class CASDemo {
 	}
 
 	private static void tay() {
-
+		// TODO everywhere that the user can input (or you are demonstrating user input), include >>>
 	}
 
 	private static void ints() {

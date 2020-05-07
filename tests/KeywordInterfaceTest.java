@@ -41,7 +41,7 @@ public class KeywordInterfaceTest {
     @Test
     void partialDerivativeNTimes() {
         GeneralFunction test1 = (GeneralFunction) KeywordInterface.useKeywords("pdn x 4 sin(x)");
-        GeneralFunction test2 = Parser.parse("sin(x)");
+        GeneralFunction test2 = Parser.parse("\\sin(x)");
         assertEquals(test2, test1);
     }
 

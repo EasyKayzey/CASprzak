@@ -86,6 +86,6 @@ public class MiscTools {
         else if (input.length() == 3 && input.charAt(0) == '\'' && input.charAt(2) == '\'')
             return input.charAt(1);
         else
-            throw new IllegalArgumentException("Input length should be 1 for Parser.toCharacter");
+            throw new IllegalArgumentException("Input length should be 1 for Parser.toCharacter, input given was " + input);
     }
 }

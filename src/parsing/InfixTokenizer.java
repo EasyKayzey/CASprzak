@@ -1,7 +1,5 @@
 package parsing;
 
-import functions.special.Variable;
-
 import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -33,12 +31,18 @@ public class InfixTokenizer {
 	private static final Pattern infixSplitter = Pattern.compile(
 			"\\s+" + 										// Splits on spaces
 			"|(?<=!)|(?=!)" +								// Splits if preceded or followed by !
+			"|(?=\\\\)" +									// Splits if followed by a LaTeX escape
 			"|(((?<=\\W)(?=[\\w-])((?<!-)|(?!\\d))" +		// Splits if preceded by non-word and followed by word and not [preceded by - and followed by a digit]
-			"|(?<=\\w)(?=\\W)(?<!(?<=E)(?=-)))" +			// Splits if preceded by a word and followed by a non-word, unless [the word was E and the non-word was -]
+			"|(?<=\\w)(?=\\W)(?<!(?<=E)(?=-)))" +			// Splits if preceded by a word and followed by a non-word, unless [the word was E and the non-word was -] //TODO maybe make this use the notation of prev line
 			"|(?<=[()])|(?=[()]))" +						// Splits if preceded or followed by a parenthesis
-			"(?<![ .])(?![ .])" +							// The PREVIOUS FOUR LINES ONLY WORK if not preceded or followed by a dot or space
+			"(?<![ .\\\\])(?![ .])" +						// The PREVIOUS FOUR LINES ONLY WORK if not preceded or followed by a dot or space, and not preceded by a LaTeX escape
 			"|(?<=[CP])|(?=[CP])" +							// Splits if preceded or followed by C or P
 			"|(?<=[A-Za-z(\\-])(?=\\.)"						// Splits if preceded by [a letter, (, or -] and followed by a dot
+	);
+	private static final Pattern characterPairs = Pattern.compile( //TODO write LatexTest
+			"(?<!\\\\[a-zA-Z]{0,15})" +						// Ensures that the character is not LaTeX-escaped (up to 15 characters)
+			"(?<=[\\w)])(?=[\\w\\\\(])" + 					// Matches the empty space between any two non-escaped characters and/or parentheses
+			"|(?=\\\\[a-zA-Z]{0,15})\\s+(?=[\\w(\\\\])"		// Matches any spaces between an escaped word and a character, escape, or parenthesis
 	);
 
 	private InfixTokenizer(){}
@@ -49,10 +53,8 @@ public class InfixTokenizer {
 	 * @return array of infix tokens
 	 */
 	public static List<String> tokenizeInfix(String infix) {
-		// Remove LaTeX escapes
-		infix = infix.replace("\\", ""); // TODO use latex escapes with adjacent multiplication
 		// Make absolute values into unitary functions
-		infix = absoluteValueStart.matcher(absoluteValueEnd.matcher(infix).replaceAll(")")).replaceAll("*abs(").replace("|", " abs(");
+		infix = absoluteValueStart.matcher(absoluteValueEnd.matcher(infix).replaceAll(")")).replaceAll("*\\abs(").replace("|", " abs(");
 		// Insert multiplication in expressions like 2x and 7(x*y+1)sin(3y)
 		infix = adjacentMultiplier.matcher(infix).replaceAll(" * ");
 		// Replace curly braces and underscores with parentheses and spaces
@@ -60,23 +62,10 @@ public class InfixTokenizer {
 		// Turns expressions like x-y into x+-y, and turns expressions like x*y into x*/y (the '/' operator represents reciprocals)
 		infix = subtractionFinder.matcher(infix).replaceAll("+-").replace("/", "*/");
 		// Turns expressions like xyz into x*y*z
-		infix = parseVariablePairs(infix);
+		infix = characterPairs.matcher(infix).replaceAll(" * ");
 		// Adds parentheses to enforce order of operations
 		infix = "((((" + times.matcher(plus.matcher(closeParen.matcher(openParen.matcher(infix).replaceAll("((((")).replaceAll("))))")).replaceAll("))+((")).replaceAll(")*(") + "))))";
 		// Splits infix into tokens
 		return infixSplitter.splitAsStream(infix).collect(Collectors.toCollection(LinkedList::new));
-	}
-
-	/**
-	 * Turns pairs of variables like xy into x*y
-	 * @param infix input string in infix
-	 * @return infix string with inserted asterisks
-	 */
-	private static String parseVariablePairs(String infix) {
-		for (char a : Variable.variables)
-			for (char b : Variable.variables)
-				infix = infix.replaceAll("(?<=" + a + ")\\s*(?=" + b + ")", "*");
-
-		return infix;
 	}
 }

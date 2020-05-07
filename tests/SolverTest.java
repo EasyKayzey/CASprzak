@@ -34,7 +34,7 @@ public class SolverTest {
 
     @Test
     void simpleNotPolynomial1() {
-        GeneralFunction test = Parser.parse("ln(x)");
+        GeneralFunction test = Parser.parse("\\ln(x)");
         assertArrayEquals(new double[]{1}, Solver.getSolutionsRangeNewton(test, -10, 10));
     }
 
@@ -46,7 +46,7 @@ public class SolverTest {
 
     @Test
     void simpleTrigZero() {
-        GeneralFunction test = Parser.parse("sin(x-3)");
+        GeneralFunction test = Parser.parse("\\sin(x-3)");
         assertEquals(3, Solver.getSolutionPointNewton(test, 3.5));
     }
 

@@ -61,7 +61,7 @@ public class Settings {
 	public static double equalsMargin = 1e-12;
 
 	/**
-	 * Denotes whether functions of constants should be simplified, e.g. sin(pi/2) -> 1
+	 * Denotes whether functions of constants should be simplified, e.g. \sin(\pi/2) -> 1
 	 */
 	public static boolean simplifyFunctionsOfConstants = true;
 

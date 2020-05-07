@@ -13,7 +13,7 @@ import java.util.function.Predicate;
 public class Constant extends SpecialFunction {
 	public static final HashMap<String, Double> specialConstants = new HashMap<>() {
 		{
-			put("pi", Math.PI);
+			put("π", Math.PI);
 			put("e", Math.E);
 		}
 	}; // TODO when unicode support is implemented, possibly migrate to using characters and implement /pi

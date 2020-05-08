@@ -82,7 +82,7 @@ public class Pow extends BinaryFunction {
 	 * Returns a {@link Product} where the exponent is on each term. Example: {@code (xy)^2 = (x^2)(y^2) }
 	 * @return a {@link Product} with the exponent distributed
 	 */
-	public Product distributeExponents() { // TODO ensure this is tested
+	public Product distributeExponents() {
 		if (function2 instanceof Product product) {
 			GeneralFunction[] oldFunctions = product.getFunctions();
 			GeneralFunction[] toMultiply = new GeneralFunction[oldFunctions.length];

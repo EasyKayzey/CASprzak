@@ -177,4 +177,9 @@ public class FunctionTest {
 		assertEquals(-1, test.evaluate(null), .01);
 	}
 
+	@Test void frac() {
+		GeneralFunction test = FunctionParser.parseInfix("-\\frac{3}{-2}");
+		assertEquals(1.5, test.evaluate(null), .01);
+	}
+
 }

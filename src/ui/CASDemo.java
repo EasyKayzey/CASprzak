@@ -55,6 +55,7 @@ public class CASDemo {
 
 	private static boolean tryInput(Predicate<? super String> test, String message) {
 		try {
+			System.out.print(">>> ");
 			String input = scanner.next();
 			if ('!' == input.charAt(0) || (input.length() >= 4 && "exit".equals(input.substring(0, 4)))) {
 				currentState = DemoState.EXIT;
@@ -148,7 +149,7 @@ public class CASDemo {
 		sleep(2);
 		System.out.println("For example");
 		sleep(1);
-		System.out.println("sto d x^2*(0*ln(x)+(2*1)/x)");
+		System.out.println(">>> sto d x^2*(0*ln(x)+(2*1)/x)");
 		sleep(1.5);
 		System.out.println(KeywordInterface.useKeywords("sto d x^2*(0*ln(x)+(2*1)/x)"));
 		sleep(2);
@@ -204,7 +205,7 @@ public class CASDemo {
 		sleep(2.5);
 		System.out.println("It is probably best to explain with an example:");
 		sleep(2.5);
-		System.out.println("sub x^y y sin(y)");
+		System.out.println(">>> sub x^y y sin(y)");
 		sleep(3);
 		System.out.println(KeywordInterface.useKeywords("sub x^y y sin(x)"));
 		sleep(2.25);
@@ -228,19 +229,16 @@ public class CASDemo {
 	private static void pd() {
 		System.out.println("Another feature of our CAS is the ability to find the partial derivative of any function.");
 		sleep(3); // TODO d/dx will no longer return the derivative soon; use pd or partialderivative
-		System.out.println("d/dx x^2");
+		System.out.println(">>> d/dx x^2");
 		System.out.println(KeywordInterface.useKeywords("d/dx x^2"));
 		sleep(2);
-		System.out.println("d/dx sin(x)");
-		System.out.println(KeywordInterface.useKeywords("d/dx sin(x)"));
+		System.out.println(">>> d/dx e^(sin(x)+y)"); // TODO five of these is too much IMO
+		System.out.println(KeywordInterface.useKeywords("d/dx e^(sin(x)+y)"));
 		sleep(2);
-		System.out.println("d/dx e^(x+y)"); // TODO five of these is too much IMO
-		System.out.println(KeywordInterface.useKeywords("d/dx e^(x+y)"));
-		sleep(2);
-		System.out.println("d/dx x^(x^(x^x))");
+		System.out.println(">>> d/dx x^(x^(x^x))");
 		System.out.println(KeywordInterface.useKeywords("d/dx x^(x^(x^x))"));
 		sleep(2);
-		System.out.println("d/dy logb_{x^y+z}(2sin(y))");
+		System.out.println(">>> d/dy logb_{x^y+z}(2sin(y))");
 		System.out.println(KeywordInterface.useKeywords("d/dy logb_{x^y+z}(2sin(y))"));
 		sleep(4);
 		System.out.println("Now try it yourself using the \"d/d\" command.");
@@ -248,15 +246,45 @@ public class CASDemo {
 			return;
 		sleep(3);
 		System.out.println("Great, you have taken the derivative of a function.");
-		currentState = DemoState.EXIT;
+		sleep(4);
+		currentState = DemoState.TAY;
 	}
 
 	private static void tay() {
-		// TODO everywhere that the user can input (or you are demonstrating user input), include >>>
+		System.out.println("One application of the derivative is in the form of a taylor series.");
+		sleep(3);
+		System.out.println("The format for creating a taylor series goes as follows:");
+		sleep(3);
+		System.out.println(">>> tay [function] [terms] [center]");
+		sleep(2);
+		System.out.println("Try creating a common taylor series using the \"tay\" command ");
+		if (!tryInput(s -> "tay".equals(s.substring(0, 3)), "Begin your input with 'tay' to demonstrate the taylor series feature of the CAS."))
+			return;
+		System.out.println("Good!, taylor series can often be used as good approximations to normal functions.");
+		sleep(4);
+		currentState = DemoState.INT;
 	}
 
 	private static void ints() {
-
+		System.out.println("Integration is the other great pillar of calculus.");
+		sleep(3);
+		System.out.println("Unfortunately, our CAS can only symbolically solve integrals of the form ∫ c op(u) u' du");
+		sleep(3);
+		System.out.println("However, we do plan on further implementing symbolic integration.");
+		sleep(3);
+		System.out.println("An example of integration is as follows:");
+		sleep(2);
+		System.out.println(">>> int (cos(e^x))^2*sin(e^x)*e^x dx");
+		System.out.println(KeywordInterface.useKeywords("int (cos(e^x))^2*sin(e^x)*e^x dx"));
+		sleep(4);
+		System.out.println("Try integration for yourself using the \"int\" command.");
+		sleep(1);
+		if (!tryInput(s -> "int".equals(s.substring(0, 3)), "Begin your input with 'int' to demonstrate the integration feature of the CAS."))
+			return;
+		sleep(2);
+		System.out.println("Congratulations, you have just integrated a function.");
+		sleep(4);
+		currentState = DemoState.INTN;
 	}
 
 	private static void intn() {

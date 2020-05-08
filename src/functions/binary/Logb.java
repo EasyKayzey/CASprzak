@@ -40,7 +40,7 @@ public class Logb extends BinaryFunction {
 
 	public GeneralFunction simplify() {
 		return new Logb(function1.simplify(), function2.simplify());
-	}//TODO simplifies like log(10^x) = x
+	}//TODO this needs to incorporate the new simplifies
 
 
 	public BinaryFunction me(GeneralFunction function1, GeneralFunction function2) {

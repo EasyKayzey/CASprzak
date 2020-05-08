@@ -25,4 +25,11 @@ public abstract class TransformFunction extends UnitaryFunction {
 	 */
 	@SuppressWarnings("unused")
 	public abstract GeneralFunction execute();
+
+	/**
+	 * Returns the variable that this transform works with respect to
+	 */
+	public char getRespectTo() {
+		return respectTo;
+	}
 }

@@ -182,4 +182,8 @@ public class FunctionTest {
 		assertEquals(1.5, test.evaluate(null), .01);
 	}
 
+	@Test void exp() {
+		GeneralFunction test = FunctionParser.parseInfix("\\exp(\\ln(x))");
+		assertEquals(4, test.evaluate(Map.of('x', 4.0)), .01);
+	}
 }

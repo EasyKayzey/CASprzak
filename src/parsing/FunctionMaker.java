@@ -34,7 +34,7 @@ public class FunctionMaker {
 			case "\\sqrt" 		-> new Pow(DefaultFunctions.HALF, function);
 			case "\\sign" 		-> new Sign(function);
 			case "\\abs" 		-> new Abs(function);
-			case "\\exp" 		-> new Exp(function); // TODO test
+			case "\\exp" 		-> new Exp(function);
 			case "\\ln" 		-> new Ln(function);
 			case "\\log"		-> new Logb(function, DefaultFunctions.TEN);
 			case "\\sin" 		-> new Sin(function);
@@ -74,7 +74,7 @@ public class FunctionMaker {
 	 * @return new {@link GeneralFunction}
 	 */
 	public static GeneralFunction makeBinary(String functionName, GeneralFunction first, GeneralFunction second) {
-		return switch (functionName) { // TODO add /frac
+		return switch (functionName) {
 			case "+" 		-> new Sum(first, second);
 			case "*" 		-> new Product(first, second);
 			case "^" 		-> new Pow(second, first);

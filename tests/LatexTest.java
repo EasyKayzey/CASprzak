@@ -2,7 +2,7 @@ import config.Settings;
 import functions.GeneralFunction;
 import org.junit.jupiter.api.Test;
 import parsing.Parser;
-import parsing.ParsingTools;
+import tools.ParsingTools;
 
 import java.util.Map;
 

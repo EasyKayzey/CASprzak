@@ -1,8 +1,10 @@
-package parsing;
+package tools;
 
 import config.Settings;
 import functions.GeneralFunction;
 import functions.special.Constant;
+import parsing.LatexReplacer;
+import parsing.Parser;
 
 import java.lang.reflect.MalformedParametersException;
 

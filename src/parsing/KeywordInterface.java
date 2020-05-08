@@ -6,6 +6,7 @@ import functions.GeneralFunction;
 import functions.special.Constant;
 import functions.special.Variable;
 import functions.unitary.transforms.Integral;
+import tools.ParsingTools;
 import tools.singlevariable.Extrema;
 import tools.singlevariable.NumericalIntegration;
 import tools.singlevariable.Solver;

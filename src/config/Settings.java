@@ -1,7 +1,7 @@
 package config;
 
 import functions.GeneralFunction;
-import parsing.ParsingTools;
+import tools.ParsingTools;
 
 import java.io.IOException;
 

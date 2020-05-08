@@ -1,6 +1,6 @@
 package config;
 
-import parsing.ParsingTools;
+import tools.ParsingTools;
 
 import java.io.FileReader;
 import java.io.IOException;

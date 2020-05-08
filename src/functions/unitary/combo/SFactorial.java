@@ -5,7 +5,7 @@ import functions.GeneralFunction;
 import functions.binary.Pow;
 import functions.commutative.Product;
 import functions.unitary.UnitaryFunction;
-import parsing.ParsingTools;
+import tools.ParsingTools;
 import tools.DefaultFunctions;
 
 import java.util.Map;

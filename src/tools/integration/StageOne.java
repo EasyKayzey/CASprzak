@@ -13,7 +13,7 @@ import functions.unitary.specialcases.Ln;
 import functions.unitary.transforms.Integral;
 import functions.unitary.transforms.PartialDerivative;
 import functions.unitary.trig.normal.TrigFunction;
-import parsing.ParsingTools;
+import tools.ParsingTools;
 import tools.DefaultFunctions;
 import tools.SearchTools;
 import tools.VariableTools;

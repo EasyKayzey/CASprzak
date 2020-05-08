@@ -3,7 +3,7 @@ package functions.unitary.combo;
 import config.Settings;
 import functions.GeneralFunction;
 import functions.unitary.UnitaryFunction;
-import parsing.ParsingTools;
+import tools.ParsingTools;
 
 import java.util.Map;
 

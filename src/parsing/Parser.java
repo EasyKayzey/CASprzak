@@ -3,6 +3,7 @@ package parsing;
 import functions.GeneralFunction;
 import functions.special.Constant;
 import functions.special.Variable;
+import tools.ParsingTools;
 
 import java.util.Deque;
 import java.util.LinkedList;

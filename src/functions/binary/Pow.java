@@ -7,7 +7,7 @@ import functions.commutative.Sum;
 import functions.special.Constant;
 import functions.unitary.specialcases.Exp;
 import functions.unitary.specialcases.Ln;
-import parsing.ParsingTools;
+import tools.ParsingTools;
 import tools.DefaultFunctions;
 import tools.VariableTools;
 

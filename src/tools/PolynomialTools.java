@@ -6,7 +6,6 @@ import functions.commutative.Sum;
 import functions.commutative.Product;
 import functions.special.Constant;
 import functions.special.Variable;
-import parsing.ParsingTools;
 
 import java.util.function.DoublePredicate;
 

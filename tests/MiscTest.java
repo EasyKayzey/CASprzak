@@ -1,5 +1,5 @@
 import org.junit.jupiter.api.Test;
-import parsing.ParsingTools;
+import tools.ParsingTools;
 import tools.helperclasses.AbstractMutablePair;
 import tools.helperclasses.AbstractPair;
 import tools.helperclasses.MutablePair;

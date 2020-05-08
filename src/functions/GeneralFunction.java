@@ -10,7 +10,6 @@ import functions.special.Variable;
 import functions.unitary.combo.Factorial;
 import functions.unitary.piecewise.PiecewiseFunction;
 import functions.unitary.specialcases.SpecialCaseBinaryFunction;
-import functions.unitary.transforms.Integral;
 import functions.unitary.transforms.TransformFunction;
 import functions.unitary.trig.inverse.InverseTrigFunction;
 import functions.unitary.trig.normal.TrigFunction;
@@ -36,12 +35,11 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 			Logb.class,
 			PiecewiseFunction.class,
 			Factorial.class,
-			SpecialCaseBinaryFunction.class, //TODO add the rest of unitary functions
+			SpecialCaseBinaryFunction.class,
 			TransformFunction.class,
 			InverseTrigFunction.class,
 			TrigFunction.class,
 			Sum.class,
-			Integral.class,//TODO integral is part of TransformFunction
 	};
 
 	/**
@@ -155,7 +153,7 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 	 * @param that the {@link GeneralFunction} compared to
 	 * @return comparison
 	 */
-	protected abstract int compareSelf(GeneralFunction that); //TODO make compareTos inside each abstract class actually check between classes
+	protected abstract int compareSelf(GeneralFunction that);
 
 	/**
 	 * Two different GeneralFunction types are sorted according to {@link #sortOrder} and {@link MiscTools#findClassValue(GeneralFunction)}, and same types are sorted using {@link #compareSelf(GeneralFunction)}
@@ -172,7 +170,7 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 			if (classDelta != 0)
 				return classDelta;
 			else
-				return this.getClass().getSimpleName().compareTo(that.getClass().getSimpleName()); // TODO this isn't a great fix for the comparison problem
+				return this.getClass().getSimpleName().compareTo(that.getClass().getSimpleName());
 		}
 	}
 }

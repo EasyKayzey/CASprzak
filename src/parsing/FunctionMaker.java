@@ -33,11 +33,11 @@ public class FunctionMaker {
 			case "-" 			-> new Product(DefaultFunctions.NEGATIVE_ONE, function);
 			case "/" 			-> new Pow(DefaultFunctions.NEGATIVE_ONE, function);
 			case "!" 			-> Factorial.defaultFactorial(function); //TODO implement integral and d/dx here
-			case "\\d"			-> new Differential(function, ((Variable) function).varID);
 			case "\\ln" 		-> new Ln(function);
 			case "\\log"		-> new Logb(function, DefaultFunctions.TEN);
 			case "\\exp" 		-> new Exp(function);
 			case "\\abs" 		-> new Abs(function);
+			case "\\difn"		-> new Differential(function, ((Variable) function).varID);
 			case "\\sqrt" 		-> new Pow(DefaultFunctions.HALF, function);
 			case "\\sign" 		-> new Sign(function);
 			case "\\dirac" 		-> new Dirac(function);

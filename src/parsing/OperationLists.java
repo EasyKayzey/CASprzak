@@ -12,12 +12,12 @@ public class OperationLists {
 			add("-");
 			add("/");
 			add("!");
-			add("\\d");
 			add("\\ln");
 			add("\\pd");
 			add("\\log");
 			add("\\exp");
 			add("\\abs");
+			add("\\difn");
 			add("\\sqrt");
 			add("\\sign");
 			add("\\dirac");

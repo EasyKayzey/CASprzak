@@ -25,12 +25,16 @@ public class MutablePair<T, U> extends AbstractMutablePair<T, U> {
 	}
 
 	@Override
-	public void setFirst(T first) {
+	public T setFirst(T first) {
+		T oldFirst = this.first;
 		this.first = first;
+		return oldFirst;
 	}
 
 	@Override
-	public void setSecond(U second) {
+	public U setSecond(U second) {
+		U oldSecond = this.second;
 		this.second = second;
+		return oldSecond;
 	}
 }

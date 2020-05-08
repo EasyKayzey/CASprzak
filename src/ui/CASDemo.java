@@ -288,11 +288,41 @@ public class CASDemo {
 	}
 
 	private static void intn() {
-
+		System.out.println("Despite not being able to symbolically integrate all function, it is still possible to find a numeric solution between two bounds.");
+		sleep(3);
+		System.out.println("Our CAS uses Simpson's Rule to be able to perform numeric integration.");
+		sleep(3);
+		System.out.println("The format for numeric integration is \"intn [function] [startvalue] [endvalue]\"");
+		sleep(3);
+		System.out.println("Try it out yourself using a simple function.");
+		sleep(1);
+		if (!tryInput(s -> "intn ".equals(s.substring(0, 5)), "Begin your input with 'intn' to demonstrate the numeric integration feature of the CAS."))
+			return;
+		sleep(1.5);
+		System.out.println("Good job!");
+		sleep(2);
+		currentState = DemoState.SOL;
 	}
 
 	private static void sol() {
-
+		System.out.println("In addition to numerical integration out CAS also has numerical root finding.");
+		sleep(2.5);
+		System.out.println("The system we use to find zeroes requires a specified start and end to look for roots in.");
+		sleep(2);
+		System.out.println("The command goes \"sol [function] [startrange] [endrange]\"");
+		sleep(2);
+		System.out.println("Try it out yourself on an easy function.");
+		sleep(1);
+		if (!tryInput(s -> "sol ".equals(s.substring(0, 4)), "Begin your input with 'intn' to demonstrate the numeric integration feature of the CAS."))
+			return;
+		sleep(1.5);
+		System.out.println("As with all numeric methods, there are always some quirks.");
+		sleep(2);
+		System.out.println("Very often, simple solutions such as 1 will be found as 1.000000000023 for example.");
+		sleep(2);
+		System.out.println("However, there are settings that change how Solve works (like exit conditions) which may help fix minor issues.");
+		sleep(4);
+		currentState = DemoState.EXT;
 	}
 
 	private static void ext() {

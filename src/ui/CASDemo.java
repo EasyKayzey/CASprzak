@@ -21,6 +21,7 @@ public class CASDemo {
 		SOL,
 		EXT,
 		SET,
+		END,
 		EXIT,
 	}
 
@@ -52,6 +53,7 @@ public class CASDemo {
 			case SOL -> sol();
 			case EXT -> ext();
 			case SET -> set();
+			case END -> end();
 		}
 	}
 
@@ -62,6 +64,8 @@ public class CASDemo {
 			if ('!' == input.charAt(0) || (input.length() >= 4 && "exit".equals(input.substring(0, 4)))) {
 				currentState = DemoState.EXIT;
 				return false;
+			} else if (input.length() >= 4 && "next".equals(input.substring(0, 4))) {
+				return true;
 			} else if (!test.test(input)) {
 				System.out.println(message);
 				return tryInput(test, message);
@@ -90,6 +94,8 @@ public class CASDemo {
 		System.out.println("Hello user. Welcome to the CASprzak!");
 		sleep(1.5);
 		System.out.println("This is a quick demo to help get you started.");
+		sleep(2);
+		System.out.println("You can exit anytime by typing \"exit\"");
 		sleep(2);
 		System.out.println("First, try typing in a function like \"x^2\" or \"cos(x) + sin(x)\".");
 		if (!tryInput(s -> true, null))
@@ -145,7 +151,7 @@ public class CASDemo {
 		sleep(3);
 		System.out.println("If you store a function to character that is already used, it will be overwritten.");
 		sleep(3);
-		System.out.println("You can see all your function characters by typing in \"printfunctions\""); // TODO always introduce the shortcuts, like pf
+		System.out.println("You can see all your function characters by typing in \"printfunctions\"");
 		sleep(3);
 		System.out.println("You can also remove a function by using the \"removefunction\" command or remove all functions by using \"clearfunctions\"");
 		sleep(5);
@@ -170,7 +176,7 @@ public class CASDemo {
 		if (!tryInput(s -> "simp ".equals(s.substring(0, 5)), "Begin your input with 'simp' to demonstrate the simplification feature of the UI."))
 			return;
 		sleep(1);
-		System.out.println("Wow!, quite an improvement");
+		System.out.println("Wow, quite an improvement");
 		sleep(2);
 		System.out.println("For those who are curious, that was the general formula of the derivative of f(x)^g(x) applied to x^2.");
 		sleep(4);
@@ -193,9 +199,9 @@ public class CASDemo {
 		if (!tryInput(s -> "addvar ".equals(s.substring(0, 7)), "Begin your input with 'addvar' to add variables."))
 			return;
 		sleep(1);
-		System.out.println("Now we will construct a construct a function using more than one variable.");
+		System.out.println("Now we will construct a function using more than one variable.");
 		sleep(2);
-		System.out.println("Store a multivariable function using the \"sto\" command"); // TODO make this more descriptive
+		System.out.println("Store a function with several different variables using the \"sto\" command");
 		if (!tryInput(s -> "sto ".equals(s.substring(0, 4)), "Begin your input with 'sto' to demonstrate the storage feature of the UI."))
 			return;
 		sleep(1);
@@ -248,21 +254,21 @@ public class CASDemo {
 
 	private static void pd() {
 		System.out.println("Another feature of our CAS is the ability to find the partial derivative of any function.");
-		sleep(3); // TODO d/dx will no longer return the derivative soon; use pd or partialderivative
-		System.out.println(">>> d/dx x^2");
-		System.out.println(KeywordInterface.useKeywords("d/dx x^2"));
+		sleep(3);
+		System.out.println(">>> pd x x^2");
+		System.out.println(KeywordInterface.useKeywords("pd x x^2"));
 		sleep(2);
-		System.out.println(">>> d/dx e^(sin(x)+y)"); // TODO five of these is too much IMO
-		System.out.println(KeywordInterface.useKeywords("d/dx e^(sin(x)+y)"));
+		System.out.println(">>> pd x e^(sin(x)+y)");
+		System.out.println(KeywordInterface.useKeywords("pd x e^(sin(x)+y)"));
 		sleep(2);
-		System.out.println(">>> d/dx x^(x^(x^x))");
-		System.out.println(KeywordInterface.useKeywords("d/dx x^(x^(x^x))"));
+		System.out.println(">>> pd x x^(x^(x^x))");
+		System.out.println(KeywordInterface.useKeywords("pd x x^(x^(x^x))"));
 		sleep(2);
-		System.out.println(">>> d/dy logb_{x^y+z}(2sin(y))");
-		System.out.println(KeywordInterface.useKeywords("d/dy logb_{x^y+z}(2sin(y))"));
+		System.out.println(">>> pd y logb_{x^y+z}(2sin(y))");
+		System.out.println(KeywordInterface.useKeywords("pd y logb_{x^y+z}(2sin(y))"));
 		sleep(4);
-		System.out.println("Now try it yourself using the \"d/d\" command.");
-		if (!tryInput(s -> "d/d".equals(s.substring(0, 3)), "Begin your input with 'd/d' to demonstrate the derivative feature of the UI."))
+		System.out.println("Now try it yourself using the \"pd\" command.");
+		if (!tryInput(s -> "pd".equals(s.substring(0, 2)), "Begin your input with 'pd' to demonstrate the derivative feature of the UI."))
 			return;
 		sleep(3);
 		System.out.println("Great, you have taken the derivative of a function.");
@@ -283,7 +289,7 @@ public class CASDemo {
 		System.out.println("Try creating a common taylor series using the \"tay\" command ");
 		if (!tryInput(s -> "tay ".equals(s.substring(0, 4)), "Begin your input with 'tay' to demonstrate the taylor series feature of the CAS."))
 			return;
-		System.out.println("Good!, taylor series can often be used as good approximations to normal functions.");
+		System.out.println("Good, taylor series can often be used as good approximations to normal functions.");
 		sleep(4);
 		System.out.println("Type \"next\" to continue.");
 		if (!tryInput("next"::equals, "Please enter 'next' to continue."))
@@ -298,7 +304,7 @@ public class CASDemo {
 		sleep(3);
 		System.out.println("However, we do plan on further implementing symbolic integration.");
 		sleep(3);
-		System.out.println("An example of integration is as follows:");
+		System.out.println("An example of integration works is as follows:");
 		sleep(2);
 		System.out.println(">>> int (cos(e^x))^2*sin(e^x)*e^x dx");
 		System.out.println(KeywordInterface.useKeywords("int (cos(e^x))^2*sin(e^x)*e^x dx"));
@@ -398,11 +404,20 @@ public class CASDemo {
 		sleep(3);
 		System.out.println("As you saw, there are a lot of settings. If you want to learn what a setting does, we recommend reading our documentation.");
 		sleep(3);
+		System.out.println("Type \"next\" to continue.");
+		if (!tryInput("next"::equals, "Please enter 'next' to continue."))
+			return;
+		currentState = DemoState.END;
+	}
+
+	private static void end() {
 		System.out.println("Thank you for finishing our demo.");
 		sleep(3);
+		System.out.println("For more details such as shortcuts in the UI or other features check out our documentation or give the code a read.");
+		sleep(4.25);
 		System.out.println("We highly encourage just playing around seeing what you can do.");
-		sleep(3);
-		System.out.println("Type \"exit\" to return to the UI or \"next\" to close the application.");
+		sleep(5);
+		System.out.println("Type \"next\" to return to the UI.");
 		if (!tryInput("next"::equals, "Type in 'next' or 'exit' to leave the application."))
 			return;
 		currentState = DemoState.EXIT;

@@ -39,7 +39,7 @@ public class ComboTest {
 
 	@Test
 	void functionFactorial1() {
-		GeneralFunction test = Parser.parse("(ln(e^3))!"); // Might want to make this test use precedence when prefix precedence is added
+		GeneralFunction test = Parser.parse("(\\ln(e^3))!"); // Might want to make this test use precedence when prefix precedence is added
 		assertEquals(6, test.evaluate(Map.of('x', -3.0)));
 	}
 

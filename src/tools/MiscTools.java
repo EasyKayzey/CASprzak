@@ -2,6 +2,7 @@ package tools;
 
 import config.Settings;
 import functions.GeneralFunction;
+import parsing.LatexReplacer;
 
 import java.lang.reflect.MalformedParametersException;
 
@@ -81,11 +82,12 @@ public class MiscTools {
      * @throws IllegalArgumentException if the input is not one character or three characters in the format 'c'
      */
     public static char getCharacter(String input) {
+    	input = LatexReplacer.encodeGreek(input);
         if (input.length() == 1)
             return input.charAt(0);
         else if (input.length() == 3 && input.charAt(0) == '\'' && input.charAt(2) == '\'')
             return input.charAt(1);
         else
-            throw new IllegalArgumentException("Input length should be 1 for Parser.toCharacter");
+            throw new IllegalArgumentException("Input length should be 1 for Parser.toCharacter, input given was " + input);
     }
 }

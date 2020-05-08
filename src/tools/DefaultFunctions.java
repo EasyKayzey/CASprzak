@@ -8,7 +8,7 @@ import functions.special.Variable;
 
 @SuppressWarnings({"StaticVariableOfConcreteClass", "unused"})
 public class DefaultFunctions {
-	public static final Constant PI = new Constant("pi");
+	public static final Constant PI = new Constant("π");
 	public static final Constant E = new Constant("e");
 	public static final Constant NEGATIVE_TWO = new Constant(-2);
 	public static final Constant NEGATIVE_ONE = new Constant(-1);

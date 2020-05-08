@@ -64,7 +64,7 @@ public class ExtremaTest {
 
     @Test
     void sinTest() {
-        GeneralFunction test = Parser.parse("sin(x)");
+        GeneralFunction test = Parser.parse("\\sin(x)");
         assertEquals(Math.PI/2, Extrema.findLocalMaximum(test, 0, Math.PI), .01);
     }
 

@@ -10,7 +10,7 @@ public class NumericalIntegrationTest {
 
     @Test
     void simpleTrigIntegral() {
-        GeneralFunction function = Parser.parse("sin(x)");
+        GeneralFunction function = Parser.parse("\\sin(x)");
         double test = NumericalIntegration.simpsonsRule(function, 0, Math.PI);
         assertEquals(2, test, 0.0001);
     }
@@ -24,7 +24,7 @@ public class NumericalIntegrationTest {
 
     @Test
     void simpleTrigIntegralWithError() {
-        GeneralFunction function = Parser.parse("sin(x)");
+        GeneralFunction function = Parser.parse("\\sin(x)");
         double[] test = NumericalIntegration.simpsonsRuleWithError(function, 0, Math.PI);
         assertArrayEquals(new double[]{2, 1e-15}, test, 0.0001);
     }

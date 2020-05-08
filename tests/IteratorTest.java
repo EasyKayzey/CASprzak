@@ -34,7 +34,7 @@ public class IteratorTest {
 
 	@Test
 	void testUnitary1() {
-		GeneralFunction test = Parser.parseSimplified("sin x");
+		GeneralFunction test = Parser.parseSimplified("\\sin x");
 		int i = 0;
 		for (GeneralFunction f : test) {
 			i++;

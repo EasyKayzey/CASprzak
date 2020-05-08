@@ -24,12 +24,12 @@ public class FunctionTest {
 	}
 
 	@Test void logbWorks() {
-		GeneralFunction test = Parser.parse("logb_3(x)");
+		GeneralFunction test = Parser.parse("\\logb_3(x)");
 		assertEquals(4, test.evaluate(Map.of('x',81.0)));
 	}
 
 	@Test void trigWorks() {
-		GeneralFunction test = Parser.parse("(sin(x))^2+(cos x)^2");
+		GeneralFunction test = Parser.parse("(\\sin(x))^2+(\\cos x)^2");
 		assertEquals(1, test.evaluate(Map.of('x',81.0)));
 	}
 
@@ -39,22 +39,22 @@ public class FunctionTest {
 	}
 
 	@Test void lnWorks() {
-		GeneralFunction test = Parser.parse("ln(e)");
+		GeneralFunction test = Parser.parse("\\ln(e)");
 		assertEquals(1, test.evaluate(Map.of('x',1.5)));
 	}
 
 	@Test void tanWorks() {
-		GeneralFunction test = Parser.parse("tan(x)");
+		GeneralFunction test = Parser.parse("\\tan(x)");
 		assertEquals(1, test.evaluate(Map.of('x',Math.PI/4)), 0.0000001);
 	}
 
 	@Test void multiplyWorks() {
-		GeneralFunction test = Parser.parse("(1/(x+1))*(cos x)*(x^2-1)");
+		GeneralFunction test = Parser.parse("(1/(x+1))*(\\cos x)*(x^2-1)");
 		assertEquals(-1, test.evaluate(Map.of('x',0.0)));
 	}
 
 	@Test void addWorks() {
-		GeneralFunction test = Parser.parse("(1/(x+1))+(sec(x))+(x^3-1)");
+		GeneralFunction test = Parser.parse("(1/(x+1))+(\\sec(x))+(x^3-1)");
 		assertEquals(1, test.evaluate(Map.of('x',0.0)));
 	}
 
@@ -107,33 +107,33 @@ public class FunctionTest {
 	}
 
 	@Test void multiplyingByAdjacencyFunctions() {
-		GeneralFunction test = Parser.parse("(5+x^2)(cos(x))");
+		GeneralFunction test = Parser.parse("(5+x^2)(\\cos(x))");
 		assertEquals(5, test.evaluate(Map.of('x',0.0)));
 	}
 
 	@Test void multiplyingByAdjacencyThreeTerms0() {
-		GeneralFunction test = Parser.parse("(1/4)(2/3)sin(x)");
+		GeneralFunction test = Parser.parse("(1/4)(2/3)\\sin(x)");
 		assertEquals(0, test.evaluate(Map.of('x',0.0)));
 	}
 
 	@Test void multiplyingByAdjacencyThreeTerms1() {
-		GeneralFunction test = Parser.parse("sin(pi/2)2(x)");
+		GeneralFunction test = Parser.parse("\\sin(\\pi/2)2(x)");
 		assertEquals(2, test.evaluate(Map.of('x',1.0)), 0.01);
 	}
 
 
 	@Test void multiplyingAdjacencyLogb_2() {
-		GeneralFunction test = Parser.parse("logb_{2}(x)");
+		GeneralFunction test = Parser.parse("\\logb_{2}(x)");
 		assertEquals(2, test.evaluate(Map.of('x',4.0)));
 	}
 
 	@Test void multiplyingByAdjacencyLogb_33() {
-		GeneralFunction test = Parser.parse("logb_{33}(x)");
+		GeneralFunction test = Parser.parse("\\logb_{33}(x)");
 		assertEquals(2, test.evaluate(Map.of('x',1089.0)));
 	}
 
 	@Test void multiplyingAdjacencyLogb_y() {
-		GeneralFunction test = Parser.parse("-logb_{y}(x)");
+		GeneralFunction test = Parser.parse("-\\logb_{y}(x)");
 		assertEquals(-2, test.evaluate(Map.of('x',4.0, 'y', 2.0)));
 	}
 
@@ -158,12 +158,12 @@ public class FunctionTest {
 	}
 
 	@Test void emptyMap() {
-		GeneralFunction test = Parser.parse("ln(e)");
+		GeneralFunction test = Parser.parse("\\ln(e)");
 		assertEquals(1, test.evaluate(Map.of()));
 	}
 
 	@Test void nullMap() {
-		GeneralFunction test = Parser.parse("ln(e)");
+		GeneralFunction test = Parser.parse("\\ln(e)");
 		assertEquals(1, test.evaluate(null));
 	}
 
@@ -171,4 +171,10 @@ public class FunctionTest {
 		GeneralFunction test = Parser.parse("16E-6*1E6");
 		assertEquals(16, test.evaluate(null));
 	}
+
+	@Test void negativeEscape() {
+		GeneralFunction test = Parser.parse("-\\sin(\\pi/2)");
+		assertEquals(-1, test.evaluate(null), .01);
+	}
+
 }

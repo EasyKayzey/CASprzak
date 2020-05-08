@@ -63,7 +63,7 @@ public class KeywordInterface {
 			case "cv", "clearvars", "clearvariables"							-> clearVariables();
 			case "ss", "sset", "sets", "setsetting"								-> setSettings(splitInput[1]);
 			case "ps", "settings", "printsettings"								-> printSettings();
-			case "svt", "setvarsto", "setvariablesto"							-> setVariablesTo(splitInput[1]);
+			case "svt", "setvarsto", "setvariablesto"							-> setVariablesTo(splitInput[1]); // TODO rename
 			case "int", "integral"												-> integral(splitInput[1]);
 			default 															-> null; //TODO add "help" and "demo"
 		};

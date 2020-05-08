@@ -1,5 +1,6 @@
 package parsing;
 
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class LatexReplacer {
@@ -58,6 +59,8 @@ public class LatexReplacer {
 	private static final Pattern ps  = Pattern.compile("\\\\psi");
 	private static final Pattern W   = Pattern.compile("\\\\Omega");
 	private static final Pattern w   = Pattern.compile("\\\\omega");
+	private static final Pattern hb  = Pattern.compile("\\\\hbar");
+	private static final Pattern par = Pattern.compile("\\\\partial");
 
 	public static String encodeGreek(String input) {
 		input = A  .matcher(input).replaceAll("Α");
@@ -115,6 +118,16 @@ public class LatexReplacer {
 		input = ps .matcher(input).replaceAll("ψ");
 		input = W  .matcher(input).replaceAll("Ω");
 		input = w  .matcher(input).replaceAll("ω");
+		input = hb .matcher(input).replaceAll("ħ");
+		input = par.matcher(input).replaceAll("∂");
+		return input;
+	}
+
+	public static String addEscapes(String input) {
+		for (List<String> ops : List.of(Parser.binaryOperations, Parser.unitaryOperations, List.of("\\pi")))
+			for (String op : ops)
+				if (op.charAt(0) == '\\')
+					input = input.replaceAll("(?<![\\\\a])\\s*(?=" + op.substring(1) + ")", "\\\\");
 		return input;
 	}
 

@@ -47,8 +47,8 @@ public class SimplifyTest {
 
     @Test
     void distributeTerms() {
-        GeneralFunction test1 = Parser.parse("sin(x)*(1+5x)");
-        GeneralFunction test2 = Parser.parse("sin(x)+5*x*sin(x)");
+        GeneralFunction test1 = Parser.parse("\\sin(x)*(1+5x)");
+        GeneralFunction test2 = Parser.parse("\\sin(x)+5*x*\\sin(x)");
         assertEquals(((Product)test1).distributeAll(), test2);
     }
 

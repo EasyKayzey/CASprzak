@@ -40,8 +40,8 @@ public class KeywordInterfaceTest {
 
     @Test
     void partialDerivativeNTimes() {
-        GeneralFunction test1 = (GeneralFunction) KeywordInterface.useKeywords("pdn x 4 sin(x)");
-        GeneralFunction test2 = Parser.parse("sin(x)");
+        GeneralFunction test1 = (GeneralFunction) KeywordInterface.useKeywords("pdn x 4 \\sin(x)");
+        GeneralFunction test2 = Parser.parse("\\sin(x)");
         assertEquals(test2, test1);
     }
 
@@ -91,26 +91,26 @@ public class KeywordInterfaceTest {
 
     @Test
     void basicExtremaMax() {
-        double test = (double) KeywordInterface.useKeywords("extrema max 1-x^2 -pi pi");
+        double test = (double) KeywordInterface.useKeywords("extrema max 1-x^2 -\\pi \\pi");
         assertEquals(0, test);
     }
 
     @Test
     void basicTaylor() {
-        GeneralFunction test1 = (GeneralFunction) KeywordInterface.useKeywords("tay cos(x) 1 0");
+        GeneralFunction test1 = (GeneralFunction) KeywordInterface.useKeywords("tay \\cos(x) 1 0");
         GeneralFunction test2 = Parser.parse("1");
         assertEquals(test2, test1);
     }
 
     @Test
     void basicNumericalIntegration() {
-        double test = (double) KeywordInterface.useKeywords("intn sin(x) 0 pi");
+        double test = (double) KeywordInterface.useKeywords("intn \\sin(x) 0 \\pi");
         assertEquals(2, test, 0.01);
     }
 
     @Test
     void basicNumericalIntegrationWithError() {
-        double[] test = (double[]) KeywordInterface.useKeywords("intne sin(x) 0 pi");
+        double[] test = (double[]) KeywordInterface.useKeywords("intne \\sin(x) 0 \\pi");
         assertArrayEquals(new double[]{2, 0.01}, test, 0.01);
     }
 }

@@ -5,6 +5,7 @@ import functions.binary.Logb;
 import functions.binary.Pow;
 import functions.commutative.Product;
 import functions.commutative.Sum;
+import functions.special.Constant;
 import functions.unitary.combo.Factorial;
 import functions.unitary.piecewise.Abs;
 import functions.unitary.piecewise.Dirac;
@@ -36,6 +37,7 @@ public class FunctionMaker {
 			case "abs" 		-> new Abs(function);
 			case "exp" 		-> new Exp(function);
 			case "ln" 		-> new Ln(function);
+			case "log" 		-> new Logb(function, new Constant(10));
 			case "sin" 		-> new Sin(function);
 			case "cos" 		-> new Cos(function);
 			case "tan" 		-> new Tan(function);

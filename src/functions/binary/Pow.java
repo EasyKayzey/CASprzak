@@ -47,6 +47,8 @@ public class Pow extends BinaryFunction {
 		Pow currentPow = new Pow(function1.simplify(), function2.simplify());
 		currentPow = currentPow.multiplyExponents();
 		GeneralFunction current = currentPow.simplifyObviousExponentsAndFOC();
+		if (current instanceof Pow pow)
+			current = pow.simplifyLogsOfSameBase(); //TODO improve this whole method
 		if (current instanceof Pow pow && pow.function2 instanceof Product && Settings.distributeExponents)
 			current = pow.distributeExponents();
 		return current;
@@ -134,7 +136,7 @@ public class Pow extends BinaryFunction {
 	}
 
 	@SuppressWarnings("ChainOfInstanceofChecks")
-	public GeneralFunction simplifyLogsOfSameBase() { //TODO add this method to simplify
+	public GeneralFunction simplifyLogsOfSameBase() {
 		if (function1 instanceof Logb logb && logb.getFunction2().equals(function2))
 			return logb.getFunction1();
 		else if (function1 instanceof Ln ln && function2 instanceof Constant constant && constant.constant == Math.E)

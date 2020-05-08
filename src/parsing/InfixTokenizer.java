@@ -44,11 +44,12 @@ public class InfixTokenizer {
 	private static final Pattern characterPairsToMultiply = Pattern.compile( //TODO write LatexTest
 			"(?<!\\\\[a-zA-Z]{0,15})" +								// Ensures that the character is not LaTeX-escaped (up to 15 characters)
 			"(?<![CEP])(?![CEP])" +									// Ensures the spaces before and after C, E, and P are not matched
+			"(?<!logb_\\w)" +										// Ensures not preceded by logb
 			"((?<!\\d)|(?!\\d))" +									// Ensures that spaces both preceded and followed by a digit are not matched
 			"((?<=[a-zA-Z)\\d])|(?<=[^\\x00-\\x7F]))" +				// Preceded by a digit, alphabetic char, or non-ascii character
 			"\\s*" + 												// Allows for spaces
 			"((?=[a-zA-Z\\\\(\\d])|(?=[^\\x00-\\x7F]))" //+			// Followed by a digit, alphabetic char, or non-ascii character
-//			"|(?=\\\\[a-zA-Z]{0,15})\\s+(?=[\\w(\\\\])"				// Matches any spaces between an escaped word and a character, escape, or parenthesis
+//			"|(?=\\\\[a-zA-Z]{0,15})\\s+(?=[\\w(\\\\])"				// Matches any spaces between an escaped word and a character, escape, or parenthesis TODO maybe remove
 	);
 
 	private InfixTokenizer(){}
@@ -63,12 +64,12 @@ public class InfixTokenizer {
 		infix = absoluteValueStart.matcher(absoluteValueEnd.matcher(infix).replaceAll(")")).replaceAll("*\\abs(").replace("|", " \\abs(");
 		// Insert multiplication in expressions like 2x and 7(x*y+1)sin(3y)
 		infix = adjacentMultiplier.matcher(infix).replaceAll(" * ");
-		// Replace curly braces and underscores with parentheses and spaces
-		infix = infix.replace("{", "(").replace("}", ")").replace("_", " ");
 		// Turns expressions like x-y into x+-y, and turns expressions like x*y into x*/y (the '/' operator represents reciprocals)
 		infix = subtractionFinder.matcher(infix).replaceAll("+-").replace("/", "*/");
 		// Turns expressions like xyz into x*y*z
 		infix = characterPairsToMultiply.matcher(infix).replaceAll(" * ");
+		// Replace curly braces and underscores with parentheses and spaces
+		infix = infix.replace("{", "(").replace("}", ")").replace("_", " ");
 		// Adds parentheses to enforce order of operations
 		infix = "((((" + times.matcher(plus.matcher(closeParen.matcher(openParen.matcher(infix).replaceAll("((((")).replaceAll("))))")).replaceAll("))+((")).replaceAll(")*(") + "))))";
 		// Splits infix into tokens

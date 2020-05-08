@@ -75,7 +75,7 @@ public class InfixTokenizer {
 		// Turns expressions like xyz into x*y*z
 		infix = characterPairsToMultiply.matcher(infix).replaceAll(" * ");
 		// Replace curly braces and underscores with parentheses and spaces
-		infix = infix.replace("{", "(").replace("}", ")").replace("_", " ");
+		infix = infix.replace("{", "(").replace("}", ")").replace("[", "(").replace("]", ")").replace("_", " ");
 		// Adds parentheses to enforce order of operations
 		infix = "((((" + times.matcher(plus.matcher(closeParen.matcher(openParen.matcher(infix).replaceAll("((((")).replaceAll("))))")).replaceAll("))+((")).replaceAll(")*(") + "))))";
 		// Splits infix into tokens

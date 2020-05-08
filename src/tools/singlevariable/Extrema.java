@@ -4,6 +4,7 @@ import config.Settings;
 import functions.GeneralFunction;
 import tools.VariableTools;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +22,7 @@ public class Extrema {
      * @return the local minima of function on the specified range
      */
     public static double findLocalMinimum(GeneralFunction function, double lowerBound, double upperBound) {
-       double[] secondDerivativeIsPositive = findPoints(function, lowerBound, upperBound, (a, b) -> (a > b));
+       List<Double> secondDerivativeIsPositive = findPoints(function, lowerBound, upperBound, (a, b) -> (a > b));
         double minimum = findSmallestOrLargest(function, secondDerivativeIsPositive, (a, b) -> (a < b));
         if (minimum > upperBound || minimum < lowerBound)
             return Double.NaN;
@@ -38,7 +39,7 @@ public class Extrema {
      * @return the local maxima of function on the specified range
      */
     public static double findLocalMaximum(GeneralFunction function, double lowerBound, double upperBound) {
-        double[] secondDerivativeIsNegative = findPoints(function, lowerBound, upperBound, (a, b) -> (a < b));
+        List<Double> secondDerivativeIsNegative = findPoints(function, lowerBound, upperBound, (a, b) -> (a < b));
         double maximum = findSmallestOrLargest(function, secondDerivativeIsNegative, (a, b) -> (a > b));
         if (maximum > upperBound || maximum < lowerBound)
             return Double.NaN;
@@ -89,7 +90,7 @@ public class Extrema {
      * @param upperBound The upper bound of the range
      * @return any minima of function on the specified range
      */
-    public static double[] findAnyMinima(GeneralFunction function, double lowerBound, double upperBound) {
+    public static List<Double> findAnyMinima(GeneralFunction function, double lowerBound, double upperBound) {
         return findPoints(function, lowerBound, upperBound, (a, b) -> (a > b));
     }
 
@@ -100,7 +101,7 @@ public class Extrema {
      * @param upperBound The upper bound of the range
      * @return any maxima of function on the specified range
      */
-    public static double[] findAnyMaxima(GeneralFunction function, double lowerBound, double upperBound) {
+    public static List<Double> findAnyMaxima(GeneralFunction function, double lowerBound, double upperBound) {
        return findPoints(function, lowerBound, upperBound, (a, b) -> (a < b));
     }
 
@@ -111,34 +112,34 @@ public class Extrema {
      * @param upperBound The upper bound of the range
      * @return any inflection point of function on the specified range
      */
-    public static double[] findAnyInflectionPoints(GeneralFunction function, double lowerBound, double upperBound) {
+    public static List<Double> findAnyInflectionPoints(GeneralFunction function, double lowerBound, double upperBound) {
         return findPoints(function, lowerBound, upperBound, (a, b) -> (Math.abs(a - b) < Settings.zeroMargin));
     }
 
-    private static double[] findPoints(GeneralFunction function, double lowerBound, double upperBound, BiPredicate<? super Double, ? super Double> strategy) {
+    private static List<Double> findPoints(GeneralFunction function, double lowerBound, double upperBound, BiPredicate<? super Double, ? super Double> strategy) {
         char var = VariableTools.getSingleVariable(function);
         List<Double> criticalPoints = Solver.getSolutionsRange(function.getSimplifiedDerivative(var), lowerBound, upperBound);
         if (criticalPoints.size() == 0)
-            return new double[0];
+            return new ArrayList<>();
 
         List<Double> secondDerivative = new LinkedList<>();
         for (double criticalPoint : criticalPoints)
             if (strategy.test(function.getNthDerivative(var, 2).evaluate(Map.of(var, criticalPoint)), 0.0))
                 secondDerivative.add(criticalPoint);
 
-        return secondDerivative.stream().mapToDouble(i -> i).toArray();
+        return secondDerivative;
     }
 
-    private static double findSmallestOrLargest(GeneralFunction function, double[] numbers, BiPredicate<? super Double, ? super Double> strategy) {
+    private static double findSmallestOrLargest(GeneralFunction function, List<Double> numbers, BiPredicate<? super Double, ? super Double> strategy) {
         char var = VariableTools.getSingleVariable(function);
-        if (numbers.length == 0)
+        if (numbers.size() == 0)
             return Double.NaN;
-        else if (numbers.length == 1)
-            return numbers[0];
+        else if (numbers.size() == 1)
+            return numbers.get(0);
 
-        double[] functionAtPoints = new double[numbers.length];
+        double[] functionAtPoints = new double[numbers.size()];
         for (int i = 0; i < functionAtPoints.length; i++)
-            functionAtPoints[i] = function.evaluate(Map.of(var, numbers[i]));
+            functionAtPoints[i] = function.evaluate(Map.of(var, numbers.get(i)));
 
         int bestIndex = 0;
         for (int i = 1; i < functionAtPoints.length; i++)
@@ -147,7 +148,7 @@ public class Extrema {
             else if (strategy.test(functionAtPoints[i], functionAtPoints[bestIndex]))
                 bestIndex = i;
 
-        return numbers[bestIndex];
+        return numbers.get(bestIndex);
     }
 
 }

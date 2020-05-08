@@ -53,6 +53,12 @@ public class LatexTest {
 	}
 
 	@Test
+	void log() {
+		GeneralFunction test = Parser.parse("\\log(x)+\\log(1)");
+		assertEquals(1, test.evaluate(Map.of('x', 10.0)), .3);
+	}
+
+	@Test
 	void noEscape() {
 		boolean temp = Settings.enforceEscapes;
 		Settings.enforceEscapes = false;

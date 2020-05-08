@@ -69,11 +69,11 @@ public class FunctionMaker {
 	 * Returns a {@link GeneralFunction} corresponding to a "binary" operation string
 	 * NOTE: The functions are sometimes in a weird order for non-commutative types, so always check the constructors
 	 * @param functionName the string of the operation (e.g. "*" or "logb")
-	 * @param second    one {@link GeneralFunction} to be operated on
 	 * @param first     another {@link GeneralFunction} to be operated on
+	 * @param second    one {@link GeneralFunction} to be operated on
 	 * @return new {@link GeneralFunction}
 	 */
-	public static GeneralFunction makeBinary(String functionName, GeneralFunction second, GeneralFunction first) {
+	public static GeneralFunction makeBinary(String functionName, GeneralFunction first, GeneralFunction second) {
 		return switch (functionName) { // TODO add /frac
 			case "+" 		-> new Sum(first, second);
 			case "*" 		-> new Product(first, second);

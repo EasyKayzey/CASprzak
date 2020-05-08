@@ -49,7 +49,7 @@ public class FunctionParser {
 			} else if (binaryOperations.contains(token)) {
 				GeneralFunction a = functionStack.pop();
 				GeneralFunction b = functionStack.pop();
-				functionStack.push(FunctionMaker.makeBinary(token, a, b));
+				functionStack.push(FunctionMaker.makeBinary(token, b, a));
 			} else if (unitaryOperations.contains(token)) {
 				GeneralFunction c = functionStack.pop();
 				functionStack.push(FunctionMaker.makeUnitary(token, c));

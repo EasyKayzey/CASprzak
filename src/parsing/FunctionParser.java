@@ -15,7 +15,7 @@ import static parsing.OperationLists.*;
 
 public class FunctionParser {
 
-	private FunctionParser(){} // TODO rename, possibly modularize this and KInfixPostfix and InfixTokenizer
+	private FunctionParser(){}
 
 	/**
 	 * Parses infix to a {@link GeneralFunction}

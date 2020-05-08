@@ -1,4 +1,5 @@
 import functions.GeneralFunction;
+import functions.commutative.Product;
 import functions.commutative.Sum;
 import functions.special.Constant;
 import org.junit.jupiter.api.Test;
@@ -144,6 +145,13 @@ public class IntegralTest {
     void severalVariableBasicFunctionOfXAndY2() {
         Integral test1 = new Integral(FunctionParser.parseInfix("e^(3xy+y)"), 'x');
         GeneralFunction test2 = FunctionParser.parseInfix("1/(3y)*e^(3xy+y)");
+        assertEquals(test2, test1.execute());
+    }
+
+    @Test
+    void noIntegrand() {
+        Integral test1 = new Integral(new Product(), 'x');
+        GeneralFunction test2 = FunctionParser.parseInfix("x");
         assertEquals(test2, test1.execute());
     }
 }

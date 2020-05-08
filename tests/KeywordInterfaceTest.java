@@ -12,28 +12,28 @@ public class KeywordInterfaceTest {
 
     @Test
     void partialDerivatives() {
-        GeneralFunction test1 = (GeneralFunction) KeywordInterface.useKeywords("d/dx x^2");
+        GeneralFunction test1 = (GeneralFunction) KeywordInterface.useKeywords("pd x x^2");
         GeneralFunction test2 = FunctionParser.parseInfix("2x");
         assertEquals(test2, test1);
     }
 
     @Test
     void doublePartialDerivatives() {
-        GeneralFunction test1 = (GeneralFunction) KeywordInterface.useKeywords("d/dx d/dx x^2");
+        GeneralFunction test1 = (GeneralFunction) KeywordInterface.useKeywords("pd x pd x x^2");
         GeneralFunction test2 = FunctionParser.parseInfix("2");
         assertEquals(test2, test1);
     }
 
     @Test
     void partialWithRespectToVariableDoesNotExist() {
-        GeneralFunction test1 = (GeneralFunction) KeywordInterface.useKeywords("d/dn x^2");
+        GeneralFunction test1 = (GeneralFunction) KeywordInterface.useKeywords("pd n x^2");
         GeneralFunction test2 = FunctionParser.parseInfix("0");
         assertEquals(test2, test1);
     }
 
     @Test
     void partialOfASimp() {
-        GeneralFunction test1 = (GeneralFunction) KeywordInterface.useKeywords("d/dx simp 2x+3x");
+        GeneralFunction test1 = (GeneralFunction) KeywordInterface.useKeywords("pd x simp 2x+3x");
         GeneralFunction test2 = FunctionParser.parseInfix("5");
         assertEquals(test2, test1);
     }

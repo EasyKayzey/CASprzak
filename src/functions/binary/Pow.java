@@ -64,11 +64,7 @@ public class Pow extends BinaryFunction {
 				return function2.simplify();
 			else if (Settings.simplifyFunctionsOfConstants && function2 instanceof Constant)
 				return new Constant(this.evaluate(null));
-
-		if (Settings.trustImmutability)
-			return this;
-		else
-			return clone();
+		return this;
 	}
 
 	/**
@@ -78,11 +74,8 @@ public class Pow extends BinaryFunction {
 	public Pow multiplyExponents() {
 		if (function2 instanceof Pow base)
 			return new Pow(new Product(base.function1, function1).simplify(), base.function2);
-
-		if (Settings.trustImmutability)
-			return this;
 		else
-			return clone();
+			return this;
 	}
 
 	/**
@@ -106,17 +99,11 @@ public class Pow extends BinaryFunction {
 	 * @return a new unwrapped GeneralFunction
 	 */
 	public GeneralFunction unwrapIntegerPowerSafe() {
-		if (function1 instanceof Constant constant && constant.constant >= 0) {
-			try {
-				return unwrapIntegerPower(); // TODO instead of try-catching, just check if it's an int
-			} catch (IllegalArgumentException ignored) {
-				// Do nothing
-			}
-		}
-		if (Settings.trustImmutability)
+		try {
+			return unwrapIntegerPower(); // TODO instead of try-catching, just check if it's an int
+		} catch (IllegalArgumentException ignored) {
 			return this;
-		else
-			return clone();
+		}
 	}
 
 	/**
@@ -152,9 +139,7 @@ public class Pow extends BinaryFunction {
 			return logb.getFunction1();
 		else if (function1 instanceof Ln ln && function2 instanceof Constant constant && constant.constant == Math.E)
 			return ln.operand;
-		else if (Settings.trustImmutability)
-			return this;
 		else
-			return clone();
+			return this;
 	}
 }

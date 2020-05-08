@@ -31,21 +31,20 @@ public class StageOne {
      */
     public static GeneralFunction derivativeDivides(GeneralFunction integrand, char variableChar) { // TODO Erez needs to review this
         if (integrand instanceof Sum terms) {
-            GeneralFunction[] integratedTerms = new GeneralFunction[terms.getFunctionsLength()];
-            for(int i = 0; i < terms.getFunctionsLength(); i++) {
-                integratedTerms[i] = new Integral(terms.getFunctions()[i], variableChar).execute();
-            }
+            GeneralFunction[] integratedTerms = new GeneralFunction[terms.getFunctions().length];
+            GeneralFunction[] sumTerms = terms.getFunctions();
+            for (int i = 0; i < sumTerms.length; i++)
+                integratedTerms[i] = new Integral(sumTerms[i], variableChar).execute();
             return new Sum(integratedTerms);
         }
-        if (integrand instanceof Pow power && power.getFunction2() instanceof Sum && power.getFunction1() instanceof Constant constant && ParsingTools.isAlmostInteger(constant.constant)) {
+        if (integrand instanceof Pow power && power.getFunction2() instanceof Sum && power.getFunction1() instanceof Constant constant && ParsingTools.isAlmostInteger(constant.constant))
             return new Integral(power.unwrapIntegerPower().distributeAll(), variableChar).execute();
-        }
-        if (integrand instanceof PartialDerivative derivative) {
+
+        if (integrand instanceof PartialDerivative derivative)
             if (derivative.respectTo == variableChar)
                 return integrand;
             else
                 integrand = integrand.getSimplifiedDerivative(derivative.respectTo);
-        }
 
         Pair<GeneralFunction, GeneralFunction> stripConstant = IntegralTools.stripConstants(integrand, variableChar);
         GeneralFunction function = stripConstant.second;

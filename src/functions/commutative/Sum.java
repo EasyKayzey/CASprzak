@@ -1,10 +1,9 @@
 package functions.commutative;
 
-import config.Settings;
 import functions.GeneralFunction;
 import functions.special.Constant;
-import tools.DefaultFunctions;
 import tools.ArrayTools;
+import tools.DefaultFunctions;
 
 import java.util.Map;
 
@@ -96,10 +95,7 @@ public class Sum extends CommutativeFunction {
 			}
 		}
 
-		if (Settings.trustImmutability)
-			return this;
-		else
-			return clone();
+		return this;
 	}
 
 	public CommutativeFunction me(GeneralFunction... functions) {

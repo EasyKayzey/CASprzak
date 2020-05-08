@@ -32,7 +32,6 @@ public class SettingsParser {
 			case "simplifyFunctionsOfConstants" 			-> Settings.simplifyFunctionsOfConstants = ParsingTools.parseBoolean(value);
 			case "distributeExponents" 						-> Settings.distributeExponents = ParsingTools.parseBoolean(value);
 			case "cacheDerivatives" 						-> Settings.cacheDerivatives = ParsingTools.parseBoolean(value);
-			case "trustImmutability" 						-> Settings.trustImmutability = ParsingTools.parseBoolean(value);
 			case "enforceIntegerOperations" 				-> Settings.enforceIntegerOperations = ParsingTools.parseBoolean(value);
 			case "exitSolverOnProximity" 					-> Settings.exitSolverOnProximity = ParsingTools.parseBoolean(value);
 			case "defaultSolverType" 						-> Settings.defaultSolverType = SolverType.valueOf(value);

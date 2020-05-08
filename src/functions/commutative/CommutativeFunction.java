@@ -1,6 +1,5 @@
 package functions.commutative;
 
-import config.Settings;
 import functions.GeneralFunction;
 import functions.special.Constant;
 import org.jetbrains.annotations.NotNull;
@@ -80,10 +79,7 @@ public abstract class CommutativeFunction extends GeneralFunction {
 			for (int j = 0; j < i; j++) {
 				if (functions[i] instanceof Constant first && functions[j] instanceof Constant second) { // TODO maybe make this not recurse? not sure
 					GeneralFunction[] toOperate;
-					if (Settings.trustImmutability)
-						toOperate = functions.clone();
-					else
-						toOperate = ArrayTools.deepClone(functions);
+					toOperate = functions.clone();
 					toOperate[i] = new Constant(operation.applyAsDouble(first.constant, second.constant));
 					toOperate = ArrayTools.removeFunctionAt(toOperate, j);
 					return me(toOperate).simplifyConstants();
@@ -91,10 +87,7 @@ public abstract class CommutativeFunction extends GeneralFunction {
 			}
 		}
 
-		if (Settings.trustImmutability)
-			return this;
-		else
-			return (CommutativeFunction) clone();
+		return this;
 	}
 
 
@@ -106,10 +99,8 @@ public abstract class CommutativeFunction extends GeneralFunction {
 		for (int i = 0; i < functions.length; i++)
 			if (this.getClass().equals(functions[i].getClass()))
 				return me(ArrayTools.pullUp(functions, ((CommutativeFunction) functions[i]).getFunctions(), i)).simplifyPull();
-		if (Settings.trustImmutability)
-			return this;
-		else
-			return (CommutativeFunction) clone();
+
+		return this;
 	}
 
 	/**
@@ -121,10 +112,8 @@ public abstract class CommutativeFunction extends GeneralFunction {
 			return new Constant(identityValue);
 		else if (functions.length == 1)
 			return functions[0].simplify();
-		else if (Settings.trustImmutability)
-			return this;
 		else
-			return clone();
+			return this;
 	}
 
 
@@ -133,18 +122,7 @@ public abstract class CommutativeFunction extends GeneralFunction {
 	 * @return {@link #functions}
 	 */
 	public GeneralFunction[] getFunctions() {
-		if (Settings.trustImmutability)
-			return functions;
-		else
-			return ArrayTools.deepClone(functions);
-	}
-
-	/**
-	 * Returns the length of {@link #functions}
-	 * @return the length of {@link #functions}
-	 */
-	public int getFunctionsLength() {
-		return functions.length;
+		return functions;
 	}
 
 
@@ -176,8 +154,8 @@ public abstract class CommutativeFunction extends GeneralFunction {
 
 	public int compareSelf(GeneralFunction that) {
 		if (that instanceof CommutativeFunction function) {
-			if (functions.length != function.getFunctionsLength())
-				return functions.length - function.getFunctionsLength();
+			if (functions.length != function.getFunctions().length)
+				return functions.length - function.getFunctions().length;
 			GeneralFunction[] thisFunctions = functions;
 			GeneralFunction[] thatFunctions = function.getFunctions();
 			for (int i = 0; i < thisFunctions.length; i++)

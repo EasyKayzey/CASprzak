@@ -1,6 +1,5 @@
 package functions.commutative;
 
-import config.Settings;
 import functions.GeneralFunction;
 import functions.binary.Pow;
 import functions.special.Constant;
@@ -119,10 +118,7 @@ public class Product extends CommutativeFunction {
 			}
 		}
 
-		if (Settings.trustImmutability)
-			return this;
-		else
-			return clone();
+		return this;
 	}
 
 	public CommutativeFunction me(GeneralFunction... functions) {
@@ -143,10 +139,7 @@ public class Product extends CommutativeFunction {
 				return new Sum(ArrayTools.distribute(multiplyTerms, addTerms)).simplify();
 			}
 		}
-		if (Settings.trustImmutability)
-			return this;
-		else
-			return clone();
+		return this;
 	}
 
 	public int compareSelf(GeneralFunction that) {

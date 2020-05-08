@@ -1,6 +1,5 @@
 package functions.unitary.transforms;
 
-import config.Settings;
 import functions.GeneralFunction;
 import functions.unitary.UnitaryFunction;
 import tools.integration.StageOne;
@@ -82,10 +81,7 @@ public class Integral extends TransformFunction {
 
 	@Override
 	public UnitaryFunction simplifyInternal() {
-		if(Settings.trustImmutability)
-			return this;
-		else
-			return clone();
+		return this;
 	}
 
 

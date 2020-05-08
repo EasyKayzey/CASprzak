@@ -82,11 +82,6 @@ public class Settings {
 	public static boolean cacheDerivatives = true;
 
 	/**
-	 * Denotes whether or not function immutability should be trusted when using getters or performing simplifications. There should be no reason to turn this off.
-	 */
-	public static boolean trustImmutability = true; // TODO REMOVE THIS!!!!
-
-	/**
 	 * Forces functions in {@link functions.unitary.combo} to return integers when using approximations
 	 */
 	public static boolean enforceIntegerOperations = true;

@@ -1,8 +1,8 @@
 import config.Settings;
 import functions.GeneralFunction;
 import org.junit.jupiter.api.Test;
+import parsing.FunctionParser;
 import parsing.KeywordInterface;
-import parsing.Parser;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -13,35 +13,35 @@ public class KeywordInterfaceTest {
     @Test
     void partialDerivatives() {
         GeneralFunction test1 = (GeneralFunction) KeywordInterface.useKeywords("d/dx x^2");
-        GeneralFunction test2 = Parser.parse("2x");
+        GeneralFunction test2 = FunctionParser.parseInfix("2x");
         assertEquals(test2, test1);
     }
 
     @Test
     void doublePartialDerivatives() {
         GeneralFunction test1 = (GeneralFunction) KeywordInterface.useKeywords("d/dx d/dx x^2");
-        GeneralFunction test2 = Parser.parse("2");
+        GeneralFunction test2 = FunctionParser.parseInfix("2");
         assertEquals(test2, test1);
     }
 
     @Test
     void partialWithRespectToVariableDoesNotExist() {
         GeneralFunction test1 = (GeneralFunction) KeywordInterface.useKeywords("d/dn x^2");
-        GeneralFunction test2 = Parser.parse("0");
+        GeneralFunction test2 = FunctionParser.parseInfix("0");
         assertEquals(test2, test1);
     }
 
     @Test
     void partialOfASimp() {
         GeneralFunction test1 = (GeneralFunction) KeywordInterface.useKeywords("d/dx simp 2x+3x");
-        GeneralFunction test2 = Parser.parse("5");
+        GeneralFunction test2 = FunctionParser.parseInfix("5");
         assertEquals(test2, test1);
     }
 
     @Test
     void partialDerivativeNTimes() {
         GeneralFunction test1 = (GeneralFunction) KeywordInterface.useKeywords("pdn x 4 \\sin(x)");
-        GeneralFunction test2 = Parser.parse("\\sin(x)");
+        GeneralFunction test2 = FunctionParser.parseInfix("\\sin(x)");
         assertEquals(test2, test1);
     }
 
@@ -71,7 +71,7 @@ public class KeywordInterfaceTest {
     @Test
     void basicSimplify() {
         GeneralFunction test1 = (GeneralFunction) KeywordInterface.useKeywords("simp 1*(x+2x+0)");
-        GeneralFunction test2 = Parser.parse("3x");
+        GeneralFunction test2 = FunctionParser.parseInfix("3x");
         assertEquals(test2, test1);
     }
 
@@ -79,7 +79,7 @@ public class KeywordInterfaceTest {
     void notSoBasicSubstitute() {
         KeywordInterface.useKeywords("sto t x^2");
         GeneralFunction test1 = (GeneralFunction) KeywordInterface.useKeywords("sub z+y y t");
-        GeneralFunction test2 = Parser.parse("z+x^2");
+        GeneralFunction test2 = FunctionParser.parseInfix("z+x^2");
         assertEquals(test2, test1);
     }
 
@@ -98,7 +98,7 @@ public class KeywordInterfaceTest {
     @Test
     void basicTaylor() {
         GeneralFunction test1 = (GeneralFunction) KeywordInterface.useKeywords("tay \\cos(x) 1 0");
-        GeneralFunction test2 = Parser.parse("1");
+        GeneralFunction test2 = FunctionParser.parseInfix("1");
         assertEquals(test2, test1);
     }
 

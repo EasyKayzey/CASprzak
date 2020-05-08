@@ -53,7 +53,7 @@ public class InfixTokenizer {
 	private InfixTokenizer(){}
 
 	/**
-	 * Tokenizes an input infix string into a format supported by the {@link PreProcessor}
+	 * Tokenizes an input infix string into a format supported by the {@link FunctionParser}
 	 * @param infix input string in infix
 	 * @return array of infix tokens
 	 */

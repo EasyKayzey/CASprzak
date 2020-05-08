@@ -1,34 +1,38 @@
 package parsing;
 
+import config.Settings;
 import functions.GeneralFunction;
 import functions.special.Constant;
 import functions.special.Variable;
 import tools.ParsingTools;
 
+import java.util.ArrayList;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Parser {
+import static parsing.OperationLists.*;
 
-	private Parser(){} // TODO rename, possibly modularize this and PreProcessor and InfixTokenizer
+public class FunctionParser {
+
+	private FunctionParser(){} // TODO rename, possibly modularize this and KInfixPostfix and InfixTokenizer
 
 	/**
-	 * Parses infix using {@link parsing.PreProcessor} and {@link #parse(List)}
+	 * Parses infix to a {@link GeneralFunction}
 	 * @param infix infix string
 	 * @return a {@link GeneralFunction} corresponding to the infix string
 	 */
-	public static GeneralFunction parse(String infix) {
-		return Parser.parse(PreProcessor.toPostfix(infix));
+	public static GeneralFunction parseInfix(String infix) {
+		return FunctionParser.parsePostfix(toPostfix(infix));
 	}
 
 	/**
-	 * Parses infix using {@link parsing.PreProcessor} and {@link #parse(List)}, then simplifies the output
+	 * Parses infix using {@link #parseInfix(String)}, then simplifies the output
 	 * @param infix infix string
 	 * @return a {@link GeneralFunction} corresponding to the infix string, simplified
 	 */
 	public static GeneralFunction parseSimplified(String infix) {
-		return parse(infix).simplify();
+		return parseInfix(infix).simplify();
 	}
 
 	/**
@@ -36,7 +40,7 @@ public class Parser {
 	 * @param postfix array of tokens in postfix
 	 * @return a {@link GeneralFunction} corresponding to the postfix string
 	 */
-	public static GeneralFunction parse(List<String> postfix) {
+	public static GeneralFunction parsePostfix(List<String> postfix) {
 		Deque<GeneralFunction> functionStack = new LinkedList<>();
 
 		for (String token : postfix) {
@@ -65,61 +69,37 @@ public class Parser {
 	}
 
 	/**
-	 * A list of unitary operations
+	 * Turns an infix string into a postfix array
+	 * @param infix input string in infix
+	 * @return array of postfix tokens
 	 */
-	public static final List<String> unitaryOperations = new LinkedList<>() {
-		{
-			add("-");
-			add("/");
-			add("!");
-			add("\\sin");
-			add("\\cos");
-			add("\\tan");
-			add("\\log");
-			add("\\ln");
-			add("\\sqrt");
-			add("\\exp");
-			add("\\abs");
-			add("\\sign");
-			add("\\dirac");
-			add("\\sin");
-			add("\\cos");
-			add("\\tan");
-			add("\\csc");
-			add("\\sec");
-			add("\\cot");
-			add("\\asin");
-			add("\\acos");
-			add("\\atan");
-			add("\\acsc");
-			add("\\asec");
-			add("\\acot");
-			add("\\sinh");
-			add("\\cosh");
-			add("\\tanh");
-			add("\\csch");
-			add("\\sech");
-			add("\\coth");
-			add("\\asinh");
-			add("\\acosh");
-			add("\\atanh");
-			add("\\acsch");
-			add("\\asech");
-			add("\\acoth");
-		}
-	};
+	public static List<String> toPostfix(String infix) {
+		if (!Settings.enforceEscapes)
+			infix = LatexReplacer.addEscapes(infix);
+		infix = LatexReplacer.encodeGreek(infix);
+		List<String> tokens = InfixTokenizer.tokenizeInfix(infix);
+		Deque<String> postfix = new LinkedList<>();
+		Deque<String> operators = new LinkedList<>();
 
-	/**
-	 * A list of binary operations
-	 */
-	public static final List<String> binaryOperations = new LinkedList<>() {
-		{
-			add("^");
-			add("*");
-			add("+");
-			add("\\logb");
-			add("C");
-			add("P");
+		for (String token : tokens) {
+			if (Constant.isSpecialConstant(token)) {
+				postfix.add(token);
+			} else if ("(".equals(token)) {
+				operators.push(token);
+			} else if (")".equals(token)) {
+				while (!"(".equals(operators.peek()))
+					postfix.add(operators.pop());
+				operators.pop();
+			} else if (unitaryOperations.contains(token) || binaryOperations.contains(token)) {
+				operators.push(token);
+			} else {
+				postfix.add(token);
+			}
 		}
-	};
+
+		while (operators.size() != 0)
+			postfix.add(operators.pop());
+
+		return new ArrayList<>(postfix);
+	}
 }

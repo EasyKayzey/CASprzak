@@ -3,8 +3,8 @@ package tools;
 import config.Settings;
 import functions.GeneralFunction;
 import functions.special.Constant;
+import parsing.FunctionParser;
 import parsing.LatexReplacer;
-import parsing.Parser;
 
 import java.lang.reflect.MalformedParametersException;
 
@@ -16,7 +16,7 @@ public class ParsingTools { // TODO review this file
 		else if (input instanceof Double d)
 			return new Constant(d);
 		else if (input instanceof String s)
-			return Parser.parse(s);
+			return FunctionParser.parseInfix(s);
 		else
 			throw new MalformedParametersException("Cannot parse " + input + " of type " + input.getClass().getSimpleName() + ".");
 	}
@@ -27,7 +27,7 @@ public class ParsingTools { // TODO review this file
 	 * @return a double corresponding to the evaluated constant to be evaluated
 	 */
 	public static double getConstant(String infix) {
-		return Parser.parse(infix).evaluate(null);
+		return FunctionParser.parseInfix(infix).evaluate(null);
 	}
 
 	/**
@@ -82,6 +82,6 @@ public class ParsingTools { // TODO review this file
         else if (input.length() == 3 && input.charAt(0) == '\'' && input.charAt(2) == '\'')
             return input.charAt(1);
         else
-            throw new IllegalArgumentException("Input length should be 1 for Parser.toCharacter, input given was " + input);
+            throw new IllegalArgumentException("Input length should be 1 for FunctionParser.toCharacter, input given was " + input);
     }
 }

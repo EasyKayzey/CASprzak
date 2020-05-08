@@ -3,7 +3,7 @@ import functions.binary.Pow;
 import functions.special.Constant;
 import functions.special.Variable;
 import org.junit.jupiter.api.Test;
-import parsing.Parser;
+import parsing.FunctionParser;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class IteratorTest {
 	@Test
 	void testCommutative1() {
-		GeneralFunction test = Parser.parseSimplified("x^2+x^3+x^4");
+		GeneralFunction test = FunctionParser.parseSimplified("x^2+x^3+x^4");
 		int i = 0;
 		boolean io = true;
 		for (GeneralFunction f : test) {
@@ -24,7 +24,7 @@ public class IteratorTest {
 
 	@Test
 	void testBinary1() {
-		GeneralFunction test = Parser.parseSimplified("x^2");
+		GeneralFunction test = FunctionParser.parseSimplified("x^2");
 		int i = 0;
 		for (GeneralFunction f : test) {
 			i++;
@@ -34,7 +34,7 @@ public class IteratorTest {
 
 	@Test
 	void testUnitary1() {
-		GeneralFunction test = Parser.parseSimplified("\\sin x");
+		GeneralFunction test = FunctionParser.parseSimplified("\\sin x");
 		int i = 0;
 		for (GeneralFunction f : test) {
 			i++;
@@ -45,7 +45,7 @@ public class IteratorTest {
 
 	@Test
 	void testSpecial1() {
-		GeneralFunction test = Parser.parseSimplified("x");
+		GeneralFunction test = FunctionParser.parseSimplified("x");
 		int i = 0;
 		for (GeneralFunction f : test) {
 			i++;
@@ -55,7 +55,7 @@ public class IteratorTest {
 
 	@Test
 	void testRecursive1() {
-		GeneralFunction test = Parser.parseSimplified("1+2x+x^2+x^3+x^4");
+		GeneralFunction test = FunctionParser.parseSimplified("1+2x+x^2+x^3+x^4");
 		int i = 0;
 		int j = 0;
 		for (GeneralFunction f : test) {

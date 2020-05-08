@@ -3,6 +3,8 @@ package parsing;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import static parsing.OperationLists.*;
+
 public class LatexReplacer {
 	private static final Pattern A   = Pattern.compile("\\\\Alpha");
 	private static final Pattern a   = Pattern.compile("\\\\alpha");
@@ -124,7 +126,7 @@ public class LatexReplacer {
 	}
 
 	public static String addEscapes(String input) {
-		for (List<String> ops : List.of(Parser.binaryOperations, Parser.unitaryOperations, List.of("\\pi")))
+		for (List<String> ops : List.of(binaryOperations, unitaryOperations, List.of("\\pi")))
 			for (String op : ops)
 				if (op.charAt(0) == '\\')
 					input = input.replaceAll("(?<![\\\\a])\\s*(?=" + op.substring(1) + ")", "\\\\");

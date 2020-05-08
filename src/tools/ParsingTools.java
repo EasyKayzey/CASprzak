@@ -8,7 +8,7 @@ import parsing.LatexReplacer;
 
 import java.lang.reflect.MalformedParametersException;
 
-public class ParsingTools { // TODO review this file
+public class ParsingTools { // TODO Michael review this file
 	@SuppressWarnings("ChainOfInstanceofChecks")
 	public static GeneralFunction toFunction(Object input) {
 		if (input instanceof GeneralFunction f)

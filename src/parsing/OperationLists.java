@@ -12,14 +12,13 @@ public class OperationLists {
 			add("-");
 			add("/");
 			add("!");
-			add("\\sin");
-			add("\\cos");
-			add("\\tan");
-			add("\\log");
+			add("\\d");
 			add("\\ln");
-			add("\\sqrt");
+			add("\\log");
 			add("\\exp");
 			add("\\abs");
+			add("\\d/d");
+			add("\\sqrt");
 			add("\\sign");
 			add("\\dirac");
 			add("\\sin");

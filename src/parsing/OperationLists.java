@@ -13,7 +13,6 @@ public class OperationLists {
 			add("/");
 			add("!");
 			add("\\ln");
-			add("\\pd");
 			add("\\log");
 			add("\\exp");
 			add("\\abs");
@@ -55,6 +54,7 @@ public class OperationLists {
 			add("^");
 			add("*");
 			add("+");
+			add("\\pd");
 			add("\\logb");
 			add("\\frac");
 			add("C");

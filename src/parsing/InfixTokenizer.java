@@ -42,17 +42,20 @@ public class InfixTokenizer {
 	);
 	private static final Pattern characterPairsToMultiply = Pattern.compile(
 			"(?<!\\\\[a-zA-Z]{0,15})" +								// Ensures that the character is not LaTeX-escaped (up to 15 characters)
-					"(?<![CEP])(?![CEP])" +							// Ensures the spaces before and after C, E, and P are not matched
-					"(?<!logb_\\w)" +								// Ensures not preceded by logb
-					"((?<!\\d)|(?!\\d))" +							// Ensures that spaces both preceded and followed by a digit are not matched
-					"((?<=[a-zA-Z)\\d])|(?<=[^\\x00-\\x7F]))" +		// Preceded by a digit, alphabetic char, or non-ascii character
-					"\\s*" + 										// Allows for spaces
-					"((?=[a-zA-Z\\\\(\\d])|(?=[^\\x00-\\x7F]))" 	// Followed by a digit, alphabetic char, or non-ascii character
+			"(?<![CEP])(?![CEP])" +									// Ensures the spaces before and after C, E, and P are not matched
+			"(?<!logb_\\w)" +										// Ensures not preceded by logb
+			"((?<!\\d)|(?!\\d))" +									// Ensures that spaces both preceded and followed by a digit are not matched
+			"((?<=[a-zA-Z)\\d])|(?<=[^\\x00-\\x7F]))" +				// Preceded by a digit, alphabetic char, or non-ascii character
+			"\\s*" + 												// Allows for spaces
+			"((?=[a-zA-Z\\\\(\\d])|(?=[^\\x00-\\x7F]))" 			// Followed by a digit, alphabetic char, or non-ascii character
 	);
 	private static final Pattern differential = Pattern.compile(
-			"d(?=[a-zA-Z\\x00-\\x7F])"
+			"\\\\d(?=[a-zA-Z\\x00-\\x7F])"
 	);
 	private static final Pattern partialDerivative = Pattern.compile("d/d");
+	private static final Pattern endPD = Pattern.compile(
+			"(?<=\\\\pd\\{[a-zA-Z\\x00-\\x7F])"
+	);
 
 	private InfixTokenizer(){}
 
@@ -63,7 +66,7 @@ public class InfixTokenizer {
 	 */
 	public static List<String> tokenizeInfix(String infix) {
 		// Make d/dx into \pd x
-		infix = partialDerivative.matcher(infix).replaceAll("\\pd ");
+		infix = endPD.matcher(partialDerivative.matcher(infix).replaceAll("\\\\pd{")).replaceAll("}");
 		// Make absolute values into unitary functions
 		infix = absoluteValueStart.matcher(absoluteValueEnd.matcher(infix).replaceAll(")")).replaceAll("*\\abs(").replace("|", " \\abs(");
 		// Insert multiplication in expressions like 2x and 7(x*y+1)sin(3y)

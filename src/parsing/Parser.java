@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Parser {
 
-	private Parser(){}
+	private Parser(){} // TODO rename, possibly modularize this and PreProcessor and InfixTokenizer
 
 	/**
 	 * Parses infix using {@link parsing.PreProcessor} and {@link #parse(List)}

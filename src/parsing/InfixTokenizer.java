@@ -22,7 +22,7 @@ public class InfixTokenizer {
 	);
 	private static final Pattern subtractionFinder = Pattern.compile(
 			"(?<!^)(?<!E)" +										// Ensures not preceded by newline or E
-			"(?<![\\^\\-+*/\\s({])\\s*-"								// Ensures not preceded by an operation or (, then matches - signs and all spaces preceding
+			"(?<![\\^\\-+*/\\s({])\\s*-"							// Ensures not preceded by an operation or (, then matches - signs and all spaces preceding
 	);
 	private static final Pattern openParen = Pattern.compile("\\(");
 	private static final Pattern closeParen = Pattern.compile("\\)");

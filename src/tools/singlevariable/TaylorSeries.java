@@ -38,7 +38,7 @@ public class TaylorSeries {
         for (int i = 0; i < degree; i++){
             taylorSeriesTerms[i] = new Product(new Constant(function.getNthDerivative('x', i).evaluate(Map.of(var, center)) / MiscTools.factorial(i)), new Pow(new Constant(i), new Sum(new Variable('x'), new Constant(-center))));
         }
-        return new Sum(taylorSeriesTerms);
+        return new Sum(taylorSeriesTerms).simplify();
     }
 }
 

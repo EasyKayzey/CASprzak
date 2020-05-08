@@ -20,7 +20,6 @@ public class Parser {
 	 * @return a {@link GeneralFunction} corresponding to the infix string
 	 */
 	public static GeneralFunction parse(String infix) {
-		System.out.println(infix);
 		return Parser.parse(PreProcessor.toPostfix(infix));
 	}
 

@@ -21,7 +21,6 @@ public class PreProcessor {
 		List<String> tokens = InfixTokenizer.tokenizeInfix(infix);
 		Deque<String> postfix = new LinkedList<>();
 		Deque<String> operators = new LinkedList<>();
-		System.out.println(tokens);
 
 		for (String token : tokens) {
 			if (Constant.isSpecialConstant(token)) {

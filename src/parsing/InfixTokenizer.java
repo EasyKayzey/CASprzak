@@ -71,7 +71,6 @@ public class InfixTokenizer {
 		// Adds parentheses to enforce order of operations
 		infix = "((((" + times.matcher(plus.matcher(closeParen.matcher(openParen.matcher(infix).replaceAll("((((")).replaceAll("))))")).replaceAll("))+((")).replaceAll(")*(") + "))))";
 		// Splits infix into tokens
-		System.out.println(infix);
 		return infixSplitter.splitAsStream(infix).collect(Collectors.toCollection(LinkedList::new));
 	}
 }

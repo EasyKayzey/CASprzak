@@ -103,6 +103,9 @@ public class CASDemo {
 		sleep(1);
 		System.out.println("You can see that it called the function that you last typed in.");
 		sleep(2);
+		System.out.println("Type \"next\" to continue.");
+		if (!tryInput("next"::equals, "Please enter 'next' to continue."))
+			return;
 		currentState = DemoState.EVAL;
 	}
 
@@ -119,6 +122,9 @@ public class CASDemo {
 		sleep(1);
 		System.out.println("Notice how underscore now saves the result from the evaluation.");
 		sleep(2);
+		System.out.println("Type \"next\" to continue.");
+		if (!tryInput("next"::equals, "Please enter 'next' to continue."))
+			return;
 		currentState = DemoState.STO;
 	}
 
@@ -143,6 +149,9 @@ public class CASDemo {
 		sleep(3);
 		System.out.println("You can also remove a function by using the \"removefunction\" command or remove all functions by using \"clearfunctions\"");
 		sleep(5);
+		System.out.println("Type \"next\" to continue.");
+		if (!tryInput("next"::equals, "Please enter 'next' to continue."))
+			return;
 		currentState = DemoState.SIMP;
 	}
 
@@ -165,6 +174,9 @@ public class CASDemo {
 		sleep(2);
 		System.out.println("For those who are curious, that was the general formula of the derivative of f(x)^g(x) applied to x^2.");
 		sleep(4);
+		System.out.println("Type \"next\" to continue.");
+		if (!tryInput("next"::equals, "Please enter 'next' to continue."))
+			return;
 		currentState = DemoState.VAR;
 	}
 
@@ -199,6 +211,9 @@ public class CASDemo {
 		sleep(2);
 		System.out.println("and variables can be removed using \"removevar\" or all cleared using \"clearvars\".");
 		sleep(4);
+		System.out.println("Type \"next\" to continue.");
+		if (!tryInput("next"::equals, "Please enter 'next' to continue."))
+			return;
 		currentState = DemoState.SUB;
 	}
 
@@ -225,6 +240,9 @@ public class CASDemo {
 		sleep(3);
 		System.out.println("You would have to do \"sto g sub g x x^2\" for example.");
 		sleep(4);
+		System.out.println("Type \"next\" to continue.");
+		if (!tryInput("next"::equals, "Please enter 'next' to continue."))
+			return;
 		currentState = DemoState.PD;
 	}
 
@@ -249,6 +267,9 @@ public class CASDemo {
 		sleep(3);
 		System.out.println("Great, you have taken the derivative of a function.");
 		sleep(4);
+		System.out.println("Type \"next\" to continue.");
+		if (!tryInput("next"::equals, "Please enter 'next' to continue."))
+			return;
 		currentState = DemoState.TAY;
 	}
 
@@ -264,6 +285,9 @@ public class CASDemo {
 			return;
 		System.out.println("Good!, taylor series can often be used as good approximations to normal functions.");
 		sleep(4);
+		System.out.println("Type \"next\" to continue.");
+		if (!tryInput("next"::equals, "Please enter 'next' to continue."))
+			return;
 		currentState = DemoState.INT;
 	}
 
@@ -286,6 +310,9 @@ public class CASDemo {
 		sleep(2);
 		System.out.println("Congratulations, you have just integrated a function.");
 		sleep(4);
+		System.out.println("Type \"next\" to continue.");
+		if (!tryInput("next"::equals, "Please enter 'next' to continue."))
+			return;
 		currentState = DemoState.INTN;
 	}
 
@@ -303,6 +330,9 @@ public class CASDemo {
 		sleep(1.5);
 		System.out.println("Good job!");
 		sleep(4);
+		System.out.println("Type \"next\" to continue.");
+		if (!tryInput("next"::equals, "Please enter 'next' to continue."))
+			return;
 		currentState = DemoState.SOL;
 	}
 
@@ -324,6 +354,9 @@ public class CASDemo {
 		sleep(2);
 		System.out.println("However, there are settings that change how Solve works (like exit conditions) which may help fix minor issues.");
 		sleep(4);
+		System.out.println("Type \"next\" to continue.");
+		if (!tryInput("next"::equals, "Please enter 'next' to continue."))
+			return;
 		currentState = DemoState.EXT;
 	}
 
@@ -346,6 +379,9 @@ public class CASDemo {
 		sleep(3);
 		System.out.println("anymin, anymax, and inflection return an array of all local minima, maxima, or inflection points.");
 		sleep(5);
+		System.out.println("Type \"next\" to continue.");
+		if (!tryInput("next"::equals, "Please enter 'next' to continue."))
+			return;
 		currentState = DemoState.SET;
 	}
 

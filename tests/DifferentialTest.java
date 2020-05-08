@@ -6,8 +6,20 @@ import static parsing.FunctionParser.*;
 
 public class DifferentialTest {
 	@Test
-	void basicDerivative() {
+	void basicDerivative1() {
 		GeneralFunction test = parseSimplified("d/dx x");
+		assertEquals(1, test.evaluate(null));
+	}
+
+	@Test
+	void basicDerivative2() {
+		GeneralFunction test = parseSimplified("d/dx{x}");
+		assertEquals(1, test.evaluate(null));
+	}
+
+	@Test
+	void basicDerivative3() {
+		GeneralFunction test = parseSimplified("d/dx(x)");
 		assertEquals(1, test.evaluate(null));
 	}
 }

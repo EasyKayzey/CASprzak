@@ -75,10 +75,11 @@ public class FunctionMaker {
 	 */
 	public static GeneralFunction makeBinary(String functionName, GeneralFunction second, GeneralFunction first) {
 		return switch (functionName) { // TODO add /frac
-			case "+" 		-> new Sum(second, first);
-			case "*" 		-> new Product(second, first);
+			case "+" 		-> new Sum(first, second);
+			case "*" 		-> new Product(first, second);
 			case "^" 		-> new Pow(second, first);
 			case "\\logb" 	-> new Logb(second, first);
+			case "\\frac" 	-> new Product(first, DefaultFunctions.reciprocal(second));
 			case "C" 		-> new Product(Factorial.defaultFactorial(first), new Pow(DefaultFunctions.NEGATIVE_ONE, new Product(Factorial.defaultFactorial(second), Factorial.defaultFactorial(new Sum(first, new Product(DefaultFunctions.NEGATIVE_ONE, second))))));
 			case "P" 		-> new Product(Factorial.defaultFactorial(first), new Pow(DefaultFunctions.NEGATIVE_ONE, Factorial.defaultFactorial(new Sum(first, new Product(DefaultFunctions.NEGATIVE_ONE, second)))));
 			default 		-> throw new UnsupportedOperationException("Invalid functionName " + functionName);

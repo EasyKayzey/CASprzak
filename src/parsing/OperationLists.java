@@ -57,6 +57,7 @@ public class OperationLists {
 			add("*");
 			add("+");
 			add("\\logb");
+			add("\\frac");
 			add("C");
 			add("P");
 		}

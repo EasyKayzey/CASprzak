@@ -3,9 +3,7 @@ package parsing;
 import functions.GeneralFunction;
 import functions.special.Constant;
 import functions.special.Variable;
-import tools.MiscTools;
 
-import java.lang.reflect.MalformedParametersException;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
@@ -54,7 +52,7 @@ public class Parser {
 				try {
 					functionStack.push(new Constant(Double.parseDouble(token)));
 				} catch (NumberFormatException e) {
-					functionStack.push(new Variable(MiscTools.getCharacter(token)));
+					functionStack.push(new Variable(ParsingTools.getCharacter(token)));
 				}
 			}
 		}
@@ -64,27 +62,6 @@ public class Parser {
 
 		return functionStack.pop();
 	}
-
-	@SuppressWarnings("ChainOfInstanceofChecks")
-	public static GeneralFunction toFunction(Object input) {
-		if (input instanceof GeneralFunction f)
-			return f;
-		else if (input instanceof Double d)
-			return new Constant(d);
-		else if (input instanceof String s)
-			return parse(s);
-		else
-			throw new MalformedParametersException("Cannot parse " + input + " of type " + input.getClass().getSimpleName() + ".");
-	}
-
-	/**
-	 * Evaluates infix corresponding to a constant, like {@code pi/3}
-	 * @param infix infix string of constant
-	 * @return a double corresponding to the evaluated constant to be evaluated
-	 */
-	public static double getConstant(String infix) {
-		return parse(infix).evaluate(null);
-	} // TODO consolidate all of these to one class (from MiscTools as well)
 
 	/**
 	 * A list of unitary operations

@@ -1,6 +1,6 @@
 package config;
 
-import tools.MiscTools;
+import parsing.ParsingTools;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -24,17 +24,17 @@ public class SettingsParser {
 			case "defaultSolverIterations" 					-> Settings.defaultSolverIterations = Integer.parseInt(value);
 			case "defaultRangeSections" 					-> Settings.defaultRangeSections = Integer.parseInt(value);
 			case "simpsonsSegments" 						-> Settings.simpsonsSegments = Integer.parseInt(value);
-			case "singleVariableDefault" 					-> Settings.singleVariableDefault = MiscTools.getCharacter(value);
+			case "singleVariableDefault" 					-> Settings.singleVariableDefault = ParsingTools.getCharacter(value);
 			case "zeroMargin" 								-> Settings.zeroMargin = Double.parseDouble(value);
 			case "integerMargin" 							-> Settings.integerMargin = Double.parseDouble((value));
 			case "equalsMargin" 							-> Settings.equalsMargin = Double.parseDouble((value));
-			case "enforceEscapes"				 			-> Settings.enforceEscapes = MiscTools.parseBoolean(value);
-			case "simplifyFunctionsOfConstants" 			-> Settings.simplifyFunctionsOfConstants = MiscTools.parseBoolean(value);
-			case "distributeExponents" 						-> Settings.distributeExponents = MiscTools.parseBoolean(value);
-			case "cacheDerivatives" 						-> Settings.cacheDerivatives = MiscTools.parseBoolean(value);
-			case "trustImmutability" 						-> Settings.trustImmutability = MiscTools.parseBoolean(value);
-			case "enforceIntegerOperations" 				-> Settings.enforceIntegerOperations = MiscTools.parseBoolean(value);
-			case "exitSolverOnProximity" 					-> Settings.exitSolverOnProximity = MiscTools.parseBoolean(value);
+			case "enforceEscapes"				 			-> Settings.enforceEscapes = ParsingTools.parseBoolean(value);
+			case "simplifyFunctionsOfConstants" 			-> Settings.simplifyFunctionsOfConstants = ParsingTools.parseBoolean(value);
+			case "distributeExponents" 						-> Settings.distributeExponents = ParsingTools.parseBoolean(value);
+			case "cacheDerivatives" 						-> Settings.cacheDerivatives = ParsingTools.parseBoolean(value);
+			case "trustImmutability" 						-> Settings.trustImmutability = ParsingTools.parseBoolean(value);
+			case "enforceIntegerOperations" 				-> Settings.enforceIntegerOperations = ParsingTools.parseBoolean(value);
+			case "exitSolverOnProximity" 					-> Settings.exitSolverOnProximity = ParsingTools.parseBoolean(value);
 			case "defaultSolverType" 						-> Settings.defaultSolverType = SolverType.valueOf(value);
 			case "defaultFactorial" 						-> Settings.defaultFactorial = FactorialType.valueOf(value);
 			default 										-> throw new IllegalStateException("Setting " + key + " does not exist.");

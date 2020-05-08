@@ -1,5 +1,5 @@
 import org.junit.jupiter.api.Test;
-import tools.MiscTools;
+import parsing.ParsingTools;
 import tools.helperclasses.AbstractMutablePair;
 import tools.helperclasses.AbstractPair;
 import tools.helperclasses.MutablePair;
@@ -28,8 +28,8 @@ public class MiscTest {
 
 	@Test
 	void miscParsing() {
-		assertTrue(MiscTools.parseBoolean("truE"));
-		assertFalse(MiscTools.parseBoolean("falSE"));
-		assertEquals(4, MiscTools.toInteger(4.00000000002));
+		assertTrue(ParsingTools.parseBoolean("truE"));
+		assertFalse(ParsingTools.parseBoolean("falSE"));
+		assertEquals(4, ParsingTools.toInteger(4.00000000002));
 	}
 }

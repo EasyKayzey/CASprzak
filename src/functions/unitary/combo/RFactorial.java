@@ -3,7 +3,7 @@ package functions.unitary.combo;
 import config.Settings;
 import functions.GeneralFunction;
 import functions.unitary.UnitaryFunction;
-import tools.MiscTools;
+import parsing.ParsingTools;
 
 import java.util.Map;
 
@@ -31,7 +31,7 @@ public class RFactorial extends Factorial {
 	public double evaluate(Map<Character, Double> variableValues) {
 		if (!Settings.enforceIntegerOperations)
 			throw new IllegalStateException("RFactorial cannot be used if Settings.enforceIntegerOperations is not enabled.");
-		int argument = MiscTools.toInteger(operand.evaluate(variableValues));
+		int argument = ParsingTools.toInteger(operand.evaluate(variableValues));
 		long prod = 1;
 		for (int i = 2; i <= argument; i++)
 			prod *= i;

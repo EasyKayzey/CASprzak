@@ -2,7 +2,7 @@ import config.Settings;
 import functions.GeneralFunction;
 import org.junit.jupiter.api.Test;
 import parsing.Parser;
-import tools.MiscTools;
+import parsing.ParsingTools;
 
 import java.util.Map;
 
@@ -19,7 +19,7 @@ public class LatexTest {
 	@Test
 	void testVar() {
 		GeneralFunction test = Parser.parse("\\pi\\Gamma");
-		assertEquals(10, test.evaluate(Map.of(MiscTools.getCharacter("\\Gamma"), 3.2)), .3);
+		assertEquals(10, test.evaluate(Map.of(ParsingTools.getCharacter("\\Gamma"), 3.2)), .3);
 	}
 
 	@Test

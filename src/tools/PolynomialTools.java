@@ -6,6 +6,7 @@ import functions.commutative.Sum;
 import functions.commutative.Product;
 import functions.special.Constant;
 import functions.special.Variable;
+import parsing.ParsingTools;
 
 import java.util.function.DoublePredicate;
 
@@ -39,7 +40,7 @@ public class PolynomialTools {
 	 * @return true if function is a monomial
 	 */
 	public static boolean isMonomial(GeneralFunction function) {
-		return isGivenMonomial(function, (a -> (MiscTools.isAlmostInteger(a) && a > 0)));
+		return isGivenMonomial(function, (a -> (ParsingTools.isAlmostInteger(a) && a > 0)));
 	}
 
 	/**

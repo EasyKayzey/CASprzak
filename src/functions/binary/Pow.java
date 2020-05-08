@@ -7,8 +7,8 @@ import functions.commutative.Sum;
 import functions.special.Constant;
 import functions.unitary.specialcases.Exp;
 import functions.unitary.specialcases.Ln;
+import parsing.ParsingTools;
 import tools.DefaultFunctions;
-import tools.MiscTools;
 import tools.VariableTools;
 
 import java.util.Arrays;
@@ -125,7 +125,7 @@ public class Pow extends BinaryFunction {
 	 * @throws RuntimeException if the exponent is not a positive integer
 	 */
 	public Product unwrapIntegerPower() throws RuntimeException {
-		int integerExponent = MiscTools.toInteger(((Constant) function1).constant);
+		int integerExponent = ParsingTools.toInteger(((Constant) function1).constant);
 		GeneralFunction[] toMultiply = new GeneralFunction[integerExponent];
 		Arrays.fill(toMultiply, function2);
 		return new Product(toMultiply);

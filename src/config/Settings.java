@@ -1,6 +1,7 @@
 package config;
 
 import functions.GeneralFunction;
+import parsing.ParsingTools;
 
 import java.io.IOException;
 
@@ -51,7 +52,7 @@ public class Settings {
 	public static double zeroMargin = 1e-3;
 
 	/**
-	 * The margin used in {@link tools.MiscTools#toInteger(double)} when deciding when a double is close enough to an integer
+	 * The margin used in {@link ParsingTools#toInteger(double)} when deciding when a double is close enough to an integer
 	 */
 	public static double integerMargin = 1e-4;
 

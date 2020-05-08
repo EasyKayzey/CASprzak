@@ -5,8 +5,8 @@ import functions.GeneralFunction;
 import functions.binary.Pow;
 import functions.commutative.Product;
 import functions.unitary.UnitaryFunction;
+import parsing.ParsingTools;
 import tools.DefaultFunctions;
-import tools.MiscTools;
 
 import java.util.Map;
 
@@ -34,7 +34,7 @@ public class SFactorial extends Factorial {
 	public double evaluate(Map<Character, Double> variableValues) {
 		double argument = operand.evaluate(variableValues);
 		if (Settings.enforceIntegerOperations)
-			argument = MiscTools.toInteger(argument);
+			argument = ParsingTools.toInteger(argument);
 		double ans = Math.sqrt(2 * Math.PI * argument) * Math.pow(argument / Math.E, argument);
 		if (Settings.enforceIntegerOperations)
 			return Math.round(ans);

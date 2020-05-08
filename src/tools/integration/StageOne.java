@@ -13,8 +13,8 @@ import functions.unitary.specialcases.Ln;
 import functions.unitary.transforms.Integral;
 import functions.unitary.transforms.PartialDerivative;
 import functions.unitary.trig.normal.TrigFunction;
+import parsing.ParsingTools;
 import tools.DefaultFunctions;
-import tools.MiscTools;
 import tools.SearchTools;
 import tools.VariableTools;
 import tools.exceptions.IntegrationFailedException;
@@ -37,7 +37,7 @@ public class StageOne {
             }
             return new Sum(integratedTerms);
         }
-        if (integrand instanceof Pow power && power.getFunction2() instanceof Sum && power.getFunction1() instanceof Constant constant && MiscTools.isAlmostInteger(constant.constant)) {
+        if (integrand instanceof Pow power && power.getFunction2() instanceof Sum && power.getFunction1() instanceof Constant constant && ParsingTools.isAlmostInteger(constant.constant)) {
             return new Integral(power.unwrapIntegerPower().distributeAll(), variableChar).execute();
         }
         if (integrand instanceof PartialDerivative derivative) {

@@ -332,7 +332,7 @@ public class KeywordInterface {
 			try {
 				stringBuilder.append(setting.get(null));
 			} catch (IllegalAccessException e) {
-				stringBuilder.append(e.getMessage());
+				stringBuilder.append(e.toString());
 			}
 			stringBuilder.append("\n");
 		}

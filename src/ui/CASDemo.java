@@ -68,7 +68,7 @@ public class CASDemo {
 				return true;
 			}
 		} catch (Exception e) {
-			System.out.println("Your input threw exception '" + e.getMessage() + "', please try again.");
+			System.out.println("Your input threw exception '" + e.toString() + "', please try again.");
 			return tryInput(test, message);
 		}
 	}

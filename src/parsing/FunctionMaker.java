@@ -84,7 +84,7 @@ public class FunctionMaker {
 			case "^" 		-> new Pow(second, first);
 			case "C" 		-> new Product(Factorial.defaultFactorial(first), new Pow(DefaultFunctions.NEGATIVE_ONE, new Product(Factorial.defaultFactorial(second), Factorial.defaultFactorial(new Sum(first, new Product(DefaultFunctions.NEGATIVE_ONE, second))))));
 			case "P" 		-> new Product(Factorial.defaultFactorial(first), new Pow(DefaultFunctions.NEGATIVE_ONE, Factorial.defaultFactorial(new Sum(first, new Product(DefaultFunctions.NEGATIVE_ONE, second)))));
-			case "\\d/d"	-> new PartialDerivative(second, ((Variable) first).varID);
+			case "\\pd"	-> new PartialDerivative(second, ((Variable) first).varID);
 			case "\\logb" 	-> new Logb(second, first);
 			case "\\frac" 	-> new Product(first, DefaultFunctions.reciprocal(second));
 			default 		-> throw new UnsupportedOperationException("Invalid functionName " + functionName);

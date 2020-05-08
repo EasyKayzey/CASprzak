@@ -52,6 +52,7 @@ public class InfixTokenizer {
 	private static final Pattern differential = Pattern.compile(
 			"d(?=[a-zA-Z\\x00-\\x7F])"
 	);
+	private static final Pattern partialDerivative = Pattern.compile("d/d");
 
 	private InfixTokenizer(){}
 
@@ -61,6 +62,8 @@ public class InfixTokenizer {
 	 * @return array of infix tokens
 	 */
 	public static List<String> tokenizeInfix(String infix) {
+		// Make d/dx into \pd x
+		infix = partialDerivative.matcher(infix).replaceAll("\\pd ");
 		// Make absolute values into unitary functions
 		infix = absoluteValueStart.matcher(absoluteValueEnd.matcher(infix).replaceAll(")")).replaceAll("*\\abs(").replace("|", " \\abs(");
 		// Insert multiplication in expressions like 2x and 7(x*y+1)sin(3y)

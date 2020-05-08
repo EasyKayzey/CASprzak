@@ -14,10 +14,10 @@ public class OperationLists {
 			add("!");
 			add("\\d");
 			add("\\ln");
+			add("\\pd");
 			add("\\log");
 			add("\\exp");
 			add("\\abs");
-			add("\\d/d");
 			add("\\sqrt");
 			add("\\sign");
 			add("\\dirac");

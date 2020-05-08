@@ -26,10 +26,10 @@ public class Pow extends BinaryFunction {
 
 	@Override
 	public GeneralFunction getDerivative(char varID) {
-		if (function1 instanceof Constant exponent) //TODO should this use doesntContainConstant like in StageOne
+		if (function1 instanceof Constant exponent)
 			return new Product(new Constant(exponent.constant), new Pow(new Constant(exponent.constant - 1), function2), function2.getSimplifiedDerivative(varID));
 		else if (VariableTools.doesNotContainsVariable(function1, varID))
-			return new Product(function1, new Pow(new Sum(function1, DefaultFunctions.NEGATIVE_ONE), function2), function2.getSimplifiedDerivative(varID)); // TODO Michael read this
+			return new Product(function1, new Pow(new Sum(function1, DefaultFunctions.NEGATIVE_ONE), function2), function2.getSimplifiedDerivative(varID));
 		else
 			return new Product(new Pow(function1, function2), new Sum(new Product(function1.getSimplifiedDerivative(varID), new Ln(function2)), new Product(new Product(function1, function2.getSimplifiedDerivative(varID)), new Pow(DefaultFunctions.NEGATIVE_ONE, function2))));
 	}

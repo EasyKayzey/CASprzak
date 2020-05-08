@@ -30,7 +30,7 @@ public class StageOne {
      * @return The integral of the function if one is found.
      */
     public static GeneralFunction derivativeDivides(GeneralFunction integrand, char variableChar) { // TODO Erez needs to review this
-        if (integrand instanceof Sum terms) { // TODO ensure an empty integral don't break shit
+        if (integrand instanceof Sum terms) {
             GeneralFunction[] integratedTerms = new GeneralFunction[terms.getFunctions().length];
             GeneralFunction[] sumTerms = terms.getFunctions();
             for (int i = 0; i < sumTerms.length; i++)

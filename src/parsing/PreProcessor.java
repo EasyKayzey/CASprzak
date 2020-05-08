@@ -14,7 +14,7 @@ public class PreProcessor {
 	 * @param infix input string in infix
 	 * @return array of postfix tokens
 	 */
-	public static List<String> toPostfix(String infix) { // TODO add unicode support
+	public static List<String> toPostfix(String infix) {
 		if (!Settings.enforceEscapes)
 			infix = LatexReplacer.addEscapes(infix);
 		infix = LatexReplacer.encodeGreek(infix);

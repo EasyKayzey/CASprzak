@@ -33,23 +33,21 @@ public class InfixTokenizer {
 			"(?<=!)|(?=!)" +										// Splits if preceded or followed by !
 			"|(?<!\\s)(?=\\\\)" +									// Splits if followed by a LaTeX escape
 			"|(((?<=\\W)(?=[\\w-])((?<!-)|(?!\\d))" +				// Splits if preceded by non-word and followed by word and not [preceded by - and followed by a digit]
-			"|(?<=\\w)(?=\\W)(?<!(?<=E)(?=-)))" +					// Splits if preceded by a word and followed by a non-word, unless [the word was E and the non-word was -] //TODO maybe make this use the notation of prev line
+			"|(?<=\\w)(?=\\W)((?<!E)|(?!-)))" +					// Splits if preceded by a word and followed by a non-word, unless [the word was E and the non-word was -]
 			"|(?<=[()])|(?=[()]))" +								// Splits if preceded or followed by a parenthesis
 			"(?<![ .\\\\])(?![ .])" +								// The PREVIOUS FOUR LINES ONLY WORK if not preceded or followed by a dot or space, and not preceded by a LaTeX escape
 			"|(?<=[CP])|(?=[CP])" +									// Splits if preceded or followed by C or P
 			"|(?<=[^\\x00-\\x7F])|(?=[^\\x00-\\x7F])" +
-			"|(?<=[A-Za-z(])(?=\\.))" //+							// Splits if preceded by a letter or open parenthesis and followed by a dot
-//			"|(?<=-)(?![\\d.])"										// Splits if preceded by a - and not followed by a digit or dot TODO uncomment things and move ending paren
+			"|(?<=[A-Za-z(])(?=\\.))"							// Splits if preceded by a letter or open parenthesis and followed by a dot
 	);
-	private static final Pattern characterPairsToMultiply = Pattern.compile( //TODO write LatexTest
+	private static final Pattern characterPairsToMultiply = Pattern.compile(
 			"(?<!\\\\[a-zA-Z]{0,15})" +								// Ensures that the character is not LaTeX-escaped (up to 15 characters)
 			"(?<![CEP])(?![CEP])" +									// Ensures the spaces before and after C, E, and P are not matched
 			"(?<!logb_\\w)" +										// Ensures not preceded by logb
 			"((?<!\\d)|(?!\\d))" +									// Ensures that spaces both preceded and followed by a digit are not matched
 			"((?<=[a-zA-Z)\\d])|(?<=[^\\x00-\\x7F]))" +				// Preceded by a digit, alphabetic char, or non-ascii character
 			"\\s*" + 												// Allows for spaces
-			"((?=[a-zA-Z\\\\(\\d])|(?=[^\\x00-\\x7F]))" //+			// Followed by a digit, alphabetic char, or non-ascii character
-//			"|(?=\\\\[a-zA-Z]{0,15})\\s+(?=[\\w(\\\\])"				// Matches any spaces between an escaped word and a character, escape, or parenthesis TODO maybe remove
+			"((?=[a-zA-Z\\\\(\\d])|(?=[^\\x00-\\x7F]))" 			// Followed by a digit, alphabetic char, or non-ascii character
 	);
 
 	private InfixTokenizer(){}

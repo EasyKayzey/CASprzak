@@ -77,7 +77,7 @@ public class Solver {
 	 * @return an array of all the approximate roots found
 	 */
 	@SuppressWarnings("UnnecessaryDefault")
-	public static double[] getSolutionsRange(GeneralFunction expression, double lower, double upper) {
+	public static List<Double> getSolutionsRange(GeneralFunction expression, double lower, double upper) {
 		return switch (Settings.defaultSolverType) {
 			case NEWTON -> getSolutionsRangeNewton(expression, lower, upper);
 			case HALLEY -> getSolutionsRangeHalley(expression, lower, upper);
@@ -93,7 +93,7 @@ public class Solver {
 	 * @param runs       the amount of times that {@link #newtonsMethod} is repeated
 	 * @return an array of all the approximate roots found
 	 */
-	public static double[] getSolutionsRangeNewton(GeneralFunction expression, double lower, double upper, int runs) {
+	public static List<Double> getSolutionsRangeNewton(GeneralFunction expression, double lower, double upper, int runs) {
 		char var = VariableTools.getSingleVariable(expression);
 		List<Double> solutions = SolverTools.createRange(upper, lower, Settings.defaultRangeSections);
 		ListIterator<Double> iter = solutions.listIterator();
@@ -107,7 +107,7 @@ public class Solver {
 		}
 		SolverTools.removeNotInRange(solutions, lower, upper);
 		SolverTools.removeRepeatsSort(solutions);
-		return solutions.stream().mapToDouble(i -> i).toArray();
+		return solutions;
 	}
 
 	/**
@@ -117,7 +117,7 @@ public class Solver {
 	 * @param upper      the upper bound of the values that will be searched
 	 * @return an array of all the approximate roots found
 	 */
-	public static double[] getSolutionsRangeHalley(GeneralFunction expression, double lower, double upper) {
+	public static List<Double> getSolutionsRangeHalley(GeneralFunction expression, double lower, double upper) {
 		char var = VariableTools.getSingleVariable(expression);
 		return getSolutionsRangeNewton(
 				(new Product(expression, new Pow(DefaultFunctions.NEGATIVE_HALF, new Abs(expression.getDerivative(var))))).simplify(),
@@ -132,7 +132,7 @@ public class Solver {
 	 * @param upper      the upper bound of the values that will be searched
 	 * @return an array of all the approximate roots found
 	 */
-	public static double[] getSolutionsRangeNewton(GeneralFunction expression, double lower, double upper) {
+	public static List<Double> getSolutionsRangeNewton(GeneralFunction expression, double lower, double upper) {
 		return getSolutionsRangeNewton(expression, lower, upper, Settings.defaultSolverIterations);
 	}
 }

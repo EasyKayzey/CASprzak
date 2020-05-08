@@ -17,7 +17,7 @@ public class SolverTest {
     @Test
     void moreAdvancedPolynomial() {
         GeneralFunction test = FunctionParser.parseInfix("x^4-5x^2+4");
-        assertArrayEquals(new double[]{-2, -1, 1, 2}, Solver.getSolutionsRangeNewton(test, -10, 10), 1e-10);
+        assertArrayEquals(new double[]{-2, -1, 1, 2}, Solver.getSolutionsRangeNewton(test, -10, 10).stream().mapToDouble(i -> i).toArray(), 1e-10);
     }
 
     @Test
@@ -29,19 +29,19 @@ public class SolverTest {
     @Test
     void polynomialWithNoSolutionRange() {
         GeneralFunction test = FunctionParser.parseInfix("x^2+1");
-        assertArrayEquals(new double[]{}, Solver.getSolutionsRangeNewton(test, -10, 10));
+        assertArrayEquals(new double[]{}, Solver.getSolutionsRangeNewton(test, -10, 10).stream().mapToDouble(i -> i).toArray());
     }
 
     @Test
     void simpleNotPolynomial1() {
         GeneralFunction test = FunctionParser.parseInfix("\\ln(x)");
-        assertArrayEquals(new double[]{1}, Solver.getSolutionsRangeNewton(test, -10, 10));
+        assertArrayEquals(new double[]{1}, Solver.getSolutionsRangeNewton(test, -10, 10).stream().mapToDouble(i -> i).toArray());
     }
 
      @Test
     void simpleNotPolynomial2() {
         GeneralFunction test = FunctionParser.parseInfix("e^(x-5) - 1");
-         assertArrayEquals(new double[]{5}, Solver.getSolutionsRangeHalley(test, 0, 7.68785));
+         assertArrayEquals(new double[]{5}, Solver.getSolutionsRangeHalley(test, 0, 7.68785).stream().mapToDouble(i -> i).toArray());
     }
 
     @Test
@@ -64,11 +64,11 @@ public class SolverTest {
 
     @Test void chemTest1() {
         GeneralFunction test = FunctionParser.parseInfix("x^2/(.2-x)-.013");
-        assertArrayEquals(new double[]{-.057, .045}, Solver.getSolutionsRangeHalley(test, -10, 10), .05);
+        assertArrayEquals(new double[]{-.057, .045}, Solver.getSolutionsRangeHalley(test, -10, 10).stream().mapToDouble(i -> i).toArray(), .05);
     }
 
     @Test void chemTest2() {
         GeneralFunction test = FunctionParser.parseInfix("(.12x)^2/((1-x).12)-6.3E-5");
-        assertEquals(1, Solver.getSolutionsRangeHalley(test, 0, 1).length);
+        assertEquals(1, Solver.getSolutionsRangeHalley(test, 0, 1).size());
     }
 }

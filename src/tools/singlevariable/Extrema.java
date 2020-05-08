@@ -117,8 +117,8 @@ public class Extrema {
 
     private static double[] findPoints(GeneralFunction function, double lowerBound, double upperBound, BiPredicate<? super Double, ? super Double> strategy) {
         char var = VariableTools.getSingleVariable(function);
-        double[] criticalPoints = Solver.getSolutionsRange(function.getSimplifiedDerivative(var), lowerBound, upperBound);
-        if (criticalPoints.length == 0)
+        List<Double> criticalPoints = Solver.getSolutionsRange(function.getSimplifiedDerivative(var), lowerBound, upperBound);
+        if (criticalPoints.size() == 0)
             return new double[0];
 
         List<Double> secondDerivative = new LinkedList<>();

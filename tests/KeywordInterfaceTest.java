@@ -4,10 +4,12 @@ import org.junit.jupiter.api.Test;
 import parsing.FunctionParser;
 import parsing.KeywordInterface;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@SuppressWarnings("SpellCheckingInspection")
+@SuppressWarnings({"SpellCheckingInspection", "unchecked"})
 public class KeywordInterfaceTest {
 
     @Test
@@ -85,7 +87,7 @@ public class KeywordInterfaceTest {
 
     @Test
     void basicSolve() {
-        double[] test = (double[]) KeywordInterface.useKeywords("solve 5-5x 0 2");
+        double[] test = ((List<Double>) KeywordInterface.useKeywords("solve 5-5x 0 2")).stream().mapToDouble(i -> i).toArray();
         assertArrayEquals(new double[]{1}, test, Settings.equalsMargin);
     }
 

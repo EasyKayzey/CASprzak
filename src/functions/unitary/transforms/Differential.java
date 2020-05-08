@@ -61,10 +61,6 @@ public class Differential extends TransformFunction {
 		throw new UnsupportedOperationException("Cannot evaluate a differential " + this);
 	}
 
-	@Override
-	public GeneralFunction simplify() {
-		return clone();
-	}
 
 	@Override
 	public UnitaryFunction simplifyInternal() {

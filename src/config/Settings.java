@@ -92,6 +92,11 @@ public class Settings {
 	public static boolean exitSolverOnProximity = false;
 
 	/**
+	 * Denotes whether transforms should execute their action when simplify is called
+	 */
+	public static boolean executeOnSimplify = true;
+
+	/**
 	 * Denotes the default method used to solve equations
 	 */
 	public static SolverType defaultSolverType = SolverType.NEWTON;

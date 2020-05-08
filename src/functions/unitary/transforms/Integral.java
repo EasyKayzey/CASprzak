@@ -74,10 +74,6 @@ public class Integral extends TransformFunction {
 		return NumericalIntegration.simpsonsRule(operand.setVariables(newMap), 0, bound);
 	}
 
-	@Override
-	public GeneralFunction simplify() {
-		return clone();
-	}
 
 	@Override
 	public UnitaryFunction simplifyInternal() {

@@ -61,10 +61,6 @@ public class PartialDerivative extends TransformFunction {
 		return operand.getSimplifiedDerivative(respectTo).evaluate(variableValues);
 	}
 
-	@Override
-	public GeneralFunction simplify() {
-		return simplifyInternal();
-	}
 
 	@Override
 	public UnitaryFunction simplifyInternal() {

@@ -313,7 +313,7 @@ public class CASDemo {
 		sleep(2);
 		System.out.println("Try it out yourself on an easy function.");
 		sleep(1);
-		if (!tryInput(s -> "sol ".equals(s.substring(0, 4)), "Begin your input with 'intn' to demonstrate the numeric integration feature of the CAS."))
+		if (!tryInput(s -> "sol ".equals(s.substring(0, 4)), "Begin your input with 'sol' to demonstrate the solving feature of the CAS."))
 			return;
 		sleep(1.5);
 		System.out.println("As with all numeric methods, there are always some quirks.");
@@ -326,7 +326,24 @@ public class CASDemo {
 	}
 
 	private static void ext() {
-
+		System.out.println("With the ability to solve for zeros, we can now find extrema of functions.");
+		sleep(3);
+		System.out.println("For example:");
+		sleep(1);
+		System.out.println(">>> ext max 1-x^2 -2 2");
+		sleep(2);
+		System.out.println(KeywordInterface.useKeywords("ext max 1-x^2 -2 2"));
+		sleep(3);
+		System.out.println("This command found the maximum of \"1-x^2\" on the range (-2, 2).");
+		sleep(3);
+		System.out.println("There are other commands in addition to just max.");
+		sleep(2);
+		System.out.println("The 5 options after ext are \"min, max, anymin, anymax, inflection\"");
+		sleep(3);
+		System.out.println("min and max return the maximum or minimum of the function in the given range.");
+		sleep(3);
+		System.out.println("anymin, anymax, and inflection return an array of all local minima, maxima, or inflection points.");
+		sleep(5);
 	}
 }
 

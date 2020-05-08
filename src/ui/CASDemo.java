@@ -20,6 +20,7 @@ public class CASDemo {
 		INTN,
 		SOL,
 		EXT,
+		SET,
 		EXIT,
 	}
 
@@ -50,6 +51,7 @@ public class CASDemo {
 			case INTN -> intn();
 			case SOL -> sol();
 			case EXT -> ext();
+			case SET -> set();
 		}
 	}
 
@@ -205,7 +207,7 @@ public class CASDemo {
 		sleep(2.5);
 		System.out.println("It is probably best to explain with an example:");
 		sleep(2.5);
-		System.out.println(">>> sub x^y y sin(y)");
+		System.out.println(">>> sub x^y y sin(x)");
 		sleep(3);
 		System.out.println(KeywordInterface.useKeywords("sub x^y y sin(x)"));
 		sleep(2.25);
@@ -219,7 +221,7 @@ public class CASDemo {
 		sleep(2);
 		System.out.println("Congratulations, you have just substituted a variable for a function.");
 		sleep(2);
-		System.out.println("An important to remembers is that these changes are not saved in the function.");
+		System.out.println("An important thing to remembers is that these changes are not saved in the function.");
 		sleep(3);
 		System.out.println("You would have to do \"sto g sub g x x^2\" for example.");
 		sleep(4);
@@ -300,7 +302,7 @@ public class CASDemo {
 			return;
 		sleep(1.5);
 		System.out.println("Good job!");
-		sleep(2);
+		sleep(4);
 		currentState = DemoState.SOL;
 	}
 
@@ -315,7 +317,7 @@ public class CASDemo {
 		sleep(1);
 		if (!tryInput(s -> "sol ".equals(s.substring(0, 4)), "Begin your input with 'sol' to demonstrate the solving feature of the CAS."))
 			return;
-		sleep(1.5);
+		sleep(1.5);//TODO this gives pointer
 		System.out.println("As with all numeric methods, there are always some quirks.");
 		sleep(2);
 		System.out.println("Very often, simple solutions such as 1 will be found as 1.000000000023 for example.");
@@ -338,12 +340,36 @@ public class CASDemo {
 		sleep(3);
 		System.out.println("There are other commands in addition to just max.");
 		sleep(2);
-		System.out.println("The 5 options after ext are \"min, max, anymin, anymax, inflection\"");
+		System.out.println("The 5 options after \"ext\" are \"min, max, anymin, anymax, inflection\"");
 		sleep(3);
 		System.out.println("min and max return the maximum or minimum of the function in the given range.");
 		sleep(3);
 		System.out.println("anymin, anymax, and inflection return an array of all local minima, maxima, or inflection points.");
 		sleep(5);
+		currentState = DemoState.SET;
+	}
+
+	private static void set() {
+		System.out.println("Finally, our Demo will show you how to see or change settings.");
+		sleep(3);
+		System.out.println("Type in \"settings\" to see all current settings.");
+		if (!tryInput("settings"::equals, "Type in 'settings' to see the settings."))
+			return;
+		sleep(3);
+		System.out.println("These are all the current settings.");
+		sleep(3);
+		System.out.println("If we want to change a setting we use \"setsetting [setting] [value]\"");
+		sleep(3);
+		System.out.println("As you saw, there are a lot of settings. If you want to learn what a setting does, we recommend reading our documentation.");
+		sleep(3);
+		System.out.println("Thank you for finishing our demo.");
+		sleep(3);
+		System.out.println("We highly encourage just playing around seeing what you can do.");
+		sleep(3);
+		System.out.println("Type \"exit\" to return to the UI or \"next\" to close the application.");
+		if (!tryInput("next"::equals, "Type in 'next' or 'exit' to leave the application."))
+			return;
+		currentState = DemoState.EXIT;
 	}
 }
 

@@ -24,9 +24,6 @@ public class InfixTokenizer {
 			"(?<!^)(?<!E)" +										// Ensures not preceded by newline or E
 			"(?<![\\^\\-+*/\\s({])\\s*-"							// Ensures not preceded by an operation or (, then matches - signs and all spaces preceding
 	);
-	private static final Pattern division = Pattern.compile(
-			"(?<![^a-zA-Z]d)/"										// Slashes, as long as they're not preceded by a non-alpha then a d
-	);
 	private static final Pattern openParen = Pattern.compile("\\(");
 	private static final Pattern closeParen = Pattern.compile("\\)");
 	private static final Pattern plus = Pattern.compile("\\+");
@@ -69,7 +66,7 @@ public class InfixTokenizer {
 		// Insert multiplication in expressions like 2x and 7(x*y+1)sin(3y)
 		infix = adjacentMultiplier.matcher(infix).replaceAll(" * ");
 		// Turns expressions like x-y into x+-y, and turns expressions like x*y into x*/y (the '/' operator represents reciprocals)
-		infix = subtractionFinder.matcher(division.matcher(infix).replaceAll("*/")).replaceAll("+-");
+		infix = subtractionFinder.matcher(infix).replaceAll("+-").replace("/", "*/");
 		// Turns differentials like dx into \d x
 		infix = differential.matcher(infix).replaceAll("\\d ");
 		// Turns expressions like xyz into x*y*z

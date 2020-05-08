@@ -108,7 +108,7 @@ public class CASDemo {
 		System.out.println("Now, lets do something with our function like evaluating it.");
 		sleep(2.25);
 		System.out.println("Try typing in \"eval _ x=2\" for example to evaluate your function at point 2.");
-		if (!tryInput(s -> "eval".equals(s.substring(0, 4)), "Begin your input with 'eval' to demonstrate the evaluation feature of the UI."))
+		if (!tryInput(s -> "eval ".equals(s.substring(0, 5)), "Begin your input with 'eval' to demonstrate the evaluation feature of the UI."))
 			return;
 		sleep(1);
 		System.out.println("Now, try entering an underscore.");
@@ -124,13 +124,13 @@ public class CASDemo {
 		System.out.println("If we want to use a function several times, we are going to have to store it.");
 		sleep(3);
 		System.out.println("Try typing in \"sto f 1-x^2\" for example to store the function \"1-x^2\" in \"f\".");
-		if (!tryInput(s -> "sto".equals(s.substring(0, 3)), "Begin your input with 'sto' to demonstrate the storage feature of the UI."))
+		if (!tryInput(s -> "sto ".equals(s.substring(0, 4)), "Begin your input with 'sto' to demonstrate the storage feature of the UI."))
 			return;
 		sleep(1);
 		System.out.println("Great, we can now use the function stored whenever we want.");
 		sleep(2);
 		System.out.println("As a quick example, evaluate the function that you have stored by using the character that you stored in place of the underscore.");
-		if (!tryInput(s -> "eval".equals(s.substring(0, 4)), "Begin your input with 'eval'"))
+		if (!tryInput(s -> "eval ".equals(s.substring(0, 5)), "Begin your input with 'eval'"))
 			return;
 		sleep(1);
 		System.out.println("Good. Now here are some quick tips for using the storage feature:");
@@ -156,7 +156,7 @@ public class CASDemo {
 		System.out.println("This expression looks complicated, right?");
 		sleep(2);
 		System.out.println("Try typing \"simp d\" to return a simplified form of the expression");
-		if (!tryInput(s -> "simp".equals(s.substring(0, 4)), "Begin your input with 'simp' to demonstrate the simplification feature of the UI."))
+		if (!tryInput(s -> "simp ".equals(s.substring(0, 5)), "Begin your input with 'simp' to demonstrate the simplification feature of the UI."))
 			return;
 		sleep(1);
 		System.out.println("Wow!, quite an improvement");
@@ -170,25 +170,25 @@ public class CASDemo {
 		System.out.println("Until this point, all the expressions that we have been using have only contained one variable.");
 		sleep(2);
 		System.out.println("Type in \"vars\" to see all current variables");
-		if (!tryInput(s -> "vars".equals(s.substring(0, 4)), "Please type in 'vars' to see the variables."))
+		if (!tryInput("vars"::equals, "Please type in 'vars' to see the variables."))
 			return;
 		sleep(1);
 		System.out.println("These are all the current variables.");
 		sleep(2);
 		System.out.println("Try adding a variable by using \"addvar t\" for example to add the variable \"t\".");
-		if (!tryInput(s -> "addvar".equals(s.substring(0, 6)), "Begin your input with 'addvar' to add variables."))
+		if (!tryInput(s -> "addvar ".equals(s.substring(0, 7)), "Begin your input with 'addvar' to add variables."))
 			return;
 		sleep(1);
 		System.out.println("Now we will construct a construct a function using more than one variable.");
 		sleep(2);
 		System.out.println("Store a multivariable function using the \"sto\" command"); // TODO make this more descriptive
-		if (!tryInput(s -> "sto".equals(s.substring(0, 3)), "Begin your input with 'sto' to demonstrate the storage feature of the UI."))
+		if (!tryInput(s -> "sto ".equals(s.substring(0, 4)), "Begin your input with 'sto' to demonstrate the storage feature of the UI."))
 			return;
 		sleep(1);
 		System.out.println("Now, when we evaluate we are going to have to set all the variables equal to values, for example \"eval x-y x=2 y=3\".");
 		sleep(2.5);
 		System.out.println("Try evaluating your multivariable function using \"eval\"");
-		if (!tryInput(s -> "eval".equals(s.substring(0, 4)), "Begin your input with 'eval'"))
+		if (!tryInput(s -> "eval ".equals(s.substring(0, 5)), "Begin your input with 'eval'"))
 			return;
 		sleep(1.5);
 		System.out.println("Now, some more quick tips:");
@@ -214,7 +214,7 @@ public class CASDemo {
 		System.out.println("Now, lets try this for yourself:");
 		sleep(2);
 		System.out.println("Take your multivariable function from before and replace a variable with a function using \"sub\".");
-		if (!tryInput(s -> "sub".equals(s.substring(0, 3)), "Begin your input with 'sto' to demonstrate the substitution feature of the UI."))
+		if (!tryInput(s -> "sub ".equals(s.substring(0, 4)), "Begin your input with 'sto' to demonstrate the substitution feature of the UI."))
 			return;
 		sleep(2);
 		System.out.println("Congratulations, you have just substituted a variable for a function.");
@@ -258,7 +258,7 @@ public class CASDemo {
 		System.out.println(">>> tay [function] [terms] [center]");
 		sleep(2);
 		System.out.println("Try creating a common taylor series using the \"tay\" command ");
-		if (!tryInput(s -> "tay".equals(s.substring(0, 3)), "Begin your input with 'tay' to demonstrate the taylor series feature of the CAS."))
+		if (!tryInput(s -> "tay ".equals(s.substring(0, 4)), "Begin your input with 'tay' to demonstrate the taylor series feature of the CAS."))
 			return;
 		System.out.println("Good!, taylor series can often be used as good approximations to normal functions.");
 		sleep(4);
@@ -279,7 +279,7 @@ public class CASDemo {
 		sleep(4);
 		System.out.println("Try integration for yourself using the \"int\" command.");
 		sleep(1);
-		if (!tryInput(s -> "int".equals(s.substring(0, 3)), "Begin your input with 'int' to demonstrate the integration feature of the CAS."))
+		if (!tryInput(s -> "int ".equals(s.substring(0, 4)), "Begin your input with 'int' to demonstrate the integration feature of the CAS."))
 			return;
 		sleep(2);
 		System.out.println("Congratulations, you have just integrated a function.");

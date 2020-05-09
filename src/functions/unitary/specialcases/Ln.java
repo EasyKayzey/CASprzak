@@ -44,7 +44,7 @@ public class Ln extends SpecialCaseBinaryFunction {
 
 
 	public GeneralFunction simplify() {
-		return ((Ln)this.simplifyInternal()).simplifyPowersInTheOperand();
+		return ((Ln)this.simplifyInternal()).simplifyPowersInTheOperand().simplify();
 	} //TODO Erez check this
 
 	@SuppressWarnings("ChainOfInstanceofChecks")

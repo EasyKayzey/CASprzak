@@ -136,4 +136,12 @@ public class SimplifyTest {
         GeneralFunction test2 = FunctionParser.parseInfix("ln(exp(x))");
         assertEquals(test1, test2);
     }
+
+
+    @Test
+    void simpleInverseTrig() {
+        GeneralFunction test1 = FunctionParser.parseInfix("asin(sin(x))");
+        GeneralFunction test2 = FunctionParser.parseInfix("cos(acos(x))");
+        assertEquals(test1, test2);
+    }
 }

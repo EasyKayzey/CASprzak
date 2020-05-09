@@ -128,7 +128,7 @@ public class Product extends CommutativeFunction {
 				simplifiedTerms[a] = new Pow(DefaultFunctions.ONE, simplifiedTerms[a]);
 
 		for (int i = 1; i < simplifiedTerms.length; i++) {
-			for (int j = 0; j < i; j++) { // TODO make this use the linear stsrategy
+			for (int j = 0; j < i; j++) {
 				if (simplifiedTerms[i] instanceof Pow first && simplifiedTerms[j] instanceof Pow second) {
 					if (first.getFunction2().equalsFunction(second.getFunction2())) {
 						simplifiedTerms[j] = new Pow(new Sum(first.getFunction1(), second.getFunction1()), first.getFunction2());

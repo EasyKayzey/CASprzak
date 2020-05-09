@@ -25,6 +25,21 @@ public class Sum extends CommutativeFunction {
 		return accumulator;
 	}
 
+	@Override
+	public GeneralFunction getDerivative(char varID) {
+		GeneralFunction[] toAdd = new GeneralFunction[functions.length];
+		for (int i = 0; i < functions.length; i++)
+			toAdd[i] = functions[i].getSimplifiedDerivative(varID);
+		return new Sum(toAdd);
+	}
+
+	public CommutativeFunction me(GeneralFunction... functions) {
+		return new Sum(functions);
+	}
+
+	public Sum clone() {
+		return new Sum(ArrayTools.deepClone(functions));
+	}
 
 	public String toString() {
 		if (functions.length < 1)
@@ -37,18 +52,6 @@ public class Sum extends CommutativeFunction {
 		string.append(functions[0].toString());
 		string.append(")");
 		return string.toString();
-	}
-
-	@Override
-	public GeneralFunction getDerivative(char varID) {
-		GeneralFunction[] toAdd = new GeneralFunction[functions.length];
-		for (int i = 0; i < functions.length; i++)
-			toAdd[i] = functions[i].getSimplifiedDerivative(varID);
-		return new Sum(toAdd);
-	}
-
-	public Sum clone() {
-		return new Sum(ArrayTools.deepClone(functions));
 	}
 
 
@@ -96,9 +99,5 @@ public class Sum extends CommutativeFunction {
 		}
 
 		return this;
-	}
-
-	public CommutativeFunction me(GeneralFunction... functions) {
-		return new Sum(functions);
 	}
 }

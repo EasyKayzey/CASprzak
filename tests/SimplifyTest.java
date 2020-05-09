@@ -129,4 +129,11 @@ public class SimplifyTest {
         GeneralFunction test2 = FunctionParser.parseInfix("1");
         assertEquals(((Pow)test1).unwrapIntegerPowerSafe(), test2);
     }
+
+    @Test
+    void simpleInverseLnAndExp() {
+        GeneralFunction test1 = FunctionParser.parseInfix("exp(ln(x))");
+        GeneralFunction test2 = FunctionParser.parseInfix("ln(exp(x))");
+        assertEquals(test1, test2);
+    }
 }

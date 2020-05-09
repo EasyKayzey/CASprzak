@@ -56,12 +56,13 @@ public class Pow extends BinaryFunction {
 		return "(" + function2 + "^" + function1 + ")";
 	}
 
+	@SuppressWarnings("ChainOfInstanceofChecks")
 	public GeneralFunction simplify() {
 		Pow currentPow = new Pow(function1.simplify(), function2.simplify());
 		currentPow = currentPow.multiplyExponents();
 		GeneralFunction current = currentPow.simplifyObviousExponentsAndFOC();
 		if (current instanceof Pow pow)
-			current = pow.simplifyLogsOfSameBase(); //TODO improve this whole method
+			current = pow.simplifyLogsOfSameBase();
 		if (current instanceof Pow pow && pow.function2 instanceof Product && Settings.distributeExponents)
 			current = pow.distributeExponents();
 		return current;

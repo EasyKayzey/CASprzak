@@ -51,8 +51,13 @@ public class Logb extends BinaryFunction {
 	}
 
 	public GeneralFunction simplify() {
-		return new Logb(function1.simplify(), function2.simplify());
-	}//TODO this needs to incorporate the new simplifies
+		Logb currentLogb = new Logb(function1.simplify(), function2.simplify());
+		GeneralFunction current = currentLogb.simplifyPowers();
+		if (current instanceof Logb logb)
+			return logb.simplifyIdentity();
+		else
+			return current;
+	}
 
 	public GeneralFunction simplifyIdentity() {
 		if (function2.equals(function1))

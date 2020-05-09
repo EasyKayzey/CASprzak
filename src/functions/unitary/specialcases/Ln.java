@@ -43,9 +43,17 @@ public class Ln extends SpecialCaseBinaryFunction {
 	}
 
 
+	@SuppressWarnings("ChainOfInstanceofChecks")
 	public GeneralFunction simplify() {
-		return ((Ln)this.simplifyInternal()).simplifyPowersInTheOperand();
-	} //TODO Erez fix this
+		GeneralFunction current = super.simplify();
+		if (current instanceof Ln ln)
+			current = ln.simplifyPowersInTheOperand();
+
+		if (current instanceof UnitaryFunction unit)
+			return unit.simplifyFOC();
+		else
+			return current;
+	}
 
 	@SuppressWarnings("ChainOfInstanceofChecks")
 	public GeneralFunction simplifyPowersInTheOperand() {

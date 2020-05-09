@@ -33,9 +33,14 @@ public abstract class UnitaryFunction extends GeneralFunction {
 
 	public GeneralFunction simplify() {
 		UnitaryFunction newFunction = this.simplifyInternal();
-		if (Settings.simplifyFunctionsOfConstants && newFunction.operand instanceof Constant)
-			return new Constant(newFunction.evaluate(null));
-		return newFunction;
+		return newFunction.simplifyFOC();
+	}
+
+	public GeneralFunction simplifyFOC() {
+		if (Settings.simplifyFunctionsOfConstants && operand instanceof Constant)
+			return new Constant(evaluate(null));
+		else
+			return this;
 	}
 
 	/**

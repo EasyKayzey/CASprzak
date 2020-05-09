@@ -62,7 +62,7 @@ public class LatexReplacer {
 	private static final Pattern W   = Pattern.compile("\\\\Omega");
 	private static final Pattern w   = Pattern.compile("\\\\omega");
 	private static final Pattern hb  = Pattern.compile("\\\\hbar");
-	private static final Pattern par = Pattern.compile("\\\\partial");
+	private static final Pattern par = Pattern.compile("\\\\par(tial)?");
 
 	public static String encodeGreek(String input) {
 		input = A  .matcher(input).replaceAll("Α");

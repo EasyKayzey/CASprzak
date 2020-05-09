@@ -13,6 +13,7 @@ import functions.unitary.piecewise.Sign;
 import functions.unitary.specialcases.Exp;
 import functions.unitary.specialcases.Ln;
 import functions.unitary.transforms.Differential;
+import functions.unitary.transforms.Integral;
 import functions.unitary.transforms.PartialDerivative;
 import functions.unitary.trig.inverse.*;
 import functions.unitary.trig.normal.*;
@@ -85,6 +86,7 @@ public class FunctionMaker {
 			case "C" 		-> new Product(Factorial.defaultFactorial(first), new Pow(DefaultFunctions.NEGATIVE_ONE, new Product(Factorial.defaultFactorial(second), Factorial.defaultFactorial(new Sum(first, new Product(DefaultFunctions.NEGATIVE_ONE, second))))));
 			case "P" 		-> new Product(Factorial.defaultFactorial(first), new Pow(DefaultFunctions.NEGATIVE_ONE, Factorial.defaultFactorial(new Sum(first, new Product(DefaultFunctions.NEGATIVE_ONE, second)))));
 			case "\\pd"		-> new PartialDerivative(second, ((Variable) first).varID);
+			case "\\int" 	-> new Integral(first, ((Differential) second).getRespectTo());
 			case "\\logb" 	-> new Logb(second, first);
 			case "\\frac" 	-> new Product(first, DefaultFunctions.reciprocal(second));
 			default 		-> throw new UnsupportedOperationException("Invalid functionName " + functionName);

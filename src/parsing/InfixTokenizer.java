@@ -74,7 +74,7 @@ public class InfixTokenizer {
 		// Turns expressions like x-y into x+-y, and turns expressions like x*y into x*/y (the '/' operator represents reciprocals)
 		infix = subtractionFinder.matcher(infix).replaceAll("+-").replace("/", "*/");
 		// Turns differentials like dx into \d x
-		infix = differential.matcher(infix).replaceAll("\\difn ");
+		infix = differential.matcher(infix).replaceAll("\\\\difn ");
 		// Turns expressions like xyz into x*y*z
 		infix = characterPairsToMultiply.matcher(infix).replaceAll(" * ");
 		// Replace curly braces and underscores with parentheses and spaces

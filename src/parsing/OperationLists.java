@@ -54,11 +54,12 @@ public class OperationLists {
 			add("^");
 			add("*");
 			add("+");
-			add("\\pd");
-			add("\\logb");
-			add("\\frac");
 			add("C");
 			add("P");
+			add("\\pd");
+			add("\\int");
+			add("\\logb");
+			add("\\frac");
 		}
 	};
 }

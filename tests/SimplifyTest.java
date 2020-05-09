@@ -4,6 +4,7 @@ import functions.binary.Pow;
 import functions.commutative.Product;
 import org.junit.jupiter.api.Test;
 import parsing.FunctionParser;
+import tools.DefaultFunctions;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -137,11 +138,16 @@ public class SimplifyTest {
         assertEquals(test1, test2);
     }
 
-
     @Test
     void simpleInverseTrig() {
         GeneralFunction test1 = FunctionParser.parseInfix("asin(sin(x))");
         GeneralFunction test2 = FunctionParser.parseInfix("cos(acos(x))");
         assertEquals(test1, test2);
+    }
+
+    @Test
+    void inverseChain() {
+        GeneralFunction test1 = FunctionParser.parseInfix("asin(acos(exp(ln(sec(asec(cos(sin(x))))))))");
+        assertEquals(DefaultFunctions.X, test1.simplify());
     }
 }

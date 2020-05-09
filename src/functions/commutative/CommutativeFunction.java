@@ -75,19 +75,32 @@ public abstract class CommutativeFunction extends GeneralFunction {
 	 * @return current {@link CommutativeFunction} after combined the {@link Constant}s
 	 */
 	public CommutativeFunction simplifyConstants() {
-		for (int i = 1; i < functions.length; i++) {
-			for (int j = 0; j < i; j++) {
-				if (functions[i] instanceof Constant first && functions[j] instanceof Constant second) { // TODO maybe make this not recurse? not sure
-					GeneralFunction[] toOperate;
-					toOperate = functions.clone();
-					toOperate[i] = new Constant(operation.applyAsDouble(first.constant, second.constant));
-					toOperate = ArrayTools.removeFunctionAt(toOperate, j);
-					return me(toOperate).simplifyConstants();
+		if (hasMultipleConstants()) {
+			double accumulator = identityValue;
+			List<GeneralFunction> functionList = new LinkedList<>(List.of(functions));
+			ListIterator<GeneralFunction> iter = functionList.listIterator();
+			while (iter.hasNext()) {
+				if (iter.next() instanceof Constant constant) {
+					accumulator = operation.applyAsDouble(accumulator, constant.constant);
+					iter.remove();
 				}
 			}
+			functionList.add(new Constant(accumulator));
+			return me(functionList.toArray(new GeneralFunction[0]));
+		} else {
+			return this;
 		}
+	}
 
-		return this;
+	private boolean hasMultipleConstants() {
+		boolean flag = false;
+		for (GeneralFunction function : functions)
+			if (function instanceof Constant)
+				if (flag)
+					return true;
+				else
+					flag = true;
+		return false;
 	}
 
 

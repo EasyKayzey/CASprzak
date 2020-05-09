@@ -150,4 +150,11 @@ public class SimplifyTest {
         GeneralFunction test1 = FunctionParser.parseInfix("asin(acos(exp(ln(sec(asec(cos(sin(x))))))))");
         assertEquals(DefaultFunctions.X, test1.simplify()); // this isn't actually correct based on ranges, so if you add that this will break
     }
+
+
+    @Test
+    void expInverses() {
+        GeneralFunction test1 = FunctionParser.parseSimplified("ln(e^logb_e(exp(x)))");
+        assertEquals(DefaultFunctions.X, test1); // this isn't actually correct based on ranges, so if you add that this will break
+    }
 }

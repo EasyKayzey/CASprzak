@@ -64,9 +64,11 @@ public class CASDemo {
 	
 	private static boolean tryInput(Predicate<? super String> test, String message, String input) {
 		try {
-			System.out.print(">>> ");
-			if (input == null)
+			if (input == null) {
+				System.out.print(">>> ");
 				input = scanner.next();
+			}
+			
 			if ('!' == input.charAt(0) || (input.length() >= 4 && "exit".equals(input.substring(0, 4)))) {
 				currentState = DemoState.EXIT;
 				return false;
@@ -93,7 +95,22 @@ public class CASDemo {
 		}
 	}
 
+	private static void runTillNext() {
+		System.out.print(">>> ");
+		String input = scanner.next();
+		while (!"next".equals(input)) {
+			if (!tryInput(s -> true, null, input))
+				return;
+			else {
+				System.out.print(">>> ");
+				input = scanner.next();
+			}
+		}
+	}
+	
+	@SuppressWarnings("UnnecessaryReturnStatement")
 	private static void exit() {
+		return;
 	}
 
 	private static void intro() {
@@ -116,12 +133,6 @@ public class CASDemo {
 		System.out.println("You can see that this references the function that you last typed in.");
 		sleep(1.5);
 		System.out.println("Continue testing this feature, or type 'next' to continue.");
-		String input = scanner.next();
-		while (!"next".equals(input))
-			if (!tryInput(s -> true, null, input))
-				return;
-			else
-				input = scanner.next();
 		currentState = DemoState.EVAL;
 	}
 
@@ -139,13 +150,7 @@ public class CASDemo {
 		System.out.println("Notice how underscore now saves the result from the evaluation.");
 		sleep(1.5);
 		System.out.println("Continue testing this feature, or type 'next' to continue.");
-		String input = scanner.next();
-		while (!"next".equals(input))
-			if (!tryInput(s -> true, null, input))
-				return;
-			else
-				input = scanner.next();
-
+		runTillNext();
 		currentState = DemoState.STO;
 	}
 
@@ -171,12 +176,7 @@ public class CASDemo {
 		System.out.println("You can also remove a function by using the 'removefunction' or 'rmf' command, or remove all functions by using 'clearfunctions'.");
 		sleep(1.5);
 		System.out.println("Continue testing this feature, or type 'next' to continue.");
-		String input = scanner.next();
-		while (!"next".equals(input))
-			if (!tryInput(s -> true, null, input))
-				return;
-			else
-				input = scanner.next();
+		runTillNext();
 		currentState = DemoState.SIMP;
 	}
 
@@ -200,12 +200,7 @@ public class CASDemo {
 		System.out.println("For those who are curious, that was the general formula of the derivative of 'f(x)^g(x)' applied to 'x^2'.");
 		sleep(1.5);
 		System.out.println("Continue testing this feature, or type 'next' to continue.");
-		String input = scanner.next();
-		while (!"next".equals(input))
-			if (!tryInput(s -> true, null, input))
-				return;
-			else
-				input = scanner.next();
+		runTillNext();
 		currentState = DemoState.VAR;
 	}
 
@@ -241,12 +236,7 @@ public class CASDemo {
 		System.out.println("Variables can be removed using 'removevar' or 'rmv', and cleared using 'clearvars'.");
 		sleep(1.5);
 		System.out.println("Continue testing this feature, or type 'next' to continue.");
-		String input = scanner.next();
-		while (!"next".equals(input))
-			if (!tryInput(s -> true, null, input))
-				return;
-			else
-				input = scanner.next();
+		runTillNext();
 		currentState = DemoState.SUB;
 	}
 
@@ -272,12 +262,7 @@ public class CASDemo {
 		System.out.println("For example, to substitute every 'x' in 'g' with 'x^2', you would need to run 'sto g sub g x x^2'.");
 		sleep(1.5);
 		System.out.println("Continue testing this feature, or type 'next' to continue.");
-		String input = scanner.next();
-		while (!"next".equals(input))
-			if (!tryInput(s -> true, null, input))
-				return;
-			else
-				input = scanner.next();
+		runTillNext();
 		currentState = DemoState.PD;
 	}
 
@@ -305,12 +290,7 @@ public class CASDemo {
 		System.out.println("Great, you have taken the derivative of a function.");
 		sleep(1.5);
 		System.out.println("Continue testing this feature, or type 'next' to continue.");
-		String input = scanner.next();
-		while (!"next".equals(input))
-			if (!tryInput(s -> true, null, input))
-				return;
-			else
-				input = scanner.next();
+		runTillNext();
 		currentState = DemoState.TAY;
 	}
 
@@ -327,12 +307,7 @@ public class CASDemo {
 		System.out.println("Good. Taylor series can often be used as good approximations to difficult functions.");
 		sleep(1.5);
 		System.out.println("Continue testing this feature, or type 'next' to continue.");
-		String input = scanner.next();
-		while (!"next".equals(input))
-			if (!tryInput(s -> true, null, input))
-				return;
-			else
-				input = scanner.next();
+		runTillNext();
 		currentState = DemoState.INT;
 	}
 
@@ -356,12 +331,7 @@ public class CASDemo {
 		System.out.println("Congratulations, you've just integrated your first function.");
 		sleep(1.5);
 		System.out.println("Continue testing this feature, or type 'next' to continue.");
-		String input = scanner.next();
-		while (!"next".equals(input))
-			if (!tryInput(s -> true, null, input))
-				return;
-			else
-				input = scanner.next();
+		runTillNext();
 		currentState = DemoState.INTN;
 	}
 
@@ -380,12 +350,7 @@ public class CASDemo {
 		System.out.println("Good job!");
 		sleep(1.5);
 		System.out.println("Continue testing this feature, or type 'next' to continue.");
-		String input = scanner.next();
-		while (!"next".equals(input))
-			if (!tryInput(s -> true, null, input))
-				return;
-			else
-				input = scanner.next();
+		runTillNext();
 		currentState = DemoState.SOL;
 	}
 
@@ -408,12 +373,7 @@ public class CASDemo {
 		System.out.println("There are some settings like exit conditions that change how the solver works which may help fix minor issues.");
 		sleep(1.5);
 		System.out.println("Continue testing this feature, or type 'next' to continue.");
-		String input = scanner.next();
-		while (!"next".equals(input))
-			if (!tryInput(s -> true, null, input))
-				return;
-			else
-				input = scanner.next();
+		runTillNext();
 		currentState = DemoState.EXT;
 	}
 
@@ -437,12 +397,7 @@ public class CASDemo {
 		System.out.println("anymin, anymax, and inflection return an array of all local minima, maxima, or inflection points.");
 		sleep(1.5);
 		System.out.println("Continue testing this feature, or type 'next' to continue.");
-		String input = scanner.next();
-		while (!"next".equals(input))
-			if (!tryInput(s -> true, null, input))
-				return;
-			else
-				input = scanner.next();
+		runTillNext();
 		currentState = DemoState.SET;
 	}
 
@@ -462,12 +417,7 @@ public class CASDemo {
 		System.out.println("Default settings are read from 'config/cas.properties' on launch. This file also contains documentation regarding the effects of various settings.");
 		sleep(1.5);
 		System.out.println("Continue testing this feature, or type 'next' to continue.");
-		String input = scanner.next();
-		while (!"next".equals(input))
-			if (!tryInput(s -> true, null, input))
-				return;
-			else
-				input = scanner.next();
+		runTillNext();
 		currentState = DemoState.END;
 	}
 
@@ -479,12 +429,7 @@ public class CASDemo {
 		System.out.println("We highly encourage just playing around to see what you can do.");
 		sleep(1.5);
 		System.out.println("Continue testing in the demo, or type 'next' to return to the main command-line interface.");
-		String input = scanner.next();
-		while (!"next".equals(input))
-			if (!tryInput(s -> true, null, input))
-				return;
-			else
-				input = scanner.next();
+		runTillNext();
 		currentState = DemoState.EXIT; // TODO add a section about LaTeX
 	}
 }

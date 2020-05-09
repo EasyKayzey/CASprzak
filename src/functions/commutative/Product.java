@@ -1,5 +1,6 @@
 package functions.commutative;
 
+import config.Settings;
 import functions.GeneralFunction;
 import functions.binary.Pow;
 import functions.special.Constant;
@@ -85,8 +86,10 @@ public class Product extends CommutativeFunction {
 			return new Constant(0);
 		else if (currentFunction.getFunctions().length <= 1)
 			return currentFunction.simplifyTrivialElement();
+		else if (Settings.distributeFunctions)
+			return currentFunction.distributeAll();
 		else
-			return currentFunction.distributeAll(); // TODO maybe make this a setting?
+			return currentFunction;
 	}
 
 	public Product simplifyInternal() {

@@ -97,6 +97,11 @@ public class Settings {
 	public static boolean executeOnSimplify;
 
 	/**
+	 * Denotes whether expressions are distributed over sum when called in simplify(), e.g. x(y+z) -> (xy+xz)
+	 */
+	public static boolean distributeFunctions;
+
+	/**
 	 * Denotes the default method used to solve equations
 	 */
 	public static SolverType defaultSolverType;

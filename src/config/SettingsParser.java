@@ -37,6 +37,7 @@ public class SettingsParser {
 			case "executeOnSimplify" 						-> Settings.executeOnSimplify = ParsingTools.parseBoolean(value);
 			case "defaultSolverType" 						-> Settings.defaultSolverType = SolverType.valueOf(value);
 			case "defaultFactorial" 						-> Settings.defaultFactorial = FactorialType.valueOf(value);
+			case "distributeFunctions"					    -> Settings.distributeFunctions = ParsingTools.parseBoolean(value);
 			default 										-> throw new IllegalStateException("Setting " + key + " does not exist.");
 		}
 	}

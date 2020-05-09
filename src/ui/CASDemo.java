@@ -32,10 +32,10 @@ public class CASDemo {
 	@SuppressWarnings("SameReturnValue")
 	public static String runDemo() {
 		scanner = new Scanner(System.in);
-		scanner.useDelimiter("\n.");
+		scanner.useDelimiter("\n");
 		while (currentState != DemoState.EXIT)
 			runState();
-		return "Exited demo.";
+		return "Exited demo";
 	}
 
 	private static void runState() {

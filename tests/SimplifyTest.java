@@ -148,6 +148,6 @@ public class SimplifyTest {
     @Test
     void inverseChain() {
         GeneralFunction test1 = FunctionParser.parseInfix("asin(acos(exp(ln(sec(asec(cos(sin(x))))))))");
-        assertEquals(DefaultFunctions.X, test1.simplify());
+        assertEquals(DefaultFunctions.X, test1.simplify()); // this isn't actually correct based on ranges, so if you add that this will break
     }
 }

@@ -33,7 +33,7 @@ public class FunctionMaker {
 		return switch (functionName) {
 			case "-" 			-> new Product(DefaultFunctions.NEGATIVE_ONE, function);
 			case "/" 			-> new Pow(DefaultFunctions.NEGATIVE_ONE, function);
-			case "!" 			-> Factorial.defaultFactorial(function); //TODO implement integral and d/dx here
+			case "!" 			-> Factorial.defaultFactorial(function);
 			case "\\ln" 		-> new Ln(function);
 			case "\\log"		-> new Logb(function, DefaultFunctions.TEN);
 			case "\\exp" 		-> new Exp(function);

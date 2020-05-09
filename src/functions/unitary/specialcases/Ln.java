@@ -42,8 +42,13 @@ public class Ln extends SpecialCaseBinaryFunction {
 		return Exp.class;
 	}
 
+
+	public GeneralFunction simplify() {
+		return ((Ln)this.simplifyInternal()).simplifyPowersInTheOperand();
+	} //TODO Erez check this
+
 	@SuppressWarnings("ChainOfInstanceofChecks")
-	public GeneralFunction simplifyPowersInTheOperand() {//TODO add this to the simplify
+	public GeneralFunction simplifyPowersInTheOperand() {
 		if (operand instanceof Pow pow)
 			return new Product(pow.getFunction1(), new Ln(pow.getFunction2()));
 		else if (operand instanceof Exp exp)

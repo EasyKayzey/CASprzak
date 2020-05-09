@@ -29,6 +29,24 @@ public class Product extends CommutativeFunction {
 		return accumulator;
 	}
 
+	@Override
+	public GeneralFunction getDerivative(char varID) {
+		GeneralFunction[] toAdd = new GeneralFunction[functions.length];
+		for (int i = 0; i < toAdd.length; i++) {
+			GeneralFunction[] toMultiply = Arrays.copyOf(functions, functions.length);
+			toMultiply[i] = functions[i].getSimplifiedDerivative(varID);
+			toAdd[i] = new Product(toMultiply);
+		}
+		return new Sum(toAdd);
+	}
+
+	public CommutativeFunction me(GeneralFunction... functions) {
+		return new Product(functions);
+	}
+
+	public Product clone() {
+		return new Product(ArrayTools.deepClone(functions));
+	}
 
 	public String toString() {
 		if (functions.length < 1)
@@ -43,21 +61,23 @@ public class Product extends CommutativeFunction {
 		return string.toString();
 	}
 
-	@Override
-	public GeneralFunction getDerivative(char varID) {
-		GeneralFunction[] toAdd = new GeneralFunction[functions.length];
-		for (int i = 0; i < toAdd.length; i++) {
-			GeneralFunction[] toMultiply = Arrays.copyOf(functions, functions.length);
-			toMultiply[i] = functions[i].getSimplifiedDerivative(varID);
-			toAdd[i] = new Product(toMultiply);
+	public int compareSelf(GeneralFunction that) {
+		boolean thisIsMonomial = PolynomialTools.isMonomial(this);
+		boolean thatIsMonomial = PolynomialTools.isMonomial(that);
+		if (thisIsMonomial && !thatIsMonomial) {
+			return 1;
+		} else if (!thisIsMonomial && thatIsMonomial) {
+			return -1;
+		} else if (!thisIsMonomial) { // && !thatIsMonomial
+			return super.compareSelf(that);
+		} else { // thisIsMonomial && thatIsMonomial
+			double thisDegree = PolynomialTools.getDegree(this);
+			double thatDegree = PolynomialTools.getDegree(that);
+			if (thisDegree == thatDegree)
+				return super.compareSelf(that);
+			return (int) Math.signum(thisDegree - thatDegree);
 		}
-		return new Sum(toAdd);
 	}
-
-	public Product clone() {
-		return new Product(ArrayTools.deepClone(functions));
-	}
-
 
 	public GeneralFunction simplify() {
 		Product currentFunction = simplifyInternal();
@@ -121,10 +141,6 @@ public class Product extends CommutativeFunction {
 		return this;
 	}
 
-	public CommutativeFunction me(GeneralFunction... functions) {
-		return new Product(functions);
-	}
-
 	/**
 	 * Returns a {@link GeneralFunction} where the rest of the multiple has been distributed to any {@link Sum}. Example: {@code sin(y)*(x+2) = x*sin(y) + 2*sin(y)}
 	 * @return a {@link GeneralFunction} where the rest of the multiple has been distributed to any {@link Sum}
@@ -140,23 +156,5 @@ public class Product extends CommutativeFunction {
 			}
 		}
 		return this;
-	}
-
-	public int compareSelf(GeneralFunction that) {
-		boolean thisIsMonomial = PolynomialTools.isMonomial(this);
-		boolean thatIsMonomial = PolynomialTools.isMonomial(that);
-		if (thisIsMonomial && !thatIsMonomial) {
-			return 1;
-		} else if (!thisIsMonomial && thatIsMonomial) {
-			return -1;
-		} else if (!thisIsMonomial) { // && !thatIsMonomial
-			return super.compareSelf(that);
-		} else { // thisIsMonomial && thatIsMonomial
-			double thisDegree = PolynomialTools.getDegree(this);
-			double thatDegree = PolynomialTools.getDegree(that);
-			if (thisDegree == thatDegree)
-				return super.compareSelf(that);
-			return (int) Math.signum(thisDegree - thatDegree);
-		}
 	}
 }

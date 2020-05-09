@@ -175,11 +175,6 @@ public abstract class CommutativeFunction extends GeneralFunction {
 			return this;
 	}
 
-
-
-
-
-
 	public @NotNull Iterator<GeneralFunction> iterator() {
 		return new CommutativeIterator();
 	}

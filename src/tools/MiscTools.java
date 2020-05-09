@@ -1,10 +1,13 @@
 package tools;
 
-import config.Settings;
 import functions.GeneralFunction;
-import parsing.LatexReplacer;
+import functions.commutative.Product;
+import functions.commutative.Sum;
+import functions.special.Constant;
+import tools.helperclasses.Pair;
 
-import java.lang.reflect.MalformedParametersException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MiscTools {
 
@@ -36,6 +39,23 @@ public class MiscTools {
 				return i;
 		}
 		throw new UnsupportedOperationException("Class " + function.getClass().getSimpleName() + " not supported.");
+	}
+
+	public static List<Pair<Double, GeneralFunction>> stripConstantsOfASum(Sum sum) {
+		GeneralFunction[] sumArray = sum.getFunctions();
+		List<Pair<Double, GeneralFunction>> strippedPairsArray = new ArrayList<>();
+		for (GeneralFunction function: sumArray) {
+			if (function instanceof Product multiply) {
+				GeneralFunction[] terms = multiply.simplifyConstants().getFunctions();
+				if (terms[0] instanceof Constant constant)
+					strippedPairsArray.add(new Pair<>(constant.constant, new Product(ArrayTools.removeFunctionAt(terms, 0)).simplifyTrivialElement()));
+				else
+					strippedPairsArray.add(new Pair<>(1.0, multiply));
+			} else {
+				strippedPairsArray.add(new Pair<>(1.0, function));
+			}
+		}
+		return strippedPairsArray;
 	}
 
 }

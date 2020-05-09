@@ -2,6 +2,7 @@ package functions.unitary;
 
 import config.Settings;
 import functions.GeneralFunction;
+import functions.Invertible;
 import functions.special.Constant;
 import org.jetbrains.annotations.NotNull;
 
@@ -31,14 +32,27 @@ public abstract class UnitaryFunction extends GeneralFunction {
 		return this.getClass().getSimpleName().toLowerCase() + "(" + operand.toString() + ")";
 	}
 
+	@SuppressWarnings("ChainOfInstanceofChecks")
 	public GeneralFunction simplify() {
-		UnitaryFunction newFunction = this.simplifyInternal();
-		return newFunction.simplifyFOC();
+		GeneralFunction newFunction = this.simplifyInternal();
+		if (newFunction instanceof UnitaryFunction unit)
+			newFunction = unit.simplifyInverse();
+
+		if (newFunction instanceof UnitaryFunction unit)
+			newFunction = unit.simplifyFOC();
+		return newFunction;
 	}
 
 	public GeneralFunction simplifyFOC() {
 		if (Settings.simplifyFunctionsOfConstants && operand instanceof Constant)
 			return new Constant(evaluate(null));
+		else
+			return this;
+	}
+
+	public GeneralFunction simplifyInverse() {
+		if (this instanceof Invertible inv && operand.getClass().isAssignableFrom(inv.getInverse()))
+			return ((UnitaryFunction) operand).operand; // TODO domain of trig
 		else
 			return this;
 	}

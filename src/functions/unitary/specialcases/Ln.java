@@ -44,24 +44,11 @@ public class Ln extends SpecialCaseBinaryFunction {
 
 
 	@SuppressWarnings("ChainOfInstanceofChecks")
-	public GeneralFunction simplify() {
-		GeneralFunction current = super.simplify();
-		if (current instanceof Ln ln)
-			current = ln.simplifyPowersInTheOperand();
-
-		if (current instanceof UnitaryFunction unit)
-			return unit.simplifyFOC();
-		else
-			return current;
-	}
-
-	@SuppressWarnings("ChainOfInstanceofChecks")
-	public GeneralFunction simplifyPowersInTheOperand() {
+	@Override
+	public GeneralFunction simplifyInverse() {
 		if (operand instanceof Pow pow)
 			return new Product(pow.getFunction1(), new Ln(pow.getFunction2()));
-		else if (operand instanceof Exp exp)
-			return exp.operand;
 		else
-			return this;
+			return super.simplifyInverse();
 	}
 }

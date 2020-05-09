@@ -122,7 +122,7 @@ public class Product extends CommutativeFunction {
 	 * @return A new {@link Product} with all variable combined with added exponents
 	 */
 	public Product addExponents() {
-		GeneralFunction[] simplifiedTerms = ArrayTools.deepClone(functions);
+		GeneralFunction[] simplifiedTerms = ArrayTools.deepClone(functions); // TODO make both this and other not deep clone
 		for (int a = 0; a < simplifiedTerms.length; a++)
 			if (!(simplifiedTerms[a] instanceof Pow))
 				simplifiedTerms[a] = new Pow(DefaultFunctions.ONE, simplifiedTerms[a]);

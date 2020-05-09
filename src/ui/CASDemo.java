@@ -320,7 +320,7 @@ public class CASDemo {
 		sleep(1.5);
 		System.out.println("An example where integration works is as follows:.");
 		sleep(1.5);
-		System.out.println(">>> int (cos(e^x))^2*sin(e^x)*e^x dx.");
+		System.out.println(">>> int 3*(cos(e^x))^2*sin(e^x)*e^x dx");
 		System.out.println(KeywordInterface.useKeywords("int (cos(e^x))^2*sin(e^x)*e^x dx"));
 		sleep(1.5);
 		System.out.println("Try integration for yourself using the 'int' command.");

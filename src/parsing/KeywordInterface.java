@@ -59,8 +59,8 @@ public class KeywordInterface {
 			case "pf", "printfun", "printfunctions"								-> printFunctions();
 			case "pv", "vars", "printvars"										-> printVariables();
 			case "pc", "printc", "printconstants"								-> printConstants();
-			case "cf", "clearfun", "clearfunctions"								-> clearFunctions();
-			case "cv", "clearvars", "clearvariables"							-> clearVariables();
+			case "clearfun", "clearfunctions"									-> clearFunctions();
+			case "clearvars", "clearvariables"									-> clearVariables();
 			case "ss", "sset", "sets", "setsetting"								-> setSettings(splitInput[1]);
 			case "ps", "settings", "printsettings"								-> printSettings();
 			case "svt", "setvarsto", "setvariablesto"							-> setVariablesTo(splitInput[1]); // TODO rename

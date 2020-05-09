@@ -6,14 +6,14 @@ import functions.unitary.UnitaryFunction;
 
 public abstract class TransformFunction extends UnitaryFunction {
 	/**
-	 * The character of the variable that the Integral is with respect to
+	 * The character of the variable that the TransformFunction is with respect to
 	 */
 	public final char respectTo;
 
 	/**
-	 * Constructs a new CalcFunction
-	 * @param operand The operand of the CalcFunction
-	 * @param respectTo The variable that the CalcFunction operates with respect to
+	 * Constructs a new TransformFunction
+	 * @param operand The operand of the TransformFunction
+	 * @param respectTo The variable that the TransformFunction operates with respect to
 	 */
 	public TransformFunction(GeneralFunction operand, char respectTo) {
 		super(operand);

@@ -34,7 +34,7 @@ public class KeywordInterface {
 	 * @param input contains the command and arguments
 	 * @return the Object requested
 	 */
-	public static Object useKeywords(String input) { // TODO Michael needs to go over this
+	public static Object useKeywords(String input) {
 		if ("_".equals(input))
 			return prev;
 		String[] splitInput = spaces.split(input, 2);

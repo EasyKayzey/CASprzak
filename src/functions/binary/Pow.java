@@ -25,6 +25,11 @@ public class Pow extends BinaryFunction {
 	}
 
 	@Override
+	public double evaluate(Map<Character, Double> variableValues) {
+		return Math.pow(function2.evaluate(variableValues), function1.evaluate(variableValues));
+	}
+
+	@Override
 	public GeneralFunction getDerivative(char varID) {
 		if (function1 instanceof Constant exponent)
 			return new Product(new Constant(exponent.constant), new Pow(new Constant(exponent.constant - 1), function2), function2.getSimplifiedDerivative(varID));
@@ -34,13 +39,21 @@ public class Pow extends BinaryFunction {
 			return new Product(new Pow(function1, function2), new Sum(new Product(function1.getSimplifiedDerivative(varID), new Ln(function2)), new Product(new Product(function1, function2.getSimplifiedDerivative(varID)), new Pow(DefaultFunctions.NEGATIVE_ONE, function2))));
 	}
 
-	@Override
-	public double evaluate(Map<Character, Double> variableValues) {
-		return Math.pow(function2.evaluate(variableValues), function1.evaluate(variableValues));
+	public BinaryFunction me(GeneralFunction function1, GeneralFunction function2) {
+		return new Pow(function1, function2);
 	}
 
 	public Pow clone() {
 		return new Pow(function1.clone(), function2.clone());
+	}
+
+	public GeneralFunction toSpecialCase() {
+		return new Exp(new Product(new Ln(function2), function1));
+	}
+
+	@Override
+	public String toString() {
+		return "(" + function2 + "^" + function1 + ")";
 	}
 
 	public GeneralFunction simplify() {
@@ -121,19 +134,6 @@ public class Pow extends BinaryFunction {
 	}
 
 
-	public BinaryFunction me(GeneralFunction function1, GeneralFunction function2) {
-		return new Pow(function1, function2);
-	}
-
-	public GeneralFunction toSpecialCase() {
-		return new Exp(new Product(new Ln(function2), function1));
-	}
-
-
-	@Override
-	public String toString() {
-		return "(" + function2 + "^" + function1 + ")";
-	}
 
 	@SuppressWarnings("ChainOfInstanceofChecks")
 	public GeneralFunction simplifyLogsOfSameBase() {

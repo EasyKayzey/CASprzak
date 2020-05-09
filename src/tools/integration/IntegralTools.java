@@ -19,7 +19,7 @@ public class IntegralTools {
      * @param function The GeneralFunction whose Constant is being Stripped
      * @return A {@link Pair} of the constant and the stripped GeneralFunction
      */
-    public static Pair<GeneralFunction, GeneralFunction> stripConstants(GeneralFunction function, char varID) {
+    public static Pair<GeneralFunction, GeneralFunction> stripConstantsRespectTo(GeneralFunction function, char varID) {
         if (function instanceof Product multiply) {
             GeneralFunction[] terms = multiply.simplifyConstants().getFunctions();
             List<GeneralFunction> constants = new ArrayList<>();

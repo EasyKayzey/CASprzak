@@ -46,7 +46,7 @@ public class StageOne {
             else
                 integrand = integrand.getSimplifiedDerivative(derivative.respectTo);
 
-        Pair<GeneralFunction, GeneralFunction> stripConstant = IntegralTools.stripConstants(integrand, variableChar);
+        Pair<GeneralFunction, GeneralFunction> stripConstant = IntegralTools.stripConstantsRespectTo(integrand, variableChar);
         GeneralFunction function = stripConstant.second;
         GeneralFunction number = stripConstant.first;
 
@@ -126,7 +126,7 @@ public class StageOne {
 
     private static Pair<Boolean, GeneralFunction> derivativeDividesSearcher(CommutativeFunction product, GeneralFunction term, GeneralFunction toTakeDerivative, char variableChar) {
         GeneralFunction derivativeWithConstants = toTakeDerivative.getSimplifiedDerivative(variableChar);
-        Pair<GeneralFunction, GeneralFunction> derivative = IntegralTools.stripConstants(derivativeWithConstants, variableChar);
+        Pair<GeneralFunction, GeneralFunction> derivative = IntegralTools.stripConstantsRespectTo(derivativeWithConstants, variableChar);
         GeneralFunction derivativeWithoutConstant = derivative.second;
         GeneralFunction constantInFront = derivative.first;
         Product derivativeTimesOperation = new Product(derivativeWithoutConstant, term);

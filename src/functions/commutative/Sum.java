@@ -82,7 +82,7 @@ public class Sum extends CommutativeFunction {
 
 		for (int i = 1; i < combinedTerms.length; i++) {
 			for (int j = 0; j < i; j++) {
-				if (combinedTerms[i] instanceof Product first && combinedTerms[j] instanceof Product second) {
+				if (combinedTerms[i] instanceof Product first && combinedTerms[j] instanceof Product second) { // TODO make this use the linear strategy
 					GeneralFunction[] firstFunctions = first.getFunctions();
 					GeneralFunction[] secondFunctions = second.getFunctions();
 					if (!((firstFunctions[0] instanceof Constant) && (secondFunctions[0] instanceof Constant)))

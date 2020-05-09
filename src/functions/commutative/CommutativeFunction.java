@@ -36,6 +36,52 @@ public abstract class CommutativeFunction extends GeneralFunction {
 		Arrays.sort(this.functions);
 	}
 
+	/**
+	 * Returns {@link #functions}
+	 * @return {@link #functions}
+	 */
+	public GeneralFunction[] getFunctions() {
+		return functions;
+	}
+
+	/**
+	 * Returns an instance of this {@link GeneralFunction}
+	 * @param functions Constructor parameter
+	 * @return an instance of this GeneralFunction
+	 */
+	public abstract CommutativeFunction me(GeneralFunction... functions);
+
+	public boolean equalsFunction(GeneralFunction that) {
+		if (that instanceof CommutativeFunction function && this.getClass().equals(that.getClass()))
+			return ArrayTools.deepEquals(functions, function.getFunctions());
+		else
+			return false;
+	}
+
+	public int compareSelf(GeneralFunction that) {
+		if (that instanceof CommutativeFunction function) {
+			if (functions.length != function.getFunctions().length)
+				return functions.length - function.getFunctions().length;
+			GeneralFunction[] thisFunctions = functions;
+			GeneralFunction[] thatFunctions = function.getFunctions();
+			for (int i = 0; i < thisFunctions.length; i++)
+				if (!thisFunctions[i].equalsFunction(thatFunctions[i]))
+					return thisFunctions[i].compareTo(thatFunctions[i]);
+		} else {
+			throw new IllegalCallerException("Illegally called CommutativeFunction.compareSelf on a non-CommutativeFunction");
+		}
+		throw new IllegalStateException("This code in CommutativeFunction.compareSelf should never run.");
+	}
+
+	public GeneralFunction substituteAll(Predicate<? super GeneralFunction> test, Function<? super GeneralFunction, ? extends GeneralFunction> replacer) {
+		if (test.test(this))
+			return replacer.apply(this);
+
+		GeneralFunction[] newFunctions = new GeneralFunction[functions.length];
+		for (int i = 0; i < functions.length; i++)
+			newFunctions[i] = functions[i].substituteAll(test, replacer);
+		return me(newFunctions);
+	}
 
 	public GeneralFunction simplify() {
 		return this.simplifyInternal().simplifyTrivialElement();
@@ -130,55 +176,8 @@ public abstract class CommutativeFunction extends GeneralFunction {
 	}
 
 
-	/**
-	 * Returns {@link #functions}
-	 * @return {@link #functions}
-	 */
-	public GeneralFunction[] getFunctions() {
-		return functions;
-	}
 
 
-	/**
-	 * Returns an instance of this {@link GeneralFunction}
-	 * @param functions Constructor parameter
-	 * @return an instance of this GeneralFunction
-	 */
-	public abstract CommutativeFunction me(GeneralFunction... functions);
-
-
-	public GeneralFunction substituteAll(Predicate<? super GeneralFunction> test, Function<? super GeneralFunction, ? extends GeneralFunction> replacer) {
-		if (test.test(this))
-			return replacer.apply(this);
-
-		GeneralFunction[] newFunctions = new GeneralFunction[functions.length];
-		for (int i = 0; i < functions.length; i++)
-			newFunctions[i] = functions[i].substituteAll(test, replacer);
-		return me(newFunctions);
-	}
-
-
-	public boolean equalsFunction(GeneralFunction that) {
-		if (that instanceof CommutativeFunction function && this.getClass().equals(that.getClass()))
-			return ArrayTools.deepEquals(functions, function.getFunctions());
-		else
-			return false;
-	}
-
-	public int compareSelf(GeneralFunction that) {
-		if (that instanceof CommutativeFunction function) {
-			if (functions.length != function.getFunctions().length)
-				return functions.length - function.getFunctions().length;
-			GeneralFunction[] thisFunctions = functions;
-			GeneralFunction[] thatFunctions = function.getFunctions();
-			for (int i = 0; i < thisFunctions.length; i++)
-				if (!thisFunctions[i].equalsFunction(thatFunctions[i]))
-					return thisFunctions[i].compareTo(thatFunctions[i]);
-		} else {
-			throw new IllegalCallerException("Illegally called CommutativeFunction.compareSelf on a non-CommutativeFunction");
-		}
-		throw new IllegalStateException("This code in CommutativeFunction.compareSelf should never run.");
-	}
 
 
 	public @NotNull Iterator<GeneralFunction> iterator() {

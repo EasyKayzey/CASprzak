@@ -16,10 +16,6 @@ public abstract class InverseTrigFunction extends GeneralTrigFunction {
 		super(operand);
 	}
 
-	/**
-	 * Returns a {@link GeneralFunction} that would be the integral of the function with {@link UnitaryFunction#operand} as the variable
-	 * @return a {@link GeneralFunction} that would be the integral of the function with {@link UnitaryFunction#operand} as the variable
-	 */
 	public GeneralFunction getElementaryIntegral() {
 		return new Sum(new Product(operand, me(operand)), new Product(DefaultFunctions.NEGATIVE_ONE, UnitaryFunction.newInstanceOf(getInverse(), me(operand))));
 	}

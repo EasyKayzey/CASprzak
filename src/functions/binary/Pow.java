@@ -115,7 +115,7 @@ public class Pow extends BinaryFunction {
 	 */
 	public GeneralFunction unwrapIntegerPowerSafe() {
 		try {
-			return unwrapIntegerPower(); // TODO instead of try-catching, just check if it's an int
+			return unwrapIntegerPower();
 		} catch (IllegalArgumentException ignored) {
 			return this;
 		}

@@ -33,7 +33,7 @@ public class Integral extends TransformFunction {
 		if (varID == respectTo)
 			throw new UnsupportedOperationException("You cannot substitute the variable you are working with respect to");
 		return new Integral(operand.substituteVariable(varID, toReplace), respectTo);
-	} // TODO implement replaceALl
+	}
 
 	@Override
 	public boolean equalsFunction(GeneralFunction that) {

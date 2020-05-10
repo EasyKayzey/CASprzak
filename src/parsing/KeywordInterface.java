@@ -348,7 +348,35 @@ public class KeywordInterface {
 	}
 
 	private static String helpWithInput(String input) {
-		return "hello";
+		return switch (input) {
+			case "demo"																-> "implement";
+			case "pd", "pdiff", "partial", "pdifferentiate"             			-> "implement";
+			case "pdn", "pdiffn", "partialn", "pdifferentiaten"         			-> "implement";
+			case "eval", "evaluate"                                     			-> "implement";
+			case "simp", "simplify"                                     			-> "implement";
+			case "sub", "substitute"                                    			-> "implement";
+			case "sol", "solve"                                         			-> "implement";
+			case "ext", "extrema"                                       			-> "implement";
+			case "tay", "taylor"                                        			-> "implement";
+			case "intn", "intnumeric"                                   			-> "implement";
+			case "intne", "intnumericerror"                             			-> "implement";
+			case "addf", "sto", "store", "new", "def", "addfunction"    			-> "implement";
+			case "addv", "addvar", "addvars"                            			-> "implement";
+			case "addc", "addconstant", "defc", "defcon", "defconstant" 			-> "implement";
+			case "rmf", "rmfun", "removefun", "removefunction"          			-> "implement";
+			case "rmv", "rmvar", "removevar", "removevariable"          			-> "implement";
+			case "rmc", "rmconstant", "removeconstant"                  			-> "implement";
+			case "pf", "printfun", "printfunctions"                     			-> "implement";
+			case "pv", "vars", "printvars"                              			-> "implement";
+			case "pc", "printc", "printconstants"                       			-> "implement";
+			case "clearfun", "clearfunctions"                           			-> "implement";
+			case "clearvars", "clearvariables"                          			-> "implement";
+			case "ss", "sset", "sets", "setsetting"                     			-> "implement";
+			case "ps", "settings", "printsettings"                      			-> "implement";
+			case "int", "integral"                                      			-> "implement";
+			case "help"                                           					-> "implement";
+			default -> throw new IllegalArgumentException("Invalid keyword: " + input);
+		};
 	}
 
 	private static String helpNoInput() {

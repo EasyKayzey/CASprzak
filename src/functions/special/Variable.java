@@ -6,18 +6,6 @@ import java.util.*;
 
 
 public class Variable extends SpecialFunction {
-	/**
-	 * The list containing all the variable characters
-	 */
-	public static List<Character> variables = new ArrayList<>() {
-		{
-			add('x');
-			add('y');
-			add('z');
-		}
-	}; //TODO implement sortVariables here and in KeywordInterface
-
-	private static int variablesEnd = 3; // TODO possible remove FunctionVariables
 
 	/**
 	 * The character representing this variable
@@ -30,44 +18,6 @@ public class Variable extends SpecialFunction {
 	 */
 	public Variable(char varID) {
 		this.varID = varID;
-	}
-
-	/**
-	 * Sets the variable names
-	 * @param variables array of variable names
-	 */
-	public static void setVariablesArray(Character... variables) {
-		Variable.variables = new ArrayList<>(Arrays.asList(variables));
-	}
-
-
-	public static void addVariable(char variable) {
-		if (!variables.contains(variable)) {
-			variables.add(variablesEnd, variable);
-			variablesEnd++;
-		}
-	}
-
-	public static void removeVariable(char variable) {
-		variables.remove(variable);
-		variablesEnd--;
-	}
-
-	public static void addFunctionVariable(char variable) {
-		variables.add(variable);
-	}
-
-	public static void removeFunctionVariable(char variable) {
-		variables.remove(variable);
-	}
-
-	public static void clearVariables() {
-		variables.clear();
-		variablesEnd = 0;
-	}
-
-	public static void clearFunctionVariables() {
-		variables = variables.subList(0, variablesEnd);
 	}
 
 

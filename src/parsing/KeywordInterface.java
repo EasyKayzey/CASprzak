@@ -4,7 +4,6 @@ import config.Settings;
 import config.SettingsParser;
 import functions.GeneralFunction;
 import functions.special.Constant;
-import functions.special.Variable;
 import functions.unitary.transforms.Integral;
 import tools.ParsingTools;
 import tools.singlevariable.Extrema;
@@ -50,17 +49,13 @@ public class KeywordInterface {
 			case "tay", "taylor"												-> taylor(splitInput[1]);
 			case "intn", "intnumeric"											-> integrateNumeric(splitInput[1]);
 			case "intne", "intnumericerror"										-> integrateNumericError(splitInput[1]);
-			case "addf", "sto", "store", "new", "def", "addfunction"			-> storeFunction(splitInput[1]);
-			case "addv", "addvar", "addvars"									-> addVariables(splitInput[1]);
+			case "addf", "sto", "store", "new", "def", "addfunction"			-> defineFunction(splitInput[1]); // TODO rename
 			case "addc", "addconstant", "defc", "defcon", "defconstant"			-> defineConstant(splitInput[1]);
 			case "rmf", "rmfun", "removefun", "removefunction"					-> removeFunction(splitInput[1]);
-			case "rmv", "rmvar", "removevar", "removevariable"					-> removeVariables(splitInput[1]);
 			case "rmc", "rmconstant", "removeconstant"							-> removeConstant(splitInput[1]);
 			case "pf", "printfun", "printfunctions"								-> printFunctions();
-			case "pv", "vars", "printvars"										-> printVariables();
 			case "pc", "printc", "printconstants"								-> printConstants();
 			case "clearfun", "clearfunctions"									-> clearFunctions();
-			case "clearvars", "clearvariables"									-> clearVariables();
 			case "ss", "sset", "sets", "setsetting"								-> setSettings(splitInput[1]);
 			case "ps", "settings", "printsettings"								-> printSettings();
 			case "int", "integral"												-> integral(splitInput[1]);
@@ -196,44 +191,14 @@ public class KeywordInterface {
 	/**
 	 * sto [locationstring] [input]
 	 */
-	public static Object storeFunction(String input) {
+	public static Object defineFunction(String input) {
 		String[] splitInput = spaces.split(input, 2);
-		if (!storedFunctions.containsKey(splitInput[0])) // TODO Make Variable.isFunctionVariable or something
-			Variable.addFunctionVariable(ParsingTools.getCharacter(splitInput[0]));
 		try {
 			storedFunctions.put(splitInput[0], (GeneralFunction) KeywordInterface.useKeywords(splitInput[1]));
 		} catch (RuntimeException e) {
 			storedFunctions.put(splitInput[0], parseStored(splitInput[1]));
 		}
 		return storedFunctions.get(splitInput[0]);
-	}
-
-	/**
-	 * rmfun [functionname]
-	 */
-	private static Object removeFunction(String input) {
-		Variable.removeFunctionVariable(ParsingTools.getCharacter(input));
-		return printVariables();
-	}
-
-	/**
-	 * addvar(s) [variablename(s)]
-	 */
-	public static String addVariables(String input) {
-		String[] splitInput = keywordSplitter.split(input);
-		for (String var : splitInput)
-			Variable.addVariable(ParsingTools.getCharacter(var));
-		return printVariables();
-	}
-
-	/**
-	 * rmvar(s) [variablenames]
-	 */
-	private static Object removeVariables(String input) {
-		String[] splitInput = keywordSplitter.split(input);
-		for (String var : splitInput)
-			Variable.removeVariable(ParsingTools.getCharacter(var));
-		return printVariables();
 	}
 
 	/**
@@ -249,10 +214,25 @@ public class KeywordInterface {
 	}
 
 	/**
+	 * rmfun [functionname]
+	 */
+	private static Object removeFunction(String input) {
+		storedFunctions.remove(input);
+		return String.valueOf(storedFunctions);
+	}
+
+	/**
 	 * rmc [constantstring]
 	 */
 	private static double removeConstant(String input) {
 		return Constant.removeSpecialConstant(input);
+	}
+
+	/**
+	 * printfun
+	 */
+	public static String printFunctions() {
+		return String.valueOf(storedFunctions);
 	}
 
 	/**
@@ -264,35 +244,11 @@ public class KeywordInterface {
 	}
 
 	/**
-	 * printvars
-	 */
-	public static String printVariables() {
-		return String.valueOf(Variable.variables);
-	}
-
-	/**
-	 * clearvars
-	 */
-	public static String clearVariables() {
-		Variable.clearVariables();
-		storedFunctions.clear();
-		return String.valueOf(Variable.variables);
-	}
-
-	/**
-	 * printfun
-	 */
-	public static String printFunctions() {
-		return String.valueOf(storedFunctions);
-	}
-
-	/**
 	 * clearfun
 	 */
 	public static String clearFunctions() {
-		Variable.clearFunctionVariables();
 		storedFunctions.clear();
-		return String.valueOf(Variable.variables);
+		return String.valueOf(storedFunctions);
 	}
 
 	/**
@@ -361,16 +317,12 @@ public class KeywordInterface {
 			case "intn", "intnumeric"                                   			-> "intn [function] [startvalue] [endvalue]";
 			case "intne", "intnumericerror"                             			-> "intne [function] [startvalue] [endvalue]";
 			case "addf", "sto", "store", "new", "def", "addfunction"    			-> "sto [locationstring] [input]";
-			case "addv", "addvar", "addvars"                            			-> "addv [variablename(s)]";
-			case "addc", "addconstant", "defc", "defcon", "defconstant" 			-> "defcon [constantstring] [value]";
-			case "rmf", "rmfun", "removefun", "removefunction"          			-> "rmfun [functionname]";
-			case "rmv", "rmvar", "removevar", "removevariable"          			-> "rmvar(s) [variablenames]";
+			case "addc", "addconstant", "defc", "defcon", "defconstant" 			-> "defc [constantstring] [value]";
+			case "rmf", "rmfun", "removefun", "removefunction"          			-> "rmf [functionname]";
 			case "rmc", "rmconstant", "removeconstant"                  			-> "rmc [constantstring]";
 			case "pf", "printfun", "printfunctions"                     			-> "printfun";
-			case "pv", "vars", "printvars"                              			-> "printvars";
 			case "pc", "printc", "printconstants"                       			-> "printconstants";
 			case "clearfun", "clearfunctions"                           			-> "clearfun";
-			case "clearvars", "clearvariables"                          			-> "clearvars";
 			case "ss", "sset", "sets", "setsetting"                     			-> "setsetting [setting] [value]";
 			case "ps", "settings", "printsettings"                      			-> "setting";
 			case "int", "integral"                                      			-> "integral [function] d[variable]";
@@ -393,16 +345,12 @@ public class KeywordInterface {
 				ext, extrema: finds extrema
 				ss, sset, sets, setsetting: sets a setting
 				addf, sto, store, new, def, addfunction: stores a function
-				addv, addvar, addvars: adds a variable
 				addc, addconstant, defc, defcon, defconstant: defines a constant
 				rmf, rmfun, removefun, removefunction: removes a function
-				rmv, rmvar, removevar, removevariable: removes a function
 				rmc, rmconstant, removeconstant: removes a constant
 				pf, printfun, printfunctions: prints all stored functions
-				pv, vars, printvars: prints all variables
 				pc, printc, printconstants: prints all stored constants
-				pv, vars, printvars: prints all variables
 				clearfun, clearfunctions: clears functions
-				clearvars, clearvariables: clears variables""";
+				""";
 	}
 }

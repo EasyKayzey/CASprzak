@@ -11,7 +11,7 @@ public class CASDemo {
 	protected enum DemoState {
 		INTRO,
 		EVAL,
-		STO,
+		DEF,
 		SIMP,
 		VAR,
 		SUB,
@@ -43,7 +43,7 @@ public class CASDemo {
 			case EXIT -> exit();
 			case INTRO -> intro();
 			case EVAL -> eval();
-			case STO -> sto();
+			case DEF -> def();
 			case SIMP -> simp();
 			case VAR -> var();
 			case SUB -> sub();
@@ -151,14 +151,14 @@ public class CASDemo {
 		sleep(1.5);
 		System.out.println("Continue testing this feature, or type 'next' to continue.");
 		runTillNext();
-		currentState = DemoState.STO;
+		currentState = DemoState.DEF;
 	}
 
-	private static void sto() {
-		System.out.println("If we want to use a function several times, we are going to have to store it using the 'store' or 'sto' command.");
+	private static void def() {
+		System.out.println("If we want to use a function several times, we are going to have to define it using the 'def' command.");
 		sleep(1.5);
-		System.out.println("For example, try typing in 'sto f 1-x^2' to store the function '1-x^2' in 'f'.");
-		if (!tryInput(s -> s.length() > 2 && "sto".equals(s.substring(0, 3)), "Begin your input with 'sto' to demonstrate the storage feature of the UI."))
+		System.out.println("For example, try typing in 'def f 1-x^2' to store the function '1-x^2' in 'f'.");
+		if (!tryInput(s -> s.length() > 2 && "def".equals(s.substring(0, 3)), "Begin your input with 'def' to demonstrate the storage feature of the UI."))
 			return;
 		sleep(1.5);
 		System.out.println("Great, we can now use this function whenever we want.");
@@ -169,7 +169,7 @@ public class CASDemo {
 		sleep(1.5);
 		System.out.println("Good. Here are some tips for using the storage feature:");
 		sleep(1.5);
-		System.out.println("If you store a function to character that is already used, the old function will be overwritten.");
+		System.out.println("If you define a function to character that is already used, the old function will be overwritten.");
 		sleep(1.5);
 		System.out.println("You can see all your function characters by typing in 'printfunctions' or 'pf'.");
 		sleep(1.5);
@@ -185,9 +185,9 @@ public class CASDemo {
 		sleep(1.5);
 		System.out.println("For example:");
 		sleep(1.5);
-		System.out.println(">>> sto d x^2*(0*ln(x)+(2*1)/x)");
+		System.out.println(">>> def d x^2*(0*ln(x)+(2*1)/x)");
 		sleep(1.5);
-		System.out.println(KeywordInterface.useKeywords("sto d x^2*(0*ln(x)+(2*1)/x)"));
+		System.out.println(KeywordInterface.useKeywords("def d x^2*(0*ln(x)+(2*1)/x)"));
 		sleep(1.5);
 		System.out.println("This expression looks complicated, right?");
 		sleep(1.5);
@@ -219,8 +219,8 @@ public class CASDemo {
 		sleep(1.5);
 		System.out.println("Now we will construct a function using more than one variable.");
 		sleep(1.5);
-		System.out.println("Store a function with several different variables using the 'sto' command, e.g. 'sto g xy^2+q'.");
-		if (!tryInput(s -> "sto ".equals(s.substring(0, 4)), "Begin your input with 'sto' to demonstrate the storage feature of the UI."))
+		System.out.println("Define a new function with several different variables using the 'def' command, e.g. 'def g xy^2+q'.");
+		if (!tryInput(s -> "def ".equals(s.substring(0, 4)), "Begin your input with 'def' to demonstrate the storage feature of the UI."))
 			return;
 		sleep(1.5);
 		System.out.println("Now, when evaluating, you will need to specify each value, like 'eval x-y x=2 y=3'.");
@@ -252,14 +252,14 @@ public class CASDemo {
 		System.out.println("As you can see, this replaces all 'y's in the function with 'sin(x)'.");
 		sleep(1.5);
 		System.out.println("To try it yourself, take your multivariable function from before and replace a variable with a function using 'sub'.");
-		if (!tryInput(s -> s.length() > 3  && "sub ".equals(s.substring(0, 4)), "Begin your input with 'sto' to demonstrate the substitution feature of the UI."))
+		if (!tryInput(s -> s.length() > 3  && "sub ".equals(s.substring(0, 4)), "Begin your input with 'sub' to demonstrate the substitution feature of the UI."))
 			return;
 		sleep(1.5);
 		System.out.println("Congratulations, you have just substituted a variable for a function.");
 		sleep(1.5);
 		System.out.println("An important thing to remembers is that these changes are not saved in the function.");
 		sleep(1.5);
-		System.out.println("For example, to substitute every 'x' in 'g' with 'x^2', you would need to run 'sto g sub g x x^2'.");
+		System.out.println("For example, to substitute every 'x' in 'g' with 'x^2', you would need to run 'def g sub g x x^2'.");
 		sleep(1.5);
 		System.out.println("Continue testing this feature, or type 'next' to continue.");
 		runTillNext();

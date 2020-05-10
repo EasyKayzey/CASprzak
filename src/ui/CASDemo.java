@@ -6,7 +6,6 @@ import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Predicate;
 
-@SuppressWarnings("SpellCheckingInspection")
 public class CASDemo {
 	protected enum DemoState {
 		INTRO,
@@ -207,16 +206,6 @@ public class CASDemo {
 	private static void var() {
 		System.out.println("Until this point, all the expressions that we've been using have only contained one variable.");
 		sleep(1.5);
-		System.out.println("Type in 'vars' to see all current variables.");
-		if (!tryInput("vars"::equals, "Please type in 'vars' to see the variables."))
-			return;
-		sleep(1.5);
-		System.out.println("These are all the current variables.");
-		sleep(1.5);
-		System.out.println("Try adding a variable by using 'addvar t' to add the variable 't'."); // TODO remove this when removing variables
-		if (!tryInput(s -> "addvar ".equals(s.substring(0, 7)), "Begin your input with 'addvar' to add variables."))
-			return;
-		sleep(1.5);
 		System.out.println("Now we will construct a function using more than one variable.");
 		sleep(1.5);
 		System.out.println("Define a new function with several different variables using the 'def' command, e.g. 'def g xy^2+q'.");
@@ -228,12 +217,6 @@ public class CASDemo {
 		System.out.println("Try evaluating your multivariable function using 'eval', e.g. 'eval f x=2 y=4 q=e.");
 		if (!tryInput(s -> s.length() > 4 && "eval ".equals(s.substring(0, 5)), "Begin your input with 'eval'"))
 			return;
-		sleep(1.5);
-		System.out.println("Now, some more quick tips:");
-		sleep(1.5);
-		System.out.println("'addvar' or 'addv' can add several variables at a time, e.g. 'vars a b c d e f g'.");
-		sleep(1.5);
-		System.out.println("Variables can be removed using 'removevar' or 'rmv', and cleared using 'clearvars'.");
 		sleep(1.5);
 		System.out.println("Continue testing this feature, or type 'next' to continue.");
 		runTillNext();

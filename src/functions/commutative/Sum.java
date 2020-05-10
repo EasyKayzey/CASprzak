@@ -76,12 +76,12 @@ public class Sum extends CommutativeFunction {
 	 * @return a {@link Sum} where like terms are added together
 	 */
 	public Sum combineLikeTerms() {
-		Deque<Pair<Double, GeneralFunction>> functionList = MiscTools.stripConstantsOfSum(this);
+		List<Pair<Double, GeneralFunction>> functionList = MiscTools.stripConstantsOfSum(this);
 		List<GeneralFunction> newFunctions = new ArrayList<>();
 
 		boolean combinedAny = false;
 		while (functionList.size() > 0) {
-			Pair<Double, GeneralFunction> comparing = functionList.pop();
+			Pair<Double, GeneralFunction> comparing = functionList.remove(0);
 			Iterator<Pair<Double, GeneralFunction>> iter = functionList.iterator();
 			while (iter.hasNext()) {
 				Pair<Double, GeneralFunction> current = iter.next();

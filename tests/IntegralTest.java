@@ -128,9 +128,23 @@ public class IntegralTest {
     }
 
     @Test
-    void severalVariableBasicWithNoX() {
+    void severalVariableBasicWithoutX() {
         Integral test1 = new Integral(FunctionParser.parseInfix("y*z^y*\\ln(y)"), 'x');
         GeneralFunction test2 = FunctionParser.parseInfix("y*z^y*\\ln(y)*x");
+        assertEquals(test2, test1.execute());
+    }
+
+    @Test
+    void severalVariableBasicWithX() {
+        Integral test1 = new Integral(FunctionParser.parseSimplified("y*z^y*\\ln(y)x^3"), 'x');
+        GeneralFunction test2 = FunctionParser.parseInfix("y*z^y*\\ln(y)*x^4/4");
+        assertEquals(test2, test1.execute());
+    }
+
+    @Test
+    void severalVariableBasicWithXUnsimplified() {
+        Integral test1 = new Integral(FunctionParser.parseInfix("y*z^y*\\ln(y)x^3"), 'x');
+        GeneralFunction test2 = FunctionParser.parseInfix("y*z^y*\\ln(y)*x^4/4");
         assertEquals(test2, test1.execute());
     }
 

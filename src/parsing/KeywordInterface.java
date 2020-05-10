@@ -63,8 +63,8 @@ public class KeywordInterface {
 			case "clearvars", "clearvariables"									-> clearVariables();
 			case "ss", "sset", "sets", "setsetting"								-> setSettings(splitInput[1]);
 			case "ps", "settings", "printsettings"								-> printSettings();
-			case "svt", "setvarsto", "setvariablesto"							-> setVariablesTo(splitInput[1]); // TODO rename
 			case "int", "integral"												-> integral(splitInput[1]);
+			case "help"															-> splitInput.length == 1 ? helpNoInput() : helpWithInput(splitInput[1]);
 			default 															-> null; //TODO add "help" and "demo"
 		};
 		if (ret == null) {
@@ -340,22 +340,43 @@ public class KeywordInterface {
 	}
 
 	/**
-	 * svt [function] ([char]=[value])*
-	 */
-	private static Object setVariablesTo(String input) {
-		String[] splitInput = spaces.split(input, 2);
-		return parseStored(splitInput[0]).setVariables(
-				Arrays.stream(keywordSplitter.split(splitInput[1]))
-				.map(equals::split)
-				.collect(Collectors.toMap(e -> ParsingTools.getCharacter(e[0]), e -> ParsingTools.getConstant(e[1])))
-		);
-	}
-
-	/**
 	 * integral [function] d[variable]
 	 */
 	private static GeneralFunction integral(String input) {
 		String[] splitInput = keywordSplitter.split(input);
 		return new Integral(parseStored(splitInput[0]), splitInput[1].charAt(1)).execute();
+	}
+
+	private static String helpWithInput(String input) {
+		return "hello";
+	}
+
+	private static String helpNoInput() {
+		return """
+				demo: runs the demo
+				pd, pdiff, partial, pdifferentiate: takes the partial derivative
+				pdn pdiffn partialn pdifferentiaten: takes the partial derivative n times
+				eval, evaluate:  evaluate
+				simp, simplify: simplifies
+				sub, substitute: substitutes
+				sol, solve: solves for roots
+				ext, extrema: finds extrema
+				tay, taylor: takes a taylor series
+				intn, intnumeric: performs numerical integration
+				intne, intnumericerror: performs numerical integration with error
+				addf, sto, store, new, def, addfunction: stores a function
+				addv, addvar, addvars: adds a variable
+				addc, addconstant, defc, defcon, defconstant: defines a constant
+				rmf, rmfun, removefun, removefunction: removes a function
+				rmv, rmvar, removevar, removevariable: removes a function
+				rmc, rmconstant, removeconstant: removes a constant
+				pf, printfun, printfunctions: prints all stored functions
+				pv, vars, printvars: prints all variables
+				pc, printc, printconstants: prints all stored constants
+				clearfun, clearfunctions: clears functions
+				clearvars, clearvariables: clears variables
+				ss, sset, sets, setsetting: sets a setting
+				ps, settings, printsettings: prints all settings
+				int, integral: integrates a function""";
 	}
 }

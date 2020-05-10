@@ -1,5 +1,6 @@
 package tools.integration;
 
+import config.Settings;
 import functions.GeneralFunction;
 import functions.commutative.Product;
 import tools.DefaultFunctions;
@@ -36,5 +37,13 @@ public class IntegralTools {
         } else {
             return new Pair<>(DefaultFunctions.ONE, function);
         }
+    }
+
+    public static GeneralFunction minimalSimplify(GeneralFunction function) {
+        boolean dF = Settings.distributeFunctions;
+        Settings.distributeFunctions = false;
+        GeneralFunction simplified = function.simplify();
+        Settings.distributeFunctions = dF;
+        return simplified;
     }
 }

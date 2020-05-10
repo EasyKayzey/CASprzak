@@ -30,6 +30,8 @@ public class StageOne {
      * @return The integral of the function if one is found.
      */
     public static GeneralFunction derivativeDivides(GeneralFunction integrand, char variableChar) {
+        integrand = IntegralTools.minimalSimplify(integrand);
+
         if (integrand instanceof PartialDerivative derivative)
             if (derivative.respectTo == variableChar)
                 return integrand;

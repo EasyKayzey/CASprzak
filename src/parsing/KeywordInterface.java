@@ -65,7 +65,7 @@ public class KeywordInterface {
 			case "ps", "settings", "printsettings"								-> printSettings();
 			case "int", "integral"												-> integral(splitInput[1]);
 			case "help"															-> splitInput.length == 1 ? helpNoInput() : helpWithInput(splitInput[1]);
-			default 															-> null; //TODO add "help" and "demo"
+			default 															-> null;
 		};
 		if (ret == null) {
 			if (storedFunctions.containsKey(input)) {

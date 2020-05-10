@@ -2,10 +2,7 @@ package functions.special;
 
 import functions.GeneralFunction;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 public class Variable extends SpecialFunction {
@@ -84,7 +81,10 @@ public class Variable extends SpecialFunction {
 	}
 
 	public double evaluate(Map<Character, Double> variableValues) {
-		return variableValues.get(varID);
+		if (!variableValues.containsKey(varID))
+			throw new NoSuchElementException("No value was assigned to variable " + varID);
+		else
+			return variableValues.get(varID);
 	}
 
 

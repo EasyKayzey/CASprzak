@@ -52,7 +52,7 @@ public abstract class UnitaryFunction extends GeneralFunction {
 
 	public GeneralFunction simplifyInverse() {
 		if (this instanceof Invertible inv && operand.getClass().isAssignableFrom(inv.getInverse()))
-			return ((UnitaryFunction) operand).operand; // TODO domain of trig
+			return ((UnitaryFunction) operand).operand;
 		else
 			return this;
 	}

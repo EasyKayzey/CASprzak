@@ -354,16 +354,17 @@ public class KeywordInterface {
 	private static String helpNoInput() {
 		return """
 				demo: runs the demo
-				pd, pdiff, partial, pdifferentiate: takes the partial derivative
-				pdn pdiffn partialn pdifferentiaten: takes the partial derivative n times
 				eval, evaluate:  evaluate
 				simp, simplify: simplifies
-				sub, substitute: substitutes
-				sol, solve: solves for roots
-				ext, extrema: finds extrema
-				tay, taylor: takes a taylor series
+				sub, substitute: substitutespd, pdiff, partial, pdifferentiate: takes the partial derivative
+				pdn pdiffn partialn pdifferentiaten: takes the partial derivative n times
+				int, integral: integrates a function
 				intn, intnumeric: performs numerical integration
 				intne, intnumericerror: performs numerical integration with error
+				tay, taylor: takes a taylor series
+				sol, solve: solves for roots
+				ext, extrema: finds extrema
+				ss, sset, sets, setsetting: sets a setting
 				addf, sto, store, new, def, addfunction: stores a function
 				addv, addvar, addvars: adds a variable
 				addc, addconstant, defc, defcon, defconstant: defines a constant
@@ -373,10 +374,8 @@ public class KeywordInterface {
 				pf, printfun, printfunctions: prints all stored functions
 				pv, vars, printvars: prints all variables
 				pc, printc, printconstants: prints all stored constants
+				pv, vars, printvars: prints all variables
 				clearfun, clearfunctions: clears functions
-				clearvars, clearvariables: clears variables
-				ss, sset, sets, setsetting: sets a setting
-				ps, settings, printsettings: prints all settings
-				int, integral: integrates a function""";
+				clearvars, clearvariables: clears variables""";
 	}
 }

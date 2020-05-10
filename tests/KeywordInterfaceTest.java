@@ -82,7 +82,7 @@ public class KeywordInterfaceTest {
         KeywordInterface.useKeywords("sto t x^2");
         GeneralFunction test1 = (GeneralFunction) KeywordInterface.useKeywords("sub z+y y t");
         GeneralFunction test2 = FunctionParser.parseInfix("z+x^2");
-        assertEquals(test2, test1);
+        assertEquals(test2, test1); // breaks because of substituteAll, remake this test to fix
     }
 
     @Test

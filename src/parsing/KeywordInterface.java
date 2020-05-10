@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 
 @SuppressWarnings("SpellCheckingInspection")
 public class KeywordInterface {
-	public static final Pattern keywordSplitter = Pattern.compile("\"\\s+\"|\"\\s+|\\s+\"|\"$|\\s+(?=[^\"]*(\"[^\"]*\"[^\"]*)*$)");
+	public static final Pattern keywordSplitter = Pattern.compile("\\s+(?=[^\"]*(\"[^\"]*\"[^\"]*)*$)");
 	public static final Pattern spaces = Pattern.compile("\\s+");
 	public static final Pattern equals = Pattern.compile("=");
 	public static final HashMap<String, GeneralFunction> storedFunctions = new HashMap<>();
@@ -34,6 +34,7 @@ public class KeywordInterface {
 	 * @return the Object requested
 	 */
 	public static Object useKeywords(String input) {
+		input = stripQuotes(input);
 		if ("_".equals(input))
 			return prev;
 		String[] splitInput = spaces.split(input, 2);
@@ -89,12 +90,6 @@ public class KeywordInterface {
 		if ("_".equals(input))
 			return ParsingTools.toFunction(prev);
 
-		if (input.chars().filter(ch -> ch == '\"').count() % 2 == 1) // this is a really janky fix TODO fix this by adding quotes-stripper and removing quotes from keywordsplitter
-			if (input.charAt(input.length() - 1) == '\"')
-				input = input.substring(0, input.length() - 1);
-			else
-				throw new IllegalArgumentException("Unmatched quotes in " + input);
-
 		if (storedFunctions.containsKey(input))
 			return storedFunctions.get(input);
 		else if (Constant.isSpecialConstant(input))
@@ -114,6 +109,16 @@ public class KeywordInterface {
 		return function;
 	}
 
+	private static String stripQuotes(String input) {
+		if (input.charAt(0) == '"' && input.charAt(input.length() - 1) == '"') {
+			String stripped = input.substring(1, input.length() - 1);
+			if (!stripped.contains("\""))
+				return stripped;
+		}
+		return input;
+	}
+
+
 	/**
 	 * pd [variable] [function]
 	 */
@@ -126,7 +131,7 @@ public class KeywordInterface {
 	 * pdn [variable] [times] [function]
 	 */
 	private static GeneralFunction partialDiffNth(String input) {
-		String[] splitInput = keywordSplitter.split(input, 3);
+		String[] splitInput = spaces.split(input, 3);
 		return parseStored(splitInput[2]).getNthDerivative(ParsingTools.getCharacter(splitInput[0]), Integer.parseInt(splitInput[1]));
 	}
 

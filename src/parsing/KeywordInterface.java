@@ -217,7 +217,7 @@ public class KeywordInterface {
 	}
 
 	/**
-	 * var(s) [variablename(s)]
+	 * addvar(s) [variablename(s)]
 	 */
 	public static String addVariables(String input) {
 		String[] splitInput = keywordSplitter.split(input);
@@ -349,28 +349,28 @@ public class KeywordInterface {
 
 	private static String helpWithInput(String input) {//TODO finish this
 		return switch (input) {
-			case "demo"																-> "implement";
+			case "demo"																-> "demo";
 			case "pd", "pdiff", "partial", "pdifferentiate"             			-> "pd [variable] [function]";
 			case "pdn", "pdiffn", "partialn", "pdifferentiaten"         			-> "pdn [variable] [times] [function]";
 			case "eval", "evaluate"                                     			-> "eval [function] [var=val]*";
-			case "simp", "simplify"                                     			-> "implement";
-			case "sub", "substitute"                                    			-> "implement";
-			case "sol", "solve"                                         			-> "implement";
-			case "ext", "extrema"                                       			-> "implement";
-			case "tay", "taylor"                                        			-> "implement";
-			case "intn", "intnumeric"                                   			-> "implement";
-			case "intne", "intnumericerror"                             			-> "implement";
-			case "addf", "sto", "store", "new", "def", "addfunction"    			-> "implement";
-			case "addv", "addvar", "addvars"                            			-> "implement";
-			case "addc", "addconstant", "defc", "defcon", "defconstant" 			-> "implement";
-			case "rmf", "rmfun", "removefun", "removefunction"          			-> "implement";
-			case "rmv", "rmvar", "removevar", "removevariable"          			-> "implement";
-			case "rmc", "rmconstant", "removeconstant"                  			-> "implement";
-			case "pf", "printfun", "printfunctions"                     			-> "implement";
-			case "pv", "vars", "printvars"                              			-> "implement";
-			case "pc", "printc", "printconstants"                       			-> "implement";
-			case "clearfun", "clearfunctions"                           			-> "implement";
-			case "clearvars", "clearvariables"                          			-> "implement";
+			case "simp", "simplify"                                     			-> "simp [function]";
+			case "sub", "substitute"                                    			-> "sub [function] [variable] [replacementfunction]";
+			case "sol", "solve"                                         			-> "sol [function] [startrange] [endrange]";
+			case "ext", "extrema"                                       			-> "ext [\"min(ima)\"/\"max(ima)\"/\"anymin(ima)\"/\"anymax(ima)\"/\"inflect(ion)\"] [function] [startrange] [endrange]";
+			case "tay", "taylor"                                        			-> "tay [function] [terms] [center]";
+			case "intn", "intnumeric"                                   			-> "intn [function] [startvalue] [endvalue]";
+			case "intne", "intnumericerror"                             			-> "intne [function] [startvalue] [endvalue]";
+			case "addf", "sto", "store", "new", "def", "addfunction"    			-> "sto [locationstring] [input]";
+			case "addv", "addvar", "addvars"                            			-> "addv [variablename(s)]";
+			case "addc", "addconstant", "defc", "defcon", "defconstant" 			-> "defcon [constantstring] [value]";
+			case "rmf", "rmfun", "removefun", "removefunction"          			-> "rmfun [functionname]";
+			case "rmv", "rmvar", "removevar", "removevariable"          			-> "rmvar(s) [variablenames]";
+			case "rmc", "rmconstant", "removeconstant"                  			-> "rmc [constantstring]";
+			case "pf", "printfun", "printfunctions"                     			-> "printfun";
+			case "pv", "vars", "printvars"                              			-> "printvars";
+			case "pc", "printc", "printconstants"                       			-> "printconstants";
+			case "clearfun", "clearfunctions"                           			-> "clearfun";
+			case "clearvars", "clearvariables"                          			-> "clearvars";
 			case "ss", "sset", "sets", "setsetting"                     			-> "setsetting [setting] [value]";
 			case "ps", "settings", "printsettings"                      			-> "setting";
 			case "int", "integral"                                      			-> "integral [function] d[variable]";

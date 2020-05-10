@@ -347,12 +347,12 @@ public class KeywordInterface {
 		return new Integral(parseStored(splitInput[0]), splitInput[1].charAt(1)).execute();
 	}
 
-	private static String helpWithInput(String input) {
+	private static String helpWithInput(String input) {//TODO finish this
 		return switch (input) {
 			case "demo"																-> "implement";
-			case "pd", "pdiff", "partial", "pdifferentiate"             			-> "implement";
-			case "pdn", "pdiffn", "partialn", "pdifferentiaten"         			-> "implement";
-			case "eval", "evaluate"                                     			-> "implement";
+			case "pd", "pdiff", "partial", "pdifferentiate"             			-> "pd [variable] [function]";
+			case "pdn", "pdiffn", "partialn", "pdifferentiaten"         			-> "pdn [variable] [times] [function]";
+			case "eval", "evaluate"                                     			-> "eval [function] [var=val]*";
 			case "simp", "simplify"                                     			-> "implement";
 			case "sub", "substitute"                                    			-> "implement";
 			case "sol", "solve"                                         			-> "implement";
@@ -371,10 +371,9 @@ public class KeywordInterface {
 			case "pc", "printc", "printconstants"                       			-> "implement";
 			case "clearfun", "clearfunctions"                           			-> "implement";
 			case "clearvars", "clearvariables"                          			-> "implement";
-			case "ss", "sset", "sets", "setsetting"                     			-> "implement";
-			case "ps", "settings", "printsettings"                      			-> "implement";
-			case "int", "integral"                                      			-> "implement";
-			case "help"                                           					-> "implement";
+			case "ss", "sset", "sets", "setsetting"                     			-> "setsetting [setting] [value]";
+			case "ps", "settings", "printsettings"                      			-> "setting";
+			case "int", "integral"                                      			-> "integral [function] d[variable]";
 			default -> throw new IllegalArgumentException("Invalid keyword: " + input);
 		};
 	}

@@ -4,9 +4,13 @@ import functions.GeneralFunction;
 import functions.special.Constant;
 import tools.ArrayTools;
 import tools.MiscTools;
+import tools.helperclasses.AbstractPair;
 import tools.helperclasses.Pair;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 public class Sum extends CommutativeFunction {
 	/**
@@ -81,7 +85,7 @@ public class Sum extends CommutativeFunction {
 
 		boolean combinedAny = false;
 		while (functionList.size() > 0) {
-			Pair<Double, GeneralFunction> comparing = functionList.remove(0);
+			AbstractPair<Double, GeneralFunction> comparing = functionList.remove(0);
 			Iterator<Pair<Double, GeneralFunction>> iter = functionList.iterator();
 			while (iter.hasNext()) {
 				Pair<Double, GeneralFunction> current = iter.next();

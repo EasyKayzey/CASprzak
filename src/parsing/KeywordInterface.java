@@ -108,7 +108,7 @@ public class KeywordInterface {
 	 * @param function the function to be substituted into
 	 * @return input with all substitutions
 	 */
-	public static GeneralFunction substituteAll(GeneralFunction function) {
+	public static GeneralFunction substituteAll(GeneralFunction function) {//TODO make stuff like def f x^2; def g f+1 work. AKA g=f+1 not x^2+1
 		for (Map.Entry<String, GeneralFunction>  entry : storedFunctions.entrySet())
 			function = function.substituteVariable(ParsingTools.getCharacter(entry.getKey()), entry.getValue());
 		return function;

@@ -8,9 +8,10 @@ import functions.special.Variable;
 import tools.ArrayTools;
 import tools.DefaultFunctions;
 import tools.PolynomialTools;
+import tools.helperclasses.AbstractPair;
+import tools.helperclasses.Pair;
 
-import java.util.Arrays;
-import java.util.Map;
+import java.util.*;
 
 public class Product extends CommutativeFunction {
 	/**
@@ -122,26 +123,38 @@ public class Product extends CommutativeFunction {
 	 * @return A new {@link Product} with all variable combined with added exponents
 	 */
 	public Product addExponents() {
-		GeneralFunction[] simplifiedTerms = ArrayTools.deepClone(functions); // TODO make both this and other not deep clone
-		for (int a = 0; a < simplifiedTerms.length; a++)
-			if (!(simplifiedTerms[a] instanceof Pow))
-				simplifiedTerms[a] = new Pow(DefaultFunctions.ONE, simplifiedTerms[a]);
+		List<GeneralFunction> functionList = new LinkedList<>(List.of(functions));
+		List<GeneralFunction> newFunctions = new ArrayList<>();
 
-		for (int i = 1; i < simplifiedTerms.length; i++) {
-			for (int j = 0; j < i; j++) {
-				if (simplifiedTerms[i] instanceof Pow first && simplifiedTerms[j] instanceof Pow second) {
-					if (first.getFunction2().equalsFunction(second.getFunction2())) {
-						simplifiedTerms[j] = new Pow(new Sum(first.getFunction1(), second.getFunction1()), first.getFunction2());
-						simplifiedTerms = ArrayTools.removeFunctionAt(simplifiedTerms, i);
-						return new Product(simplifiedTerms).simplifyInternal();
-					}
-				} else {
-					throw new IllegalStateException("All functions should have been converted to powers.");
-				}
+		{
+			ListIterator<GeneralFunction> iter = functionList.listIterator();
+			while (iter.hasNext()) {
+				GeneralFunction current = iter.next();
+				if (!(current instanceof Pow))
+					iter.set(new Pow(DefaultFunctions.ONE, current));
 			}
 		}
 
-		return this;
+		boolean combinedAny = false;
+		while (functionList.size() > 0) {
+			Pow comparingPow = (Pow) functionList.remove(0);
+			AbstractPair<GeneralFunction, GeneralFunction> comparingPair = new Pair<>(comparingPow.getFunction1(), comparingPow.getFunction2());
+			Iterator<GeneralFunction> iter = functionList.iterator();
+			while (iter.hasNext()) {
+				Pow current = (Pow) iter.next();
+				if (current.getFunction2().equalsFunction(comparingPair.getSecond())) {
+					comparingPair = new Pair<>(new Sum(comparingPair.getFirst(), current.getFunction1()), comparingPair.getSecond());
+					iter.remove();
+					combinedAny = true;
+				}
+			}
+			newFunctions.add(new Pow(comparingPair.getFirst(), comparingPair.getSecond()));
+		}
+
+		if (combinedAny)
+			return new Product(newFunctions.toArray(new GeneralFunction[0])).simplifyInternal();
+		else
+			return this;
 	}
 
 	/**

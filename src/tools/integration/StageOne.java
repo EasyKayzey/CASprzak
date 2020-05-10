@@ -55,33 +55,33 @@ public class StageOne {
             GeneralFunction[] productTerms = product.getFunctions();
             for (GeneralFunction term : productTerms) { // TODO should this be recursed?
                 if (term instanceof Pow power && VariableTools.doesNotContainsVariable(power.getFunction2(), variableChar)) {
-                    Pair<Boolean, GeneralFunction> results = derivativeDividesSearcher(product, term, power.getFunction1(), variableChar);
-                    if (results.getFirst())
-                        return exponential(new Product(number, DefaultFunctions.reciprocal(results.getSecond())), power.getFunction2(), power.getFunction1());
+                    GeneralFunction results = derivativeDividesSearcher(product, term, power.getFunction1(), variableChar);
+                    if (results != null)
+                        return exponential(new Product(number, DefaultFunctions.reciprocal(results)), power.getFunction2(), power.getFunction1());
                 } else if (term instanceof Pow power && VariableTools.doesNotContainsVariable(power.getFunction1(), variableChar)) {
-                    Pair<Boolean, GeneralFunction> results = derivativeDividesSearcher(product, term, power.getFunction2(), variableChar);
-                    if (results.getFirst())
-                        return power(new Product(number, DefaultFunctions.reciprocal(results.getSecond())), power.getFunction1(), power.getFunction2());
+                    GeneralFunction results = derivativeDividesSearcher(product, term, power.getFunction2(), variableChar);
+                    if (results != null)
+                        return power(new Product(number, DefaultFunctions.reciprocal(results)), power.getFunction1(), power.getFunction2());
                 } else if (term instanceof Ln ln) {
-                    Pair<Boolean, GeneralFunction> results = derivativeDividesSearcher(product, term, ln.operand, variableChar);
-                    if (results.getFirst())
-                        return naturalLog(new Product(number, DefaultFunctions.reciprocal(results.getSecond())), ln.operand);
+                    GeneralFunction results = derivativeDividesSearcher(product, term, ln.operand, variableChar);
+                    if (results != null)
+                        return naturalLog(new Product(number, DefaultFunctions.reciprocal(results)), ln.operand);
                 } else if (term instanceof Exp exp) {
-                    Pair<Boolean, GeneralFunction> results = derivativeDividesSearcher(product, term, exp.operand, variableChar);
-                    if (results.getFirst())
-                        return naturalExponential(new Product(number, DefaultFunctions.reciprocal(results.getSecond())), exp.operand);
+                    GeneralFunction results = derivativeDividesSearcher(product, term, exp.operand, variableChar);
+                    if (results != null)
+                        return naturalExponential(new Product(number, DefaultFunctions.reciprocal(results)), exp.operand);
                 } else if (term instanceof Logb logb && VariableTools.doesNotContainsVariable(logb.getFunction2(), variableChar)) {
-                    Pair<Boolean, GeneralFunction> results = derivativeDividesSearcher(product, term, logb.getFunction1(), variableChar);
-                    if (results.getFirst())
-                        return naturalLog(new Product(number, DefaultFunctions.reciprocal(new Product(results.getSecond(), new Ln(logb.getFunction2())))), logb.getFunction2());
+                    GeneralFunction results = derivativeDividesSearcher(product, term, logb.getFunction1(), variableChar);
+                    if (results != null)
+                        return naturalLog(new Product(number, DefaultFunctions.reciprocal(new Product(results, new Ln(logb.getFunction2())))), logb.getFunction2());
                 } else if (term instanceof TrigFunction trig) {
-                    Pair<Boolean, GeneralFunction> results = derivativeDividesSearcher(product, term, trig.operand, variableChar);
-                    if (results.getFirst())
-                        return new Product(new Product(number, DefaultFunctions.reciprocal(results.getSecond())), trig.getElementaryIntegral());
+                    GeneralFunction results = derivativeDividesSearcher(product, term, trig.operand, variableChar);
+                    if (results != null)
+                        return new Product(new Product(number, DefaultFunctions.reciprocal(results)), trig.getElementaryIntegral());
                 }
-                Pair<Boolean, GeneralFunction> results = derivativeDividesSearcher(product, term, term, variableChar);
-                if (results.getFirst())
-                    return power(new Product(number, DefaultFunctions.reciprocal(results.getSecond())), DefaultFunctions.ONE, term);
+                GeneralFunction results = derivativeDividesSearcher(product, term, term, variableChar);
+                if (results != null)
+                    return power(new Product(number, DefaultFunctions.reciprocal(results)), DefaultFunctions.ONE, term);
             }
         } else {
             if (function instanceof Pow power && VariableTools.doesNotContainsVariable(power.getFunction2(), variableChar) && VariableTools.doesNotContainsVariable(power.getFunction1().getSimplifiedDerivative(variableChar), variableChar))
@@ -124,12 +124,15 @@ public class StageOne {
         return new Product(number, new Exp(operand));
     }
 
-    private static Pair<Boolean, GeneralFunction> derivativeDividesSearcher(CommutativeFunction product, GeneralFunction term, GeneralFunction toTakeDerivative, char variableChar) {
+    private static GeneralFunction derivativeDividesSearcher(CommutativeFunction product, GeneralFunction term, GeneralFunction toTakeDerivative, char variableChar) {
         GeneralFunction derivativeWithConstants = toTakeDerivative.getSimplifiedDerivative(variableChar);
         Pair<GeneralFunction, GeneralFunction> derivative = IntegralTools.stripConstantsRespectTo(derivativeWithConstants, variableChar);
         GeneralFunction derivativeWithoutConstant = derivative.second;
         GeneralFunction constantInFront = derivative.first;
         Product derivativeTimesOperation = new Product(derivativeWithoutConstant, term);
-        return new Pair<>(SearchTools.existsInSurfaceSubset(product, derivativeTimesOperation::equals) && !SearchTools.existsInOppositeSurfaceSubset(product, (u -> SearchTools.existsAny(u, VariableTools.isVariable(variableChar))), derivativeTimesOperation::equals), constantInFront);
+        if (!SearchTools.existsInSurfaceSubset(product, derivativeTimesOperation::equals) || SearchTools.existsInOppositeSurfaceSubset(product, (u -> SearchTools.existsAny(u, VariableTools.isVariable(variableChar))), derivativeTimesOperation::equals))
+            return null;
+        else
+            return constantInFront;
         }
 }

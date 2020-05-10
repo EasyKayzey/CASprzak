@@ -29,22 +29,23 @@ public class StageOne {
      * @param variableChar The {@link Variable#varID} the function is integrated with respect to.
      * @return The integral of the function if one is found.
      */
-    public static GeneralFunction derivativeDivides(GeneralFunction integrand, char variableChar) { // TODO Erez needs to review this
-        if (integrand instanceof Sum terms) {
-            GeneralFunction[] integratedTerms = new GeneralFunction[terms.getFunctions().length];
-            GeneralFunction[] sumTerms = terms.getFunctions();
-            for (int i = 0; i < sumTerms.length; i++)
-                integratedTerms[i] = new Integral(sumTerms[i], variableChar).execute();
-            return new Sum(integratedTerms);
-        }
-        if (integrand instanceof Pow power && power.getFunction2() instanceof Sum && power.getFunction1() instanceof Constant constant && ParsingTools.isAlmostInteger(constant.constant))
-            return new Integral(power.unwrapIntegerPower().distributeAll(), variableChar).execute();
-
+    public static GeneralFunction derivativeDivides(GeneralFunction integrand, char variableChar) {
         if (integrand instanceof PartialDerivative derivative)
             if (derivative.respectTo == variableChar)
                 return integrand;
             else
                 integrand = integrand.getSimplifiedDerivative(derivative.respectTo);
+
+        if (integrand instanceof Sum terms) {
+            GeneralFunction[] sumTerms = terms.getFunctions();
+            GeneralFunction[] integratedTerms = new GeneralFunction[sumTerms.length];
+            for (int i = 0; i < sumTerms.length; i++)
+                integratedTerms[i] = new Integral(sumTerms[i], variableChar).execute();
+            return new Sum(integratedTerms);
+        }
+
+        if (integrand instanceof Pow power && power.getFunction2() instanceof Sum && power.getFunction1() instanceof Constant constant && ParsingTools.isAlmostInteger(constant.constant))
+            return new Integral(power.unwrapIntegerPower().distributeAll(), variableChar).execute();
 
         Pair<GeneralFunction, GeneralFunction> stripConstant = IntegralTools.stripConstantsRespectTo(integrand, variableChar);
         GeneralFunction function = stripConstant.second;
@@ -52,7 +53,7 @@ public class StageOne {
 
         if (function instanceof Product product){
             GeneralFunction[] productTerms = product.getFunctions();
-            for (GeneralFunction term : productTerms) {
+            for (GeneralFunction term : productTerms) { // TODO should this be recursed?
                 if (term instanceof Pow power && VariableTools.doesNotContainsVariable(power.getFunction2(), variableChar)) {
                     Pair<Boolean, GeneralFunction> results = derivativeDividesSearcher(product, term, power.getFunction1(), variableChar);
                     if (results.getFirst())
@@ -83,23 +84,22 @@ public class StageOne {
                     return power(new Product(number, DefaultFunctions.reciprocal(results.getSecond())), DefaultFunctions.ONE, term);
             }
         } else {
-            if (function instanceof Pow power && VariableTools.doesNotContainsVariable(power.getFunction2(), variableChar) && VariableTools.doesNotContainsVariable(power.getFunction1().getSimplifiedDerivative(variableChar), variableChar)) {
+            if (function instanceof Pow power && VariableTools.doesNotContainsVariable(power.getFunction2(), variableChar) && VariableTools.doesNotContainsVariable(power.getFunction1().getSimplifiedDerivative(variableChar), variableChar))
                 return exponential(new Product(number, DefaultFunctions.reciprocal(power.getFunction1().getSimplifiedDerivative(variableChar))), power.getFunction2(), power.getFunction1());
-            } else if (function instanceof Pow power && VariableTools.doesNotContainsVariable(power.getFunction1(), variableChar) && VariableTools.doesNotContainsVariable(power.getFunction2().getSimplifiedDerivative(variableChar), variableChar)) {
+            else if (function instanceof Pow power && VariableTools.doesNotContainsVariable(power.getFunction1(), variableChar) && VariableTools.doesNotContainsVariable(power.getFunction2().getSimplifiedDerivative(variableChar), variableChar))
                 return power(new Product(number, DefaultFunctions.reciprocal(power.getFunction2().getSimplifiedDerivative(variableChar))), power.getFunction1(), power.getFunction2());
-            } else if (function instanceof Ln log && VariableTools.doesNotContainsVariable(log.operand.getSimplifiedDerivative(variableChar), variableChar)) {
+            else if (function instanceof Ln log && VariableTools.doesNotContainsVariable(log.operand.getSimplifiedDerivative(variableChar), variableChar))
                 return naturalLog(new Product(number, DefaultFunctions.reciprocal(log.operand.getSimplifiedDerivative(variableChar))), log.operand);
-            } else if (function instanceof Exp exp && VariableTools.doesNotContainsVariable(exp.operand.getSimplifiedDerivative(variableChar), variableChar)) {
+            else if (function instanceof Exp exp && VariableTools.doesNotContainsVariable(exp.operand.getSimplifiedDerivative(variableChar), variableChar))
                 return naturalExponential(new Product(number, DefaultFunctions.reciprocal(exp.operand.getSimplifiedDerivative(variableChar))), exp.operand);
-            } else if (function instanceof Logb logb && VariableTools.doesNotContainsVariable(logb.getFunction2(), variableChar) && VariableTools.doesNotContainsVariable(logb.getFunction1().getSimplifiedDerivative(variableChar), variableChar)) {
+            else if (function instanceof Logb logb && VariableTools.doesNotContainsVariable(logb.getFunction2(), variableChar) && VariableTools.doesNotContainsVariable(logb.getFunction1().getSimplifiedDerivative(variableChar), variableChar))
                 return naturalLog(new Product(number, DefaultFunctions.reciprocal(new Product(logb.getFunction1().getSimplifiedDerivative(variableChar), new Ln(logb.getFunction2())))), logb.getFunction1());
-            } else if (VariableTools.doesNotContainsVariable(function, variableChar)) {
+            else if (VariableTools.doesNotContainsVariable(function, variableChar))
                 return new Product(number, function, new Variable(variableChar));
-            } else if (function instanceof Variable variable) {
+            else if (function instanceof Variable variable)
                 return power(number, DefaultFunctions.ONE, variable);
-            } else if (function instanceof TrigFunction unit && VariableTools.doesNotContainsVariable(unit.operand.getSimplifiedDerivative(variableChar), variableChar)) {
+            else if (function instanceof TrigFunction unit && VariableTools.doesNotContainsVariable(unit.operand.getSimplifiedDerivative(variableChar), variableChar))
                 return new Product(new Product(number, DefaultFunctions.reciprocal(unit.operand.getSimplifiedDerivative(variableChar))), unit.getElementaryIntegral());
-            }
         }
         throw new IntegrationFailedException("Integration failed");
     }

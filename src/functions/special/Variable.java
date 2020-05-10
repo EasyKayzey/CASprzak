@@ -20,7 +20,7 @@ public class Variable extends SpecialFunction {
 	private static int variablesEnd = 3; // TODO possible remove FunctionVariables
 
 	/**
-	 * The index of this variable in {@link #variables}
+	 * The character representing this variable
 	 */
 	public final char varID;
 

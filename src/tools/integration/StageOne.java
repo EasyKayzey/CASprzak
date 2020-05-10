@@ -55,7 +55,7 @@ public class StageOne {
 
         if (function instanceof Product product){
             GeneralFunction[] productTerms = product.getFunctions();
-            for (GeneralFunction term : productTerms) { // TODO should this be recursed?
+            for (GeneralFunction term : productTerms) {
                 if (term instanceof Pow power && VariableTools.doesNotContainsVariable(power.getFunction2(), variableChar)) {
                     GeneralFunction results = derivativeDividesSearcher(product, term, power.getFunction1(), variableChar);
                     if (results != null)

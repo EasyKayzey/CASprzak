@@ -49,8 +49,8 @@ public class KeywordInterface {
 			case "tay", "taylor"												-> taylor(splitInput[1]);
 			case "intn", "intnumeric"											-> integrateNumeric(splitInput[1]);
 			case "intne", "intnumericerror"										-> integrateNumericError(splitInput[1]);
-			case "addf", "sto", "store", "new", "def", "addfunction"			-> defineFunction(splitInput[1]); // TODO rename
-			case "addc", "addconstant", "defc", "defcon", "defconstant"			-> defineConstant(splitInput[1]);
+			case "def", "deffunction"											-> defineFunction(splitInput[1]);
+			case "defc", "defcon", "defconstant"								-> defineConstant(splitInput[1]);
 			case "rmf", "rmfun", "removefun", "removefunction"					-> removeFunction(splitInput[1]);
 			case "rmc", "rmconstant", "removeconstant"							-> removeConstant(splitInput[1]);
 			case "pf", "printfun", "printfunctions"								-> printFunctions();
@@ -189,7 +189,7 @@ public class KeywordInterface {
 	}
 
 	/**
-	 * sto [locationstring] [input]
+	 * def [locationstring] [input]
 	 */
 	public static Object defineFunction(String input) {
 		String[] splitInput = spaces.split(input, 2);
@@ -202,7 +202,7 @@ public class KeywordInterface {
 	}
 
 	/**
-	 * defcon [constantstring] [value]
+	 * defc [constantstring] [value]
 	 */
 	private static Object defineConstant(String input) {
 		String[] splitInput = spaces.split(input, 2);
@@ -316,8 +316,8 @@ public class KeywordInterface {
 			case "tay", "taylor"                                        			-> "tay [function] [terms] [center]";
 			case "intn", "intnumeric"                                   			-> "intn [function] [startvalue] [endvalue]";
 			case "intne", "intnumericerror"                             			-> "intne [function] [startvalue] [endvalue]";
-			case "addf", "sto", "store", "new", "def", "addfunction"    			-> "sto [locationstring] [input]";
-			case "addc", "addconstant", "defc", "defcon", "defconstant" 			-> "defc [constantstring] [value]";
+			case "def", "deffunction"    											-> "sto [locationstring] [input]";
+			case "defc", "defcon", "defconstant" 									-> "defc [constantstring] [value]";
 			case "rmf", "rmfun", "removefun", "removefunction"          			-> "rmf [functionname]";
 			case "rmc", "rmconstant", "removeconstant"                  			-> "rmc [constantstring]";
 			case "pf", "printfun", "printfunctions"                     			-> "printfun";
@@ -344,8 +344,8 @@ public class KeywordInterface {
 				sol, solve: solves for roots
 				ext, extrema: finds extrema
 				ss, sset, sets, setsetting: sets a setting
-				addf, sto, store, new, def, addfunction: stores a function
-				addc, addconstant, defc, defcon, defconstant: defines a constant
+				def, deffunction: defines a function
+				defcon, defconstant: defines a constant
 				rmf, rmfun, removefun, removefunction: removes a function
 				rmc, rmconstant, removeconstant: removes a constant
 				pf, printfun, printfunctions: prints all stored functions

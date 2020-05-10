@@ -126,13 +126,11 @@ public class Product extends CommutativeFunction {
 		List<GeneralFunction> functionList = new LinkedList<>(List.of(functions));
 		List<GeneralFunction> newFunctions = new ArrayList<>();
 
-		{
-			ListIterator<GeneralFunction> iter = functionList.listIterator();
-			while (iter.hasNext()) {
-				GeneralFunction current = iter.next();
-				if (!(current instanceof Pow))
-					iter.set(new Pow(DefaultFunctions.ONE, current));
-			}
+		ListIterator<GeneralFunction> initialIter = functionList.listIterator();
+		while (initialIter.hasNext()) {
+			GeneralFunction current = initialIter.next();
+			if (!(current instanceof Pow))
+				initialIter.set(new Pow(DefaultFunctions.ONE, current));
 		}
 
 		boolean combinedAny = false;

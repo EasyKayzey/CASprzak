@@ -3,9 +3,10 @@ package functions.commutative;
 import functions.GeneralFunction;
 import functions.special.Constant;
 import tools.ArrayTools;
-import tools.DefaultFunctions;
+import tools.MiscTools;
+import tools.helperclasses.Pair;
 
-import java.util.Map;
+import java.util.*;
 
 public class Sum extends CommutativeFunction {
 	/**
@@ -75,29 +76,27 @@ public class Sum extends CommutativeFunction {
 	 * @return a {@link Sum} where like terms are added together
 	 */
 	public Sum combineLikeTerms() {
-		GeneralFunction[] combinedTerms = ArrayTools.deepClone(functions);
-		for (int a = 0; a < combinedTerms.length; a++)
-			if (!(combinedTerms[a] instanceof Product product && product.getFunctions()[0] instanceof Constant))
-				combinedTerms[a] = new Product(DefaultFunctions.ONE, combinedTerms[a]).simplifyPull();
+		Deque<Pair<Double, GeneralFunction>> functionList = MiscTools.stripConstantsOfSum(this);
+		List<GeneralFunction> newFunctions = new ArrayList<>();
 
-		for (int i = 1; i < combinedTerms.length; i++) {
-			for (int j = 0; j < i; j++) {
-				if (combinedTerms[i] instanceof Product first && combinedTerms[j] instanceof Product second) {
-					GeneralFunction[] firstFunctions = first.getFunctions();
-					GeneralFunction[] secondFunctions = second.getFunctions();
-					if (!((firstFunctions[0] instanceof Constant) && (secondFunctions[0] instanceof Constant)))
-						throw new IllegalStateException("Constants should always be first in a Multiply.");
-					if (ArrayTools.deepEqualsExcluding(firstFunctions, secondFunctions, 0)) {
-						combinedTerms[j] = new Product(new Sum(firstFunctions[0], secondFunctions[0]), new Product(ArrayTools.removeFunctionAt(firstFunctions, 0)));
-						combinedTerms = ArrayTools.removeFunctionAt(combinedTerms, i);
-						return (new Sum(combinedTerms)).simplifyInternal();
-					}
-				} else {
-					throw new IllegalStateException("All Functions should have been converted to products");
+		boolean combinedAny = false;
+		while (functionList.size() > 0) {
+			Pair<Double, GeneralFunction> comparing = functionList.pop();
+			Iterator<Pair<Double, GeneralFunction>> iter = functionList.iterator();
+			while (iter.hasNext()) {
+				Pair<Double, GeneralFunction> current = iter.next();
+				if (current.getSecond().equalsFunction(comparing.getSecond())) {
+					comparing = new Pair<>(comparing.getFirst() + current.getFirst(), comparing.getSecond());
+					iter.remove();
+					combinedAny = true;
 				}
 			}
+			newFunctions.add(new Product(new Constant(comparing.getFirst()), comparing.getSecond()));
 		}
 
-		return this;
+		if (combinedAny)
+			return new Sum(newFunctions.toArray(new GeneralFunction[0])).simplifyInternal();
+		else
+			return this;
 	}
 }

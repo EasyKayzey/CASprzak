@@ -6,8 +6,8 @@ import functions.commutative.Sum;
 import functions.special.Constant;
 import tools.helperclasses.Pair;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Deque;
+import java.util.LinkedList;
 
 public class MiscTools {
 
@@ -41,9 +41,9 @@ public class MiscTools {
 		throw new UnsupportedOperationException("Class " + function.getClass().getSimpleName() + " not supported.");
 	}
 
-	public static List<Pair<Double, GeneralFunction>> stripConstantsOfASum(Sum sum) {
+	public static Deque<Pair<Double, GeneralFunction>> stripConstantsOfSum(Sum sum) {
 		GeneralFunction[] sumArray = sum.getFunctions();
-		List<Pair<Double, GeneralFunction>> strippedPairsArray = new ArrayList<>();
+		Deque<Pair<Double, GeneralFunction>> strippedPairsArray = new LinkedList<>();
 		for (GeneralFunction function: sumArray) {
 			if (function instanceof Product multiply) {
 				GeneralFunction[] terms = multiply.simplifyConstants().getFunctions();

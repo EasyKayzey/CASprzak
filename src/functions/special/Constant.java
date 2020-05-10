@@ -16,7 +16,7 @@ public class Constant extends SpecialFunction {
 			put("π", Math.PI);
 			put("e", Math.E);
 		}
-	}; // TODO when unicode support is implemented, possibly migrate to using characters and implement /pi
+	};
 
 	/**
 	 * The numerical value of the constant

@@ -296,7 +296,7 @@ public class CASDemo {
 
 	private static void tay() {
 		System.out.println("One application of the derivative is in the form of a taylor series.");
-		sleep(1.5);
+		sleep(1.49);
 		System.out.println("The syntax for creating a taylor series goes as follows:");
 		sleep(1.5);
 		System.out.println(">>> tay [function] [terms] [center].");

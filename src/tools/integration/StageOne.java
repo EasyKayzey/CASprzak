@@ -22,12 +22,13 @@ import tools.helperclasses.Pair;
 
 @SuppressWarnings("ChainOfInstanceofChecks")
 public class StageOne {
+    private StageOne(){}
 
     /**
-     * Performs the derivative divides method on the integrand and returns the integral
-     * @param integrand The {@link GeneralFunction} who is being integrated
-     * @param variableChar The {@link Variable#varID} the function is integrated with respect to.
-     * @return The integral of the function if one is found.
+     * Performs the derivative divides method on the integrand and returns the integral if the method succeeded
+     * @param integrand The {@link GeneralFunction} that is being integrated
+     * @param variableChar The {@link Variable#varID} that the integrand is integrated with respect to
+     * @return The integral of the function, if one is found
      * @throws IntegrationFailedException if the integration did not succeed
      */
     public static GeneralFunction derivativeDivides(GeneralFunction integrand, char variableChar) throws IntegrationFailedException {

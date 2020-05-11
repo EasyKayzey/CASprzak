@@ -21,7 +21,7 @@ public class Solver {
 	/**
 	 * Performs one iteration of Newton's method for a given {@link GeneralFunction} at a given point
 	 * @param expression the function that is iterated on
-	 * @param value      the initial approximation of the root
+	 * @param value      initial approximation of the root
 	 * @return a better approximation of the root based on the value provided
 	 */
 	private static double newtonsMethod(GeneralFunction expression, double value) {
@@ -30,10 +30,10 @@ public class Solver {
 	}
 
 	/**
-	 * Gives an approximate root of a {@link GeneralFunction} using {@link #newtonsMethod} for the initialPoint and a specified amount of runs
+	 * Gives an approximate root of a {@link GeneralFunction} using {@link #newtonsMethod} on the initialPoint for a specified amount of runs
 	 * @param expression   the function whose root is being found
-	 * @param initialPoint the initial approximation of the root
-	 * @param runs         the amount of times that {@link #newtonsMethod} is repeated
+	 * @param initialPoint initial approximation of the root
+	 * @param runs         the amount of times that {@link #newtonsMethod} is iterated
 	 * @return the approximate solution for a root of the function
 	 */
 	public static double getSolutionPointNewton(GeneralFunction expression, double initialPoint, int runs) {
@@ -60,9 +60,9 @@ public class Solver {
 	}
 
 	/**
-	 * Gives an approximate root of a {@link GeneralFunction} using {@link #newtonsMethod} on the initialPoint after the amount of runs specified in {@link Settings#defaultSolverIterations}
+	 * Gives an approximate root of a {@link GeneralFunction} using {@link #newtonsMethod} on the initialPoint for the amount of runs specified in {@link Settings#defaultSolverIterations}
 	 * @param expression   the function whose root is being found
-	 * @param initialPoint the initial approximation of the root
+	 * @param initialPoint initial approximation of the root
 	 * @return the approximate solution for a root of the function
 	 */
 	public static double getSolutionPointNewton(GeneralFunction expression, double initialPoint) {
@@ -86,11 +86,11 @@ public class Solver {
 	}
 
 	/**
-	 * Gives approximate roots of a {@link GeneralFunction} using {@link #newtonsMethod} in a range of values after a specified amount of runs
+	 * Gives approximate roots of a {@link GeneralFunction} using {@link #newtonsMethod} in a range of values for a specified amount of runs
 	 * @param expression the function whose roots are being found
 	 * @param lower      the lower bound of the values that will be searched
 	 * @param upper      the upper bound of the values that will be searched
-	 * @param runs       the amount of times that {@link #newtonsMethod} is repeated
+	 * @param runs       the amount of times that {@link #newtonsMethod} is iterated
 	 * @return an array of all the approximate roots found
 	 */
 	public static List<Double> getSolutionsRangeNewton(GeneralFunction expression, double lower, double upper, int runs) {
@@ -111,7 +111,7 @@ public class Solver {
 	}
 
 	/**
-	 * Gives approximate roots of a {@link GeneralFunction} using Halley's method in a range of values after the amount of runs specified in {@link Settings}
+	 * Gives approximate roots of a {@link GeneralFunction} using Halley's method in a range of values for the amount of runs specified in {@link Settings}
 	 * @param expression the function whose roots are being found
 	 * @param lower      the lower bound of the values that will be searched
 	 * @param upper      the upper bound of the values that will be searched
@@ -126,7 +126,7 @@ public class Solver {
 	}
 
 	/**
-	 * Gives approximate roots of a {@link GeneralFunction} using {@link #newtonsMethod} in a range of values after the amount of runs specified in {@link Settings}
+	 * Gives approximate roots of a {@link GeneralFunction} using {@link #newtonsMethod} in a range of values for the amount of runs specified in {@link Settings}
 	 * @param expression the function whose roots are being found
 	 * @param lower      the lower bound of the values that will be searched
 	 * @param upper      the upper bound of the values that will be searched

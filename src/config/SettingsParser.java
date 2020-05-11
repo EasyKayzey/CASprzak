@@ -19,7 +19,7 @@ public class SettingsParser {
 			parseSingleSetting((String) entry.getKey(), (String) entry.getValue());
 	}
 
-	public static void parseSingleSetting(String key, String value) {
+	public static void parseSingleSetting(String key, String value) {//TODO document this
 		switch (key) {
 			case "defaultSolverIterations" 					-> Settings.defaultSolverIterations = Integer.parseInt(value);
 			case "defaultRangeSections" 					-> Settings.defaultRangeSections = Integer.parseInt(value);

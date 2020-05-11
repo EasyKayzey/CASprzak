@@ -52,13 +52,7 @@ public class SolverTools {
 	 * @param upperBound the upper bound of the range
 	 */
 	public static void removeNotInRange(List<Double> values, double lowerBound, double upperBound) {
-		ListIterator<Double> iter = values.listIterator();
-		double current;
-		while (iter.hasNext()) {
-			current = iter.next();
-			if (current > upperBound || current < lowerBound)
-				iter.remove();
-		}
+		values.removeIf(v -> v > upperBound || v < lowerBound);
 	}
 
 

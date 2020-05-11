@@ -38,8 +38,6 @@ public class Solver {
 	 */
 	public static double getSolutionPointNewton(GeneralFunction expression, double initialPoint, int runs) {
 		char var = VariableTools.getSingleVariable(expression);
-		if (expression.evaluate(Map.of(var, 0.0)) == 0) //Temporary but probably best fix
-			return 0;
 		if (expression.evaluate(Map.of(var, initialPoint)) == 0)
 			return initialPoint;
 		if (expression instanceof Constant)
@@ -55,7 +53,10 @@ public class Solver {
 				return nextPoint;
 		}
 		if (Math.abs(expression.evaluate(Map.of(var, initialPoint))) < Settings.zeroMargin)
-			return initialPoint;
+			if (Math.abs(initialPoint) < Settings.equalsMargin)
+				return 0;
+			else
+				return initialPoint;
 		return Double.NaN;
 	}
 

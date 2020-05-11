@@ -2,8 +2,8 @@ package tools;
 
 import config.Settings;
 
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -19,7 +19,7 @@ public class SolverTools {
 	 * @return the specified range
 	 */
 	public static List<Double> createRange(double upper, double lower, int sections) {
-		List<Double> range = new LinkedList<>();
+		List<Double> range = new ArrayList<>(sections + 1);
 		for (int i = 0; i <= sections; i++)
 			range.add(lower + i * (upper - lower) / sections);
 		return range;

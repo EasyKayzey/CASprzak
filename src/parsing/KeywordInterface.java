@@ -45,7 +45,7 @@ public class KeywordInterface {
 			case "eval", "evaluate"												-> evaluate(splitInput[1]);
 			case "simp", "simplify"												-> simplify(splitInput[1]);
 			case "sub", "substitute"											-> substitute(splitInput[1]);
-			case "sa", "suball"													-> substituteAllInput(splitInput[1]);//TODO fix, check discord
+			case "sa", "suball"													-> substituteAllInput(splitInput[1]);
 			case "sol", "solve"													-> solve(splitInput[1]);
 			case "ext", "extrema"												-> extrema(splitInput[1]);
 			case "tay", "taylor"												-> taylor(splitInput[1]);
@@ -55,7 +55,7 @@ public class KeywordInterface {
 			case "defc", "defcon", "defconstant"								-> defineConstant(splitInput[1]);
 			case "rmf", "rmfun", "removefun", "removefunction"					-> removeFunction(splitInput[1]);
 			case "rmc", "rmconstant", "removeconstant"							-> removeConstant(splitInput[1]);
-			case "pf", "printfun", "printfunctions"								-> getFunctions();
+			case "pf", "printfun", "printfunctions"								-> getFunctions(); // TODO make this be able to take an argument
 			case "pc", "printc", "printconstants"								-> getConstants();
 			case "clearfun", "clearfunctions"									-> clearFunctions();
 			case "ss", "sset", "sets", "setsetting"								-> setSettings(splitInput[1]);
@@ -91,9 +91,7 @@ public class KeywordInterface {
 		if ("_".equals(input))
 			return ParsingTools.toFunction(prev);
 
-		if (storedFunctions.containsKey(input))
-			return storedFunctions.get(input);
-		else if (Constant.isSpecialConstant(input))
+		if (Constant.isSpecialConstant(input))
 			return new Constant(input);
 		else
 			return (GeneralFunction) useKeywords(input);

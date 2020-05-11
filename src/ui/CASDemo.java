@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Predicate;
 
 public class CASDemo {
-	protected enum DemoState {
+	private enum DemoState {
 		INTRO,
 		EVAL,
 		DEF,

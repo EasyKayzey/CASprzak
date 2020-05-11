@@ -159,9 +159,9 @@ public class KeywordInterface {
 		return switch (splitInput[0]) {
 			case "min", "minima"					-> Extrema.findLocalMinimum(parseStored(splitInput[1]), ParsingTools.getConstant(splitInput[2]), ParsingTools.getConstant(splitInput[3]));
 			case "max", "maxima"					-> Extrema.findLocalMaximum(parseStored(splitInput[1]), ParsingTools.getConstant(splitInput[2]), ParsingTools.getConstant(splitInput[3]));
-			case "anymin", "anyminima"				-> Extrema.findAnyMinima(parseStored(splitInput[1]), ParsingTools.getConstant(splitInput[2]), ParsingTools.getConstant(splitInput[3]));
-			case "anymax", "anymaxima"				-> Extrema.findAnyMaxima(parseStored(splitInput[1]), ParsingTools.getConstant(splitInput[2]), ParsingTools.getConstant(splitInput[3]));
-			case "inflect", "inflection"			-> Extrema.findAnyInflectionPoints(parseStored(splitInput[1]), ParsingTools.getConstant(splitInput[2]), ParsingTools.getConstant(splitInput[3]));
+			case "anymin", "anyminima"				-> Extrema.findLocalMinima(parseStored(splitInput[1]), ParsingTools.getConstant(splitInput[2]), ParsingTools.getConstant(splitInput[3]));
+			case "anymax", "anymaxima"				-> Extrema.findLocalMaxima(parseStored(splitInput[1]), ParsingTools.getConstant(splitInput[2]), ParsingTools.getConstant(splitInput[3]));
+			case "inflect", "inflection"			-> Extrema.findInflectionPoints(parseStored(splitInput[1]), ParsingTools.getConstant(splitInput[2]), ParsingTools.getConstant(splitInput[3]));
 			default 								-> throw new IllegalStateException("Invalid setting for extrema: " + splitInput[0]);
 		};
 	}

@@ -16,11 +16,11 @@ public class Extrema {
     private Extrema(){}
 
     /**
-     * Returns the local minima of a {@link GeneralFunction} function on a specified range
-     * @param function The {@link GeneralFunction} whose minima is being found
+     * Returns the local minimum of a {@link GeneralFunction} function on a specified range
+     * @param function The {@link GeneralFunction} whose minimum is being found
      * @param lowerBound The lower bound of the range
      * @param upperBound The upper bound of the range
-     * @return the local minima of function on the specified range
+     * @return the local minimum of function on the specified range
      */
     public static double findLocalMinimum(GeneralFunction function, double lowerBound, double upperBound) {
        List<Double> secondDerivativeIsPositive = findPoints(function, lowerBound, upperBound, (a, b) -> (a > b));
@@ -30,28 +30,16 @@ public class Extrema {
 
 
     /**
-     * Returns the local maxima of a {@link GeneralFunction} function on a specified range
-     * @param function The {@link GeneralFunction} whose maxima is being found
+     * Returns the local maximum of a {@link GeneralFunction} function on a specified range
+     * @param function The {@link GeneralFunction} whose maximum is being found
      * @param lowerBound The lower bound of the range
      * @param upperBound The upper bound of the range
-     * @return the local maxima of function on the specified range
+     * @return the local maximum of function on the specified range
      */
     public static double findLocalMaximum(GeneralFunction function, double lowerBound, double upperBound) {
         List<Double> secondDerivativeIsNegative = findPoints(function, lowerBound, upperBound, (a, b) -> (a < b));
         double maximum = findSmallestOrLargest(function, secondDerivativeIsNegative, (a, b) -> (a > b));
         return SolverTools.strictToRange(maximum, lowerBound, upperBound);
-    }
-
-    /**
-     * Returns the maximum of a {@link GeneralFunction} function on a specified range (endpoints included)
-     * @param function The {@link GeneralFunction} whose maximum is being found
-     * @param lowerBound The lower bound of the range
-     * @param upperBound The upper bound of the range
-     * @return the maximum of function on the specified range
-     */
-    public static double findMaximumOnRange(GeneralFunction function, double lowerBound, double upperBound) {
-        double maximum = findLocalMaximum(function, lowerBound, upperBound);
-        return findExtremumOnRange(function, lowerBound, upperBound, (a, b) -> (a > b), maximum);
     }
 
     /**
@@ -64,6 +52,18 @@ public class Extrema {
     public static double findMinimumOnRange(GeneralFunction function, double lowerBound, double upperBound) {
         double minimum = findLocalMinimum(function, lowerBound, upperBound);
         return findExtremumOnRange(function, lowerBound, upperBound, (a, b) -> (a < b), minimum);
+    }
+
+    /**
+     * Returns the maximum of a {@link GeneralFunction} function on a specified range (endpoints included)
+     * @param function The {@link GeneralFunction} whose maximum is being found
+     * @param lowerBound The lower bound of the range
+     * @param upperBound The upper bound of the range
+     * @return the maximum of function on the specified range
+     */
+    public static double findMaximumOnRange(GeneralFunction function, double lowerBound, double upperBound) {
+        double maximum = findLocalMaximum(function, lowerBound, upperBound);
+        return findExtremumOnRange(function, lowerBound, upperBound, (a, b) -> (a > b), maximum);
     }
 
     private static double findExtremumOnRange(GeneralFunction function, double lowerBound, double upperBound, BiPredicate<? super Double, ? super Double> strategy, double extremum) {
@@ -79,35 +79,35 @@ public class Extrema {
     }
 
     /**
-     * Returns any minima of a {@link GeneralFunction} function on a specified range
-     * @param function The {@link GeneralFunction} whose minima is being found
+     * Returns the local minima of a {@link GeneralFunction} function on a specified range
+     * @param function The {@link GeneralFunction} whose minima are being found
      * @param lowerBound The lower bound of the range
      * @param upperBound The upper bound of the range
      * @return any minima of function on the specified range
      */
-    public static List<Double> findAnyMinima(GeneralFunction function, double lowerBound, double upperBound) {
+    public static List<Double> findLocalMinima(GeneralFunction function, double lowerBound, double upperBound) {
         return findPoints(function, lowerBound, upperBound, (a, b) -> (a > b));
     }
 
     /**
-     * Returns any maxima of a {@link GeneralFunction} function on a specified range
-     * @param function The {@link GeneralFunction} whose maxima is being found
+     * Returns the local maxima of a {@link GeneralFunction} function on a specified range
+     * @param function The {@link GeneralFunction} whose maxima are being found
      * @param lowerBound The lower bound of the range
      * @param upperBound The upper bound of the range
      * @return any maxima of function on the specified range
      */
-    public static List<Double> findAnyMaxima(GeneralFunction function, double lowerBound, double upperBound) {
+    public static List<Double> findLocalMaxima(GeneralFunction function, double lowerBound, double upperBound) {
        return findPoints(function, lowerBound, upperBound, (a, b) -> (a < b));
     }
 
     /**
-     * Returns any inflection point of a {@link GeneralFunction} function on a specified range
+     * Returns the inflection points of a {@link GeneralFunction} function on a specified range
      * @param function The {@link GeneralFunction} whose inflection points are being found
      * @param lowerBound The lower bound of the range
      * @param upperBound The upper bound of the range
-     * @return any inflection point of function on the specified range
+     * @return the inflection points of function on the specified range
      */
-    public static List<Double> findAnyInflectionPoints(GeneralFunction function, double lowerBound, double upperBound) {
+    public static List<Double> findInflectionPoints(GeneralFunction function, double lowerBound, double upperBound) {
         return findPoints(function, lowerBound, upperBound, (a, b) -> (Math.abs(a - b) < Settings.zeroMargin));
     }
 

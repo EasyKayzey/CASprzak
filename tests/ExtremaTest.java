@@ -29,19 +29,19 @@ public class ExtremaTest {
     @Test
     void simpleHighOrderMinima() {
         GeneralFunction test = FunctionParser.parseInfix("(x-1)^4");
-        assertArrayEquals(new double[]{1}, Extrema.findAnyMinima(test, -5.87329472, 5.023954780232345).stream().mapToDouble(i -> i).toArray(), 0.01);
+        assertArrayEquals(new double[]{1}, Extrema.findLocalMinima(test, -5.87329472, 5.023954780232345).stream().mapToDouble(i -> i).toArray(), 0.01);
     }
 
     @Test
     void simpleInflection() {
         GeneralFunction test = FunctionParser.parseInfix("x^3");
-        assertArrayEquals(new double[]{0}, Extrema.findAnyInflectionPoints(test, -5.87329472, 5.023954780232345).stream().mapToDouble(i -> i).toArray());
+        assertArrayEquals(new double[]{0}, Extrema.findInflectionPoints(test, -5.87329472, 5.023954780232345).stream().mapToDouble(i -> i).toArray());
     }
 
     @Test
     void simpleInflectionWithNoInflection() {
         GeneralFunction test = FunctionParser.parseInfix("x^2");
-        assertArrayEquals(new double[]{}, Extrema.findAnyInflectionPoints(test, -5.01238941, 7.80293154).stream().mapToDouble(i -> i).toArray());
+        assertArrayEquals(new double[]{}, Extrema.findInflectionPoints(test, -5.01238941, 7.80293154).stream().mapToDouble(i -> i).toArray());
     }
 
     @Test
@@ -53,13 +53,13 @@ public class ExtremaTest {
     @Test
     void simpleFindAnyMinima() {
         GeneralFunction test = FunctionParser.parseInfix("x^{4}-3x^{3}+2x^{2}+x+1");
-        assertArrayEquals(new double[]{-.175, 1.425}, Extrema.findAnyMinima(test, -6.30457892, 7.2543525).stream().mapToDouble(i -> i).toArray(), 0.01);
+        assertArrayEquals(new double[]{-.175, 1.425}, Extrema.findLocalMinima(test, -6.30457892, 7.2543525).stream().mapToDouble(i -> i).toArray(), 0.01);
     }
 
     @Test
     void simpleFindAnyMaxima() {
         GeneralFunction test = FunctionParser.parseInfix("x^{4}-3x^{3}+2x^{2}+x+1");
-        assertArrayEquals(new double[]{1}, Extrema.findAnyMaxima(test, -6.30457892, 7.2543525).stream().mapToDouble(i -> i).toArray(), .01);
+        assertArrayEquals(new double[]{1}, Extrema.findLocalMaxima(test, -6.30457892, 7.2543525).stream().mapToDouble(i -> i).toArray(), .01);
     }
 
     @Test

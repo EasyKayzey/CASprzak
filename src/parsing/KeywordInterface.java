@@ -336,8 +336,8 @@ public class KeywordInterface {
 			case "pf", "printfun", "printfunctions"                     			-> "printfun";
 			case "pc", "printc", "printconstants"                       			-> "printconstants";
 			case "clearfun", "clearfunctions"                           			-> "clearfun";
-			case "ss", "sset", "sets", "setsetting"                     			-> "setsetting [setting] [value]";
-			case "ps", "settings", "printsettings"                      			-> "setting";
+			case "ss", "sets", "setsetting"                    			 			-> "setsetting [setting] [value]";
+			case "ps", "prints", "printsettings"                    	  			-> "prints";
 			case "int", "integral"                                      			-> "integral [function] d[variable]";
 			default -> throw new IllegalArgumentException("Invalid keyword: " + input);
 		};
@@ -358,13 +358,14 @@ public class KeywordInterface {
 				tay, taylor:                                       takes a taylor series
 				sol, solve:                                        solves for roots
 				ext, extrema:                                      finds extrema
-				ss, sset, sets, setsetting:                        sets a setting
 				def, deffunction:                                  defines a function
 				defcon, defconstant:                               defines a constant
 				rmf, rmfun, removefun, removefunction:             removes a function
 				rmc, rmconstant, removeconstant:                   removes a constant
 				pf, printfun, printfunctions:                      prints all stored functions
 				pc, printc, printconstants:                        prints all stored constants
+				ss, sets, setsetting:                        	   sets a setting
+				ps, prints, printsettings:						   prints all settings
 				clearfun, clearfunctions:                          clears functions
 				""";
 	}

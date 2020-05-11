@@ -54,8 +54,8 @@ public class KeywordInterface {
 			case "defc", "defcon", "defconstant"								-> defineConstant(splitInput[1]);
 			case "rmf", "rmfun", "removefun", "removefunction"					-> removeFunction(splitInput[1]);
 			case "rmc", "rmconstant", "removeconstant"							-> removeConstant(splitInput[1]);
-			case "pf", "printfun", "printfunctions"								-> printFunctions();
-			case "pc", "printc", "printconstants"								-> printConstants();
+			case "pf", "printfun", "printfunctions"								-> getFunctions();
+			case "pc", "printc", "printconstants"								-> getConstants();
 			case "clearfun", "clearfunctions"									-> clearFunctions();
 			case "ss", "sset", "sets", "setsetting"								-> setSettings(splitInput[1]);
 			case "ps", "settings", "printsettings"								-> printSettings();
@@ -221,9 +221,8 @@ public class KeywordInterface {
 	/**
 	 * rmfun [functionname]
 	 */
-	private static Object removeFunction(String input) {
-		storedFunctions.remove(input);
-		return String.valueOf(storedFunctions);
+	private static GeneralFunction removeFunction(String input) {
+		return storedFunctions.remove(input);
 	}
 
 	/**
@@ -236,24 +235,24 @@ public class KeywordInterface {
 	/**
 	 * printfun
 	 */
-	public static String printFunctions() {
-		return String.valueOf(storedFunctions);
+	public static Map<String, GeneralFunction> getFunctions() {
+		return storedFunctions;
 	}
 
 	/**
 	 * printconstants
 	 */
 	@SuppressWarnings("SameReturnValue")
-	private static String printConstants() { //TODO maybe replace all print___ functions with get___ and have them have flexible return types
-		return String.valueOf(Constant.specialConstants);
+	private static Map<String, Double> getConstants() {
+		return Constant.specialConstants;
 	}
 
 	/**
 	 * clearfun
 	 */
-	public static String clearFunctions() {
+	public static Map<String, GeneralFunction> clearFunctions() {
 		storedFunctions.clear();
-		return String.valueOf(storedFunctions);
+		return storedFunctions;
 	}
 
 	/**

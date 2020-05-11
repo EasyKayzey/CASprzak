@@ -14,6 +14,7 @@ public class CASDemo {
 		SIMP,
 		VAR,
 		SUB,
+		SA,
 		PD,
 		TAY,
 		INT,
@@ -21,6 +22,7 @@ public class CASDemo {
 		SOL,
 		EXT,
 		SET,
+		LATEX,
 		END,
 		EXIT,
 	}
@@ -39,13 +41,13 @@ public class CASDemo {
 
 	private static void runState() {
 		switch (currentState) {
-			case EXIT -> exit();
 			case INTRO -> intro();
 			case EVAL -> eval();
 			case DEF -> def();
 			case SIMP -> simp();
 			case VAR -> var();
 			case SUB -> sub();
+			case SA -> sa();
 			case PD -> pd();
 			case TAY -> tay();
 			case INT -> ints();
@@ -53,7 +55,9 @@ public class CASDemo {
 			case SOL -> sol();
 			case EXT -> ext();
 			case SET -> set();
+			case LATEX -> latex();
 			case END -> end();
+			case EXIT -> exit();
 		}
 	}
 
@@ -249,6 +253,10 @@ public class CASDemo {
 		currentState = DemoState.PD;
 	}
 
+	private static void sa() {
+
+	}
+
 	private static void pd() {
 		System.out.println("Another feature of this CAS is its ability to compute the partial derivative of any function.");
 		sleep(1.5);
@@ -404,6 +412,10 @@ public class CASDemo {
 		currentState = DemoState.END;
 	}
 
+	private static void latex() {
+
+	}
+
 	private static void end() {
 		System.out.println("Thank you for completing the demo.");
 		sleep(1.5);
@@ -413,7 +425,7 @@ public class CASDemo {
 		sleep(1.5);
 		System.out.println("Continue testing in the demo, or type 'next' to return to the main command-line interface.");
 		runTillNext();
-		currentState = DemoState.EXIT; // TODO add a section about LaTeX
+		currentState = DemoState.EXIT;
 	}
 }
 

@@ -12,7 +12,7 @@ public abstract class AbstractMutablePair<T, U> extends AbstractPair<T, U> {
 
 	/**
 	 * Sets the second item in the pair and returns the old value
-	 * @param second the future value of the first item
+	 * @param second the future value of the second item
 	 * @return the old value of the second item
 	 */
 	public abstract U setSecond(U second);

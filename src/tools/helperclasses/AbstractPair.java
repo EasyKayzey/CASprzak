@@ -14,6 +14,10 @@ public abstract class AbstractPair<T, U> {
 	 */
 	public abstract U getSecond();
 
+	/**
+	 * Returns the toString of the pair in the form {@code <first, second>}
+	 * @return the toString as specified
+	 */
 	public String toString() {
 		return "<" + getFirst() + ", " + getSecond() + ">";
 	}

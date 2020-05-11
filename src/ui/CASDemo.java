@@ -110,10 +110,9 @@ public class CASDemo {
 			}
 		}
 	}
-	
-	@SuppressWarnings("UnnecessaryReturnStatement")
+
 	private static void exit() {
-		return;
+		currentState = DemoState.EXIT;
 	}
 
 	private static void intro() {
@@ -398,6 +397,7 @@ public class CASDemo {
 		currentState = DemoState.EXT;
 	}
 
+	@SuppressWarnings("SpellCheckingInspection")
 	private static void ext() {
 		System.out.println("With the ability to solve for zeros, we can now find extrema of functions.");
 		sleep(1.5);
@@ -422,6 +422,7 @@ public class CASDemo {
 		currentState = DemoState.SET;
 	}
 
+	@SuppressWarnings("SpellCheckingInspection")
 	private static void set() {
 		System.out.println("Finally, we will show you how to view or modify settings.");
 		sleep(1.5);

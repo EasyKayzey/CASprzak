@@ -198,6 +198,7 @@ public class KeywordInterface {
 		return Constant.removeSpecialConstant(input);
 	}
 
+	@SuppressWarnings("SameReturnValue")
 	public static Map<String, GeneralFunction> getFunctions() {
 		return storedFunctions;
 	}
@@ -211,6 +212,7 @@ public class KeywordInterface {
 		return Constant.specialConstants;
 	}
 
+	@SuppressWarnings("SameReturnValue")
 	public static Map<String, GeneralFunction> clearFunctions() {
 		storedFunctions.clear();
 		return storedFunctions;
@@ -303,6 +305,7 @@ public class KeywordInterface {
 		};
 	}
 
+	@SuppressWarnings("SameReturnValue")
 	private static String help() {
 		return """
 				demo:                                              runs the demo

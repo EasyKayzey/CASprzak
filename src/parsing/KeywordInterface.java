@@ -6,6 +6,7 @@ import functions.GeneralFunction;
 import functions.special.Constant;
 import functions.unitary.transforms.Integral;
 import tools.ParsingTools;
+import tools.exceptions.TransformFailedException;
 import tools.singlevariable.Extrema;
 import tools.singlevariable.NumericalIntegration;
 import tools.singlevariable.Solver;
@@ -252,7 +253,13 @@ public class KeywordInterface {
 
 	private static GeneralFunction integral(String input) {
 		String[] splitInput = keywordSplitter.split(input);
-		return new Integral(parseStored(splitInput[0]), splitInput[1].charAt(1)).execute();
+		Integral integral = new Integral(parseStored(splitInput[0]), splitInput[1].charAt(1));
+		try {
+			return integral.execute();
+		} catch (TransformFailedException e) {
+			System.out.println("Integration failed: " + e.toString());
+			return integral;
+		}
 	}
 
 	private static String help(String input) {

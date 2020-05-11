@@ -2,6 +2,7 @@ package functions.unitary.transforms;
 
 import functions.GeneralFunction;
 import functions.unitary.UnitaryFunction;
+import tools.exceptions.IntegrationFailedException;
 import tools.integration.StageOne;
 import tools.singlevariable.NumericalIntegration;
 
@@ -89,7 +90,7 @@ public class Integral extends TransformFunction {
 	 * Returns the Integral of the integrand if it can be found.
 	 * @return the Integral of the integrand
 	 */
-	public GeneralFunction execute() {
+	public GeneralFunction execute() throws IntegrationFailedException {
 		return StageOne.derivativeDivides(operand, respectTo).simplify();
 	}
 }

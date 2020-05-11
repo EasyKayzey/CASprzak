@@ -5,9 +5,9 @@ import parsing.KeywordInterface;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class CommandUI {
+public class CommandUI extends KeywordInterface {
 	/**
-	 * Runs {@link KeywordInterface#useKeywords} on user input
+	 * Runs {@link #useKeywords} on user input
 	 * @param args default main arguments
 	 */
 	public static void main(String[] args) {
@@ -23,7 +23,7 @@ public class CommandUI {
 				flag = false;
 			else {
 				try {
-					output(KeywordInterface.useKeywords(input));
+					output(useKeywords(input));
 				} catch (RuntimeException e) {
 					System.out.println(e.toString());
 				}

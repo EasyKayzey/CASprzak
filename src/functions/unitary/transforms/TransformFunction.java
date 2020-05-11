@@ -3,6 +3,7 @@ package functions.unitary.transforms;
 import config.Settings;
 import functions.GeneralFunction;
 import functions.unitary.UnitaryFunction;
+import tools.exceptions.TransformFailedException;
 
 public abstract class TransformFunction extends UnitaryFunction {
 	/**
@@ -23,7 +24,11 @@ public abstract class TransformFunction extends UnitaryFunction {
 	@Override
 	public GeneralFunction simplify() {
 		if (Settings.executeOnSimplify)
-			return execute();
+			try {
+				return execute();
+			} catch (TransformFailedException ignored) {
+				return simplifyInternal();
+			}
 		else
 			return simplifyInternal();
 	}
@@ -31,9 +36,10 @@ public abstract class TransformFunction extends UnitaryFunction {
 	/**
 	 * Returns the transformation of the {@link UnitaryFunction#operand}
 	 * @return The the transformation of the {@link UnitaryFunction#operand}
+	 * @throws TransformFailedException if the transform did not succeed
 	 */
 	@SuppressWarnings("unused")
-	public abstract GeneralFunction execute();
+	public abstract GeneralFunction execute() throws TransformFailedException;
 
 	/**
 	 * Returns the variable that this transform works with respect to

@@ -62,17 +62,17 @@ public class Settings {
 	public static double equalsMargin;
 
 	/**
-	 * Denotes whether or not expressions like sin(pi/2) must be escaped to \sin(\pi/2). Enabling this will significantly reduce issues.
+	 * Denotes whether or not expressions like {@code sin(pi/2)} must be escaped to {@code \sin(\pi/2)}. Enabling this will significantly reduce issues.
 	 */
 	public static boolean enforceEscapes;
 
 	/**
-	 * Denotes whether functions of constants should be simplified, e.g. \sin(\pi/2) becomes 1
+	 * Denotes whether functions of constants should be simplified, e.g. {@code \sin(\pi/2)} becomes {@code 1}
 	 */
 	public static boolean simplifyFunctionsOfConstants;
 
 	/**
-	 * Denotes whether exponents should be distributed over multiplication in a normal simplify(), e.g. (2x)^2 becomes 4x^2
+	 * Denotes whether exponents should be distributed over multiplication in a normal simplify(), e.g. {@code (2x)^2} becomes {@code 4x^2}
 	 */
 	public static boolean distributeExponents;
 
@@ -97,7 +97,7 @@ public class Settings {
 	public static boolean executeOnSimplify;
 
 	/**
-	 * Denotes whether expressions are distributed over sum when called in simplify(), e.g. x(y+z) becomes (xy+xz)
+	 * Denotes whether expressions are distributed over sum when called in simplify(), e.g. {@code x(y+z)} becomes {@code (xy+xz)}
 	 */
 	public static boolean distributeFunctions;
 

@@ -27,8 +27,8 @@ public class CASDemo {
 		EXIT,
 	}
 
-	public static DemoState currentState = DemoState.INTRO;
-	protected static Scanner scanner;
+	private static DemoState currentState = DemoState.INTRO;
+	private static Scanner scanner;
 
 	@SuppressWarnings("SameReturnValue")
 	public static String runDemo() {

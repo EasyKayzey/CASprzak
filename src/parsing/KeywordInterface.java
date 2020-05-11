@@ -61,7 +61,7 @@ public class KeywordInterface {
 			case "ss", "sset", "sets", "setsetting"								-> setSettings(splitInput[1]);
 			case "ps", "settings", "printsettings"								-> printSettings();
 			case "int", "integral"												-> integral(splitInput[1]);
-			case "help"															-> splitInput.length == 1 ? helpNoInput() : helpWithInput(splitInput[1]);
+			case "help"															-> splitInput.length == 1 ? help() : help(splitInput[1]);
 			default 															-> null;
 		};
 		if (ret == null) {
@@ -320,7 +320,7 @@ public class KeywordInterface {
 		return new Integral(parseStored(splitInput[0]), splitInput[1].charAt(1)).execute();
 	}
 
-	private static String helpWithInput(String input) {//TODO finish this
+	private static String help(String input) {//TODO finish this
 		return switch (input) {
 			case "demo"																-> "demo";
 			case "pd", "pdiff", "partial", "pdifferentiate"             			-> "pd [variable] [function]";
@@ -348,7 +348,7 @@ public class KeywordInterface {
 		};
 	}
 
-	private static String helpNoInput() {
+	private static String help() {
 		return """
 				demo:                                              runs the demo
                 eval, evaluate:                                    evaluates

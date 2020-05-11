@@ -45,7 +45,7 @@ public class KeywordInterface {
 			case "eval", "evaluate"												-> evaluate(splitInput[1]);
 			case "simp", "simplify"												-> simplify(splitInput[1]);
 			case "sub", "substitute"											-> substitute(splitInput[1]);
-			case "sa", "suball"													-> substituteAllInput(splitInput[1]);
+			case "sa", "suball"													-> substituteAllInput(splitInput[1]);//TODO fix, check discord
 			case "sol", "solve"													-> solve(splitInput[1]);
 			case "ext", "extrema"												-> extrema(splitInput[1]);
 			case "tay", "taylor"												-> taylor(splitInput[1]);

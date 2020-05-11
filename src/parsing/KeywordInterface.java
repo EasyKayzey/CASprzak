@@ -320,7 +320,7 @@ public class KeywordInterface {
 		return new Integral(parseStored(splitInput[0]), splitInput[1].charAt(1)).execute();
 	}
 
-	private static String help(String input) {//TODO finish this
+	private static String help(String input) {
 		return switch (input) {
 			case "demo"																-> "Runs the demo.\n" +
 					"demo";

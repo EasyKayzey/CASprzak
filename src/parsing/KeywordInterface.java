@@ -45,6 +45,7 @@ public class KeywordInterface {
 			case "eval", "evaluate"												-> evaluate(splitInput[1]);
 			case "simp", "simplify"												-> simplify(splitInput[1]);
 			case "sub", "substitute"											-> substitute(splitInput[1]);
+			case "sa", "suball"													-> substituteAllInput(splitInput[1]);
 			case "sol", "solve"													-> solve(splitInput[1]);
 			case "ext", "extrema"												-> extrema(splitInput[1]);
 			case "tay", "taylor"												-> taylor(splitInput[1]);
@@ -160,6 +161,13 @@ public class KeywordInterface {
 	public static GeneralFunction substitute(String input) {
 		String[] splitInput = keywordSplitter.split(input);
 		return parseStored(splitInput[0]).substituteVariable(ParsingTools.getCharacter(splitInput[1]), parseStored(splitInput[2]));
+	}
+
+	/**
+	 * sa [function]
+	 */
+	public static GeneralFunction substituteAllInput(String input) {
+		return substituteAll(parseStored(input));
 	}
 
 	/**

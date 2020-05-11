@@ -43,7 +43,6 @@ public class Ln extends SpecialCaseBinaryFunction {
 	}
 
 
-	@SuppressWarnings("ChainOfInstanceofChecks")
 	@Override
 	public GeneralFunction simplifyInverse() {
 		if (operand instanceof Pow pow)

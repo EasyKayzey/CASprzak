@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 
 @SuppressWarnings("SpellCheckingInspection")
 public class KeywordInterface {
-	public static final Pattern keywordSplitter = Pattern.compile("\\s+(?=[^']*('[^']*'[^']*)*$)");
+	public static final Pattern keywordSplitter = Pattern.compile("\\s+(?=[^\"]*(\"[^\"]*\"[^\"]*)*$)");
 	public static final Pattern spaces = Pattern.compile("\\s+");
 	public static final Pattern equals = Pattern.compile("=");
 	public static final HashMap<String, GeneralFunction> storedFunctions = new HashMap<>();
@@ -111,7 +111,7 @@ public class KeywordInterface {
 	private static String stripQuotes(String input) {
 		if (input.charAt(0) == '"' && input.charAt(input.length() - 1) == '"') {
 			String stripped = input.substring(1, input.length() - 1);
-			if (!stripped.contains("'"))
+			if (!stripped.contains("\""))
 				return stripped;
 		}
 		return input;

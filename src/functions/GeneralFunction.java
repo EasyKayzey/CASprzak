@@ -47,10 +47,6 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 	 */
 	protected final HashMap<Character, GeneralFunction> derivatives = new HashMap<>();
 
-	private GeneralFunction() {
-
-	}
-
 	/**
 	 * Returns a String representation of this GeneralFunction
 	 * @return String representation of this function

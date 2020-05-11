@@ -395,13 +395,13 @@ public class CASDemo {
 	private static void set() {
 		System.out.println("Finally, we will show you how to view or modify settings.");
 		sleep(1.5);
-		System.out.println("Type in 'settings' to see all current settings.");
-		if (!tryInput("settings"::equals, "Type in 'settings' to see the settings."))
+		System.out.println("Type in 'printsettings' or 'ps' to see all current settings.");
+		if (!tryInput(s -> "printsettings".equals(s) || "ps".equals(s), "Type in 'settings' to see the settings."))
 			return;
 		sleep(1.5);
 		System.out.println("These are all the current settings.");
 		sleep(1.5);
-		System.out.println("If you want to change a setting, use 'setsetting [setting] [value]'.");
+		System.out.println("If you want to change a setting, use 'setsetting [setting] [value]', or the shortcut 'ss'.");
 		sleep(1.5);
 		System.out.println("As you saw, there are a lot of settings. If you want to learn what a setting does, we recommend reading our documentation.");
 		sleep(1.5);
@@ -409,11 +409,23 @@ public class CASDemo {
 		sleep(1.5);
 		System.out.println("Continue testing this feature, or type 'next' to continue.");
 		runTillNext();
-		currentState = DemoState.END;
+		currentState = DemoState.LATEX;
 	}
 
 	private static void latex() {
-
+		System.out.println("The custom parser used by this CAS internally operates on a system with formatting modeled after LaTeX.");
+		sleep(1.5);
+		System.out.println("In some edge cases, the parser may have difficulty converting raw input to this LaTeX-like form, resulting in an 'unsupported' error.");
+		sleep(1.5);
+		System.out.println("If you are familiar with LaTeX, it is highly recommended you enable the setting 'enforceEscapes' both in the runtime settings (with 'ss') and in 'config/cas.properties'.");
+		sleep(1.5);
+		System.out.println("This setting will disable the raw-to-LaTeX conversion, increasing both performance and consistency.");
+		sleep(1.5);
+		System.out.println("Using this feature requires all input to be LaTeX-escaped, so expressions like 'sin(pi*x)' should be written '\\sin(\\pi*x)'.");
+		sleep(1.5);
+		System.out.println("If you would like to enable this feature now, you may do so using 'ss enforceEscapes true' and then test the new functionality. Type 'next' to continue.");
+		runTillNext();
+		currentState = DemoState.END;
 	}
 
 	private static void end() {

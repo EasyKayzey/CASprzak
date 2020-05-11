@@ -336,26 +336,26 @@ public class KeywordInterface {
 
 	private static String helpNoInput() {
 		return """
-				demo:                                                               runs the demo
-                eval, evaluate:                                                     evaluates
-				simp, simplify:                                                     simplifies
-				sub, substitute: 													substitutes
-				pd, pdiff, partial, pdifferentiate:     							takes the partial derivative
-				pdn pdiffn partialn pdifferentiaten:                                takes the partial derivative n times
-				int, integral:                                                      integrates a function
-				intn, intnumeric:                                                   performs numerical integration
-				intne, intnumericerror:                                             performs numerical integration with error
-				tay, taylor:                                                        takes a taylor series
-				sol, solve:                                                         solves for roots
-				ext, extrema:                                                       finds extrema
-				ss, sset, sets, setsetting:                                         sets a setting
-				def, deffunction:                                                   defines a function
-				defcon, defconstant:                                                defines a constant
-				rmf, rmfun, removefun, removefunction:                              removes a function
-				rmc, rmconstant, removeconstant:                                    removes a constant
-				pf, printfun, printfunctions:                                       prints all stored functions
-				pc, printc, printconstants:                                         prints all stored constants
-				clearfun, clearfunctions:                                           clears functions
+				demo:                                              runs the demo
+                eval, evaluate:                                    evaluates
+				simp, simplify:                                    simplifies
+				sub, substitute: 								   substitutes
+				pd, pdiff, partial, pdifferentiate:				   takes the partial derivative
+				pdn pdiffn partialn pdifferentiaten:               takes the partial derivative n times
+				int, integral:                                     integrates a function
+				intn, intnumeric:                                  performs numerical integration
+				intne, intnumericerror:                            performs numerical integration with error
+				tay, taylor:                                       takes a taylor series
+				sol, solve:                                        solves for roots
+				ext, extrema:                                      finds extrema
+				ss, sset, sets, setsetting:                        sets a setting
+				def, deffunction:                                  defines a function
+				defcon, defconstant:                               defines a constant
+				rmf, rmfun, removefun, removefunction:             removes a function
+				rmc, rmconstant, removeconstant:                   removes a constant
+				pf, printfun, printfunctions:                      prints all stored functions
+				pc, printc, printconstants:                        prints all stored constants
+				clearfun, clearfunctions:                          clears functions
 				""";
 	}
 }

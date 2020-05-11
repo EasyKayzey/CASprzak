@@ -19,8 +19,6 @@ public class LatexTest {
 	@Test
 	void testVar() {
 		GeneralFunction test = FunctionParser.parseInfix("\\pi\\Gamma");
-		System.out.println(test);
-		System.out.println(Map.of(ParsingTools.getCharacter("\\Gamma"), 3.2));
 		assertEquals(10, test.evaluate(Map.of(ParsingTools.getCharacter("\\Gamma"), 3.2)), .3);
 	}
 

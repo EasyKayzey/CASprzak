@@ -72,7 +72,7 @@ public class KeywordInterface {
 				prev = Constant.getSpecialConstant(input);
 				return prev;
 			} else try {
-				 prev = substituteAll(FunctionParser.parseInfix(input));
+				 prev = FunctionParser.parseInfix(input);
 				 return prev;
 			} catch (Exception ignored) {
 				throw new IllegalArgumentException(splitInput[0] + " is not supported by KeywordInterface");

@@ -2,6 +2,7 @@ package tools.singlevariable;
 
 import config.Settings;
 import functions.GeneralFunction;
+import tools.SolverTools;
 import tools.VariableTools;
 
 import java.util.ArrayList;
@@ -24,10 +25,7 @@ public class Extrema {
     public static double findLocalMinimum(GeneralFunction function, double lowerBound, double upperBound) {
        List<Double> secondDerivativeIsPositive = findPoints(function, lowerBound, upperBound, (a, b) -> (a > b));
         double minimum = findSmallestOrLargest(function, secondDerivativeIsPositive, (a, b) -> (a < b));
-        if (minimum > upperBound || minimum < lowerBound)
-            return Double.NaN;
-        else
-            return minimum;
+        return SolverTools.strictToRange(minimum, lowerBound, upperBound);
     }
 
 
@@ -41,10 +39,7 @@ public class Extrema {
     public static double findLocalMaximum(GeneralFunction function, double lowerBound, double upperBound) {
         List<Double> secondDerivativeIsNegative = findPoints(function, lowerBound, upperBound, (a, b) -> (a < b));
         double maximum = findSmallestOrLargest(function, secondDerivativeIsNegative, (a, b) -> (a > b));
-        if (maximum > upperBound || maximum < lowerBound)
-            return Double.NaN;
-        else
-           return maximum;
+        return SolverTools.strictToRange(maximum, lowerBound, upperBound);
     }
 
     /**

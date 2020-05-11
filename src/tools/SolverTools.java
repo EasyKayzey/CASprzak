@@ -60,4 +60,19 @@ public class SolverTools {
 				iter.remove();
 		}
 	}
+
+
+	/**
+	 * Returns [value] if it is in the range, and NaN otherwise
+	 * @param value the value to be checked
+	 * @param lowerBound the lower bound of the range
+	 * @param upperBound the upper bound of the range
+	 * @return [value] if it is the range, and NaN otherwise
+	 */
+	public static double strictToRange(double value, double lowerBound, double upperBound) {
+		if (value > upperBound || value < lowerBound)
+			return Double.NaN;
+		else
+			return value;
+	}
 }

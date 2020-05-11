@@ -55,7 +55,7 @@ public class KeywordInterface {
 			case "defc", "defcon", "defconstant"								-> defineConstant(splitInput[1]);
 			case "rmf", "rmfun", "removefun", "removefunction"					-> removeFunction(splitInput[1]);
 			case "rmc", "rmconstant", "removeconstant"							-> removeConstant(splitInput[1]);
-			case "pf", "printfun", "printfunctions"								-> splitInput.length == 1 ? getFunctions() : getFunction(splitInput[1]);
+			case "pf", "printfun", "printfunction", "printfunctions"			-> splitInput.length == 1 ? getFunctions() : getFunction(splitInput[1]);
 			case "pc", "printc", "printconstants"								-> getConstants();
 			case "clearfun", "clearfunctions"									-> clearFunctions();
 			case "ss", "sset", "sets", "setsetting"								-> setSettings(splitInput[1]);

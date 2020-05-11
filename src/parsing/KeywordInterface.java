@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 
 @SuppressWarnings("SpellCheckingInspection")
 public class KeywordInterface {
-	public static final Pattern keywordSplitter = Pattern.compile("\\s+(?=[^\"]*(\"[^\"]*\"[^\"]*)*$)");
+	public static final Pattern keywordSplitter = Pattern.compile("\\s+(?=[^']*('[^']*'[^']*)*$)");
 	public static final Pattern spaces = Pattern.compile("\\s+");
 	public static final Pattern equals = Pattern.compile("=");
 	public static final HashMap<String, GeneralFunction> storedFunctions = new HashMap<>();
@@ -111,7 +111,7 @@ public class KeywordInterface {
 	private static String stripQuotes(String input) {
 		if (input.charAt(0) == '"' && input.charAt(input.length() - 1) == '"') {
 			String stripped = input.substring(1, input.length() - 1);
-			if (!stripped.contains("\""))
+			if (!stripped.contains("'"))
 				return stripped;
 		}
 		return input;
@@ -192,7 +192,7 @@ public class KeywordInterface {
 	}
 
 	/**
-	 * tay [function] [terms] [center]
+	 * tay [function] [degree] [center]
 	 */
 	public static GeneralFunction taylor(String input) {
 		String[] splitInput = keywordSplitter.split(input);
@@ -322,28 +322,50 @@ public class KeywordInterface {
 
 	private static String help(String input) {//TODO finish this
 		return switch (input) {
-			case "demo"																-> "demo";
-			case "pd", "pdiff", "partial", "pdifferentiate"             			-> "pd [variable] [function]";
-			case "pdn", "pdiffn", "partialn", "pdifferentiaten"         			-> "pdn [variable] [times] [function]";
-			case "eval", "evaluate"                                     			-> "eval [function] [var=val]*";
-			case "simp", "simplify"                                     			-> "simp [function]";
-			case "sub", "substitute"                                    			-> "sub [function] [variable] [replacementfunction]";
-			case "sa", "suball"														-> "sa [function]";
-			case "sol", "solve"                                         			-> "sol [function] [startrange] [endrange]";
-			case "ext", "extrema"                                       			-> "ext [\"min(ima)\"/\"max(ima)\"/\"anymin(ima)\"/\"anymax(ima)\"/\"inflect(ion)\"] [function] [startrange] [endrange]";
-			case "tay", "taylor"                                        			-> "tay [function] [terms] [center]";
-			case "intn", "intnumeric"                                   			-> "intn [function] [startvalue] [endvalue]";
-			case "intne", "intnumericerror"                             			-> "intne [function] [startvalue] [endvalue]";
-			case "def", "deffunction"    											-> "sto [locationstring] [input]";
-			case "defc", "defcon", "defconstant" 									-> "defc [constantstring] [value]";
-			case "rmf", "rmfun", "removefun", "removefunction"          			-> "rmf [functionname]";
-			case "rmc", "rmconstant", "removeconstant"                  			-> "rmc [constantstring]";
-			case "pf", "printfun", "printfunctions"                     			-> "printfun";
-			case "pc", "printc", "printconstants"                       			-> "printconstants";
-			case "clearfun", "clearfunctions"                           			-> "clearfun";
-			case "ss", "sets", "setsetting"                    			 			-> "setsetting [setting] [value]";
-			case "ps", "prints", "printsettings"                    	  			-> "prints";
-			case "int", "integral"                                      			-> "integral [function] d[variable]";
+			case "demo"																-> "Runs the demo.\n" +
+					"demo";
+			case "pd", "pdiff", "partial", "pdifferentiate"             			-> "Returns the partial derivative of [function] with respect to [variable].\n" +
+					"pd [variable] [function]";
+			case "pdn", "pdiffn", "partialn", "pdifferentiaten"         			-> "Executes 'pd' [times] times.\n" +
+					"pdn [variable] [times] [function]";
+			case "eval", "evaluate"                                     			-> "Evaluates [function] at the values specified.\n" +
+					"eval [function] [var=val]*";
+			case "simp", "simplify"                                     			-> "Simplifies [function].\n" +
+					"simp [function]";
+			case "sub", "substitute"                                    			-> "Substitutes [replacementfunction] into every instance of [variable] in [function].\n" +
+					"sub [function] [variable] [replacementfunction]";
+			case "sa", "suball"														-> "Substites every pre-defined function into [function] in accordance with its name.\n" +
+					"sa [function]";
+			case "sol", "solve"                                         			-> "Solves [function] in one variable on a range.\n" +
+					"sol [function] [startrange] [endrange]";
+			case "ext", "extrema"                                       			-> "Finds the specified extrema of [function] on a range. 'min'/'max' return one coordinate, and 'anymin'/'anymax'/'inflect' return a list of coordinates.\n" +
+					"ext ['min(ima)'/'max(ima)'/'anymin(ima)'/'anymax(ima)'/'inflect(ion)'] [function] [startrange] [endrange]";
+			case "tay", "taylor"                                        			-> "Find the [degree]-degree taylor series of [function] around [center].\n" +
+					"tay [function] [degree] [center]";
+			case "intn", "intnumeric"                                   			-> "Integrates [function] numerically on a range.\n" +
+					"intn [function] [startvalue] [endvalue]";
+			case "intne", "intnumericerror"                             			-> "Integrates [function] numerically on a range, returning an array whose first value is the result, and whose second value is the maximum error of the approximation.\n" +
+					"intne [function] [startvalue] [endvalue]";
+			case "def", "deffunction"    											-> "Defines a function with name [name] to be [value]. [name] can be a LaTeX-escaped Greek letter.\n" +
+					"def [name] [value]";
+			case "defc", "defcon", "defconstant" 									-> "Defines a constant with name [name] to be [value]. [name] can be a LaTeX-escaped Greek letter.\n" +
+					"defc [name] [value]";
+			case "rmf", "rmfun", "removefun", "removefunction"          			-> "Removes a defined function.\n" +
+					"rmf [name]";
+			case "rmc", "rmconstant", "removeconstant"                  			-> "Removes a defined constant.\n" +
+					"rmc [name]";
+			case "pf", "printfun", "printfunctions"                     			-> "Prints the list of functions, or the contents of one function.\n" +
+					"printfun (name)";
+			case "pc", "printc", "printconstants"                       			-> "Prints the list of constants.\n" +
+					"printconstants";
+			case "clearfun", "clearfunctions"                           			-> "Clears the list of functions.\n" +
+					"clearfun";
+			case "ss", "sets", "setsetting"                    			 			-> "Sets a setting.\n" +
+					"setsetting [setting] [value]";
+			case "ps", "prints", "printsettings"                    	  			-> "Prints all settings.\n" +
+					"printsettings";
+			case "int", "integral"                                      			-> "Symbolically integrates [function] with respect to [variable].\n" +
+					"integral [function] d[variable]";
 			default -> throw new IllegalArgumentException("Invalid keyword: " + input);
 		};
 	}

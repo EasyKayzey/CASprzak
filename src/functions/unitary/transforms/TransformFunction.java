@@ -37,6 +37,7 @@ public abstract class TransformFunction extends UnitaryFunction {
 
 	/**
 	 * Returns the variable that this transform works with respect to
+	 * @return the variable that this transform works with respect to
 	 */
 	public char getRespectTo() {
 		return respectTo;

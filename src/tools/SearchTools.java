@@ -70,6 +70,7 @@ public class SearchTools {
 
 	/**
 	 * Checks if this CommutativeFunction has a subset (as a new instance of its class) satisfying the condition, including empty and single-element products
+	 * @param input the CommutativeFunction to be searched in
 	 * @param test the condition to be satisfied
 	 * @return true if the condition was satisfied by a subset
 	 */
@@ -79,6 +80,7 @@ public class SearchTools {
 
 	/**
 	 * Checks if this CommutativeFunction has a subset (as a new instance of its class) not including one or more of its children satisfying excludeFromSubset that satisfies the condition, including empty and single-element products
+	 * @param input the CommutativeFunction to be searched in
 	 * @param test the condition to be satisfied
 	 * @param excludeFromSubset subset that should be excluded
 	 * @return true if the condition was satisfied by a subset

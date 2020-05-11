@@ -16,8 +16,9 @@ import java.util.ListIterator;
 public class IntegralTools {
 
     /**
-     * Strips a {@link GeneralFunction} of any Constants and returns a {@link Pair} of the constant and the stripped GeneralFunction
+     * Strips a {@link GeneralFunction} of any relative constants and returns a {@link Pair} of the constant function and the stripped GeneralFunction (note that 2y is treated as a constant with respect to x)
      * @param function The GeneralFunction whose Constant is being Stripped
+     * @param varID the variable to strip with respect to (i.e. varID='x' would mean '2y' is a constant)
      * @return A {@link Pair} of the constant and the stripped GeneralFunction
      */
     public static Pair<GeneralFunction, GeneralFunction> stripConstantsRespectTo(GeneralFunction function, char varID) {

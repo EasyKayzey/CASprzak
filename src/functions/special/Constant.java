@@ -70,6 +70,7 @@ public class Constant extends SpecialFunction {
 	 * Defines a new special constant
 	 * @param string name of constant
 	 * @param value value of constant
+	 * @return the value of the constant for convenience
 	 */
 	public static double addSpecialConstant(String string, double value) {
 		specialConstants.put(string, value);
@@ -79,6 +80,7 @@ public class Constant extends SpecialFunction {
 	/**
 	 * Removes a special constant
 	 * @param string name of constant
+	 * @return the value of the constant
 	 */
 	public static double removeSpecialConstant(String string) {
 		return specialConstants.remove(string);

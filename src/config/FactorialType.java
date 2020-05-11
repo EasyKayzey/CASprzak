@@ -1,6 +1,6 @@
 package config;
 
 public enum FactorialType {
-	STIRLING,
+	STIRLING,//TODO both Enums aren't documented
 	RECURSIVE,
 }

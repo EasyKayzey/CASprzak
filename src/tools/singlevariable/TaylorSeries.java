@@ -18,7 +18,7 @@ public class TaylorSeries {
     /**
      * Returns a Maclaurin series of the specified function of a given degree
      * @param function The function whose Maclaurin series is being found
-     * @param degree The amount of terms in the polynomial (this includes zero terms like {@code 0*x^2}
+     * @param degree The amount of terms in the polynomial (this includes zero terms like {@code 0*x^2})
      * @return Maclaurin series of the specified function
      */
     public static GeneralFunction makeTaylorSeries(GeneralFunction function, int degree) {
@@ -28,7 +28,7 @@ public class TaylorSeries {
     /**
      * Returns a Taylor series of the specified function at the specified center of a given degree
      * @param function The function whose Taylor series is being found
-     * @param degree The amount of terms in the polynomial (this includes zero terms like {@code 0*x^2}
+     * @param degree The amount of terms in the polynomial (this includes zero terms like {@code 0*x^2})
      * @param center Where the Taylor series is centered
      * @return Taylor series of the specified function
      */

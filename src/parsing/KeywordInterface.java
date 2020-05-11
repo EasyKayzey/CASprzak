@@ -117,26 +117,16 @@ public class KeywordInterface {
 		return input;
 	}
 
-
-	/**
-	 * pd [variable] [function]
-	 */
 	public static GeneralFunction partialDiff(String input) {
 		String[] splitInput = spaces.split(input, 2);
 		return parseStored(splitInput[1]).getSimplifiedDerivative(ParsingTools.getCharacter(splitInput[0]));
 	}
 
-	/**
-	 * pdn [variable] [times] [function]
-	 */
 	private static GeneralFunction partialDiffNth(String input) {
 		String[] splitInput = spaces.split(input, 3);
 		return parseStored(splitInput[2]).getNthDerivative(ParsingTools.getCharacter(splitInput[0]), Integer.parseInt(splitInput[1]));
 	}
 
-	/**
-	 * eval [function] [var=val]*
-	 */
 	public static double evaluate(String input) {
 		String[] splitInput = spaces.split(input, 2);
 		return parseStored(splitInput[0]).evaluate(
@@ -146,39 +136,24 @@ public class KeywordInterface {
 		);
 	}
 
-	/**
-	 * simp [function]
-	 */
 	public static GeneralFunction simplify(String input) {
 		return parseStored(input).simplify();
 	}
 
-	/**
-	 * sub [function] [variable] [replacementfunction]
-	 */
 	public static GeneralFunction substitute(String input) {
 		String[] splitInput = keywordSplitter.split(input);
 		return parseStored(splitInput[0]).substituteVariable(ParsingTools.getCharacter(splitInput[1]), parseStored(splitInput[2]));
 	}
 
-	/**
-	 * sa [function]
-	 */
 	public static GeneralFunction substituteAllInput(String input) {
 		return substituteAll(parseStored(input));
 	}
 
-	/**
-	 * sol [function] [startrange] [endrange]
-	 */
 	public static List<Double> solve(String input) {
 		String[] splitInput = keywordSplitter.split(input);
 		return Solver.getSolutionsRange(parseStored(splitInput[0]), ParsingTools.getConstant(splitInput[1]), ParsingTools.getConstant(splitInput[2]));
 	}
 
-	/**
-	 * ext ["min(ima)"/"max(ima)"/"anymin(ima)"/"anymax(ima)"/"inflect(ion)"] [function] [startrange] [endrange]
-	 */
 	public static Object extrema(String input) {
 		String[] splitInput = keywordSplitter.split(input);
 		return switch (splitInput[0]) {
@@ -191,17 +166,11 @@ public class KeywordInterface {
 		};
 	}
 
-	/**
-	 * tay [function] [degree] [center]
-	 */
 	public static GeneralFunction taylor(String input) {
 		String[] splitInput = keywordSplitter.split(input);
 		return TaylorSeries.makeTaylorSeries(parseStored(splitInput[0]), ParsingTools.toInteger(ParsingTools.getConstant(splitInput[1])), ParsingTools.getConstant(splitInput[2]));
 	}
 
-	/**
-	 * def [locationstring] [input]
-	 */
 	public static Object defineFunction(String input) {
 		String[] splitInput = spaces.split(input, 2);
 		try {
@@ -212,9 +181,6 @@ public class KeywordInterface {
 		return storedFunctions.get(splitInput[0]);
 	}
 
-	/**
-	 * defc [constantstring] [value]
-	 */
 	private static Object defineConstant(String input) {
 		String[] splitInput = spaces.split(input, 2);
 		try {
@@ -224,78 +190,48 @@ public class KeywordInterface {
 		}
 	}
 
-	/**
-	 * rmfun [functionname]
-	 */
 	private static GeneralFunction removeFunction(String input) {
 		return storedFunctions.remove(input);
 	}
 
-	/**
-	 * rmc [constantstring]
-	 */
 	private static double removeConstant(String input) {
 		return Constant.removeSpecialConstant(input);
 	}
 
-	/**
-	 * printfun
-	 */
 	public static Map<String, GeneralFunction> getFunctions() {
 		return storedFunctions;
 	}
 
-	/**
-	 * printfun
-	 */
 	public static GeneralFunction getFunction(String function) {
 		return storedFunctions.get(function);
 	}
 
-	/**
-	 * printconstants
-	 */
 	@SuppressWarnings("SameReturnValue")
 	private static Map<String, Double> getConstants() {
 		return Constant.specialConstants;
 	}
 
-	/**
-	 * clearfun
-	 */
 	public static Map<String, GeneralFunction> clearFunctions() {
 		storedFunctions.clear();
 		return storedFunctions;
 	}
 
-	/**
-	 * intn [function] [startvalue] [endvalue]
-	 */
 	public static double integrateNumeric(String input) {
 		String[] splitInput = keywordSplitter.split(input);
 		return NumericalIntegration.simpsonsRule(parseStored(splitInput[0]), ParsingTools.getConstant(splitInput[1]), ParsingTools.getConstant(splitInput[2]));
 	}
 
-	/**
-	 * intne [function] [startvalue] [endvalue]
-	 */
 	private static double[] integrateNumericError(String input) {
 		String[] splitInput = keywordSplitter.split(input);
 		return NumericalIntegration.simpsonsRuleWithError(parseStored(splitInput[0]), ParsingTools.getConstant(splitInput[1]), ParsingTools.getConstant(splitInput[2]));
 	}
 
-	/**
-	 * setsetting [setting] [value]
-	 */
 	private static String setSettings(String input) {
 		String[] splitInput = keywordSplitter.split(input);
 		SettingsParser.parseSingleSetting(splitInput[0], splitInput[1]);
 		return splitInput[0] + " = " + splitInput[1];
 	}
 
-	/**
-	 * settings
-	 */
 	private static String printSettings() {
 		Field[] settings = Settings.class.getDeclaredFields();
 		StringBuilder stringBuilder = new StringBuilder();
@@ -312,9 +248,6 @@ public class KeywordInterface {
 		return stringBuilder.toString();
 	}
 
-	/**
-	 * integral [function] d[variable]
-	 */
 	private static GeneralFunction integral(String input) {
 		String[] splitInput = keywordSplitter.split(input);
 		return new Integral(parseStored(splitInput[0]), splitInput[1].charAt(1)).execute();

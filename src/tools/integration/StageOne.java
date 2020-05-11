@@ -28,8 +28,9 @@ public class StageOne {
      * @param integrand The {@link GeneralFunction} who is being integrated
      * @param variableChar The {@link Variable#varID} the function is integrated with respect to.
      * @return The integral of the function if one is found.
+     * @throws IntegrationFailedException if the integration did not succeed
      */
-    public static GeneralFunction derivativeDivides(GeneralFunction integrand, char variableChar) {
+    public static GeneralFunction derivativeDivides(GeneralFunction integrand, char variableChar) throws IntegrationFailedException {
         integrand = IntegralTools.minimalSimplify(integrand);
 
         if (integrand instanceof PartialDerivative derivative)

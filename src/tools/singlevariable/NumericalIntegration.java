@@ -53,7 +53,7 @@ public class NumericalIntegration {
      * @param function The {@link GeneralFunction} whose integral is being found
      * @param lowerBound The lower bound of the range
      * @param upperBound The upper bound of the range
-     * @return a double array comprised of the approximate definite integral of the function on a range and its error range
+     * @return a {@code double[]} comprised of the approximate definite integral of the function on a range and its maximum error range
      */
     public static double[] simpsonsRuleWithError(GeneralFunction function, double lowerBound, double upperBound) {
         return new double[]{simpsonsRule(function, lowerBound, upperBound), simpsonsError(function, lowerBound, upperBound)};

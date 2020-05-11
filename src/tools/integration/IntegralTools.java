@@ -18,7 +18,7 @@ public class IntegralTools {
     /**
      * Strips a {@link GeneralFunction} of any relative constants and returns a {@link Pair} of the constant function and the stripped GeneralFunction (note that 2y is treated as a constant with respect to x)
      * @param function The GeneralFunction whose Constant is being Stripped
-     * @param varID the variable to strip with respect to (i.e. varID='x' would mean '2y' is a constant)
+     * @param varID the variable to strip with respect to (i.e. {@code varID='x'} would mean {@code 2y} is a constant)
      * @return A {@link Pair} of the constant and the stripped GeneralFunction
      */
     public static Pair<GeneralFunction, GeneralFunction> stripConstantsRespectTo(GeneralFunction function, char varID) {
@@ -40,6 +40,11 @@ public class IntegralTools {
         }
     }
 
+    /**
+     * Temporarily disables all optional simplification settings (such as distributeFunctions), then simplifies the input
+     * @param function the function to be minimally simplified
+     * @return the function, minimally simplified
+     */
     public static GeneralFunction minimalSimplify(GeneralFunction function) {
         boolean dF = Settings.distributeFunctions;
         Settings.distributeFunctions = false;

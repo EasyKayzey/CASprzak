@@ -339,7 +339,8 @@ public class KeywordInterface {
 				demo:                                                               runs the demo
                 eval, evaluate:                                                     evaluates
 				simp, simplify:                                                     simplifies
-				sub, substitute: substitutespd, pdiff, partial, pdifferentiate:     takes the partial derivative
+				sub, substitute: 													substitutes
+				pd, pdiff, partial, pdifferentiate:     							takes the partial derivative
 				pdn pdiffn partialn pdifferentiaten:                                takes the partial derivative n times
 				int, integral:                                                      integrates a function
 				intn, intnumeric:                                                   performs numerical integration

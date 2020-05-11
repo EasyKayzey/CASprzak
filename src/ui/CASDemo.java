@@ -86,7 +86,7 @@ public class CASDemo {
 			}
 		} catch (Exception e) {
 			System.out.println("Your input threw exception '" + e.toString() + "', please try again.");
-			return tryInput(test, message);
+			return tryInput(test, message); // NOTE: this code means that if you have an error in runTillNext then try to exit with "next", you'll need to type it twice.
 		}
 	}
 

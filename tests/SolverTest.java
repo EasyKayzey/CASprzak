@@ -76,4 +76,9 @@ public class SolverTest {
         GeneralFunction test = FunctionParser.parseSimplified("2x^2+x");
         assertArrayEquals(new double[]{-.5, 0}, Solver.getSolutionsRange(test, -10, 10).stream().mapToDouble(i -> i).toArray(), .01);
     }
+
+    @Test void xToFour() {
+        GeneralFunction test = FunctionParser.parseSimplified("x^4");
+        assertArrayEquals(new double[]{0}, Solver.getSolutionsRange(test, -10, 10).stream().mapToDouble(i -> i).toArray());
+    }
 }

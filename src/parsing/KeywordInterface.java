@@ -323,6 +323,7 @@ public class KeywordInterface {
 			case "eval", "evaluate"                                     			-> "eval [function] [var=val]*";
 			case "simp", "simplify"                                     			-> "simp [function]";
 			case "sub", "substitute"                                    			-> "sub [function] [variable] [replacementfunction]";
+			case "sa", "suball"														-> "sa [function]";
 			case "sol", "solve"                                         			-> "sol [function] [startrange] [endrange]";
 			case "ext", "extrema"                                       			-> "ext [\"min(ima)\"/\"max(ima)\"/\"anymin(ima)\"/\"anymax(ima)\"/\"inflect(ion)\"] [function] [startrange] [endrange]";
 			case "tay", "taylor"                                        			-> "tay [function] [terms] [center]";
@@ -348,6 +349,7 @@ public class KeywordInterface {
                 eval, evaluate:                                    evaluates
 				simp, simplify:                                    simplifies
 				sub, substitute: 								   substitutes
+				sa, suball:										   substitutes all functions variables
 				pd, pdiff, partial, pdifferentiate:				   takes the partial derivative
 				pdn pdiffn partialn pdifferentiaten:               takes the partial derivative n times
 				int, integral:                                     integrates a function

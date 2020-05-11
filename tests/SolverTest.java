@@ -71,4 +71,9 @@ public class SolverTest {
         GeneralFunction test = FunctionParser.parseInfix("(.12x)^2/((1-x).12)-6.3E-5");
         assertEquals(1, Solver.getSolutionsRangeHalley(test, 0, 1).size());
     }
+
+    @Test void zeroAtZero() {
+        GeneralFunction test = FunctionParser.parseSimplified("2x^2+x");
+        assertArrayEquals(new double[]{-.5, 0}, Solver.getSolutionsRange(test, -10, 10).stream().mapToDouble(i -> i).toArray(), .01);
+    }
 }

@@ -135,7 +135,6 @@ public class CASDemo {
 		sleep(1.5);
 		System.out.println("You can see that this references the function that you last typed in.");
 		sleep(1.5);
-		System.out.println("Continue testing this feature, or type 'next' to continue.");
 		currentState = DemoState.EVAL;
 	}
 
@@ -210,14 +209,14 @@ public class CASDemo {
 	private static void var() {
 		System.out.println("Until this point, all the expressions that we've been using have only contained one variable.");
 		sleep(1.5);
-		System.out.println("Now we will construct a function using more than one variable.");
+		System.out.println("We will now construct a function using more than one variable.");
 		sleep(1.5);
 		System.out.println("Define a new function with several different variables using the 'def' command, e.g. 'def g xy^2+q'.");
 		if (!tryInput(s -> "def ".equals(s.substring(0, 4)), "Begin your input with 'def' to demonstrate the storage feature of the UI."))
 			return;
 		sleep(1.5);
 		System.out.println("Now, when evaluating, you will need to specify each value, like 'eval x-y x=2 y=3'.");
-		sleep(1.5);
+		sleep(2);
 		System.out.println("Try evaluating your multivariable function using 'eval', e.g. 'eval f x=2 y=4 q=e.");
 		if (!tryInput(s -> s.length() > 4 && "eval ".equals(s.substring(0, 5)), "Begin your input with 'eval'"))
 			return;
@@ -250,11 +249,42 @@ public class CASDemo {
 		sleep(1.5);
 		System.out.println("Continue testing this feature, or type 'next' to continue.");
 		runTillNext();
-		currentState = DemoState.PD;
+		currentState = DemoState.SA;
 	}
 
 	private static void sa() {
-
+		System.out.println("Remember, that whenever you define a new function it gets stored in a variable.");
+		sleep(1.5);
+		System.out.println(">>> def a x^2");
+		System.out.println(KeywordInterface.useKeywords("def a x^2"));
+		sleep(1.5);
+		System.out.println("Now, what happens when we define a new function 'b' using 'a' as a variable.");
+		sleep(1.5);
+		System.out.println("Try it yourself, define a new function 'b' as a function of a, e.g. def b a+1");
+		if (!tryInput(s -> s.length() > 3  && "def b ".equals(s.substring(0, 6)), "Begin your input with 'def b ' to define a function as 'b'."))
+			return;
+		sleep(1.5);
+		System.out.println("Notice that 'b' is a function of 'a', not of 'x', when we evaluate, we are going to have to use 'a=[value]'.");
+		sleep(1.5);
+		System.out.println(">>> eval b a=2");
+		System.out.println(KeywordInterface.useKeywords("eval b a=2"));
+		sleep(1.5);
+		System.out.println("Now, try using substitute all, type in 'sa b'.");
+		if (!tryInput("sa b"::equals, "Your input must be 'sa b' to substitute all in 'b'."))
+			return;
+		sleep(1.5);
+		System.out.println(">>> def b _");
+		System.out.println(KeywordInterface.useKeywords("def b _"));
+		sleep(2.25);
+		System.out.println("Notice how 'b' is now a function in terms of 'x'.");
+		sleep(1.5);
+		System.out.println("Try evaluating it, you can now use 'x=[value]', using 'a=[value]' will result in a error, as 'a' is no longer a variable in 'b'.");
+		if (!tryInput(s -> s.length() > 3  && "eval b ".equals(s.substring(0, 7)), "Begin your input with 'eval b ' to evaluate 'b'."))
+			return;
+		sleep(1.5);
+		System.out.println("Continue testing this feature, or type 'next' to continue.");
+		runTillNext();
+		currentState = DemoState.PD;
 	}
 
 	private static void pd() {

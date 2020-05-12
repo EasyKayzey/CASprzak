@@ -1,10 +1,8 @@
-package tools.integration;
+package tools;
 
 import config.Settings;
 import functions.GeneralFunction;
 import functions.commutative.Product;
-import tools.DefaultFunctions;
-import tools.VariableTools;
 import tools.helperclasses.Pair;
 
 import java.util.ArrayList;

@@ -7,7 +7,7 @@ import parsing.FunctionParser;
 import tools.exceptions.IntegrationFailedException;
 import tools.helperclasses.Pair;
 import functions.unitary.transforms.Integral;
-import tools.integration.IntegralTools;
+import tools.IntegralTools;
 
 import static org.junit.jupiter.api.Assertions.*;
 

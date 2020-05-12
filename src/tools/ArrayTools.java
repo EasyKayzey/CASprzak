@@ -87,9 +87,8 @@ public class ArrayTools {
 	 */
 	public static GeneralFunction[] distribute(GeneralFunction[] multiply, GeneralFunction[] add) {
 		GeneralFunction[] finalAdd = new GeneralFunction[add.length];
-		for (int i = 0; i < finalAdd.length; i++) {
+		for (int i = 0; i < finalAdd.length; i++)
 			finalAdd[i] = new Product(append(multiply, add[i]));
-		}
 		return finalAdd;
 	}
 

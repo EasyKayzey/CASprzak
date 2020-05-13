@@ -19,7 +19,12 @@ public class SettingsParser {
 			parseSingleSetting((String) entry.getKey(), (String) entry.getValue());
 	}
 
-	public static void parseSingleSetting(String key, String value) {//TODO document this
+	/**
+	 * Parses string input to a single setting to be stored in {@link Settings}
+	 * @param key the name of the setting, such as defaultSolverIterations or defaultFactorial
+	 * @param value the value of the setting, such as 10000 or RECURSIVE
+	 */
+	public static void parseSingleSetting(String key, String value) {
 		switch (key) {
 			case "defaultSolverIterations" 					-> Settings.defaultSolverIterations = Integer.parseInt(value);
 			case "defaultRangeSections" 					-> Settings.defaultRangeSections = Integer.parseInt(value);
@@ -35,9 +40,9 @@ public class SettingsParser {
 			case "enforceIntegerOperations" 				-> Settings.enforceIntegerOperations = ParsingTools.parseBoolean(value);
 			case "exitSolverOnProximity" 					-> Settings.exitSolverOnProximity = ParsingTools.parseBoolean(value);
 			case "executeOnSimplify" 						-> Settings.executeOnSimplify = ParsingTools.parseBoolean(value);
+			case "distributeFunctions"					    -> Settings.distributeFunctions = ParsingTools.parseBoolean(value);
 			case "defaultSolverType" 						-> Settings.defaultSolverType = SolverType.valueOf(value);
 			case "defaultFactorial" 						-> Settings.defaultFactorial = FactorialType.valueOf(value);
-			case "distributeFunctions"					    -> Settings.distributeFunctions = ParsingTools.parseBoolean(value);
 			default 										-> throw new IllegalStateException("Setting " + key + " does not exist.");
 		}
 	}

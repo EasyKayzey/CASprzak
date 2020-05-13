@@ -39,7 +39,7 @@ public class Settings {
 	/**
 	 * The number of segments that {@link tools.singlevariable.NumericalIntegration#simpsonsRule(GeneralFunction, double, double)} uses when performing numerical integration. **MUST BE EVEN**
 	 */
-	public static int simpsonsSegments; // MUST BE EVEN
+	public static int simpsonsSegments;
 
 	/**
 	 * The variable to be used in {@link tools.singlevariable} when none is specified
@@ -67,12 +67,12 @@ public class Settings {
 	public static boolean enforceEscapes;
 
 	/**
-	 * Denotes whether functions of constants should be simplified, e.g. {@code \sin(\pi/2) -> 1}
+	 * Denotes whether functions of constants should be simplified. Ex: {@code \sin(\pi/2) -> 1}
 	 */
 	public static boolean simplifyFunctionsOfConstants;
 
 	/**
-	 * Denotes whether exponents should be distributed over multiplication in a normal simplify(), e.g. {@code (2x)^2 -> 4x^2}
+	 * Denotes whether exponents should be distributed over multiplication in a normal simplify(). Ex: {@code (2x)^2 -> 4x^2}
 	 */
 	public static boolean distributeExponents;
 
@@ -97,7 +97,7 @@ public class Settings {
 	public static boolean executeOnSimplify;
 
 	/**
-	 * Denotes whether expressions are distributed over sum when called in simplify(), e.g. {@code x(y+z) -> (xy+xz)}
+	 * Denotes whether expressions are distributed over sum when called in simplify(). Ex: {@code x(y+z) -> (xy+xz)}
 	 */
 	public static boolean distributeFunctions;
 

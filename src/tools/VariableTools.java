@@ -10,7 +10,7 @@ import java.util.function.Predicate;
 
 public class VariableTools {
 	/**
-	 * Returns a {@link Predicate} of {@link GeneralFunction} describing whether a given {@link GeneralFunction} is an instance of {@link Variable} with varID equal to the specified character
+	 * Returns a {@link Predicate} of {@link GeneralFunction} describing whether a given {@link GeneralFunction} is an instance of {@link Variable} with {@code varID} equal to the specified character
 	 * @param varID the character of the variable to be checked for
 	 * @return the predicate described above
 	 */
@@ -19,9 +19,9 @@ public class VariableTools {
 	}
 
 	/**
-	 * Returns a set of characters representing all variables used in this function
+	 * Returns a set of characters representing the characters of all variables used in this function
 	 * @param input the function to be tested
-	 * @return the set of variables
+	 * @return the set of variable characters
 	 */
 	public static Set<Character> getAllVariables(GeneralFunction input) {
 		Set<Character> vars = new HashSet<>();
@@ -32,7 +32,7 @@ public class VariableTools {
 	/**
 	 * If the input is in terms of only one variable, returns that variable's character; otherwise, returns {@link Settings#singleVariableDefault}
 	 * @param input the function to be read from
-	 * @return the variable requested
+	 * @return the variable character requested
 	 */
 	public static char getSingleVariable(GeneralFunction input) {
 		Set<Character> vars = getAllVariables(input);
@@ -43,10 +43,10 @@ public class VariableTools {
 	}
 
 	/**
-	 * Returns false if the {@link Variable} specified is found in the {@link GeneralFunction}
+	 * Returns true if the {@link Variable} specified is NOT found in the {@link GeneralFunction}
 	 * @param function The {@link GeneralFunction} that is being searched
 	 * @param varID The variable ID of the variable that is being looked for
-	 * @return false if the {@link Variable} specified is found in the {@link GeneralFunction}
+	 * @return true if the {@link Variable} specified is NOT found in the {@link GeneralFunction}
 	 */
 	public static boolean doesNotContainsVariable(GeneralFunction function, char varID) {
 		return !SearchTools.existsAny(function, isVariable(varID));

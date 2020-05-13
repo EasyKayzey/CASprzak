@@ -60,7 +60,7 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 	public abstract GeneralFunction clone();
 
 	/**
-	 * Returns the derivative of this {@link GeneralFunction}, simplified
+	 * Returns the derivative of the function, simplified
 	 * @param varID the ID of the variable being differentiated
 	 * @return the derivative of this function , simplified
 	 */

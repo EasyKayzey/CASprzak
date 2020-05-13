@@ -28,7 +28,7 @@ public class Constant extends SpecialFunction {
 	public final @Nullable String constantKey;
 
 	/**
-	 * Constructs a new Constant from the specified numerical value
+	 * Constructs a new {@link Constant} from the specified numerical value
 	 * @param constant The numerical value of the constant
 	 */
 	public Constant(double constant) {
@@ -37,8 +37,8 @@ public class Constant extends SpecialFunction {
 	}
 
 	/**
-	 * Constructs a new special Constant from its String
-	 * @param constantKey The string of the special Constant
+	 * Constructs a new special {@link Constant} from its String
+	 * @param constantKey The string of the special {@link Constant}
 	 */
 	@SuppressWarnings("NullableProblems")
 	public Constant(String constantKey) {
@@ -49,9 +49,9 @@ public class Constant extends SpecialFunction {
 	}
 
 	/**
-	 * Returns true if string is a special Constant
+	 * Returns true if string is a special {@link Constant}
 	 * @param string The string that is being checked if it is a special constant
-	 * @return true if string is a special Constant
+	 * @return true if string is a special {@link Constant}
 	 */
 	public static boolean isSpecialConstant(String string) {
 		return specialConstants.containsKey(string);

@@ -50,7 +50,7 @@ public class ArrayTools {
 	/**
 	 * Returns a copy of the input array with the {@link GeneralFunction} at the specified index removed
 	 * @param functionArray the array of GeneralFunctions
-	 * @param index         index of the GeneralFunction to be removed
+	 * @param index         index of the {@link GeneralFunction} to be removed
 	 * @return the new array
 	 */
 	public static GeneralFunction[] removeFunctionAt(GeneralFunction[] functionArray, int index) {

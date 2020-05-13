@@ -48,7 +48,7 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 	protected final HashMap<Character, GeneralFunction> derivatives = new HashMap<>();
 
 	/**
-	 * Returns a String representation of this GeneralFunction
+	 * Returns a String representation of this {@link GeneralFunction}
 	 * @return String representation of this function
 	 */
 	public abstract String toString();
@@ -100,7 +100,7 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 	}
 
 	/**
-	 * Replaces every GeneralFunction that satisfies the predicate using the action specified by the replacer
+	 * Replaces every {@link GeneralFunction} that satisfies the predicate using the action specified by the replacer
 	 * @param test checks if the function should be replaced
 	 * @param replacer replaces the function
 	 * @return a new function with all replacements made
@@ -156,7 +156,7 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 	protected abstract int compareSelf(GeneralFunction that);
 
 	/**
-	 * Two different GeneralFunction types are sorted according to {@link #sortOrder} and {@link MiscTools#findClassValue(GeneralFunction)}, and same types are sorted using {@link #compareSelf(GeneralFunction)}
+	 * Two different {@link GeneralFunction} types are sorted according to {@link #sortOrder} and {@link MiscTools#findClassValue(GeneralFunction)}, and same types are sorted using {@link #compareSelf(GeneralFunction)}
 	 * @param that the {@link GeneralFunction} compared to
 	 * @return comparison
 	 */

@@ -15,9 +15,9 @@ public class IntegralTools {
 
     /**
      * Strips a {@link GeneralFunction} of any relative constants and returns a {@link Pair} of the constant function and the stripped GeneralFunction (note that 2y is treated as a constant with respect to x)
-     * @param function The GeneralFunction whose Constant is being Stripped
+     * @param function The {@link GeneralFunction} whose relative constant is being Stripped
      * @param varID the variable to strip with respect to (i.e. {@code varID='x'} would mean {@code 2y} is a constant)
-     * @return A {@link Pair} of the constant and the stripped GeneralFunction
+     * @return A {@link Pair} of the constant and the stripped {@link GeneralFunction}
      */
     public static Pair<GeneralFunction, GeneralFunction> stripConstantsRespectTo(GeneralFunction function, char varID) {
         if (function instanceof Product multiply) {

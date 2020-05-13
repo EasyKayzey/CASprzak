@@ -12,7 +12,7 @@ public class SearchTools {
 
 	/**
 	 * Returns true if any {@link GeneralFunction} in the function tree satisfies the predicate test
-	 * @param input the GeneralFunction to be searched in
+	 * @param input the {@link GeneralFunction} to be searched in
 	 * @param test the predicate to be tested
 	 * @return true if found
 	 */
@@ -22,7 +22,7 @@ public class SearchTools {
 
 	/**
 	 * Returns true if a {@link  GeneralFunction} in the function tree satisfies the predicate test, excluding all Functions on branches satisfying the predicate exclude
-	 * @param input the GeneralFunction to be searched in
+	 * @param input the {@link GeneralFunction} to be searched in
 	 * @param test the predicate to be tested
 	 * @param exclude the predicate to exclude
 	 * @return true if found
@@ -52,7 +52,7 @@ public class SearchTools {
 
 	/**
 	 * Returns true if a single direct child of this {@link  GeneralFunction} satisfies the predicate test, excluding all Functions satisfying the predicate exclude
-	 * @param input the GeneralFunction to be searched in
+	 * @param input the {@link GeneralFunction} to be searched in
 	 * @param test the predicate to be tested
 	 * @param exclude the predicate to exclude
 	 * @return true if found
@@ -69,8 +69,8 @@ public class SearchTools {
 
 
 	/**
-	 * Checks if this CommutativeFunction has a subset (as a new instance of its class) satisfying the condition, including empty and single-element products
-	 * @param input the CommutativeFunction to be searched in
+	 * Checks if this {@link CommutativeFunction} has a subset (as a new instance of its class) satisfying the condition, including empty and single-element products
+	 * @param input the {@link CommutativeFunction} to be searched in
 	 * @param test the condition to be satisfied
 	 * @return true if the condition was satisfied by a subset
 	 */
@@ -79,8 +79,8 @@ public class SearchTools {
 	}
 
 	/**
-	 * Checks if this CommutativeFunction has a subset (as a new instance of its class) not including one or more of its children satisfying excludeFromSubset that satisfies the condition, including empty and single-element products
-	 * @param input the CommutativeFunction to be searched in
+	 * Checks if this {@link CommutativeFunction} has a subset (as a new instance of its class) not including one or more of its children satisfying excludeFromSubset that satisfies the condition, including empty and single-element products
+	 * @param input the {@link CommutativeFunction} to be searched in
 	 * @param test the condition to be satisfied
 	 * @param excludeFromSubset subset that should be excluded
 	 * @return true if the condition was satisfied by a subset
@@ -116,7 +116,7 @@ public class SearchTools {
 
 	/**
 	 * Applies the specified consumer recursively down the function tree for every node satisfying the test
-	 * @param input the GeneralFunction to be recursively consumed
+	 * @param input the {@link GeneralFunction} to be recursively consumed
 	 * @param consumer the consumer
 	 * @param test the test to be satisfied
 	 */

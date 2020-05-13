@@ -49,7 +49,7 @@ public abstract class BinaryFunction extends GeneralFunction {
 	 * Returns an instance of this {@link GeneralFunction}, using the correct subclass
 	 * @param function1 Constructor parameter 1
 	 * @param function2 Constructor parameter 2
-	 * @return an instance of this GeneralFunction
+	 * @return an instance of this {@link GeneralFunction}
 	 */
 	public abstract BinaryFunction me(GeneralFunction function1, GeneralFunction function2);
 

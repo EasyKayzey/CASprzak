@@ -10,7 +10,7 @@ import java.util.function.Predicate;
 
 public class VariableTools {
 	/**
-	 * Returns a {@link Predicate} of GeneralFunction describing whether a given GeneralFunction is an instance of {@link Variable} with varID equal to the specified character
+	 * Returns a {@link Predicate} of {@link GeneralFunction} describing whether a given {@link GeneralFunction} is an instance of {@link Variable} with varID equal to the specified character
 	 * @param varID the character of the variable to be checked for
 	 * @return the predicate described above
 	 */
@@ -44,7 +44,7 @@ public class VariableTools {
 
 	/**
 	 * Returns true if the {@link Variable} specified is found in the {@link GeneralFunction}
-	 * @param function The GeneralFunction that is being searched
+	 * @param function The {@link GeneralFunction} that is being searched
 	 * @param varID The variable ID of the variable that is being looked for
 	 * @return true if the {@link Variable} specified is found in the {@link GeneralFunction}
 	 */

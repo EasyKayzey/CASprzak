@@ -28,7 +28,7 @@ public abstract class CommutativeFunction extends GeneralFunction {
 	public DoubleBinaryOperator operation;
 
 	/**
-	 * Constructs a new CommutativeFunction
+	 * Constructs a new {@link CommutativeFunction}
 	 * @param functions The {@link GeneralFunction}s that will be acted on
 	 */
 	public CommutativeFunction(GeneralFunction... functions) {
@@ -47,7 +47,7 @@ public abstract class CommutativeFunction extends GeneralFunction {
 	/**
 	 * Returns an instance of this {@link GeneralFunction}
 	 * @param functions Constructor parameter
-	 * @return an instance of this GeneralFunction
+	 * @return an instance of this {@link GeneralFunction}
 	 */
 	public abstract CommutativeFunction me(GeneralFunction... functions);
 

@@ -112,7 +112,7 @@ public class Pow extends BinaryFunction {
 
 	/**
 	 * Given a Pow, checks if the exponent is a positive integer then unwraps it into a multiply
-	 * @return a new unwrapped GeneralFunction
+	 * @return a new unwrapped {@link GeneralFunction}
 	 */
 	public GeneralFunction unwrapIntegerPowerSafe() {
 		try {

@@ -60,7 +60,7 @@ public abstract class UnitaryFunction extends GeneralFunction {
 	/**
 	 * Returns an instance of this {@link GeneralFunction}
 	 * @param operand Constructor parameter
-	 * @return an instance of this GeneralFunction
+	 * @return an instance of this {@link GeneralFunction}
 	 */
 	public abstract UnitaryFunction me(GeneralFunction operand);
 

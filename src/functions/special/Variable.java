@@ -13,7 +13,7 @@ public class Variable extends SpecialFunction {
 	public final char varID;
 
 	/**
-	 * Constructs a new Variable
+	 * Constructs a new {@link Variable}
 	 * @param varID The variable's representative character
 	 */
 	public Variable(char varID) {

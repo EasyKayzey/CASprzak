@@ -59,6 +59,10 @@ public class Logb extends BinaryFunction {
 			return current;
 	}
 
+	/**
+	 * Returns {@link DefaultFunctions#ONE} if the base of the logarithm equals the argument
+	 * @return {@link DefaultFunctions#ONE} if the base of the logarithm equals the argument
+	 */
 	public GeneralFunction simplifyIdentity() {
 		if (function2.equals(function1))
 			return DefaultFunctions.ONE;
@@ -66,6 +70,10 @@ public class Logb extends BinaryFunction {
 			return this;
 	}
 
+	/**
+	 * Returns a {@link GeneralFunction} where the exponent of the argument has been moved to in front of the logarithm
+	 * @return a {@link GeneralFunction} where the exponent of the argument has been moved to in front of the logarithm
+	 */
 	@SuppressWarnings("ChainOfInstanceofChecks")
 	public GeneralFunction simplifyPowers() {
 		if (function1 instanceof Pow power)

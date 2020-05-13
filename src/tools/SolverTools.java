@@ -12,11 +12,11 @@ public class SolverTools {
 	private SolverTools(){}
 
 	/**
-	 * Returns a list of Doubles which is a range slit into a certain amount of sections
+	 * Returns a list of Doubles that represents a range slit into a certain amount of sections by storing te endpoints of the sections
 	 * @param upper    the upper bound of the range
 	 * @param lower    the lower bound of the range
 	 * @param sections the amount of sections that the range is split into
-	 * @return the specified range
+	 * @return the specified List
 	 */
 	public static List<Double> createRange(double upper, double lower, int sections) {
 		List<Double> range = new ArrayList<>(sections + 1);
@@ -26,7 +26,7 @@ public class SolverTools {
 	}
 
 	/**
-	 * Removes a number from a List if that number is adjacent to the same number within a tolerance of 1E-10
+	 * Removes a number from a List if that number is adjacent to the same number within a tolerance of {@link Settings#equalsMargin}
 	 * @param values the List from which the repeated values are removed
 	 */
 	public static void removeRepeatsSort(List<Double> values) {
@@ -40,7 +40,7 @@ public class SolverTools {
 		while (iter.hasNext()) {
 			previous = current;
 			current = iter.next();
-			if (current == previous || Math.abs(current - previous) < Settings.zeroMargin)
+			if (current == previous || Math.abs(current - previous) < Settings.equalsMargin)
 				iter.remove();
 		}
 	}

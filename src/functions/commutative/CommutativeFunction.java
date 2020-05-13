@@ -18,7 +18,7 @@ public abstract class CommutativeFunction extends GeneralFunction {
 	protected final GeneralFunction[] functions;
 
 	/**
-	 * The identity of the {@link CommutativeFunction} (e.g. 1 for * and 0 for +)
+	 * The identity of the {@link CommutativeFunction}. (e.g. 1 for * and 0 for +)
 	 */
 	protected double identityValue;
 

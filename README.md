@@ -18,7 +18,7 @@ Hello, and welcome to our CAS. This is a joint project by The EasyKayzey Show st
 - Basic symbolic integration using only "derivative divides" substitution
 ### Other
 - Parsing and storing infix expressions like `x^2-3y+sin(1/z)`
-- Command-line interface
+- Command-line interface in `CommandUI`
   - Definition and storage of functions
   - Evaluating, differentiating, and numerically integrating functions
   - Solving for zeroes and extrema of functions
@@ -26,11 +26,13 @@ Hello, and welcome to our CAS. This is a joint project by The EasyKayzey Show st
   - Generating taylor series of functions from a point
   - Defining special constants
   - Defining and removing variables
+  - Demo - to start the demo, run `CommandUI` and input `demo`
 
 ## Notes
 - If you find a problem with the CAS, please report the bug in `Issues` so we can fix it
 - If you have any feature suggestions not present in `Projects`, make a feature request in `Issues`
 - If you would like to design a better interface than the placeholder that we have now, please contact us by email
+- As noted before, to begin the demo, run `CommandUI` and input `demo`
 
 ## Contacts
 ### Group

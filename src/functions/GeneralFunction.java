@@ -108,7 +108,7 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 	public abstract GeneralFunction substituteAll(Predicate<? super GeneralFunction> test, Function<? super GeneralFunction, ? extends GeneralFunction> replacer);
 
 	/**
-	 * Substitutes a new {@link GeneralFunction} into a variable
+	 * Substitutes a new {@link GeneralFunction} into a {@link Variable}
 	 * @param varID     the variable to be substituted into
 	 * @param toReplace the {@link GeneralFunction} that will be substituted
 	 * @return the new {@link GeneralFunction} after all substitutions are preformed

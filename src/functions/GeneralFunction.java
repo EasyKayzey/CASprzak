@@ -17,6 +17,7 @@ import org.jetbrains.annotations.NotNull;
 import tools.MiscTools;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -173,4 +174,10 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 				return this.getClass().getSimpleName().compareTo(that.getClass().getSimpleName());
 		}
 	}
+
+	/**
+	 * Returns an iterator over the operands of this {@link GeneralFunction}
+	 * @return an iterator over the operands of this {@link GeneralFunction}
+	 */
+	public abstract @NotNull Iterator<GeneralFunction> iterator();
 }

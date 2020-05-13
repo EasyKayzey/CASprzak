@@ -1,6 +1,13 @@
 package config;
 
 public enum FactorialType {
-	STIRLING,//TODO both Enums aren't documented
+	/**
+	 * Stirling approximation for evaluating factorials
+	 */
+	STIRLING,
+
+	/**
+	 * Recursive definition for evaluating factorials
+	 */
 	RECURSIVE,
 }

@@ -37,7 +37,7 @@ public class KeywordInterface {
 	}
 
 	/**
-	 * Takes input as a string in the format {@code command arguments...}
+	 * Takes input as a string in the format {@code "command arguments..."}
 	 * @param input a string that contains the command and arguments
 	 * @return the Object requested
 	 */

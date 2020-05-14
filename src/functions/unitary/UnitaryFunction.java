@@ -44,8 +44,8 @@ public abstract class UnitaryFunction extends GeneralFunction {
 	}
 
 	/**
-	 * Returns a new {@link Constant} of the {@link UnitaryFunction} evaluated if the {@link UnitaryFunction#operand} is a {@link Constant}
-	 * @return a new {@link Constant} of the {@link UnitaryFunction} evaluated if the {@link UnitaryFunction#operand} is a {@link Constant}
+	 * Returns a new {@link Constant} of the {@link UnitaryFunction} evaluated if the {@link #operand} is a {@link Constant}
+	 * @return a new {@link Constant} of the {@link UnitaryFunction} evaluated if the {@link #operand} is a {@link Constant}
 	 */
 	public GeneralFunction simplifyFOC() {
 		if (Settings.simplifyFunctionsOfConstants && operand instanceof Constant)
@@ -55,8 +55,8 @@ public abstract class UnitaryFunction extends GeneralFunction {
 	}
 
 	/**
-	 * Returns a {@link GeneralFunction} of the {@link UnitaryFunction#operand} of the current {@link UnitaryFunction#operand} if it is an instance of the {@link Invertible#getInverse()} of the {@link UnitaryFunction}
-	 * @return a {@link GeneralFunction} of the {@link UnitaryFunction#operand} of the current {@link UnitaryFunction#operand} if it is an instance of the {@link Invertible#getInverse()} of the {@link UnitaryFunction}
+	 * Returns a {@link GeneralFunction} of the {@link #operand} of the current {@link #operand} if it is an instance of the {@link Invertible#getInverse()} of the {@link UnitaryFunction}
+	 * @return a {@link GeneralFunction} of the {@link #operand} of the current {@link #operand} if it is an instance of the {@link Invertible#getInverse()} of the {@link UnitaryFunction}
 	 */
 	public GeneralFunction simplifyInverse() {
 		if (this instanceof Invertible inv && operand.getClass().isAssignableFrom(inv.getInverse()))
@@ -103,7 +103,7 @@ public abstract class UnitaryFunction extends GeneralFunction {
 	/**
 	 * Returns a {@link UnitaryFunction} of the given type and of the given operand
 	 * @param type The {@code Class} of the {@link UnitaryFunction} being returned
-	 * @param operand The {@link UnitaryFunction#operand} of the {@link UnitaryFunction}
+	 * @param operand The {@link #operand} of the {@link UnitaryFunction}
 	 * @return a {@link UnitaryFunction} of the given type and of the given operand.
 	 */
 	public static UnitaryFunction newInstanceOf(Class<?> type, GeneralFunction operand) {

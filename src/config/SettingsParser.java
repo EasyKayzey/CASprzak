@@ -9,7 +9,7 @@ import java.util.Properties;
 
 public class SettingsParser {
 	/**
-	 * Parses the configuration file cas.properties and stores the read values in {@link Settings}
+	 * Parses the configuration file {@code cas.properties} and stores the read values in {@link Settings}
 	 * @throws IOException if the file cannot be found
 	 */
 	public static void parseConfig() throws IOException {
@@ -22,7 +22,7 @@ public class SettingsParser {
 	/**
 	 * Parses string input to a single setting to be stored in {@link Settings}
 	 * @param key the name of the setting, such as defaultSolverIterations or defaultFactorial
-	 * @param value the value of the setting, such as 10000 or RECURSIVE
+	 * @param value the value of the setting, such as {@code 10000} or {@code RECURSIVE}
 	 */
 	public static void parseSingleSetting(String key, String value) {
 		switch (key) {

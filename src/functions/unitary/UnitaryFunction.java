@@ -54,6 +54,10 @@ public abstract class UnitaryFunction extends GeneralFunction {
 			return this;
 	}
 
+	/**
+	 * Returns a {@link GeneralFunction} of the {@link UnitaryFunction#operand} of the current {@link UnitaryFunction#operand} if it is an instance of the {@link Invertible#getInverse()} of the {@link UnitaryFunction}
+	 * @return a {@link GeneralFunction} of the {@link UnitaryFunction#operand} of the current {@link UnitaryFunction#operand} if it is an instance of the {@link Invertible#getInverse()} of the {@link UnitaryFunction}
+	 */
 	public GeneralFunction simplifyInverse() {
 		if (this instanceof Invertible inv && operand.getClass().isAssignableFrom(inv.getInverse()))
 			return ((UnitaryFunction) operand).operand;

@@ -15,7 +15,7 @@ import java.util.Map;
 public class Asec extends InverseTrigFunction {
 
 	/**
-	 * Constructs a new Asec
+	 * Constructs a new {@code Asec}
 	 * @param operand The function which arcsec is operating on
 	 */
 	public Asec(GeneralFunction operand) {

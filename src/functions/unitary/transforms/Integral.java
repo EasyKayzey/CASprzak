@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class Integral extends TransformFunction {
 	/**
-	 * Constructs a new Integral
+	 * Constructs a new {@code Integral}
 	 * @param integrand The integrand on the Integral
 	 * @param respectTo The variable that the Integral is with respect to
 	 */

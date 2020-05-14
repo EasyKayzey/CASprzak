@@ -11,7 +11,7 @@ import java.util.Map;
 public class Sinh extends TrigFunction {
 
 	/**
-	 * Constructs a new Sinh
+	 * Constructs a new {@code Sinh}
 	 * @param operand The function which sinh is operating on
 	 */
 	public Sinh(GeneralFunction operand) {

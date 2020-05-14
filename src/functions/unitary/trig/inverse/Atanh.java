@@ -14,7 +14,7 @@ import java.util.Map;
 public class Atanh extends InverseTrigFunction {
 
 	/**
-	 * Constructs a new Atanh
+	 * Constructs a new {@code Atanh}
 	 * @param operand The function which arctanh is operating on
 	 */
 	public Atanh(GeneralFunction operand) {

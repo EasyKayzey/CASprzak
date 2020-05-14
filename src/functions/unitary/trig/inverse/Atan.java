@@ -14,7 +14,7 @@ import java.util.Map;
 public class Atan extends InverseTrigFunction {
 
 	/**
-	 * Constructs a new Atan
+	 * Constructs a new {@code Atan}
 	 * @param operand The function which arctan is operating on
 	 */
 	public Atan(GeneralFunction operand) {

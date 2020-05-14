@@ -14,7 +14,7 @@ import java.util.Map;
 public class Acoth extends InverseTrigFunction {
 
 	/**
-	 * Constructs a new Acoth
+	 * Constructs a new {@code Acoth}
 	 * @param operand The function which arccoth is operating on
 	 */
 	public Acoth(GeneralFunction operand) {

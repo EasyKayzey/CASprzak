@@ -14,7 +14,7 @@ import java.util.Map;
 public class Sech extends TrigFunction {
 
 	/**
-	 * Constructs a new Sech
+	 * Constructs a new {@code Sech}
 	 * @param operand The function which sech is operating on
 	 */
 	public Sech(GeneralFunction operand) {

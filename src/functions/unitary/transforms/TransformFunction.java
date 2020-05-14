@@ -12,7 +12,7 @@ public abstract class TransformFunction extends UnitaryFunction {
 	public final char respectTo;
 
 	/**
-	 * Constructs a new TransformFunction
+	 * Constructs a new {@code TransformFunction}
 	 * @param operand The operand of the TransformFunction
 	 * @param respectTo The variable that the TransformFunction operates with respect to
 	 */

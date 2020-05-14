@@ -20,7 +20,7 @@ public abstract class UnitaryFunction extends GeneralFunction {
 	public final GeneralFunction operand;
 
 	/**
-	 * Constructs a new UnitaryFunction
+	 * Constructs a new {@code UnitaryFunction}
 	 * @param operand The {@link GeneralFunction} which will be operated on
 	 */
 	public UnitaryFunction(GeneralFunction operand) {

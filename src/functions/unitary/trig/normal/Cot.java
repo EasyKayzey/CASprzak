@@ -15,7 +15,7 @@ import java.util.Map;
 public class Cot extends TrigFunction {
 
 	/**
-	 * Constructs a new Cot
+	 * Constructs a new {@code Cot}
 	 * @param operand The function which cot is operating on
 	 */
 	public Cot(GeneralFunction operand) {

@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class Sign extends PiecewiseFunction {
 	/**
-	 * Constructs a new Sign
+	 * Constructs a new {@code Sign}
 	 * @param operand The function which sign is operating on
 	 */
 	public Sign(GeneralFunction operand) {

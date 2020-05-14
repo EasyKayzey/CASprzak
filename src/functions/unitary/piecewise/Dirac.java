@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class Dirac extends PiecewiseFunction {
 	/**
-	 * Constructs a new Dirac
+	 * Constructs a new {@code Dirac}
 	 * @param operand The function which the Dirac-Delta function is operating on
 	 */
 	public Dirac(GeneralFunction operand) {

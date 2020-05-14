@@ -16,7 +16,7 @@ public class Csc extends TrigFunction {
 
 
 	/**
-	 * Constructs a new Csc
+	 * Constructs a new {@code Csc}
 	 * @param operand The function which csc is operating on
 	 */
 	public Csc(GeneralFunction operand) {

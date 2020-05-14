@@ -12,7 +12,7 @@ import java.util.Map;
 public class Cos extends TrigFunction {
 
 	/**
-	 * Constructs a new Cos
+	 * Constructs a new {@code Cos}
 	 * @param operand The function which cos is operating on
 	 */
 	public Cos(GeneralFunction operand) {

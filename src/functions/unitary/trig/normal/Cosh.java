@@ -11,7 +11,7 @@ import java.util.Map;
 public class Cosh extends TrigFunction {
 
 	/**
-	 * Constructs a new Cosh
+	 * Constructs a new {@code Cosh}
 	 * @param operand The function which cosh is operating on
 	 */
 	public Cosh(GeneralFunction operand) {

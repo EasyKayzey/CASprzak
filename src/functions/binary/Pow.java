@@ -16,9 +16,9 @@ import java.util.Map;
 
 public class Pow extends BinaryFunction {
 	/**
-	 * Constructs a new Pow
-	 * @param exponent The exponent of the exponent
-	 * @param base The base of the exponent
+	 * Constructs a new {@link Pow}
+	 * @param exponent The exponent
+	 * @param base The base
 	 */
 	public Pow(GeneralFunction exponent, GeneralFunction base) {
 		super(exponent, base);
@@ -69,8 +69,8 @@ public class Pow extends BinaryFunction {
 	}
 
 	/**
-	 * Returns a {@link GeneralFunction} where obvious exponents (ex: {@code (x+1)^1 or (x-1)^0}) have been simplified and {@link Constant} bases and {@link Constant} exponents (ex: {@code 2^7}) are simplified
-	 * @return a {@link GeneralFunction} where obvious exponents and Functions of Constants are simplified
+	 * Returns a {@link GeneralFunction} where obvious exponents (ex: {@code (x+1)^1 or (x-1)^0}) have been simplified and functions of constants (ex: {@code 2^7}) are simplified
+	 * @return a {@link GeneralFunction} where obvious exponents and functions of constants are simplified
 	 */
 	public GeneralFunction simplifyObviousExponentsAndFOC() { //FOC means Functions of Constants
 		if (function1 instanceof Constant constant)
@@ -84,7 +84,7 @@ public class Pow extends BinaryFunction {
 	}
 
 	/**
-	 * Returns a {@link Pow} where an exponent to an exponent has been simplified. Example: {@code (x^2)^3 = x^6}
+	 * Simplifies instances of a power raised to a power. Example: {@code (x^2)^3 = x^6}
 	 * @return a {@link Pow} where the exponents are multiplied
 	 */
 	public Pow multiplyExponents() {
@@ -95,7 +95,7 @@ public class Pow extends BinaryFunction {
 	}
 
 	/**
-	 * Returns a {@link Product} where the exponent is on each term. Example: {@code (xy)^2 = (x^2)(y^2) }
+	 * Returns a {@link Product} where the exponent is distributed to each term. Example: {@code (xy)^2 = (x^2)(y^2) }
 	 * @return a {@link Product} with the exponent distributed
 	 */
 	public Product distributeExponents() {
@@ -111,8 +111,8 @@ public class Pow extends BinaryFunction {
 	}
 
 	/**
-	 * Given a Pow, checks if the exponent is a positive integer then unwraps it into a multiply
-	 * @return a new unwrapped {@link GeneralFunction}
+	 * Given a {@link Pow}, checks if the exponent is a positive integer, and if so, applies {@link #unwrapIntegerPower()}
+	 * @return {@code this} or a new unwrapped {@link Product}
 	 */
 	public GeneralFunction unwrapIntegerPowerSafe() {
 		try {
@@ -123,8 +123,8 @@ public class Pow extends BinaryFunction {
 	}
 
 	/**
-	 * Given a Pow with positive integer exponent, unwraps it into a multiply
-	 * @return a new unwrapped Multiply
+	 * Given a {@link Pow} with positive integer exponent, unwraps it into a {@link Product}
+	 * @return a new unwrapped {@link Product}
 	 * @throws RuntimeException if the exponent is not a positive integer
 	 */
 	public Product unwrapIntegerPower() throws RuntimeException {
@@ -136,8 +136,8 @@ public class Pow extends BinaryFunction {
 
 
 	/**
-	 * If the exponent is a logarithm of the same base as the {@link Pow}, it returns the argument of the logarithm
-	 * @return the argument of the logarithm in the exponent, if the exponent is a logarithm of the same base as the {@link Pow}
+	 * If the exponent is a logarithm with the same base as the {@link Pow}, it returns the argument of the logarithm
+	 * @return the argument of the logarithm in the exponent, if the exponent is a logarithm with the same base as the {@link Pow}
 	 */
 	@SuppressWarnings("ChainOfInstanceofChecks")
 	public GeneralFunction simplifyLogsOfSameBase() {

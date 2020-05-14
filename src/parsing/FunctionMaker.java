@@ -25,7 +25,7 @@ public class FunctionMaker {
 
 	/**
 	 * Returns a {@link GeneralFunction} corresponding to a "unitary" operation string
-	 * @param functionName the string of the operation (e.g. "-" or "csc")
+	 * @param functionName the string of the operation (e.g. "ln", "-", or "csc")
 	 * @param function     the {@link GeneralFunction} to be operated on
 	 * @return new {@link GeneralFunction}
 	 */
@@ -71,11 +71,10 @@ public class FunctionMaker {
 	}
 
 	/**
-	 * Returns a {@link GeneralFunction} corresponding to a "binary" operation string
-	 * NOTE: The functions are sometimes in a weird order for non-commutative types, so always check the constructors
+	 * Returns a {@link GeneralFunction} corresponding to a "binary" operation string.
 	 * @param functionName the string of the operation (e.g. "*" or "logb")
-	 * @param first     another {@link GeneralFunction} to be operated on
-	 * @param second    one {@link GeneralFunction} to be operated on
+	 * @param first     one {@link GeneralFunction} to be operated on
+	 * @param second    another {@link GeneralFunction} to be operated on
 	 * @return new {@link GeneralFunction}
 	 */
 	public static GeneralFunction makeBinary(String functionName, GeneralFunction first, GeneralFunction second) {

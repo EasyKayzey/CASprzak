@@ -4,7 +4,7 @@ import functions.GeneralFunction;
 import functions.Integrable;
 import functions.unitary.trig.GeneralTrigFunction;
 
-public abstract class TrigFunction extends GeneralTrigFunction implements Integrable {
+public abstract class TrigFunction extends GeneralTrigFunction {
 
 	/**
 	 * Constructs a new TrigFunction

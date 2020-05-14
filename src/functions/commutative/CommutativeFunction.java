@@ -53,7 +53,7 @@ public abstract class CommutativeFunction extends GeneralFunction {
 
 	public boolean equalsFunction(GeneralFunction that) {
 		if (that instanceof CommutativeFunction function && this.getClass().equals(that.getClass()))
-			return ArrayTools.deepEquals(functions, function.getFunctions());
+			return Arrays.equals(functions, function.getFunctions());
 		else
 			return false;
 	}

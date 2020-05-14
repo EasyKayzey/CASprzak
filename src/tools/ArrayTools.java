@@ -10,41 +10,13 @@ public class ArrayTools {
 	/**
 	 * Deep-clones {@link GeneralFunction} array
 	 * @param functionArray array of Functions
-	 * @return a clone of the {@code GeneralFunction[]}
+	 * @return a deep-clone of the {@code GeneralFunction[]}
 	 */
 	public static GeneralFunction[] deepClone(GeneralFunction[] functionArray) {
 		GeneralFunction[] newArray = new GeneralFunction[functionArray.length];
 		for (int i = 0; i < newArray.length; i++)
 			newArray[i] = functionArray[i].clone();
 		return newArray;
-	}
-
-
-	/**
-	 * Checks if two {@link GeneralFunction} arrays have equal GeneralFunctions at each index
-	 * @param functionArray1 first array
-	 * @param functionArray2 second array
-	 * @return true if the two arrays are deeply equal
-	 */
-	public static boolean deepEquals(GeneralFunction[] functionArray1, GeneralFunction[] functionArray2) {
-		return deepEqualsExcluding(functionArray1, functionArray2, -1);
-	}
-
-	/**
-	 * Checks if two {@link GeneralFunction} arrays have equal GeneralFunctions at each index, excluding one specified index
-	 * @param functionArray1 first array
-	 * @param functionArray2 second array
-	 * @param excluding      index to exclude
-	 * @return true if the two arrays are deeply equal
-	 */
-	public static boolean deepEqualsExcluding(GeneralFunction[] functionArray1, GeneralFunction[] functionArray2, int excluding) {
-		if (functionArray1.length != functionArray2.length)
-			return false;
-		for (int i = 0; i < functionArray1.length; i++)
-			if (i != excluding && !functionArray1[i].equalsFunction(functionArray2[i]))
-				return false;
-
-		return true;
 	}
 
 	/**

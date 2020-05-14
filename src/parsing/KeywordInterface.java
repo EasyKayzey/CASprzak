@@ -23,10 +23,13 @@ import java.util.stream.Collectors;
 
 @SuppressWarnings("SpellCheckingInspection")
 public class KeywordInterface {
-	public static final Pattern keywordSplitter = Pattern.compile("\\s+(?=[^\"]*(\"[^\"]*\"[^\"]*)*$)");
-	public static final Pattern spaces = Pattern.compile("\\s+");
-	public static final Pattern equals = Pattern.compile("=");
-	public static final HashMap<String, GeneralFunction> storedFunctions = new HashMap<>();
+	private static final Pattern keywordSplitter = Pattern.compile("\\s+(?=[^\"]*(\"[^\"]*\"[^\"]*)*$)");
+	private static final Pattern spaces = Pattern.compile("\\s+");
+	private static final Pattern equals = Pattern.compile("=");
+	private static final HashMap<String, GeneralFunction> storedFunctions = new HashMap<>();
+	/**\
+	 * The output of the last run commamnd
+	 */
 	public static Object prev;
 
 	private KeywordInterface(){

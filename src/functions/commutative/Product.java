@@ -50,7 +50,7 @@ public class Product extends CommutativeFunction {
 		return new Product(ArrayTools.deepClone(functions));
 	}
 
-	public String toString() {
+	public String toString() {//TODO special case for -1
 		if (functions.length < 1)
 			return "()";
 		StringBuilder string = new StringBuilder("(");

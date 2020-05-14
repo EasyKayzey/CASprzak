@@ -83,7 +83,7 @@ public class Extrema {
      * @param function The {@link GeneralFunction} whose minima are being found
      * @param lowerBound The lower bound of the range
      * @param upperBound The upper bound of the range
-     * @return any minima of function on the specified range
+     * @return a List of any minima of function on the specified range
      */
     public static List<Double> findLocalMinima(GeneralFunction function, double lowerBound, double upperBound) {
         return findPoints(function, lowerBound, upperBound, (a, b) -> (a > b));
@@ -94,7 +94,7 @@ public class Extrema {
      * @param function The {@link GeneralFunction} whose maxima are being found
      * @param lowerBound The lower bound of the range
      * @param upperBound The upper bound of the range
-     * @return any maxima of function on the specified range
+     * @return a List of any maxima of function on the specified range
      */
     public static List<Double> findLocalMaxima(GeneralFunction function, double lowerBound, double upperBound) {
        return findPoints(function, lowerBound, upperBound, (a, b) -> (a < b));
@@ -105,7 +105,7 @@ public class Extrema {
      * @param function The {@link GeneralFunction} whose inflection points are being found
      * @param lowerBound The lower bound of the range
      * @param upperBound The upper bound of the range
-     * @return the inflection points of function on the specified range
+     * @return a List of any inflection points of function on the specified range
      */
     public static List<Double> findInflectionPoints(GeneralFunction function, double lowerBound, double upperBound) {
         return findPoints(function, lowerBound, upperBound, (a, b) -> (Math.abs(a - b) < Settings.zeroMargin));

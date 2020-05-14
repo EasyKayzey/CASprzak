@@ -10,11 +10,11 @@ import java.util.function.Predicate;
 
 public abstract class BinaryFunction extends GeneralFunction {
 	/**
-	 * The first {@link GeneralFunction} in the binary operation
+	 * One {@link GeneralFunction} in the binary operation
 	 */
 	protected final GeneralFunction function1;
 	/**
-	 * The second {@link GeneralFunction} in the binary operation
+	 * The other {@link GeneralFunction} in the binary operation
 	 */
 	protected final GeneralFunction function2;
 
@@ -30,16 +30,16 @@ public abstract class BinaryFunction extends GeneralFunction {
 
 
 	/**
-	 * Returns the {@link GeneralFunction} stored in {@link #function1}
-	 * @return the {@link GeneralFunction} stored in {@link #function1}
+	 * Returns {@code simplify()}{@link #function1}
+	 * @return {@code simplify()}{@link #function1}
 	 */
 	public GeneralFunction getFunction1() {
 		return function1;
 	}
 
 	/**
-	 * Returns the {@link GeneralFunction} stored in {@link #function2}
-	 * @return the {@link GeneralFunction} stored in {@link #function2}
+	 * Returns {@code simplify()}{@link #function2}
+	 * @return {@code simplify()}{@link #function2}
 	 */
 	public GeneralFunction getFunction2() {
 		return function2;
@@ -84,7 +84,7 @@ public abstract class BinaryFunction extends GeneralFunction {
 	}
 
 	/**
-	 * Converts the binary function to a combination of its special cases, e.g. 2^x becomes e^((ln2)x)
+	 * Converts the binary function to a combination of its special cases. Ex: 2^x becomes e^(\ln(2)*x)
 	 * @return the special-case-converted function
 	 */
 	public abstract GeneralFunction toSpecialCase();

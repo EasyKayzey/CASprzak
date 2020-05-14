@@ -8,7 +8,7 @@ public class ArrayTools {
 	private ArrayTools(){}
 
 	/**
-	 * Deep-clones {@link GeneralFunction} array
+	 * Deep-clones a {@link GeneralFunction} array
 	 * @param functionArray array of Functions
 	 * @return a deep-clone of the {@code GeneralFunction[]}
 	 */
@@ -22,7 +22,7 @@ public class ArrayTools {
 	/**
 	 * Returns a copy of the input array with the {@link GeneralFunction} at the specified index removed
 	 * @param functionArray the array of GeneralFunctions
-	 * @param index         index of the {@link GeneralFunction} to be removed
+	 * @param index         index of the function to be removed
 	 * @return the new array
 	 */
 	public static GeneralFunction[] removeFunctionAt(GeneralFunction[] functionArray, int index) {
@@ -35,27 +35,10 @@ public class ArrayTools {
 	}
 
 	/**
-	 * Takes two {@link GeneralFunction} arrays as inputs, one of which contains a {@link functions.commutative.CommutativeFunction} containing the other. Creates a new array with all elements from both arrays, excluding the aforementioned {@link functions.commutative.CommutativeFunction} at indexInOuter.
-	 * @param outer        first {@code GeneralFunction[]}
-	 * @param inner        second {@code GeneralFunction[]}
-	 * @param indexInOuter index to not include in the first {@code GeneralFunction[]}
-	 * @return new {@code GeneralFunction[]} with elements from both
-	 */
-	public static GeneralFunction[] pullUp(GeneralFunction[] outer, GeneralFunction[] inner, int indexInOuter) {
-		GeneralFunction[] an = new GeneralFunction[outer.length + inner.length - 1];
-		if (indexInOuter > 0)
-			System.arraycopy(outer, 0, an, 0, indexInOuter);
-		if (indexInOuter < outer.length - 1)
-			System.arraycopy(outer, indexInOuter + 1, an, indexInOuter, outer.length - indexInOuter - 1);
-		System.arraycopy(inner, 0, an, outer.length - 1, inner.length);
-		return an;
-	}
-
-	/**
-	 * Returns a {@code GeneralFunction[]} where every element in add is now a {@link Product} of [multiply] and the function that was previously at its location in [add]
-	 * @param multiply the {@code GeneralFunction[]} which is distributed to every element in add
-	 * @param add      the {@code GeneralFunction[]} which is being distributed to
-	 * @return {@code GeneralFunction[]} where the multiply has been distributed to the add
+	 * Returns a {@code GeneralFunction[]} where every element in add is now a {@link Product} of {@code multiply} and the function that was previously at its location in {@code add}
+	 * @param multiply the {@code GeneralFunction[]} which is distributed to every element in {@code add}
+	 * @param add      the {@code GeneralFunction[]} which is {@code multiply} being distributed on to
+	 * @return {@code GeneralFunction[]} where {@code multiply} has been distributed to {@code add}
 	 */
 	public static GeneralFunction[] distribute(GeneralFunction[] multiply, GeneralFunction[] add) {
 		GeneralFunction[] finalAdd = new GeneralFunction[add.length];

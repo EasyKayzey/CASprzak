@@ -3,7 +3,6 @@ package functions.commutative;
 import functions.GeneralFunction;
 import functions.special.Constant;
 import org.jetbrains.annotations.NotNull;
-import tools.ArrayTools;
 
 import java.util.*;
 import java.util.function.DoubleBinaryOperator;
@@ -157,9 +156,19 @@ public abstract class CommutativeFunction extends GeneralFunction {
 	public CommutativeFunction simplifyPull() {
 		for (int i = 0; i < functions.length; i++)
 			if (this.getClass().equals(functions[i].getClass()))
-				return me(ArrayTools.pullUp(functions, ((CommutativeFunction) functions[i]).getFunctions(), i)).simplifyPull();
+				return me(pullUp(functions, ((CommutativeFunction) functions[i]).getFunctions(), i)).simplifyPull();
 
 		return this;
+	}
+
+	private static GeneralFunction[] pullUp(GeneralFunction[] outer, GeneralFunction[] inner, int indexInOuter) {
+		GeneralFunction[] newArray = new GeneralFunction[outer.length + inner.length - 1];
+		if (indexInOuter > 0)
+			System.arraycopy(outer, 0, newArray, 0, indexInOuter);
+		if (indexInOuter < outer.length - 1)
+			System.arraycopy(outer, indexInOuter + 1, newArray, indexInOuter, outer.length - indexInOuter - 1);
+		System.arraycopy(inner, 0, newArray, outer.length - 1, inner.length);
+		return newArray;
 	}
 
 	/**

@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 import static parsing.OperationLists.*;
 
-public class LatexReplacer {
+public class LatexReplacer {//TODO yeah erez, u document this
 
 	private LatexReplacer() {
 

@@ -12,7 +12,7 @@ public class SolverTools {
 	private SolverTools(){}
 
 	/**
-	 * Returns a list of Doubles that represents a range slit into a certain amount of sections by storing te endpoints of the sections
+	 * Returns a list of Doubles that represents a range split into a certain amount of sections by storing the endpoints of the sections
 	 * @param upper    the upper bound of the range
 	 * @param lower    the lower bound of the range
 	 * @param sections the amount of sections that the range is split into

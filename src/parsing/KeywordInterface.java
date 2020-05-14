@@ -42,7 +42,7 @@ public class KeywordInterface {
 	 * @param input a string that contains the command and arguments
 	 * @return the Object requested
 	 */
-	public static Object useKeywords(String input) {//TODO add an defs that defines and simplifies
+	public static Object useKeywords(String input) {
 		input = stripQuotes(input);
 		if ("_".equals(input))
 			return prev;
@@ -54,6 +54,7 @@ public class KeywordInterface {
 			case "eval", "evaluate"												-> evaluate(splitInput[1]);
 			case "simp", "simplify"												-> simplify(splitInput[1]);
 			case "sub", "substitute"											-> substitute(splitInput[1]);
+			case "subs", "substitutes", "substitutesimplify"					-> substituteSimplify(splitInput[1]);
 			case "sa", "suball"													-> substituteAllInput(splitInput[1]);
 			case "sol", "solve"													-> solve(splitInput[1]);
 			case "ext", "extrema"												-> extrema(splitInput[1]);
@@ -61,6 +62,7 @@ public class KeywordInterface {
 			case "intn", "intnumeric"											-> integrateNumeric(splitInput[1]);
 			case "intne", "intnumericerror"										-> integrateNumericError(splitInput[1]);
 			case "def", "deffunction"											-> defineFunction(splitInput[1]);
+			case "defs", "deffunctions", "deffunctionsimplify"					-> defineFunctionSimplify(splitInput[1]);
 			case "defc", "defcon", "defconstant"								-> defineConstant(splitInput[1]);
 			case "rmf", "rmfun", "removefun", "removefunction"					-> removeFunction(splitInput[1]);
 			case "rmc", "rmconstant", "removeconstant"							-> removeConstant(splitInput[1]);
@@ -154,6 +156,10 @@ public class KeywordInterface {
 		return parseStored(splitInput[0]).substituteVariable(ParsingTools.getCharacter(splitInput[1]), parseStored(splitInput[2]));
 	}
 
+	private static Object substituteSimplify(String input) {
+		return substitute(input).simplify();
+	}
+
 	private static GeneralFunction substituteAllInput(String input) {
 		return substituteAll(parseStored(input));
 	}
@@ -188,6 +194,10 @@ public class KeywordInterface {
 			storedFunctions.put(splitInput[0], parseStored(splitInput[1]));
 		}
 		return storedFunctions.get(splitInput[0]);
+	}
+
+	private static Object defineFunctionSimplify(String s) {
+		return ((GeneralFunction)defineFunction(s)).simplify();
 	}
 
 	private static Object defineConstant(String input) {

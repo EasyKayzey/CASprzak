@@ -2,8 +2,12 @@ package functions.unitary.combo;
 
 import config.Settings;
 import functions.GeneralFunction;
+import functions.special.Variable;
 import functions.unitary.UnitaryFunction;
+import tools.DefaultFunctions;
+import tools.IntegralTools;
 import tools.ParsingTools;
+import tools.VariableTools;
 
 import java.util.Map;
 
@@ -24,7 +28,10 @@ public class RFactorial extends Factorial {
 
 	@Override
 	public GeneralFunction getDerivative(char varID) {
-		throw new UnsupportedOperationException("RFactorial has no derivative.");
+		if (VariableTools.doesNotContainsVariable(operand, varID))
+			return DefaultFunctions.ZERO;
+		else
+			throw new UnsupportedOperationException("RFactorial has no derivative.");
 	}
 
 	@Override

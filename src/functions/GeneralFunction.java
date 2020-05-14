@@ -63,7 +63,7 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 	/**
 	 * Returns the derivative of the function, simplified
 	 * @param varID the ID of the variable being differentiated
-	 * @return the derivative of this function , simplified
+	 * @return the derivative of this function, simplified
 	 */
 	public GeneralFunction getSimplifiedDerivative(char varID) {
 		if (Settings.cacheDerivatives && derivatives.containsKey(varID))
@@ -150,7 +150,7 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 	}
 
 	/**
-	 * Used internally for comparing two functions of **the same exact type**
+	 * Used internally for comparing two functions of <b>the same exact type</b>
 	 * @param that the {@link GeneralFunction} compared to
 	 * @return comparison
 	 */

@@ -29,7 +29,7 @@ public class MiscTools {
 
 	/**
 	 * Returns the location of a {@link GeneralFunction} in its class-based sort order (see {@link GeneralFunction#sortOrder})
-	 * @param function the function whose class order is to be found
+	 * @param function the function whose location in the class order is to be found
 	 * @return location in {@link GeneralFunction#sortOrder}
 	 */
 	public static int findClassValue(GeneralFunction function) {
@@ -41,12 +41,17 @@ public class MiscTools {
 		throw new UnsupportedOperationException("Class " + function.getClass().getSimpleName() + " not supported.");
 	}
 
+	/**
+	 * Returns a list of the elements in this {@link Sum} with the constants stripped as a pair. Ex: {@code x^2+2sin(x)} becomes {@code [<1.0, x^2>, <2.0, sin(x)>]}
+	 * @param sum the sum whose constants should be stripped
+	 * @return the list of pairs as specified above
+	 */
 	public static List<Pair<Double, GeneralFunction>> stripConstantsOfSum(Sum sum) {
 		GeneralFunction[] sumArray = sum.getFunctions();
 		List<Pair<Double, GeneralFunction>> strippedPairsArray = new LinkedList<>();
 		for (GeneralFunction function: sumArray) {
 			if (function instanceof Product multiply) {
-				GeneralFunction[] terms = multiply.simplifyConstants().getFunctions();
+				GeneralFunction[] terms = multiply.getFunctions();
 				if (terms[0] instanceof Constant constant)
 					strippedPairsArray.add(new Pair<>(constant.constant, new Product(ArrayTools.removeFunctionAt(terms, 0)).simplifyTrivialElement()));
 				else

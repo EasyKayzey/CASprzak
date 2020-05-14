@@ -7,7 +7,7 @@ import static parsing.OperationLists.*;
 
 public class LatexReplacer {
 
-	private LatexReplacer() {}
+	private LatexReplacer(){}
 
 	private static final Pattern A   = Pattern.compile("\\\\Alpha");
 	private static final Pattern a   = Pattern.compile("\\\\alpha");

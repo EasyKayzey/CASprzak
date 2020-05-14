@@ -13,6 +13,8 @@ import java.util.ListIterator;
 
 public class IntegralTools {
 
+    private IntegralTools(){}
+
     /**
      * If {@code function} is not a {@link Product}, returns {@code <1.0, function>}. Otherwise, strips {@code function} of any functions that are constant relative to {@code varID} and returns a {@link Pair} of the constant function and the remaining stripped function. Ex: {@code 2xy, 'x'} becomes {@code <2y, x>}
      * @param function The {@link GeneralFunction} whose relative constants are being stripped

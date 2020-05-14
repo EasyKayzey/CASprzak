@@ -9,6 +9,9 @@ import java.util.Set;
 import java.util.function.Predicate;
 
 public class VariableTools {
+
+	private VariableTools() {}
+
 	/**
 	 * Returns a {@link Predicate} of {@link GeneralFunction} describing whether a given {@link GeneralFunction} is an instance of {@link Variable} with {@code varID} equal to the specified character
 	 * @param varID the character of the variable to be checked for

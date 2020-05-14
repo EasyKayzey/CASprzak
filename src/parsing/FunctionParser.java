@@ -69,7 +69,7 @@ public class FunctionParser {
 	}
 
 	/**
-	 * Turns an infix string into a postfix array
+	 * Turns an infix string into a postfix array of tokens
 	 * @param infix input string in infix
 	 * @return array of postfix tokens
 	 */

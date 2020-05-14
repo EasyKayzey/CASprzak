@@ -28,7 +28,7 @@ public class KeywordInterface {
 	private static final Pattern equals = Pattern.compile("=");
 	private static final HashMap<String, GeneralFunction> storedFunctions = new HashMap<>();
 	/**
-	 * The output of the last run commamnd
+	 * The previous output of {@link #useKeywords(String)}
 	 */
 	public static Object prev;
 
@@ -37,8 +37,8 @@ public class KeywordInterface {
 	}
 
 	/**
-	 * Takes input as a string with command, arguments...
-	 * @param input contains the command and arguments
+	 * Takes input as a string in the format {@code command arguments...}
+	 * @param input a string that contains the command and arguments
 	 * @return the Object requested
 	 */
 	public static Object useKeywords(String input) {//TODO add an defs that defines and simplifies
@@ -106,9 +106,9 @@ public class KeywordInterface {
 	}
 
 	/**
-	 * Substitutes everything stored in {@link #storedFunctions} into the input {@link GeneralFunction}
+	 * Substitutes everything stored in {@link #storedFunctions} into {@code function} in an unspecified order
 	 * @param function the function to be substituted into
-	 * @return input with all substitutions
+	 * @return {@code input} with all substitutions
 	 */
 	public static GeneralFunction substituteAll(GeneralFunction function) {
 		for (Map.Entry<String, GeneralFunction>  entry : storedFunctions.entrySet())

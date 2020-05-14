@@ -71,8 +71,8 @@ public class Logb extends BinaryFunction {
 	}
 
 	/**
-	 * Returns a {@link GeneralFunction} where the exponent of the argument has been moved to in front of the logarithm
-	 * @return a {@link GeneralFunction} where the exponent of the argument has been moved to in front of the logarithm
+	 * Returns a {@link GeneralFunction} where, if the argument is a {@link Pow} or {@link Exp}, the exponent of the argument has been moved in front of the logarithm in a {@link Product}
+	 * @return a {@link GeneralFunction} where, if the argument is a {@link Pow} or {@link Exp}, the exponent of the argument has been moved in front of the logarithm in a {@link Product}
 	 */
 	@SuppressWarnings("ChainOfInstanceofChecks")
 	public GeneralFunction simplifyPowers() {

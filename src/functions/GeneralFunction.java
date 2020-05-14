@@ -129,7 +129,7 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 
 	/**
 	 * Simplifies the two functions, then compares them with {@link #equalsFunction(GeneralFunction)}
-	 * @param that the object compared to
+	 * @param that the object that this is compared against
 	 * @return true if they're equal
 	 */
 	public boolean equals(Object that) {
@@ -140,14 +140,14 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 
 	/**
 	 * Used internally for comparing two functions of <b>the same exact type</b>
-	 * @param that the {@link GeneralFunction} compared to
+	 * @param that the {@link GeneralFunction} that this is compared against
 	 * @return the comparison
 	 */
 	protected abstract int compareSelf(GeneralFunction that);
 
 	/**
 	 * {@link GeneralFunction}s of different types are sorted according to {@link #sortOrder} and {@link MiscTools#findClassValue(GeneralFunction)}, and functions of the same exact type are sorted using {@link #compareSelf(GeneralFunction)}
-	 * @param that the {@link GeneralFunction} compared to
+	 * @param that the {@link GeneralFunction} that this is compared against
 	 * @return the comparison
 	 */
 	public int compareTo(@NotNull GeneralFunction that) {

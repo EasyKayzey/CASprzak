@@ -27,7 +27,7 @@ public class KeywordInterface {
 	private static final Pattern spaces = Pattern.compile("\\s+");
 	private static final Pattern equals = Pattern.compile("=");
 	private static final HashMap<String, GeneralFunction> storedFunctions = new HashMap<>();
-	/**\
+	/**
 	 * The output of the last run commamnd
 	 */
 	public static Object prev;

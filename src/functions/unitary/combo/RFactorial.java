@@ -2,10 +2,8 @@ package functions.unitary.combo;
 
 import config.Settings;
 import functions.GeneralFunction;
-import functions.special.Variable;
 import functions.unitary.UnitaryFunction;
 import tools.DefaultFunctions;
-import tools.IntegralTools;
 import tools.ParsingTools;
 import tools.VariableTools;
 

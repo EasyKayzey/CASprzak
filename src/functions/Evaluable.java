@@ -5,7 +5,7 @@ import java.util.Map;
 public interface Evaluable {
 
 	/**
-	 * Evaluates a {@link GeneralFunction} at a point denoted by a hashmap
+	 * Evaluates a {@link GeneralFunction} at a point denoted by a {@code Map}
 	 * @param variableValues the values of the variables in the {@link GeneralFunction} at the point
 	 * @return the value of the {@link GeneralFunction} at the point
 	 */

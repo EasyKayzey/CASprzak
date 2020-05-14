@@ -18,7 +18,7 @@ public class FunctionParser {
 	private FunctionParser(){}
 
 	/**
-	 * Parses infix to a {@link GeneralFunction}
+	 * Parses infix to a {@link GeneralFunction} using {@link #toPostfix(String)} and {@link #parsePostfix(List)}
 	 * @param infix infix string
 	 * @return a {@link GeneralFunction} corresponding to the infix string
 	 */
@@ -71,7 +71,7 @@ public class FunctionParser {
 	/**
 	 * Turns an infix string into a postfix array of tokens
 	 * @param infix input string in infix
-	 * @return array of postfix tokens
+	 * @return an array of postfix tokens
 	 */
 	public static List<String> toPostfix(String infix) {
 		if (!Settings.enforceEscapes)

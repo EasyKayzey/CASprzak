@@ -75,7 +75,7 @@ public class Solver {
 	 * @param expression the function whose roots are being found
 	 * @param lower      the lower bound of the values that will be searched
 	 * @param upper      the upper bound of the values that will be searched
-	 * @return an array of all the approximate roots found
+	 * @return a List of all the approximate roots found
 	 */
 	@SuppressWarnings("UnnecessaryDefault")
 	public static List<Double> getSolutionsRange(GeneralFunction expression, double lower, double upper) {
@@ -92,7 +92,7 @@ public class Solver {
 	 * @param lower      the lower bound of the values that will be searched
 	 * @param upper      the upper bound of the values that will be searched
 	 * @param runs       the amount of times that {@link #newtonsMethod} is iterated
-	 * @return an array of all the approximate roots found
+	 * @return a List of all the approximate roots found
 	 */
 	public static List<Double> getSolutionsRangeNewton(GeneralFunction expression, double lower, double upper, int runs) {
 		char var = VariableTools.getSingleVariable(expression);
@@ -116,7 +116,7 @@ public class Solver {
 	 * @param expression the function whose roots are being found
 	 * @param lower      the lower bound of the values that will be searched
 	 * @param upper      the upper bound of the values that will be searched
-	 * @return an array of all the approximate roots found
+	 * @return a List of all the approximate roots found
 	 */
 	public static List<Double> getSolutionsRangeHalley(GeneralFunction expression, double lower, double upper) {
 		char var = VariableTools.getSingleVariable(expression);
@@ -131,7 +131,7 @@ public class Solver {
 	 * @param expression the function whose roots are being found
 	 * @param lower      the lower bound of the values that will be searched
 	 * @param upper      the upper bound of the values that will be searched
-	 * @return an array of all the approximate roots found
+	 * @return a List of all the approximate roots found
 	 */
 	public static List<Double> getSolutionsRangeNewton(GeneralFunction expression, double lower, double upper) {
 		return getSolutionsRangeNewton(expression, lower, upper, Settings.defaultSolverIterations);

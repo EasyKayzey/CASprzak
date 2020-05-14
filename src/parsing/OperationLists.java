@@ -4,6 +4,11 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class OperationLists {
+
+	private OperationLists() {
+
+	}
+
 	/**
 	 * A list of unitary operations
 	 */
@@ -46,6 +51,7 @@ public class OperationLists {
 			add("\\acoth");
 		}
 	};
+
 	/**
 	 * A list of binary operations
 	 */

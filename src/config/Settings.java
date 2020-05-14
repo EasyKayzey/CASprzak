@@ -47,12 +47,12 @@ public class Settings {
 	public static char singleVariableDefault;
 
 	/**
-	 * The margin that {@link tools.singlevariable.Solver} uses to determine if a values is close enough to zero to considered zero
+	 * The margin that {@link tools.singlevariable.Solver} uses to determine if a value is close enough to zero to considered a root of a function
 	 */
 	public static double zeroMargin;
 
 	/**
-	 * The margin used in {@link ParsingTools#toInteger(double)} when deciding when a double is close enough to an integer
+	 * The margin used in {@link ParsingTools#toInteger(double)} when deciding when a {@code double} is close enough to an integer
 	 */
 	public static double integerMargin;
 
@@ -62,7 +62,7 @@ public class Settings {
 	public static double equalsMargin;
 
 	/**
-	 * Denotes whether or not expressions like {@code sin(pi/2)} must be escaped to {@code \sin(\pi/2)}. Enabling this will significantly reduce issues.
+	 * Denotes whether or not expressions like {@code sin(pi/2)} must be escaped to {@code \sin(\pi/2)}. Enabling this is strongly recommended, and may reduce bugs.
 	 */
 	public static boolean enforceEscapes;
 
@@ -72,7 +72,7 @@ public class Settings {
 	public static boolean simplifyFunctionsOfConstants;
 
 	/**
-	 * Denotes whether exponents should be distributed over multiplication in a normal simplify(). Ex: {@code (2x)^2 -> 4x^2}
+	 * Denotes whether exponents should be distributed over multiplication in {@code simplify()}. Ex: {@code (2x)^2 -> 4x^2}
 	 */
 	public static boolean distributeExponents;
 
@@ -92,12 +92,12 @@ public class Settings {
 	public static boolean exitSolverOnProximity;
 
 	/**
-	 * Denotes whether transforms should execute their action when simplify is called
+	 * Denotes whether a {@link functions.unitary.transforms.TransformFunction} should execute its action when {@code simplify()} is called
 	 */
 	public static boolean executeOnSimplify;
 
 	/**
-	 * Denotes whether expressions are distributed over sum when called in simplify(). Ex: {@code x(y+z) -> (xy+xz)}
+	 * Denotes whether products are distributed over addition in {@code simplify()}. Ex: {@code x(y+z) -> (xy+xz)}
 	 */
 	public static boolean distributeFunctions;
 
@@ -107,7 +107,7 @@ public class Settings {
 	public static SolverType defaultSolverType;
 
 	/**
-	 * Denotes the default implementation of factorial to be used
+	 * Denotes the default implementation of {@link functions.unitary.combo.Factorial} to be used
 	 */
 	public static FactorialType defaultFactorial;
 }

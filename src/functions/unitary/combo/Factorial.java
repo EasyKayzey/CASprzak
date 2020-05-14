@@ -21,6 +21,11 @@ public abstract class Factorial extends UnitaryFunction {
 	 */
 	public abstract GeneralFunction classForm() throws UnsupportedOperationException;
 
+	/**
+	 * Returns a {@link Factorial} of the {@link Settings#defaultFactorial} type
+	 * @param input The {@link UnitaryFunction#operand} of the new {@link Factorial}
+	 * @return a {@link Factorial} of the {@link Settings#defaultFactorial} type
+	 */
 	public static GeneralFunction defaultFactorial(GeneralFunction input) {
 		return switch (Settings.defaultFactorial) {
 			case STIRLING -> new SFactorial(input);

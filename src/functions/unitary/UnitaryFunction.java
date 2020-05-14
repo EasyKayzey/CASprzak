@@ -43,6 +43,10 @@ public abstract class UnitaryFunction extends GeneralFunction {
 		return newFunction;
 	}
 
+	/**
+	 * Returns a new {@link Constant} of the {@link UnitaryFunction} evaluated if the {@link UnitaryFunction#operand} is a {@link Constant}
+	 * @return a new {@link Constant} of the {@link UnitaryFunction} evaluated if the {@link UnitaryFunction#operand} is a {@link Constant}
+	 */
 	public GeneralFunction simplifyFOC() {
 		if (Settings.simplifyFunctionsOfConstants && operand instanceof Constant)
 			return new Constant(evaluate(null));
@@ -92,6 +96,12 @@ public abstract class UnitaryFunction extends GeneralFunction {
 	}
 
 
+	/**
+	 * Returns a {@link UnitaryFunction} of the given type and of the given operand
+	 * @param type The {@code Class} of the {@link UnitaryFunction} being returned
+	 * @param operand The {@link UnitaryFunction#operand} of the {@link UnitaryFunction}
+	 * @return a {@link UnitaryFunction} of the given type and of the given operand.
+	 */
 	public static UnitaryFunction newInstanceOf(Class<?> type, GeneralFunction operand) {
 		try {
 			Constructor<?>[] constructors = type.getConstructors();

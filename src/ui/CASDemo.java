@@ -200,6 +200,8 @@ public class CASDemo {
 		sleep(1.5);
 		System.out.println("For those who are curious, that was the general formula of the derivative of 'f(x)^g(x)' applied to 'x^2'.");
 		sleep(1.5);
+		System.out.println("Also, if you want to define a function and simplify it in one step, you can use the 'defs' or 'deffunctionsimplify'.");
+		sleep(1.5);
 		System.out.println("Continue testing this feature, or type 'next' to continue.");
 		runTillNext();
 		currentState = DemoState.VAR;
@@ -245,6 +247,8 @@ public class CASDemo {
 		System.out.println("An important thing to remembers is that these changes are not saved in the function.");
 		sleep(1.5);
 		System.out.println("For example, to substitute every 'x' in 'g' with 'x^2', you would need to run 'def g sub g x x^2'.");
+		sleep(1.5);
+		System.out.println("Additionally, like 'def', if you want to substitute and simplify in one step, use 'subs' or 'substitutesimplify'.");
 		sleep(1.5);
 		System.out.println("Continue testing this feature, or type 'next' to continue.");
 		runTillNext();

@@ -44,7 +44,7 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 	};
 
 	/**
-	 * Caches derivatives with the key corresponding to the varID of the derivative
+	 * Caches derivatives with the key corresponding to the {@code varID} of the derivative
 	 */
 	protected final Map<Character, GeneralFunction> derivatives = new HashMap<>();
 
@@ -56,15 +56,11 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 
 	/**
 	 * Returns a clone of this {@link GeneralFunction}
-	 * @return a clone of the function
+	 * @return a clone of this function
 	 */
 	public abstract GeneralFunction clone();
 
-	/**
-	 * Returns the derivative of the function, simplified
-	 * @param varID the ID of the variable being differentiated
-	 * @return the derivative of this function, simplified
-	 */
+
 	public GeneralFunction getSimplifiedDerivative(char varID) {
 		if (Settings.cacheDerivatives && derivatives.containsKey(varID))
 			return derivatives.get(varID);
@@ -74,13 +70,6 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 		return derivative;
 	}
 
-
-	/**
-	 * Returns the Nth derivative of the function, simplified
-	 * @param varID the ID of the variable being differentiated
-	 * @param N     the amount of times to differentiate
-	 * @return the Nth derivative of the {@link GeneralFunction} it is called on, simplified
-	 */
 	public GeneralFunction getNthDerivative(char varID, int N) {
 		GeneralFunction currentFunction = this;
 		for (int i = 0; i < N; i++)
@@ -90,10 +79,10 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 }
 
 	/**
-	 * Returns the value of the derivative at point
-	 * @param varID the ID of the variable being differentiated
+	 * Returns the value of the derivative at {@code point}
+	 * @param varID the variable being differentiated against
 	 * @param point the point to find the derivative at
-	 * @return the value of the derivative at point
+	 * @return the value of the derivative at {@code point}
 	 */
 	@SuppressWarnings("unused")
 	public double derivativeAt(char varID, Map<Character, Double> point) {
@@ -101,10 +90,10 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 	}
 
 	/**
-	 * Replaces every {@link GeneralFunction} that satisfies the predicate using the action specified by the replacer
+	 * Replaces every {@link GeneralFunction} that satisfies the {@code test} using the action specified by {@code replacer}
 	 * @param test checks if the function should be replaced
 	 * @param replacer replaces the function
-	 * @return a new function with all replacements made
+	 * @return a new {@link GeneralFunction} with all replacements made
 	 */
 	public abstract GeneralFunction substituteAll(Predicate<? super GeneralFunction> test, Function<? super GeneralFunction, ? extends GeneralFunction> replacer);
 
@@ -119,7 +108,7 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 	}
 
 	/**
-	 * Fixes some variables to the values given in the map by substituting in a {@link Constant} for each of those {@link Variable}s
+	 * Fixes some variables to the values given in the {@code Map<Character, Double> values} by substituting in a {@link Constant} for each of those {@link Variable}s
 	 * @param values the map defining the substitutions to be made
 	 * @return a new function with the substitutions made
 	 */
@@ -132,9 +121,9 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 
 
 	/**
-	 * Returns true when the two functions simplified are equal
-	 * @param that The {@link GeneralFunction} that the current function is being checked equal to
-	 * @return true when the two functions are equal
+	 * Returns true when the two fully-simplified functions are equal
+	 * @param that The {@link GeneralFunction} that the current function is being checked against
+	 * @return true if the two functions are equal
 	 */
 	public abstract boolean equalsFunction(GeneralFunction that);
 
@@ -152,14 +141,14 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 	/**
 	 * Used internally for comparing two functions of <b>the same exact type</b>
 	 * @param that the {@link GeneralFunction} compared to
-	 * @return comparison
+	 * @return the comparison
 	 */
 	protected abstract int compareSelf(GeneralFunction that);
 
 	/**
-	 * Two different {@link GeneralFunction} types are sorted according to {@link #sortOrder} and {@link MiscTools#findClassValue(GeneralFunction)}, and same types are sorted using {@link #compareSelf(GeneralFunction)}
+	 * {@link GeneralFunction}s of different types are sorted according to {@link #sortOrder} and {@link MiscTools#findClassValue(GeneralFunction)}, and functions of the same exact type are sorted using {@link #compareSelf(GeneralFunction)}
 	 * @param that the {@link GeneralFunction} compared to
-	 * @return comparison
+	 * @return the comparison
 	 */
 	public int compareTo(@NotNull GeneralFunction that) {
 		if (this.equalsFunction(that))

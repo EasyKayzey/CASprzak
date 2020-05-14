@@ -6,6 +6,11 @@ import java.util.regex.Pattern;
 import static parsing.OperationLists.*;
 
 public class LatexReplacer {
+
+	private LatexReplacer() {
+
+	}
+
 	private static final Pattern A   = Pattern.compile("\\\\Alpha");
 	private static final Pattern a   = Pattern.compile("\\\\alpha");
 	private static final Pattern B   = Pattern.compile("\\\\Beta");

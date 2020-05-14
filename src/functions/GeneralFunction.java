@@ -46,7 +46,7 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 	/**
 	 * Caches derivatives with the key corresponding to the varID of the derivative
 	 */
-	protected final HashMap<Character, GeneralFunction> derivatives = new HashMap<>();
+	protected final Map<Character, GeneralFunction> derivatives = new HashMap<>();
 
 	/**
 	 * Returns a String representation of this {@link GeneralFunction}

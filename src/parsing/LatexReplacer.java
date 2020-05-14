@@ -5,11 +5,9 @@ import java.util.regex.Pattern;
 
 import static parsing.OperationLists.*;
 
-public class LatexReplacer {//TODO yeah erez, u document this
+public class LatexReplacer {
 
-	private LatexReplacer() {
-
-	}
+	private LatexReplacer() {}
 
 	private static final Pattern A   = Pattern.compile("\\\\Alpha");
 	private static final Pattern a   = Pattern.compile("\\\\alpha");
@@ -69,6 +67,11 @@ public class LatexReplacer {//TODO yeah erez, u document this
 	private static final Pattern hb  = Pattern.compile("\\\\hbar");
 	private static final Pattern par = Pattern.compile("\\\\par(tial)?");
 
+	/**
+	 * Replaces LaTeX-escaped Greek letters in a string with their actual letter characters
+	 * @param input a LaTeX-escaped string
+	 * @return the encoded string
+	 */
 	public static String encodeGreek(String input) {
 		input = A  .matcher(input).replaceAll("Α");
 		input = a  .matcher(input).replaceAll("α");
@@ -130,6 +133,11 @@ public class LatexReplacer {//TODO yeah erez, u document this
 		return input;
 	}
 
+	/**
+	 * Adds LaTeX escapes to all operations that should be escaped, and to {@code pi}.
+	 * @param input the unescaped input
+	 * @return the input with LaTeX escapes inserted as specified above
+	 */
 	public static String addEscapes(String input) {
 		for (List<String> ops : List.of(binaryOperations, unitaryOperations, List.of("\\pi")))
 			for (String op : ops)

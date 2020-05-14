@@ -8,6 +8,9 @@ import functions.special.Variable;
 
 @SuppressWarnings({"StaticVariableOfConcreteClass", "unused"})
 public class DefaultFunctions {
+
+	private DefaultFunctions(){}
+
 	/**
 	 * A {@link Constant} with the value of {@code π}
 	 */
@@ -63,36 +66,36 @@ public class DefaultFunctions {
 	public static final Variable Z = new Variable('z');
 
 	/**
-	 * Returns {@link DefaultFunctions#NEGATIVE_ONE} times the input
+	 * Returns a {@link Product} of {@link DefaultFunctions#NEGATIVE_ONE} times the input
 	 * @param input the input {@link GeneralFunction}
-	 * @return {@link DefaultFunctions#NEGATIVE_ONE} times the input
+	 * @return a {@link Product} of {@link DefaultFunctions#NEGATIVE_ONE} times the input
 	 */
 	public static Product negative(GeneralFunction input) {
 		return new Product(NEGATIVE_ONE, input);
 	}
 
 	/**
-	 * Returns input to the power {@link DefaultFunctions#NEGATIVE_ONE}
+	 * Returns a {@link Pow} of input to the power {@link DefaultFunctions#NEGATIVE_ONE}
 	 * @param input the input {@link GeneralFunction}
-	 * @return input to the power {@link DefaultFunctions#NEGATIVE_ONE}
+	 * @return a {@link Pow} of input to the power {@link DefaultFunctions#NEGATIVE_ONE}
 	 */
 	public static Pow reciprocal(GeneralFunction input) {
 		return new Pow(NEGATIVE_ONE, input);
 	}
 
 	/**
-	 * Returns input to the power {@link DefaultFunctions#HALF}
+	 * Returns a {@link Pow} of input to the power {@link DefaultFunctions#HALF}
 	 * @param input the input {@link GeneralFunction}
-	 * @return input to the power {@link DefaultFunctions#HALF}
+	 * @return a {@link Pow} of input to the power {@link DefaultFunctions#HALF}
 	 */
 	public static Pow sqrt(GeneralFunction input) {
 		return new Pow(HALF, input);
 	}
 
 	/**
-	 * Returns input to the power {@link DefaultFunctions#TWO}
+	 * Returns a {@link Pow} of input to the power {@link DefaultFunctions#TWO}
 	 * @param input the input {@link GeneralFunction}
-	 * @return input to the power {@link DefaultFunctions#TWO}
+	 * @return a {@link Pow} of input to the power {@link DefaultFunctions#TWO}
 	 */
 	public static Pow square(GeneralFunction input) {
 		return new Pow(TWO, input);

@@ -34,7 +34,7 @@ public class KeywordInterface {
 	 * @param input contains the command and arguments
 	 * @return the Object requested
 	 */
-	public static Object useKeywords(String input) {
+	public static Object useKeywords(String input) {//TODO add an defs that defines and simplifies
 		input = stripQuotes(input);
 		if ("_".equals(input))
 			return prev;

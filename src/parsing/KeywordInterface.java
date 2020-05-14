@@ -29,6 +29,10 @@ public class KeywordInterface {
 	public static final HashMap<String, GeneralFunction> storedFunctions = new HashMap<>();
 	public static Object prev;
 
+	private KeywordInterface(){
+
+	}
+
 	/**
 	 * Takes input as a string with command, arguments...
 	 * @param input contains the command and arguments
@@ -118,7 +122,7 @@ public class KeywordInterface {
 		return input;
 	}
 
-	public static GeneralFunction partialDiff(String input) {
+	private static GeneralFunction partialDiff(String input) {
 		String[] splitInput = spaces.split(input, 2);
 		return parseStored(splitInput[1]).getSimplifiedDerivative(ParsingTools.getCharacter(splitInput[0]));
 	}
@@ -128,7 +132,7 @@ public class KeywordInterface {
 		return parseStored(splitInput[2]).getNthDerivative(ParsingTools.getCharacter(splitInput[0]), Integer.parseInt(splitInput[1]));
 	}
 
-	public static double evaluate(String input) {
+	private static double evaluate(String input) {
 		String[] splitInput = spaces.split(input, 2);
 		return parseStored(splitInput[0]).evaluate(
 				Arrays.stream(keywordSplitter.split(splitInput[1]))
@@ -137,25 +141,25 @@ public class KeywordInterface {
 		);
 	}
 
-	public static GeneralFunction simplify(String input) {
+	private static GeneralFunction simplify(String input) {
 		return parseStored(input).simplify();
 	}
 
-	public static GeneralFunction substitute(String input) {
+	private static GeneralFunction substitute(String input) {
 		String[] splitInput = keywordSplitter.split(input);
 		return parseStored(splitInput[0]).substituteVariable(ParsingTools.getCharacter(splitInput[1]), parseStored(splitInput[2]));
 	}
 
-	public static GeneralFunction substituteAllInput(String input) {
+	private static GeneralFunction substituteAllInput(String input) {
 		return substituteAll(parseStored(input));
 	}
 
-	public static List<Double> solve(String input) {
+	private static List<Double> solve(String input) {
 		String[] splitInput = keywordSplitter.split(input);
 		return Solver.getSolutionsRange(parseStored(splitInput[0]), ParsingTools.getConstant(splitInput[1]), ParsingTools.getConstant(splitInput[2]));
 	}
 
-	public static Object extrema(String input) {
+	private static Object extrema(String input) {
 		String[] splitInput = keywordSplitter.split(input);
 		return switch (splitInput[0]) {
 			case "min", "minima"					-> Extrema.findLocalMinimum(parseStored(splitInput[1]), ParsingTools.getConstant(splitInput[2]), ParsingTools.getConstant(splitInput[3]));
@@ -167,12 +171,12 @@ public class KeywordInterface {
 		};
 	}
 
-	public static GeneralFunction taylor(String input) {
+	private static GeneralFunction taylor(String input) {
 		String[] splitInput = keywordSplitter.split(input);
 		return TaylorSeries.makeTaylorSeries(parseStored(splitInput[0]), ParsingTools.toInteger(ParsingTools.getConstant(splitInput[1])), ParsingTools.getConstant(splitInput[2]));
 	}
 
-	public static Object defineFunction(String input) {
+	private static Object defineFunction(String input) {
 		String[] splitInput = spaces.split(input, 2);
 		try {
 			storedFunctions.put(splitInput[0], (GeneralFunction) KeywordInterface.useKeywords(splitInput[1]));
@@ -200,11 +204,11 @@ public class KeywordInterface {
 	}
 
 	@SuppressWarnings("SameReturnValue")
-	public static Map<String, GeneralFunction> getFunctions() {
+	private static Map<String, GeneralFunction> getFunctions() {
 		return storedFunctions;
 	}
 
-	public static GeneralFunction getFunction(String function) {
+	private static GeneralFunction getFunction(String function) {
 		return storedFunctions.get(function);
 	}
 
@@ -214,12 +218,12 @@ public class KeywordInterface {
 	}
 
 	@SuppressWarnings("SameReturnValue")
-	public static Map<String, GeneralFunction> clearFunctions() {
+	private static Map<String, GeneralFunction> clearFunctions() {
 		storedFunctions.clear();
 		return storedFunctions;
 	}
 
-	public static double integrateNumeric(String input) {
+	private static double integrateNumeric(String input) {
 		String[] splitInput = keywordSplitter.split(input);
 		return NumericalIntegration.simpsonsRule(parseStored(splitInput[0]), ParsingTools.getConstant(splitInput[1]), ParsingTools.getConstant(splitInput[2]));
 	}

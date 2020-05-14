@@ -9,6 +9,11 @@ import parsing.LatexReplacer;
 import java.lang.reflect.MalformedParametersException;
 
 public class ParsingTools {
+	/**
+	 * If the input is a {@link GeneralFunction}, returns the input. If the input is a {@code Double}, returns a new {@link Constant} of that value. If the input is a {@link String}, parses it with {@link FunctionParser#parseInfix(String)}.
+	 * @param input the input to be parsed as described above
+	 * @return the parsed input as described above
+	 */
 	@SuppressWarnings("ChainOfInstanceofChecks")
 	public static GeneralFunction toFunction(Object input) {
 		if (input instanceof GeneralFunction f)

@@ -22,9 +22,9 @@ public class ParsingTools {
 	}
 
 	/**
-	 * Evaluates infix corresponding to a constant, like {@code pi/3}
-	 * @param infix infix string of constant
-	 * @return a double corresponding to the evaluated constant to be evaluated
+	 * Evaluates infix corresponding to a constant, such as {@code pi/3}
+	 * @param infix the infix string of the constant
+	 * @return a {@code double} corresponding to the evaluated constant to be evaluated
 	 */
 	public static double getConstant(String infix) {
 		return FunctionParser.parseInfix(infix).evaluate(null);
@@ -32,8 +32,8 @@ public class ParsingTools {
 
 	/**
 	 * Parses a string to a boolean using the following rules, ignoring case:
-	 * TRUE:  true, t, 1, yes, y
-	 * FALSE: false, f, 0, no, n
+	 * TRUE: {@code true, t, 1, yes, y}
+	 * FALSE: {@code false, f, 0, no, n}
 	 * @param s the string to be parsed
 	 * @return the string parsed to a boolean
 	 */
@@ -46,10 +46,10 @@ public class ParsingTools {
 	}
 
 	/**
-	 * Converts a double within {@link Settings#integerMargin} of an integer to an integer
-	 * @param d the double to be converted
-	 * @return the double rounded to an integer
-	 * @throws IllegalArgumentException if the double is not within {@link Settings#integerMargin} of an integer
+	 * Converts a {@code double} within {@link Settings#integerMargin} of an integer to an {@code int}
+	 * @param d the {@code double} to be converted
+	 * @return the {@code double} rounded to an integer
+	 * @throws IllegalArgumentException if the {@code double} is not within {@link Settings#integerMargin} of an integer
 	 */
 	public static int toInteger(double d) throws IllegalArgumentException{
 		if (isAlmostInteger(d))
@@ -59,19 +59,19 @@ public class ParsingTools {
 	}
 
 	/**
-	 * Checks if a double is within Settings.integerMargin of an integer
-	 * @param d the double to be converted
-	 * @return true if the double is within {@link Settings#integerMargin} of an integer
+	 * Checks if a {@code double} is within Settings.integerMargin of an integer
+	 * @param d the {@code double} to be checked
+	 * @return true if the {@code double} is within {@link Settings#integerMargin} of an integer
 	 */
 	public static boolean isAlmostInteger(double d) throws IllegalArgumentException{
 		return Math.abs(((int) (d + .5)) - d) < Settings.integerMargin;
 	}
 
 	/**
-     * Converts the string to a character,
+     * Converts the string to a character, supporting legitimate single-character strings, LaTeX-escaped characters, and single-quote-surrounded characters.
      * @param input the string containing the character
-     * @return the character in the string
-     * @throws IllegalArgumentException if the input is not one character or three characters in the format 'c'
+     * @return the character represented by the string
+     * @throws IllegalArgumentException if the input is not in one of the formats specified above
      */
     public static char getCharacter(String input) {
     	if (!Settings.enforceEscapes)

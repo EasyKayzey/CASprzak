@@ -49,8 +49,8 @@ public class StageOne {
             return new Integral(power.unwrapIntegerPower().distributeAll(), variableChar).execute();
 
         Pair<GeneralFunction, GeneralFunction> stripConstant = IntegralTools.stripConstantsRespectTo(integrand, variableChar);
-        GeneralFunction function = stripConstant.second;
-        GeneralFunction number = stripConstant.first;
+        GeneralFunction function = stripConstant.getSecond();
+        GeneralFunction number = stripConstant.getFirst();
 
         if (function instanceof Product product){
             GeneralFunction[] productTerms = product.getFunctions();
@@ -128,8 +128,8 @@ public class StageOne {
     private static GeneralFunction derivativeDividesSearcher(CommutativeFunction product, GeneralFunction term, GeneralFunction toTakeDerivative, char variableChar) {
         GeneralFunction derivativeWithConstants = toTakeDerivative.getSimplifiedDerivative(variableChar);
         Pair<GeneralFunction, GeneralFunction> derivative = IntegralTools.stripConstantsRespectTo(derivativeWithConstants, variableChar);
-        GeneralFunction derivativeWithoutConstant = derivative.second;
-        GeneralFunction constantInFront = derivative.first;
+        GeneralFunction derivativeWithoutConstant = derivative.getSecond();
+        GeneralFunction constantInFront = derivative.getFirst();
         Product derivativeTimesOperation = new Product(derivativeWithoutConstant, term);
         if (!SearchTools.existsInSurfaceSubset(product, derivativeTimesOperation::equals) || SearchTools.existsInOppositeSurfaceSubset(product, (u -> SearchTools.existsAny(u, VariableTools.isVariable(variableChar))), derivativeTimesOperation::equals))
             return null;

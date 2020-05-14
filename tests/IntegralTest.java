@@ -32,8 +32,8 @@ public class IntegralTest {
     void stripConstantsSimple() {
         GeneralFunction test1 = FunctionParser.parseInfix("3\\sin(x)");
         Pair<GeneralFunction, GeneralFunction> test2 = IntegralTools.stripConstantsRespectTo(test1, 'x');
-        assertEquals(new Constant(3), test2.first);
-        assertEquals(FunctionParser.parseInfix("\\sin(x)"), test2.second);
+        assertEquals(new Constant(3), test2.getFirst());
+        assertEquals(FunctionParser.parseInfix("\\sin(x)"), test2.getSecond());
     }
 
     @Test

@@ -3,8 +3,8 @@ package tools.helperclasses;
 import java.util.Map;
 
 public class Pair<T, U> extends AbstractPair<T, U> {
-	public final T first;
-	public final U second;
+	private final T first;
+	private final U second;
 
 	/**
 	 * Creates a pair by specifying its values

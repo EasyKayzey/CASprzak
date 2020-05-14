@@ -3,8 +3,8 @@ package tools.helperclasses;
 import java.util.Map;
 
 public class MutablePair<T, U> extends AbstractMutablePair<T, U> {
-	public T first;
-	public U second;
+	private T first;
+	private U second;
 
 	/**
 	 * Creates a mutable pair by specifying its values

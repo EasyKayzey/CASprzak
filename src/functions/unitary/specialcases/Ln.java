@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class Ln extends SpecialCaseBinaryFunction {
 	/**
-	 * Constructs a new {@code Ln}
+	 * Constructs a new {@link Ln}
 	 * @param operand The function which natural log is operating on
 	 */
 	public Ln(GeneralFunction operand) {

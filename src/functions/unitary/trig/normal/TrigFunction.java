@@ -6,8 +6,8 @@ import functions.unitary.trig.GeneralTrigFunction;
 public abstract class TrigFunction extends GeneralTrigFunction {
 
 	/**
-	 * Constructs a new {@code TrigFunction}
-	 * @param operand The operand of the TrigFunction
+	 * Constructs a new {@link TrigFunction}
+	 * @param operand The operand of the {@code TrigFunction}
 	 */
 	public TrigFunction(GeneralFunction operand) {
 		super(operand);

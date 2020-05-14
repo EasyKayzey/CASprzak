@@ -14,7 +14,7 @@ import java.util.Map;
 public class Tanh extends TrigFunction {
 
 	/**
-	 * Constructs a new {@code Tanh}
+	 * Constructs a new {@link Tanh}
 	 * @param operand The function which tanh is operating on
 	 */
 	public Tanh(GeneralFunction operand) {

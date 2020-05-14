@@ -14,7 +14,7 @@ import java.util.Map;
 public class Asinh extends InverseTrigFunction {
 
 	/**
-	 * Constructs a new {@code Asinh}
+	 * Constructs a new {@link Asinh}
 	 * @param operand The function which arcsinh is operating on
 	 */
 	public Asinh(GeneralFunction operand) {

@@ -9,8 +9,8 @@ import tools.DefaultFunctions;
 
 public abstract class InverseTrigFunction extends GeneralTrigFunction {
 	/**
-	 * Constructs a new {@code InverseTrigFunction}
-	 * @param operand The operand of the InverseTrigFunction
+	 * Constructs a new {@link InverseTrigFunction}
+	 * @param operand The operand of the {@code InverseTrigFunction}
 	 */
 	public InverseTrigFunction(GeneralFunction operand) {
 		super(operand);

@@ -14,7 +14,7 @@ import java.util.Map;
 public class Asin extends InverseTrigFunction {
 
 	/**
-	 * Constructs a new {@code Asin}
+	 * Constructs a new {@link Asin}
 	 * @param operand The function which arcsin is operating on
 	 */
 	public Asin(GeneralFunction operand) {

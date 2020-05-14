@@ -15,7 +15,7 @@ import java.util.Map;
 public class Acsc extends InverseTrigFunction {
 
 	/**
-	 * Constructs a new {@code Acsc}
+	 * Constructs a new {@link Acsc}
 	 * @param operand The function which arccsc is operating on
 	 */
 	public Acsc(GeneralFunction operand) {

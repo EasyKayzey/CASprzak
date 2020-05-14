@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class Abs extends PiecewiseFunction {
 	/**
-	 * Constructs a new {@code Abs}
+	 * Constructs a new {@link Abs}
 	 * @param operand The function which absolute value is operating on
 	 */
 	public Abs(GeneralFunction operand) {

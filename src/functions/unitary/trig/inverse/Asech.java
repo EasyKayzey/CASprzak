@@ -15,7 +15,7 @@ import java.util.Map;
 public class Asech extends InverseTrigFunction {
 
 	/**
-	 * Constructs a new {@code Asech}
+	 * Constructs a new {@link Asech}
 	 * @param operand The function which arcsech is operating on
 	 */
 	public Asech(GeneralFunction operand) {

@@ -7,7 +7,7 @@ import functions.unitary.UnitaryFunction;
 public abstract class Factorial extends UnitaryFunction {
 
 	/**
-	 * Constructs a new {@code Factorial}
+	 * Constructs a new {@link Factorial}
 	 * @param operand the argument of the factorial
 	 */
 	public Factorial(GeneralFunction operand) {

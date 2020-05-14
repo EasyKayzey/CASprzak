@@ -12,7 +12,7 @@ import java.util.Map;
 public class Sin extends TrigFunction {
 
 	/**
-	 * Constructs a new {@code Sin}
+	 * Constructs a new {@link Sin}
 	 * @param operand The function which sin is operating on
 	 */
 	public Sin(GeneralFunction operand) {

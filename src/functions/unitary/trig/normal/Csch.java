@@ -12,7 +12,7 @@ import java.util.Map;
 public class Csch extends TrigFunction {
 
 	/**
-	 * Constructs a new {@code Csch}
+	 * Constructs a new {@link Csch}
 	 * @param operand The function which csch is operating on
 	 */
 	public Csch(GeneralFunction operand) {

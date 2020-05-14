@@ -8,8 +8,8 @@ import functions.unitary.UnitaryFunction;
 public abstract class GeneralTrigFunction extends UnitaryFunction implements Invertible, Integrable {
 
 	/**
-	 * Constructs a new {@code GeneralTrigFunction}
-	 * @param operand The operand of the GeneralTrigFunction
+	 * Constructs a new {@link GeneralTrigFunction}
+	 * @param operand The operand of the {@code GeneralTrigFunction}
 	 */
 	public GeneralTrigFunction(GeneralFunction operand) {
 		super(operand);

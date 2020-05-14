@@ -14,7 +14,7 @@ import java.util.Map;
 public class Acot extends InverseTrigFunction {
 
 	/**
-	 * Constructs a new {@code Acot}
+	 * Constructs a new {@link Acot}
 	 * @param operand The function which arccot is operating on
 	 */
 	public Acot(GeneralFunction operand) {

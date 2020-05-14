@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class Exp extends SpecialCaseBinaryFunction {
 	/**
-	 * Constructs a new {@code Exp}
+	 * Constructs a new {@link Exp}
 	 * @param operand The function which the exponential is operating on
 	 */
 	public Exp(GeneralFunction operand) {

@@ -14,10 +14,10 @@ import java.util.ListIterator;
 public class IntegralTools {
 
     /**
-     * Strips a {@link GeneralFunction} of any relative constants and returns a {@link Pair} of the constant function and the stripped GeneralFunction (note that 2y is treated as a constant with respect to x)
-     * @param function The {@link GeneralFunction} whose relative constant is being Stripped
+     * If {@code function} is not a {@link Product}, returns {@code <1.0, function>}. Otherwise, strips {@code function} of any functions that are constant relative to {@code varID} and returns a {@link Pair} of the constant function and the remaining stripped function. Ex: {@code 2xy, 'x'} becomes {@code <2y, x>}
+     * @param function The {@link GeneralFunction} whose relative constants are being stripped
      * @param varID the variable to strip with respect to (i.e. {@code varID='x'} would mean {@code 2y} is a constant)
-     * @return A {@link Pair} of the constant and the stripped {@link GeneralFunction}
+     * @return A {@link Pair} of the constant function and the remaining stripped function
      */
     public static Pair<GeneralFunction, GeneralFunction> stripConstantsRespectTo(GeneralFunction function, char varID) {
         if (function instanceof Product multiply) {
@@ -39,9 +39,9 @@ public class IntegralTools {
     }
 
     /**
-     * Temporarily disables all optional simplification settings (such as distributeFunctions), then simplifies the input
+     * Simplifies the input without executing any of the optional simplifications steps enabled and disabled in {@link Settings}
      * @param function the function to be minimally simplified
-     * @return the function, minimally simplified
+     * @return the minimally simplified version of the function
      */
     public static GeneralFunction minimalSimplify(GeneralFunction function) {
         boolean dF = Settings.distributeFunctions;

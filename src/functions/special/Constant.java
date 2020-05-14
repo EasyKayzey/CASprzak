@@ -11,6 +11,9 @@ import java.util.function.Predicate;
 
 
 public class Constant extends SpecialFunction {
+	/**
+	 * Symbols or characters with a dedicated value. The defaults are {@code π} and {@code e}.
+	 */
 	public static final HashMap<String, Double> specialConstants = new HashMap<>() {
 		{
 			put("π", Math.PI);

@@ -72,6 +72,10 @@ public class PartialDerivative extends TransformFunction {
 		return new PartialDerivative(function, respectTo);
 	}
 
+	/**
+	 * Returns the partial derivative of the operand if it can be found.
+	 * @return the partial derivative of the operand
+	 */
 	public GeneralFunction execute() {
 		return operand.getSimplifiedDerivative(respectTo);
 	}

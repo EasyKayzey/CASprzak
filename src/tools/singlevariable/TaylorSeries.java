@@ -17,9 +17,9 @@ public class TaylorSeries {
 
     /**
      * Returns a Maclaurin series of the specified function of a given degree
-     * @param function The function whose Maclaurin series is being found
-     * @param degree The degree of the Maclaurin polynomial
-     * @return A Maclaurin series of the specified function
+     * @param function the function whose Maclaurin series is being found
+     * @param degree the degree of the Maclaurin polynomial
+     * @return a Maclaurin series of the specified function
      */
     public static GeneralFunction makeTaylorSeries(GeneralFunction function, int degree) {
         return makeTaylorSeries(function, degree, 0);
@@ -27,10 +27,10 @@ public class TaylorSeries {
 
     /**
      * Returns a Taylor series of the specified function at the specified center of a given degree
-     * @param function The function whose Taylor series is being found
-     * @param degree The degree of the Taylor polynomial
-     * @param center Where the Taylor series is centered
-     * @return A Taylor series of the specified function
+     * @param function the function whose Taylor series is being found
+     * @param degree the degree of the Taylor polynomial
+     * @param center where the Taylor series is centered
+     * @return a Taylor series of the specified function
      */
     public static GeneralFunction makeTaylorSeries(GeneralFunction function, int degree, double center) {
         GeneralFunction[] taylorSeriesTerms = new GeneralFunction[degree];

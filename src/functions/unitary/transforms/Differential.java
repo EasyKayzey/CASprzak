@@ -8,6 +8,11 @@ import java.util.Map;
 
 public class Differential extends TransformFunction {
 
+	/**
+	 * Returns a new {@link Differential}, which is sometimes used as an intermediary for integrals and derivatives
+	 * @param operand the operand of the {@link Differential}, which must be a variable
+	 * @param respectTo the variable that the differential is with respect to, which must match the variable
+	 */
 	public Differential(GeneralFunction operand, char respectTo) {
 		super(operand, respectTo);
 		if (!(operand instanceof Variable))

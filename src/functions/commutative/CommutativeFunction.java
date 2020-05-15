@@ -103,7 +103,7 @@ public abstract class CommutativeFunction extends GeneralFunction {
 	 * Simplifies each element of this {@link CommutativeFunction}
 	 * @return a new {@link CommutativeFunction} with each element of {@link #functions} simplified
 	 */
-	public abstract CommutativeFunction simplifyElements();
+	public abstract CommutativeFunction simplifyElements(); // TODO make be here
 
 	/**
 	 * Removes all instances of {@link #identityValue} from {@link #functions}

@@ -72,6 +72,7 @@ public class KeywordInterface {
 			case "ss", "sset", "sets", "setsetting"								-> setSettings(splitInput[1]);
 			case "ps", "settings", "printsettings"								-> printSettings();
 			case "int", "integral"												-> integral(splitInput[1]);
+			case "debug"														-> debug(splitInput[1]);
 			case "help"															-> splitInput.length == 1 ? help() : help(splitInput[1]);
 			default 															-> null;
 		};
@@ -91,6 +92,14 @@ public class KeywordInterface {
 		}
 		prev = ret;
 		return ret;
+	}
+
+	private static Object debug(String input) {
+		switch (input) {
+			case "parser", "parse"  -> System.out.println("add stuff here");
+			default -> throw new IllegalArgumentException("Setting not found.");
+		}
+		return "Done.";
 	}
 
 	/**

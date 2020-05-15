@@ -1,6 +1,7 @@
 package ui;
 
 import parsing.KeywordInterface;
+import tools.exceptions.CommandNotFoundException;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -26,7 +27,7 @@ public class CommandUI {
 					output(KeywordInterface.useKeywords(input));
 				} catch (RuntimeException e) {
 					System.out.println(e.toString());
-					if (e instanceof IllegalArgumentException) {
+					if (e instanceof CommandNotFoundException) {
 						System.out.print("When parsing the input as a raw function, the following exception was thrown: ");
 						output(KeywordInterface.prev);
 					}

@@ -6,6 +6,8 @@ import functions.GeneralFunction;
 import functions.special.Constant;
 import functions.unitary.transforms.Integral;
 import tools.ParsingTools;
+import tools.exceptions.CommandNotFoundException;
+import tools.exceptions.SettingNotFoundException;
 import tools.exceptions.TransformFailedException;
 import tools.singlevariable.Extrema;
 import tools.singlevariable.NumericalIntegration;
@@ -14,10 +16,7 @@ import tools.singlevariable.TaylorSeries;
 import ui.CASDemo;
 
 import java.lang.reflect.Field;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -89,7 +88,7 @@ public class KeywordInterface {
 				 return prev;
 			} catch (Exception parserException) {
 				prev = parserException;
-				throw new IllegalArgumentException(splitInput[0] + " is not a command supported by KeywordInterface, so raw-function parsing was attempted.");
+				throw new CommandNotFoundException(splitInput[0] + " is not a command supported by KeywordInterface, so raw-function parsing was attempted.");
 			}
 		}
 		prev = ret;
@@ -98,8 +97,23 @@ public class KeywordInterface {
 
 	private static Object debug(String input) {
 		switch (input) {
-			case "parser", "parse"  -> System.out.println("add stuff here");
-			default -> throw new IllegalArgumentException("Setting not found.");
+			case "fp", "parse", "parser"  -> {
+				Scanner scanner = new Scanner(System.in);
+				input = scanner.next();
+				while (!"exit".equals(input) && !"!".equals(input)) {
+					try {
+						System.out.println("PSto: " + parseStored(input));
+					} catch (Exception e) {
+						System.out.println(e.toString());
+					} try {
+						System.out.println("PSim: " + FunctionParser.parseSimplified(input));
+					} catch (Exception e) {
+						System.out.println(e.toString());
+					}
+					input = scanner.next();
+				}
+			}
+			default -> throw new SettingNotFoundException(input, "debug");
 		}
 		return "Done.";
 	}
@@ -192,7 +206,7 @@ public class KeywordInterface {
 			case "anymin", "anyminima"				-> Extrema.findLocalMinima(parseStored(splitInput[1]), ParsingTools.getConstant(splitInput[2]), ParsingTools.getConstant(splitInput[3]));
 			case "anymax", "anymaxima"				-> Extrema.findLocalMaxima(parseStored(splitInput[1]), ParsingTools.getConstant(splitInput[2]), ParsingTools.getConstant(splitInput[3]));
 			case "inflect", "inflection"			-> Extrema.findInflectionPoints(parseStored(splitInput[1]), ParsingTools.getConstant(splitInput[2]), ParsingTools.getConstant(splitInput[3]));
-			default 								-> throw new IllegalStateException("Invalid setting for extrema: " + splitInput[0]);
+			default 								-> throw new SettingNotFoundException(splitInput[0], "extrema");
 		};
 	}
 
@@ -212,7 +226,7 @@ public class KeywordInterface {
 	}
 
 	private static Object defineFunctionSimplify(String s) {
-		return ((GeneralFunction)defineFunction(s)).simplify();
+		return ((GeneralFunction) defineFunction(s)).simplify();
 	}
 
 	private static Object defineConstant(String input) {
@@ -347,7 +361,7 @@ public class KeywordInterface {
 					"integral [function] d[variable]";
 			case "help"				                                      			-> "Gives more information about a command. [argument] denotes a necessary argument, (argument) denotes an optional argument, and (argument)* denotes zero or more instances of argument.\n" +
 					"help (command)";
-			default -> throw new IllegalArgumentException("Invalid keyword: " + input);
+			default -> throw new IllegalArgumentException("Invalid command: " + input);
 		};
 	}
 

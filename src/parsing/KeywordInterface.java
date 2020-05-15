@@ -44,6 +44,7 @@ public class KeywordInterface {
 	 */
 	public static Object useKeywords(String input) {
 		input = stripQuotes(input);
+		input = input.strip(); // Strips whitespace
 		if ("_".equals(input))
 			return prev;
 		String[] splitInput = spaces.split(input, 2);

@@ -18,7 +18,7 @@ public class IntegralTest {
     void splitAdds() throws Exception {
         Integral test1 = new Integral(FunctionParser.parseInfix("x+e^x"), 'x');
         GeneralFunction test2 = new Sum(FunctionParser.parseInfix("0.5*x^2"), FunctionParser.parseInfix("e^x"));
-        assertEquals(test1.execute() , test2);
+        assertEquals(test1.execute(), test2);
     }
 
     @Test

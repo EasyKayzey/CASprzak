@@ -99,6 +99,7 @@ public class KeywordInterface {
 		switch (input) {
 			case "fp", "parse", "parser"  -> {
 				Scanner scanner = new Scanner(System.in);
+				scanner.useDelimiter("\n");
 				input = scanner.next();
 				while (!"exit".equals(input) && !"!".equals(input)) {
 					try {

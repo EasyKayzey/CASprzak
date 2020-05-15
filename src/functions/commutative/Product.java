@@ -4,7 +4,6 @@ import config.Settings;
 import functions.GeneralFunction;
 import functions.binary.Pow;
 import functions.special.Constant;
-import functions.special.Variable;
 import tools.ArrayTools;
 import tools.DefaultFunctions;
 import tools.PolynomialTools;
@@ -15,7 +14,7 @@ import java.util.*;
 
 public class Product extends CommutativeFunction {
 	/**
-	 * Constructs a new Multiply
+	 * Constructs a new {@link Product}
 	 * @param functions The terms being multiplied together
 	 */
 	public Product(GeneralFunction... functions) {
@@ -107,8 +106,8 @@ public class Product extends CommutativeFunction {
 	}
 
 	/**
-	 * Returns true if the {@link Product} contains a 0 {@link Constant}
-	 * @return true if the {@link Product} contains a 0 {@link Constant}
+	 * Returns true if the {@link Product} contains a {@link Constant} with value {@code 0}
+	 * @return true if the {@link Product} contains a {@link Constant} with value {@code 0}
 	 */
 	public boolean isTimesZero() {
 		for (GeneralFunction function : functions)
@@ -119,8 +118,8 @@ public class Product extends CommutativeFunction {
 	}
 
 	/**
-	 * If {@link #functions} contains multiple of the same {@link Variable} multiplied by each other (e.g. x*x^3) then the exponents will be added and the terms will be combined into one element of {@link #functions}
-	 * @return A new {@link Product} with all variable combined with added exponents
+	 * If {@link #functions} contains multiple functions that are equal to each other, including the bases of {@link Pow}s, then the exponents are added and the terms are combined. Ex: {@code sin(x)*(sin(x))^2} becomes {@code (sin(x))^3}
+	 * @return A new {@link Product} with exponents combined as specified above
 	 */
 	public Product addExponents() {
 		List<GeneralFunction> functionList = new LinkedList<>(List.of(functions));
@@ -156,8 +155,8 @@ public class Product extends CommutativeFunction {
 	}
 
 	/**
-	 * Returns a {@link GeneralFunction} where the rest of the multiple has been distributed to any {@link Sum}. Example: {@code sin(y)*(x+2) = x*sin(y) + 2*sin(y)}
-	 * @return a {@link GeneralFunction} where the rest of the multiple has been distributed to any {@link Sum}
+	 * If one element of the product is a {@link Sum}, distributes the other contents of the product onto the sum. Example: {@code sin(y)*(x+2) = x*sin(y) + 2*sin(y)}
+	 * @return this function with multiplication and addition distributed if possible
 	 */
 	public GeneralFunction distributeAll() {
 		GeneralFunction[] multiplyTerms = getFunctions();

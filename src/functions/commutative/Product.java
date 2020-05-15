@@ -103,12 +103,6 @@ public class Product extends CommutativeFunction {
 		return current;
 	}
 
-	@Override
-	public Product simplifyElements() {
-		GeneralFunction[] toMultiply = new GeneralFunction[functions.length];
-		for (int i = 0; i < functions.length; i++) toMultiply[i] = functions[i].simplify();
-		return new Product(toMultiply);
-	}
 
 	/**
 	 * Returns true if the {@link Product} contains a {@link Constant} with value {@code 0}

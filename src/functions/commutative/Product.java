@@ -52,6 +52,8 @@ public class Product extends CommutativeFunction {
 	public String toString() {//TODO special case for -1
 		if (functions.length < 1)
 			return "()";
+		if (functions.length == 2 && functions[0] instanceof Constant constant && constant.constant == -1.0 && !(functions[1] instanceof Constant))
+			return "-"+functions[1].toString();
 		StringBuilder string = new StringBuilder("(");
 		for (int i = 0; i < functions.length - 1; i++) {
 			string.append(functions[i].toString());

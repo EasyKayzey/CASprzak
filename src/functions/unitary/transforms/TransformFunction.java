@@ -26,7 +26,7 @@ public abstract class TransformFunction extends UnitaryFunction {
 		if (Settings.executeOnSimplify) {
 			TransformFunction current = (TransformFunction) simplifyInternal();
 			try {
-				return current.execute();
+				return current.execute().simplify();
 			} catch (TransformFailedException ignored) {
 				return current;
 			}

@@ -36,7 +36,10 @@ public class IntegralTools {
             }
             return new Pair<>(new Product(constants.toArray(new GeneralFunction[0])).simplifyTrivialElement(), new Product(termsWithConstantRemoved.toArray(new GeneralFunction[0])).simplifyTrivialElement());
         } else {
-            return new Pair<>(DefaultFunctions.ONE, function);
+            if (VariableTools.doesNotContainsVariable(function, varID))
+                return new Pair<>(function, DefaultFunctions.ONE);
+            else
+                return new Pair<>(DefaultFunctions.ONE, function);
         }
     }
 

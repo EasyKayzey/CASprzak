@@ -7,9 +7,9 @@ import java.util.Map;
 
 public class PartialDerivative extends TransformFunction {
 	/**
-	 * Constructs a new {@link Integral}
-	 * @param operand The operand on the PartialDerivative
-	 * @param respectTo The variable that the PartialDerivative is with respect to
+	 * Constructs a new {@link PartialDerivative}
+	 * @param operand The operand on the {@link PartialDerivative}
+	 * @param respectTo The variable that the {@link PartialDerivative} is with respect to
 	 */
 	public PartialDerivative(GeneralFunction operand, char respectTo) {
 		super(operand, respectTo);

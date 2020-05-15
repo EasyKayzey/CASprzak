@@ -49,7 +49,7 @@ public class Product extends CommutativeFunction {
 		return new Product(ArrayTools.deepClone(functions));
 	}
 
-	public String toString() {//TODO special case for -1
+	public String toString() {
 		if (functions.length < 1)
 			return "()";
 		if (functions.length == 2 && functions[0] instanceof Constant constant && constant.constant == -1.0 && !(functions[1] instanceof Constant))

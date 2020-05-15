@@ -1,6 +1,7 @@
 package ui;
 
 import parsing.KeywordInterface;
+import tools.VariableTools;
 
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
@@ -264,9 +265,13 @@ public class CASDemo {
 		System.out.println("Now, what happens when we define a new function 'b' using 'a' as a variable.");
 		sleep(1.5);
 		System.out.println("Try it yourself, define a new function 'b' as a function of a, e.g. def b a+1");
-		if (!tryInput(s -> s.length() > 3  && "def b ".equals(s.substring(0, 6)), "Begin your input with 'def b ' to define a function as 'b'."))
+		if (!tryInput(s -> !"def b a".equals(s) && s.length() > 5  && "def b ".equals(s.substring(0, 6)), "Begin your input with 'def b ' to define a function as 'b'. Make sure your input isn't 'def b a'."))
 			return;
 		sleep(1.5);
+		if (!VariableTools.doesNotContainsVariable(KeywordInterface.parseStored("b"), 'a')) {
+			System.out.println("An issue has occurred when parsing your function for 'b'. Please report this to the developers. Defaulting to 'def b a+1'...");
+			KeywordInterface.useKeywords("def b a+1");
+		}
 		System.out.println("Notice that 'b' is a function of 'a', not of 'x', when we evaluate, we are going to have to use 'a=[value]'.");
 		sleep(1.5);
 		System.out.println(">>> eval b a=2");//TODO Erez you had an idea to make sure that b != a

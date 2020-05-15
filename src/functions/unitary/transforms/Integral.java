@@ -64,7 +64,7 @@ public class Integral extends TransformFunction {
 	}
 
 	/**
-	 * Integrates the operand numerically from 0 to the value specified in the HashMap corresponding to respectTo
+	 * Integrates the operand numerically from 0 to the value specified in the {@code Map} corresponding to {@code respectTo}
 	 * @param variableValues the values of the variables of the {@link GeneralFunction} at the point
 	 * @return the operand integrated numerically
 	 */
@@ -87,8 +87,9 @@ public class Integral extends TransformFunction {
 	}
 
 	/**
-	 * Returns the Integral of the integrand if it can be found.
-	 * @return the Integral of the integrand
+	 * Returns the integral of the integrand
+	 * @return the integral of the integrand
+	 * @throws IntegrationFailedException if the integral could not be found
 	 */
 	public GeneralFunction execute() throws IntegrationFailedException {
 		return StageOne.derivativeDivides(operand, respectTo).simplify();

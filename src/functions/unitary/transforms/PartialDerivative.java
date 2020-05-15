@@ -73,7 +73,7 @@ public class PartialDerivative extends TransformFunction {
 	}
 
 	/**
-	 * Returns the partial derivative of the operand if it can be found.
+	 * Returns the partial derivative of the operand
 	 * @return the partial derivative of the operand
 	 */
 	public GeneralFunction execute() {

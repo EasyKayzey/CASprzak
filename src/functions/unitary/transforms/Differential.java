@@ -77,7 +77,9 @@ public class Differential extends TransformFunction {
 		return new Differential(function, respectTo);
 	}
 
-
+	/**
+	 * @exclude
+	 */
 	public GeneralFunction execute() {
 		throw new UnsupportedOperationException("Cannot execute a differential " + this);
 	}

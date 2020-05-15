@@ -7,14 +7,14 @@ import tools.exceptions.TransformFailedException;
 
 public abstract class TransformFunction extends UnitaryFunction {
 	/**
-	 * The character of the variable that the TransformFunction is with respect to
+	 * The character of the variable that the {@link TransformFunction} is with respect to
 	 */
 	public final char respectTo;
 
 	/**
 	 * Constructs a new {@link TransformFunction}
-	 * @param operand The operand of the {@code TransformFunction}
-	 * @param respectTo The variable that the {@code TransformFunction} operates with respect to
+	 * @param operand the operand of the {@link TransformFunction}
+	 * @param respectTo the variable that the {@link TransformFunction} operates with respect to
 	 */
 	public TransformFunction(GeneralFunction operand, char respectTo) {
 		super(operand);
@@ -34,8 +34,8 @@ public abstract class TransformFunction extends UnitaryFunction {
 	}
 
 	/**
-	 * Returns the transformation of the {@link UnitaryFunction#operand}
-	 * @return The the transformation of the {@link UnitaryFunction#operand}
+	 * Returns the transformation of the {@link #operand}
+	 * @return the transformation of the {@link #operand}
 	 * @throws TransformFailedException if the transform did not succeed
 	 */
 	@SuppressWarnings("unused")

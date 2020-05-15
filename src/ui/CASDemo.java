@@ -269,7 +269,7 @@ public class CASDemo {
 		sleep(1.5);
 		System.out.println("Notice that 'b' is a function of 'a', not of 'x', when we evaluate, we are going to have to use 'a=[value]'.");
 		sleep(1.5);
-		System.out.println(">>> eval b a=2");
+		System.out.println(">>> eval b a=2");//TODO Erez you had an idea to make sure that b != a
 		System.out.println(KeywordInterface.useKeywords("eval b a=2"));
 		sleep(1.5);
 		System.out.println("Now, try using substitute all, type in 'sa b'.");

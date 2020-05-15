@@ -41,9 +41,10 @@ public class SettingsParser {
 			case "exitSolverOnProximity" 					-> Settings.exitSolverOnProximity = ParsingTools.parseBoolean(value);
 			case "executeOnSimplify" 						-> Settings.executeOnSimplify = ParsingTools.parseBoolean(value);
 			case "distributeFunctions"					    -> Settings.distributeFunctions = ParsingTools.parseBoolean(value);
+			case "printStackTraces"						    -> Settings.printStackTraces = ParsingTools.parseBoolean(value);
 			case "defaultSolverType" 						-> Settings.defaultSolverType = SolverType.valueOf(value);
 			case "defaultFactorial" 						-> Settings.defaultFactorial = FactorialType.valueOf(value);
-			default 										-> throw new IllegalStateException("Setting " + key + " does not exist.");
+			default 										-> throw new IllegalStateException("Setting " + key + " does not exist in SettingsParser.");
 		}
 	}
 }

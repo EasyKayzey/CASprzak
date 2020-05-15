@@ -54,7 +54,7 @@ public class Settings {
 	/**
 	 * The margin used in {@link ParsingTools#toInteger(double)} when deciding when a {@code double} is close enough to an integer
 	 */
-	public static double integerMargin; // TODO add setting that prints full stack traces of errors
+	public static double integerMargin;
 
 	/**
 	 * The default margin to be used when checking if two doubles are equal
@@ -100,6 +100,11 @@ public class Settings {
 	 * Denotes whether products are distributed over addition in {@code simplify()}. Ex: {@code x(y+z) -> (xy+xz)}
 	 */
 	public static boolean distributeFunctions;
+
+	/**
+	 * Denotes whether full stack traces of errors should be printed for debugging
+	 */
+	public static boolean printStackTraces;
 
 	/**
 	 * Denotes the default method used to solve equations

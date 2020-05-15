@@ -1,5 +1,6 @@
 package ui;
 
+import config.Settings;
 import parsing.KeywordInterface;
 import tools.VariableTools;
 
@@ -89,6 +90,8 @@ public class CASDemo {
 			}
 		} catch (Exception e) {
 			System.out.println("Your input threw exception '" + e.toString() + "', please try again.");
+			if (Settings.printStackTraces)
+				e.printStackTrace();
 			return tryInput(test, message); // NOTE: this code means that if you have an error in runTillNext then try to exit with "next", you'll need to type it twice.
 		}
 	}

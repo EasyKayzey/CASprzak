@@ -12,7 +12,7 @@ import java.util.function.Predicate;
 public abstract class CommutativeFunction extends GeneralFunction {
 
 	/**
-	 * Array of {@link GeneralFunction}s operated on by the {@link CommutativeFunction}
+	 * The array of {@link GeneralFunction}s operated on by the {@link CommutativeFunction}
 	 */
 	protected final GeneralFunction[] functions;
 
@@ -45,7 +45,7 @@ public abstract class CommutativeFunction extends GeneralFunction {
 
 	/**
 	 * Returns an instance of this {@link GeneralFunction}
-	 * @param functions Constructor parameter
+	 * @param functions the {@link GeneralFunction}s that will be acted on
 	 * @return an instance of this {@link GeneralFunction}
 	 */
 	public abstract CommutativeFunction me(GeneralFunction... functions);
@@ -87,7 +87,7 @@ public abstract class CommutativeFunction extends GeneralFunction {
 	}
 
 	/**
-	 * Returns current {@link CommutativeFunction} after {@link #simplifyElements()}, {@link #simplifyPull()}, {@link #simplifyIdentity()}, and {@link #simplifyConstants()}
+	 * Simplifies this {@link CommutativeFunction} using all methods that are guaranteed to return a {@link CommutativeFunction} of the same type
 	 * @return the simplified {@link CommutativeFunction}
 	 */
 	public CommutativeFunction simplifyInternal() {
@@ -100,14 +100,14 @@ public abstract class CommutativeFunction extends GeneralFunction {
 	}
 
 	/**
-	 * Returns current {@link CommutativeFunction} after simplifying each {@link GeneralFunction} in {@link #functions}
-	 * @return current {@link CommutativeFunction} after simplifying each {@link GeneralFunction} in {@link #functions}
+	 * Simplifies each element of this {@link CommutativeFunction}
+	 * @return a new {@link CommutativeFunction} with each element of {@link #functions} simplified
 	 */
 	public abstract CommutativeFunction simplifyElements();
 
 	/**
-	 * Returns current {@link CommutativeFunction} after simplifying the {@link #identityValue}
-	 * @return current {@link CommutativeFunction} after simplifying the {@link #identityValue}
+	 * Removes all instances of {@link #identityValue} from {@link #functions}
+	 * @return a new {@link CommutativeFunction} with
 	 */
 	public CommutativeFunction simplifyIdentity() {
 		List<GeneralFunction> toPut = new ArrayList<>(Arrays.asList(functions));
@@ -116,8 +116,8 @@ public abstract class CommutativeFunction extends GeneralFunction {
 	}
 
 	/**
-	 * Returns current {@link CommutativeFunction} after combined the {@link Constant}s
-	 * @return current {@link CommutativeFunction} after combined the {@link Constant}s
+	 * Combines all {@link Constant}s using {@link #operation}
+	 * @return a new {@link CommutativeFunction} with the combined {@link Constant}s
 	 */
 	public CommutativeFunction simplifyConstants() {
 		if (hasMultipleConstants()) {
@@ -150,8 +150,8 @@ public abstract class CommutativeFunction extends GeneralFunction {
 
 
 	/**
-	 * Returns current {@link CommutativeFunction} after instance of the same {@link CommutativeFunction} have been pulled out and each term added to {@link #functions}
-	 * @return current {@link CommutativeFunction} after instance of the same {@link CommutativeFunction} have been pulled out and each term added to {@link #functions}
+	 * Composes all sub-functions of the same type. Ex: {@code (a+(b+c))} becomes {@code (a+b+c)}
+	 * @return a new {@link CommutativeFunction} with all compositions performed
 	 */
 	public CommutativeFunction simplifyPull() {
 		for (int i = 0; i < functions.length; i++)
@@ -172,8 +172,8 @@ public abstract class CommutativeFunction extends GeneralFunction {
 	}
 
 	/**
-	 * Returns identity {@link Constant} if {@link #functions} length is 0 or the {@link GeneralFunction} if {@link #functions} length is 1
-	 * @return identity {@link Constant} if {@link #functions} length is 0 or the {@link GeneralFunction} if {@link #functions} length is 1
+	 * Returns identity {@link Constant} if {@link #functions} length is 0 and returns the {@link GeneralFunction} if {@link #functions} length is 1
+	 * @return identity {@link Constant} if {@link #functions} length is 0 and returns the {@link GeneralFunction} if {@link #functions} length is 1
 	 */
 	public GeneralFunction simplifyTrivialElement() {
 		if (functions.length == 0)

@@ -3,6 +3,7 @@ import functions.commutative.Product;
 import functions.unitary.transforms.Differential;
 import functions.unitary.transforms.Integral;
 import org.junit.jupiter.api.Test;
+import parsing.FunctionParser;
 import tools.DefaultFunctions;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -58,6 +59,12 @@ public class DifferentialTest {
 	void differentialProductIntegral2() {
 		GeneralFunction test = new Product(DefaultFunctions.TWO, new Integral(DefaultFunctions.X), new Differential('x'));
 		assertEquals(parseInfix("x^2"), test.simplify());
+	}
+
+	@Test
+	void differentialProductIntegralNested1() {
+		GeneralFunction test = FunctionParser.parseInfix("\\int(\\int(2x\\dx))\\dy");
+		assertEquals(parseInfix("yx^2"), test.simplify());
 	}
 
 }

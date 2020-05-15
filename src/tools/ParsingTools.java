@@ -76,17 +76,19 @@ public class ParsingTools {
 	}
 
 	/**
-     * Converts the string to a {@code char}, supporting legitimate single-character strings like {@code "x"} and LaTeX-escaped characters like {@code "\epsilon"}
+     * Converts the string to a {@code char}, supporting legitimate single-character strings like {@code "x"}, LaTeX-escaped characters like {@code "\epsilon"}, and single-quote-surrounded characters like {@code "'x'"}.
      * @param input the string containing the character
      * @return the character represented by the string
      * @throws IllegalArgumentException if the input is not in one of the formats specified above
      */
-    public static char getCharacter(String input) {
+    public static char getCharacter(String input) { // TODO should we remove support for single-quote-surrounded characters?
     	if (!Settings.enforceEscapes)
     		input = LatexReplacer.addEscapes(input);
     	input = LatexReplacer.encodeGreek(input);
         if (input.length() == 1)
             return input.charAt(0);
+        else if (input.length() == 3 && input.charAt(0) == '\'' && input.charAt(2) == '\'')
+            return input.charAt(1);
         else
             throw new IllegalArgumentException("Input length should be 1 for FunctionParser.toCharacter, input given was " + input);
     }

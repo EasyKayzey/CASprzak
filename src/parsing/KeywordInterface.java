@@ -294,6 +294,8 @@ public class KeywordInterface {
 					"simp [function]";
 			case "sub", "substitute"                                    			-> "Substitutes [replacementfunction] into every instance of [variable] in [function].\n" +
 					"sub [function] [variable] [replacementfunction]";
+			case "subs", "substitutesimplify"                                    	-> "Substitutes [replacementfunction] into every instance of [variable] in [function] and then simplifies.\n" +
+					"subs [function] [variable] [replacementfunction]";
 			case "sa", "suball"														-> "Substites every pre-defined function into [function] in accordance with its name.\n" +
 					"sa [function]";
 			case "sol", "solve"                                         			-> "Solves [function] in one variable on a range.\n" +
@@ -308,6 +310,8 @@ public class KeywordInterface {
 					"intne [function] [startvalue] [endvalue]";
 			case "def", "deffunction"    											-> "Defines a function with name [name] to be [value]. [name] can be a LaTeX-escaped Greek letter.\n" +
 					"def [name] [value]";
+			case "defs", "deffunctions", "deffunctionsimplify"    					-> "Defines a simplified function with name [name] to be [value]. [name] can be a LaTeX-escaped Greek letter.\n" +
+					"defs [name] [value]";
 			case "defc", "defcon", "defconstant" 									-> "Defines a constant with name [name] to be [value]. [name] can be a LaTeX-escaped Greek letter.\n" +
 					"defc [name] [value]";
 			case "rmf", "rmfun", "removefun", "removefunction"          			-> "Removes a defined function.\n" +
@@ -334,9 +338,10 @@ public class KeywordInterface {
 	private static String help() {
 		return """
 				demo:                                              runs the demo
-                eval, evaluate:                                    evaluates
+				eval, evaluate:                                    evaluates
 				simp, simplify:                                    simplifies
 				sub, substitute: 								   substitutes
+				subs, substitutesimplify						   substitutes and simplifies
 				sa, suball:										   substitutes all functions variables
 				pd, pdiff, partial, pdifferentiate:				   takes the partial derivative
 				pdn pdiffn partialn pdifferentiaten:               takes the partial derivative n times
@@ -347,6 +352,7 @@ public class KeywordInterface {
 				sol, solve:                                        solves for roots
 				ext, extrema:                                      finds extrema
 				def, deffunction:                                  defines a function
+				defs, deffunctions, deffeunctionsimplify		   defines a simplified function
 				defcon, defconstant:                               defines a constant
 				rmf, rmfun, removefun, removefunction:             removes a function
 				rmc, rmconstant, removeconstant:                   removes a constant

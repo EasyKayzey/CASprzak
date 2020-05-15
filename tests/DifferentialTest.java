@@ -3,7 +3,6 @@ import functions.commutative.Product;
 import functions.unitary.transforms.Differential;
 import functions.unitary.transforms.Integral;
 import org.junit.jupiter.api.Test;
-import parsing.FunctionParser;
 import tools.DefaultFunctions;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -67,4 +66,15 @@ public class DifferentialTest {
 		assertEquals(parseInfix("yx^2"), test.simplify());
 	}
 
+	@Test
+	void integralThatBreaks() {
+		GeneralFunction test = parseInfix("\\int(x^2\\dy)");
+		assertEquals(parseInfix("y*x^2"), test.simplify());
+	}
+
+	@Test
+	void integralThatBreaksManualCreation() {
+		GeneralFunction test = new Integral(parseInfix("x^2"), 'y');
+		assertEquals(parseInfix("y*x^2"), test.simplify());
+	}
 }

@@ -1,6 +1,7 @@
 package tools;
 
 import functions.GeneralFunction;
+import functions.commutative.CommutativeFunction;
 import functions.commutative.Product;
 import functions.commutative.Sum;
 import functions.special.Constant;
@@ -63,4 +64,14 @@ public class MiscTools {
 		return strippedPairsArray;
 	}
 
+	/**
+	 * Executes {@link CommutativeFunction#simplifyTrivialElement()} until the function is not a {@code CommutativeFunction} or has a argument count greater than one. Ex: {@code (((2*x)))} becomes {@code 2*x}
+	 * @param function the function to be simplified
+	 * @return the function with all layers removed
+	 */
+	public static GeneralFunction toFirstNonTrivial(GeneralFunction function) {
+		while (function instanceof CommutativeFunction c && c.getFunctions().length <= 1)
+			function = c.simplifyTrivialElement();
+		return function;
+	}
 }

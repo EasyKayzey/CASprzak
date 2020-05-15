@@ -66,15 +66,6 @@ public class Sum extends CommutativeFunction {
 		return current;
 	}
 
-
-	@Override
-	public Sum simplifyElements() {
-		GeneralFunction[] toAdd = new GeneralFunction[functions.length];
-		for (int i = 0; i < functions.length; i++)
-			toAdd[i] = functions[i].simplify();
-		return new Sum(toAdd);
-	}
-
 	/**
 	 * Returns a {@link Sum} where like terms are added together. Ex: {@code 2x+x=3x}
 	 * @return a {@link Sum} where like terms are added together

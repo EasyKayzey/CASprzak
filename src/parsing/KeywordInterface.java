@@ -99,16 +99,17 @@ public class KeywordInterface {
 		switch (input) {
 			case "fp", "parse", "parser"  -> {
 				Scanner scanner = new Scanner(System.in);
+				scanner.useDelimiter("\n");
 				input = scanner.next();
 				while (!"exit".equals(input) && !"!".equals(input)) {
 					try {
 						System.out.println("PSto: " + parseStored(input));
 					} catch (Exception e) {
-						System.out.println(e.toString());
+						e.printStackTrace();
 					} try {
 						System.out.println("PSim: " + FunctionParser.parseSimplified(input));
 					} catch (Exception e) {
-						System.out.println(e.toString());
+						e.printStackTrace();
 					}
 					input = scanner.next();
 				}

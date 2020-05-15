@@ -9,14 +9,19 @@ import java.util.Map;
 public class Differential extends TransformFunction {
 
 	/**
-	 * Returns a new {@link Differential}, which is sometimes used as an intermediary for integrals and derivatives
-	 * @param operand the operand of the {@link Differential}, which must be a variable
-	 * @param respectTo the variable that the differential is with respect to, which must match the variable
+	 * Constructs a new {@link Differential}, which is sometimes used as an intermediary for integrals and derivatives
+	 * @param respectTo the variable that the differential is with respect to
 	 */
-	public Differential(GeneralFunction operand, char respectTo) {
-		super(operand, respectTo);
-		if (!(operand instanceof Variable))
-			throw new UnsupportedOperationException("Created a differential with a non-variable operand " + operand);
+	public Differential(char respectTo) {
+		super(null, respectTo);
+	}
+
+	/**
+	 * Constructs a new {@link Differential}, which is sometimes used as an intermediary for integrals and derivatives, using a {@link Variable}
+	 * @param operand the variable that the differential is with respect to
+	 */
+	public Differential(Variable operand) {
+		this(operand.varID);
 	}
 
 	@Override
@@ -26,7 +31,7 @@ public class Differential extends TransformFunction {
 
 	@Override
 	public UnitaryFunction clone() {
-		return new Differential(operand.clone(), respectTo);
+		return new Differential(respectTo);
 	}
 
 	@Override
@@ -67,6 +72,10 @@ public class Differential extends TransformFunction {
 	}
 
 
+	public UnitaryFunction simplify() {
+		return this;
+	}
+
 	@Override
 	public UnitaryFunction simplifyInternal() {
 		return this;
@@ -74,7 +83,9 @@ public class Differential extends TransformFunction {
 
 
 	public UnitaryFunction getInstance(GeneralFunction function) {
-		return new Differential(function, respectTo);
+		if (!(function instanceof Variable))
+			throw new IllegalArgumentException("Cannot create a differential with respect to non-variable function " + function);
+		return new Differential((Variable) function);
 	}
 
 	/**

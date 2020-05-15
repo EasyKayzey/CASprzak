@@ -9,14 +9,14 @@ public abstract class TransformFunction extends UnitaryFunction {
 	/**
 	 * The character of the variable that the {@link TransformFunction} is with respect to
 	 */
-	public final char respectTo;
+	public final Character respectTo;
 
 	/**
 	 * Constructs a new {@link TransformFunction}
 	 * @param operand the operand of the {@link TransformFunction}
 	 * @param respectTo the variable that the {@link TransformFunction} operates with respect to
 	 */
-	public TransformFunction(GeneralFunction operand, char respectTo) {
+	public TransformFunction(GeneralFunction operand, Character respectTo) {
 		super(operand);
 		this.respectTo = respectTo;
 	}

@@ -69,6 +69,8 @@ public class InfixTokenizer {
 		infix = endPD.matcher(partialDerivative.matcher(infix).replaceAll("\\\\pd{")).replaceAll("}");
 		// Make absolute values into unitary functions
 		infix = absoluteValueStart.matcher(absoluteValueEnd.matcher(infix).replaceAll(")")).replaceAll("*\\abs(").replace("|", " \\abs(");
+		// Replaces brackets with parentheses
+		infix = infix.replace("[", "(").replace("]", ")");
 		// Insert multiplication in expressions like 2x and 7(x*y+1)sin(3y)
 		infix = adjacentMultiplier.matcher(infix).replaceAll(" * ");
 		// Turns expressions like x-y into x+-y, and turns expressions like x*y into x*/y (the '/' operator represents reciprocals)
@@ -77,8 +79,10 @@ public class InfixTokenizer {
 		infix = differential.matcher(infix).replaceAll("\\\\difn ");
 		// Turns expressions like xyz into x*y*z
 		infix = characterPairsToMultiply.matcher(infix).replaceAll(" * ");
-		// Replace curly braces and underscores with parentheses and spaces
-		infix = infix.replace("{", "(").replace("}", ")").replace("[", "(").replace("]", ")").replace("_", " ");
+		// Replace curly braces parentheses
+		infix = infix.replace("{", "(").replace("}", ")");
+		// Replaces underscores with spaces
+		infix = infix.replace("_", " ");
 		// Adds parentheses to enforce order of operations
 		infix = "((((" + times.matcher(plus.matcher(closeParen.matcher(openParen.matcher(infix).replaceAll("((((")).replaceAll("))))")).replaceAll("))+((")).replaceAll(")*(") + "))))";
 		// Splits infix into tokens

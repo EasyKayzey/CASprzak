@@ -86,7 +86,7 @@ public class KeywordInterface {
 				 prev = FunctionParser.parseInfix(input);
 				 return prev;
 			} catch (Exception ignored) {
-				throw new IllegalArgumentException(splitInput[0] + " is not supported by KeywordInterface");
+				throw new IllegalArgumentException(splitInput[0] + " is not supported by KeywordInterface"); // TODO make more descriptive error messages
 			}
 		}
 		prev = ret;

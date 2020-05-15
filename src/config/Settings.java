@@ -47,7 +47,7 @@ public class Settings {
 	public static char singleVariableDefault;
 
 	/**
-	 * The margin that {@link tools.singlevariable.Solver} uses to determine if a value is close enough to zero to considered a root of a function
+	 * The margin that {@link tools.singlevariable.Solver} uses to determine if a value is close enough to zero to be considered a root of a function
 	 */
 	public static double zeroMargin;
 

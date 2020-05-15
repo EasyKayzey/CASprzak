@@ -62,7 +62,7 @@ public class DifferentialTest {
 
 	@Test
 	void differentialProductIntegralNested1() {
-		GeneralFunction test = FunctionParser.parseInfix("\\int(\\int(2x\\dx))\\dy");
+		GeneralFunction test = parseInfix("\\int(\\int(2x\\dx))\\dy");
 		assertEquals(parseInfix("yx^2"), test.simplify());
 	}
 

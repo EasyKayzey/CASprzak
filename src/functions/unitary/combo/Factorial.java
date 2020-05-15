@@ -15,9 +15,9 @@ public abstract class Factorial extends UnitaryFunction {
 	}
 
 	/**
-	 * Returns this approximation of factorial in the form of a composition of other raw classes
-	 * @return the approximation as a composition of other raw classes
-	 * @throws UnsupportedOperationException if no such representation exists, e.g. in the case of recursive factorial {@link RFactorial}
+	 * Returns this representation of factorial in the form of a composition of other raw classes
+	 * @return the representation as a composition of other raw classes
+	 * @throws UnsupportedOperationException if no such representation exists, such as in the case of recursive factorial {@link RFactorial}
 	 */
 	public abstract GeneralFunction classForm() throws UnsupportedOperationException;
 
@@ -26,7 +26,7 @@ public abstract class Factorial extends UnitaryFunction {
 	 * @param input The {@link UnitaryFunction#operand} of the new {@link Factorial}
 	 * @return a {@link Factorial} of the {@link Settings#defaultFactorial} type
 	 */
-	public static GeneralFunction defaultFactorial(GeneralFunction input) {
+	public static Factorial defaultFactorial(GeneralFunction input) {
 		return switch (Settings.defaultFactorial) {
 			case STIRLING -> new SFactorial(input);
 			case RECURSIVE -> new RFactorial(input);

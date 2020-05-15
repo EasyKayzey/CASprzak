@@ -12,7 +12,7 @@ import tools.singlevariable.NumericalIntegration;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Integral extends TransformFunction { // TODO figure out why the parser enforces brackets for integrals
+public class Integral extends TransformFunction {
 	/**
 	 * Constructs a new {@link Integral}
 	 * @param integrand The integrand of the {@link Integral}

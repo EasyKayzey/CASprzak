@@ -293,7 +293,7 @@ public class KeywordInterface {
 			case "pdn", "pdiffn", "partialn", "pdifferentiaten"         			-> "Executes 'pd' [times] times.\n" +
 					"pdn [variable] [times] [function]";
 			case "eval", "evaluate"                                     			-> "Evaluates [function] at the values specified.\n" +
-					"eval [function] [var=val]*";
+					"eval [function] (var=val)*";
 			case "simp", "simplify"                                     			-> "Simplifies [function].\n" +
 					"simp [function]";
 			case "sub", "substitute"                                    			-> "Substitutes [replacementfunction] into every instance of [variable] in [function].\n" +
@@ -334,6 +334,8 @@ public class KeywordInterface {
 					"printsettings";
 			case "int", "integral"                                      			-> "Symbolically integrates [function] with respect to [variable].\n" +
 					"integral [function] d[variable]";
+			case "help"				                                      			-> "Gives more information about a command. [argument] denotes a necessary argument, (argument) denotes an optional argument, and (argument)* denotes zero or more instances of argument.\n" +
+					"help (command)";
 			default -> throw new IllegalArgumentException("Invalid keyword: " + input);
 		};
 	}
@@ -365,6 +367,7 @@ public class KeywordInterface {
 				ss, sets, setsetting:                        	   sets a setting
 				ps, prints, printsettings:						   prints all settings
 				clearfun, clearfunctions:                          clears functions
+				Execute `help [command]` to get more info on that command, and `help help` for more info on the help menu.
 				""";
 	}
 }

@@ -189,7 +189,7 @@ public class Product extends CommutativeFunction {
 				}
 			}
 
-			return new Product(newFunctions.toArray(new GeneralFunction[0]));
+			return new Product(newFunctions.toArray(new GeneralFunction[0])).simplifyInternal();
 		} else {
 			return this;
 		}

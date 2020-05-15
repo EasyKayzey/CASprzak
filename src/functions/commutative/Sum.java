@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class Sum extends CommutativeFunction {
 	/**
-	 * Constructs a new Add
+	 * Constructs a new {@link Sum}
 	 * @param functions The terms being added together
 	 */
 	public Sum(GeneralFunction... functions) {
@@ -76,7 +76,7 @@ public class Sum extends CommutativeFunction {
 	}
 
 	/**
-	 * Returns a {@link Sum} where like terms are added together. Example: {@code 2x+x=3x}
+	 * Returns a {@link Sum} where like terms are added together. Ex: {@code 2x+x=3x}
 	 * @return a {@link Sum} where like terms are added together
 	 */
 	public Sum combineLikeTerms() {

@@ -117,7 +117,7 @@ public class Integral extends TransformFunction {
 	@SuppressWarnings("ChainOfInstanceofChecks")
 	private GeneralFunction fixNull() {
 		if (operand instanceof Differential diff) {
-			return new Integral(DefaultFunctions.ONE, diff.respectTo);
+			return new Integral(DefaultFunctions.ONE, diff.respectTo).simplify();
 		} else if (operand instanceof Product product) {
 			GeneralFunction[] functions = product.getFunctions();
 			for (int i = 0; i < functions.length; i++) {

@@ -38,7 +38,7 @@ public class Sum extends CommutativeFunction {
 		return new Sum(toAdd);
 	}
 
-	public CommutativeFunction me(GeneralFunction... functions) {
+	public CommutativeFunction getInstance(GeneralFunction... functions) {
 		return new Sum(functions);
 	}
 

@@ -20,7 +20,7 @@ public class RFactorial extends Factorial {
 		throw new UnsupportedOperationException("RFactorial has no class form.");
 	}
 
-	public UnitaryFunction me(GeneralFunction function) {
+	public UnitaryFunction getInstance(GeneralFunction function) {
 		return new RFactorial(function);
 	}
 

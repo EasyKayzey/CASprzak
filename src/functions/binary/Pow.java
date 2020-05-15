@@ -39,7 +39,7 @@ public class Pow extends BinaryFunction {
 			return new Product(new Pow(function1, function2), new Sum(new Product(function1.getSimplifiedDerivative(varID), new Ln(function2)), new Product(new Product(function1, function2.getSimplifiedDerivative(varID)), new Pow(DefaultFunctions.NEGATIVE_ONE, function2))));
 	}
 
-	public BinaryFunction me(GeneralFunction function1, GeneralFunction function2) {
+	public BinaryFunction getInstance(GeneralFunction function1, GeneralFunction function2) {
 		return new Pow(function1, function2);
 	}
 

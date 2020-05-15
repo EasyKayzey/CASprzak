@@ -33,7 +33,7 @@ public class Cosh extends TrigFunction {
 		return new Product(new Sinh(operand), operand.getSimplifiedDerivative(varID));
 	}
 
-	public UnitaryFunction me(GeneralFunction operand) {
+	public UnitaryFunction getInstance(GeneralFunction operand) {
 		return new Cosh(operand);
 	}
 

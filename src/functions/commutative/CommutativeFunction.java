@@ -48,7 +48,7 @@ public abstract class CommutativeFunction extends GeneralFunction {
 	 * @param functions the {@link GeneralFunction}s that will be acted on
 	 * @return an instance of this {@link GeneralFunction}
 	 */
-	public abstract CommutativeFunction me(GeneralFunction... functions);
+	public abstract CommutativeFunction getInstance(GeneralFunction... functions);
 
 	public boolean equalsFunction(GeneralFunction that) {
 		if (that instanceof CommutativeFunction function && this.getClass().equals(that.getClass()))
@@ -79,7 +79,7 @@ public abstract class CommutativeFunction extends GeneralFunction {
 		GeneralFunction[] newFunctions = new GeneralFunction[functions.length];
 		for (int i = 0; i < functions.length; i++)
 			newFunctions[i] = functions[i].substituteAll(test, replacer);
-		return me(newFunctions);
+		return getInstance(newFunctions);
 	}
 
 	public GeneralFunction simplify() {
@@ -112,7 +112,7 @@ public abstract class CommutativeFunction extends GeneralFunction {
 	public CommutativeFunction simplifyIdentity() {
 		List<GeneralFunction> toPut = new ArrayList<>(Arrays.asList(functions));
 		toPut.removeIf(generalFunction -> generalFunction instanceof Constant constant && constant.constant == identityValue);
-		return me(toPut.toArray(new GeneralFunction[0]));
+		return getInstance(toPut.toArray(new GeneralFunction[0]));
 	}
 
 	/**
@@ -131,7 +131,7 @@ public abstract class CommutativeFunction extends GeneralFunction {
 				}
 			}
 			functionList.add(new Constant(accumulator));
-			return me(functionList.toArray(new GeneralFunction[0]));
+			return getInstance(functionList.toArray(new GeneralFunction[0]));
 		} else {
 			return this;
 		}
@@ -156,7 +156,7 @@ public abstract class CommutativeFunction extends GeneralFunction {
 	public CommutativeFunction simplifyPull() {
 		for (int i = 0; i < functions.length; i++)
 			if (this.getClass().equals(functions[i].getClass()))
-				return me(pullUp(functions, ((CommutativeFunction) functions[i]).getFunctions(), i)).simplifyPull();
+				return getInstance(pullUp(functions, ((CommutativeFunction) functions[i]).getFunctions(), i)).simplifyPull();
 
 		return this;
 	}

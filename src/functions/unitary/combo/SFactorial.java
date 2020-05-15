@@ -21,7 +21,7 @@ public class SFactorial extends Factorial {
 		return new Product(new Pow(DefaultFunctions.HALF, new Product(DefaultFunctions.TWO, DefaultFunctions.PI, operand)), new Pow(operand, new Product(operand, DefaultFunctions.reciprocal(DefaultFunctions.E))));
 	}
 
-	public UnitaryFunction me(GeneralFunction function) {
+	public UnitaryFunction getInstance(GeneralFunction function) {
 			return new SFactorial(function);
 	}
 

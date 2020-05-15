@@ -35,7 +35,7 @@ public class Csch extends TrigFunction {
 	}
 
 
-	public UnitaryFunction me(GeneralFunction operand) {
+	public UnitaryFunction getInstance(GeneralFunction operand) {
 		return new Csch(operand);
 	}
 

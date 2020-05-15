@@ -42,7 +42,7 @@ public class Acot extends InverseTrigFunction {
 	}
 
 
-	public UnitaryFunction me(GeneralFunction operand) {
+	public UnitaryFunction getInstance(GeneralFunction operand) {
 		return new Acot(operand);
 	}
 

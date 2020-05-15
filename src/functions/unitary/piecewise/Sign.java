@@ -28,7 +28,7 @@ public class Sign extends PiecewiseFunction {
 	}
 
 
-	public UnitaryFunction me(GeneralFunction operand) {
+	public UnitaryFunction getInstance(GeneralFunction operand) {
 		return new Sign(operand);
 	}
 }

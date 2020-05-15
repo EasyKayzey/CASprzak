@@ -46,7 +46,7 @@ public class Asec extends InverseTrigFunction {
 	}
 
 
-	public UnitaryFunction me(GeneralFunction operand) {
+	public UnitaryFunction getInstance(GeneralFunction operand) {
 		return new Asec(operand);
 	}
 

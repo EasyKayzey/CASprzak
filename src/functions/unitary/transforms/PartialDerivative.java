@@ -68,7 +68,7 @@ public class PartialDerivative extends TransformFunction {
 	}
 
 
-	public UnitaryFunction me(GeneralFunction function) {
+	public UnitaryFunction getInstance(GeneralFunction function) {
 		return new PartialDerivative(function, respectTo);
 	}
 

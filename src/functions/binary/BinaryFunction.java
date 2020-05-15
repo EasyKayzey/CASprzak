@@ -51,7 +51,7 @@ public abstract class BinaryFunction extends GeneralFunction {
 	 * @param function2 Constructor parameter 2
 	 * @return an instance of this {@link GeneralFunction}
 	 */
-	public abstract BinaryFunction me(GeneralFunction function1, GeneralFunction function2);
+	public abstract BinaryFunction getInstance(GeneralFunction function1, GeneralFunction function2);
 
 	/**
 	 * Substitutes all {@link functions.special.Variable} in the function with a specified {@link GeneralFunction}
@@ -63,7 +63,7 @@ public abstract class BinaryFunction extends GeneralFunction {
 		if (test.test(this))
 			return replacer.apply(this);
 		else
-			return me(function1.substituteAll(test, replacer), function2.substituteAll(test, replacer));
+			return getInstance(function1.substituteAll(test, replacer), function2.substituteAll(test, replacer));
 	}
 
 

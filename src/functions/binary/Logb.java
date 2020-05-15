@@ -33,7 +33,7 @@ public class Logb extends BinaryFunction {
 			return new Product(new Sum(new Product(function1.getSimplifiedDerivative(varID), new Ln(function2), DefaultFunctions.reciprocal(function1)), new Product(DefaultFunctions.NEGATIVE_ONE, function2.getSimplifiedDerivative(varID), new Ln(function1), DefaultFunctions.reciprocal(function2))), new Pow(DefaultFunctions.NEGATIVE_TWO, new Ln(function2)));
 	}
 
-	public BinaryFunction me(GeneralFunction function1, GeneralFunction function2) {
+	public BinaryFunction getInstance(GeneralFunction function1, GeneralFunction function2) {
 		return new Logb(function1, function2);
 	}
 

@@ -28,7 +28,7 @@ public class Dirac extends PiecewiseFunction {
 		throw new UnsupportedOperationException("The derivative of the dirac delta function is not supported.");
 	}
 
-	public UnitaryFunction me(GeneralFunction operand) {
+	public UnitaryFunction getInstance(GeneralFunction operand) {
 		return new Dirac(operand);
 	}
 }

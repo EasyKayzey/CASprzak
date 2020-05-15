@@ -29,7 +29,7 @@ public class Exp extends SpecialCaseBinaryFunction {
 		return new Product(this, operand.getDerivative(varID));
 	}
 
-	public UnitaryFunction me(GeneralFunction operand) {
+	public UnitaryFunction getInstance(GeneralFunction operand) {
 		return new Exp(operand);
 	}
 

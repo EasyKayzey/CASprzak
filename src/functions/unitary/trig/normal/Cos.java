@@ -34,7 +34,7 @@ public class Cos extends TrigFunction {
 		return new Product(DefaultFunctions.NEGATIVE_ONE, new Sin(operand), operand.getSimplifiedDerivative(varID));
 	}
 
-	public UnitaryFunction me(GeneralFunction operand) {
+	public UnitaryFunction getInstance(GeneralFunction operand) {
 		return new Cos(operand);
 	}
 

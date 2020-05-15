@@ -30,7 +30,7 @@ public class Ln extends SpecialCaseBinaryFunction {
 		return new Product(operand.getSimplifiedDerivative(varID), DefaultFunctions.reciprocal(operand));
 	}
 
-	public UnitaryFunction me(GeneralFunction operand) {
+	public UnitaryFunction getInstance(GeneralFunction operand) {
 		return new Ln(operand);
 	}
 

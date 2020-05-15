@@ -38,7 +38,7 @@ public class Csc extends TrigFunction {
 		return new Product(DefaultFunctions.NEGATIVE_ONE, new Cot(operand), new Csc(operand), operand.getSimplifiedDerivative(varID));
 	}
 
-	public UnitaryFunction me(GeneralFunction operand) {
+	public UnitaryFunction getInstance(GeneralFunction operand) {
 		return new Csc(operand);
 	}
 

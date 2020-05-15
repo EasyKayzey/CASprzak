@@ -41,7 +41,7 @@ public class Product extends CommutativeFunction {
 		return new Sum(toAdd);
 	}
 
-	public CommutativeFunction me(GeneralFunction... functions) {
+	public CommutativeFunction getInstance(GeneralFunction... functions) {
 		return new Product(functions);
 	}
 

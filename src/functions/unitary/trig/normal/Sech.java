@@ -37,7 +37,7 @@ public class Sech extends TrigFunction {
 	}
 
 
-	public UnitaryFunction me(GeneralFunction operand) {
+	public UnitaryFunction getInstance(GeneralFunction operand) {
 		return new Sech(operand);
 	}
 

@@ -48,7 +48,7 @@ public class Acsc extends InverseTrigFunction {
 	}
 
 
-	public UnitaryFunction me(GeneralFunction operand) {
+	public UnitaryFunction getInstance(GeneralFunction operand) {
 		return new Acsc(operand);
 	}
 

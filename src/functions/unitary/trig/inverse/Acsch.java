@@ -38,7 +38,7 @@ public class Acsch extends InverseTrigFunction {
 	}
 
 
-	public UnitaryFunction me(GeneralFunction operand) {
+	public UnitaryFunction getInstance(GeneralFunction operand) {
 		return new Acsch(operand);
 	}
 

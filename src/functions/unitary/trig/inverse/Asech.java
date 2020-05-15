@@ -39,7 +39,7 @@ public class Asech extends InverseTrigFunction {
 	}
 
 
-	public UnitaryFunction me(GeneralFunction operand) {
+	public UnitaryFunction getInstance(GeneralFunction operand) {
 		return new Asech(operand);
 	}
 

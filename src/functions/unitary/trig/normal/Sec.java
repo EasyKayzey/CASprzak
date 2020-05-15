@@ -36,7 +36,7 @@ public class Sec extends TrigFunction {
 		return new Product(new Tan(operand), new Sec(operand), operand.getSimplifiedDerivative(varID));
 	}
 
-	public UnitaryFunction me(GeneralFunction operand) {
+	public UnitaryFunction getInstance(GeneralFunction operand) {
 		return new Sec(operand);
 	}
 

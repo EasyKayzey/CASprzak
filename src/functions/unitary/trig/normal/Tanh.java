@@ -36,7 +36,7 @@ public class Tanh extends TrigFunction {
 		return new Product(operand.getSimplifiedDerivative(varID), new Pow(DefaultFunctions.NEGATIVE_TWO, new Cosh(operand)));
 	}
 
-	public UnitaryFunction me(GeneralFunction operand) {
+	public UnitaryFunction getInstance(GeneralFunction operand) {
 		return new Tanh(operand);
 	}
 

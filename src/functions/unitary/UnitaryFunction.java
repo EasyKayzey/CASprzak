@@ -70,10 +70,10 @@ public abstract class UnitaryFunction extends GeneralFunction {
 	 * @param operand the {@link GeneralFunction} to be operated on
 	 * @return a new instance of this {@link UnitaryFunction}
 	 */
-	public abstract UnitaryFunction me(GeneralFunction operand);
+	public abstract UnitaryFunction getInstance(GeneralFunction operand);
 
 	public UnitaryFunction clone() {
-		return me(operand.clone());
+		return getInstance(operand.clone());
 	}
 
 	/**
@@ -81,14 +81,14 @@ public abstract class UnitaryFunction extends GeneralFunction {
 	 * @return an instance of this {@link UnitaryFunction} with the {@link #operand} simplified
 	 */
 	public UnitaryFunction simplifyInternal() {
-		return me(operand.simplify());
+		return getInstance(operand.simplify());
 	}
 
 	public GeneralFunction substituteAll(Predicate<? super GeneralFunction> test, Function<? super GeneralFunction, ? extends GeneralFunction> replacer) {
 		if (test.test(this))
 			return replacer.apply(this);
 		else
-			return me(operand.substituteAll(test, replacer));
+			return getInstance(operand.substituteAll(test, replacer));
 	}
 
 	public boolean equalsFunction(GeneralFunction that) {

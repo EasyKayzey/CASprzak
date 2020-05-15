@@ -82,7 +82,7 @@ public class Integral extends TransformFunction {
 	}
 
 
-	public UnitaryFunction me(GeneralFunction function) {
+	public UnitaryFunction getInstance(GeneralFunction function) {
 		return new Integral(function, respectTo);
 	}
 

@@ -69,7 +69,7 @@ public class SearchTools {
 			for (int ix = 0; ix < functions.length; ix++)
 				if (((run >> ix) & 1) > 0)
 					subset.add(functions[ix]);
-			if (test.test(input.me(subset.toArray(new GeneralFunction[0]))))
+			if (test.test(input.getInstance(subset.toArray(new GeneralFunction[0]))))
 				return true;
 		}
 		return false;
@@ -92,7 +92,7 @@ public class SearchTools {
 			for (int ix = 0; ix < functions.length; ix++)
 				if (((~run >> ix) & 1) > 0)
 					subset.add(functions[ix]);
-			CommutativeFunction thisFunction = input.me(subset.toArray(new GeneralFunction[0]));
+			CommutativeFunction thisFunction = input.getInstance(subset.toArray(new GeneralFunction[0]));
 			if (test.test(thisFunction))
 				return true;
 		}
@@ -107,7 +107,7 @@ public class SearchTools {
 			for (int ix = 0; ix < functions.length; ix++)
 				if (((run >> ix) & 1) > 0)
 					subset.add(functions[ix]);
-			if (test.test(input.me(subset.toArray(new GeneralFunction[0]))))
+			if (test.test(input.getInstance(subset.toArray(new GeneralFunction[0]))))
 				ids.add(run);
 		}
 		return ids;

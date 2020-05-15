@@ -37,7 +37,7 @@ public class Tan extends TrigFunction {
 		return new Product(new Pow(DefaultFunctions.TWO, new Sec(operand)), operand.getSimplifiedDerivative(varID));
 	}
 
-	public UnitaryFunction me(GeneralFunction operand) {
+	public UnitaryFunction getInstance(GeneralFunction operand) {
 		return new Tan(operand);
 	}
 

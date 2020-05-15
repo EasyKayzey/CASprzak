@@ -38,7 +38,7 @@ public class Coth extends TrigFunction {
 	}
 
 
-	public UnitaryFunction me(GeneralFunction operand) {
+	public UnitaryFunction getInstance(GeneralFunction operand) {
 		return new Coth(operand);
 	}
 

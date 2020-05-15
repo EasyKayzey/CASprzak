@@ -37,7 +37,7 @@ public class Atan extends InverseTrigFunction {
 	}
 
 	@Override
-	public UnitaryFunction me(GeneralFunction operand) {
+	public UnitaryFunction getInstance(GeneralFunction operand) {
 		return new Atan(operand);
 	}
 

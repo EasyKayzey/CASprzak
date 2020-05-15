@@ -17,6 +17,6 @@ public abstract class InverseTrigFunction extends GeneralTrigFunction {
 	}
 
 	public GeneralFunction getElementaryIntegral() {
-		return new Sum(new Product(operand, me(operand)), new Product(DefaultFunctions.NEGATIVE_ONE, UnitaryFunction.newInstanceOf(getInverse(), me(operand))));
+		return new Sum(new Product(operand, getInstance(operand)), new Product(DefaultFunctions.NEGATIVE_ONE, UnitaryFunction.newInstanceOf(getInverse(), getInstance(operand))));
 	}
 }

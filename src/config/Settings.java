@@ -5,6 +5,9 @@ import tools.ParsingTools;
 
 import java.io.IOException;
 
+/**
+ * TODO explain that settings are in config and all that jazz, also about settingsparser
+ */
 @SuppressWarnings("CanBeFinal")
 public class Settings {
 

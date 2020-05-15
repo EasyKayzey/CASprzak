@@ -5,6 +5,9 @@ import functions.Invertible;
 import functions.binary.BinaryFunction;
 import functions.unitary.UnitaryFunction;
 
+/**
+ * TODO explain
+ */
 public abstract class SpecialCaseBinaryFunction extends UnitaryFunction implements Invertible {
 
 	public SpecialCaseBinaryFunction(GeneralFunction operand) {

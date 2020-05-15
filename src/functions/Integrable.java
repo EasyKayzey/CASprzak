@@ -1,5 +1,8 @@
 package functions;
 
+/**
+ * TODO explain more in depth
+ */
 public interface Integrable {
 
     /**

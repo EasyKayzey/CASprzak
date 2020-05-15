@@ -10,6 +10,9 @@ import tools.helperclasses.Pair;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * TODO explain
+ */
 public class MiscTools {
 
 	private MiscTools(){}

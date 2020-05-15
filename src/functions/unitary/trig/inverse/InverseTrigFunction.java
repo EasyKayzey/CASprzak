@@ -7,6 +7,9 @@ import functions.unitary.UnitaryFunction;
 import functions.unitary.trig.GeneralTrigFunction;
 import tools.DefaultFunctions;
 
+/**
+ * TODO explain
+ */
 public abstract class InverseTrigFunction extends GeneralTrigFunction {
 	/**
 	 * Constructs a new {@link InverseTrigFunction}

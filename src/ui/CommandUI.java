@@ -7,6 +7,9 @@ import tools.exceptions.CommandNotFoundException;
 import java.util.Arrays;
 import java.util.Scanner;
 
+/**
+ * TODO explain
+ */
 public class CommandUI {
 	/**
 	 * Runs {@link KeywordInterface#useKeywords} on user input

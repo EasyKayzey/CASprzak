@@ -11,6 +11,9 @@ import tools.VariableTools;
 
 import java.util.Map;
 
+/**
+ * TODO explain
+ */
 public class TaylorSeries {
 
     private TaylorSeries(){}

@@ -10,7 +10,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ListIterator;
 
-
+/**
+ * TODO explain
+ */
 public class IntegralTools {
 
     private IntegralTools(){}

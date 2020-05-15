@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Properties;
 
+/**
+ * TODO explain that this reads from the config and stores results in Settings
+ */
 public class SettingsParser {
 	/**
 	 * Parses the configuration file {@code cas.properties} and stores the read values in {@link Settings}

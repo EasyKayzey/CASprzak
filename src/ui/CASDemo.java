@@ -8,6 +8,9 @@ import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Predicate;
 
+/**
+ * TODO explain
+ */
 public class CASDemo {
 	private enum DemoState {
 		INTRO,

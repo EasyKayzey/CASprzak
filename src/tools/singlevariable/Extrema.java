@@ -11,6 +11,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiPredicate;
 
+/**
+ * TODO explain
+ */
 public class Extrema {
 
     private Extrema(){}

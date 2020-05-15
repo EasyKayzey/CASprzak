@@ -19,6 +19,9 @@ import functions.unitary.trig.inverse.*;
 import functions.unitary.trig.normal.*;
 import tools.DefaultFunctions;
 
+/**
+ * TODO explain
+ */
 public class FunctionMaker {
 
 	private FunctionMaker(){}

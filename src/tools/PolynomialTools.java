@@ -10,6 +10,7 @@ import functions.special.Variable;
 import java.util.function.DoublePredicate;
 
 /**
+ * TODO explain further, include line below in some form
  * {@link GeneralFunction#simplify()} MUST be called on the inputs to ALL methods in this class before execution for accurate results to be returned.
  */
 @SuppressWarnings("ChainOfInstanceofChecks")

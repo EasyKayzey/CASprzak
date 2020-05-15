@@ -12,7 +12,9 @@ import java.util.NoSuchElementException;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-
+/**
+ * TODO explain
+ */
 public abstract class UnitaryFunction extends GeneralFunction {
 	/**
 	 * The {@link GeneralFunction} which the {@link UnitaryFunction} operates on

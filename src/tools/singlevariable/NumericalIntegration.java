@@ -6,6 +6,9 @@ import tools.VariableTools;
 
 import java.util.Map;
 
+/**
+ * TODO explain
+ */
 public class NumericalIntegration {
     
     /**

@@ -5,6 +5,9 @@ import functions.GeneralFunction;
 import functions.unitary.UnitaryFunction;
 import tools.exceptions.TransformFailedException;
 
+/**
+ * TODO explain
+ */
 public abstract class TransformFunction extends UnitaryFunction {
 	/**
 	 * The character of the variable that the {@link TransformFunction} is with respect to

@@ -5,6 +5,9 @@ import java.util.regex.Pattern;
 
 import static parsing.OperationLists.*;
 
+/**
+ * TODO explain
+ */
 public class LatexReplacer {
 
 	private LatexReplacer(){}

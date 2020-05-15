@@ -9,6 +9,9 @@ import parsing.LatexReplacer;
 import java.lang.reflect.MalformedParametersException;
 import java.util.HashMap;
 
+/**
+ * TODO explain
+ */
 public class ParsingTools {
 
 	private ParsingTools() {}

@@ -3,6 +3,9 @@ package tools;
 import functions.GeneralFunction;
 import functions.commutative.Product;
 
+/**
+ * TODO explain
+ */
 public class ArrayTools {
 
 	private ArrayTools(){}

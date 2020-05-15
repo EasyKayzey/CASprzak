@@ -3,6 +3,9 @@ package parsing;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * TODO explain
+ */
 public class OperationLists {
 
 	private OperationLists() {

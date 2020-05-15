@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
+/**
+ * TODO explain
+ */
 public class SearchTools {
 
 	private SearchTools(){}

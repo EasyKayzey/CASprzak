@@ -22,6 +22,9 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+/**
+ * A {@code GeneralFunction} is the generalized abstract function used throughout the CAS. It is critical to note that ALL FUNCTIONS ARE IMMUTABLE: as a consequence, methods such as {@link #simplify()} return a function that has been simplified rather than simplifying the caller in place.
+ */
 public abstract class GeneralFunction implements Evaluable, Differentiable, Simplifiable, Comparable<GeneralFunction>, Iterable<GeneralFunction> {
 
 	/**

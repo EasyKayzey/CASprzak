@@ -6,6 +6,9 @@ import functions.commutative.Product;
 import functions.special.Constant;
 import functions.special.Variable;
 
+/**
+ * TODO explain
+ */
 @SuppressWarnings({"StaticVariableOfConcreteClass", "unused"})
 public class DefaultFunctions {
 

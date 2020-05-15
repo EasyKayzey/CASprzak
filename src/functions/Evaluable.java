@@ -2,6 +2,9 @@ package functions;
 
 import java.util.Map;
 
+/**
+ * TODO explain
+ */
 public interface Evaluable {
 
 	/**

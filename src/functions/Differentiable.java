@@ -1,5 +1,8 @@
 package functions;
 
+/**
+ * TODO explain
+ */
 public interface Differentiable {
 
 	/**

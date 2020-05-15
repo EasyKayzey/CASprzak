@@ -8,6 +8,9 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Predicate;
 
+/**
+ * TODO explain
+ */
 public class VariableTools {
 
 	private VariableTools() {}

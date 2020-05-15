@@ -9,6 +9,9 @@ import java.util.function.DoubleBinaryOperator;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+/**
+ * TODO explain
+ */
 public abstract class CommutativeFunction extends GeneralFunction {
 
 	/**

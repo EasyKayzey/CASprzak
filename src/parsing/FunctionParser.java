@@ -13,6 +13,9 @@ import java.util.List;
 
 import static parsing.OperationLists.*;
 
+/**
+ * TODO explain
+ */
 public class FunctionParser {
 
 	private FunctionParser(){}

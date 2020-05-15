@@ -20,6 +20,9 @@ import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+/**
+ * TODO explain
+ */
 @SuppressWarnings("SpellCheckingInspection")
 public class KeywordInterface {
 	private static final Pattern keywordSplitter = Pattern.compile("\\s+(?=[^\"]*(\"[^\"]*\"[^\"]*)*$)");

@@ -14,6 +14,9 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 
+/**
+ * TODO explain
+ */
 public class Solver {
 
 	private Solver(){}

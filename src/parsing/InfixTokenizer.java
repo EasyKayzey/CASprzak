@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+/**
+ * TODO explain
+ */
 public class InfixTokenizer {
 	private static final Pattern absoluteValueEnd = Pattern.compile(
 			"\\|(?=([^|]*\\|[^|]*\\|)*" +							// Ensures an even number of following absolute value signs

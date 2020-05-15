@@ -8,6 +8,9 @@ import java.util.NoSuchElementException;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+/**
+ * TODO explain
+ */
 public abstract class BinaryFunction extends GeneralFunction {
 	/**
 	 * One {@link GeneralFunction} in the binary operation

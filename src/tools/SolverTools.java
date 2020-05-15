@@ -7,6 +7,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
 
+/**
+ * TODO explain
+ */
 public class SolverTools {
 
 	private SolverTools(){}

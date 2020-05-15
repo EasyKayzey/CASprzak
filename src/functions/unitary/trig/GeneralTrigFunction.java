@@ -5,6 +5,9 @@ import functions.Integrable;
 import functions.Invertible;
 import functions.unitary.UnitaryFunction;
 
+/**
+ * TODO explain
+ */
 public abstract class GeneralTrigFunction extends UnitaryFunction implements Invertible, Integrable {
 
 	/**

@@ -4,6 +4,9 @@ import config.Settings;
 import functions.GeneralFunction;
 import functions.unitary.UnitaryFunction;
 
+/**
+ * TODO explain
+ */
 public abstract class Factorial extends UnitaryFunction {
 
 	/**

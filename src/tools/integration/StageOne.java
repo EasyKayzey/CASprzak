@@ -17,6 +17,9 @@ import tools.*;
 import tools.exceptions.IntegrationFailedException;
 import tools.helperclasses.Pair;
 
+/**
+ * TODO explain VERY IN DEPTH
+ */
 @SuppressWarnings("ChainOfInstanceofChecks")
 public class StageOne {
     private StageOne(){}

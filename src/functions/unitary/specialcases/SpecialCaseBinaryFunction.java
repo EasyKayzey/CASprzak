@@ -12,8 +12,8 @@ public abstract class SpecialCaseBinaryFunction extends UnitaryFunction implemen
 	}
 
 	/**
-	 * Returns the BinaryFunction this function is a special case of
-	 * @return a BinaryFunction
+	 * Returns the BinaryFunction that this function is a special case of. Ex: {@code ln} becomes {@code logb_e}
+	 * @return a new BinaryFunction
 	 */
 	public abstract BinaryFunction getClassForm();
 }

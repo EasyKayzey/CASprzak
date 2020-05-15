@@ -54,7 +54,7 @@ public class KeywordInterface {
 			case "eval", "evaluate"												-> evaluate(splitInput[1]);
 			case "simp", "simplify"												-> simplify(splitInput[1]);
 			case "sub", "substitute"											-> substitute(splitInput[1]);
-			case "subs", "substitutesimplify"					-> substituteSimplify(splitInput[1]);
+			case "subs", "substitutesimplify"									-> substituteSimplify(splitInput[1]);
 			case "sa", "suball"													-> substituteAllInput(splitInput[1]);
 			case "sol", "solve"													-> solve(splitInput[1]);
 			case "ext", "extrema"												-> extrema(splitInput[1]);
@@ -140,12 +140,16 @@ public class KeywordInterface {
 
 	private static double evaluate(String input) {
 		String[] splitInput = spaces.split(input, 2);
-		return parseStored(splitInput[0]).evaluate(
-				Arrays.stream(keywordSplitter.split(splitInput[1]))
-				.map(equals::split)
-				.collect(Collectors.toMap(e -> ParsingTools.getCharacter(e[0]), e -> ParsingTools.getConstant(e[1])))
-		);
+		if (splitInput.length == 1)
+			return parseStored(splitInput[0]).evaluate(new HashMap<>());
+		else
+			return parseStored(splitInput[0]).evaluate(
+					Arrays.stream(keywordSplitter.split(splitInput[1]))
+					.map(equals::split)
+					.collect(Collectors.toMap(e -> ParsingTools.getCharacter(e[0]), e -> ParsingTools.getConstant(e[1])))
+			);
 	}
+
 
 	private static GeneralFunction simplify(String input) {
 		return parseStored(input).simplify();

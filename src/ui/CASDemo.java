@@ -401,7 +401,6 @@ public class CASDemo {
 		currentState = DemoState.EXT;
 	}
 
-	@SuppressWarnings("SpellCheckingInspection")
 	private static void ext() {
 		System.out.println("With the ability to solve for zeros, we can now find extrema of functions.");
 		sleep(1.5);

@@ -104,11 +104,11 @@ public class KeywordInterface {
 					try {
 						System.out.println("PSto: " + parseStored(input));
 					} catch (Exception e) {
-						System.out.println(e.toString());
+						e.printStackTrace();
 					} try {
 						System.out.println("PSim: " + FunctionParser.parseSimplified(input));
 					} catch (Exception e) {
-						System.out.println(e.toString());
+						e.printStackTrace();
 					}
 					input = scanner.next();
 				}

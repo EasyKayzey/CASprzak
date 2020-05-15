@@ -31,7 +31,7 @@ public class DifferentialTest {
 	@Test
 	void integral1() {
 		GeneralFunction test = parseInfix("\\int[2x]\\dx");
-		assertTrue(test instanceof Integral);
+		assertEquals(parseInfix("x^2"), test.simplify());
 	}
 
 	@Test
@@ -52,6 +52,12 @@ public class DifferentialTest {
 	void differentialProductIntegral() {
 		GeneralFunction test = new Product(new Integral(DefaultFunctions.X), new Differential('x'));
 		assertEquals(parseInfix("x^2/2"), test.simplify());
+	}
+
+	@Test
+	void differentialProductIntegral2() {
+		GeneralFunction test = new Product(DefaultFunctions.TWO, new Integral(DefaultFunctions.X), new Differential('x'));
+		assertEquals(parseInfix("x^2"), test.simplify());
 	}
 
 }

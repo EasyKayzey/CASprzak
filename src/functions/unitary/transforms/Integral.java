@@ -5,6 +5,7 @@ import functions.commutative.Product;
 import functions.unitary.UnitaryFunction;
 import tools.ArrayTools;
 import tools.DefaultFunctions;
+import tools.IntegralTools;
 import tools.exceptions.IntegrationFailedException;
 import tools.integration.StageOne;
 import tools.singlevariable.NumericalIntegration;
@@ -18,7 +19,7 @@ public class Integral extends TransformFunction {
 	 * @param integrand The integrand of the {@link Integral}
 	 * @param respectTo The variable that the {@link Integral} is with respect to
 	 */
-	public Integral(GeneralFunction integrand, char respectTo) {
+	public Integral(GeneralFunction integrand, Character respectTo) {
 		super(integrand, respectTo);
 	}
 
@@ -27,7 +28,7 @@ public class Integral extends TransformFunction {
 	 * @param integrand the integrand of the {@link Integral}
 	 */
 	public Integral(GeneralFunction integrand) {
-		super(integrand, null);
+		this(integrand, null);
 	}
 
 	@Override
@@ -88,8 +89,8 @@ public class Integral extends TransformFunction {
 
 
 	@Override
-	public UnitaryFunction simplifyInternal() {
-		return this;
+	public Integral simplifyInternal() {
+		return new Integral(IntegralTools.minimalSimplify(operand), respectTo);
 	}
 
 
@@ -108,7 +109,7 @@ public class Integral extends TransformFunction {
 
 	public GeneralFunction simplify() {
 		if (respectTo == null) {
-			return fixNull();
+			return simplifyInternal().fixNull();
 		} else {
 			return super.simplify();
 		}

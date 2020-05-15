@@ -23,14 +23,16 @@ public abstract class TransformFunction extends UnitaryFunction {
 
 	@Override
 	public GeneralFunction simplify() {
-		if (Settings.executeOnSimplify)
+		if (Settings.executeOnSimplify) {
+			TransformFunction current = (TransformFunction) simplifyInternal();
 			try {
-				return execute();
+				return current.execute();
 			} catch (TransformFailedException ignored) {
-				return simplifyInternal();
+				return current;
 			}
-		else
+		} else {
 			return simplifyInternal();
+		}
 	}
 
 	/**

@@ -331,7 +331,7 @@ public class KeywordInterface {
 					"sol [function] [startrange] [endrange]";
 			case "ext", "extrema"                                       			-> "Finds the specified extrema of [function] on a range. 'min'/'max' return one coordinate, and 'anymin'/'anymax'/'inflect' return a list of coordinates.\n" +
 					"ext ['min(ima)'/'max(ima)'/'anymin(ima)'/'anymax(ima)'/'inflect(ion)'] [function] [startrange] [endrange]";
-			case "tay", "taylor"                                        			-> "Find the [degree]-degree taylor series of [function] around [center].\n" +
+			case "tay", "taylor"                                        			-> "Finds the [degree]-degree taylor series of [function] around [center].\n" +
 					"tay [function] [degree] [center]";
 			case "intn", "intnumeric"                                   			-> "Integrates [function] numerically on a range.\n" +
 					"intn [function] [startvalue] [endvalue]";

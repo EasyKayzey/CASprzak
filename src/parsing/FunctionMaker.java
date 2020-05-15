@@ -38,7 +38,7 @@ public class FunctionMaker {
 			case "\\log"		-> new Logb(function, DefaultFunctions.TEN);
 			case "\\exp" 		-> new Exp(function);
 			case "\\abs" 		-> new Abs(function);
-			case "\\difn"		-> new Differential(function, ((Variable) function).varID);
+			case "\\difn"		-> new Differential((Variable) function);
 			case "\\sqrt" 		-> new Pow(DefaultFunctions.HALF, function);
 			case "\\sign" 		-> new Sign(function);
 			case "\\dirac" 		-> new Dirac(function);

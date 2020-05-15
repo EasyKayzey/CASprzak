@@ -1,6 +1,9 @@
 import functions.GeneralFunction;
+import functions.commutative.Product;
+import functions.unitary.transforms.Differential;
 import functions.unitary.transforms.Integral;
 import org.junit.jupiter.api.Test;
+import tools.DefaultFunctions;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static parsing.FunctionParser.parseInfix;
@@ -42,6 +45,12 @@ public class DifferentialTest {
 	@Test
 	void integralDifferentialInside() {
 		Integral test = new Integral(parseInfix("x\\dx"));
+		assertEquals(parseInfix("x^2/2"), test.simplify());
+	}
+
+	@Test
+	void differentialProductIntegral() {
+		GeneralFunction test = new Product(new Integral(DefaultFunctions.X), new Differential('x'));
 		assertEquals(parseInfix("x^2/2"), test.simplify());
 	}
 

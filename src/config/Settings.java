@@ -54,7 +54,7 @@ public class Settings {
 	/**
 	 * The margin used in {@link ParsingTools#toInteger(double)} when deciding when a {@code double} is close enough to an integer
 	 */
-	public static double integerMargin;
+	public static double integerMargin; // TODO add setting that prints full stack traces of errors
 
 	/**
 	 * The default margin to be used when checking if two doubles are equal

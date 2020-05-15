@@ -1,7 +1,10 @@
 package functions.unitary.transforms;
 
 import functions.GeneralFunction;
+import functions.commutative.Product;
 import functions.unitary.UnitaryFunction;
+import tools.ArrayTools;
+import tools.DefaultFunctions;
 import tools.exceptions.IntegrationFailedException;
 import tools.integration.StageOne;
 import tools.singlevariable.NumericalIntegration;
@@ -17,6 +20,14 @@ public class Integral extends TransformFunction { // TODO figure out why the par
 	 */
 	public Integral(GeneralFunction integrand, char respectTo) {
 		super(integrand, respectTo);
+	}
+
+	/**
+	 * Constructs a new {@link Integral} whose {@code respectTo} is {@code null}. This WILL THROW AN EXCEPTION if any method is attempted that uses {@code respectTo}.
+	 * @param integrand the integrand of the {@link Integral}
+	 */
+	public Integral(GeneralFunction integrand) {
+		super(integrand, null);
 	}
 
 	@Override
@@ -93,5 +104,30 @@ public class Integral extends TransformFunction { // TODO figure out why the par
 	 */
 	public GeneralFunction execute() throws IntegrationFailedException {
 		return StageOne.derivativeDivides(operand, respectTo).simplify();
+	}
+
+	public GeneralFunction simplify() {
+		if (respectTo == null) {
+			return fixNull();
+		} else {
+			return super.simplify();
+		}
+	}
+
+	@SuppressWarnings("ChainOfInstanceofChecks")
+	private GeneralFunction fixNull() {
+		if (operand instanceof Differential diff) {
+			return new Integral(DefaultFunctions.ONE, diff.respectTo);
+		} else if (operand instanceof Product product) {
+			GeneralFunction[] functions = product.getFunctions();
+			for (int i = 0; i < functions.length; i++) {
+				if (functions[i] instanceof Differential diff) {
+					return new Integral(new Product(ArrayTools.removeFunctionAt(functions, i)), diff.respectTo).simplify();
+				}
+			}
+			return this;
+		} else {
+			return this;
+		}
 	}
 }

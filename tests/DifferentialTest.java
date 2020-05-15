@@ -32,11 +32,17 @@ public class DifferentialTest {
 	}
 
 	@Test
-	void integralNull() {
+	void integralNullException() {
 		Integral test = new Integral(parseSimplified("x"));
 		assertThrows(Exception.class, test::execute);
-		assertThrows(Exception.class, test::simplify);
 		assertThrows(Exception.class, () -> test.substituteVariable('x', parseSimplified("y")));
+		test.simplify();
+	}
+
+	@Test
+	void integralDifferentialInside() {
+		Integral test = new Integral(parseInfix("x\\dx"));
+		assertEquals(parseInfix("x^2/2"), test.simplify());
 	}
 
 }

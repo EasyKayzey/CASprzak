@@ -7,6 +7,7 @@ import parsing.FunctionParser;
 import parsing.LatexReplacer;
 
 import java.lang.reflect.MalformedParametersException;
+import java.util.HashMap;
 
 public class ParsingTools {
 
@@ -35,7 +36,7 @@ public class ParsingTools {
 	 * @return a {@code double} corresponding to the evaluated constant to be evaluated
 	 */
 	public static double getConstant(String infix) {
-		return FunctionParser.parseInfix(infix).evaluate(null);
+		return FunctionParser.parseInfix(infix).evaluate(new HashMap<>());
 	}
 
 	/**

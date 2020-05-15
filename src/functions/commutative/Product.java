@@ -4,6 +4,8 @@ import config.Settings;
 import functions.GeneralFunction;
 import functions.binary.Pow;
 import functions.special.Constant;
+import functions.unitary.transforms.Differential;
+import functions.unitary.transforms.Integral;
 import tools.ArrayTools;
 import tools.DefaultFunctions;
 import tools.PolynomialTools;
@@ -96,6 +98,7 @@ public class Product extends CommutativeFunction {
 
 	public Product simplifyInternal() {
 		Product current = (Product) super.simplifyInternal();
+		current = current.fixNullIntegrals();
 		current = current.addExponents();
 		return current;
 	}
@@ -154,6 +157,61 @@ public class Product extends CommutativeFunction {
 			return new Product(newFunctions.toArray(new GeneralFunction[0])).simplifyInternal();
 		else
 			return this;
+	}
+
+	/**
+	 * Turns constructs like a null-respect integral times {@code \dx} into an integral with respect to {@code 'x'}
+	 * @return this function with null-integrals fixed, if possible
+	 */
+	public Product fixNullIntegrals() {
+		if (canFixNullIntegral()) {
+			List<GeneralFunction> functionList = new LinkedList<>(List.of(functions));
+			List<GeneralFunction> newFunctions = new ArrayList<>();
+
+			outer: while (functionList.size() > 0) {
+				GeneralFunction comparing = functionList.remove(0);
+				if (comparing instanceof Integral integral) {
+					Iterator<GeneralFunction> iter = functionList.iterator();
+					while (iter.hasNext()) {
+						GeneralFunction cur = iter.next();
+						if (cur instanceof Differential diff) {
+							newFunctions.add(new Integral(integral.operand, diff.respectTo).simplify());
+							iter.remove();
+							continue outer;
+						}
+					}
+				} else if (comparing instanceof Differential diff) {
+					Iterator<GeneralFunction> iter = functionList.iterator();
+					while (iter.hasNext()) {
+						GeneralFunction cur = iter.next();
+						if (cur instanceof Integral integral) {
+							newFunctions.add(new Integral(integral.operand, diff.respectTo).simplify());
+							iter.remove();
+							continue outer;
+						}
+					}
+				} else {
+					newFunctions.add(comparing);
+				}
+			}
+
+			return new Product(newFunctions.toArray(new GeneralFunction[0]));
+		} else {
+			return this;
+		}
+	}
+
+	@SuppressWarnings("ChainOfInstanceofChecks")
+	private boolean canFixNullIntegral() {
+		boolean hasNull = false;
+		boolean hasDiff = false;
+		for (GeneralFunction function : this) {
+			if (function instanceof Integral integral && integral.respectTo == null)
+				hasNull = true;
+			if (function instanceof Differential)
+				hasDiff = true;
+		}
+		return hasNull && hasDiff;
 	}
 
 	/**

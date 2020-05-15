@@ -16,6 +16,7 @@ public class CASDemo {
 		VAR,
 		SUB,
 		SA,
+		QU,
 		PD,
 		TAY,
 		INT,
@@ -49,6 +50,7 @@ public class CASDemo {
 			case VAR -> var();
 			case SUB -> sub();
 			case SA -> sa();
+			case QU -> qu();
 			case PD -> pd();
 			case TAY -> tay();
 			case INT -> ints();
@@ -289,6 +291,29 @@ public class CASDemo {
 		System.out.println("Try evaluating it, you can now use 'x=[value]', using 'a=[value]' will result in a error, as 'a' is no longer a variable in 'b'.");
 		if (!tryInput(s -> s.length() > 3  && "eval b ".equals(s.substring(0, 7)), "Begin your input with 'eval b ' to evaluate 'b'."))
 			return;
+		sleep(1.5);
+		System.out.println("Continue testing this feature, or type 'next' to continue.");
+		runTillNext();
+		currentState = DemoState.QU;
+	}
+
+	private static void qu() {
+		System.out.println("By now, you may have encounter a situation that required outputs of command to be inputs to other commands,");
+		sleep(1.5);
+		System.out.println("For example");
+		sleep(1.5);
+		System.out.println(">>> sub x^2 x simp y+y");
+		sleep(2);
+		System.out.println("This would return an error at the moment.");
+		sleep(1.5);
+		System.out.println("To fix this, we put quotation marks around the whole simplify");
+		sleep(1.5);
+		System.out.println(">>> sub x^2 x \"simp y+y\"");
+		System.out.println(KeywordInterface.useKeywords("sub x^2 x \"simp y+y\""));
+		sleep(2);
+		System.out.println("Additionally, nested quotation marks do not work.");
+		sleep(1.5);
+		System.out.println("If your command requires nested quotes, we suggest that you split it up onto several lines.");
 		sleep(1.5);
 		System.out.println("Continue testing this feature, or type 'next' to continue.");
 		runTillNext();

@@ -72,6 +72,10 @@ public class Differential extends TransformFunction {
 	}
 
 
+	public UnitaryFunction simplify() {
+		return this;
+	}
+
 	@Override
 	public UnitaryFunction simplifyInternal() {
 		return this;

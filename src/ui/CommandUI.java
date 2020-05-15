@@ -26,6 +26,10 @@ public class CommandUI {
 					output(KeywordInterface.useKeywords(input));
 				} catch (RuntimeException e) {
 					System.out.println(e.toString());
+					if (e instanceof IllegalArgumentException) {
+						System.out.print("When parsing the input as a raw function, the following exception was thrown: ");
+						output(KeywordInterface.prev);
+					}
 				}
 			}
 		}
@@ -38,6 +42,8 @@ public class CommandUI {
 				System.out.println(Arrays.toString(array));
 			else if (object instanceof Object[] array)
 				System.out.println(Arrays.toString(array));
+			else if (object instanceof Exception e)
+				System.out.println(e.toString());
 			else
 				System.out.println(object);
 		} else {

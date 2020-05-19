@@ -160,6 +160,6 @@ public class SimplifyTest {
     @Test
     void logFOC() {
         GeneralFunction test1 = FunctionParser.parseSimplified("log(100)");
-        assertEquals(DefaultFunctions.TWO, test1); // this isn't actually correct based on ranges, so if you add that this will break
+        assertEquals(DefaultFunctions.TWO, test1);
     }
 }

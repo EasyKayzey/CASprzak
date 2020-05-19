@@ -60,7 +60,7 @@ public class Pow extends BinaryFunction {
 	public GeneralFunction simplify() {
 		Pow currentPow = new Pow(function1.simplify(), function2.simplify());
 		currentPow = currentPow.multiplyExponents();
-		GeneralFunction current = currentPow.simplifyObviousExponentsAndFOC();
+		GeneralFunction current = currentPow.simplifyObviousExponentsAndFOC(); // TODO mave FOC to BinaryFunction and make Logb implement it
 		if (current instanceof Pow pow)
 			current = pow.simplifyLogsOfSameBase();
 		if (current instanceof Pow pow && pow.function2 instanceof Product && Settings.distributeExponents)

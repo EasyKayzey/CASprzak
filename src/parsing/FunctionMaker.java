@@ -20,7 +20,7 @@ import functions.unitary.trig.normal.*;
 import tools.DefaultFunctions;
 
 /**
- * TODO explain
+ * {@link FunctionMaker} provides methods to directly convert strings representing functions and {@link GeneralFunction} inputs into one composed {@link GeneralFunction}, as used by {@link FunctionParser}.
  */
 public class FunctionMaker {
 

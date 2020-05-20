@@ -1,5 +1,6 @@
 package tools;
 
+import config.Settings;
 import functions.GeneralFunction;
 import functions.commutative.CommutativeFunction;
 import functions.commutative.Product;
@@ -9,6 +10,7 @@ import tools.helperclasses.Pair;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * The {@link MiscTools} class contains miscellaneous methods.
@@ -76,5 +78,37 @@ public class MiscTools {
 		while (function instanceof CommutativeFunction c && c.getFunctions().length <= 1)
 			function = c.simplifyTrivialElement();
 		return function;
+	}
+
+	/**
+	 * Prints a message, sleeping for {@link Settings#defaultSleep} between newlines
+	 * @param message the message to print
+	 */
+	public static void printWithSleep(String message) {
+		printWithSleep(message, Settings.defaultSleep);
+	}
+
+	/**
+	 * Prints a message, sleeping for {@code time} seconds between newlines
+	 * @param message the message to print
+	 */
+	public static void printWithSleep(String message, double time) {
+		String[] lines = message.split("\n");
+		for (String line : lines) {
+			System.out.println(line);
+			sleep(time);
+		}
+	}
+
+	/**
+	 * Sleeps for {@code seconds} seconds
+	 * @param seconds the amount of seconds to sleep for
+	 */
+	public static void sleep(double seconds) {
+		try {
+			TimeUnit.MILLISECONDS.sleep((long) (seconds*1000));
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 }

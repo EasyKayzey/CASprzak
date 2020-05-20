@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * TODO explain
+ * A wrapper class used to store functions in the integration pipeline, allowing users to utilize the methods in {@link tools.integration}.
  */
 public class Integral extends TransformFunction {
 	/**

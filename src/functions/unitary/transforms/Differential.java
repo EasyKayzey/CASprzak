@@ -6,6 +6,9 @@ import functions.unitary.UnitaryFunction;
 
 import java.util.Map;
 
+/**
+ * TODO explain
+ */
 public class Differential extends TransformFunction {
 
 	/**

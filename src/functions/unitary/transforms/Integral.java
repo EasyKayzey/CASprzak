@@ -13,6 +13,9 @@ import tools.singlevariable.NumericalIntegration;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * TODO explain
+ */
 public class Integral extends TransformFunction {
 	/**
 	 * Constructs a new {@link Integral}

@@ -5,6 +5,9 @@ import functions.unitary.UnitaryFunction;
 
 import java.util.Map;
 
+/**
+ * TODO explain
+ */
 public class PartialDerivative extends TransformFunction {
 	/**
 	 * Constructs a new {@link PartialDerivative}

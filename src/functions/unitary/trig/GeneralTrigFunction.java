@@ -6,7 +6,7 @@ import functions.Invertible;
 import functions.unitary.UnitaryFunction;
 
 /**
- * The abstract {@link GeneralTrigFunction} class represents any trigonometric function (normal, hyperbolic, or inverse).
+ * The abstract {@link GeneralTrigFunction} class represents any trigonometric function (circular, hyperbolic, or inverse).
  */
 public abstract class GeneralTrigFunction extends UnitaryFunction implements Invertible, Integrable {
 

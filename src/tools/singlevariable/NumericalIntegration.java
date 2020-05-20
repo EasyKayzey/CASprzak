@@ -7,7 +7,7 @@ import tools.VariableTools;
 import java.util.Map;
 
 /**
- * The {@link NumericalIntegration} class computes definite integrals using Simpson's Rule and can also return a maximum possible error for the calculation.
+ * The {@link NumericalIntegration} class computes definite integrals using <a href="https://en.wikipedia.org/wiki/Simpson%27s_rule">Simpson's rule</a> and can also return a maximum possible error for the calculation.
  */
 public class NumericalIntegration {
     

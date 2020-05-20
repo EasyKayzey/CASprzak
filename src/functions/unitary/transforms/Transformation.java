@@ -6,7 +6,7 @@ import functions.unitary.UnitaryFunction;
 import tools.exceptions.TransformFailedException;
 
 /**
- * TODO explain
+ * The abstract {@link Transformation} class represents any transformation that turns one function into another function. Ex: {@code ∫} or {@code d/dx}
  */
 public abstract class Transformation extends UnitaryFunction {
 	/**

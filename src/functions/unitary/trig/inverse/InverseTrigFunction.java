@@ -8,7 +8,7 @@ import functions.unitary.trig.GeneralTrigFunction;
 import tools.DefaultFunctions;
 
 /**
- * TODO explain
+ * The abstract {@link InverseTrigFunction} class represents any inverse trigonometric function.
  */
 public abstract class InverseTrigFunction extends GeneralTrigFunction {
 	/**

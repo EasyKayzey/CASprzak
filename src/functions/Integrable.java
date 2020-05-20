@@ -1,7 +1,9 @@
 package functions;
 
+import functions.unitary.UnitaryFunction;
+
 /**
- * TODO explain more in depth
+ * Any {@link UnitaryFunction} {@code f} implementing {@link Integrable} has an elementary solution to {@code ∫ f(x) dx}.
  */
 public interface Integrable {
 

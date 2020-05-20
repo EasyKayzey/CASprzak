@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
- * TODO explain
+ * {@link KeywordInterface} is the backend for {@link ui.CommandUI}, providing support for parsing user input to commands and functions.
  */
 @SuppressWarnings("SpellCheckingInspection")
 public class KeywordInterface {

@@ -6,7 +6,7 @@ import functions.unitary.UnitaryFunction;
 import java.util.Map;
 
 /**
- * TODO explain
+ * A wrapper class used to store functions in the integration pipeline, allowing users to utilize the methods provided by the {@link functions.Differentiable} interface.
  */
 public class PartialDerivative extends TransformFunction {
 	/**

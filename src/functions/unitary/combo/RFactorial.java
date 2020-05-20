@@ -9,6 +9,9 @@ import tools.VariableTools;
 
 import java.util.Map;
 
+/**
+ * The standard recursive definition of factorial.
+ */
 public class RFactorial extends Factorial {
 
 	public RFactorial(GeneralFunction operand) {

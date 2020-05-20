@@ -7,7 +7,7 @@ import functions.special.Constant;
 import functions.special.Variable;
 
 /**
- * TODO explain
+ * {@link DefaultFunctions} contains instances of many often-used {@link GeneralFunction}s so that they need not be re-instantiated repeatedly, as well as shortcuts for the negative and inverse of a {@link GeneralFunction}.
  */
 @SuppressWarnings({"StaticVariableOfConcreteClass", "unused"})
 public class DefaultFunctions {

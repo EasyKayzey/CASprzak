@@ -9,7 +9,7 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 /**
- * TODO explain
+ * The {@link SearchTools} class provides a set of methods that perform functions related to searching through with the contents in a function tree and performing actions on those functions.
  */
 public class SearchTools {
 

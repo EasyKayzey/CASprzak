@@ -10,7 +10,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 /**
- * TODO explain
+ * The abstract {@link BinaryFunction} class represents function of two inputs and that aren't commutable. Ex: {@code log_{2}(x)} or {@code 3^(x)}
  */
 public abstract class BinaryFunction extends GeneralFunction {
 	/**

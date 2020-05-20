@@ -15,7 +15,7 @@ import java.util.ListIterator;
 import java.util.Map;
 
 /**
- * The {@link Solver} class solves for zeros of {@link GeneralFunction}s using Newton's method of root finding.
+ * The {@link Solver} class solves for zeros of {@link GeneralFunction}s using <a href="https://en.wikipedia.org/wiki/Newton%27s_method">Newton's method</a> or <a href="https://en.wikipedia.org/wiki/Halley%27s_method">Halley's method</a> of root finding.
  */
 public class Solver {
 

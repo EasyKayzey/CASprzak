@@ -18,7 +18,13 @@ import tools.exceptions.IntegrationFailedException;
 import tools.helperclasses.Pair;
 
 /**
- * TODO explain VERY IN DEPTH
+ * The StageOne class tries to integrate a function using a method very similar to Stage One of the integration procedure used in Sin. Firstly,
+ * the program performs simplifications and slight modifications to the integrand. The integrand is simplified using{@link IntegralTools#minimalSimplify(GeneralFunction)}.
+ * If the integral is an instance of a {@link PartialDerivative} and the {@link PartialDerivative#respectTo} is the same as the variable that is being integrated with
+ * respect to, the programs returns the {@link PartialDerivative#operand}. Otherwise it executes the {@link PartialDerivative}. If the integrand is a {@link Sum}, then the
+ * integral is distributed to each term in the {@link Sum} and returned as a {@link Sum} of {@link Integral}. The final simplification expands {@link Sum}s, to
+ * integer {@link Constant} powers. After these, a standard derivative divides integration technique is used. The programs check if the integrand is of the form
+ * {@code C*op(u(x))*u'(x)}. If the integrand matches this form, the program returns {@code C*OP(u(x)}, where {@code OP} is the integral of just {@code op(x) dx}.
  */
 @SuppressWarnings("ChainOfInstanceofChecks")
 public class StageOne {

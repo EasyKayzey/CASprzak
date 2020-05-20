@@ -9,7 +9,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 /**
- * TODO explain
+ * All classes extending {@link SpecialFunction} are endpoints of the function tree as they have no input or operands.
  */
 public abstract class SpecialFunction extends GeneralFunction {
 

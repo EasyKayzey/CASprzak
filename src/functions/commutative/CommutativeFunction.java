@@ -10,7 +10,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 /**
- * TODO explain
+ * The abstract {@link CommutativeFunction} class represents function that are commutative. Ex: {@code addition} or {@code multiplication}
  */
 public abstract class CommutativeFunction extends GeneralFunction {
 

@@ -11,7 +11,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * TODO explain
+ * The {@link MiscTools} class contains miscellaneous methods
  */
 public class MiscTools {
 

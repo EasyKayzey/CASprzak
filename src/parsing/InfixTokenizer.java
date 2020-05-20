@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
- * TODO explain
+ * {@link InfixTokenizer} modifies and tokenizes infix into a format supported by {@link FunctionParser}.
  */
 public class InfixTokenizer {
 	private static final Pattern absoluteValueEnd = Pattern.compile(
@@ -63,9 +63,9 @@ public class InfixTokenizer {
 	private InfixTokenizer(){}
 
 	/**
-	 * Tokenizes an input infix string into a format supported by {@link FunctionParser}
+	 * Tokenizes an input infix string and modifies it to a format supported by {@link FunctionParser}
 	 * @param infix input string in infix
-	 * @return array of infix tokens
+	 * @return array of modified infix tokens
 	 */
 	public static List<String> tokenizeInfix(String infix) {
 		// Make d/dx into \pd x

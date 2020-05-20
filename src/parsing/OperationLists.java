@@ -4,13 +4,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * TODO explain
+ * {@link OperationLists} is a centralized location for the strings of all unitary and binary operations to be stored for parsing.
+ * The conversions between these strings and their {@link functions.GeneralFunction} equivalents are held in {@link FunctionMaker}.
  */
 public class OperationLists {
 
-	private OperationLists() {
-
-	}
+	private OperationLists(){}
 
 	/**
 	 * A list of unitary operations

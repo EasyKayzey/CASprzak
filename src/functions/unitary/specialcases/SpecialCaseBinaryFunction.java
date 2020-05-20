@@ -6,7 +6,8 @@ import functions.binary.BinaryFunction;
 import functions.unitary.UnitaryFunction;
 
 /**
- * TODO explain
+ * The abstract {@link SpecialCaseBinaryFunction} class represents what would typically be {@link BinaryFunction}s, but are useful enough to have to have their own {@link UnitaryFunction}s.
+ * Ex: {@code ln} and {@code exp}
  */
 public abstract class SpecialCaseBinaryFunction extends UnitaryFunction implements Invertible {
 

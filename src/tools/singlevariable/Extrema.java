@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.function.BiPredicate;
 
 /**
- * TODO explain
+ * The {@link Extrema} uses the root finding capabilities of {@link Solver} in order to find various extrema of {@link GeneralFunction}s by setting their derivatives equals to {@code 0} and solving.
  */
 public class Extrema {
 

@@ -7,7 +7,9 @@ import functions.unitary.UnitaryFunction;
 import java.util.Map;
 
 /**
- * TODO explain
+ * The {@link Differential} class is used as an intermediary for operations related to parsing derivatives and integrals.
+ * Operations such as {@link #execute} and {@link #evaluate(Map)} are NOT SUPPORTED, as all instances of this class should be converted to other transforms before evaluation.
+ * If evaluation or execution of this class is ever attempted by the CAS, please raise an issue on the <a href="https://github.com/EasyKayzey/CASprzak/">GitHub repository</a>.
  */
 public class Differential extends TransformFunction {
 
@@ -63,12 +65,21 @@ public class Differential extends TransformFunction {
 			throw new IllegalStateException("Comparing a " + this.getClass().getSimpleName() + " with a " + that.getClass().getSimpleName() + " using compareSelf");
 	}
 
+	/**
+	 * Evaluation is not supported by this class, as it is purely an intermediary
+	 * @return nothing, because this method will always throw an error
+	 * @throws UnsupportedOperationException whenever this method is called
+	 */
 	@Override
 	public GeneralFunction getDerivative(char varID) {
 		throw new UnsupportedOperationException("Cannot get the derivative of a differential " + this);
 	}
 
-
+	/**
+	 * Differentiation is not supported by this class, as it is purely an intermediary
+	 * @return nothing, because this method will always throw an error
+	 * @throws UnsupportedOperationException whenever this method is called
+	 */
 	@Override
 	public double evaluate(Map<Character, Double> variableValues) {
 		throw new UnsupportedOperationException("Cannot evaluate a differential " + this);
@@ -91,6 +102,11 @@ public class Differential extends TransformFunction {
 		return new Differential((Variable) function);
 	}
 
+	/**
+	 * Execution is not supported by this class, as it is purely an intermediary
+	 * @return nothing, because this method will always throw an error
+	 * @throws UnsupportedOperationException whenever this method is called
+	 */
 	public GeneralFunction execute() {
 		throw new UnsupportedOperationException("Cannot execute a differential " + this);
 	}

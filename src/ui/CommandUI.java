@@ -8,7 +8,8 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 /**
- * TODO explain
+ * {@link CommandUI} is the main executable of {@code CASprzak}. It opens a command line interface where user input is fed into {@link KeywordInterface#useKeywords(String)} until {@code "exit"} or {@code "!"} is called.
+ * The output from {@link KeywordInterface} is then printed to the command line.
  */
 public class CommandUI {
 	/**

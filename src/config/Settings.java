@@ -64,7 +64,7 @@ public class Settings {
 	 * The default margin to be used when checking if two doubles are equal
 	 */
 	public static double equalsMargin;
-
+// TODO add sleep-length setting for CASDemo
 	/**
 	 * Denotes whether or not expressions like {@code sin(pi/2)} must be escaped to {@code \sin(\pi/2)}. Enabling this is strongly recommended, and may reduce bugs.
 	 */

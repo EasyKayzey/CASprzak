@@ -14,7 +14,7 @@ import java.util.HashMap;
  */
 public class ParsingTools {
 
-	private ParsingTools() {}
+	private ParsingTools(){}
 
 	/**
 	 * If the input is a {@link GeneralFunction}, returns the input. If the input is a {@code Double}, returns a new {@link Constant} of that value. If the input is a {@link String}, parses it with {@link FunctionParser#parseInfix(String)}.

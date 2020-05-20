@@ -12,7 +12,7 @@ import tools.VariableTools;
 import java.util.Map;
 
 /**
- * TODO explain
+ * The methods in {@link TaylorSeries} produce Taylor Series for functions.
  */
 public class TaylorSeries {
 

@@ -77,6 +77,7 @@ public class KeywordInterface {
 			case "int", "integral"												-> integral(splitInput[1]);
 			case "debug"														-> debug(splitInput[1]);
 			case "help"															-> splitInput.length == 1 ? help() : help(splitInput[1]);
+			case "exit", "!"													-> throw new IllegalArgumentException("Exit command should never be passed directly to KeywordInterface. Please report this bug to the developers.");
 			default 															-> null;
 		};
 		if (ret == null) {
@@ -365,6 +366,8 @@ public class KeywordInterface {
 					"integral [function] d[variable]";
 			case "help"				                                      			-> "Gives more information about a command. [argument] denotes a necessary argument, (argument) denotes an optional argument, and (argument)* denotes zero or more instances of argument.\n" +
 					"help (command)";
+			case "exit", "!"														-> "Exits the program.\n" +
+					"exit";
 			default -> throw new IllegalArgumentException("Invalid command: " + input);
 		};
 	}
@@ -372,30 +375,31 @@ public class KeywordInterface {
 	@SuppressWarnings("SameReturnValue")
 	private static String help() {
 		return """
-				demo:                                              runs the demo
-				eval, evaluate:                                    evaluates
-				simp, simplify:                                    simplifies
-				sub, substitute: 								   substitutes
-				subs, substitutesimplify						   substitutes and simplifies
-				sa, suball:										   substitutes all functions variables
-				pd, pdiff, partial, pdifferentiate:				   takes the partial derivative
-				pdn pdiffn partialn pdifferentiaten:               takes the partial derivative n times
-				int, integral:                                     integrates a function
-				intn, intnumeric:                                  performs numerical integration
-				intne, intnumericerror:                            performs numerical integration with error
-				tay, taylor:                                       takes a taylor series
-				sol, solve:                                        solves for roots
-				ext, extrema:                                      finds extrema
-				def, deffunction:                                  defines a function
-				defs, deffunctions, deffeunctionsimplify		   defines a simplified function
-				defcon, defconstant:                               defines a constant
-				rmf, rmfun, removefun, removefunction:             removes a function
-				rmc, rmconstant, removeconstant:                   removes a constant
-				pf, printfun, printfunctions:                      prints all stored functions
-				pc, printc, printconstants:                        prints all stored constants
-				ss, sets, setsetting:                        	   sets a setting
-				ps, prints, printsettings:						   prints all settings
-				clearfun, clearfunctions:                          clears functions
+				demo:                                       		runs the demo
+				eval, evaluate:                             		evaluates
+				simp, simplify:                             		simplifies
+				sub, substitute: 									substitutes
+				subs, substitutesimplify							substitutes and simplifies
+				sa, suball:											substitutes all functions variables
+				pd, pdiff, partial, pdifferentiate:					takes the partial derivative
+				pdn pdiffn partialn pdifferentiaten:        		takes the partial derivative n times
+				int, integral:                              		integrates a function
+				intn, intnumeric:                           		performs numerical integration
+				intne, intnumericerror:                     		performs numerical integration with error
+				tay, taylor:                                		takes a taylor series
+				sol, solve:                                 		solves for roots
+				ext, extrema:                               		finds extrema
+				def, deffunction:                           		defines a function
+				defs, deffunctions, deffeunctionsimplify			defines a simplified function
+				defcon, defconstant:                        		defines a constant
+				rmf, rmfun, removefun, removefunction:      		removes a function
+				rmc, rmconstant, removeconstant:            		removes a constant
+				pf, printfun, printfunctions:               		prints all stored functions
+				pc, printc, printconstants:                 		prints all stored constants
+				ss, sets, setsetting:                       		sets a setting
+				ps, prints, printsettings:							prints all settings
+				clearfun, clearfunctions:                   		clears functions
+				exit, !:											exits the interface
 				Execute `help [command]` to get more info on that command, and `help help` for more info on the help menu.
 				""";
 	}

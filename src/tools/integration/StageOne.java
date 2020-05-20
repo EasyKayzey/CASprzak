@@ -18,13 +18,13 @@ import tools.exceptions.IntegrationFailedException;
 import tools.helperclasses.Pair;
 
 /**
- * The {@link StageOne} class attempts to integrate a function using a method very similar to Stage One of the integration procedure used in Sin. Firstly, //TODO link to the sin paper
+ * The {@link StageOne} class attempts to integrate a function using a method very similar to Stage One of the integration procedure used in <a href="http://www-inst.eecs.berkeley.edu/~cs282/sp02/readings/moses-int.pdf">SIN</a>. Firstly,
  * the program performs simplifications and slight modifications to the integrand. The integrand is simplified using {@link IntegralTools#minimalSimplify(GeneralFunction)}.
  * If the integral is an instance of {@link PartialDerivative} and {@link PartialDerivative#respectTo} is the same as the variable that is being integrated with
  * respect to, the program returns {@link PartialDerivative#operand}. Otherwise it executes the {@link PartialDerivative}. If the integrand is a {@link Sum}, then the
  * integral is distributed to each term in the {@link Sum} and returned as a {@link Sum} of {@link Integral}s. The final simplification expands {@link Sum}s to
  * integer {@link Constant} powers. After these steps, a standard "derivative divides" integration technique is used. The programs check if the integrand is of the form
- * {@code C*op(u(x))*u'(x)}. If the integrand matches this form, the program returns {@code C*OP(u(x)}, where {@code OP} is the integral of {@code op(x) dx}.
+ * {@code C*op(u(x))*u'(x)}. If the integrand matches this form, the program returns {@code C*OP(u(x))}, where {@code OP} is the integral of {@code op(x) dx}.
  */
 @SuppressWarnings("ChainOfInstanceofChecks")
 public class StageOne {

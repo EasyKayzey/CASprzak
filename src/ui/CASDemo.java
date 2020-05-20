@@ -40,7 +40,7 @@ public class CASDemo {
 	public static String runDemo() {
 		scanner = new Scanner(System.in);
 		scanner.useDelimiter("\n");
-		while (currentState != DemoState.EXIT)
+		while (currentState != DemoState.EXIT) // TODO add table of contents
 			runState();
 		return "Exited demo";
 	}

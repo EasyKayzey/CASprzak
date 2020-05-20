@@ -14,7 +14,7 @@ import java.util.List;
 import static parsing.OperationLists.*;
 
 /**
- * TODO explain
+ * {@link FunctionParser} provides the central methods to execute the conversion of a function from a user-inputted string to an instance of {@link GeneralFunction}.
  */
 public class FunctionParser {
 

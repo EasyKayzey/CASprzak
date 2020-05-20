@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
- * TODO explain that this reads from the config and stores results in Settings
+ * {@link SettingsParser} contains tools for parsing settings from files and user input, then storing those settings in {@link Settings} for use by package methods.
  */
 public class SettingsParser {
 	/**

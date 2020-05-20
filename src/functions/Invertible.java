@@ -7,7 +7,7 @@ public interface Invertible {
 
 	/**
 	 * Returns the {@link Class} corresponding to the inverse of this function
-	 * @return the inverse class
+	 * @return the inverse {@link Class}
 	 */
 	Class<?> getInverse();
 }

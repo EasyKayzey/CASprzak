@@ -18,7 +18,7 @@ import tools.exceptions.IntegrationFailedException;
 import tools.helperclasses.Pair;
 
 /**
- * The StageOne class attempts to integrate a function using a method very similar to Stage One of the integration procedure used in Sin. Firstly, //TODO link to the sin paper
+ * The {@link StageOne} class attempts to integrate a function using a method very similar to Stage One of the integration procedure used in Sin. Firstly, //TODO link to the sin paper
  * the program performs simplifications and slight modifications to the integrand. The integrand is simplified using {@link IntegralTools#minimalSimplify(GeneralFunction)}.
  * If the integral is an instance of {@link PartialDerivative} and {@link PartialDerivative#respectTo} is the same as the variable that is being integrated with
  * respect to, the program returns {@link PartialDerivative#operand}. Otherwise it executes the {@link PartialDerivative}. If the integrand is a {@link Sum}, then the

@@ -58,7 +58,7 @@ public abstract class UnitaryFunction extends GeneralFunction {
 
 	/**
 	 * If {@link #operand} is an instance of the inverse of this function, returns {@code operand.operand}
-	 * @return {@code operand.operand} if {@link #operand} is an instance of the inverse, and {@link this} otherwise
+	 * @return {@code operand.operand} if {@link #operand} is an instance of the inverse, and {@code this} otherwise
 	 */
 	public GeneralFunction simplifyInverse() {
 		if (this instanceof Invertible inv && operand.getClass().isAssignableFrom(inv.getInverse()))

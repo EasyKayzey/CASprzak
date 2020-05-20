@@ -88,9 +88,6 @@ public class Differential extends TransformFunction {
 		return new Differential((Variable) function);
 	}
 
-	/**
-	 * @exclude
-	 */
 	public GeneralFunction execute() {
 		throw new UnsupportedOperationException("Cannot execute a differential " + this);
 	}

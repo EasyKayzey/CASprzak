@@ -6,7 +6,7 @@ import tools.ParsingTools;
 import java.io.IOException;
 
 /**
- * The Settings class stores global settings as static variables. These settings are read from {@code cas.properties} by {@link SettingsParser} on launch, and can be modified dynamically during runtime.
+ * The {@link Settings} class stores global settings as static variables. These settings are read from {@code cas.properties} by {@link SettingsParser} on launch, and can be modified dynamically during runtime.
  * Settings that are modified during runtime do NOT get written into the properties file. To save a settings profile, write it into {@code cas.properties} so it is read on launch.
  */
 @SuppressWarnings("CanBeFinal")

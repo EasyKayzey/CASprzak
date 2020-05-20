@@ -10,7 +10,7 @@ import java.lang.reflect.MalformedParametersException;
 import java.util.HashMap;
 
 /**
- * TODO explain
+ * The {@link ParsingTools} class contains methods related to parsing user input, and is used heavily by {@link parsing}.
  */
 public class ParsingTools {
 

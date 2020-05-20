@@ -125,7 +125,7 @@ public class CASDemo {
 	}
 
 	private static void intro() {
-		System.out.println("Hello user. Welcome to the CASprzak!");
+		System.out.println("Hello user. Welcome to the CASprzak!"); // TODO add print-sleep text block method
 		sleep(1.5);
 		System.out.println("This is a quick demo to help get you started.");
 		sleep(1.5);

@@ -3,7 +3,7 @@ package functions;
 import java.util.Map;
 
 /**
- * TODO explain
+ * The {@link Evaluable} interface provides an interface for the evaluation of functions.
  */
 public interface Evaluable {
 

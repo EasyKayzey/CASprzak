@@ -1,7 +1,7 @@
 package functions;
 
 /**
- * TODO explain
+ * The {@link Differentiable} interface provides an interface for the differentiation of functions.
  */
 public interface Differentiable {
 

@@ -1,7 +1,7 @@
 package functions;
 
 /**
- * TODO explain
+ * The {@link Simplifiable} interface provides an interface for the simplification of functions.
  */
 public interface Simplifiable {
 

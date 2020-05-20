@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Predicate;
 
 /**
- * TODO explain
+ * {@link CASDemo} provides a demo and tutorial of the CAS functionality for new users. The demo is started using the {@code demo} command in {@link KeywordInterface} or {@link CommandUI}.
  */
 public class CASDemo {
 	private enum DemoState {

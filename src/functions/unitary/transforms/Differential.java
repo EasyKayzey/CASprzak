@@ -11,7 +11,7 @@ import java.util.Map;
  * Operations such as {@link #execute} and {@link #evaluate(Map)} are NOT SUPPORTED, as all instances of this class should be converted to other transforms before evaluation.
  * If evaluation or execution of this class is ever attempted by the CAS, please raise an issue on the <a href="https://github.com/EasyKayzey/CASprzak/">GitHub repository</a>.
  */
-public class Differential extends TransformFunction {
+public class Differential extends Transformation {
 
 	/**
 	 * Constructs a new {@link Differential}, which is sometimes used as an intermediary for integrals and derivatives

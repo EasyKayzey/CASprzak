@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * A wrapper class used to store functions in the integration pipeline, allowing users to utilize the methods provided by the {@link functions.Differentiable} interface.
  */
-public class PartialDerivative extends TransformFunction {
+public class PartialDerivative extends Transformation {
 	/**
 	 * Constructs a new {@link PartialDerivative}
 	 * @param operand The operand on the {@link PartialDerivative}

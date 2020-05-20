@@ -8,18 +8,18 @@ import tools.exceptions.TransformFailedException;
 /**
  * TODO explain
  */
-public abstract class TransformFunction extends UnitaryFunction {
+public abstract class Transformation extends UnitaryFunction {
 	/**
-	 * The character of the variable that the {@link TransformFunction} is with respect to
+	 * The character of the variable that the {@link Transformation} is with respect to
 	 */
 	public final Character respectTo;
 
 	/**
-	 * Constructs a new {@link TransformFunction}
-	 * @param operand the operand of the {@link TransformFunction}
-	 * @param respectTo the variable that the {@link TransformFunction} operates with respect to
+	 * Constructs a new {@link Transformation}
+	 * @param operand the operand of the {@link Transformation}
+	 * @param respectTo the variable that the {@link Transformation} operates with respect to
 	 */
-	public TransformFunction(GeneralFunction operand, Character respectTo) {
+	public Transformation(GeneralFunction operand, Character respectTo) {
 		super(operand);
 		this.respectTo = respectTo;
 	}
@@ -27,7 +27,7 @@ public abstract class TransformFunction extends UnitaryFunction {
 	@Override
 	public GeneralFunction simplify() {
 		if (Settings.executeOnSimplify) {
-			TransformFunction current = (TransformFunction) simplifyInternal();
+			Transformation current = (Transformation) simplifyInternal();
 			try {
 				return current.execute().simplify();
 			} catch (TransformFailedException ignored) {

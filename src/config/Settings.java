@@ -1,6 +1,7 @@
 package config;
 
 import functions.GeneralFunction;
+import functions.unitary.transforms.Transformation;
 import tools.ParsingTools;
 
 import java.io.IOException;
@@ -96,7 +97,7 @@ public class Settings {
 	public static boolean exitSolverOnProximity;
 
 	/**
-	 * Denotes whether a {@link functions.unitary.transforms.TransformFunction} should execute its action when {@code simplify()} is called
+	 * Denotes whether a {@link Transformation} should execute its action when {@code simplify()} is called
 	 */
 	public static boolean executeOnSimplify;
 

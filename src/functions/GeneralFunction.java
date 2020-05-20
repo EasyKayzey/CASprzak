@@ -10,7 +10,7 @@ import functions.special.Variable;
 import functions.unitary.combo.Factorial;
 import functions.unitary.piecewise.PiecewiseFunction;
 import functions.unitary.specialcases.SpecialCaseBinaryFunction;
-import functions.unitary.transforms.TransformFunction;
+import functions.unitary.transforms.Transformation;
 import functions.unitary.trig.inverse.InverseTrigFunction;
 import functions.unitary.trig.normal.TrigFunction;
 import org.jetbrains.annotations.NotNull;
@@ -41,7 +41,7 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 			PiecewiseFunction.class,
 			Factorial.class,
 			SpecialCaseBinaryFunction.class,
-			TransformFunction.class,
+			Transformation.class,
 			InverseTrigFunction.class,
 			TrigFunction.class,
 			Sum.class,

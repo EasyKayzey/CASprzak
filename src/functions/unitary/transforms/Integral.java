@@ -16,7 +16,7 @@ import java.util.Map;
 /**
  * A wrapper class used to store functions in the integration pipeline, allowing users to utilize the methods in {@link tools.integration}.
  */
-public class Integral extends TransformFunction {
+public class Integral extends Transformation {
 	/**
 	 * Constructs a new {@link Integral}
 	 * @param integrand The integrand of the {@link Integral}

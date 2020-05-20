@@ -13,7 +13,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 /**
- * TODO explain
+ * The abstract {@link UnitaryFunction} class represents function of one input. Ex: {@code cos} or {@code abs}
  */
 public abstract class UnitaryFunction extends GeneralFunction {
 	/**

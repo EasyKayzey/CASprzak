@@ -10,6 +10,10 @@ import tools.DefaultFunctions;
 
 import java.util.Map;
 
+/**
+ * <a href="https://en.wikipedia.org/wiki/Stirling%27s_approximation">Stirling's Approximation</a> for factorials asymptotically approaches {@code n!}, but it has a delta greater than one for {@code x>=5}.
+ * It is useful for performance (but not accuracy) of large number inputs, and for approximations of the gamma function especially on {@code [1, 4]}.
+ */
 public class SFactorial extends Factorial {
 
 	public SFactorial(GeneralFunction operand) {

@@ -50,13 +50,18 @@ public class Logb extends BinaryFunction {
 		return "(log_{" + function2.toString() + "}(" + function1.toString() + "))";
 	}
 
+	@SuppressWarnings("ChainOfInstanceofChecks")
 	public GeneralFunction simplify() {
 		Logb currentLogb = new Logb(function1.simplify(), function2.simplify());
 		GeneralFunction current = currentLogb.simplifyPowers();
+
 		if (current instanceof Logb logb)
-			return logb.simplifyIdentity();
-		else
-			return current;
+			current = logb.simplifyFOC();
+
+		if (current instanceof Logb logb)
+			current = logb.simplifyIdentity();
+
+		return current;
 	}
 
 	/**

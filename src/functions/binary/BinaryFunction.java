@@ -1,6 +1,7 @@
 package functions.binary;
 
 import functions.GeneralFunction;
+import functions.special.Constant;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Iterator;
@@ -91,6 +92,17 @@ public abstract class BinaryFunction extends GeneralFunction {
 	 * @return the special-case-converted function
 	 */
 	public abstract GeneralFunction toSpecialCase();
+
+	/**
+	 * Returns a new {@link Constant} of the {@link BinaryFunction} evaluated if both operands are a {@link Constant}
+	 * @return a new {@link Constant} of the {@link BinaryFunction} evaluated if both operands are a {@link Constant}
+	 */
+	public GeneralFunction simplifyFOC() {
+		if (function1 instanceof Constant && function2 instanceof Constant)
+			return new Constant(this.evaluate(null)).simplify();
+		else
+			return this;
+	}
 
 
 	public @NotNull Iterator<GeneralFunction> iterator() {

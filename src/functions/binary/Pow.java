@@ -60,7 +60,7 @@ public class Pow extends BinaryFunction {
 	public GeneralFunction simplify() {
 		Pow currentPow = new Pow(function1.simplify(), function2.simplify());
 		currentPow = currentPow.multiplyExponents();
-		GeneralFunction current = currentPow.simplifyObviousExponentsAndFOC(); // TODO mave FOC to BinaryFunction and make Logb implement it
+		GeneralFunction current = currentPow.simplifyObviousExponentsAndFOC();
 		if (current instanceof Pow pow)
 			current = pow.simplifyLogsOfSameBase();
 		if (current instanceof Pow pow && pow.function2 instanceof Product && Settings.distributeExponents)
@@ -72,15 +72,13 @@ public class Pow extends BinaryFunction {
 	 * Returns a {@link GeneralFunction} where obvious exponents (ex: {@code (x+1)^1 or (x-1)^0}) have been simplified and functions of constants (ex: {@code 2^7}) are simplified
 	 * @return a {@link GeneralFunction} where obvious exponents and functions of constants are simplified
 	 */
-	public GeneralFunction simplifyObviousExponentsAndFOC() { //FOC means Functions of Constants
+	public GeneralFunction simplifyObviousExponentsAndFOC() {
 		if (function1 instanceof Constant constant)
 			if (constant.constant == 0)
 				return DefaultFunctions.ONE;
 			else if (constant.constant == 1)
 				return function2.simplify();
-			else if (Settings.simplifyFunctionsOfConstants && function2 instanceof Constant)
-				return new Constant(this.evaluate(null));
-		return this;
+		return simplifyFOC();
 	}
 
 	/**

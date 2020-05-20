@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 /**
- * The {@link IntegralTools} class contains miscellaneous methods used in {@link tools.integration}
+ * The {@link IntegralTools} class contains miscellaneous methods used in {@link tools.integration}.
  */
 public class IntegralTools {
 

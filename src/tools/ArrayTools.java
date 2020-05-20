@@ -4,7 +4,7 @@ import functions.GeneralFunction;
 import functions.commutative.Product;
 
 /**
- * The {@link ArrayTools} class contains miscellaneous methods relating to arrays
+ * The {@link ArrayTools} class contains miscellaneous methods relating to arrays.
  */
 public class ArrayTools {
 

@@ -9,7 +9,7 @@ import java.util.Set;
 import java.util.function.Predicate;
 
 /**
- * The {@link VariableTools} class contains miscellaneous methods revolving around the {@link Variable} class
+ * The {@link VariableTools} class contains miscellaneous methods revolving around the {@link Variable} class.
  */
 public class VariableTools {
 

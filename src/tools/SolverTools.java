@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 /**
- * The {@link SolverTools} class contains miscellaneous methods used in {@link tools.singlevariable.Solver}
+ * The {@link SolverTools} class contains miscellaneous methods used in {@link tools.singlevariable.Solver}.
  */
 public class SolverTools {
 

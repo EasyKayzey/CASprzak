@@ -4,7 +4,7 @@ import functions.GeneralFunction;
 import functions.unitary.UnitaryFunction;
 
 /**
- * TODO explain
+ * The abstract {@link PiecewiseFunction} class represents any piece-wise function.
  */
 public abstract class PiecewiseFunction extends UnitaryFunction {
 	public PiecewiseFunction(GeneralFunction operand) {

@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 import static parsing.OperationLists.*;
 
 /**
- * TODO explain
+ * {@link LatexReplacer} contains tools regarding the use of LaTeX escapes. See method documentation for more details.
  */
 public class LatexReplacer {
 

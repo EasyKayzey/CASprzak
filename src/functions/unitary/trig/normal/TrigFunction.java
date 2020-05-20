@@ -4,7 +4,7 @@ import functions.GeneralFunction;
 import functions.unitary.trig.GeneralTrigFunction;
 
 /**
- * TODO explain
+ * The abstract {@link TrigFunction} class represents any non-inverse trigonometric function (circular or hyperbolic).
  */
 public abstract class TrigFunction extends GeneralTrigFunction {
 

@@ -212,17 +212,17 @@ public class CASDemo {
 
 	private static void var() {
 		printWithSleep("""
-		Until this point, all the expressions that we've been using have only contained one variable.
-		We will now construct a function using more than one variable.
-		Define a new function with several different variables using the 'def' command, e.g. 'def g xy^2+q'.
-		""");
+				Until this point, all the expressions that we've been using have only contained one variable.
+				We will now construct a function using more than one variable.
+				Define a new function with several different variables using the 'def' command, e.g. 'def g xy^2+q'.
+				""");
 		if (!tryInput(s -> "def ".equals(s.substring(0, 4)), "Begin your input with 'def' to demonstrate the storage feature of the UI."))
 			return;
 		sleep();
 		printWithSleep("""
-		Now, when evaluating, you will need to specify each value, like 'eval x-y x=2 y=3'.
-		Try evaluating your multivariable function using 'eval', e.g. 'eval f x=2 y=4 q=e.
-		""", 2);
+				Now, when evaluating, you will need to specify each value, like 'eval x-y x=2 y=3'.
+				Try evaluating your multivariable function using 'eval', e.g. 'eval f x=2 y=4 q=e.
+				""", 2);
 		if (!tryInput(s -> s.length() > 4 && "eval ".equals(s.substring(0, 5)), "Begin your input with 'eval'"))
 			return;
 		sleep();
@@ -232,31 +232,29 @@ public class CASDemo {
 	}
 
 	private static void sub() {
-		System.out.println("Now, with several variables, we can begin to substitute.");
-		sleep();
-		System.out.println("It is probably best to explain with an example:");
-		sleep();
-		System.out.println(">>> sub x^y y sin(x)");
-		sleep();
-		System.out.println(KeywordInterface.useKeywords("sub x^y y sin(x)"));
-		sleep();
-		System.out.println("As you can see, this replaces all 'y's in the function with 'sin(x)'.");
-		sleep();
-		System.out.println("To try it yourself, take your multivariable function from before and replace a variable with a function using 'sub'.");
-		if (!tryInput(s -> s.length() > 3  && "sub ".equals(s.substring(0, 4)), "Begin your input with 'sub' to demonstrate the substitution feature of the UI."))
+		printWithSleep("""
+				Now, with several variables, we can begin to substitute.
+				It is probably best to explain with an example:
+				>>> sub x^y y sin(x)
+				""" +
+				KeywordInterface.useKeywords("sub x^y y sin(x)")
+				+ """
+				  
+				As you can see, this replaces all 'y's in the function with 'sin(x)'.
+				To try it yourself, take your multivariable function from before and replace a variable with a function using 'sub'.
+				""");
+		if (!tryInput(s -> s.length() > 3 && "sub ".equals(s.substring(0, 4)), "Begin your input with 'sub' to demonstrate the substitution feature of the UI."))
 			return;
 		sleep();
-		System.out.println("Congratulations, you have just substituted a variable for a function.");
-		sleep();
-		System.out.println("An important thing to remembers is that these changes are not saved in the function.");
-		sleep();
-		System.out.println("For example, to substitute every 'x' in 'g' with 'x^2', you would need to run 'def g sub g x x^2'.");
-		sleep();
-		System.out.println("Additionally, like 'def', if you want to substitute and simplify in one step, use 'subs' or 'substitutesimplify'.");
-		sleep();
-		System.out.println("Continue testing this feature, or type 'next' to continue.");
-		runTillNext();
+		printWithSleep("""
+				Congratulations, you have just substituted a variable for a function.
+				An important thing to remembers is that these changes are not saved in the function.
+				For example, to substitute every 'x' in 'g' with 'x^2', you would need to run 'def g sub g x x^2'.
+				Additionally, like 'def', if you want to substitute and simplify in one step, use 'subs' or 'substitutesimplify'.
+				Continue testing this feature, or type 'next' to continue.
+				""");
 		currentState = DemoState.SA;
+		runTillNext();
 	}
 
 	private static void sa() {

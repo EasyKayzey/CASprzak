@@ -139,7 +139,7 @@ public abstract class CommutativeFunction extends GeneralFunction {
 				}
 			}
 			functionList.add(new Constant(accumulator));
-			return getInstance(functionList.toArray(new GeneralFunction[0]));
+			return getInstance(functionList.toArray(new GeneralFunction[0])).simplifyIdentity();
 		} else {
 			return this;
 		}

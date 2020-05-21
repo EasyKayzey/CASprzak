@@ -110,7 +110,6 @@ public class CASDemo {
 				return true;
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
 			System.out.println("Your input threw exception '" + e.toString() + "', please try again.");
 			if (Settings.printStackTraces)
 				e.printStackTrace();

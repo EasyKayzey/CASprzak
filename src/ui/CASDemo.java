@@ -33,6 +33,7 @@ public class CASDemo {
 		LATEX,
 		END,
 		EXIT,
+		TOC,
 	}
 
 	private static DemoState currentState = DemoState.INTRO;
@@ -67,6 +68,7 @@ public class CASDemo {
 			case LATEX -> latex();
 			case END -> end();
 			case EXIT -> exit();
+			case TOC -> tableOfContents();
 		}
 	}
 
@@ -81,11 +83,14 @@ public class CASDemo {
 				input = scanner.next();
 			}
 			
-			if ('!' == input.charAt(0) || (input.length() >= 4 && "exit".equals(input.substring(0, 4)))) {
+			if ((input.length() > 0 && '!' == input.charAt(0)) || (input.length() >= 4 && "exit".equals(input.substring(0, 4)))) {
 				currentState = DemoState.EXIT;
 				return false;
 			} else if (input.length() >= 4 && "next".equals(input.substring(0, 4))) {
 				return true;
+			} else if ("toc".equals(input.toLowerCase())) {
+				currentState = DemoState.TOC;
+				return false;
 			} else if (!test.test(input)) {
 				System.out.println(message);
 				return tryInput(test, message);
@@ -94,6 +99,7 @@ public class CASDemo {
 				return true;
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.println("Your input threw exception '" + e.toString() + "', please try again.");
 			if (Settings.printStackTraces)
 				e.printStackTrace();
@@ -136,7 +142,7 @@ public class CASDemo {
 				END -> closing
 				EXIT -> exit
 				Enter one of the above capital shortcuts above to go to that section of the demo.
-				""", .4);
+				""", .25);
 		while (true) try {
 			System.out.print(">>> ");
 			currentState = DemoState.valueOf(scanner.next().toUpperCase());
@@ -154,22 +160,20 @@ public class CASDemo {
 		printWithSleep("""
 				Hello user. Welcome to the CASprzak!
 				This is a quick demo to help get you started.
-				If you would like to only see a specific section of the demo, enter 'toc'. Otherwise, enter anything else.
-				""");
-		System.out.print(">>> ");
-		if ("toc".equals(scanner.next().toLowerCase())) {
-			tableOfContents();
-			return;
-		}
-		printWithSleep("""
 				You can exit the demo anytime by typing 'exit' or '!'.
-				First, try typing in a function like 'x^2' or 'cos(x) + sin(x)'.
+				If you would like to only see a specific section of the demo, enter 'toc'. Otherwise, enter 'next'.
 				""");
 		if (!tryInput(s -> true, null))
 			return;
 		sleep();
 		printWithSleep("""
-				Congratulations, you've just inputted your first function.
+				First, to demonstrate parsing, try typing in a function like 'x^2' or 'cos(x) + sin(x)'.
+				""");
+		if (!tryInput(s -> true, null))
+			return;
+		sleep();
+		printWithSleep("""
+				Congratulations, you've just parsed your first function.
 				Now, enter an underscore to reference your previous output.
 				""");
 		if (!tryInput("_"::equals, "Please enter an underscore to demonstrate the previous-output feature of the UI."))

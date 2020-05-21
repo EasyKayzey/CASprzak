@@ -428,25 +428,20 @@ public class CASDemo {
 	}
 
 	private static void ext() {
-		System.out.println("With the ability to solve for zeros, we can now find extrema of functions.");
-		sleep();
-		System.out.println("For example:");
-		sleep();
-		System.out.println(">>> ext max 1-x^2 -2 2.");
-		sleep();
-		System.out.println(KeywordInterface.useKeywords("ext max 1-x^2 -2 2"));
-		sleep();
-		System.out.println("This command found the maximum of '1-x^2' on the range (-2, 2).");
-		sleep();
-		System.out.println("There are other commands in addition to just max.");
-		sleep();
-		System.out.println("The 5 options after 'ext' are 'min, max, anymin, anymax, inflection'.");
-		sleep();
-		System.out.println("min and max return the maximum or minimum of the function in the given range.");
-		sleep();
-		System.out.println("anymin, anymax, and inflection return an array of all local minima, maxima, or inflection points.");
-		sleep();
-		System.out.println("Continue testing this feature, or type 'next' to continue.");
+		printWithSleep("""
+				With the ability to solve for zeros, we can now find extrema of functions.
+				For example:
+				>>> ext max 1-x^2 -2 2.
+				""" +
+				KeywordInterface.useKeywords("ext max 1-x^2 -2 2")
+				+ """
+				This command found the maximum of '1-x^2' on the range (-2, 2).
+				There are other commands in addition to just max.
+				The 5 options after 'ext' are 'min, max, anymin, anymax, inflection'.
+				min and max return the maximum or minimum of the function in the given range.
+				anymin, anymax, and inflection return an array of all local minima, maxima, or inflection points.
+				Continue testing this feature, or type 'next' to continue.
+				""");
 		currentState = DemoState.SET;
 		runTillNext();
 	}

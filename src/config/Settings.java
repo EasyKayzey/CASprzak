@@ -19,17 +19,6 @@ public class Settings {
 	 */
 	public static boolean readProperties = true;
 
-	static {
-		//noinspection ConstantConditions
-		if (readProperties) {
-			try {
-				SettingsParser.parseConfig();
-			} catch (IOException e) {
-				System.out.println("Properties file not found. Using defaults...");
-			}
-		}
-	}
-
 	private Settings(){}
 
 	/**
@@ -126,4 +115,15 @@ public class Settings {
 	 * Denotes the default implementation of {@link functions.unitary.combo.Factorial} to be used
 	 */
 	public static FactorialType defaultFactorial = FactorialType.RECURSIVE;
+
+	static {
+		//noinspection ConstantConditions
+		if (Settings.readProperties) {
+			try {
+				SettingsParser.parseConfig();
+			} catch (IOException e) {
+				System.out.println("Properties file not found. Using defaults...");
+			}
+		}
+	}
 }

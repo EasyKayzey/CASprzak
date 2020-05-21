@@ -298,42 +298,47 @@ public class CASDemo {
 	}
 
 	private static void sa() {
-		System.out.println("Remember, that whenever you define a new function it gets stored in a variable.");
-		sleep();
-		System.out.println(">>> def a x^2");
-		System.out.println(KeywordInterface.useKeywords("def a x^2"));
-		sleep();
-		System.out.println("Now, what happens when we define a new function 'b' using 'a' as a variable.");
-		sleep();
-		System.out.println("Try it yourself, define a new function 'b' as a function of a, e.g. def b a+1");
-		if (!tryInput(s -> !"def b a".equals(s) && s.length() > 5  && "def b ".equals(s.substring(0, 6)), "Begin your input with 'def b ' to define a function as 'b'. Make sure your input isn't 'def b a'."))
+		printWithSleep("""
+				Remember, that whenever you define a new function it gets stored in a variable.
+				>>> def a x^2
+				""" +
+				KeywordInterface.useKeywords("def a x^2")
+				+ """
+				Now, what happens when we define a new function 'b' using 'a' as a variable.
+				Try it yourself, define a new function 'b' as a function of a, e.g. def b a+1
+				""");
+		if (!tryInput(s -> !"def b a".equals(s) && s.length() > 5 && "def b ".equals(s.substring(0, 6)), "Begin your input with 'def b ' to define a function as 'b'. Make sure your input isn't 'def b a'."))
 			return;
 		sleep();
 		if (!VariableTools.doesNotContainsVariable(KeywordInterface.parseStored("b"), 'a')) {
 			System.out.println("An issue has occurred when parsing your function for 'b'. Please report this to the developers. Defaulting to 'def b a+1'...");
 			KeywordInterface.useKeywords("def b a+1");
 		}
-		System.out.println("Notice that 'b' is a function of 'a', not of 'x', when we evaluate, we are going to have to use 'a=[value]'.");
-		sleep();
-		System.out.println(">>> eval b a=2");
-		System.out.println(KeywordInterface.useKeywords("eval b a=2"));
-		sleep();
-		System.out.println("Now, try using substitute all, type in 'sa b'.");
+		printWithSleep("""
+				Notice that 'b' is a function of 'a', not of 'x', when we evaluate, we are going to have to use 'a=[value]'.
+				>>> eval b a=2
+				""" +
+				KeywordInterface.useKeywords("eval b a=2")
+				+ """
+				Now, try using substitute all, type in 'sa b'.
+				""");
 		if (!tryInput("sa b"::equals, "Your input must be 'sa b' to substitute all in 'b'."))
 			return;
 		sleep();
-		System.out.println(">>> def b _");
-		System.out.println(KeywordInterface.useKeywords("def b _"));
-		sleep(2.25);
-		System.out.println("Notice how 'b' is now a function in terms of 'x'.");
-		sleep();
-		System.out.println("Try evaluating it, you can now use 'x=[value]', using 'a=[value]' will result in a error, as 'a' is no longer a variable in 'b'.");
-		if (!tryInput(s -> s.length() > 3  && "eval b ".equals(s.substring(0, 7)), "Begin your input with 'eval b ' to evaluate 'b'."))
+		printWithSleep("""
+				>>> def b _
+				""" +
+				KeywordInterface.useKeywords("def b _")
+				+ """
+				Notice how 'b' is now a function in terms of 'x'.
+				Try evaluating it, you can now use 'x=[value]', using 'a=[value]' will result in a error, as 'a' is no longer a variable in 'b'.
+				""");
+		if (!tryInput(s -> s.length() > 3 && "eval b ".equals(s.substring(0, 7)), "Begin your input with 'eval b ' to evaluate 'b'."))
 			return;
 		sleep();
-		System.out.println("Continue testing this feature, or type 'next' to continue.");
-		runTillNext();
+		printWithSleep("Continue testing this feature, or type 'next' to continue.");
 		currentState = DemoState.QUOTES;
+		runTillNext();
 	}
 
 	private static void quotes() {

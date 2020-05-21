@@ -352,7 +352,7 @@ public class CASDemo {
 				Notice how 'b' is now a function in terms of 'x'.
 				Try evaluating it, you can now use 'x=[value]', using 'a=[value]' will result in a error, as 'a' is no longer a variable in 'b'.
 				""");
-		if (!tryInput(s -> s.length() > 3 && "eval b ".equals(s.substring(0, 7)), "Begin your input with 'eval b ' to evaluate 'b'."))
+		if (!tryInput(s -> s.length() > 6 && "eval b ".equals(s.substring(0, 7)), "Begin your input with 'eval b ' to evaluate 'b'."))
 			return;
 		sleep();
 		printWithSleep("Continue testing this feature, or type 'next' to continue.");

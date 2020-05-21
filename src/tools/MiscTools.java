@@ -94,6 +94,7 @@ public class MiscTools {
 	/**
 	 * Prints a message, sleeping for {@code time} seconds between newlines, but not at the end
 	 * @param message the message to print
+	 * @param time amount of seconds to sleep
 	 */
 	public static void printWithSleep(String message, double time) {
 		String[] lines = newline.split(message);

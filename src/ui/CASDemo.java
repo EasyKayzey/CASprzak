@@ -337,26 +337,22 @@ public class CASDemo {
 	}
 
 	private static void quotes() {
-		System.out.println("By now, you may have encounter a situation that required outputs of command to be inputs to other commands,");
-		sleep();
-		System.out.println("For example");
-		sleep();
-		System.out.println(">>> sub x^2 x simp y+y");
-		sleep(2);
-		System.out.println("This would return an error at the moment.");
-		sleep();
-		System.out.println("To fix this, we put quotation marks around the whole simplification:");
-		sleep();
-		System.out.println(">>> sub x^2 x \"simp y+y\"");
-		System.out.println(KeywordInterface.useKeywords("sub x^2 x \"simp y+y\""));
-		sleep(2);
-		System.out.println("Additionally, nested quotation marks do not work.");
-		sleep();
-		System.out.println("If your command requires nested quotes, we suggest that you split it up onto several lines.");
-		sleep();
-		System.out.println("Continue testing this feature, or type 'next' to continue.");
-		runTillNext();
+		printWithSleep("""
+				By now, you may have encounter a situation that required outputs of command to be inputs to other commands,
+				For example
+				>>> sub x^2 x simp y+y
+				This would return an error at the moment.
+				To fix this, we put quotation marks around the whole simplification:
+				>>> sub x^2 x "simp y+y"
+				""" +
+				KeywordInterface.useKeywords("sub x^2 x \"simp y+y\"")
+				+ """
+				Additionally, nested quotation marks do not work.
+				If your command requires nested quotes, we suggest that you split it up onto several lines.
+				Continue testing this feature, or type 'next' to continue.
+				""");
 		currentState = DemoState.PD;
+		runTillNext();
 	}
 
 	private static void pd() {//TODO talk about pd and int classes

@@ -387,6 +387,9 @@ public class CASDemo {
 		sleep();
 		printWithSleep("""
 				Great, you have taken the derivative of a function.
+				The 'pd' command in the command line interface is not the only way to evaluate derivatives.
+				This CAS also supports the actual derivative function, denoted 'd/dx' (if it is with respect to x).
+				The function 'd/dx(x^2)' will get parsed internally to 'd/dx[x^2]' and not to '2x', so to evaluate the derivative you must execute 'simp _'.
 				Continue testing this feature, or type 'next' to continue.
 				""");
 		currentState = DemoState.TAY;
@@ -414,12 +417,12 @@ public class CASDemo {
 	private static void ints() {
 		printWithSleep("""
 				Integration is the other great pillar of calculus.
-				Currently, this CAS can only symbolically solve integrals of the form ∫ c op(u) u' du.
+				Currently, this CAS can only symbolically solve integrals of the form ∫[c*op(u)*u']du.
 				More general symbolic integration will be added in future releases.
 				An example where integration works is as follows:.
 				>>> int 3*(cos(e^x))^2*sin(e^x)*e^x dx
 				""" +
-				KeywordInterface.useKeywords("int (cos(e^x))^2*sin(e^x)*e^x dx")
+				KeywordInterface.useKeywords("int 3*(cos(e^x))^2*sin(e^x)*e^x dx")
 				+ """
 				Try integration for yourself using the 'int' command.
 				""");
@@ -428,6 +431,11 @@ public class CASDemo {
 		sleep();
 		printWithSleep("""
 				Congratulations, you've just integrated your first function.
+				Just like derivatives, the 'int' command is not the only way to evaluate integrals in this CAS.
+				The internal representation of an integral is denoted 'int'. 
+				To input an integral, you could parse 'int(2x)dx', but this would not be directly converted to 'int[2x]dx' internally.
+				Integral parsing uses intermediary differentials, which will error if evaluation is attempted.
+				To solve parsing issues, then execute the integral, you can still input 'simp _'.
 				Continue testing this feature, or type 'next' to continue.
 				""");
 		currentState = DemoState.INTN;

@@ -69,6 +69,7 @@ public class LatexReplacer {
 	private static final Pattern w   = Pattern.compile("\\\\omega");
 	private static final Pattern hb  = Pattern.compile("\\\\hbar");
 	private static final Pattern par = Pattern.compile("\\\\par(tial)?");
+	private static final Pattern dx  = Pattern.compile("(?<![\\\\/])(?=d[a-ce-zA-Z](?![a-zA-Z]))");
 
 	/**
 	 * Replaces LaTeX-escaped Greek letters in a string with their actual letter characters
@@ -146,6 +147,7 @@ public class LatexReplacer {
 			for (String op : ops)
 				if (op.charAt(0) == '\\')
 					input = input.replaceAll("(?<![\\\\a])\\s*(?=" + op.substring(1) + ")", "\\\\");
+		input = dx.matcher(input).replaceAll("\\\\");
 		return input;
 	}
 

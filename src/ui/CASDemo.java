@@ -375,7 +375,7 @@ public class CASDemo {
 		runTillNext();
 	}
 
-	private static void pd() {//TODO talk about pd and int classes
+	private static void pd() {
 		printWithSleep("""
 				Another feature of this CAS is its ability to compute the partial derivative of any function.
 				Some examples:

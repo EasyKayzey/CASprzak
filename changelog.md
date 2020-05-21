@@ -1,8 +1,14 @@
 # Changelog
+
+## v0.1.2
+### Bugfixes
+ - Fix properties not being read on launch for binaries
+
 ## v0.1.1
 ### Bugfixes
- - Improved support for carriage returns
+ - Improves support for carriage returns
  - Fix bug that caused CASDemo to exit on entry if it had been previously completed
+ 
 ## v0.1.0
 ### Major Additions
 - Storage of functions in an artificial data type

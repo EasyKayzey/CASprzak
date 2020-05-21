@@ -423,8 +423,8 @@ public class CASDemo {
 				There are some settings like exit conditions that change how the solver works which may help fix minor issues.
 				Continue testing this feature, or type 'next' to continue.
 				""");
-		runTillNext();
 		currentState = DemoState.EXT;
+		runTillNext();
 	}
 
 	private static void ext() {
@@ -447,8 +447,8 @@ public class CASDemo {
 		System.out.println("anymin, anymax, and inflection return an array of all local minima, maxima, or inflection points.");
 		sleep();
 		System.out.println("Continue testing this feature, or type 'next' to continue.");
-		runTillNext();
 		currentState = DemoState.SET;
+		runTillNext();
 	}
 
 	@SuppressWarnings("SpellCheckingInspection")
@@ -467,8 +467,8 @@ public class CASDemo {
 				Default settings are read from 'config/cas.properties' on launch. This file also contains documentation regarding the effects of various settings.
 				Continue testing this feature, or type 'next' to continue.
 				""");
-		runTillNext();
 		currentState = DemoState.LATEX;
+		runTillNext();
 	}
 
 	private static void latex() {
@@ -480,8 +480,8 @@ public class CASDemo {
 				Using this feature requires all input to be LaTeX-escaped, so expressions like 'sin(pi*x)' should be written '\\sin(\\pi*x)'.
 				If you would like to enable this feature now, you may do so using 'ss enforceEscapes true' and then test the new functionality. Type 'next' to continue.
 				""");
-		runTillNext();
 		currentState = DemoState.END;
+		runTillNext();
 	}
 
 	private static void end() {
@@ -491,8 +491,8 @@ public class CASDemo {
 				"We highly encourage just playing around to see what you can do.
 				"Continue testing in the demo, or type 'next' to return to the main command-line interface.
 				""");
-		runTillNext();
 		currentState = DemoState.EXIT;
+		runTillNext();
 	}
 }
 

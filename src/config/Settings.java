@@ -75,55 +75,55 @@ public class Settings {
 	/**
 	 * Denotes whether or not expressions like {@code sin(pi/2)} must be escaped to {@code \sin(\pi/2)}. Enabling this is strongly recommended, and may reduce bugs.
 	 */
-	public static boolean enforceEscapes;
+	public static boolean enforceEscapes = false;
 
 	/**
 	 * Denotes whether functions of constants should be simplified. Ex: {@code \sin(\pi/2) -> 1}
 	 */
-	public static boolean simplifyFunctionsOfConstants;
+	public static boolean simplifyFunctionsOfConstants = true;
 
 	/**
 	 * Denotes whether exponents should be distributed over multiplication in {@code simplify()}. Ex: {@code (2x)^2 -> 4x^2}
 	 */
-	public static boolean distributeExponents;
+	public static boolean distributeExponents = true;
 
 	/**
 	 * Denotes whether or not the derivatives of functions should be cached when created
 	 */
-	public static boolean cacheDerivatives;
+	public static boolean cacheDerivatives = true;
 
 	/**
 	 * Forces functions in {@link functions.unitary.combo} to return integers when using approximations
 	 */
-	public static boolean enforceIntegerOperations;
+	public static boolean enforceIntegerOperations = true;
 
 	/**
 	 * Denotes whether methods in {@link tools.singlevariable} should exit if the result is within a certain proximity of the target. Improves performance at the cost of accuracy.
 	 */
-	public static boolean exitSolverOnProximity;
+	public static boolean exitSolverOnProximity = false;
 
 	/**
 	 * Denotes whether a {@link Transformation} should execute its action when {@code simplify()} is called
 	 */
-	public static boolean executeOnSimplify;
+	public static boolean executeOnSimplify = true;
 
 	/**
 	 * Denotes whether products are distributed over addition in {@code simplify()}. Ex: {@code x(y+z) -> (xy+xz)}
 	 */
-	public static boolean distributeFunctions;
+	public static boolean distributeFunctions = true;
 
 	/**
 	 * Denotes whether full stack traces of errors should be printed for debugging
 	 */
-	public static boolean printStackTraces;
+	public static boolean printStackTraces = false;
 
 	/**
 	 * Denotes the default method used to solve equations
 	 */
-	public static SolverType defaultSolverType;
+	public static SolverType defaultSolverType = SolverType.NEWTON;
 
 	/**
 	 * Denotes the default implementation of {@link functions.unitary.combo.Factorial} to be used
 	 */
-	public static FactorialType defaultFactorial;
+	public static FactorialType defaultFactorial = FactorialType.RECURSIVE;
 }

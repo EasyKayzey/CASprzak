@@ -42,7 +42,7 @@ public class CASDemo {
 	public static String runDemo() {
 		scanner = new Scanner(System.in);
 		scanner.useDelimiter("\n");
-		while (currentState != DemoState.EXIT) // TODO add table of contents
+		while (currentState != DemoState.EXIT)
 			runState();
 		return "Exited demo";
 	}
@@ -115,7 +115,7 @@ public class CASDemo {
 	}
 
 	private static void tableOfContents() {
-		System.out.println("""
+		System.out.print("""
 				Table of Contents:
 				INTRO -> introduction to CASprzak
 				EVAL -> evaluation
@@ -124,18 +124,26 @@ public class CASDemo {
 				VAR -> multivariable functions
 				SUB -> substitution
 				SA -> substitute-all shortcut
-				QU -> qu();
-				PD -> pd();
-				TAY -> tay();
-				INT -> ints();
-				INTN -> intn();
-				SOL -> sol();
-				EXT -> ext();
-				SET -> set();
-				LATEX -> latex();
-				END -> end();
-				EXIT -> exit();
+				QUOTES -> quotes tutorial
+				PD -> partial derivatives
+				TAY -> taylor series
+				INT -> symbolic integration
+				INTN -> numerical integration
+				SOL -> numerical solving
+				EXT -> extrema
+				SET -> settings
+				LATEX -> latex
+				END -> closing
+				EXIT -> exit
+				Enter one of the above capital shortcuts above to go to that section of the demo.
 				""");
+		while (true) try {
+			System.out.print(">>> ");
+			currentState = DemoState.valueOf(scanner.next().toUpperCase());
+			return;
+		} catch (IllegalArgumentException e) {
+			System.out.println("Your input was not one of the constants mentioned above. To exit, enter EXIT.");
+		}
 	}
 
 	private static void exit() {
@@ -146,6 +154,14 @@ public class CASDemo {
 		printWithSleep("""
 				Hello user. Welcome to the CASprzak!
 				This is a quick demo to help get you started.
+				If you would like to only see a specific section of the demo, enter 'toc'. Otherwise, enter anything else.
+				""");
+		System.out.print(">>> ");
+		if ("toc".equals(scanner.next().toLowerCase())) {
+			tableOfContents();
+			return;
+		}
+		printWithSleep("""
 				You can exit the demo anytime by typing 'exit' or '!'.
 				First, try typing in a function like 'x^2' or 'cos(x) + sin(x)'.
 				""");

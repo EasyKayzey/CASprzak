@@ -22,7 +22,7 @@ public class CASDemo {
 		VAR,
 		SUB,
 		SA,
-		QU,
+		QUOTES,
 		PD,
 		TAY,
 		INT,
@@ -56,7 +56,7 @@ public class CASDemo {
 			case VAR -> var();
 			case SUB -> sub();
 			case SA -> sa();
-			case QU -> qu();
+			case QUOTES -> quotes();
 			case PD -> pd();
 			case TAY -> tay();
 			case INT -> ints();
@@ -112,6 +112,30 @@ public class CASDemo {
 				input = scanner.next();
 			}
 		}
+	}
+
+	private static void tableOfContents() {
+		System.out.println("""
+				Table of Contents:
+				INTRO -> introduction to CASprzak
+				EVAL -> evaluation
+				DEF -> function definition
+				SIMP -> simplification
+				VAR -> multivariable functions
+				SUB -> substitution
+				SA -> substitute-all shortcut
+				QU -> qu();
+				PD -> pd();
+				TAY -> tay();
+				INT -> ints();
+				INTN -> intn();
+				SOL -> sol();
+				EXT -> ext();
+				SET -> set();
+				LATEX -> latex();
+				END -> end();
+				EXIT -> exit();
+				""");
 	}
 
 	private static void exit() {
@@ -293,10 +317,10 @@ public class CASDemo {
 		sleep();
 		System.out.println("Continue testing this feature, or type 'next' to continue.");
 		runTillNext();
-		currentState = DemoState.QU;
+		currentState = DemoState.QUOTES;
 	}
 
-	private static void qu() {
+	private static void quotes() {
 		System.out.println("By now, you may have encounter a situation that required outputs of command to be inputs to other commands,");
 		sleep();
 		System.out.println("For example");
@@ -305,7 +329,7 @@ public class CASDemo {
 		sleep(2);
 		System.out.println("This would return an error at the moment.");
 		sleep();
-		System.out.println("To fix this, we put quotation marks around the whole simplify");
+		System.out.println("To fix this, we put quotation marks around the whole simplification:");
 		sleep();
 		System.out.println(">>> sub x^2 x \"simp y+y\"");
 		System.out.println(KeywordInterface.useKeywords("sub x^2 x \"simp y+y\""));

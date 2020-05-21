@@ -221,8 +221,8 @@ public class CASDemo {
 				You can also remove a function by using the 'removefunction' or 'rmf' command, or remove all functions by using 'clearfunctions'.
 				Continue testing this feature, or type 'next' to continue.
 				""");
-		runTillNext();
 		currentState = DemoState.SIMP;
+		runTillNext();
 	}
 
 	private static void simp() {

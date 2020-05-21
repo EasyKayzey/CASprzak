@@ -389,22 +389,21 @@ public class CASDemo {
 	}
 
 	private static void intn() {
-		System.out.println("Despite not being able to symbolically integrate all functions, it is still almost always possible to find a numeric solution between two bounds.");
-		sleep();
-		System.out.println("This CAS uses Simpson's Rule to be able to perform very accurate numeric integration.");
-		sleep();
-		System.out.println("The syntax for numeric integration is 'intn [function] [startvalue] [endvalue]'.");
-		sleep();
-		System.out.println("Try it out yourself using any function.");
-		sleep();
+		printWithSleep("""
+				Despite not being able to symbolically integrate all functions, it is still almost always possible to find a numeric solution between two bounds.
+				This CAS uses Simpson's Rule to be able to perform very accurate numeric integration.
+				The syntax for numeric integration is 'intn [function] [startvalue] [endvalue]'.
+				Try it out yourself using any function.
+				""");
 		if (!tryInput(s -> "intn ".equals(s.substring(0, 5)), "Begin your input with 'intn' to demonstrate the numeric integration feature of the CAS."))
 			return;
 		sleep();
-		System.out.println("Good job!");
-		sleep();
-		System.out.println("Continue testing this feature, or type 'next' to continue.");
-		runTillNext();
+		printWithSleep("""
+				Good job!
+				Continue testing this feature, or type 'next' to continue.
+				""");
 		currentState = DemoState.SOL;
+		runTillNext();
 	}
 
 	private static void sol() {
@@ -423,8 +422,8 @@ public class CASDemo {
 				There are some settings like exit conditions that change how the solver works which may help fix minor issues.
 				Continue testing this feature, or type 'next' to continue.
 				""");
-		currentState = DemoState.EXT;
 		runTillNext();
+		currentState = DemoState.EXT;
 	}
 
 	private static void ext() {

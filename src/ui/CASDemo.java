@@ -155,8 +155,8 @@ public class CASDemo {
 				Notice how underscore now saves the result from the evaluation.
 				Continue testing this feature, or type 'next' to continue.
 				""");
-		runTillNext();
 		currentState = DemoState.DEF;
+		runTillNext();
 	}
 
 	private static void def() {
@@ -168,18 +168,18 @@ public class CASDemo {
 			return;
 		sleep();
 		printWithSleep("""	
-				Great, we can now use this function whenever we want.");
-				Evaluate the function that you have stored by using the character that you stored in place of the underscore, e.g. 'eval f x=2'.");
+				Great, we can now use this function whenever we want.
+				Evaluate the function that you have stored by using the character that you stored in place of the underscore, e.g. 'eval f x=2'.
 				""");
 		if (!tryInput(s -> s.length() > 4 && "eval ".equals(s.substring(0, 5)), "Begin your input with 'eval'."))
 			return;
 		sleep();
 		printWithSleep("""		
-				Good. Here are some tips for using the storage feature:");
-				If you define a function to character that is already used, the old function will be overwritten.");
-				You can see all your function characters by typing in 'printfunctions' or 'pf'.");
-				You can also remove a function by using the 'removefunction' or 'rmf' command, or remove all functions by using 'clearfunctions'.");
-				Continue testing this feature, or type 'next' to continue.");
+				Good. Here are some tips for using the storage feature:
+				If you define a function to character that is already used, the old function will be overwritten.
+				You can see all your function characters by typing in 'printfunctions' or 'pf'.
+				You can also remove a function by using the 'removefunction' or 'rmf' command, or remove all functions by using 'clearfunctions'.
+				Continue testing this feature, or type 'next' to continue.
 				""");
 		runTillNext();
 		currentState = DemoState.SIMP;
@@ -206,8 +206,8 @@ public class CASDemo {
 				Also, if you want to define a function and simplify it in one step, you can use the 'defs' or 'deffunctionsimplify'.
 				Continue testing this feature, or type 'next' to continue.
 				""");
-		runTillNext(); // TODO fix that exiting during next doesn't work
 		currentState = DemoState.VAR;
+		runTillNext();
 	}
 
 	private static void var() {

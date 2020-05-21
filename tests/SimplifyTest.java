@@ -133,33 +133,33 @@ public class SimplifyTest {
 
     @Test
     void simpleInverseLnAndExp() {
-        GeneralFunction test1 = FunctionParser.parseInfix("exp(ln(x))");
-        GeneralFunction test2 = FunctionParser.parseInfix("ln(exp(x))");
+        GeneralFunction test1 = FunctionParser.parseInfix("\\exp(\\ln(x))");
+        GeneralFunction test2 = FunctionParser.parseInfix("\\ln(\\exp(x))");
         assertEquals(test1, test2);
     }
 
     @Test
     void simpleInverseTrig() {
-        GeneralFunction test1 = FunctionParser.parseInfix("asin(sin(x))");
-        GeneralFunction test2 = FunctionParser.parseInfix("cos(acos(x))");
+        GeneralFunction test1 = FunctionParser.parseInfix("\\asin(\\sin(x))");
+        GeneralFunction test2 = FunctionParser.parseInfix("\\cos(\\acos(x))");
         assertEquals(test1, test2);
     }
 
     @Test
     void inverseChain() {
-        GeneralFunction test1 = FunctionParser.parseInfix("asin(acos(exp(ln(sec(asec(cos(sin(x))))))))");
+        GeneralFunction test1 = FunctionParser.parseInfix("\\asin(\\acos(\\exp(\\ln(\\sec(\\asec(\\cos(\\sin(x))))))))");
         assertEquals(DefaultFunctions.X, test1.simplify()); // this isn't actually correct based on ranges, so if you add that this will break
     }
 
     @Test
     void expInverses() {
-        GeneralFunction test1 = FunctionParser.parseSimplified("ln(e^logb_e(exp(x)))");
+        GeneralFunction test1 = FunctionParser.parseSimplified("\\ln(e^\\logb_e(\\exp(x)))");
         assertEquals(DefaultFunctions.X, test1); // this isn't actually correct based on ranges, so if you add that this will break
     }
 
     @Test
     void logFOC() {
-        GeneralFunction test1 = FunctionParser.parseSimplified("log(100)");
+        GeneralFunction test1 = FunctionParser.parseSimplified("\\log(100)");
         assertEquals(DefaultFunctions.TWO, test1);
     }
 }

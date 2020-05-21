@@ -319,6 +319,7 @@ public class CASDemo {
 				""" +
 				KeywordInterface.useKeywords("def a x^2")
 				+ """
+    
 				Now, what happens when we define a new function 'b' using 'a' as a variable.
 				Try it yourself, define a new function 'b' as a function of a, e.g. def b a+1
 				""");
@@ -335,6 +336,7 @@ public class CASDemo {
 				""" +
 				KeywordInterface.useKeywords("eval b a=2")
 				+ """
+    
 				Now, try using substitute all, type in 'sa b'.
 				""");
 		if (!tryInput("sa b"::equals, "Your input must be 'sa b' to substitute all in 'b'."))
@@ -345,6 +347,7 @@ public class CASDemo {
 				""" +
 				KeywordInterface.useKeywords("def b _")
 				+ """
+    
 				Notice how 'b' is now a function in terms of 'x'.
 				Try evaluating it, you can now use 'x=[value]', using 'a=[value]' will result in a error, as 'a' is no longer a variable in 'b'.
 				""");
@@ -367,6 +370,7 @@ public class CASDemo {
 				""" +
 				KeywordInterface.useKeywords("sub x^2 x \"simp y+y\"")
 				+ """
+    
 				Additionally, nested quotation marks do not work.
 				If your command requires nested quotes, we suggest that you split it up onto several lines.
 				Continue testing this feature, or type 'next' to continue.
@@ -383,18 +387,22 @@ public class CASDemo {
 				""" +
 				KeywordInterface.useKeywords("pd x x^2")
 				+ """
+    
 				>>> pd x e^(sin(x)+y)
 				""" +
 				KeywordInterface.useKeywords("pd x e^(sin(x)+y)")
 				+ """
+    
 				>>> pd x x^(x^(x^x))
 				""" +
 				KeywordInterface.useKeywords("pd x x^(x^(x^x))")
 				+ """
+    
 				>>> pd y logb_{x^y+z}(2sin(y))
 				""" +
 				KeywordInterface.useKeywords("pd y logb_{x^y+z}(2sin(y))")
 				+ """
+    
 				Now try it yourself using the 'pd' command, in the syntax 'pd [variable] [function]'.
 				""");
 		if (!tryInput(s -> s.length() > 1 && "pd".equals(s.substring(0, 2)), "Begin your input with 'pd' to demonstrate the derivative feature of the UI."))
@@ -439,6 +447,7 @@ public class CASDemo {
 				""" +
 				KeywordInterface.useKeywords("int 3*(cos(e^x))^2*sin(e^x)*e^x dx")
 				+ """
+    
 				Try integration for yourself using the 'int' command.
 				""");
 		if (!tryInput(s -> s.length() > 3 && "int ".equals(s.substring(0, 4)), "Begin your input with 'int' to demonstrate the integration feature of the CAS."))
@@ -503,6 +512,7 @@ public class CASDemo {
 				""" +
 				KeywordInterface.useKeywords("ext max 1-x^2 -2 2")
 				+ """
+    
 				This command found the maximum of '1-x^2' on the range (-2, 2).
 				There are other commands in addition to just max.
 				The 5 options after 'ext' are 'min, max, anymin, anymax, inflection'.

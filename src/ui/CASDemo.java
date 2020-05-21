@@ -123,7 +123,7 @@ public class CASDemo {
 				SIMP -> simplification
 				VAR -> multivariable functions
 				SUB -> substitution
-				SA -> substitute-all shortcut
+				SA -> substitute-all
 				QUOTES -> quotes tutorial
 				PD -> partial derivatives
 				TAY -> taylor series

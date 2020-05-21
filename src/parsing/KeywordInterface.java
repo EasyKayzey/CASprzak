@@ -53,7 +53,7 @@ public class KeywordInterface {
 			return "No input was given.";
 		String[] splitInput = spaces.split(input, 2);
 		Object ret = switch (splitInput[0]) {
-			case "demo"															-> CASDemo.runDemo();
+			case "demo"															-> demo();
 			case "pd", "pdiff", "partial", "pdifferentiate"						-> partialDiff(splitInput[1]);
 			case "pdn", "pdiffn", "partialn", "pdifferentiaten"					-> partialDiffNth(splitInput[1]);
 			case "eval", "evaluate"												-> evaluate(splitInput[1]);

@@ -525,10 +525,10 @@ public class CASDemo {
 
 	private static void end() {
 		printWithSleep("""
-				"Thank you for completing the demo.
-				"For more details such as more features and shortcuts in the UI, check out our documentation or give the code a read.
-				"We highly encourage just playing around to see what you can do.
-				"Continue testing in the demo, or type 'next' to return to the main command-line interface.
+				Thank you for completing the demo.
+				For more details such as more features and shortcuts in the UI, check out our documentation or give the code a read.
+				We highly encourage just playing around to see what you can do.
+				Continue testing in the demo, or type 'next' to return to the main command-line interface.
 				""");
 		currentState = DemoState.EXIT;
 		runTillNext();

@@ -11,11 +11,14 @@ import tools.helperclasses.Pair;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Pattern;
 
 /**
  * The {@link MiscTools} class contains miscellaneous methods.
  */
 public class MiscTools {
+
+	private static final Pattern newline = Pattern.compile("\\r?\\n");
 
 	private MiscTools(){}
 
@@ -81,7 +84,7 @@ public class MiscTools {
 	}
 
 	/**
-	 * Prints a message, sleeping for {@link Settings#defaultSleep} between newlines
+	 * Prints a message, sleeping for {@link Settings#defaultSleep} between newlines, but not at the end
 	 * @param message the message to print
 	 */
 	public static void printWithSleep(String message) {
@@ -89,14 +92,37 @@ public class MiscTools {
 	}
 
 	/**
-	 * Prints a message, sleeping for {@code time} seconds between newlines
+	 * Prints a message, sleeping for {@code time} seconds between newlines, but not at the end
 	 * @param message the message to print
 	 */
 	public static void printWithSleep(String message, double time) {
-		String[] lines = message.split("\n");
-		for (String line : lines) {
-			System.out.println(line);
+		String[] lines = newline.split(message);
+		for (int i = 0; i < lines.length - 1; i++) {
+			System.out.println(lines[i]);
 			sleep(time);
+		}
+		System.out.println(lines[lines.length - 1]);
+	}
+
+	/**
+	 * Prints a message, sleeping for {@link Settings#defaultSleep} between newlines, then sleeps that same amount at the end if {@code sleepAtEnd} is true.
+	 * @param message the message to print
+	 * @param sleepAtEnd denotes whether the message should end with a {@code sleep()}
+	 */
+	public static void printWithSleep(String message, boolean sleepAtEnd) {
+		printWithSleep(message, Settings.defaultSleep);
+		if (sleepAtEnd)
+			sleep();
+	}
+
+	/**
+	 * Sleeps for {@link Settings#defaultSleep} seconds
+	 */
+	public static void sleep() {
+		try {
+			TimeUnit.MILLISECONDS.sleep((long) (Settings.defaultSleep*1000));
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
 	}
 

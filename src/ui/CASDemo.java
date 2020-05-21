@@ -343,7 +343,7 @@ public class CASDemo {
 		currentState = DemoState.PD;
 	}
 
-	private static void pd() {
+	private static void pd() {//TODO talk about pd and int classes
 		System.out.println("Another feature of this CAS is its ability to compute the partial derivative of any function.");
 		sleep();
 		System.out.println("Some examples:");
@@ -384,28 +384,28 @@ public class CASDemo {
 		System.out.println("Good. Taylor series can often be used as good approximations to difficult functions.");
 		sleep();
 		System.out.println("Continue testing this feature, or type 'next' to continue.");
-		runTillNext();
 		currentState = DemoState.INT;
+		runTillNext();
 	}
 
 	private static void ints() {
 		printWithSleep("""
-		Integration is the other great pillar of calculus.
-		Currently, this CAS can only symbolically solve integrals of the form ∫ c op(u) u' du.
-		More general symbolic integration will be added in future releases.
-		An example where integration works is as follows:.
-		>>> int 3*(cos(e^x))^2*sin(e^x)*e^x dx""" +
-		KeywordInterface.useKeywords("int (cos(e^x))^2*sin(e^x)*e^x dx")
-		+ """
-		Try integration for yourself using the 'int' command.
-		""");
+				Integration is the other great pillar of calculus.
+				Currently, this CAS can only symbolically solve integrals of the form ∫ c op(u) u' du.
+				More general symbolic integration will be added in future releases.
+				An example where integration works is as follows:.
+				>>> int 3*(cos(e^x))^2*sin(e^x)*e^x dx""" +
+				KeywordInterface.useKeywords("int (cos(e^x))^2*sin(e^x)*e^x dx")
+				+ """
+				Try integration for yourself using the 'int' command.
+				""");
 		if (!tryInput(s -> s.length() > 3 && "int ".equals(s.substring(0, 4)), "Begin your input with 'int' to demonstrate the integration feature of the CAS."))
 			return;
 		sleep();
 		printWithSleep("""
-		Congratulations, you've just integrated your first function.
-		Continue testing this feature, or type 'next' to continue.
-		""");
+				Congratulations, you've just integrated your first function.
+				Continue testing this feature, or type 'next' to continue.
+				""");
 		currentState = DemoState.INTN;
 		runTillNext();
 	}

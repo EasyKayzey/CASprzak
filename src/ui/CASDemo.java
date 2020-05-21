@@ -233,6 +233,8 @@ public class CASDemo {
 				If you define a function to character that is already used, the old function will be overwritten.
 				You can see all your function characters by typing in 'printfunctions' or 'pf'.
 				You can also remove a function by using the 'removefunction' or 'rmf' command, or remove all functions by using 'clearfunctions'.
+				Additionally to functions, you can also define constants using 'defc', 'defcon', or 'defconstant'. E.g. 'defc g 9.81'.
+				The constants 'e' and 'π' are already predefined.
 				Continue testing this feature, or type 'next' to continue.
 				""");
 		currentState = DemoState.SIMP;
@@ -270,7 +272,7 @@ public class CASDemo {
 				We will now construct a function using more than one variable.
 				Define a new function with several different variables using the 'def' command, e.g. 'def g xy^2+q'.
 				""");
-		if (!tryInput(s -> "def ".equals(s.substring(0, 4)), "Begin your input with 'def' to demonstrate the storage feature of the UI."))
+		if (!tryInput(s -> "def".equals(s.substring(0, 3)), "Begin your input with 'def' or 'defs' to demonstrate the storage feature of the UI."))
 			return;
 		sleep();
 		printWithSleep("""

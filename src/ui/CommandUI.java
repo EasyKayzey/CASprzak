@@ -17,6 +17,7 @@ public class CommandUI {
 	 * @param args default main arguments
 	 */
 	public static void main(String[] args) {
+		System.out.println("Welcome to CASprzak. Run 'help' for a command list, or 'demo' for a tutorial.");
 		Scanner scan = new Scanner(System.in);
 		scan.useDelimiter("\\n");
 		boolean flag = true;

@@ -422,8 +422,8 @@ public class CASDemo {
 				There are some settings like exit conditions that change how the solver works which may help fix minor issues.
 				Continue testing this feature, or type 'next' to continue.
 				""");
-		runTillNext();
 		currentState = DemoState.EXT;
+		runTillNext();
 	}
 
 	private static void ext() {

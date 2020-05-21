@@ -457,21 +457,20 @@ public class CASDemo {
 
 	@SuppressWarnings("SpellCheckingInspection")
 	private static void set() {
-		System.out.println("Finally, we will show you how to view or modify settings.");
-		sleep();
-		System.out.println("Type in 'printsettings' or 'ps' to see all current settings.");
+		printWithSleep("""
+				Finally, we will show you how to view or modify settings.
+				Type in 'printsettings' or 'ps' to see all current settings.
+				""");
 		if (!tryInput(s -> "printsettings".equals(s) || "ps".equals(s), "Type in 'settings' to see the settings."))
 			return;
 		sleep();
-		System.out.println("These are all the current settings.");
-		sleep();
-		System.out.println("If you want to change a setting, use 'setsetting [setting] [value]', or the shortcut 'ss'.");
-		sleep();
-		System.out.println("As you saw, there are a lot of settings. If you want to learn what a setting does, we recommend reading our documentation.");
-		sleep();
-		System.out.println("Default settings are read from 'config/cas.properties' on launch. This file also contains documentation regarding the effects of various settings.");
-		sleep();
-		System.out.println("Continue testing this feature, or type 'next' to continue.");
+		printWithSleep("""
+				These are all the current settings.
+				If you want to change a setting, use 'setsetting [setting] [value]', or the shortcut 'ss'.
+				As you saw, there are a lot of settings. If you want to learn what a setting does, we recommend reading our documentation.
+				Default settings are read from 'config/cas.properties' on launch. This file also contains documentation regarding the effects of various settings.
+				Continue testing this feature, or type 'next' to continue.
+				""");
 		runTillNext();
 		currentState = DemoState.LATEX;
 	}
@@ -490,13 +489,12 @@ public class CASDemo {
 	}
 
 	private static void end() {
-		System.out.println("Thank you for completing the demo.");
-		sleep();
-		System.out.println("For more details such as more features and shortcuts in the UI, check out our documentation or give the code a read.");
-		sleep();
-		System.out.println("We highly encourage just playing around to see what you can do.");
-		sleep();
-		System.out.println("Continue testing in the demo, or type 'next' to return to the main command-line interface.");
+		printWithSleep("""
+				"Thank you for completing the demo.
+				"For more details such as more features and shortcuts in the UI, check out our documentation or give the code a read.
+				"We highly encourage just playing around to see what you can do.
+				"Continue testing in the demo, or type 'next' to return to the main command-line interface.
+				""");
 		runTillNext();
 		currentState = DemoState.EXIT;
 	}

@@ -171,7 +171,7 @@ public class CASDemo {
 				Hello user. Welcome to the CASprzak!
 				This is a quick demo to help get you started.
 				You can exit the demo anytime by typing 'exit' or '!'.
-				If you would like to only see a specific section of the demo, enter 'toc'. Otherwise, enter 'next'.
+				If you would like to only see a specific section of the demo, enter 'toc'. You can do this at any point. Otherwise, enter 'next'.
 				""");
 		if (!tryInput(s -> true, null))
 			return;

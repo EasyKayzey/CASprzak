@@ -408,24 +408,21 @@ public class CASDemo {
 	}
 
 	private static void sol() {
-		System.out.println("In addition to numerical integration, this CAS also implements numerical root finding.");
-		sleep();
-		System.out.println("The system we use to find zeroes requires a specified start and end to look for roots in.");
-		sleep();
-		System.out.println("The syntax is 'sol [function] [startrange] [endrange]'.");
-		sleep();
-		System.out.println("Try it out yourself:");
-		sleep();
+		printWithSleep("""
+				In addition to numerical integration, this CAS also implements numerical root finding.
+				The system we use to find zeroes requires a specified start and end to look for roots in.
+				The syntax is 'sol [function] [startrange] [endrange]'.
+				Try it out yourself:
+				""");
 		if (!tryInput(s -> s.length() > 3 && "sol ".equals(s.substring(0, 4)), "Begin your input with 'sol' to demonstrate the solving feature of the CAS."))
 			return;
 		sleep();
-		System.out.println("As with all numeric methods, there are some quirks.");
-		sleep();
-		System.out.println("Very often, simple solutions such as 1 will be found as a decimal like 1.000000000023.");
-		sleep();
-		System.out.println("There are some settings like exit conditions that change how the solver works which may help fix minor issues.");
-		sleep();
-		System.out.println("Continue testing this feature, or type 'next' to continue.");
+		printWithSleep("""
+				As with all numeric methods, there are some quirks.
+				Very often, simple solutions such as 1 will be found as a decimal like 1.000000000023.
+				There are some settings like exit conditions that change how the solver works which may help fix minor issues.
+				Continue testing this feature, or type 'next' to continue.
+				""");
 		runTillNext();
 		currentState = DemoState.EXT;
 	}

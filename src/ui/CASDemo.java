@@ -424,7 +424,7 @@ public class CASDemo {
 		printWithSleep("""
 				One application of the derivative is in the form of a taylor series.
 				The syntax for creating a taylor series goes as follows:
-				>>> tay [function] [terms] [center].
+				>>> tay [function] [degree] [center].
 				Try creating a taylor series using the 'tay' command.
 				""");
 		if (!tryInput(s -> "tay ".equals(s.substring(0, 4)), "Begin your input with 'tay' to demonstrate the taylor series feature of the CAS."))

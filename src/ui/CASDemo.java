@@ -319,7 +319,7 @@ public class CASDemo {
 				KeywordInterface.useKeywords("def a x^2")
 				+ """
     
-				Now, what happens when we define a new function 'b' using 'a' as a variable.
+				Now, what happens when we define a new function 'b' using 'a' as a variable?
 				Try it yourself, define a new function 'b' as a function of a, e.g. def b a+1
 				""");
 		if (!tryInput(s -> !"def b a".equals(s) && s.length() > 5 && "def b ".equals(s.substring(0, 6)), "Begin your input with 'def b ' to define a function as 'b'. Make sure your input isn't 'def b a'."))

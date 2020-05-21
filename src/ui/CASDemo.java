@@ -344,31 +344,36 @@ public class CASDemo {
 	}
 
 	private static void pd() {//TODO talk about pd and int classes
-		System.out.println("Another feature of this CAS is its ability to compute the partial derivative of any function.");
-		sleep();
-		System.out.println("Some examples:");
-		sleep();
-		System.out.println(">>> pd x x^2");
-		System.out.println(KeywordInterface.useKeywords("pd x x^2"));
-		sleep();
-		System.out.println(">>> pd x e^(sin(x)+y)");
-		System.out.println(KeywordInterface.useKeywords("pd x e^(sin(x)+y)"));
-		sleep();
-		System.out.println(">>> pd x x^(x^(x^x))");
-		System.out.println(KeywordInterface.useKeywords("pd x x^(x^(x^x))"));
-		sleep();
-		System.out.println(">>> pd y logb_{x^y+z}(2sin(y))");
-		System.out.println(KeywordInterface.useKeywords("pd y logb_{x^y+z}(2sin(y))"));
-		sleep();
-		System.out.println("Now try it yourself using the 'pd' command, in the syntax 'pd [variable] [function]'.");
+		printWithSleep("""
+				Another feature of this CAS is its ability to compute the partial derivative of any function.
+				Some examples:
+				>>> pd x x^2
+				""" +
+				KeywordInterface.useKeywords("pd x x^2")
+				+ """
+				>>> pd x e^(sin(x)+y)
+				""" +
+				KeywordInterface.useKeywords("pd x e^(sin(x)+y)")
+				+ """
+				>>> pd x x^(x^(x^x))
+				""" +
+				KeywordInterface.useKeywords("pd x x^(x^(x^x))")
+				+ """
+				>>> pd y logb_{x^y+z}(2sin(y))
+				""" +
+				KeywordInterface.useKeywords("pd y logb_{x^y+z}(2sin(y))")
+				+ """
+				Now try it yourself using the 'pd' command, in the syntax 'pd [variable] [function]'.
+				""");
 		if (!tryInput(s -> s.length() > 1 && "pd".equals(s.substring(0, 2)), "Begin your input with 'pd' to demonstrate the derivative feature of the UI."))
 			return;
 		sleep();
-		System.out.println("Great, you have taken the derivative of a function.");
-		sleep();
-		System.out.println("Continue testing this feature, or type 'next' to continue.");
-		runTillNext();
+		printWithSleep("""
+				Great, you have taken the derivative of a function.
+				Continue testing this feature, or type 'next' to continue.
+				""");
 		currentState = DemoState.TAY;
+		runTillNext();
 	}
 
 	private static void tay() {
@@ -395,7 +400,8 @@ public class CASDemo {
 				Currently, this CAS can only symbolically solve integrals of the form ∫ c op(u) u' du.
 				More general symbolic integration will be added in future releases.
 				An example where integration works is as follows:.
-				>>> int 3*(cos(e^x))^2*sin(e^x)*e^x dx""" +
+				>>> int 3*(cos(e^x))^2*sin(e^x)*e^x dx
+				""" +
 				KeywordInterface.useKeywords("int (cos(e^x))^2*sin(e^x)*e^x dx")
 				+ """
 				Try integration for yourself using the 'int' command.

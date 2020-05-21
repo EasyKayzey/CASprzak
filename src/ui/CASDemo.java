@@ -472,17 +472,14 @@ public class CASDemo {
 	}
 
 	private static void latex() {
-		System.out.println("The custom parser used by this CAS internally operates on a system with formatting modeled after LaTeX.");
-		sleep();
-		System.out.println("In some edge cases, the parser may have difficulty converting raw input to this LaTeX-like form, resulting in an 'unsupported' error.");
-		sleep();
-		System.out.println("If you are familiar with LaTeX, it is highly recommended you enable the setting 'enforceEscapes' both in the runtime settings (with 'ss') and in 'config/cas.properties'.");
-		sleep();
-		System.out.println("This setting will disable the raw-to-LaTeX conversion, increasing both performance and consistency.");
-		sleep();
-		System.out.println("Using this feature requires all input to be LaTeX-escaped, so expressions like 'sin(pi*x)' should be written '\\sin(\\pi*x)'.");
-		sleep();
-		System.out.println("If you would like to enable this feature now, you may do so using 'ss enforceEscapes true' and then test the new functionality. Type 'next' to continue.");
+		printWithSleep("""
+				The custom parser used by this CAS internally operates on a system with formatting modeled after LaTeX.
+				In some edge cases, the parser may have difficulty converting raw input to this LaTeX-like form, resulting in an 'unsupported' error.
+				If you are familiar with LaTeX, it is highly recommended you enable the setting 'enforceEscapes' both in the runtime settings (with 'ss') and in 'config/cas.properties'.
+				This setting will disable the raw-to-LaTeX conversion, increasing both performance and consistency.
+				Using this feature requires all input to be LaTeX-escaped, so expressions like 'sin(pi*x)' should be written '\\sin(\\pi*x)'.
+				If you would like to enable this feature now, you may do so using 'ss enforceEscapes true' and then test the new functionality. Type 'next' to continue.
+				""");
 		runTillNext();
 		currentState = DemoState.END;
 	}

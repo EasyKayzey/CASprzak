@@ -115,7 +115,7 @@ public class CASDemo {
 	}
 
 	private static void tableOfContents() {
-		System.out.print("""
+		printWithSleep("""
 				Table of Contents:
 				INTRO -> introduction to CASprzak
 				EVAL -> evaluation
@@ -136,7 +136,7 @@ public class CASDemo {
 				END -> closing
 				EXIT -> exit
 				Enter one of the above capital shortcuts above to go to that section of the demo.
-				""");
+				""", .4);
 		while (true) try {
 			System.out.print(">>> ");
 			currentState = DemoState.valueOf(scanner.next().toUpperCase());

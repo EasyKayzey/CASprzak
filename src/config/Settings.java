@@ -35,42 +35,42 @@ public class Settings {
 	/**
 	 * The amount of times that {@link tools.singlevariable.Solver} will run unless the exit conditions are met beforehand
 	 */
-	public static int defaultSolverIterations;
+	public static int defaultSolverIterations = 100;
 
 	/**
 	 * The amount of segments which {@link tools.singlevariable.Solver} splits a given range into
 	 */
-	public static int defaultRangeSections;
+	public static int defaultRangeSections = 29;
 
 	/**
 	 * The number of segments that {@link tools.singlevariable.NumericalIntegration#simpsonsRule(GeneralFunction, double, double)} uses when performing numerical integration. **MUST BE EVEN**
 	 */
-	public static int simpsonsSegments;
+	public static int simpsonsSegments = 500;
 
 	/**
 	 * The variable to be used in {@link tools.singlevariable} when none is specified
 	 */
-	public static char singleVariableDefault;
+	public static char singleVariableDefault = 'x';
 
 	/**
 	 * The margin that {@link tools.singlevariable.Solver} uses to determine if a value is close enough to zero to be considered a root of a function
 	 */
-	public static double zeroMargin;
+	public static double zeroMargin = 1E-3;
 
 	/**
 	 * The margin used in {@link ParsingTools#toInteger(double)} when deciding when a {@code double} is close enough to an integer
 	 */
-	public static double integerMargin;
+	public static double integerMargin = 1E-4;
 
 	/**
 	 * The default margin to be used when checking if two doubles are equal
 	 */
-	public static double equalsMargin;
+	public static double equalsMargin = 1E-10;
 
 	/**
 	 * The default amount to be slept on newlines in {@link MiscTools#printWithSleep}
 	 */
-	public static double defaultSleep;
+	public static double defaultSleep = 1.5;
 
 	/**
 	 * Denotes whether or not expressions like {@code sin(pi/2)} must be escaped to {@code \sin(\pi/2)}. Enabling this is strongly recommended, and may reduce bugs.

@@ -211,23 +211,24 @@ public class CASDemo {
 	}
 
 	private static void var() {
-		System.out.println("Until this point, all the expressions that we've been using have only contained one variable.");
-		sleep();
-		System.out.println("We will now construct a function using more than one variable.");
-		sleep();
-		System.out.println("Define a new function with several different variables using the 'def' command, e.g. 'def g xy^2+q'.");
+		printWithSleep("""
+		Until this point, all the expressions that we've been using have only contained one variable.
+		We will now construct a function using more than one variable.
+		Define a new function with several different variables using the 'def' command, e.g. 'def g xy^2+q'.
+		""");
 		if (!tryInput(s -> "def ".equals(s.substring(0, 4)), "Begin your input with 'def' to demonstrate the storage feature of the UI."))
 			return;
 		sleep();
-		System.out.println("Now, when evaluating, you will need to specify each value, like 'eval x-y x=2 y=3'.");
-		sleep(2);
-		System.out.println("Try evaluating your multivariable function using 'eval', e.g. 'eval f x=2 y=4 q=e.");
+		printWithSleep("""
+		Now, when evaluating, you will need to specify each value, like 'eval x-y x=2 y=3'.
+		Try evaluating your multivariable function using 'eval', e.g. 'eval f x=2 y=4 q=e.
+		""", 2);
 		if (!tryInput(s -> s.length() > 4 && "eval ".equals(s.substring(0, 5)), "Begin your input with 'eval'"))
 			return;
 		sleep();
-		System.out.println("Continue testing this feature, or type 'next' to continue.");
-		runTillNext();
+		printWithSleep("Continue testing this feature, or type 'next' to continue.");
 		currentState = DemoState.SUB;
+		runTillNext();
 	}
 
 	private static void sub() {

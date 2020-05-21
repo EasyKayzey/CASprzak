@@ -166,6 +166,7 @@ public class CASDemo {
 				""");
 		if (!tryInput(s -> s.length() > 2 && "def".equals(s.substring(0, 3)), "Begin your input with 'def' to demonstrate the storage feature of the UI."))
 			return;
+		sleep();
 		printWithSleep("""	
 				Great, we can now use this function whenever we want.");
 				Evaluate the function that you have stored by using the character that you stored in place of the underscore, e.g. 'eval f x=2'.");
@@ -185,23 +186,27 @@ public class CASDemo {
 	}
 
 	private static void simp() {
-		printWithSleep(String.format("""
+		printWithSleep("""
 				Now, one of the most important features of our CAS is its ability to simplify expressions.
 				For example:
 				>>> def d x^2*(0*ln(x)+(2*1)/x)
-				%s
+				""" +
+				KeywordInterface.useKeywords("def d x^2*(0*ln(x)+(2*1)/x)")
+				+ """
+    
 				This expression looks complicated, right?
 				Try typing 'simp d' to return a simplified form of the expression.
-				""", KeywordInterface.useKeywords("def d x^2*(0*ln(x)+(2*1)/x)")));
+				""");
 		if (!tryInput(s -> s.length() > 4 && "simp ".equals(s.substring(0, 5)), "Begin your input with 'simp' to demonstrate the simplification feature of the UI."))
 			return;
+		sleep();
 		printWithSleep("""
 				Wow, quite the improvement.
 				For those who are curious, that was the general formula of the derivative of 'f(x)^g(x)' applied to 'x^2'.
 				Also, if you want to define a function and simplify it in one step, you can use the 'defs' or 'deffunctionsimplify'.
 				Continue testing this feature, or type 'next' to continue.
 				""");
-		runTillNext();
+		runTillNext(); // TODO fix that exiting during next doesn't work
 		currentState = DemoState.VAR;
 	}
 

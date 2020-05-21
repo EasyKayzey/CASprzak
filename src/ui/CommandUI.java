@@ -2,6 +2,7 @@ package ui;
 
 import config.Settings;
 import parsing.KeywordInterface;
+import tools.ParsingTools;
 import tools.exceptions.CommandNotFoundException;
 
 import java.util.Arrays;
@@ -19,7 +20,7 @@ public class CommandUI {
 	public static void main(String[] args) {
 		System.out.println("Welcome to CASprzak. Run 'help' for a command list, or 'demo' for a tutorial.");
 		Scanner scan = new Scanner(System.in);
-		scan.useDelimiter("\\n");
+		scan.useDelimiter(ParsingTools.newline);
 		boolean flag = true;
 		while (flag) {
 			System.out.print(">>> ");

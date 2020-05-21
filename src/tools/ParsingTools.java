@@ -8,11 +8,17 @@ import parsing.LatexReplacer;
 
 import java.lang.reflect.MalformedParametersException;
 import java.util.HashMap;
+import java.util.regex.Pattern;
 
 /**
  * The {@link ParsingTools} class contains methods related to parsing user input, and is used heavily by {@link parsing}.
  */
 public class ParsingTools {
+
+	/**
+	 * Newlines with supported carriage returns
+	 */
+	public static final Pattern newline = Pattern.compile("\\r?\\n");
 
 	private ParsingTools(){}
 

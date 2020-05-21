@@ -2,6 +2,7 @@ package ui;
 
 import config.Settings;
 import parsing.KeywordInterface;
+import tools.ParsingTools;
 import tools.VariableTools;
 
 import java.util.Scanner;
@@ -46,7 +47,7 @@ public class CASDemo {
 	@SuppressWarnings("SameReturnValue")
 	public static String runDemo() {
 		scanner = new Scanner(System.in);
-		scanner.useDelimiter("\n");
+		scanner.useDelimiter(ParsingTools.newline);
 		while (currentState != DemoState.EXIT)
 			runState();
 		return "Exited demo";

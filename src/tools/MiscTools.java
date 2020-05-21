@@ -11,14 +11,11 @@ import tools.helperclasses.Pair;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import java.util.regex.Pattern;
 
 /**
  * The {@link MiscTools} class contains miscellaneous methods.
  */
 public class MiscTools {
-
-	private static final Pattern newline = Pattern.compile("\\r?\\n");
 
 	private MiscTools(){}
 
@@ -97,7 +94,7 @@ public class MiscTools {
 	 * @param time amount of seconds to sleep
 	 */
 	public static void printWithSleep(String message, double time) {
-		String[] lines = newline.split(message);
+		String[] lines = ParsingTools.newline.split(message);
 		for (int i = 0; i < lines.length - 1; i++) {
 			System.out.println(lines[i]);
 			sleep(time);

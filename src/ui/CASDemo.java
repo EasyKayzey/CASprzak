@@ -469,7 +469,7 @@ public class CASDemo {
 
 	private static void intn() {
 		printWithSleep("""
-				Despite not being able to symbolically integrate all functions, it is still almost always possible to find a numeric solution between two bounds.
+				Despite the fact that not all functions are symbolically integrable, it is still almost always possible to find a numeric solution between two bounds.
 				This CAS uses Simpson's Rule to be able to perform very accurate numeric integration.
 				The syntax for numeric integration is 'intn [function] [startvalue] [endvalue]'.
 				Try it out yourself using any function.
@@ -552,7 +552,7 @@ public class CASDemo {
 				If you are familiar with LaTeX, it is highly recommended you enable the setting 'enforceEscapes' both in the runtime settings (with 'ss') and in 'config/cas.properties'.
 				This setting will disable the raw-to-LaTeX conversion, increasing both performance and consistency.
 				Using this feature requires all input to be LaTeX-escaped, so expressions like 'sin(pi*x)' should be written '\\sin(\\pi*x)'.
-				If you would like to enable this feature now, you may do so using 'ss enforceEscapes true' and then test the new functionality. Type 'next' to continue.
+				If you would like to enable this feature now, do so using 'ss enforceEscapes true' and then test the new functionality. Type 'next' to continue.
 				""");
 		currentState = DemoState.END;
 		runTillNext();
@@ -563,10 +563,9 @@ public class CASDemo {
 				Thank you for completing the demo.
 				For more details such as more features and shortcuts in the UI, check out our documentation or give the code a read.
 				We highly encourage just playing around to see what you can do.
-				Continue testing in the demo, or type 'next' to return to the main command-line interface.
+				The demo will now exit. We hope you enjoy CASprzak!
 				""");
 		currentState = DemoState.EXIT;
-		runTillNext();
 	}
 }
 

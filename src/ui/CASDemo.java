@@ -160,42 +160,39 @@ public class CASDemo {
 	}
 
 	private static void def() {
-		printWithSleep("If we want to use a function several times, we are going to have to define it using the 'def' command.");
-		System.out.println("For example, try typing in 'def f 1-x^2' to store the function '1-x^2' in 'f'.");
+		printWithSleep("""
+				If we want to use a function several times, we are going to have to define it using the 'def' command.
+				For example, try typing in 'def f 1-x^2' to store the function '1-x^2' in 'f'.
+				""");
 		if (!tryInput(s -> s.length() > 2 && "def".equals(s.substring(0, 3)), "Begin your input with 'def' to demonstrate the storage feature of the UI."))
 			return;
-		sleep();
-		System.out.println("Great, we can now use this function whenever we want.");
-		sleep();
-		System.out.println("Evaluate the function that you have stored by using the character that you stored in place of the underscore, e.g. 'eval f x=2'.");
+		printWithSleep("""	
+				Great, we can now use this function whenever we want.");
+				Evaluate the function that you have stored by using the character that you stored in place of the underscore, e.g. 'eval f x=2'.");
+				""");
 		if (!tryInput(s -> s.length() > 4 && "eval ".equals(s.substring(0, 5)), "Begin your input with 'eval'."))
 			return;
 		sleep();
-		System.out.println("Good. Here are some tips for using the storage feature:");
-		sleep();
-		System.out.println("If you define a function to character that is already used, the old function will be overwritten.");
-		sleep();
-		System.out.println("You can see all your function characters by typing in 'printfunctions' or 'pf'.");
-		sleep();
-		System.out.println("You can also remove a function by using the 'removefunction' or 'rmf' command, or remove all functions by using 'clearfunctions'.");
-		sleep();
-		System.out.println("Continue testing this feature, or type 'next' to continue.");
+		printWithSleep("""		
+				Good. Here are some tips for using the storage feature:");
+				If you define a function to character that is already used, the old function will be overwritten.");
+				You can see all your function characters by typing in 'printfunctions' or 'pf'.");
+				You can also remove a function by using the 'removefunction' or 'rmf' command, or remove all functions by using 'clearfunctions'.");
+				Continue testing this feature, or type 'next' to continue.");
+				""");
 		runTillNext();
 		currentState = DemoState.SIMP;
 	}
 
 	private static void simp() {
-		System.out.println("Now, one of the most important features of our CAS is its ability to simplify expressions.");
-		sleep();
-		System.out.println("For example:");
-		sleep();
-		System.out.println(">>> def d x^2*(0*ln(x)+(2*1)/x)");
-		sleep();
-		System.out.println(KeywordInterface.useKeywords("def d x^2*(0*ln(x)+(2*1)/x)"));
-		sleep();
-		System.out.println("This expression looks complicated, right?");
-		sleep();
-		System.out.println("Try typing 'simp d' to return a simplified form of the expression.");
+		printWithSleep(String.format("""
+		Now, one of the most important features of our CAS is its ability to simplify expressions.
+		For example:
+		>>> def d x^2*(0*ln(x)+(2*1)/x)
+		%s
+		This expression looks complicated, right?
+		Try typing 'simp d' to return a simplified form of the expression.
+		""", KeywordInterface.useKeywords("def d x^2*(0*ln(x)+(2*1)/x)")));
 		if (!tryInput(s -> s.length() > 4 && "simp ".equals(s.substring(0, 5)), "Begin your input with 'simp' to demonstrate the simplification feature of the UI."))
 			return;
 		sleep();

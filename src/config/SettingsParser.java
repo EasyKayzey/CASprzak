@@ -17,7 +17,11 @@ public class SettingsParser {
 	 */
 	public static void parseConfig() throws IOException {
 		Properties properties = new Properties();
-		properties.load(new FileReader(".\\src\\config\\cas.properties"));
+		try {
+			properties.load(new FileReader(".\\src\\config\\cas.properties"));
+		} catch (IOException ignored) {
+			properties.load(new FileReader(".\\cas.properties"));
+		}
 		for (Map.Entry<Object, Object> entry : properties.entrySet())
 			parseSingleSetting((String) entry.getKey(), (String) entry.getValue());
 	}

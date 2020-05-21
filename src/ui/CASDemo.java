@@ -234,7 +234,7 @@ public class CASDemo {
 				You can see all your function characters by typing in 'printfunctions' or 'pf'.
 				You can also remove a function by using the 'removefunction' or 'rmf' command, or remove all functions by using 'clearfunctions'.
 				Additionally to functions, you can also define constants using 'defc', 'defcon', or 'defconstant'. E.g. 'defc g 9.81'.
-				The constants 'e' and 'π' are already predefined.
+				The constants 'e' and 'pi' are already predefined.
 				Continue testing this feature, or type 'next' to continue.
 				""");
 		currentState = DemoState.SIMP;

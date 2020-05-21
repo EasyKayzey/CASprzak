@@ -389,27 +389,25 @@ public class CASDemo {
 	}
 
 	private static void ints() {
-		System.out.println("Integration is the other great pillar of calculus.");
-		sleep();
-		System.out.println("Currently, this CAS can only symbolically solve integrals of the form ∫ c op(u) u' du.");
-		sleep();
-		System.out.println("More general symbolic integration will be added in future releases.");
-		sleep();
-		System.out.println("An example where integration works is as follows:.");
-		sleep();
-		System.out.println(">>> int 3*(cos(e^x))^2*sin(e^x)*e^x dx");
-		System.out.println(KeywordInterface.useKeywords("int (cos(e^x))^2*sin(e^x)*e^x dx"));
-		sleep();
-		System.out.println("Try integration for yourself using the 'int' command.");
-		sleep();
+		printWithSleep("""
+		Integration is the other great pillar of calculus.
+		Currently, this CAS can only symbolically solve integrals of the form ∫ c op(u) u' du.
+		More general symbolic integration will be added in future releases.
+		An example where integration works is as follows:.
+		>>> int 3*(cos(e^x))^2*sin(e^x)*e^x dx""" +
+		KeywordInterface.useKeywords("int (cos(e^x))^2*sin(e^x)*e^x dx")
+		+ """
+		Try integration for yourself using the 'int' command.
+		""");
 		if (!tryInput(s -> s.length() > 3 && "int ".equals(s.substring(0, 4)), "Begin your input with 'int' to demonstrate the integration feature of the CAS."))
 			return;
 		sleep();
-		System.out.println("Congratulations, you've just integrated your first function.");
-		sleep();
-		System.out.println("Continue testing this feature, or type 'next' to continue.");
-		runTillNext();
+		printWithSleep("""
+		Congratulations, you've just integrated your first function.
+		Continue testing this feature, or type 'next' to continue.
+		""");
 		currentState = DemoState.INTN;
+		runTillNext();
 	}
 
 	private static void intn() {

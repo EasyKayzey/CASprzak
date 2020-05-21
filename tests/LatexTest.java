@@ -1,4 +1,3 @@
-import config.Settings;
 import functions.GeneralFunction;
 import org.junit.jupiter.api.Test;
 import parsing.FunctionParser;
@@ -56,15 +55,6 @@ public class LatexTest {
 	void log() {
 		GeneralFunction test = FunctionParser.parseInfix("\\log(x)+\\log(1)");
 		assertEquals(1, test.evaluate(Map.of('x', 10.0)), .3);
-	}
-
-	@Test
-	void noEscape() {
-		boolean temp = Settings.enforceEscapes;
-		Settings.enforceEscapes = false;
-		GeneralFunction test = FunctionParser.parseInfix("pi (1+1)+sin(pi/2)");
-		assertEquals(7.3, test.evaluate(Map.of('x', 3.2)), .3);
-		Settings.enforceEscapes = temp;
 	}
 
 }

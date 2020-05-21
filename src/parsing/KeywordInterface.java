@@ -49,6 +49,8 @@ public class KeywordInterface {
 		input = input.strip(); // Strips whitespace
 		if ("_".equals(input))
 			return prev;
+		if (input != null && input.isEmpty())
+			return "No input was given.";
 		String[] splitInput = spaces.split(input, 2);
 		Object ret = switch (splitInput[0]) {
 			case "demo"															-> CASDemo.runDemo();
@@ -150,12 +152,17 @@ public class KeywordInterface {
 	}
 
 	private static String stripQuotes(String input) {
-		if (input.charAt(0) == '"' && input.charAt(input.length() - 1) == '"') {
+		if (input.length() > 0 && input.charAt(0) == '"' && input.charAt(input.length() - 1) == '"') {
 			String stripped = input.substring(1, input.length() - 1);
 			if (!stripped.contains("\""))
 				return stripped;
 		}
 		return input;
+	}
+
+	private static String demo() {
+		CASDemo.reset();
+		return CASDemo.runDemo();
 	}
 
 	private static GeneralFunction partialDiff(String input) {

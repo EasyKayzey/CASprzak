@@ -39,6 +39,10 @@ public class CASDemo {
 	private static DemoState currentState = DemoState.INTRO;
 	private static Scanner scanner;
 
+	/**
+	 * Runs the demo
+	 * @return "Exited demo"
+	 */
 	@SuppressWarnings("SameReturnValue")
 	public static String runDemo() {
 		scanner = new Scanner(System.in);
@@ -46,6 +50,13 @@ public class CASDemo {
 		while (currentState != DemoState.EXIT)
 			runState();
 		return "Exited demo";
+	}
+
+	/**
+	 * Resets the demo
+	 */
+	public static void reset() {
+		currentState = DemoState.INTRO;
 	}
 
 	private static void runState() {

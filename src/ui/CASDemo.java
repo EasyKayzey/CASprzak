@@ -528,7 +528,7 @@ public class CASDemo {
 	@SuppressWarnings("SpellCheckingInspection")
 	private static void set() {
 		printWithSleep("""
-				Finally, we will show you how to view or modify settings.
+				Now, you learn how to view or modify settings.
 				Type in 'printsettings' or 'ps' to see all current settings.
 				""");
 		if (!tryInput(s -> "printsettings".equals(s) || "ps".equals(s), "Type in 'settings' to see the settings."))

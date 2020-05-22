@@ -5,7 +5,6 @@ import functions.special.Constant;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
-import java.util.function.DoubleBinaryOperator;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -18,16 +17,6 @@ public abstract class CommutativeFunction extends GeneralFunction {
 	 * The array of {@link GeneralFunction}s operated on by the {@link CommutativeFunction}
 	 */
 	protected final GeneralFunction[] functions;
-
-	/**
-	 * The identity of the {@link CommutativeFunction}. (e.g. 1 for * and 0 for +)
-	 */
-	protected double identityValue;
-
-	/**
-	 * The operation performed by the {@link CommutativeFunction}
-	 */
-	public DoubleBinaryOperator operation;
 
 	/**
 	 * Constructs a new {@link CommutativeFunction}
@@ -114,27 +103,27 @@ public abstract class CommutativeFunction extends GeneralFunction {
 	}
 
 	/**
-	 * Removes all instances of {@link #identityValue} from {@link #functions}
+	 * Removes all instances of the identity of the function from {@link #functions}
 	 * @return a new {@link CommutativeFunction} with
 	 */
 	public CommutativeFunction simplifyIdentity() {
 		List<GeneralFunction> toPut = new ArrayList<>(Arrays.asList(functions));
-		toPut.removeIf(generalFunction -> generalFunction instanceof Constant constant && constant.constant == identityValue);
+		toPut.removeIf(generalFunction -> generalFunction instanceof Constant constant && constant.constant == getIdentityValue());
 		return getInstance(toPut.toArray(new GeneralFunction[0]));
 	}
 
 	/**
-	 * Combines all {@link Constant}s using {@link #operation}
+	 * Combines all {@link Constant}s using {@link #operate(double, double)}
 	 * @return a new {@link CommutativeFunction} with the combined {@link Constant}s
 	 */
 	public CommutativeFunction simplifyConstants() {
 		if (hasMultipleConstants()) {
-			double accumulator = identityValue;
+			double accumulator = getIdentityValue();
 			List<GeneralFunction> functionList = new LinkedList<>(List.of(functions));
 			ListIterator<GeneralFunction> iter = functionList.listIterator();
 			while (iter.hasNext()) {
 				if (iter.next() instanceof Constant constant) {
-					accumulator = operation.applyAsDouble(accumulator, constant.constant);
+					accumulator = operate(accumulator, constant.constant);
 					iter.remove();
 				}
 			}
@@ -185,12 +174,26 @@ public abstract class CommutativeFunction extends GeneralFunction {
 	 */
 	public GeneralFunction simplifyTrivialElement() {
 		if (functions.length == 0)
-			return new Constant(identityValue);
+			return new Constant(getIdentityValue());
 		else if (functions.length == 1)
 			return functions[0].simplify();
 		else
 			return this;
 	}
+
+	/**
+	 * Returns the identity of this {@link CommutativeFunction}, such as 0 for + or gcd and 1 for * or lcm
+	 * @return the identity of this {@link CommutativeFunction}
+	 */
+	public abstract double getIdentityValue();
+
+	/**
+	 * Performs the operation of this {@link CommutativeFunction} on the two inputs
+	 * @param a the first input
+	 * @param b the second input
+	 * @return the operation applied to the inputs
+	 */
+	public abstract double operate(double a, double b);
 
 	public @NotNull Iterator<GeneralFunction> iterator() {
 		return new CommutativeIterator();

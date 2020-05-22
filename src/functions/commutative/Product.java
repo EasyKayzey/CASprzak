@@ -21,12 +21,10 @@ public class Product extends CommutativeFunction {
 	 */
 	public Product(GeneralFunction... functions) {
 		super(functions);
-		identityValue = 1;
-		operation = (a, b) -> (a * b);
 	}
 
 	public double evaluate(Map<Character, Double> variableValues) {
-		double accumulator = identityValue;
+		double accumulator = getIdentityValue();
 		for (GeneralFunction f : functions)
 			accumulator *= f.evaluate(variableValues);
 		return accumulator;
@@ -223,5 +221,13 @@ public class Product extends CommutativeFunction {
 			}
 		}
 		return this;
+	}
+
+	public double getIdentityValue() {
+		return 1;
+	}
+
+	public double operate(double a, double b) {
+		return a * b;
 	}
 }

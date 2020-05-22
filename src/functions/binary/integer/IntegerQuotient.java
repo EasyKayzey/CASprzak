@@ -3,6 +3,7 @@ package functions.binary.integer;
 import config.Settings;
 import functions.GeneralFunction;
 import functions.binary.BinaryFunction;
+import functions.special.Constant;
 import tools.DefaultFunctions;
 import tools.ParsingTools;
 import tools.VariableTools;
@@ -53,8 +54,11 @@ public class IntegerQuotient extends BinaryFunction {
         return (double) (argument2 / argument1);
     }
 
+    @SuppressWarnings("RedundantCast")
     @Override
-    public GeneralFunction simplify() { //TODO make this deal with constants
+    public GeneralFunction simplify() {
+        if (function1 instanceof Constant constant1 && function2 instanceof Constant constant2)
+            return new Constant((double) (ParsingTools.toInteger(constant2.constant) / ParsingTools.toInteger(constant1.constant)));
         return new IntegerQuotient(function1.simplify(), function2.simplify());
     }
 }

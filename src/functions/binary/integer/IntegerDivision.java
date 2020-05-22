@@ -2,6 +2,8 @@ package functions.binary.integer;
 
 import functions.GeneralFunction;
 import functions.binary.BinaryFunction;
+import tools.DefaultFunctions;
+import tools.VariableTools;
 
 import java.util.Map;
 
@@ -23,17 +25,20 @@ public class IntegerDivision extends BinaryFunction {
 
     @Override
     public String toString() {
-        return null;
+        return "(" + function2 + "//" + function1 + ")";
     }
 
     @Override
     public GeneralFunction clone() {
-        return null;
+        return new IntegerDivision(function1.clone(), function2.clone());
     }
 
     @Override
     public GeneralFunction getDerivative(char varID) {
-        return null;
+        if (VariableTools.doesNotContainsVariable(function1, varID) && VariableTools.doesNotContainsVariable(function2, varID))
+            return DefaultFunctions.ZERO;
+        else
+            throw new UnsupportedOperationException("IntegerDivision has no derivative.");
     }
 
     @Override

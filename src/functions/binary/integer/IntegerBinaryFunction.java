@@ -32,9 +32,7 @@ public abstract class IntegerBinaryFunction extends BinaryFunction {
 	public double evaluate(Map<Character, Double> variableValues) {
 		if (!Settings.enforceIntegerOperations)
 			throw new IllegalStateException("IntegerQuotient cannot be used if Settings.enforceIntegerOperations is not enabled.");
-		int argument1 = ParsingTools.toInteger(function1.evaluate(variableValues));
-		int argument2 = ParsingTools.toInteger(function2.evaluate(variableValues));
-		return operate(argument1, argument2);
+		return operate(ParsingTools.toInteger(function2.evaluate(variableValues)), ParsingTools.toInteger(function1.evaluate(variableValues)));
 	}
 
 	/**

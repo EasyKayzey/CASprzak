@@ -1,4 +1,4 @@
-package functions.unitary.integer;
+package functions.unitary.integer.combo;
 
 import config.Settings;
 import functions.GeneralFunction;

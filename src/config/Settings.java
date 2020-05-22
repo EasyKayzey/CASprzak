@@ -1,6 +1,7 @@
 package config;
 
 import functions.GeneralFunction;
+import functions.unitary.integer.combo.Factorial;
 import functions.unitary.transforms.Transformation;
 import tools.MiscTools;
 import tools.ParsingTools;
@@ -112,7 +113,7 @@ public class Settings {
 	public static SolverType defaultSolverType = SolverType.NEWTON;
 
 	/**
-	 * Denotes the default implementation of {@link functions.unitary.integer.Factorial} to be used
+	 * Denotes the default implementation of {@link Factorial} to be used
 	 */
 	public static FactorialType defaultFactorial = FactorialType.RECURSIVE;
 

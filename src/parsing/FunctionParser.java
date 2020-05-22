@@ -11,7 +11,7 @@ import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
 
-import static parsing.OperationLists.*;
+import static parsing.OperationMaps.*;
 
 /**
  * {@link FunctionParser} provides the central methods to execute the conversion of a function from a user-inputted string to an instance of {@link GeneralFunction}.
@@ -49,11 +49,11 @@ public class FunctionParser {
 		for (String token : postfix) {
 			if (Constant.isSpecialConstant(token)) {
 				functionStack.push(new Constant(token));
-			} else if (binaryOperations.contains(token)) {
+			} else if (binaryOperations.containsKey(token)) {
 				GeneralFunction a = functionStack.pop();
 				GeneralFunction b = functionStack.pop();
 				functionStack.push(FunctionMaker.makeBinary(token, b, a));
-			} else if (unitaryOperations.contains(token)) {
+			} else if (unitaryOperations.containsKey(token)) {
 				GeneralFunction c = functionStack.pop();
 				functionStack.push(FunctionMaker.makeUnitary(token, c));
 			} else {
@@ -93,7 +93,7 @@ public class FunctionParser {
 				while (!"(".equals(operators.peek()))
 					postfix.add(operators.pop());
 				operators.pop();
-			} else if (unitaryOperations.contains(token) || binaryOperations.contains(token)) {
+			} else if (unitaryOperations.containsKey(token) || binaryOperations.containsKey(token)) {
 				operators.push(token);
 			} else {
 				postfix.add(token);

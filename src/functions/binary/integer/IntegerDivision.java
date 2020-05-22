@@ -17,13 +17,9 @@ public class IntegerDivision extends BinaryFunction {
 
     @Override
     public BinaryFunction getInstance(GeneralFunction function1, GeneralFunction function2) {
-        return null;
+        return new IntegerDivision(function1, function2);
     }
 
-    @Override
-    public GeneralFunction toSpecialCase() {
-        return null;
-    }
 
     @Override
     public String toString() {

@@ -1,4 +1,14 @@
 # Changelog
+# v0.2.0
+### Major Additions 
+ - Integer division and modulo operations
+
+### Minor Additions
+ - Make parsing errors more descriptive
+ - Port parsing to use operation maps rather than operation lists
+ 
+ ### Bugfixes
+ - Fix `toInteger` error message using the wrong margin from `Settings`
 
 ## v0.1.2
 ### Bugfixes

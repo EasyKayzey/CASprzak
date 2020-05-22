@@ -52,10 +52,10 @@ public class FunctionParser {
 			} else if (binaryOperations.containsKey(token)) {
 				GeneralFunction a = functionStack.pop();
 				GeneralFunction b = functionStack.pop();
-				functionStack.push(FunctionMaker.makeBinary(token, b, a));
+				functionStack.push(binaryOperations.get(token).construct(b, a));
 			} else if (unitaryOperations.containsKey(token)) {
 				GeneralFunction c = functionStack.pop();
-				functionStack.push(FunctionMaker.makeUnitary(token, c));
+				functionStack.push(unitaryOperations.get(token).construct(c));
 			} else {
 				try {
 					functionStack.push(new Constant(Double.parseDouble(token)));

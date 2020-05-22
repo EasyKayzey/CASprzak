@@ -88,12 +88,6 @@ public abstract class BinaryFunction extends GeneralFunction {
 	}
 
 	/**
-	 * Converts the binary function to a combination of its special cases. Ex: 2^x becomes e^(\ln(2)*x)
-	 * @return the special-case-converted function
-	 */
-	public abstract GeneralFunction toSpecialCase();
-
-	/**
 	 * Returns a new {@link Constant} of the {@link BinaryFunction} evaluated if both operands are a {@link Constant}
 	 * @return a new {@link Constant} of the {@link BinaryFunction} evaluated if both operands are a {@link Constant}
 	 */

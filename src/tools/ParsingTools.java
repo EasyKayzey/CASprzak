@@ -73,7 +73,7 @@ public class ParsingTools {
 		if (isAlmostInteger(d))
 			return (int) (d + .5);
 		else
-			throw new IllegalArgumentException("Double " + d + " is not within " + Settings.zeroMargin + " of an integer.");
+			throw new IllegalArgumentException("Double " + d + " is not within " + Settings.integerMargin + " of an integer.");
 	}
 
 	/**

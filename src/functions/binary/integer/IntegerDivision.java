@@ -54,7 +54,7 @@ public class IntegerDivision extends BinaryFunction {
     }
 
     @Override
-    public GeneralFunction simplify() {
-        return null;
+    public GeneralFunction simplify() { //TODO make this deal with constants
+        return new IntegerDivision(function1.simplify(), function2.simplify());
     }
 }

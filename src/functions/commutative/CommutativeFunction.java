@@ -103,7 +103,7 @@ public abstract class CommutativeFunction extends GeneralFunction {
 	}
 
 	/**
-	 * Removes all instances of {@link #getIdentityValue()} from {@link #functions}
+	 * Removes all instances of the identity of the function from {@link #functions}
 	 * @return a new {@link CommutativeFunction} with
 	 */
 	public CommutativeFunction simplifyIdentity() {

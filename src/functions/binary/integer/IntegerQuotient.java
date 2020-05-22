@@ -41,14 +41,14 @@ public class IntegerQuotient extends BinaryFunction {
         if (VariableTools.doesNotContainsVariable(function1, varID) && VariableTools.doesNotContainsVariable(function2, varID))
             return DefaultFunctions.ZERO;
         else
-            throw new UnsupportedOperationException("IntegerDivision has no derivative.");
+            throw new UnsupportedOperationException("IntegerQuotient has no derivative.");
     }
 
     @SuppressWarnings("RedundantCast")
     @Override
     public double evaluate(Map<Character, Double> variableValues) {
         if (!Settings.enforceIntegerOperations)
-            throw new IllegalStateException("RFactorial cannot be used if Settings.enforceIntegerOperations is not enabled.");
+            throw new IllegalStateException("IntegerQuotient cannot be used if Settings.enforceIntegerOperations is not enabled.");
         int argument1 = ParsingTools.toInteger(function1.evaluate(variableValues));
         int argument2 = ParsingTools.toInteger(function2.evaluate(variableValues));
         return (double) (argument2 / argument1);

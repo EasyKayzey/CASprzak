@@ -6,10 +6,7 @@ import functions.special.Constant;
 import functions.special.Variable;
 import tools.ParsingTools;
 
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 import static parsing.OperationMaps.*;
 
@@ -50,10 +47,14 @@ public class FunctionParser {
 			if (Constant.isSpecialConstant(token)) {
 				functionStack.push(new Constant(token));
 			} else if (binaryOperations.containsKey(token)) {
+				if (functionStack.size() < 2)
+					throw new NoSuchElementException("Tried to pop two elements for " + token + ", but not enough elements exist. Parsing: " + postfix + ". Current stack: " + functionStack + ".");
 				GeneralFunction a = functionStack.pop();
 				GeneralFunction b = functionStack.pop();
 				functionStack.push(binaryOperations.get(token).construct(b, a));
 			} else if (unitaryOperations.containsKey(token)) {
+				if (functionStack.size() < 1)
+					throw new NoSuchElementException("Tried to pop an element for " + token + ", but not the stack is empty. Parsing: " + postfix + ".");
 				GeneralFunction c = functionStack.pop();
 				functionStack.push(unitaryOperations.get(token).construct(c));
 			} else {
@@ -66,7 +67,7 @@ public class FunctionParser {
 		}
 
 		if (functionStack.size() != 1)
-			throw new IndexOutOfBoundsException("functionStack size is " + functionStack.size() + ", current stack is " + functionStack);
+			throw new IndexOutOfBoundsException("Stack has more than one function at end of parsing. Parsing: " + postfix + ". Current stack: " + functionStack + ".");
 
 		return functionStack.pop();
 	}

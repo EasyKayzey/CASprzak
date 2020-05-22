@@ -19,12 +19,10 @@ public class Sum extends CommutativeFunction {
 	 */
 	public Sum(GeneralFunction... functions) {
 		super(functions);
-		identityValue = 0;
-		operation = Double::sum;
 	}
 
 	public double evaluate(Map<Character, Double> variableValues) {
-		double accumulator = identityValue;
+		double accumulator = getIdentityValue();
 		for (GeneralFunction f : functions)
 			accumulator += f.evaluate(variableValues);
 		return accumulator;
@@ -93,5 +91,13 @@ public class Sum extends CommutativeFunction {
 			return new Sum(newFunctions.toArray(new GeneralFunction[0])).simplifyInternal();
 		else
 			return this;
+	}
+
+	public double getIdentityValue() {
+		return 0;
+	}
+
+	public double operate(double a, double b) {
+		return a + b;
 	}
 }

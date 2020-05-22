@@ -9,19 +9,19 @@ import tools.VariableTools;
 
 import java.util.Map;
 
-public class IntegerDivision extends BinaryFunction {
+public class IntegerQuotient extends BinaryFunction {
     /**
      * Constructs a new IntegerDivision
      * @param function1 The first {@link GeneralFunction} in the binary operation
      * @param function2 The second {@link GeneralFunction} in the binary operation
      */
-    public IntegerDivision(GeneralFunction function1, GeneralFunction function2) {
+    public IntegerQuotient(GeneralFunction function1, GeneralFunction function2) {
         super(function1, function2);
     }
 
     @Override
     public BinaryFunction getInstance(GeneralFunction function1, GeneralFunction function2) {
-        return new IntegerDivision(function1, function2);
+        return new IntegerQuotient(function1, function2);
     }
 
 
@@ -32,7 +32,7 @@ public class IntegerDivision extends BinaryFunction {
 
     @Override
     public GeneralFunction clone() {
-        return new IntegerDivision(function1.clone(), function2.clone());
+        return new IntegerQuotient(function1.clone(), function2.clone());
     }
 
     @Override
@@ -55,6 +55,6 @@ public class IntegerDivision extends BinaryFunction {
 
     @Override
     public GeneralFunction simplify() { //TODO make this deal with constants
-        return new IntegerDivision(function1.simplify(), function2.simplify());
+        return new IntegerQuotient(function1.simplify(), function2.simplify());
     }
 }

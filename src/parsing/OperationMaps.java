@@ -5,7 +5,7 @@ import functions.binary.Pow;
 import functions.commutative.Product;
 import functions.commutative.Sum;
 import functions.special.Variable;
-import functions.unitary.combo.Factorial;
+import functions.unitary.integer.combo.Factorial;
 import functions.unitary.piecewise.Abs;
 import functions.unitary.piecewise.Dirac;
 import functions.unitary.piecewise.Sign;

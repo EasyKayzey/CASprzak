@@ -7,7 +7,7 @@ import functions.commutative.Product;
 import functions.commutative.Sum;
 import functions.special.Constant;
 import functions.special.Variable;
-import functions.unitary.combo.Factorial;
+import functions.unitary.integer.combo.Factorial;
 import functions.unitary.piecewise.PiecewiseFunction;
 import functions.unitary.specialcases.SpecialCaseBinaryFunction;
 import functions.unitary.transforms.Transformation;

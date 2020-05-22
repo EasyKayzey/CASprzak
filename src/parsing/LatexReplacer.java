@@ -1,9 +1,11 @@
 package parsing;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import static parsing.OperationLists.*;
+import static parsing.OperationMaps.binaryOperations;
+import static parsing.OperationMaps.unitaryOperations;
 
 /**
  * {@link LatexReplacer} contains tools regarding the use of LaTeX escapes. See method documentation for more details.
@@ -143,7 +145,7 @@ public class LatexReplacer {
 	 * @return the input with LaTeX escapes inserted as specified above
 	 */
 	public static String addEscapes(String input) {
-		for (List<String> ops : List.of(binaryOperations, unitaryOperations, List.of("\\pi")))
+		for (Collection<String> ops : List.of(binaryOperations.keySet(), unitaryOperations.keySet(), List.of("\\pi")))
 			for (String op : ops)
 				if (op.charAt(0) == '\\')
 					input = input.replaceAll("(?<![\\\\a])\\s*(?=" + op.substring(1) + ")", "\\\\");

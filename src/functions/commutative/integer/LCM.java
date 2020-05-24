@@ -15,13 +15,10 @@ public class LCM extends IntegerCommutativeFunction {
 
 	@Override
 	protected long operateInt(int... operands) {
-		int gcd = operands[0];
-		long prod = operands[0];
-		for (int i = 1 ; i < operands.length; i++) {
-			gcd = MiscTools.gcd(operands[i], gcd);
-			prod *= operands[i];
-		}
-		return prod / gcd;
+		int lcm = operands[0];
+		for (int i = 1 ; i < operands.length; i++)
+			lcm = (operands[i] * lcm) / MiscTools.gcd(operands[i], lcm);
+		return lcm;
 	}
 
 	@Override

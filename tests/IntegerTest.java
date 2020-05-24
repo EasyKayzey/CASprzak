@@ -1,6 +1,7 @@
 import functions.GeneralFunction;
 import functions.binary.integer.IntegerQuotient;
 import functions.binary.integer.Modulo;
+import functions.commutative.integer.GCD;
 import functions.special.Constant;
 import org.junit.jupiter.api.Test;
 
@@ -31,6 +32,11 @@ public class IntegerTest {
     void basicModulo2() {
         GeneralFunction test = new Modulo(new Constant(7.000067), new Constant(Math.pow(2, 18)));
         assertEquals(1, test.evaluate(Map.of()));
+    }
+
+    @Test
+    void gcd() {
+        assertEquals(new Constant(4), new GCD(new Constant(4), new Constant(196), new Constant(80)).simplify());
     }
 
 

@@ -9,6 +9,9 @@ import tools.VariableTools;
 
 import java.util.Map;
 
+/**
+ * {@link IntegerUnitaryFunction} provides resources for subclasses to implement mathematical functions with integer-restricted domain.
+ */
 public abstract class IntegerUnitaryFunction extends UnitaryFunction {
 	/**
 	 * Constructs a new {@link IntegerUnitaryFunction}

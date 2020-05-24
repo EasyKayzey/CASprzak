@@ -30,7 +30,7 @@ public abstract class IntegerCommutativeFunction extends CommutativeFunction {
 	@Override
 	public double evaluate(Map<Character, Double> variableValues) {
 		if (!Settings.enforceIntegerOperations)
-			throw new IllegalStateException("IntegerQuotient cannot be used if Settings.enforceIntegerOperations is not enabled.");
+			throw new IllegalStateException("IntegerCommutativeFunctions cannot be used if Settings.enforceIntegerOperations is not enabled.");
 		int[] toOperate = Arrays.stream(functions).mapToInt(f -> ParsingTools.toInteger(f.evaluate(variableValues))).toArray();
 		return operateInt(toOperate);
 	}

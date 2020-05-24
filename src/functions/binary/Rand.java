@@ -21,7 +21,7 @@ public class Rand extends BinaryFunction {
 
     @Override
     public String toString() {
-        return "Rand( " + function2 + " , " + function1 + " )";
+        return "rand( " + function2 + " , " + function1 + " )";
     }
 
     @Override

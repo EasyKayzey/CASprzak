@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class Ceil extends PiecewiseFunction{
     /**
-     * Constructs a new {@link Ceil)
+     * Constructs a new {@link Ceil}
      * @param operand The function which ceiling is operating on
      */
     public Ceil(GeneralFunction operand) {

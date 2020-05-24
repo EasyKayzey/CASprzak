@@ -33,6 +33,12 @@ public class MiscTools {
 			return n * factorial(n - 1);
 	}
 
+	/**
+	 * Computes the GCD of the inputs. It is preferred to input {@code a > b}, but this is not explicitly necessary.
+	 * @param a the first input
+	 * @param b the second input
+	 * @return the GCD of the inputs
+	 */
 	public static int gcd(int a, int b) {
 		return a < b ? gcd(b, a) : b == 0 ? a : gcd(b, a % b);
 	}

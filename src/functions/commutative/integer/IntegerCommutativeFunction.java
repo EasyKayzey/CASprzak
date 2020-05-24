@@ -10,6 +10,9 @@ import tools.VariableTools;
 import java.util.Arrays;
 import java.util.Map;
 
+/**
+ * {@link IntegerCommutativeFunction} provides resources for subclasses to implement mathematical functions with integer-restricted domain.
+ */
 public abstract class IntegerCommutativeFunction extends CommutativeFunction {
 	/**
 	 * Constructs a new {@link IntegerCommutativeFunction}

@@ -9,6 +9,9 @@ import tools.VariableTools;
 
 import java.util.Map;
 
+/**
+ * {@link IntegerBinaryFunction} provides resources for subclasses to implement mathematical functions with integer-restricted domain.
+ */
 public abstract class IntegerBinaryFunction extends BinaryFunction {
 	/**
 	 * Constructs a new {@link IntegerBinaryFunction}

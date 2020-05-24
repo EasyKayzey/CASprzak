@@ -101,6 +101,7 @@ public class KeywordInterface {
 		return ret;
 	}
 
+	@SuppressWarnings("SameReturnValue")
 	private static Object debug(String input) {
 		switch (input) {
 			case "fp", "parse", "parser"  -> {

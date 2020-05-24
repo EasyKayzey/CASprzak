@@ -43,7 +43,7 @@ public class CommandUI {
 		}
 	}
 
-	@SuppressWarnings("ChainOfInstanceofChecks")
+
 	private static void output(Object object) {
 		if (object != null) {
 			if (object instanceof double[] array)

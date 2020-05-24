@@ -118,7 +118,7 @@ public class Integral extends Transformation {
 		}
 	}
 
-	@SuppressWarnings("ChainOfInstanceofChecks")
+
 	private GeneralFunction fixNull() {
 		if (operand instanceof Differential diff) {
 			return new Integral(DefaultFunctions.ONE, diff.respectTo).simplify();

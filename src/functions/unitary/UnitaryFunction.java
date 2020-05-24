@@ -34,7 +34,7 @@ public abstract class UnitaryFunction extends GeneralFunction {
 		return this.getClass().getSimpleName().toLowerCase() + "(" + operand.toString() + ")";
 	}
 
-	@SuppressWarnings("ChainOfInstanceofChecks")
+
 	public GeneralFunction simplify() {
 		GeneralFunction newFunction = this.simplifyInternal();
 		if (newFunction instanceof UnitaryFunction unit)

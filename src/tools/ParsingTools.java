@@ -27,7 +27,7 @@ public class ParsingTools {
 	 * @param input the input to be parsed as described above
 	 * @return the parsed input as described above
 	 */
-	@SuppressWarnings("ChainOfInstanceofChecks")
+
 	public static GeneralFunction toFunction(Object input) {
 		if (input instanceof GeneralFunction f)
 			return f;

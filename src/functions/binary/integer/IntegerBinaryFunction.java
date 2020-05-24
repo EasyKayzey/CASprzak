@@ -31,7 +31,7 @@ public abstract class IntegerBinaryFunction extends BinaryFunction {
 	@Override
 	public double evaluate(Map<Character, Double> variableValues) {
 		if (!Settings.enforceIntegerOperations)
-			throw new IllegalStateException("IntegerQuotient cannot be used if Settings.enforceIntegerOperations is not enabled.");
+			throw new IllegalStateException("IntegerBinaryFunctions cannot be used if Settings.enforceIntegerOperations is not enabled.");
 		return operate(ParsingTools.toInteger(function2.evaluate(variableValues)), ParsingTools.toInteger(function1.evaluate(variableValues)));
 	}
 

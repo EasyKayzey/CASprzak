@@ -4,7 +4,7 @@ import functions.GeneralFunction;
 
 import java.util.Map;
 
-public class Rand extends BinaryFunction{
+public class Rand extends BinaryFunction {
     /**
      * Constructs a new {@link Rand}
      * @param function1 the upper bound of the range

@@ -2,12 +2,13 @@ package functions.unitary.integer.combo;
 
 import config.Settings;
 import functions.GeneralFunction;
+import functions.unitary.integer.IntegerUnitaryFunction;
 import functions.unitary.UnitaryFunction;
 
 /**
  * {@link Factorial} is the general class extended in all implementations of factorial. To conform with {@link Settings}, factorial should always be instantiated with {@link #defaultFactorial(GeneralFunction)}.
  */
-public abstract class Factorial extends UnitaryFunction {
+public abstract class Factorial extends IntegerUnitaryFunction {
 
 	/**
 	 * Constructs a new {@link Factorial}

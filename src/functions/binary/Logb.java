@@ -50,7 +50,6 @@ public class Logb extends BinaryFunction {
 		return "(log_{" + function2.toString() + "}(" + function1.toString() + "))";
 	}
 
-
 	public GeneralFunction simplify() {
 		Logb currentLogb = new Logb(function1.simplify(), function2.simplify());
 		GeneralFunction current = currentLogb.simplifyPowers();
@@ -79,7 +78,6 @@ public class Logb extends BinaryFunction {
 	 * Returns a {@link GeneralFunction} where, if the argument is a {@link Pow} or {@link Exp}, the exponent of the argument has been moved in front of the logarithm in a {@link Product}
 	 * @return a {@link GeneralFunction} where, if the argument is a {@link Pow} or {@link Exp}, the exponent of the argument has been moved in front of the logarithm in a {@link Product}
 	 */
-
 	public GeneralFunction simplifyPowers() {
 		if (function1 instanceof Pow power)
 			return new Product(power.function1, new Logb(power.function2, function2).simplifyIdentity());

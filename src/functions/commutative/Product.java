@@ -193,7 +193,6 @@ public class Product extends CommutativeFunction {
 		}
 	}
 
-
 	private boolean canFixNullIntegral() {
 		boolean hasNull = false;
 		boolean hasDiff = false;

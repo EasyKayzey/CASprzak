@@ -43,7 +43,6 @@ public class CommandUI {
 		}
 	}
 
-
 	private static void output(Object object) {
 		if (object != null) {
 			if (object instanceof double[] array)

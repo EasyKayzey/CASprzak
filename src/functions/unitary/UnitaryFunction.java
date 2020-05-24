@@ -34,7 +34,6 @@ public abstract class UnitaryFunction extends GeneralFunction {
 		return this.getClass().getSimpleName().toLowerCase() + "(" + operand.toString() + ")";
 	}
 
-
 	public GeneralFunction simplify() {
 		GeneralFunction newFunction = this.simplifyInternal();
 		if (newFunction instanceof UnitaryFunction unit)

@@ -56,7 +56,6 @@ public class Pow extends BinaryFunction {
 		return "(" + function2 + "^" + function1 + ")";
 	}
 
-
 	public GeneralFunction simplify() {
 		Pow currentPow = new Pow(function1.simplify(), function2.simplify());
 		currentPow = currentPow.multiplyExponents();
@@ -137,7 +136,6 @@ public class Pow extends BinaryFunction {
 	 * If the exponent is a logarithm with the same base as the {@link Pow}, it returns the argument of the logarithm
 	 * @return the argument of the logarithm in the exponent, if the exponent is a logarithm with the same base as the {@link Pow}
 	 */
-
 	public GeneralFunction simplifyLogsOfSameBase() {
 		if (function1 instanceof Logb logb && logb.getFunction2().equals(function2))
 			return logb.getFunction1();

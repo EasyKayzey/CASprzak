@@ -11,9 +11,9 @@ import java.util.Map;
 
 public abstract class IntegerBinaryFunction extends BinaryFunction {
 	/**
-	 * Constructs a new IntegerBinaryFunction
-	 * @param function1 The first {@link GeneralFunction} in the binary operation
-	 * @param function2 The second {@link GeneralFunction} in the binary operation
+	 * Constructs a new {@link IntegerBinaryFunction}
+	 * @param function1 the first {@link GeneralFunction} in the binary operation
+	 * @param function2 the second {@link GeneralFunction} in the binary operation
 	 */
 	public IntegerBinaryFunction(GeneralFunction function1, GeneralFunction function2) {
 		super(function1, function2);

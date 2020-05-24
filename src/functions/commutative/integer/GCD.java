@@ -14,7 +14,7 @@ public class GCD extends IntegerCommutativeFunction {
 	}
 
 	@Override
-	protected long operate(int... operands) {
+	protected long operateInt(int... operands) {
 		int gcd = operands[0];
 		for (int i = 1 ; i < operands.length; i++)
 			gcd = MiscTools.gcd(operands[i], gcd);
@@ -40,5 +40,9 @@ public class GCD extends IntegerCommutativeFunction {
 	@Override
 	public GeneralFunction clone() {
 		return new GCD(functions.clone());
+	}
+
+	public double getIdentityValue() {
+		return 0;
 	}
 }

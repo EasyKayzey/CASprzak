@@ -14,7 +14,7 @@ public class LCM extends IntegerCommutativeFunction {
 	}
 
 	@Override
-	protected long operate(int... operands) {
+	protected long operateInt(int... operands) {
 		int gcd = operands[0];
 		long prod = operands[0];
 		for (int i = 1 ; i < operands.length; i++) {
@@ -43,5 +43,9 @@ public class LCM extends IntegerCommutativeFunction {
 	@Override
 	public GeneralFunction clone() {
 		return new LCM(functions.clone());
+	}
+
+	public double getIdentityValue() {
+		return 1;
 	}
 }

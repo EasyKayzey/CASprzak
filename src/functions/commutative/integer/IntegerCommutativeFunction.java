@@ -32,7 +32,11 @@ public abstract class IntegerCommutativeFunction extends CommutativeFunction {
 		if (!Settings.enforceIntegerOperations)
 			throw new IllegalStateException("IntegerQuotient cannot be used if Settings.enforceIntegerOperations is not enabled.");
 		int[] toOperate = Arrays.stream(functions).mapToInt(f -> ParsingTools.toInteger(f.evaluate(variableValues))).toArray();
-		return operate(toOperate);
+		return operateInt(toOperate);
+	}
+
+	public double operate(double a, double b) {
+		return operateInt(ParsingTools.toInteger(a), ParsingTools.toInteger(b));
 	}
 
 	/**
@@ -40,5 +44,5 @@ public abstract class IntegerCommutativeFunction extends CommutativeFunction {
 	 * @param operands the list of inputs
 	 * @return the operation applied to the inputs
 	 */
-	protected abstract long operate(int... operands);
+	protected abstract long operateInt(int... operands);
 }

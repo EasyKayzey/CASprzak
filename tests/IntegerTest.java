@@ -2,6 +2,7 @@ import functions.GeneralFunction;
 import functions.binary.integer.IntegerQuotient;
 import functions.binary.integer.Modulo;
 import functions.commutative.integer.GCD;
+import functions.commutative.integer.LCM;
 import functions.special.Constant;
 import org.junit.jupiter.api.Test;
 
@@ -9,6 +10,7 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@SuppressWarnings("AssertEqualsBetweenInconvertibleTypes")
 public class IntegerTest {
     @Test
     void basicIntegerQuotient1() {
@@ -36,7 +38,15 @@ public class IntegerTest {
 
     @Test
     void gcd() {
-        assertEquals(new Constant(4), new GCD(new Constant(4), new Constant(196), new Constant(80)).simplify());
+        assertEquals(new Constant(4), new GCD(new Constant(4), new Constant(196), new Constant(80)));
+        assertEquals(4, new GCD(new Constant(4), new Constant(196), new Constant(80)).evaluate(Map.of()));
+    }
+
+
+    @Test
+    void lcm() {
+        assertEquals(new Constant(3920), new LCM(new Constant(4), new Constant(196), new Constant(80)));
+        assertEquals(3920, new LCM(new Constant(4), new Constant(196), new Constant(80)).evaluate(Map.of()));
     }
 
 

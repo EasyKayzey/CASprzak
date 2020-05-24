@@ -1,11 +1,14 @@
 # Changelog
 # v0.2.0
 ### Major Additions 
- - Integer division and modulo operations
+ - Integer division, modulo, lcm, and gcd operations
+ - Floor, ceiling, rounding, and random operations
+ - Add new abstract classes for new integer operations
 
 ### Minor Additions
  - Make parsing errors more descriptive
  - Port parsing to use operation maps rather than operation lists
+ - Add new test class for integer operations
  
  ### Bugfixes
  - Fix `toInteger` error message using the wrong margin from `Settings`

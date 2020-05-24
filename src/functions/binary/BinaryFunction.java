@@ -23,7 +23,7 @@ public abstract class BinaryFunction extends GeneralFunction {
 	protected final GeneralFunction function2;
 
 	/**
-	 * Constructs a new BinaryFunction
+	 * Constructs a new {@link BinaryFunction}
 	 * @param function1 The first {@link GeneralFunction} in the binary operation
 	 * @param function2 The second {@link GeneralFunction} in the binary operation
 	 */

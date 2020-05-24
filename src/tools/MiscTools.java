@@ -34,6 +34,16 @@ public class MiscTools {
 	}
 
 	/**
+	 * Computes the GCD of the inputs. It is preferred to input {@code a > b}, but this is not explicitly necessary.
+	 * @param a the first input
+	 * @param b the second input
+	 * @return the GCD of the inputs
+	 */
+	public static int gcd(int a, int b) {
+		return a < b ? gcd(b, a) : b == 0 ? a : gcd(b, a % b);
+	}
+
+	/**
 	 * Returns the location of a {@link GeneralFunction} in its class-based sort order (see {@link GeneralFunction#sortOrder})
 	 * @param function the function whose location in the class order is to be found
 	 * @return location in {@link GeneralFunction#sortOrder}

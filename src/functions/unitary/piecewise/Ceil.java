@@ -1,0 +1,31 @@
+package functions.unitary.piecewise;
+
+import functions.GeneralFunction;
+import functions.unitary.UnitaryFunction;
+
+import java.util.Map;
+
+public class Ceil extends PiecewiseFunction{
+    /**
+     * Constructs a new {@link Ceil}
+     * @param operand The function which ceiling is operating on
+     */
+    public Ceil(GeneralFunction operand) {
+        super(operand);
+    }
+
+    @Override
+    public UnitaryFunction getInstance(GeneralFunction operand) {
+        return new Ceil(operand);
+    }
+
+    @Override
+    public GeneralFunction getDerivative(char varID) {
+        throw new UnsupportedOperationException("Ceil has no derivative.");
+    }
+
+    @Override
+    public double evaluate(Map<Character, Double> variableValues) {
+        return Math.ceil(operand.evaluate(variableValues));
+    }
+}

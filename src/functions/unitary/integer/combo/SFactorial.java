@@ -45,4 +45,8 @@ public class SFactorial extends Factorial {
 		else
 			return ans;
 	}
+
+	public long operate(int input) {
+		return (int) Math.round(Math.sqrt(2 * Math.PI * input) * Math.pow(input / Math.E, input));
+	}
 }

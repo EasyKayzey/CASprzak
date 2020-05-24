@@ -9,11 +9,14 @@ import tools.VariableTools;
 
 import java.util.Map;
 
+/**
+ * {@link IntegerBinaryFunction} provides resources for subclasses to implement mathematical functions with integer-restricted domain.
+ */
 public abstract class IntegerBinaryFunction extends BinaryFunction {
 	/**
-	 * Constructs a new IntegerBinaryFunction
-	 * @param function1 The first {@link GeneralFunction} in the binary operation
-	 * @param function2 The second {@link GeneralFunction} in the binary operation
+	 * Constructs a new {@link IntegerBinaryFunction}
+	 * @param function1 the first {@link GeneralFunction} in the binary operation
+	 * @param function2 the second {@link GeneralFunction} in the binary operation
 	 */
 	public IntegerBinaryFunction(GeneralFunction function1, GeneralFunction function2) {
 		super(function1, function2);
@@ -31,8 +34,12 @@ public abstract class IntegerBinaryFunction extends BinaryFunction {
 	@Override
 	public double evaluate(Map<Character, Double> variableValues) {
 		if (!Settings.enforceIntegerOperations)
-			throw new IllegalStateException("IntegerQuotient cannot be used if Settings.enforceIntegerOperations is not enabled.");
-		return operate(ParsingTools.toInteger(function2.evaluate(variableValues)), ParsingTools.toInteger(function1.evaluate(variableValues)));
+			throw new IllegalStateException("IntegerBinaryFunctions cannot be used if Settings.enforceIntegerOperations is not enabled.");
+		double a = function1.evaluate(variableValues);
+		double b = function2.evaluate(variableValues);
+		if (!ParsingTools.isAlmostInteger(a) || !ParsingTools.isAlmostInteger(b))
+			throw new IllegalArgumentException("Tried to evaluate an IntegerUnitaryFunction with non-integer operand set " + a + ", " + b);
+		return operate(ParsingTools.toInteger(b), ParsingTools.toInteger(a));
 	}
 
 	/**

@@ -27,7 +27,7 @@ public class IntegerTest {
 
     @Test
     void basicIntegerQuotient2() {
-        GeneralFunction test = new IntegerQuotient(new Constant(4.999998), new Constant(25.00002));
+        GeneralFunction test = new IntegerQuotient(new Constant(4.999999999999999999999999999999999999999999999998), new Constant(25.000000000000000000000000002));
         assertEquals(5, test.evaluate(Map.of()));
     }
 
@@ -39,7 +39,7 @@ public class IntegerTest {
 
     @Test
     void basicModulo2() {
-        GeneralFunction test = new Modulo(new Constant(7.000067), new Constant(Math.pow(2, 18)));
+        GeneralFunction test = new Modulo(new Constant(7.0000000000000000000000000000000000000000000000000067), new Constant(Math.pow(2, 18)));
         assertEquals(1, test.evaluate(Map.of()));
     }
 

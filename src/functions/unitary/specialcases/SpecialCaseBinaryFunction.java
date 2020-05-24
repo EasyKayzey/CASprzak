@@ -11,6 +11,10 @@ import functions.unitary.UnitaryFunction;
  */
 public abstract class SpecialCaseBinaryFunction extends UnitaryFunction implements Invertible {
 
+	/**
+	 * Constructs a new {@link SpecialCaseBinaryFunction}
+	 * @param operand The function which the special case binary function is operating on
+	 */
 	public SpecialCaseBinaryFunction(GeneralFunction operand) {
 		super(operand);
 	}

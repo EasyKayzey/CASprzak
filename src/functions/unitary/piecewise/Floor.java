@@ -2,6 +2,7 @@ package functions.unitary.piecewise;
 
 import functions.GeneralFunction;
 import functions.unitary.UnitaryFunction;
+import tools.DefaultFunctions;
 
 import java.util.Map;
 
@@ -16,16 +17,16 @@ public class Floor extends PiecewiseFunction{
 
     @Override
     public UnitaryFunction getInstance(GeneralFunction operand) {
-        return null;
+        return new Floor(operand);
     }
 
     @Override
     public GeneralFunction getDerivative(char varID) {
-        return null;
+        return DefaultFunctions.ZERO;
     }
 
     @Override
     public double evaluate(Map<Character, Double> variableValues) {
-        return 0;
+        return Math.floor(operand.evaluate(variableValues));
     }
 }

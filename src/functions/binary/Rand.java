@@ -7,8 +7,8 @@ import java.util.Map;
 public class Rand extends BinaryFunction{
     /**
      * Constructs a new {@link Rand}
-     * @param function1 The first {@link GeneralFunction} in the binary operation
-     * @param function2 The second {@link GeneralFunction} in the binary operation
+     * @param function1 The upper bound of the range
+     * @param function2 The lower bound of the range
      */
     public Rand(GeneralFunction function1, GeneralFunction function2) {
         super(function1, function2);

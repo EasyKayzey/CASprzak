@@ -14,7 +14,7 @@ public class GCD extends IntegerCommutativeFunction {
 	}
 
 	@Override
-	protected int operate(int... operands) {
+	protected long operate(int... operands) {
 		int gcd = operands[0];
 		for (int i = 1 ; i < operands.length; i++)
 			gcd = MiscTools.gcd(operands[i], gcd);

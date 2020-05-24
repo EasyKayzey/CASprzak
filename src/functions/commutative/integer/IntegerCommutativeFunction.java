@@ -40,5 +40,5 @@ public abstract class IntegerCommutativeFunction extends CommutativeFunction {
 	 * @param operands the list of inputs
 	 * @return the operation applied to the inputs
 	 */
-	protected abstract int operate(int... operands);
+	protected abstract long operate(int... operands);
 }

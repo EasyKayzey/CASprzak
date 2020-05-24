@@ -1,4 +1,5 @@
 import org.junit.jupiter.api.Test;
+import tools.MiscTools;
 import tools.ParsingTools;
 import tools.helperclasses.AbstractMutablePair;
 import tools.helperclasses.AbstractPair;
@@ -31,5 +32,11 @@ public class MiscTest {
 		assertTrue(ParsingTools.parseBoolean("truE"));
 		assertFalse(ParsingTools.parseBoolean("falSE"));
 		assertEquals(4, ParsingTools.toInteger(4.00000000002));
+	}
+
+	@Test
+	void gcd() {
+		assertEquals(4, MiscTools.gcd(8, 12));
+		assertEquals(1, MiscTools.gcd(9, 7));
 	}
 }

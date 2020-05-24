@@ -35,7 +35,11 @@ public abstract class IntegerBinaryFunction extends BinaryFunction {
 	public double evaluate(Map<Character, Double> variableValues) {
 		if (!Settings.enforceIntegerOperations)
 			throw new IllegalStateException("IntegerBinaryFunctions cannot be used if Settings.enforceIntegerOperations is not enabled.");
-		return operate(ParsingTools.toInteger(function2.evaluate(variableValues)), ParsingTools.toInteger(function1.evaluate(variableValues)));
+		double a = function1.evaluate(variableValues);
+		double b = function2.evaluate(variableValues);
+		if (!ParsingTools.isAlmostInteger(a) || !ParsingTools.isAlmostInteger(b))
+			throw new IllegalArgumentException("Tried to evaluate an IntegerUnitaryFunction with non-integer operand set " + a + ", " + b);
+		return operate(ParsingTools.toInteger(b), ParsingTools.toInteger(a));
 	}
 
 	/**

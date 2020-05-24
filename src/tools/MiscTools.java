@@ -33,6 +33,10 @@ public class MiscTools {
 			return n * factorial(n - 1);
 	}
 
+	public static int gcd(int a, int b) {
+		return a < b ? gcd(b, a) : b == 0 ? a : gcd(b, a % b);
+	}
+
 	/**
 	 * Returns the location of a {@link GeneralFunction} in its class-based sort order (see {@link GeneralFunction#sortOrder})
 	 * @param function the function whose location in the class order is to be found

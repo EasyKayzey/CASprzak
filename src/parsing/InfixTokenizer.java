@@ -85,7 +85,7 @@ public class InfixTokenizer {
 		// Replace curly braces parentheses
 		infix = infix.replace("{", "(").replace("}", ")");
 		// Replaces underscores with spaces
-		infix = infix.replace("_", " ");
+		infix = infix.replace("_", " ").replace(",", ") (");
 		// Adds parentheses to enforce order of operations
 		infix = "((((" + times.matcher(plus.matcher(closeParen.matcher(openParen.matcher(infix).replaceAll("((((")).replaceAll("))))")).replaceAll("))+((")).replaceAll(")*(") + "))))";
 		// Splits infix into tokens

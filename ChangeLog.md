@@ -9,6 +9,7 @@
  - Make parsing errors more descriptive
  - Port parsing to use operation maps rather than operation lists
  - Add new test class for integer operations
+ - Change `equals` to check if two functions are exactly equal and `equalsSimplified` to check if they are equal when simplified
  
  ### Bugfixes
  - Fix `toInteger` error message using the wrong margin from `Settings`

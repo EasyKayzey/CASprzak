@@ -167,7 +167,7 @@ public class Product extends CommutativeFunction {
 					while (iter.hasNext()) {
 						GeneralFunction cur = iter.next();
 						if (cur instanceof Differential diff) {
-							newFunctions.add(new Integral(integral.operand, diff.respectToChar).simplify());
+							newFunctions.add(new Integral(integral.operand, diff.respectTo).simplify());
 							iter.remove();
 							continue outer;
 						}
@@ -177,7 +177,7 @@ public class Product extends CommutativeFunction {
 					while (iter.hasNext()) {
 						GeneralFunction cur = iter.next();
 						if (cur instanceof Integral integral) {
-							newFunctions.add(new Integral(integral.operand, diff.respectToChar).simplify());
+							newFunctions.add(new Integral(integral.operand, diff.respectTo).simplify());
 							iter.remove();
 							continue outer;
 						}
@@ -197,7 +197,7 @@ public class Product extends CommutativeFunction {
 		boolean hasNull = false;
 		boolean hasDiff = false;
 		for (GeneralFunction function : this) {
-			if (function instanceof Integral integral && integral.respectToChar == null)
+			if (function instanceof Integral integral && integral.respectTo == null)
 				hasNull = true;
 			if (function instanceof Differential)
 				hasDiff = true;

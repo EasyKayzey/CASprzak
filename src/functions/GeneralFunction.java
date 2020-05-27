@@ -133,7 +133,7 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 
 	/**
 	 * Simplifies the two functions, then compares them with {@link #equalsFunction(GeneralFunction)}
-	 * @param that the object that this is compared against
+	 * @param that the function to be compared against
 	 * @return true if they're equal when simplified
 	 */
 	public boolean equalsSimplified(GeneralFunction that) {
@@ -142,7 +142,7 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 
 	/**
 	 * Compares two functions with {@link #equalsFunction(GeneralFunction)}
-	 * @param that the object that this is compared against
+	 * @param that the object to be compared against
 	 * @return true if they're equal
 	 */
 	public boolean equals(Object that) {

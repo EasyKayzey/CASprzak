@@ -112,7 +112,7 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 	}
 
 	/**
-	 * Fixes some variables to the values given in the {@code Map<Character, Double> values} by substituting in a {@link Constant} for each of those {@link Variable}s
+	 * Fixes some variables to the values given in the {@code Map<String, Double> values} by substituting in a {@link Constant} for each of those {@link Variable}s
 	 * @param values the map defining the substitutions to be made
 	 * @return a new function with the substitutions made
 	 */

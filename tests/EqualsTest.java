@@ -11,7 +11,7 @@ public class EqualsTest {
     void unitaryEqualsUnitary() {
         GeneralFunction test1 = FunctionParser.parseInfix("\\sin(x)");
         GeneralFunction test2 = FunctionParser.parseInfix("\\sin(x)");
-        assertEquals(test1, test2);
+        assertEquals(test1.simplify(), test2.simplify());
     }
 
     @Test
@@ -46,77 +46,77 @@ public class EqualsTest {
     void switchedOrderVariableConstant() {
         GeneralFunction test1 = FunctionParser.parseInfix("1+2x");
         GeneralFunction test2 = FunctionParser.parseInfix("2x+1");
-        assertEquals(test1, test2);
+        assertEquals(test1.simplify(), test2.simplify());
     }
 
     @Test
     void switchedOrderVariables() {
         GeneralFunction test1 = FunctionParser.parseInfix("x+y");
         GeneralFunction test2 = FunctionParser.parseInfix("y + x");
-        assertEquals(test1, test2);
+        assertEquals(test1.simplify(), test2.simplify());
     }
 
     @Test
     void switchedVariablesWithPowers() {
         GeneralFunction test1 = FunctionParser.parseInfix("x^2+x^3");
         GeneralFunction test2 = FunctionParser.parseInfix("x^3+x^2");
-        assertEquals(test1, test2);
+        assertEquals(test1.simplify(), test2.simplify());
     }
 
     @Test
     void switchedOrderVariableMultiply() {
         GeneralFunction test1 = FunctionParser.parseInfix("x+2y");
         GeneralFunction test2 = FunctionParser.parseInfix("2y + x");
-        assertEquals(test1, test2);
+        assertEquals(test1.simplify(), test2.simplify());
     }
 
     @Test
     void switchedOrderMultiplies() {
         GeneralFunction test1 = FunctionParser.parseInfix("3x+2y");
         GeneralFunction test2 = FunctionParser.parseInfix("2y + 3x");
-        assertEquals(test1, test2);
+        assertEquals(test1.simplify(), test2.simplify());
     }
 
     @Test
     void switchedOrderVariablesMul() {
         GeneralFunction test1 = FunctionParser.parseInfix("x*y");
         GeneralFunction test2 = FunctionParser.parseInfix("yx");
-        assertEquals(test1, test2);
+        assertEquals(test1.simplify(), test2.simplify());
     }
 
     @Test
     void switchedVariablesWithPowersMul() {
         GeneralFunction test1 = FunctionParser.parseInfix("x^2*x^3");
         GeneralFunction test2 = FunctionParser.parseInfix("x^3*x^2");
-        assertEquals(test1, test2);
+        assertEquals(test1.simplify(), test2.simplify());
     }
 
     @Test
     void switchedOrderVariableMultiplyMul() {
         GeneralFunction test1 = FunctionParser.parseInfix("x*2*y");
         GeneralFunction test2 = FunctionParser.parseInfix("2*y*x");
-        assertEquals(test1, test2);
+        assertEquals(test1.simplify(), test2.simplify());
     }
 
     @Test
     void switchedOrderMultipliesMul() {
         GeneralFunction test1 = FunctionParser.parseInfix("3x*2y");
         GeneralFunction test2 = FunctionParser.parseInfix("2y*3x");
-        assertEquals(test1, test2);
+        assertEquals(test1.simplify(), test2.simplify());
     }
 
     @Test
     void switchedOrderComplicated() {
         GeneralFunction test1 = FunctionParser.parseInfix("x^2+1+y+3\\sin(x)+2x");
         GeneralFunction test2 = FunctionParser.parseInfix("3(\\sin(x))+y+x^2+2x+1");
-        assertEquals(test1, test2);
+        assertEquals(test1.simplify(), test2.simplify());
     }
 
     @Test
     void switchedOrderTrig() {
         GeneralFunction test1 = FunctionParser.parseInfix("\\sin(x)+\\cos(x)");
         GeneralFunction test2 = FunctionParser.parseInfix("\\cos(x)+\\sin(x)");
-        assertEquals(test1, test2);
+        assertEquals(test1.simplify(), test2.simplify());
     }
 
 }

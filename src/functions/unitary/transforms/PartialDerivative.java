@@ -38,7 +38,7 @@ public class PartialDerivative extends Transformation {
 	@Override
 	public boolean equalsFunction(GeneralFunction that) {
 		if (that instanceof PartialDerivative pd)
-			return respectTo == pd.respectTo && operand.equals(pd.operand);
+			return respectTo == pd.respectTo && operand.equalsSimplified(pd.operand);
 		else
 			return false;
 	}

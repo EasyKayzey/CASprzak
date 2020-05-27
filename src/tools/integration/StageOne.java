@@ -140,7 +140,7 @@ public class StageOne {
         GeneralFunction derivativeWithoutConstant = derivative.getSecond();
         GeneralFunction constantInFront = derivative.getFirst();
         Product derivativeTimesOperation = new Product(derivativeWithoutConstant, term);
-        if (!SearchTools.existsInSurfaceSubset(product, derivativeTimesOperation::equals) || SearchTools.existsInOppositeSurfaceSubset(product, (u -> SearchTools.existsAny(u, VariableTools.isVariable(variableChar))), derivativeTimesOperation::equals))
+        if (!SearchTools.existsInSurfaceSubset(product, derivativeTimesOperation::equalsSimplified) || SearchTools.existsInOppositeSurfaceSubset(product, (u -> SearchTools.existsAny(u, VariableTools.isVariable(variableChar))), derivativeTimesOperation::equalsSimplified))
             return null;
         else
             return constantInFront;

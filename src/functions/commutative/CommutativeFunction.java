@@ -3,6 +3,7 @@ package functions.commutative;
 import functions.GeneralFunction;
 import functions.special.Constant;
 import org.jetbrains.annotations.NotNull;
+import tools.ArrayTools;
 
 import java.util.*;
 import java.util.function.Function;
@@ -44,7 +45,7 @@ public abstract class CommutativeFunction extends GeneralFunction {
 
 	public boolean equalsFunction(GeneralFunction that) {
 		if (that instanceof CommutativeFunction function && this.getClass().equals(that.getClass()))
-			return Arrays.equals(functions, function.getFunctions());
+			return ArrayTools.equalsSimplified(functions, function.getFunctions());
 		else
 			return false;
 	}

@@ -137,7 +137,7 @@ public class Pow extends BinaryFunction {
 	 * @return the argument of the logarithm in the exponent, if the exponent is a logarithm with the same base as the {@link Pow}
 	 */
 	public GeneralFunction simplifyLogsOfSameBase() {
-		if (function1 instanceof Logb logb && logb.getFunction2().equals(function2))
+		if (function1 instanceof Logb logb && logb.getFunction2().equalsSimplified(function2))
 			return logb.getFunction1();
 		else if (function1 instanceof Ln ln && function2 instanceof Constant constant && constant.constant == Math.E)
 			return ln.operand;

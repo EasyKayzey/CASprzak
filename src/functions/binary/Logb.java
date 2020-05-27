@@ -68,7 +68,7 @@ public class Logb extends BinaryFunction {
 	 * @return {@link DefaultFunctions#ONE} if the base of the logarithm equals the argument
 	 */
 	public GeneralFunction simplifyIdentity() {
-		if (function2.equals(function1))
+		if (function2.equalsSimplified(function1))
 			return DefaultFunctions.ONE;
 		else
 			return this;

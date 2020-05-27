@@ -49,7 +49,7 @@ public class Differential extends Transformation {
 	@Override
 	public boolean equalsFunction(GeneralFunction that) {
 		if (that instanceof Differential diff)
-			return respectTo == diff.respectTo && operand.equals(diff.operand);
+			return respectTo == diff.respectTo && operand.equalsSimplified(diff.operand);
 		else
 			return false;
 	}

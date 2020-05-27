@@ -98,6 +98,12 @@ public abstract class BinaryFunction extends GeneralFunction {
 			return this;
 	}
 
+	public int hashCode() {
+		int code = this.getClass().hashCode();
+		code = code * 31 + function1.hashCode();
+		code = code * 31 + function2.hashCode();
+		return code;
+	}
 
 	public @NotNull Iterator<GeneralFunction> iterator() {
 		return new BinaryIterator();

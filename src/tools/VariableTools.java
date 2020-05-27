@@ -20,8 +20,8 @@ public class VariableTools {
 	 * @param varID the character of the variable to be checked for
 	 * @return the predicate described above
 	 */
-	public static Predicate<GeneralFunction> isVariable(char varID) {
-		return input -> (input instanceof Variable v) && (v.varIDChar == varID);
+	public static Predicate<GeneralFunction> isVariable(String varID) {
+		return input -> (input instanceof Variable v) && (v.varID.equals(varID));
 	}
 
 	/**
@@ -29,9 +29,9 @@ public class VariableTools {
 	 * @param input the function to be tested
 	 * @return the set of variable characters
 	 */
-	public static Set<Character> getAllVariables(GeneralFunction input) {
-		Set<Character> vars = new HashSet<>();
-		SearchTools.consumeIf(input, f -> vars.add(((Variable) f).varIDChar), f -> (f instanceof Variable));
+	public static Set<String> getAllVariables(GeneralFunction input) {
+		Set<String> vars = new HashSet<>();
+		SearchTools.consumeIf(input, f -> vars.add(((Variable) f).varID), f -> (f instanceof Variable));
 		return vars;
 	}
 
@@ -40,8 +40,8 @@ public class VariableTools {
 	 * @param input the function to be read from
 	 * @return the variable character requested
 	 */
-	public static char getSingleVariable(GeneralFunction input) {
-		Set<Character> vars = getAllVariables(input);
+	public static String getSingleVariable(GeneralFunction input) {
+		Set<String> vars = getAllVariables(input);
 		if (vars.size() == 1)
 			return vars.iterator().next();
 		else
@@ -54,7 +54,7 @@ public class VariableTools {
 	 * @param varID The variable ID of the variable that is being looked for
 	 * @return true if the {@link Variable} specified is NOT found in the {@link GeneralFunction}
 	 */
-	public static boolean doesNotContainsVariable(GeneralFunction function, char varID) {
+	public static boolean doesNotContainsVariable(GeneralFunction function, String varID) {
 		return !SearchTools.existsAny(function, isVariable(varID));
 	}
 }

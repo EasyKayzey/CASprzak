@@ -18,7 +18,7 @@ public class DerivativeDoesNotExistException extends OperationNotSupportedExcept
     }
 
     /**
-     * Return the non-differentiable function
+     * Returns the non-differentiable function
      * @return the non-differentiable function
      */
     public GeneralFunction getFunction() {

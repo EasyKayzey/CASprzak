@@ -81,7 +81,7 @@ public class ParsingTools {
 	 * @return true if the {@code double} is within {@link Settings#integerMargin} of an integer
 	 */
 	public static boolean isAlmostInteger(double d) throws IllegalArgumentException{
-		return Math.abs(((int) (d + .5)) - d) < Settings.integerMargin;
+		return Math.abs(Math.round(d) - d) < Settings.integerMargin;
 	}
 
 	/**

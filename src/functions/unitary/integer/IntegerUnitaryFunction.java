@@ -6,6 +6,7 @@ import functions.unitary.UnitaryFunction;
 import tools.DefaultFunctions;
 import tools.ParsingTools;
 import tools.VariableTools;
+import tools.exceptions.DerivativeDoesNotExistException;
 
 import java.util.Map;
 
@@ -26,7 +27,7 @@ public abstract class IntegerUnitaryFunction extends UnitaryFunction {
 		if (VariableTools.doesNotContainsVariable(this, varID))
 			return DefaultFunctions.ZERO;
 		else
-			throw new UnsupportedOperationException("IntegerUnitaryFunctions have no derivative.");
+			throw new DerivativeDoesNotExistException(this);
 	}
 
 	@Override

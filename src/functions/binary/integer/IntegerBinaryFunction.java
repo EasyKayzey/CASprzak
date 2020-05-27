@@ -6,6 +6,7 @@ import functions.binary.BinaryFunction;
 import tools.DefaultFunctions;
 import tools.ParsingTools;
 import tools.VariableTools;
+import tools.exceptions.DerivativeDoesNotExistException;
 
 import java.util.Map;
 
@@ -28,7 +29,7 @@ public abstract class IntegerBinaryFunction extends BinaryFunction {
 		if (VariableTools.doesNotContainsVariable(function1, varID) && VariableTools.doesNotContainsVariable(function2, varID))
 			return DefaultFunctions.ZERO;
 		else
-			throw new UnsupportedOperationException("IntegerBinaryFunctions have no derivative.");
+			throw new DerivativeDoesNotExistException(this);
 	}
 
 	@Override

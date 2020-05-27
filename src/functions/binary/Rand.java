@@ -1,6 +1,7 @@
 package functions.binary;
 
 import functions.GeneralFunction;
+import tools.exceptions.DerivativeDoesNotExistException;
 
 import java.util.Map;
 
@@ -31,7 +32,7 @@ public class Rand extends BinaryFunction {
 
     @Override
     public GeneralFunction getDerivative(char varID) {
-        throw new UnsupportedOperationException("Rand does not support derivatives.");
+        throw new DerivativeDoesNotExistException(this);
     }
 
     @Override

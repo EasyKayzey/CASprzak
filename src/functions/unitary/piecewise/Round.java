@@ -2,6 +2,7 @@ package functions.unitary.piecewise;
 
 import functions.GeneralFunction;
 import functions.unitary.UnitaryFunction;
+import tools.exceptions.DerivativeDoesNotExistException;
 
 import java.util.Map;
 
@@ -21,7 +22,7 @@ public class Round extends PiecewiseFunction{
 
     @Override
     public GeneralFunction getDerivative(char varID) {
-        throw new UnsupportedOperationException("Round has no derivative.");
+        throw new DerivativeDoesNotExistException(this);
     }
 
     @Override

@@ -2,8 +2,12 @@ package parsing;
 
 import functions.binary.Logb;
 import functions.binary.Pow;
+import functions.binary.Rand;
+import functions.binary.integer.Modulo;
 import functions.commutative.Product;
 import functions.commutative.Sum;
+import functions.commutative.integer.GCD;
+import functions.commutative.integer.LCM;
 import functions.special.Variable;
 import functions.unitary.integer.combo.Factorial;
 import functions.unitary.piecewise.Abs;
@@ -83,11 +87,15 @@ public class OperationMaps {
 			put("+", (first, second) -> new Sum(first, second));
 			put("*", (first, second) -> new Product(first, second));
 			put("^", (first, second) -> new Pow(second, first));
+			put("%", (first, second) -> new Modulo(second, first));
 			put("C", (first, second) -> new Product(Factorial.defaultFactorial(first), new Pow(DefaultFunctions.NEGATIVE_ONE, new Product(Factorial.defaultFactorial(second), Factorial.defaultFactorial(new Sum(first, new Product(DefaultFunctions.NEGATIVE_ONE, second)))))));
 			put("P", (first, second) -> new Product(Factorial.defaultFactorial(first), new Pow(DefaultFunctions.NEGATIVE_ONE, Factorial.defaultFactorial(new Sum(first, new Product(DefaultFunctions.NEGATIVE_ONE, second))))));
 			put("\\pd", (first, second) -> new PartialDerivative(second, ((Variable) first).varID));
 			put("\\logb", (first, second) -> new Logb(second, first));
 			put("\\frac", (first, second) -> new Product(first, DefaultFunctions.reciprocal(second)));
+			put("\\rand", (first, second) -> new Rand(second, first));
+			put("\\gcd", (first, second) -> new GCD(first, second));
+			put("\\lcm", (first, second) -> new LCM(first, second));
 		}
 	};
 }

@@ -41,7 +41,8 @@ public abstract class IntegerCommutativeFunction extends CommutativeFunction {
 	}
 
 	public String toString() {
-		StringBuilder str = new StringBuilder(this.getClass().getSimpleName().toLowerCase() + "(");
+		StringBuilder str = new StringBuilder(this.getClass().getSimpleName().toLowerCase());
+		str.append("(");
 		for (int i = 0; i < functions.length - 1; i++) {
 			str.append(functions[i]);
 			str.append(", ");

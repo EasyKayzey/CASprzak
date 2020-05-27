@@ -5,6 +5,7 @@ import functions.unitary.UnitaryFunction;
 import tools.DefaultFunctions;
 import tools.MiscTools;
 import tools.VariableTools;
+import tools.exceptions.DerivativeDoesNotExistException;
 
 /**
  * The standard recursive definition of factorial.
@@ -29,7 +30,7 @@ public class RFactorial extends Factorial {
 		if (VariableTools.doesNotContainsVariable(operand, varID))
 			return DefaultFunctions.ZERO;
 		else
-			throw new UnsupportedOperationException("RFactorial has no derivative.");
+			throw new DerivativeDoesNotExistException(this);
 	}
 
 	public long operate(int input) {

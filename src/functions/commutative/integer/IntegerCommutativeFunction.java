@@ -6,6 +6,7 @@ import functions.commutative.CommutativeFunction;
 import tools.DefaultFunctions;
 import tools.ParsingTools;
 import tools.VariableTools;
+import tools.exceptions.DerivativeDoesNotExistException;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -27,7 +28,7 @@ public abstract class IntegerCommutativeFunction extends CommutativeFunction {
 		if (VariableTools.doesNotContainsVariable(this, varID))
 			return DefaultFunctions.ZERO;
 		else
-			throw new UnsupportedOperationException("IntegerCommutativeFunctions have no derivative.");
+			throw new DerivativeDoesNotExistException(this);
 	}
 
 	@Override

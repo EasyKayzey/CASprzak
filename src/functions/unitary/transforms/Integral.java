@@ -22,7 +22,7 @@ public class Integral extends Transformation {
 	 * @param integrand The integrand of the {@link Integral}
 	 * @param respectTo The variable that the {@link Integral} is with respect to
 	 */
-	public Integral(GeneralFunction integrand, Character respectTo) {
+	public Integral(GeneralFunction integrand, String respectTo) {
 		super(integrand, respectTo);
 	}
 
@@ -36,25 +36,25 @@ public class Integral extends Transformation {
 
 	@Override
 	public String toString() {
-		return "∫[" + operand.toString() + "]d" + respectToChar;
+		return "∫[" + operand.toString() + "]d" + respectTo;
 	}
 
 	@Override
 	public UnitaryFunction clone() {
-		return new Integral(operand.clone(), respectToChar);
+		return new Integral(operand.clone(), respectTo);
 	}
 
 	@Override
-	public GeneralFunction substituteVariable(char varID, GeneralFunction toReplace) {
-		if (varID == respectToChar)
+	public GeneralFunction substituteVariable(String varID, GeneralFunction toReplace) {
+		if (varID.equals(respectTo))
 			throw new UnsupportedOperationException("You cannot substitute the variable you are working with respect to");
-		return new Integral(operand.substituteVariable(varID, toReplace), respectToChar);
+		return new Integral(operand.substituteVariable(varID, toReplace), respectTo);
 	}
 
 	@Override
 	public boolean equalsFunction(GeneralFunction that) {
 		if (that instanceof Integral integral)
-			return respectToChar == integral.respectToChar && operand.equalsSimplified(integral.operand);
+			return respectTo.equals(integral.respectTo) && operand.equalsSimplified(integral.operand);
 		else
 			return false;
 	}
@@ -62,20 +62,20 @@ public class Integral extends Transformation {
 	@Override
 	public int compareSelf(GeneralFunction that) {
 		if (that instanceof Integral integral)
-			if (respectToChar == integral.respectToChar)
+			if (respectTo.equals(integral.respectTo))
 				return operand.compareTo(integral.operand);
 			else
-				return respectToChar - integral.respectToChar;
+				return respectTo.compareTo(integral.respectTo);
 		else
 			throw new IllegalStateException("Comparing a " + this.getClass().getSimpleName() + " with a " + that.getClass().getSimpleName() + " using compareSelf");
 	}
 
 	@Override
 	public GeneralFunction getDerivative(String varID) {
-		if (varID == respectToChar)
+		if (varID.equals(respectTo))
 			return operand;
 		else
-			return new Integral(operand.getSimplifiedDerivative(varID), respectToChar);
+			return new Integral(operand.getSimplifiedDerivative(varID), respectTo);
 	}
 
 	/**
@@ -85,20 +85,20 @@ public class Integral extends Transformation {
 	 */
 	@Override
 	public double evaluate(Map<String, Double> variableValues) {
-		Map<Character, Double> newMap = new HashMap<>(variableValues);
-		double bound = newMap.remove(respectToChar);
+		Map<String, Double> newMap = new HashMap<>(variableValues);
+		double bound = newMap.remove(respectTo);
 		return NumericalIntegration.simpsonsRule(operand.setVariables(newMap), 0, bound);
 	}
 
 
 	@Override
 	public Integral simplifyInternal() {
-		return new Integral(IntegralTools.minimalSimplify(operand), respectToChar);
+		return new Integral(IntegralTools.minimalSimplify(operand), respectTo);
 	}
 
 
 	public UnitaryFunction getInstance(GeneralFunction function) {
-		return new Integral(function, respectToChar);
+		return new Integral(function, respectTo);
 	}
 
 	/**
@@ -107,11 +107,11 @@ public class Integral extends Transformation {
 	 * @throws IntegrationFailedException if the integral could not be found
 	 */
 	public GeneralFunction execute() throws IntegrationFailedException {
-		return StageOne.derivativeDivides(operand, respectToChar).simplify();
+		return StageOne.derivativeDivides(operand, respectTo).simplify();
 	}
 
 	public GeneralFunction simplify() {
-		if (respectToChar == null) {
+		if (respectTo == null) {
 			return simplifyInternal().fixNull();
 		} else {
 			return super.simplify();
@@ -120,12 +120,12 @@ public class Integral extends Transformation {
 
 	private GeneralFunction fixNull() {
 		if (operand instanceof Differential diff) {
-			return new Integral(DefaultFunctions.ONE, diff.respectToChar).simplify();
+			return new Integral(DefaultFunctions.ONE, diff.respectTo).simplify();
 		} else if (operand instanceof Product product) {
 			GeneralFunction[] functions = product.getFunctions();
 			for (int i = 0; i < functions.length; i++) {
 				if (functions[i] instanceof Differential diff) {
-					return new Integral(new Product(ArrayTools.removeFunctionAt(functions, i)), diff.respectToChar).simplify();
+					return new Integral(new Product(ArrayTools.removeFunctionAt(functions, i)), diff.respectTo).simplify();
 				}
 			}
 			return this;

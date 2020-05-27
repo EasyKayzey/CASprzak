@@ -19,7 +19,7 @@ public class Differential extends Transformation {
 	 * Constructs a new {@link Differential}, which is sometimes used as an intermediary for integrals and derivatives
 	 * @param respectTo the variable that the differential is with respect to
 	 */
-	public Differential(char respectTo) {
+	public Differential(String respectTo) {
 		super(null, respectTo);
 	}
 
@@ -28,22 +28,22 @@ public class Differential extends Transformation {
 	 * @param operand the variable that the differential is with respect to
 	 */
 	public Differential(Variable operand) {
-		this(operand.varIDChar);
+		this(operand.varID);
 	}
 
 	@Override
 	public String toString() {
-		return "d" + respectToChar;
+		return "d" + respectTo;
 	}
 
 	@Override
 	public UnitaryFunction clone() {
-		return new Differential(respectToChar);
+		return new Differential(respectTo);
 	}
 
 	@Override
-	public GeneralFunction substituteVariable(char varID, GeneralFunction toReplace) {
-		if (varID == respectToChar)
+	public GeneralFunction substituteVariable(String varID, GeneralFunction toReplace) {
+		if (varID.equals(respectTo))
 			throw new UnsupportedOperationException("You cannot substitute the variable you are working with respect to");
 		return this;
 	}
@@ -51,7 +51,7 @@ public class Differential extends Transformation {
 	@Override
 	public boolean equalsFunction(GeneralFunction that) {
 		if (that instanceof Differential diff)
-			return respectToChar == diff.respectToChar && operand.equalsSimplified(diff.operand);
+			return respectTo.equals(diff.respectTo) && operand.equalsSimplified(diff.operand);
 		else
 			return false;
 	}
@@ -59,10 +59,10 @@ public class Differential extends Transformation {
 	@Override
 	public int compareSelf(GeneralFunction that) {
 		if (that instanceof Differential diff)
-			if (respectToChar == diff.respectToChar)
+			if (respectTo.equals(diff.respectTo))
 				return operand.compareTo(diff.operand);
 			else
-				return respectToChar - diff.respectToChar;
+				return respectTo.compareTo(diff.respectTo);
 		else
 			throw new IllegalStateException("Comparing a " + this.getClass().getSimpleName() + " with a " + that.getClass().getSimpleName() + " using compareSelf");
 	}
@@ -71,7 +71,7 @@ public class Differential extends Transformation {
 	 * Evaluation is not supported by this class, as it is purely an intermediary
 	 * @return nothing, because this method will always throw an error
 	 * @throws DerivativeDoesNotExistException whenever this method is called
-	 * @param varID
+	 * @param varID The variable that the function's derivative is taken with respect to
 	 */
 	@Override
 	public GeneralFunction getDerivative(String varID) {
@@ -82,7 +82,7 @@ public class Differential extends Transformation {
 	 * Differentiation is not supported by this class, as it is purely an intermediary
 	 * @return nothing, because this method will always throw an error
 	 * @throws UnsupportedOperationException whenever this method is called
-	 * @param variableValues
+	 * @param variableValues The values of each variable
 	 */
 	@Override
 	public double evaluate(Map<String, Double> variableValues) {

@@ -9,6 +9,7 @@
  - Make parsing errors more descriptive
  - Port parsing to use operation maps rather than operation lists
  - Add new test class for integer operations
+ - Add `DerivativeDoesNotExistException` for operations with no derivative
  
  ### Bugfixes
  - Fix `toInteger` error message using the wrong margin from `Settings`

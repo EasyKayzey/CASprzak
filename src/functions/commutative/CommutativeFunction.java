@@ -196,6 +196,13 @@ public abstract class CommutativeFunction extends GeneralFunction {
 	 */
 	public abstract double operate(double a, double b);
 
+	public int hashCode() {
+		int code = this.getClass().hashCode();
+		for (GeneralFunction f : functions)
+			code = code * 31 + f.hashCode();
+		return code;
+	}
+
 	public @NotNull Iterator<GeneralFunction> iterator() {
 		return new CommutativeIterator();
 	}

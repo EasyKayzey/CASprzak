@@ -120,6 +120,11 @@ public abstract class UnitaryFunction extends GeneralFunction {
 		}
 	}
 
+	public int hashCode() {
+		int code = this.getClass().hashCode();
+		code = code * 31 + operand.hashCode();
+		return code;
+	}
 
 	public @NotNull Iterator<GeneralFunction> iterator() {
 		return new UnitaryIterator();

@@ -1,4 +1,5 @@
 import org.junit.jupiter.api.Test;
+import parsing.FunctionParser;
 import tools.MiscTools;
 import tools.ParsingTools;
 import tools.helperclasses.AbstractMutablePair;
@@ -38,5 +39,11 @@ public class MiscTest {
 	void gcd() {
 		assertEquals(4, MiscTools.gcd(8, 12));
 		assertEquals(1, MiscTools.gcd(9, 7));
+	}
+
+	@Test
+	void hashCode1() {
+		assertEquals(FunctionParser.parseSimplified("x+y").hashCode(), FunctionParser.parseSimplified("y+x").hashCode());
+		assertEquals(FunctionParser.parseSimplified("\\sec(x)*\\tan(x)*(5*(\\sec(x))^2+(\\tan(x))^2)").hashCode(), FunctionParser.parseSimplified("(5*(\\sec(x))^2+(\\tan(x))^2)*\\sec(x)*\\tan(x)").hashCode());
 	}
 }

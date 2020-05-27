@@ -141,4 +141,8 @@ public class Constant extends SpecialFunction {
 		else
 			return (int) Math.signum(this.constant - ((Constant) that).constant);
 	}
+
+	public int hashCode() {
+		return Double.hashCode(constant);
+	}
 }

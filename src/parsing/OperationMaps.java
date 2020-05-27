@@ -85,7 +85,7 @@ public class OperationMaps {
 			put("^", (first, second) -> new Pow(second, first));
 			put("C", (first, second) -> new Product(Factorial.defaultFactorial(first), new Pow(DefaultFunctions.NEGATIVE_ONE, new Product(Factorial.defaultFactorial(second), Factorial.defaultFactorial(new Sum(first, new Product(DefaultFunctions.NEGATIVE_ONE, second)))))));
 			put("P", (first, second) -> new Product(Factorial.defaultFactorial(first), new Pow(DefaultFunctions.NEGATIVE_ONE, Factorial.defaultFactorial(new Sum(first, new Product(DefaultFunctions.NEGATIVE_ONE, second))))));
-			put("\\pd", (first, second) -> new PartialDerivative(second, ((Variable) first).varID));
+			put("\\pd", (first, second) -> new PartialDerivative(second, ((Variable) first).varIDChar));
 			put("\\logb", (first, second) -> new Logb(second, first));
 			put("\\frac", (first, second) -> new Product(first, DefaultFunctions.reciprocal(second)));
 		}

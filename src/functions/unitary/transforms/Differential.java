@@ -27,7 +27,7 @@ public class Differential extends Transformation {
 	 * @param operand the variable that the differential is with respect to
 	 */
 	public Differential(Variable operand) {
-		this(operand.varID);
+		this(operand.varIDChar);
 	}
 
 	@Override

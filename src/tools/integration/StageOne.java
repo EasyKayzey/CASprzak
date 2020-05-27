@@ -33,7 +33,7 @@ public class StageOne {
     /**
      * Performs the "derivative divides" method of integration and returns the integral if the method succeeded
      * @param integrand The {@link GeneralFunction} that is being integrated
-     * @param variableChar The {@link Variable#varID} that the integrand is integrated with respect to
+     * @param variableChar The {@link Variable#varIDChar} that the integrand is integrated with respect to
      * @return The integral of the function, if one is found
      * @throws IntegrationFailedException if the integration did not succeed
      */

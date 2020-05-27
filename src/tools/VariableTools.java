@@ -21,7 +21,7 @@ public class VariableTools {
 	 * @return the predicate described above
 	 */
 	public static Predicate<GeneralFunction> isVariable(char varID) {
-		return input -> (input instanceof Variable v) && (v.varID == varID);
+		return input -> (input instanceof Variable v) && (v.varIDChar == varID);
 	}
 
 	/**
@@ -31,7 +31,7 @@ public class VariableTools {
 	 */
 	public static Set<Character> getAllVariables(GeneralFunction input) {
 		Set<Character> vars = new HashSet<>();
-		SearchTools.consumeIf(input, f -> vars.add(((Variable) f).varID), f -> (f instanceof Variable));
+		SearchTools.consumeIf(input, f -> vars.add(((Variable) f).varIDChar), f -> (f instanceof Variable));
 		return vars;
 	}
 

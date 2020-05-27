@@ -108,7 +108,7 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 	 * @return the new {@link GeneralFunction} after all substitutions are preformed
 	 */
 	public GeneralFunction substituteVariable(char varID, GeneralFunction toReplace) {
-		return substituteAll(f -> (f instanceof Variable v && v.varID == varID), f -> toReplace);
+		return substituteAll(f -> (f instanceof Variable v && v.varIDChar == varID), f -> toReplace);
 	}
 
 	/**

@@ -6,6 +6,7 @@ import functions.commutative.CommutativeFunction;
 import tools.DefaultFunctions;
 import tools.ParsingTools;
 import tools.VariableTools;
+import tools.exceptions.DerivativeDoesNotExistException;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -27,7 +28,7 @@ public abstract class IntegerCommutativeFunction extends CommutativeFunction {
 		if (VariableTools.doesNotContainsVariable(this, varID))
 			return DefaultFunctions.ZERO;
 		else
-			throw new UnsupportedOperationException("IntegerCommutativeFunctions have no derivative.");
+			throw new DerivativeDoesNotExistException(this);
 	}
 
 	@Override
@@ -38,6 +39,18 @@ public abstract class IntegerCommutativeFunction extends CommutativeFunction {
 				.mapToInt(f -> ParsingTools.toInteger(f.evaluate(variableValues)))
 				.toArray();
 		return operateInt(toOperate);
+	}
+
+	public String toString() {
+		StringBuilder str = new StringBuilder(this.getClass().getSimpleName().toLowerCase());
+		str.append("(");
+		for (int i = 0; i < functions.length - 1; i++) {
+			str.append(functions[i]);
+			str.append(", ");
+		}
+		str.append(functions[functions.length - 1]);
+		str.append(")");
+		return str.toString();
 	}
 
 	public double operate(double a, double b) {

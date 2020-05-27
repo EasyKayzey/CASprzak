@@ -111,7 +111,7 @@ public class StageOne {
             else if (function instanceof TrigFunction unit && VariableTools.doesNotContainsVariable(unit.operand.getSimplifiedDerivative(variableChar), variableChar))
                 return new Product(new Product(number, DefaultFunctions.reciprocal(unit.operand.getSimplifiedDerivative(variableChar))), unit.getElementaryIntegral());
         }
-        throw new IntegrationFailedException("Integration failed");
+        throw new IntegrationFailedException(integrand);
     }
 
 

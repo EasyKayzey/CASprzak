@@ -2,6 +2,7 @@ package functions.unitary.piecewise;
 
 import functions.GeneralFunction;
 import functions.unitary.UnitaryFunction;
+import tools.exceptions.DerivativeDoesNotExistException;
 
 import java.util.Map;
 
@@ -25,7 +26,7 @@ public class Dirac extends PiecewiseFunction {
 
 	@Override
 	public GeneralFunction getDerivative(char varID) {
-		throw new UnsupportedOperationException("The derivative of the dirac delta function is not supported.");
+		throw new DerivativeDoesNotExistException(this);
 	}
 
 	public UnitaryFunction getInstance(GeneralFunction operand) {

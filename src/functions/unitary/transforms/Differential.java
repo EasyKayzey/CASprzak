@@ -3,6 +3,7 @@ package functions.unitary.transforms;
 import functions.GeneralFunction;
 import functions.special.Variable;
 import functions.unitary.UnitaryFunction;
+import tools.exceptions.DerivativeDoesNotExistException;
 
 import java.util.Map;
 
@@ -68,11 +69,11 @@ public class Differential extends Transformation {
 	/**
 	 * Evaluation is not supported by this class, as it is purely an intermediary
 	 * @return nothing, because this method will always throw an error
-	 * @throws UnsupportedOperationException whenever this method is called
+	 * @throws DerivativeDoesNotExistException whenever this method is called
 	 */
 	@Override
 	public GeneralFunction getDerivative(char varID) {
-		throw new UnsupportedOperationException("Cannot get the derivative of a differential " + this);
+		throw new DerivativeDoesNotExistException(this);
 	}
 
 	/**

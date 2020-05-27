@@ -36,7 +36,7 @@ public class SettingsParser {
 			case "defaultSolverIterations" 					-> Settings.defaultSolverIterations = Integer.parseInt(value);
 			case "defaultRangeSections" 					-> Settings.defaultRangeSections = Integer.parseInt(value);
 			case "simpsonsSegments" 						-> Settings.simpsonsSegments = Integer.parseInt(value);
-			case "singleVariableDefault" 					-> Settings.singleVariableDefault = ParsingTools.getCharacter(value);
+			case "singleVariableDefault" 					-> Settings.singleVariableDefault = value;
 			case "zeroMargin" 								-> Settings.zeroMargin = Double.parseDouble(value);
 			case "integerMargin" 							-> Settings.integerMargin = Double.parseDouble(value);
 			case "equalsMargin" 							-> Settings.equalsMargin = Double.parseDouble(value);

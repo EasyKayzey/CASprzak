@@ -54,4 +54,8 @@ public class Variable extends SpecialFunction {
 	public int compareSelf(GeneralFunction that) {
 		return this.varID - ((Variable) that).varID;
 	}
+
+	public int hashCode() {
+		return Character.hashCode(varID);
+	}
 }

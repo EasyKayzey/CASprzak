@@ -40,7 +40,7 @@ public class MiscTools {
 	 * @return the GCD of the inputs
 	 */
 	public static int gcd(int a, int b) {
-		return a < b ? gcd(b, a) : b == 0 ? a : gcd(b, a % b);
+		return b == 0 ? a : gcd(b, a % b);
 	}
 
 	/**

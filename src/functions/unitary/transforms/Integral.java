@@ -36,25 +36,25 @@ public class Integral extends Transformation {
 
 	@Override
 	public String toString() {
-		return "∫[" + operand.toString() + "]d" + respectTo;
+		return "∫[" + operand.toString() + "]d" + respectToChar;
 	}
 
 	@Override
 	public UnitaryFunction clone() {
-		return new Integral(operand.clone(), respectTo);
+		return new Integral(operand.clone(), respectToChar);
 	}
 
 	@Override
 	public GeneralFunction substituteVariable(char varID, GeneralFunction toReplace) {
-		if (varID == respectTo)
+		if (varID == respectToChar)
 			throw new UnsupportedOperationException("You cannot substitute the variable you are working with respect to");
-		return new Integral(operand.substituteVariable(varID, toReplace), respectTo);
+		return new Integral(operand.substituteVariable(varID, toReplace), respectToChar);
 	}
 
 	@Override
 	public boolean equalsFunction(GeneralFunction that) {
 		if (that instanceof Integral integral)
-			return respectTo == integral.respectTo && operand.equalsSimplified(integral.operand);
+			return respectToChar == integral.respectToChar && operand.equalsSimplified(integral.operand);
 		else
 			return false;
 	}
@@ -62,20 +62,20 @@ public class Integral extends Transformation {
 	@Override
 	public int compareSelf(GeneralFunction that) {
 		if (that instanceof Integral integral)
-			if (respectTo == integral.respectTo)
+			if (respectToChar == integral.respectToChar)
 				return operand.compareTo(integral.operand);
 			else
-				return respectTo - integral.respectTo;
+				return respectToChar - integral.respectToChar;
 		else
 			throw new IllegalStateException("Comparing a " + this.getClass().getSimpleName() + " with a " + that.getClass().getSimpleName() + " using compareSelf");
 	}
 
 	@Override
 	public GeneralFunction getDerivative(char varID) {
-		if (varID == respectTo)
+		if (varID == respectToChar)
 			return operand;
 		else
-			return new Integral(operand.getSimplifiedDerivative(varID), respectTo);
+			return new Integral(operand.getSimplifiedDerivative(varID), respectToChar);
 	}
 
 	/**
@@ -86,19 +86,19 @@ public class Integral extends Transformation {
 	@Override
 	public double evaluate(Map<Character, Double> variableValues) {
 		Map<Character, Double> newMap = new HashMap<>(variableValues);
-		double bound = newMap.remove(respectTo);
+		double bound = newMap.remove(respectToChar);
 		return NumericalIntegration.simpsonsRule(operand.setVariables(newMap), 0, bound);
 	}
 
 
 	@Override
 	public Integral simplifyInternal() {
-		return new Integral(IntegralTools.minimalSimplify(operand), respectTo);
+		return new Integral(IntegralTools.minimalSimplify(operand), respectToChar);
 	}
 
 
 	public UnitaryFunction getInstance(GeneralFunction function) {
-		return new Integral(function, respectTo);
+		return new Integral(function, respectToChar);
 	}
 
 	/**
@@ -107,11 +107,11 @@ public class Integral extends Transformation {
 	 * @throws IntegrationFailedException if the integral could not be found
 	 */
 	public GeneralFunction execute() throws IntegrationFailedException {
-		return StageOne.derivativeDivides(operand, respectTo).simplify();
+		return StageOne.derivativeDivides(operand, respectToChar).simplify();
 	}
 
 	public GeneralFunction simplify() {
-		if (respectTo == null) {
+		if (respectToChar == null) {
 			return simplifyInternal().fixNull();
 		} else {
 			return super.simplify();
@@ -120,12 +120,12 @@ public class Integral extends Transformation {
 
 	private GeneralFunction fixNull() {
 		if (operand instanceof Differential diff) {
-			return new Integral(DefaultFunctions.ONE, diff.respectTo).simplify();
+			return new Integral(DefaultFunctions.ONE, diff.respectToChar).simplify();
 		} else if (operand instanceof Product product) {
 			GeneralFunction[] functions = product.getFunctions();
 			for (int i = 0; i < functions.length; i++) {
 				if (functions[i] instanceof Differential diff) {
-					return new Integral(new Product(ArrayTools.removeFunctionAt(functions, i)), diff.respectTo).simplify();
+					return new Integral(new Product(ArrayTools.removeFunctionAt(functions, i)), diff.respectToChar).simplify();
 				}
 			}
 			return this;

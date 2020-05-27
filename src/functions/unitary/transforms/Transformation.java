@@ -12,7 +12,7 @@ public abstract class Transformation extends UnitaryFunction {
 	/**
 	 * The character of the variable that the {@link Transformation} is with respect to
 	 */
-	public final Character respectTo;
+	public final Character respectToChar;
 
 	/**
 	 * Constructs a new {@link Transformation}
@@ -21,7 +21,7 @@ public abstract class Transformation extends UnitaryFunction {
 	 */
 	public Transformation(GeneralFunction operand, Character respectTo) {
 		super(operand);
-		this.respectTo = respectTo;
+		this.respectToChar = respectTo;
 	}
 
 	@Override
@@ -51,6 +51,6 @@ public abstract class Transformation extends UnitaryFunction {
 	 * @return the variable that this transform works with respect to
 	 */
 	public char getRespectTo() {
-		return respectTo;
+		return respectToChar;
 	}
 }

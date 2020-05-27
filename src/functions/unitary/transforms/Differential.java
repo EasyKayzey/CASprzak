@@ -32,17 +32,17 @@ public class Differential extends Transformation {
 
 	@Override
 	public String toString() {
-		return "d" + respectTo;
+		return "d" + respectToChar;
 	}
 
 	@Override
 	public UnitaryFunction clone() {
-		return new Differential(respectTo);
+		return new Differential(respectToChar);
 	}
 
 	@Override
 	public GeneralFunction substituteVariable(char varID, GeneralFunction toReplace) {
-		if (varID == respectTo)
+		if (varID == respectToChar)
 			throw new UnsupportedOperationException("You cannot substitute the variable you are working with respect to");
 		return this;
 	}
@@ -50,7 +50,7 @@ public class Differential extends Transformation {
 	@Override
 	public boolean equalsFunction(GeneralFunction that) {
 		if (that instanceof Differential diff)
-			return respectTo == diff.respectTo && operand.equalsSimplified(diff.operand);
+			return respectToChar == diff.respectToChar && operand.equalsSimplified(diff.operand);
 		else
 			return false;
 	}
@@ -58,10 +58,10 @@ public class Differential extends Transformation {
 	@Override
 	public int compareSelf(GeneralFunction that) {
 		if (that instanceof Differential diff)
-			if (respectTo == diff.respectTo)
+			if (respectToChar == diff.respectToChar)
 				return operand.compareTo(diff.operand);
 			else
-				return respectTo - diff.respectTo;
+				return respectToChar - diff.respectToChar;
 		else
 			throw new IllegalStateException("Comparing a " + this.getClass().getSimpleName() + " with a " + that.getClass().getSimpleName() + " using compareSelf");
 	}

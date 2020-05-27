@@ -20,25 +20,25 @@ public class PartialDerivative extends Transformation {
 
 	@Override
 	public String toString() {
-		return "d/d" + respectTo + "[" + operand.toString() + "]";
+		return "d/d" + respectToChar + "[" + operand.toString() + "]";
 	}
 
 	@Override
 	public UnitaryFunction clone() {
-		return new PartialDerivative(operand.clone(), respectTo);
+		return new PartialDerivative(operand.clone(), respectToChar);
 	}
 
 	@Override
 	public GeneralFunction substituteVariable(char varID, GeneralFunction toReplace) {
-		if (varID == respectTo)
+		if (varID == respectToChar)
 			throw new UnsupportedOperationException("You cannot substitute the variable you are working with respect to");
-		return new PartialDerivative(operand.substituteVariable(varID, toReplace), respectTo);
+		return new PartialDerivative(operand.substituteVariable(varID, toReplace), respectToChar);
 	}
 
 	@Override
 	public boolean equalsFunction(GeneralFunction that) {
 		if (that instanceof PartialDerivative pd)
-			return respectTo == pd.respectTo && operand.equalsSimplified(pd.operand);
+			return respectToChar == pd.respectToChar && operand.equalsSimplified(pd.operand);
 		else
 			return false;
 	}
@@ -46,33 +46,33 @@ public class PartialDerivative extends Transformation {
 	@Override
 	public int compareSelf(GeneralFunction that) {
 		if (that instanceof PartialDerivative pd)
-			if (respectTo == pd.respectTo)
+			if (respectToChar == pd.respectToChar)
 				return operand.compareTo(pd.operand);
 			else
-				return respectTo - pd.respectTo;
+				return respectToChar - pd.respectToChar;
 		else
 			throw new IllegalStateException("Comparing a " + this.getClass().getSimpleName() + " with a " + that.getClass().getSimpleName() + " using compareSelf");
 	}
 
 	@Override
 	public GeneralFunction getDerivative(char varID) {
-		return new PartialDerivative(operand.getSimplifiedDerivative(varID), respectTo);
+		return new PartialDerivative(operand.getSimplifiedDerivative(varID), respectToChar);
 	}
 
 	@Override
 	public double evaluate(Map<Character, Double> variableValues) {
-		return operand.getSimplifiedDerivative(respectTo).evaluate(variableValues);
+		return operand.getSimplifiedDerivative(respectToChar).evaluate(variableValues);
 	}
 
 
 	@Override
 	public UnitaryFunction simplifyInternal() {
-		return new PartialDerivative(operand.simplify(), respectTo);
+		return new PartialDerivative(operand.simplify(), respectToChar);
 	}
 
 
 	public UnitaryFunction getInstance(GeneralFunction function) {
-		return new PartialDerivative(function, respectTo);
+		return new PartialDerivative(function, respectToChar);
 	}
 
 	/**
@@ -80,6 +80,6 @@ public class PartialDerivative extends Transformation {
 	 * @return the partial derivative of the operand
 	 */
 	public GeneralFunction execute() {
-		return operand.getSimplifiedDerivative(respectTo);
+		return operand.getSimplifiedDerivative(respectToChar);
 	}
 }

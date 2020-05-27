@@ -178,6 +178,12 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 	}
 
 	/**
+	 * Returns a hash code value for this object
+	 * @return a hash code value for this object
+	 */
+	public abstract int hashCode();
+
+	/**
 	 * Returns an iterator over the operands of this {@link GeneralFunction}
 	 * @return an iterator over the operands of this {@link GeneralFunction}
 	 */

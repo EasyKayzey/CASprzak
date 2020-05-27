@@ -1,5 +1,6 @@
 package tools.singlevariable;
 
+import config.Settings;
 import functions.GeneralFunction;
 import functions.binary.Pow;
 import functions.commutative.Product;
@@ -37,9 +38,9 @@ public class TaylorSeries {
      */
     public static GeneralFunction makeTaylorSeries(GeneralFunction function, int degree, double center) {
         GeneralFunction[] taylorSeriesTerms = new GeneralFunction[degree];
-        char var = VariableTools.getSingleVariable(function);
+        String var = VariableTools.getSingleVariable(function);
         for (int i = 0; i < degree; i++){
-            taylorSeriesTerms[i] = new Product(new Constant(function.getNthDerivative('x', i).evaluate(Map.of(var, center)) / MiscTools.factorial(i)), new Pow(new Constant(i), new Sum(new Variable('x'), new Constant(-center))));
+            taylorSeriesTerms[i] = new Product(new Constant(function.getNthDerivative(Settings.singleVariableDefault, i).evaluate(Map.of(var, center)) / MiscTools.factorial(i)), new Pow(new Constant(i), new Sum(new Variable(Settings.singleVariableDefault), new Constant(-center))));
         }
         return new Sum(taylorSeriesTerms).simplify();
     }

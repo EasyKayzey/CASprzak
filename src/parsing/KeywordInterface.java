@@ -311,7 +311,7 @@ public class KeywordInterface {
 
 	private static GeneralFunction integral(String input) {
 		String[] splitInput = keywordSplitter.split(input);
-		Integral integral = new Integral(parseStored(splitInput[0]), splitInput[1].charAt(1));
+		Integral integral = new Integral(parseStored(splitInput[0]), splitInput[1].substring(1));
 		try {
 			return integral.execute();
 		} catch (TransformFailedException e) {

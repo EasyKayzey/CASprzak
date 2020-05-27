@@ -2,9 +2,7 @@ package tools.exceptions;
 
 import functions.GeneralFunction;
 
-import javax.naming.OperationNotSupportedException;
-
-public class DerivativeDoesNotExistException extends OperationNotSupportedException {
+public class DerivativeDoesNotExistException extends UnsupportedOperationException {
 
     private final GeneralFunction function;
 

@@ -24,37 +24,37 @@ public class LatexTest {
 	@Test
 	void latexNot() {
 		GeneralFunction test = FunctionParser.parseInfix("\\pi x");
-		assertEquals(10, test.evaluate(Map.of('x', 3.2)), .3);
+		assertEquals(10, test.evaluate(Map.of("x", 3.2)), .3);
 	}
 
 	@Test
 	void rightNumber() {
 		GeneralFunction test = FunctionParser.parseInfix("\\pi 2");
-		assertEquals(6.3, test.evaluate(Map.of('x', 3.2)), .3);
+		assertEquals(6.3, test.evaluate(Map.of("x", 3.2)), .3);
 	}
 
 	@Test
 	void leftNumber() {
 		GeneralFunction test = FunctionParser.parseInfix("2\\pi ");
-		assertEquals(6.3, test.evaluate(Map.of('x', 3.2)), .3);
+		assertEquals(6.3, test.evaluate(Map.of("x", 3.2)), .3);
 	}
 
 	@Test
 	void leftParen() {
 		GeneralFunction test = FunctionParser.parseInfix("(1+1)\\pi ");
-		assertEquals(6.3, test.evaluate(Map.of('x', 3.2)), .3);
+		assertEquals(6.3, test.evaluate(Map.of("x", 3.2)), .3);
 	}
 
 	@Test
 	void rightParen() {
 		GeneralFunction test = FunctionParser.parseInfix("\\pi (1+1)");
-		assertEquals(6.3, test.evaluate(Map.of('x', 3.2)), .3);
+		assertEquals(6.3, test.evaluate(Map.of("x", 3.2)), .3);
 	}
 
 	@Test
 	void log() {
 		GeneralFunction test = FunctionParser.parseInfix("\\log(x)+\\log(1)");
-		assertEquals(1, test.evaluate(Map.of('x', 10.0)), .3);
+		assertEquals(1, test.evaluate(Map.of("x", 10.0)), .3);
 	}
 
 }

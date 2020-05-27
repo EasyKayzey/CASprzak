@@ -38,7 +38,7 @@ public class DifferentialTest {
 	void integralNullException() {
 		Integral test = new Integral(parseSimplified("x"));
 		assertThrows(Exception.class, test::execute);
-		assertThrows(Exception.class, () -> test.substituteVariable('x', parseSimplified("y")));
+		assertThrows(Exception.class, () -> test.substituteVariable("x", parseSimplified("y")));
 		test.simplify();
 	}
 
@@ -50,13 +50,13 @@ public class DifferentialTest {
 
 	@Test
 	void differentialProductIntegral() {
-		GeneralFunction test = new Product(new Integral(DefaultFunctions.X), new Differential('x'));
+		GeneralFunction test = new Product(new Integral(DefaultFunctions.X), new Differential("x"));
 		assertEquals(parseInfix("x^2/2"), test.simplify());
 	}
 
 	@Test
 	void differentialProductIntegral2() {
-		GeneralFunction test = new Product(DefaultFunctions.TWO, new Integral(DefaultFunctions.X), new Differential('x'));
+		GeneralFunction test = new Product(DefaultFunctions.TWO, new Integral(DefaultFunctions.X), new Differential("x"));
 		assertEquals(parseInfix("x^2"), test.simplify());
 	}
 
@@ -74,7 +74,7 @@ public class DifferentialTest {
 
 	@Test
 	void integralThatBreaksManualCreation() {
-		GeneralFunction test = new Integral(parseInfix("x^2"), 'y');
+		GeneralFunction test = new Integral(parseInfix("x^2"), "y");
 		assertEquals(parseInfix("y*x^2"), test.simplify());
 	}
 }

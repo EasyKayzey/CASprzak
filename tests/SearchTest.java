@@ -46,7 +46,7 @@ public class SearchTest {
     void simpleSubsetNoExclusion() {
         CommutativeFunction test1 = (CommutativeFunction) FunctionParser.parseSimplified("x*\\sin(x)*e^x");
         GeneralFunction test2 = FunctionParser.parseSimplified("x*e^x");
-        assertTrue(SearchTools.existsInOppositeSurfaceSubset(test1, (f -> SearchTools.existsAny(f, VariableTools.isVariable('x'))), test2::equalsFunction));
+        assertTrue(SearchTools.existsInOppositeSurfaceSubset(test1, (f -> SearchTools.existsAny(f, VariableTools.isVariable("x"))), test2::equalsFunction));
     }
 
     @Test
@@ -54,20 +54,20 @@ public class SearchTest {
         CommutativeFunction test1 = (CommutativeFunction) FunctionParser.parseSimplified("x*\\sin(x)*e^x");
         GeneralFunction test2 = FunctionParser.parseSimplified("x*e^x");
         GeneralFunction test3 = FunctionParser.parseSimplified("\\sin(x)");
-        assertFalse(SearchTools.existsInOppositeSurfaceSubset(test1, (f -> SearchTools.existsExcluding(f, VariableTools.isVariable('x'), test3::equalsFunction)), test2::equalsFunction));
+        assertFalse(SearchTools.existsInOppositeSurfaceSubset(test1, (f -> SearchTools.existsExcluding(f, VariableTools.isVariable("x"), test3::equalsFunction)), test2::equalsFunction));
     }
 
     @Test
     void isVariable() {
-        assertTrue(VariableTools.isVariable('y').test(FunctionParser.parseSimplified("y")));
-        assertFalse(VariableTools.isVariable('x').test(FunctionParser.parseSimplified("y")));
-        assertFalse(VariableTools.isVariable('x').test(FunctionParser.parseSimplified("x+1")));
-        assertFalse(VariableTools.isVariable('x').test(FunctionParser.parseSimplified("2x")));
+        assertTrue(VariableTools.isVariable("y").test(FunctionParser.parseSimplified("y")));
+        assertFalse(VariableTools.isVariable("x").test(FunctionParser.parseSimplified("y")));
+        assertFalse(VariableTools.isVariable("x").test(FunctionParser.parseSimplified("x+1")));
+        assertFalse(VariableTools.isVariable("x").test(FunctionParser.parseSimplified("2x")));
     }
 
     @Test
     void findVariables() {
         GeneralFunction test = FunctionParser.parseSimplified("x+2a+3\\pi^2-17x");
-        assertEquals(VariableTools.getAllVariables(test), Set.of('a', 'x'));
+        assertEquals(VariableTools.getAllVariables(test), Set.of("a", "x"));
     }
 }

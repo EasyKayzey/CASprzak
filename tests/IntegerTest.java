@@ -58,20 +58,20 @@ public class IntegerTest {
 
     @Test
     void basicFloor() {
-        GeneralFunction test = new Floor(new Sin(new Variable('x')));
-        assertEquals(0, test.evaluate(Map.of('x', 1.0)));
+        GeneralFunction test = new Floor(new Sin(new Variable("x")));
+        assertEquals(0, test.evaluate(Map.of("x", 1.0)));
     }
 
     @Test
     void basicCeil() {
-        GeneralFunction test = new Ceil(new Sin(new Variable('x')));
-        assertEquals(1, test.evaluate(Map.of('x', 1.0)));
+        GeneralFunction test = new Ceil(new Sin(new Variable("x")));
+        assertEquals(1, test.evaluate(Map.of("x", 1.0)));
     }
 
     @Test
     void basicRound() {
-        GeneralFunction test = new Round(new Sin(new Variable('x')));
-        assertEquals(1, test.evaluate(Map.of('x', 1.0)));
+        GeneralFunction test = new Round(new Sin(new Variable("x")));
+        assertEquals(1, test.evaluate(Map.of("x", 1.0)));
     }
 
     @Test

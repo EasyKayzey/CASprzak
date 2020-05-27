@@ -11,7 +11,7 @@ public class IntegrationFailedException extends TransformFailedException {
 	 * @param function the non-integrable function
 	 */
 	public IntegrationFailedException(GeneralFunction function) {
-		super("The integral of " + function.getClass().getSimpleName() + " could not be found.");
+		super("The integral of " + function + " could not be found.");
 		this.function = function;
 	}
 

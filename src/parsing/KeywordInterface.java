@@ -35,9 +35,7 @@ public class KeywordInterface {
 	 */
 	public static Object prev;
 
-	private KeywordInterface(){
-
-	}
+	private KeywordInterface(){}
 
 	/**
 	 * Takes input as a string in the format {@code "command arguments..."}

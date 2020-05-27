@@ -63,4 +63,14 @@ public class ArrayTools {
 		return finalFunctionArray;
 	}
 
+
+	public static boolean equalsSimplified(GeneralFunction[] first, GeneralFunction[] second) {
+		if (first.length != second.length)
+			return false;
+		for (int i = 0; i < first.length; i++)
+			if (!first[i].equalsSimplified(second[i]))
+				return false;
+		return true;
+	}
+
 }

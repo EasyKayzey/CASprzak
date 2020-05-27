@@ -54,7 +54,7 @@ public class NoEscapeTest {
 		Settings.enforceEscapes = false;
 		GeneralFunction test1 = FunctionParser.parseInfix("exp(ln(x))");
 		GeneralFunction test2 = FunctionParser.parseInfix("ln(exp(x))");
-		assertEquals(test1, test2);
+		assertEquals(test1.simplify(), test2.simplify());
 		Settings.enforceEscapes = temp;
 	}
 
@@ -64,7 +64,7 @@ public class NoEscapeTest {
 		Settings.enforceEscapes = false;
 		GeneralFunction test1 = FunctionParser.parseInfix("asin(sin(x))");
 		GeneralFunction test2 = FunctionParser.parseInfix("cos(acos(x))");
-		assertEquals(test1, test2);
+		assertEquals(test1.simplify(), test2.simplify());
 		Settings.enforceEscapes = temp;
 	}
 

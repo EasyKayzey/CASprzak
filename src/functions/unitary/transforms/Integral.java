@@ -54,7 +54,7 @@ public class Integral extends Transformation {
 	@Override
 	public boolean equalsFunction(GeneralFunction that) {
 		if (that instanceof Integral integral)
-			return respectTo == integral.respectTo && operand.equals(integral.operand);
+			return respectTo == integral.respectTo && operand.equalsSimplified(integral.operand);
 		else
 			return false;
 	}

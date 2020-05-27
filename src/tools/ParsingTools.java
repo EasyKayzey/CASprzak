@@ -70,7 +70,7 @@ public class ParsingTools {
 	 */
 	public static int toInteger(double d) throws IllegalArgumentException{
 		if (isAlmostInteger(d))
-			return (int) (d + .5);
+			return (int) Math.round(d);
 		else
 			throw new IllegalArgumentException("Double " + d + " is not within " + Settings.integerMargin + " of an integer.");
 	}

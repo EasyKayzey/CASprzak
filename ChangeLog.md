@@ -14,7 +14,8 @@
  
  ### Bugfixes
  - Fix `toInteger` error message using the wrong margin from `Settings`
-
+ - Fix bad rounding in `ParsingTools.toInteger` and `ParsingTools.isAlmostInteger`
+ 
 ## v0.1.2
 ### Bugfixes
  - Fix properties not being read on launch for binaries

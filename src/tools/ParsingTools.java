@@ -70,7 +70,7 @@ public class ParsingTools {
 	 */
 	public static int toInteger(double d) throws IllegalArgumentException{
 		if (isAlmostInteger(d))
-			return (int) (d + .5);
+			return (int) Math.round(d);
 		else
 			throw new IllegalArgumentException("Double " + d + " is not within " + Settings.integerMargin + " of an integer.");
 	}
@@ -81,7 +81,7 @@ public class ParsingTools {
 	 * @return true if the {@code double} is within {@link Settings#integerMargin} of an integer
 	 */
 	public static boolean isAlmostInteger(double d) throws IllegalArgumentException{
-		return Math.abs(((int) (d + .5)) - d) < Settings.integerMargin;
+		return Math.abs(Math.round(d) - d) < Settings.integerMargin;
 	}
 
 	/**

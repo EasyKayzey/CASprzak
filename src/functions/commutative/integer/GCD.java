@@ -26,16 +26,6 @@ public class GCD extends IntegerCommutativeFunction {
 		return new GCD(functions);
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder str = new StringBuilder("gcd(");
-		for (int i = 0; i < functions.length - 1; i++) {
-			str.append(functions[i]);
-			str.append(", ");
-		}
-		str.append(functions[functions.length - 1]);
-		return str.toString();
-	}
 
 	@Override
 	public GeneralFunction clone() {

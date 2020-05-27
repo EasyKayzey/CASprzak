@@ -41,6 +41,18 @@ public abstract class IntegerCommutativeFunction extends CommutativeFunction {
 		return operateInt(toOperate);
 	}
 
+	public String toString() {
+		StringBuilder str = new StringBuilder(this.getClass().getSimpleName().toLowerCase());
+		str.append("(");
+		for (int i = 0; i < functions.length - 1; i++) {
+			str.append(functions[i]);
+			str.append(", ");
+		}
+		str.append(functions[functions.length - 1]);
+		str.append(")");
+		return str.toString();
+	}
+
 	public double operate(double a, double b) {
 		return operateInt(ParsingTools.toInteger(a), ParsingTools.toInteger(b));
 	}

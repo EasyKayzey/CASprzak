@@ -27,17 +27,6 @@ public class LCM extends IntegerCommutativeFunction {
 	}
 
 	@Override
-	public String toString() {
-		StringBuilder str = new StringBuilder("lcm(");
-		for (int i = 0; i < functions.length - 1; i++) {
-			str.append(functions[i]);
-			str.append(", ");
-		}
-		str.append(functions[functions.length - 1]);
-		return str.toString();
-	}
-
-	@Override
 	public GeneralFunction clone() {
 		return new LCM(functions.clone());
 	}

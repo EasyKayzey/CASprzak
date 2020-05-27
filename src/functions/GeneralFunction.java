@@ -136,10 +136,8 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 	 * @param that the object that this is compared against
 	 * @return true if they're equalsSimplified
 	 */
-	public boolean equalsSimplified(Object that) {
-		if (!(that instanceof GeneralFunction))
-			return false;
-		return this.simplify().equalsFunction(((GeneralFunction) that).simplify());
+	public boolean equalsSimplified(GeneralFunction that) {
+		return this.simplify().equalsFunction(that.simplify());
 	}
 
 	/**

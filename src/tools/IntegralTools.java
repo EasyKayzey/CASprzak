@@ -23,7 +23,7 @@ public class IntegralTools {
      * @param varID the variable to strip with respect to (i.e. {@code varID='x'} would mean {@code 2y} is a constant)
      * @return A {@link Pair} of the constant function and the remaining stripped function
      */
-    public static Pair<GeneralFunction, GeneralFunction> stripConstantsRespectTo(GeneralFunction function, char varID) {
+    public static Pair<GeneralFunction, GeneralFunction> stripConstantsRespectTo(GeneralFunction function, String varID) {
         if (function instanceof Product multiply) {
             GeneralFunction[] terms = multiply.simplifyConstants().getFunctions();
             List<GeneralFunction> constants = new ArrayList<>();

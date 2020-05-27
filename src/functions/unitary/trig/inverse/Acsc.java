@@ -23,7 +23,7 @@ public class Acsc extends InverseTrigFunction {
 	}
 
 	@Override
-	public GeneralFunction getDerivative(char varID) {
+	public GeneralFunction getDerivative(String varID) {
 		return new Product(DefaultFunctions.NEGATIVE_ONE, operand.getSimplifiedDerivative(varID), DefaultFunctions.reciprocal(new Product(new Abs(operand), new Pow(DefaultFunctions.HALF, new Sum(new Pow(DefaultFunctions.TWO, operand), DefaultFunctions.NEGATIVE_ONE)))));
 	}
 
@@ -34,7 +34,7 @@ public class Acsc extends InverseTrigFunction {
 	 */
 	@SuppressWarnings("RedundantSuppression")
 	@Override
-	public double evaluate(Map<Character, Double> variableValues) {
+	public double evaluate(Map<String, Double> variableValues) {
 		double functionEvaluated = operand.evaluate(variableValues);
 		if (functionEvaluated > 1) {
 			//noinspection DuplicateExpressions

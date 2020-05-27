@@ -22,7 +22,7 @@ public class Asinh extends InverseTrigFunction {
 	}
 
 	@Override
-	public GeneralFunction getDerivative(char varID) {
+	public GeneralFunction getDerivative(String varID) {
 		return new Product(operand.getSimplifiedDerivative(varID), new Pow(DefaultFunctions.NEGATIVE_HALF, new Sum(DefaultFunctions.ONE, new Pow(DefaultFunctions.TWO, operand))));
 	}
 
@@ -32,7 +32,7 @@ public class Asinh extends InverseTrigFunction {
 	 * @return the arcsinh of {@link #operand} evaluated
 	 */
 	@Override
-	public double evaluate(Map<Character, Double> variableValues) {
+	public double evaluate(Map<String, Double> variableValues) {
 		double functionEvaluated = operand.evaluate(variableValues);
 		return Math.log(functionEvaluated + Math.sqrt(functionEvaluated * functionEvaluated + 1));
 	}

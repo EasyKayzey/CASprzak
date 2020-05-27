@@ -25,12 +25,12 @@ public class Pow extends BinaryFunction {
 	}
 
 	@Override
-	public double evaluate(Map<Character, Double> variableValues) {
+	public double evaluate(Map<String, Double> variableValues) {
 		return Math.pow(function2.evaluate(variableValues), function1.evaluate(variableValues));
 	}
 
 	@Override
-	public GeneralFunction getDerivative(char varID) {
+	public GeneralFunction getDerivative(String varID) {
 		if (function1 instanceof Constant exponent)
 			return new Product(new Constant(exponent.constant), new Pow(new Constant(exponent.constant - 1), function2), function2.getSimplifiedDerivative(varID));
 		else if (VariableTools.doesNotContainsVariable(function1, varID))

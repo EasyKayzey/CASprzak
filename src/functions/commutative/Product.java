@@ -23,7 +23,7 @@ public class Product extends CommutativeFunction {
 		super(functions);
 	}
 
-	public double evaluate(Map<Character, Double> variableValues) {
+	public double evaluate(Map<String, Double> variableValues) {
 		double accumulator = getIdentityValue();
 		for (GeneralFunction f : functions)
 			accumulator *= f.evaluate(variableValues);
@@ -31,7 +31,7 @@ public class Product extends CommutativeFunction {
 	}
 
 	@Override
-	public GeneralFunction getDerivative(char varID) {
+	public GeneralFunction getDerivative(String varID) {
 		GeneralFunction[] toAdd = new GeneralFunction[functions.length];
 		for (int i = 0; i < toAdd.length; i++) {
 			GeneralFunction[] toMultiply = Arrays.copyOf(functions, functions.length);

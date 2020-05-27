@@ -25,7 +25,7 @@ public abstract class IntegerBinaryFunction extends BinaryFunction {
 
 
 	@Override
-	public GeneralFunction getDerivative(char varID) {
+	public GeneralFunction getDerivative(String varID) {
 		if (VariableTools.doesNotContainsVariable(function1, varID) && VariableTools.doesNotContainsVariable(function2, varID))
 			return DefaultFunctions.ZERO;
 		else
@@ -33,7 +33,7 @@ public abstract class IntegerBinaryFunction extends BinaryFunction {
 	}
 
 	@Override
-	public double evaluate(Map<Character, Double> variableValues) {
+	public double evaluate(Map<String, Double> variableValues) {
 		if (!Settings.enforceIntegerOperations)
 			throw new IllegalStateException("IntegerBinaryFunctions cannot be used if Settings.enforceIntegerOperations is not enabled.");
 		double a = function1.evaluate(variableValues);

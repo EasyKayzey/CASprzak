@@ -55,12 +55,12 @@ public class PartialDerivative extends Transformation {
 	}
 
 	@Override
-	public GeneralFunction getDerivative(char varID) {
+	public GeneralFunction getDerivative(String varID) {
 		return new PartialDerivative(operand.getSimplifiedDerivative(varID), respectToChar);
 	}
 
 	@Override
-	public double evaluate(Map<Character, Double> variableValues) {
+	public double evaluate(Map<String, Double> variableValues) {
 		return operand.getSimplifiedDerivative(respectToChar).evaluate(variableValues);
 	}
 

@@ -22,7 +22,7 @@ public class Acot extends InverseTrigFunction {
 	}
 
 	@Override
-	public GeneralFunction getDerivative(char varID) {
+	public GeneralFunction getDerivative(String varID) {
 		return new Product(DefaultFunctions.NEGATIVE_ONE, operand.getSimplifiedDerivative(varID), DefaultFunctions.reciprocal(new Sum(DefaultFunctions.ONE, new Pow(DefaultFunctions.TWO, operand))));
 	}
 
@@ -32,7 +32,7 @@ public class Acot extends InverseTrigFunction {
 	 * @return the arccot of {@link #operand} evaluated
 	 */
 	@Override
-	public double evaluate(Map<Character, Double> variableValues) {
+	public double evaluate(Map<String, Double> variableValues) {
 		double functionEvaluated = operand.evaluate(variableValues);
 		if (functionEvaluated < 0) {
 			return -0.5 * Math.PI - Math.atan(functionEvaluated);

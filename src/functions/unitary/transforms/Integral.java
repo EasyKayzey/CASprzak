@@ -71,7 +71,7 @@ public class Integral extends Transformation {
 	}
 
 	@Override
-	public GeneralFunction getDerivative(char varID) {
+	public GeneralFunction getDerivative(String varID) {
 		if (varID == respectToChar)
 			return operand;
 		else
@@ -84,7 +84,7 @@ public class Integral extends Transformation {
 	 * @return the operand integrated numerically
 	 */
 	@Override
-	public double evaluate(Map<Character, Double> variableValues) {
+	public double evaluate(Map<String, Double> variableValues) {
 		Map<Character, Double> newMap = new HashMap<>(variableValues);
 		double bound = newMap.remove(respectToChar);
 		return NumericalIntegration.simpsonsRule(operand.setVariables(newMap), 0, bound);

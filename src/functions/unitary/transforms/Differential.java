@@ -1,5 +1,6 @@
 package functions.unitary.transforms;
 
+import functions.Evaluable;
 import functions.GeneralFunction;
 import functions.special.Variable;
 import functions.unitary.UnitaryFunction;
@@ -9,7 +10,7 @@ import java.util.Map;
 
 /**
  * The {@link Differential} class is used as an intermediary for operations related to parsing derivatives and integrals.
- * Operations such as {@link #execute} and {@link #evaluate(Map)} are NOT SUPPORTED, as all instances of this class should be converted to other transforms before evaluation.
+ * Operations such as {@link #execute} and {@link Evaluable#evaluate(Map)} are NOT SUPPORTED, as all instances of this class should be converted to other transforms before evaluation.
  * If evaluation or execution of this class is ever attempted by the CAS, please raise an issue on the <a href="https://github.com/EasyKayzey/CASprzak/">GitHub repository</a>.
  */
 public class Differential extends Transformation {
@@ -70,9 +71,10 @@ public class Differential extends Transformation {
 	 * Evaluation is not supported by this class, as it is purely an intermediary
 	 * @return nothing, because this method will always throw an error
 	 * @throws DerivativeDoesNotExistException whenever this method is called
+	 * @param varID
 	 */
 	@Override
-	public GeneralFunction getDerivative(char varID) {
+	public GeneralFunction getDerivative(String varID) {
 		throw new DerivativeDoesNotExistException(this);
 	}
 
@@ -80,9 +82,10 @@ public class Differential extends Transformation {
 	 * Differentiation is not supported by this class, as it is purely an intermediary
 	 * @return nothing, because this method will always throw an error
 	 * @throws UnsupportedOperationException whenever this method is called
+	 * @param variableValues
 	 */
 	@Override
-	public double evaluate(Map<Character, Double> variableValues) {
+	public double evaluate(Map<String, Double> variableValues) {
 		throw new UnsupportedOperationException("Cannot evaluate a differential " + this);
 	}
 

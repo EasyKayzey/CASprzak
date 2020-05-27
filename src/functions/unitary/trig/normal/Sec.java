@@ -27,12 +27,12 @@ public class Sec extends TrigFunction {
 	 * @return the sec of {@link #operand} evaluated
 	 */
 	@Override
-	public double evaluate(Map<Character, Double> variableValues) {
+	public double evaluate(Map<String, Double> variableValues) {
 		return 1 / Math.cos(operand.evaluate(variableValues));
 	}
 
 	@Override
-	public GeneralFunction getDerivative(char varID) {
+	public GeneralFunction getDerivative(String varID) {
 		return new Product(new Tan(operand), new Sec(operand), operand.getSimplifiedDerivative(varID));
 	}
 

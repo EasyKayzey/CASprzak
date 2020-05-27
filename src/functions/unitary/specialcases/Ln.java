@@ -21,12 +21,12 @@ public class Ln extends SpecialCaseBinaryFunction {
 	}
 
 	@Override
-	public double evaluate(Map<Character, Double> variableValues) {
+	public double evaluate(Map<String, Double> variableValues) {
 		return Math.log(operand.evaluate(variableValues));
 	}
 
 	@Override
-	public GeneralFunction getDerivative(char varID) {
+	public GeneralFunction getDerivative(String varID) {
 		return new Product(operand.getSimplifiedDerivative(varID), DefaultFunctions.reciprocal(operand));
 	}
 

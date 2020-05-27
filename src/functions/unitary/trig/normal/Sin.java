@@ -25,12 +25,12 @@ public class Sin extends TrigFunction {
 	 * @return the sin of {@link #operand} evaluated
 	 */
 	@Override
-	public double evaluate(Map<Character, Double> variableValues) {
+	public double evaluate(Map<String, Double> variableValues) {
 		return Math.sin(operand.evaluate(variableValues));
 	}
 
 	@Override
-	public GeneralFunction getDerivative(char varID) {
+	public GeneralFunction getDerivative(String varID) {
 		return new Product(new Cos(operand), operand.getSimplifiedDerivative(varID));
 	}
 

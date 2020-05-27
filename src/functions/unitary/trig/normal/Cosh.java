@@ -24,12 +24,12 @@ public class Cosh extends TrigFunction {
 	 * @return the cosh of {@link #operand} evaluated
 	 */
 	@Override
-	public double evaluate(Map<Character, Double> variableValues) {
+	public double evaluate(Map<String, Double> variableValues) {
 		return Math.cosh(operand.evaluate(variableValues));
 	}
 
 	@Override
-	public GeneralFunction getDerivative(char varID) {
+	public GeneralFunction getDerivative(String varID) {
 		return new Product(new Sinh(operand), operand.getSimplifiedDerivative(varID));
 	}
 

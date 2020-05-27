@@ -24,12 +24,12 @@ public class Sinh extends TrigFunction {
 	 * @return the sinh of {@link #operand} evaluated
 	 */
 	@Override
-	public double evaluate(Map<Character, Double> variableValues) {
+	public double evaluate(Map<String, Double> variableValues) {
 		return Math.sin(operand.evaluate(variableValues));
 	}
 
 	@Override
-	public GeneralFunction getDerivative(char varID) {
+	public GeneralFunction getDerivative(String varID) {
 		return new Product(new Cosh(operand), operand.getSimplifiedDerivative(varID));
 	}
 

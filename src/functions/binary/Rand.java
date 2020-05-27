@@ -31,12 +31,12 @@ public class Rand extends BinaryFunction {
     }
 
     @Override
-    public GeneralFunction getDerivative(char varID) {
+    public GeneralFunction getDerivative(String varID) {
         throw new DerivativeDoesNotExistException(this);
     }
 
     @Override
-    public double evaluate(Map<Character, Double> variableValues) {
+    public double evaluate(Map<String, Double> variableValues) {
         double lowerBoundEvaluated = function2.evaluate(variableValues);
         return lowerBoundEvaluated + (function1.evaluate(variableValues) - lowerBoundEvaluated) * Math.random();
     }

@@ -10,36 +10,36 @@ public class Variable extends SpecialFunction {
 	/**
 	 * The character representing this variable
 	 */
-	public final char varIDChar;
+	public final String varID;
 
 	/**
 	 * Constructs a new {@link Variable}
 	 * @param varID The variable's representative character
 	 */
-	public Variable(char varID) {
-		this.varIDChar = varID;
+	public Variable(String varID) {
+		this.varID = varID;
 	}
 
 
 	public String toString() {
-		return String.valueOf(varIDChar);
+		return varID;
 	}
 
 
-	public GeneralFunction getDerivative(char varID) {
-		return new Constant(this.varIDChar == varID ? 1 : 0);
+	public GeneralFunction getDerivative(String varID) {
+		return new Constant(this.varID.equals(varID) ? 1 : 0);
 	}
 
-	public double evaluate(Map<Character, Double> variableValues) {
-		if (!variableValues.containsKey(varIDChar))
-			throw new NoSuchElementException("No value was assigned to variable " + varIDChar);
+	public double evaluate(Map<String, Double> variableValues) {
+		if (!variableValues.containsKey(varID))
+			throw new NoSuchElementException("No value was assigned to variable " + varID);
 		else
-			return variableValues.get(varIDChar);
+			return variableValues.get(varID);
 	}
 
 
 	public GeneralFunction clone() {
-		return new Variable(varIDChar);
+		return new Variable(varID);
 	}
 
 	public GeneralFunction simplify() {
@@ -48,14 +48,14 @@ public class Variable extends SpecialFunction {
 
 
 	public boolean equalsFunction(GeneralFunction that) {
-		return (that instanceof Variable variable) && (varIDChar == variable.varIDChar);
+		return (that instanceof Variable variable) && (varID.equals(variable.varID));
 	}
 
 	public int compareSelf(GeneralFunction that) {
-		return this.varIDChar - ((Variable) that).varIDChar;
+		return this.varID.compareTo(((Variable) that).varID);
 	}
 
 	public int hashCode() {
-		return Character.hashCode(varIDChar);
+		return varID.hashCode();
 	}
 }

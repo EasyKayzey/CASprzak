@@ -90,7 +90,7 @@ public class ParsingTools {
      * @return the character represented by the string
      * @throws IllegalArgumentException if the input is not in one of the formats specified above
      */
-    public static String getCharacter(String input) {
+    public static String getCharacter(String input) {//TODO Erez look at this
     	if (!Settings.enforceEscapes)
     		input = LatexReplacer.addEscapes(input);
     	input = LatexReplacer.encodeGreek(input);

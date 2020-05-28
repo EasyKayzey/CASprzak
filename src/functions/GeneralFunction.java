@@ -3,11 +3,13 @@ package functions;
 import config.Settings;
 import functions.binary.Logb;
 import functions.binary.Pow;
+import functions.binary.integer.IntegerBinaryFunction;
 import functions.commutative.Product;
 import functions.commutative.Sum;
+import functions.commutative.integer.IntegerCommutativeFunction;
 import functions.special.Constant;
 import functions.special.Variable;
-import functions.unitary.integer.combo.Factorial;
+import functions.unitary.integer.IntegerUnitaryFunction;
 import functions.unitary.piecewise.PiecewiseFunction;
 import functions.unitary.specialcases.SpecialCaseBinaryFunction;
 import functions.unitary.transforms.Transformation;
@@ -39,7 +41,9 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 			Pow.class,
 			Logb.class,
 			PiecewiseFunction.class,
-			Factorial.class,
+			IntegerCommutativeFunction.class,
+			IntegerBinaryFunction.class,
+			IntegerUnitaryFunction.class,
 			SpecialCaseBinaryFunction.class,
 			Transformation.class,
 			InverseTrigFunction.class,

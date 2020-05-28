@@ -130,6 +130,8 @@ public class KeywordInterface {
 	 * @return a {@link GeneralFunction}
 	 */
 	public static GeneralFunction parseStored(String input) {
+		input = stripQuotes(input);
+
 		if ("_".equals(input))
 			return ParsingTools.toFunction(prev);
 

@@ -25,12 +25,13 @@ public class InfixTokenizer {
 	);
 	private static final Pattern subtractionFinder = Pattern.compile(
 			"(?<!^)(?<!E)" +										// Ensures not preceded by newline or E
-			"(?<![\\^\\-+*/\\s({])\\s*-"							// Ensures not preceded by an operation or (, then matches - signs and all spaces preceding
+			"(?<![\\^\\-%+*,/\\s({])\\s*-"							// Ensures not preceded by an infix operation, comma, or (, then matches - signs and all spaces preceding
 	);
 	private static final Pattern openParen = Pattern.compile("\\(");
 	private static final Pattern closeParen = Pattern.compile("\\)");
 	private static final Pattern plus = Pattern.compile("\\+");
 	private static final Pattern times = Pattern.compile("\\*");
+	private static final Pattern modulo = Pattern.compile("%");
 	private static final Pattern infixSplitter = Pattern.compile(
 			"\\s+|(?<!\\s)(" + 										// Splits on spaces, and ensured spaces are not including in following splits
 			"(?<=!)|(?=!)" +										// Splits if preceded or followed by !
@@ -85,9 +86,11 @@ public class InfixTokenizer {
 		// Replace curly braces parentheses
 		infix = infix.replace("{", "(").replace("}", ")");
 		// Replaces underscores with spaces
-		infix = infix.replace("_", " ");
+		infix = infix.replace("_", " ").replace(",", ") (");
 		// Adds parentheses to enforce order of operations
 		infix = "((((" + times.matcher(plus.matcher(closeParen.matcher(openParen.matcher(infix).replaceAll("((((")).replaceAll("))))")).replaceAll("))+((")).replaceAll(")*(") + "))))";
+		// Adds parentheses to lower modulo precedence below multiplication
+		infix = modulo.matcher(infix).replaceAll("))%((");
 		// Splits infix into tokens
 		return infixSplitter.splitAsStream(infix).collect(Collectors.toCollection(LinkedList::new));
 	}

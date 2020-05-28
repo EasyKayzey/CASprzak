@@ -186,4 +186,29 @@ public class FunctionTest {
 		GeneralFunction test = FunctionParser.parseInfix("\\exp(\\ln(x))");
 		assertEquals(4, test.evaluate(Map.of("x", 4.0)), .01);
 	}
+
+	@Test void gcd() {
+		GeneralFunction test = FunctionParser.parseSimplified("\\gcd(2, -4)");
+		assertEquals(2, test.evaluate(Map.of()));
+	}
+
+	@Test void lcm() {
+		GeneralFunction test = FunctionParser.parseSimplified("\\lcm(2,-4)");
+		assertEquals(-4, test.evaluate(Map.of()));
+	}
+
+	@Test void mod() {
+		GeneralFunction test = FunctionParser.parseSimplified("-4%3");
+		assertEquals(-1, test.evaluate(Map.of()));
+	}
+
+	@Test void floor() {
+		GeneralFunction test = FunctionParser.parseSimplified("floor(2.5)");
+		assertEquals(2, test.evaluate(Map.of()));
+	}
+
+	@Test void ceil() {
+		GeneralFunction test = FunctionParser.parseSimplified("ceil(2.5)");
+		assertEquals(3, test.evaluate(Map.of()));
+	}
 }

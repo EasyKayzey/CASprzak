@@ -47,13 +47,14 @@ public class IntegerTest {
     void gcd() {
         assertEquals(new Constant(4), new GCD(new Constant(4), new Constant(196), new Constant(80)).simplify());
         assertEquals(4, new GCD(new Constant(4), new Constant(196), new Constant(80)).evaluate(Map.of()));
+        assertEquals(4, new GCD(new Constant(4), new Constant(-196), new Constant(80)).evaluate(Map.of()));
     }
-
 
     @Test
     void lcm() {
         assertEquals(new Constant(3920), new LCM(new Constant(4), new Constant(196), new Constant(80)).simplify());
         assertEquals(3920, new LCM(new Constant(4), new Constant(196), new Constant(80)).evaluate(Map.of()));
+        assertEquals(-3920, new LCM(new Constant(4), new Constant(-196), new Constant(-80)).evaluate(Map.of()));
     }
 
     @Test

@@ -148,7 +148,7 @@ public class KeywordInterface {
 	 */
 	public static GeneralFunction substituteAll(GeneralFunction function) {
 		for (Map.Entry<String, GeneralFunction>  entry : storedFunctions.entrySet())
-			function = function.substituteVariable(ParsingTools.getCharacter(entry.getKey()), entry.getValue());
+			function = function.substituteVariable(LatexReplacer.encodeAll(entry.getKey()), entry.getValue());
 		return function;
 	}
 
@@ -168,12 +168,12 @@ public class KeywordInterface {
 
 	private static GeneralFunction partialDiff(String input) {
 		String[] splitInput = spaces.split(input, 2);
-		return parseStored(splitInput[1]).getSimplifiedDerivative(ParsingTools.getCharacter(splitInput[0]));
+		return parseStored(splitInput[1]).getSimplifiedDerivative(LatexReplacer.encodeAll(splitInput[0]));
 	}
 
 	private static GeneralFunction partialDiffNth(String input) {
 		String[] splitInput = spaces.split(input, 3);
-		return parseStored(splitInput[2]).getNthDerivative(ParsingTools.getCharacter(splitInput[0]), Integer.parseInt(splitInput[1]));
+		return parseStored(splitInput[2]).getNthDerivative(LatexReplacer.encodeAll(splitInput[0]), Integer.parseInt(splitInput[1]));
 	}
 
 	private static double evaluate(String input) {
@@ -184,7 +184,7 @@ public class KeywordInterface {
 			return parseStored(splitInput[0]).evaluate(
 					Arrays.stream(keywordSplitter.split(splitInput[1]))
 					.map(equals::split)
-					.collect(Collectors.toMap(e -> ParsingTools.getCharacter(e[0]), e -> ParsingTools.getConstant(e[1])))
+					.collect(Collectors.toMap(e -> LatexReplacer.encodeAll(e[0]), e -> ParsingTools.getConstant(e[1])))
 			);
 	}
 
@@ -195,7 +195,7 @@ public class KeywordInterface {
 
 	private static GeneralFunction substitute(String input) {
 		String[] splitInput = keywordSplitter.split(input);
-		return parseStored(splitInput[0]).substituteVariable(ParsingTools.getCharacter(splitInput[1]), parseStored(splitInput[2]));
+		return parseStored(splitInput[0]).substituteVariable(LatexReplacer.encodeAll(splitInput[1]), parseStored(splitInput[2]));
 	}
 
 	private static Object substituteSimplify(String input) {

@@ -38,7 +38,6 @@ public class DifferentialTest {
 	void integralNullException() {
 		Integral test = new Integral(parseSimplified("x"));
 		assertThrows(Exception.class, test::execute);
-		assertThrows(Exception.class, () -> test.substituteVariable("x", parseSimplified("y")));
 		test.simplify();
 	}
 

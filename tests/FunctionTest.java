@@ -208,7 +208,7 @@ public class FunctionTest {
 	}
 
 	@Test void ceil() {
-		GeneralFunction test = FunctionParser.parseSimplified("floor(2.5)");
+		GeneralFunction test = FunctionParser.parseSimplified("ceil(2.5)");
 		assertEquals(3, test.evaluate(Map.of()));
 	}
 }

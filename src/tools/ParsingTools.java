@@ -90,6 +90,7 @@ public class ParsingTools {
      * @return the character represented by the string
      * @throws IllegalArgumentException if the input is not in one of the formats specified above
      */
+	@SuppressWarnings("unused")
 	public static char getCharacter(String input) {
 		input = LatexReplacer.encodeAll(input);
 		if (input.length() == 1)

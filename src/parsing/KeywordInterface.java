@@ -313,6 +313,8 @@ public class KeywordInterface {
 
 	private static GeneralFunction integral(String input) {
 		String[] splitInput = keywordSplitter.split(input);
+		if (splitInput[1].charAt(0) != 'd')
+			throw new IllegalArgumentException(splitInput[1] + " is not a differential (does not start with d).");
 		Integral integral = new Integral(parseStored(splitInput[0]), splitInput[1].substring(1));
 		try {
 			return integral.execute();

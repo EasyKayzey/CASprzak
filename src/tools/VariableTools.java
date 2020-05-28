@@ -16,8 +16,8 @@ public class VariableTools {
 	private VariableTools(){}
 
 	/**
-	 * Returns a {@link Predicate} of {@link GeneralFunction} describing whether a given {@link GeneralFunction} is an instance of {@link Variable} with {@code varID} equal to the specified character
-	 * @param varID the character of the variable to be checked for
+	 * Returns a {@link Predicate} of {@link GeneralFunction} describing whether a given {@link GeneralFunction} is an instance of {@link Variable} with {@code varID} equal to the specified String
+	 * @param varID the String of the variable to be checked for
 	 * @return the predicate described above
 	 */
 	public static Predicate<GeneralFunction> isVariable(String varID) {
@@ -25,9 +25,9 @@ public class VariableTools {
 	}
 
 	/**
-	 * Returns a set of characters representing the characters of all variables used in this function
+	 * Returns a set of Strings representing the Strings of all variables used in this function
 	 * @param input the function to be tested
-	 * @return the set of variable characters
+	 * @return the set of variable Strings
 	 */
 	public static Set<String> getAllVariables(GeneralFunction input) {
 		Set<String> vars = new HashSet<>();
@@ -36,9 +36,9 @@ public class VariableTools {
 	}
 
 	/**
-	 * If the input is in terms of only one variable, returns that variable's character; otherwise, returns {@link Settings#singleVariableDefault}
+	 * If the input is in terms of only one variable, returns that variable's String; otherwise, returns {@link Settings#singleVariableDefault}
 	 * @param input the function to be read from
-	 * @return the variable character requested
+	 * @return the variable String requested
 	 */
 	public static String getSingleVariable(GeneralFunction input) {
 		Set<String> vars = getAllVariables(input);

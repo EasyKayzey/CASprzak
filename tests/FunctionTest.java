@@ -201,4 +201,14 @@ public class FunctionTest {
 		GeneralFunction test = FunctionParser.parseSimplified("-4%3");
 		assertEquals(-1, test.evaluate(Map.of()));
 	}
+
+	@Test void floor() {
+		GeneralFunction test = FunctionParser.parseSimplified("floor(2.5)");
+		assertEquals(2, test.evaluate(Map.of()));
+	}
+
+	@Test void ceil() {
+		GeneralFunction test = FunctionParser.parseSimplified("floor(2.5)");
+		assertEquals(3, test.evaluate(Map.of()));
+	}
 }

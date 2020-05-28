@@ -8,13 +8,13 @@ import java.util.*;
 public class Variable extends SpecialFunction {
 
 	/**
-	 * The character representing this variable
+	 * The String representing this variable
 	 */
 	public final String varID;
 
 	/**
 	 * Constructs a new {@link Variable}
-	 * @param varID The variable's representative character
+	 * @param varID The variable's representative String
 	 */
 	public Variable(String varID) {
 		this.varID = varID;

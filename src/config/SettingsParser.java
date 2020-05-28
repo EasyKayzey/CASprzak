@@ -37,6 +37,7 @@ public class SettingsParser {
 			case "defaultRangeSections" 					-> Settings.defaultRangeSections = Integer.parseInt(value);
 			case "simpsonsSegments" 						-> Settings.simpsonsSegments = Integer.parseInt(value);
 			case "singleVariableDefault" 					-> Settings.singleVariableDefault = value;
+			case "maxEscapeLength" 							-> Settings.maxEscapeLength = Integer.parseInt(value);
 			case "zeroMargin" 								-> Settings.zeroMargin = Double.parseDouble(value);
 			case "integerMargin" 							-> Settings.integerMargin = Double.parseDouble(value);
 			case "equalsMargin" 							-> Settings.equalsMargin = Double.parseDouble(value);

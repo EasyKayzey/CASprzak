@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import static config.Settings.maxEscapeLength;
+
 /**
  * {@link InfixTokenizer} modifies and tokenizes infix into a format supported by {@link FunctionParser}.
  */
@@ -45,13 +47,13 @@ public class InfixTokenizer {
 			"|(?<=[A-Za-z(])(?=\\.))"								// Splits if preceded by a letter or open parenthesis and followed by a dot
 	);
 	private static final Pattern characterPairsToMultiply = Pattern.compile(
-			"(?<!\\\\[a-zA-Z]{0,15})" +								// Ensures that the character is not LaTeX-escaped (up to 15 characters)
+			"(?<!\\\\[a-zA-Z]{0," + maxEscapeLength + "})" +		// Ensures that the character is not LaTeX-escaped (up to Settings.maxEscapeLength characters)
 			"(?<![CEP])(?![CEP])" +									// Ensures the spaces before and after C, E, and P are not matched
 			"(?<!logb_\\w)" +										// Ensures not preceded by logb
 			"((?<!\\d)|(?!\\d))" +									// Ensures that spaces both preceded and followed by a digit are not matched
 			"((?<=[a-zA-Z)\\d])|(?<=[^\\x00-\\x7F]))" +				// Preceded by a digit, alphabetic char, or non-ascii character
 			"\\s*" + 												// Allows for spaces
-			"((?=[a-zA-Z\\\\(\\d])|(?=[^\\x00-\\x7F]))" 			// Followed by a digit, alphabetic char, or non-ascii character
+			"((?=[a-zA-Z\\\\(\\d])|(?=[^\\x00-\\x7F]))" 			// Followed by a digit, alphabetic char, open-parenthesis, or non-ascii character
 	);
 	private static final Pattern differential = Pattern.compile(
 			"\\\\d(?=[a-zA-Z\\x00-\\x7F])"

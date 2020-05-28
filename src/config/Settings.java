@@ -37,6 +37,11 @@ public class Settings {
 	 */
 	public static int simpsonsSegments = 500;
 
+	/*
+	 * The maximum length that a LaTeX escape extends before expiring. This setting can only be changed through the config; modifying it during runtime will not do anything.
+	 */
+	public static int maxEscapeLength = 6;
+
 	/**
 	 * The variable to be used in {@link tools.singlevariable} when none is specified
 	 */

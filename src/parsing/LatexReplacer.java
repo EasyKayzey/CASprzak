@@ -1,5 +1,7 @@
 package parsing;
 
+import config.Settings;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -72,6 +74,18 @@ public class LatexReplacer {
 	private static final Pattern hb  = Pattern.compile("\\\\hbar");
 	private static final Pattern par = Pattern.compile("\\\\par(tial)?");
 	private static final Pattern dx  = Pattern.compile("(?<![\\\\/])(?=d[a-ce-zA-Z](?![a-zA-Z]))");
+
+	/**
+	 * Performs all of the methods in this class on the input according to the settings in {@link Settings}
+	 * @param input the input to be encoded
+	 * @return the encoded input
+	 */
+	public static String encodeAll(String input) {
+		if (!Settings.enforceEscapes)
+			input = LatexReplacer.addEscapes(input);
+		input = LatexReplacer.encodeGreek(input);
+		return input;
+	}
 
 	/**
 	 * Replaces LaTeX-escaped Greek letters in a string with their actual letter characters

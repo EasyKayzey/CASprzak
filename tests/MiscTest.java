@@ -46,4 +46,10 @@ public class MiscTest {
 		assertEquals(FunctionParser.parseSimplified("x+y").hashCode(), FunctionParser.parseSimplified("y+x").hashCode());
 		assertEquals(FunctionParser.parseSimplified("\\sec(x)*\\tan(x)*(5*(\\sec(x))^2+(\\tan(x))^2)").hashCode(), FunctionParser.parseSimplified("(5*(\\sec(x))^2+(\\tan(x))^2)*\\sec(x)*\\tan(x)").hashCode());
 	}
+
+	@Test
+	void rounding() {
+		assertTrue(ParsingTools.isAlmostInteger(-186.000000000000000001));
+		assertEquals(-186, ParsingTools.toInteger(-186.00000000000000001));
+	}
 }

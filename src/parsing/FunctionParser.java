@@ -48,28 +48,28 @@ public class FunctionParser {
 				functionStack.push(new Constant(token));
 			} else if (binaryOperations.containsKey(token)) {
 				if (functionStack.size() < 2)
-					throw new NoSuchElementException("Tried to pop two elements for " + token + ", but not enough elements exist. Parsing: " + postfix + ". Current stack: " + functionStack + ".");
+					throw new NoSuchElementException("Tried to pop two elements for token '" + token + "', but not enough elements exist. Parsing postfix: " + postfix + ". Current stack: " + functionStack + ".");
 				GeneralFunction a = functionStack.pop();
 				GeneralFunction b = functionStack.pop();
 				functionStack.push(binaryOperations.get(token).construct(b, a));
 			} else if (unitaryOperations.containsKey(token)) {
 				if (functionStack.size() < 1)
-					throw new NoSuchElementException("Tried to pop an element for " + token + ", but not the stack is empty. Parsing: " + postfix + ".");
+					throw new NoSuchElementException("Tried to pop an element for token '" + token + "', but the stack is empty. Parsing postfix: " + postfix + ".");
 				GeneralFunction c = functionStack.pop();
 				functionStack.push(unitaryOperations.get(token).construct(c));
-			} else {
-				try {
-					functionStack.push(new Constant(Double.parseDouble(token)));
-				} catch (NumberFormatException e) {
-					functionStack.push(new Variable(ParsingTools.getCharacter(token)));
-				}
+			} else try {
+				functionStack.push(new Constant(Double.parseDouble(token)));
+			} catch (NumberFormatException e) {
+				functionStack.push(new Variable(ParsingTools.getCharacter(token)));
 			}
 		}
 
-		if (functionStack.size() != 1)
-			throw new IndexOutOfBoundsException("Stack has more than one function at end of parsing. Parsing: " + postfix + ". Current stack: " + functionStack + ".");
-
-		return functionStack.pop();
+		if (functionStack.size() < 1)
+			throw new IndexOutOfBoundsException("Stack is empty at end of parsing, so there is nothing to return. Parsed postfix: " + postfix + ".");
+		else if (functionStack.size() > 1)
+			throw new IndexOutOfBoundsException("Stack has more than one function at end of parsing. Parsed postfix: " + postfix + ". Current stack: " + functionStack + ".");
+		else
+			return functionStack.pop();
 	}
 
 	/**

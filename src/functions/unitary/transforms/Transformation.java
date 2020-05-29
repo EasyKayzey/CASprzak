@@ -10,16 +10,16 @@ import tools.exceptions.TransformFailedException;
  */
 public abstract class Transformation extends UnitaryFunction {
 	/**
-	 * The character of the variable that the {@link Transformation} is with respect to
+	 * The String of the variable that the {@link Transformation} is with respect to
 	 */
-	public final Character respectTo;
+	public final String respectTo;
 
 	/**
 	 * Constructs a new {@link Transformation}
 	 * @param operand the operand of the {@link Transformation}
 	 * @param respectTo the variable that the {@link Transformation} operates with respect to
 	 */
-	public Transformation(GeneralFunction operand, Character respectTo) {
+	public Transformation(GeneralFunction operand, String respectTo) {
 		super(operand);
 		this.respectTo = respectTo;
 	}
@@ -50,7 +50,7 @@ public abstract class Transformation extends UnitaryFunction {
 	 * Returns the variable that this transform works with respect to
 	 * @return the variable that this transform works with respect to
 	 */
-	public char getRespectTo() {
+	public String getRespectTo() {
 		return respectTo;
 	}
 }

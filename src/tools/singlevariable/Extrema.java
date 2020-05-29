@@ -70,7 +70,7 @@ public class Extrema {
     }
 
     private static double findExtremumOnRange(GeneralFunction function, double lowerBound, double upperBound, BiPredicate<? super Double, ? super Double> strategy, double extremum) {
-        char var = VariableTools.getSingleVariable(function);
+        String var = VariableTools.getSingleVariable(function);
         if (Double.isNaN(extremum))
             extremum = lowerBound;
         else if (strategy.test(function.evaluate(Map.of(var, lowerBound)), function.evaluate(Map.of(var, extremum))))
@@ -115,7 +115,7 @@ public class Extrema {
     }
 
     private static List<Double> findPoints(GeneralFunction function, double lowerBound, double upperBound, BiPredicate<? super Double, ? super Double> strategy) {
-        char var = VariableTools.getSingleVariable(function);
+        String var = VariableTools.getSingleVariable(function);
         List<Double> criticalPoints = Solver.getSolutionsRange(function.getSimplifiedDerivative(var), lowerBound, upperBound);
         if (criticalPoints.size() == 0)
             return new ArrayList<>();
@@ -129,7 +129,7 @@ public class Extrema {
     }
 
     private static double findSmallestOrLargest(GeneralFunction function, List<Double> numbers, BiPredicate<? super Double, ? super Double> strategy) {
-        char var = VariableTools.getSingleVariable(function);
+        String var = VariableTools.getSingleVariable(function);
         if (numbers.size() == 0)
             return Double.NaN;
         else if (numbers.size() == 1)

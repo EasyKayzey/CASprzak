@@ -23,7 +23,7 @@ public class Coth extends TrigFunction {
 	}
 
 	@Override
-	public GeneralFunction getDerivative(char varID) {
+	public GeneralFunction getDerivative(String varID) {
 		return new Product(DefaultFunctions.NEGATIVE_ONE, operand.getSimplifiedDerivative(varID), new Pow(DefaultFunctions.TWO, new Csch(operand)));
 	}
 
@@ -33,7 +33,7 @@ public class Coth extends TrigFunction {
 	 * @return the coth of {@link #operand} evaluated
 	 */
 	@Override
-	public double evaluate(Map<Character, Double> variableValues) {
+	public double evaluate(Map<String, Double> variableValues) {
 		return 1 / Math.tanh(operand.evaluate(variableValues));
 	}
 

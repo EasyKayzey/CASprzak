@@ -4,11 +4,11 @@ import config.Settings;
 import functions.GeneralFunction;
 import functions.special.Constant;
 import functions.special.Variable;
-import tools.ParsingTools;
 
 import java.util.*;
 
-import static parsing.OperationMaps.*;
+import static parsing.OperationMaps.binaryOperations;
+import static parsing.OperationMaps.unitaryOperations;
 
 /**
  * {@link FunctionParser} provides the central methods to execute the conversion of a function from a user-inputted string to an instance of {@link GeneralFunction}.
@@ -60,7 +60,7 @@ public class FunctionParser {
 			} else try {
 				functionStack.push(new Constant(Double.parseDouble(token)));
 			} catch (NumberFormatException e) {
-				functionStack.push(new Variable(ParsingTools.getCharacter(token)));
+				functionStack.push(new Variable(LatexReplacer.encodeAll(token)));
 			}
 		}
 

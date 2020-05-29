@@ -22,7 +22,7 @@ public class Integral extends Transformation {
 	 * @param integrand The integrand of the {@link Integral}
 	 * @param respectTo The variable that the {@link Integral} is with respect to
 	 */
-	public Integral(GeneralFunction integrand, Character respectTo) {
+	public Integral(GeneralFunction integrand, String respectTo) {
 		super(integrand, respectTo);
 	}
 
@@ -45,8 +45,8 @@ public class Integral extends Transformation {
 	}
 
 	@Override
-	public GeneralFunction substituteVariable(char varID, GeneralFunction toReplace) {
-		if (varID == respectTo)
+	public GeneralFunction substituteVariable(String varID, GeneralFunction toReplace) {
+		if (varID.equals(respectTo))
 			throw new UnsupportedOperationException("You cannot substitute the variable you are working with respect to");
 		return new Integral(operand.substituteVariable(varID, toReplace), respectTo);
 	}
@@ -54,7 +54,7 @@ public class Integral extends Transformation {
 	@Override
 	public boolean equalsFunction(GeneralFunction that) {
 		if (that instanceof Integral integral)
-			return respectTo == integral.respectTo && operand.equalsSimplified(integral.operand);
+			return respectTo.equals(integral.respectTo) && operand.equalsSimplified(integral.operand);
 		else
 			return false;
 	}
@@ -62,17 +62,17 @@ public class Integral extends Transformation {
 	@Override
 	public int compareSelf(GeneralFunction that) {
 		if (that instanceof Integral integral)
-			if (respectTo == integral.respectTo)
+			if (respectTo.equals(integral.respectTo))
 				return operand.compareTo(integral.operand);
 			else
-				return respectTo - integral.respectTo;
+				return respectTo.compareTo(integral.respectTo);
 		else
 			throw new IllegalStateException("Comparing a " + this.getClass().getSimpleName() + " with a " + that.getClass().getSimpleName() + " using compareSelf");
 	}
 
 	@Override
-	public GeneralFunction getDerivative(char varID) {
-		if (varID == respectTo)
+	public GeneralFunction getDerivative(String varID) {
+		if (varID.equals(respectTo))
 			return operand;
 		else
 			return new Integral(operand.getSimplifiedDerivative(varID), respectTo);
@@ -84,8 +84,8 @@ public class Integral extends Transformation {
 	 * @return the operand integrated numerically
 	 */
 	@Override
-	public double evaluate(Map<Character, Double> variableValues) {
-		Map<Character, Double> newMap = new HashMap<>(variableValues);
+	public double evaluate(Map<String, Double> variableValues) {
+		Map<String, Double> newMap = new HashMap<>(variableValues);
 		double bound = newMap.remove(respectTo);
 		return NumericalIntegration.simpsonsRule(operand.setVariables(newMap), 0, bound);
 	}

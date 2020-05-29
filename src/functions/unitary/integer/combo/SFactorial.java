@@ -30,12 +30,12 @@ public class SFactorial extends Factorial {
 	}
 
 	@Override
-	public GeneralFunction getDerivative(char varID) {
+	public GeneralFunction getDerivative(String varID) {
 		return classForm().getDerivative(varID);
 	}
 
 	@Override
-	public double evaluate(Map<Character, Double> variableValues) {
+	public double evaluate(Map<String, Double> variableValues) {
 		double argument = operand.evaluate(variableValues);
 		if (Settings.enforceIntegerOperations)
 			argument = ParsingTools.toInteger(argument);

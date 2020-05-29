@@ -22,7 +22,7 @@ public class Sech extends TrigFunction {
 	}
 
 	@Override
-	public GeneralFunction getDerivative(char varID) {
+	public GeneralFunction getDerivative(String varID) {
 		return new Product(DefaultFunctions.NEGATIVE_ONE, operand.getSimplifiedDerivative(varID), new Sech(operand), new Tanh(operand));
 	}
 
@@ -32,7 +32,7 @@ public class Sech extends TrigFunction {
 	 * @return the sech of {@link #operand} evaluated
 	 */
 	@Override
-	public double evaluate(Map<Character, Double> variableValues) {
+	public double evaluate(Map<String, Double> variableValues) {
 		return 1 / Math.cosh(operand.evaluate(variableValues));
 	}
 

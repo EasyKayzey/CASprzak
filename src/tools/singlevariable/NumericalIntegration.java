@@ -21,7 +21,7 @@ public class NumericalIntegration {
     public static double simpsonsRule(GeneralFunction function, double lowerBound, double upperBound) {
         if (Settings.simpsonsSegments % 2 != 0)
             throw new IllegalArgumentException("Amount of segments for Simpson's rule must be even.");
-        char var = VariableTools.getSingleVariable(function);
+        String var = VariableTools.getSingleVariable(function);
         double step = (upperBound - lowerBound) / Settings.simpsonsSegments;
         double x = lowerBound + step;
         double sum = function.evaluate(Map.of(var, lowerBound));
@@ -46,7 +46,7 @@ public class NumericalIntegration {
      * @return the maximum error associated with the definite integral of the function on a range
      */
     public static double simpsonsError(GeneralFunction function, double lowerBound, double upperBound) {
-        char var = VariableTools.getSingleVariable(function);
+        String var = VariableTools.getSingleVariable(function);
         GeneralFunction fourthDerivative = function.getNthDerivative(var, 4);
         return fourthDerivative.evaluate(Map.of(var, Extrema.findMaximumOnRange(fourthDerivative, lowerBound, upperBound))) * Math.pow(upperBound - lowerBound, 5) / (180 * Math.pow(Settings.simpsonsSegments, 4));
     }

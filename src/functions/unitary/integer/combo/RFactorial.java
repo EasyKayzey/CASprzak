@@ -26,7 +26,7 @@ public class RFactorial extends Factorial {
 	}
 
 	@Override
-	public GeneralFunction getDerivative(char varID) {
+	public GeneralFunction getDerivative(String varID) {
 		if (VariableTools.doesNotContainsVariable(operand, varID))
 			return DefaultFunctions.ZERO;
 		else

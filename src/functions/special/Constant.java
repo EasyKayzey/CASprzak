@@ -12,7 +12,7 @@ import java.util.function.Predicate;
 
 public class Constant extends SpecialFunction {
 	/**
-	 * Symbols or characters with a dedicated value. The defaults are {@code π} and {@code e}.
+	 * Symbols or Strings with a dedicated value. The defaults are {@code π} and {@code e}.
 	 */
 	public static final HashMap<String, Double> specialConstants = new HashMap<>() {
 		{
@@ -89,7 +89,7 @@ public class Constant extends SpecialFunction {
 		return specialConstants.remove(string);
 	}
 
-	public double evaluate(Map<Character, Double> variableValues) {
+	public double evaluate(Map<String, Double> variableValues) {
 		return constant;
 	}
 
@@ -101,7 +101,7 @@ public class Constant extends SpecialFunction {
 			return String.valueOf(constant);
 	}
 
-	public GeneralFunction getDerivative(char varID) {
+	public GeneralFunction getDerivative(String varID) {
 		return new Constant(0);
 	}
 

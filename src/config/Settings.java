@@ -45,7 +45,7 @@ public class Settings {
 	/**
 	 * The variable to be used in {@link tools.singlevariable} when none is specified
 	 */
-	public static char singleVariableDefault = 'x';
+	public static String singleVariableDefault = "x";
 
 	/**
 	 * The margin that {@link tools.singlevariable.Solver} uses to determine if a value is close enough to zero to be considered a root of a function

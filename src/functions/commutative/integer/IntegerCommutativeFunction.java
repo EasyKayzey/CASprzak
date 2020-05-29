@@ -24,7 +24,7 @@ public abstract class IntegerCommutativeFunction extends CommutativeFunction {
 	}
 
 	@Override
-	public GeneralFunction getDerivative(char varID) {
+	public GeneralFunction getDerivative(String varID) {
 		if (VariableTools.doesNotContainsVariable(this, varID))
 			return DefaultFunctions.ZERO;
 		else
@@ -32,7 +32,7 @@ public abstract class IntegerCommutativeFunction extends CommutativeFunction {
 	}
 
 	@Override
-	public double evaluate(Map<Character, Double> variableValues) {
+	public double evaluate(Map<String, Double> variableValues) {
 		if (!Settings.enforceIntegerOperations)
 			throw new IllegalStateException("IntegerCommutativeFunctions cannot be used if Settings.enforceIntegerOperations is not enabled.");
 		int[] toOperate = Arrays.stream(functions)

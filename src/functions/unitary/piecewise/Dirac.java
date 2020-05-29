@@ -17,7 +17,7 @@ public class Dirac extends PiecewiseFunction {
 	}
 
 	@Override
-	public double evaluate(Map<Character, Double> variableValues) {
+	public double evaluate(Map<String, Double> variableValues) {
 		if (operand.evaluate(variableValues) == 0)
 			return Double.POSITIVE_INFINITY;
 		else
@@ -25,7 +25,7 @@ public class Dirac extends PiecewiseFunction {
 	}
 
 	@Override
-	public GeneralFunction getDerivative(char varID) {
+	public GeneralFunction getDerivative(String varID) {
 		throw new DerivativeDoesNotExistException(this);
 	}
 

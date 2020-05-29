@@ -16,7 +16,7 @@ public class NoEscapeTest {
 		boolean temp = Settings.enforceEscapes;
 		Settings.enforceEscapes = false;
 		GeneralFunction test = FunctionParser.parseInfix("pi (1+1)+sin(pi/2)");
-		assertEquals(7.3, test.evaluate(Map.of('x', 3.2)), .3);
+		assertEquals(7.3, test.evaluate(Map.of("x", 3.2)), .3);
 		Settings.enforceEscapes = temp;
 	}
 
@@ -25,7 +25,7 @@ public class NoEscapeTest {
 		boolean temp = Settings.enforceEscapes;
 		Settings.enforceEscapes = false;
 		GeneralFunction test = FunctionParser.parseInfix("log(x)+log(1)");
-		assertEquals(1, test.evaluate(Map.of('x', 10.0)), .3);
+		assertEquals(1, test.evaluate(Map.of("x", 10.0)), .3);
 		Settings.enforceEscapes = temp;
 	}
 
@@ -44,7 +44,7 @@ public class NoEscapeTest {
 		boolean temp = Settings.enforceEscapes;
 		Settings.enforceEscapes = false;
 		GeneralFunction test = FunctionParser.parseInfix("exp(ln(x))");
-		assertEquals(4, test.evaluate(Map.of('x', 4.0)), .01);
+		assertEquals(4, test.evaluate(Map.of("x", 4.0)), .01);
 		Settings.enforceEscapes = temp;
 	}
 
@@ -73,7 +73,7 @@ public class NoEscapeTest {
 		boolean temp = Settings.enforceEscapes;
 		Settings.enforceEscapes = false;
 		GeneralFunction test1 = FunctionParser.parseInfix("asin(acos(exp(ln(sec(asec(cos(sin(x))))))))");
-		assertEquals(DefaultFunctions.X, test1.simplify()); // this isn't actually correct based on ranges, so if you add that this will break
+		assertEquals(DefaultFunctions.X, test1.simplify()); // this isn"t actually correct based on ranges, so if you add that this will break
 		Settings.enforceEscapes = temp;
 	}
 

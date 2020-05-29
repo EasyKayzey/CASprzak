@@ -27,12 +27,12 @@ public class Tanh extends TrigFunction {
 	 * @return the tanh of {@link #operand} evaluated
 	 */
 	@Override
-	public double evaluate(Map<Character, Double> variableValues) {
+	public double evaluate(Map<String, Double> variableValues) {
 		return Math.tanh(operand.evaluate(variableValues));
 	}
 
 	@Override
-	public GeneralFunction getDerivative(char varID) {
+	public GeneralFunction getDerivative(String varID) {
 		return new Product(operand.getSimplifiedDerivative(varID), new Pow(DefaultFunctions.NEGATIVE_TWO, new Cosh(operand)));
 	}
 

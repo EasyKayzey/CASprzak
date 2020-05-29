@@ -22,7 +22,7 @@ public class Atanh extends InverseTrigFunction {
 	}
 
 	@Override
-	public GeneralFunction getDerivative(char varID) {
+	public GeneralFunction getDerivative(String varID) {
 		return new Product(operand.getSimplifiedDerivative(varID), DefaultFunctions.reciprocal(new Sum(DefaultFunctions.ONE, DefaultFunctions.negative(new Pow(DefaultFunctions.TWO, operand)))));
 	}
 
@@ -32,7 +32,7 @@ public class Atanh extends InverseTrigFunction {
 	 * @return the arctanh of {@link #operand} evaluated
 	 */
 	@Override
-	public double evaluate(Map<Character, Double> variableValues) {
+	public double evaluate(Map<String, Double> variableValues) {
 		double functionEvaluated = operand.evaluate(variableValues);
 		return 0.5 * Math.log((1 + functionEvaluated) / (1 + functionEvaluated));
 	}

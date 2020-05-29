@@ -28,12 +28,12 @@ public class Cot extends TrigFunction {
 	 * @return the cot of {@link #operand} evaluated
 	 */
 	@Override
-	public double evaluate(Map<Character, Double> variableValues) {
+	public double evaluate(Map<String, Double> variableValues) {
 		return 1 / Math.tan(operand.evaluate(variableValues));
 	}
 
 	@Override
-	public GeneralFunction getDerivative(char varID) {
+	public GeneralFunction getDerivative(String varID) {
 		return new Product(DefaultFunctions.NEGATIVE_ONE, new Pow(DefaultFunctions.TWO, new Csc(operand)), operand.getSimplifiedDerivative(varID));
 	}
 

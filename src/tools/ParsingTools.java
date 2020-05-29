@@ -90,13 +90,12 @@ public class ParsingTools {
      * @return the character represented by the string
      * @throws IllegalArgumentException if the input is not in one of the formats specified above
      */
-    public static char getCharacter(String input) {
-    	if (!Settings.enforceEscapes)
-    		input = LatexReplacer.addEscapes(input);
-    	input = LatexReplacer.encodeGreek(input);
-        if (input.length() == 1)
-            return input.charAt(0);
-        else
-            throw new IllegalArgumentException("Input length should be 1 for FunctionParser.toCharacter, input given was " + input);
-    }
+	@SuppressWarnings("unused")
+	public static char getCharacter(String input) {
+		input = LatexReplacer.encodeAll(input);
+		if (input.length() == 1)
+			return input.charAt(0);
+		else
+			throw new IllegalArgumentException("Input length should be 1 for FunctionParser.toCharacter, input given was " + input);
+	}
 }

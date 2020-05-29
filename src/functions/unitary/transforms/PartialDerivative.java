@@ -14,7 +14,7 @@ public class PartialDerivative extends Transformation {
 	 * @param operand The operand on the {@link PartialDerivative}
 	 * @param respectTo The variable that the {@link PartialDerivative} is with respect to
 	 */
-	public PartialDerivative(GeneralFunction operand, char respectTo) {
+	public PartialDerivative(GeneralFunction operand, String respectTo) {
 		super(operand, respectTo);
 	}
 
@@ -29,8 +29,8 @@ public class PartialDerivative extends Transformation {
 	}
 
 	@Override
-	public GeneralFunction substituteVariable(char varID, GeneralFunction toReplace) {
-		if (varID == respectTo)
+	public GeneralFunction substituteVariable(String varID, GeneralFunction toReplace) {
+		if (varID.equals(respectTo))
 			throw new UnsupportedOperationException("You cannot substitute the variable you are working with respect to");
 		return new PartialDerivative(operand.substituteVariable(varID, toReplace), respectTo);
 	}
@@ -38,7 +38,7 @@ public class PartialDerivative extends Transformation {
 	@Override
 	public boolean equalsFunction(GeneralFunction that) {
 		if (that instanceof PartialDerivative pd)
-			return respectTo == pd.respectTo && operand.equalsSimplified(pd.operand);
+			return respectTo.equals(pd.respectTo) && operand.equalsSimplified(pd.operand);
 		else
 			return false;
 	}
@@ -46,21 +46,21 @@ public class PartialDerivative extends Transformation {
 	@Override
 	public int compareSelf(GeneralFunction that) {
 		if (that instanceof PartialDerivative pd)
-			if (respectTo == pd.respectTo)
+			if (respectTo.equals(pd.respectTo))
 				return operand.compareTo(pd.operand);
 			else
-				return respectTo - pd.respectTo;
+				return respectTo.compareTo(pd.respectTo);
 		else
 			throw new IllegalStateException("Comparing a " + this.getClass().getSimpleName() + " with a " + that.getClass().getSimpleName() + " using compareSelf");
 	}
 
 	@Override
-	public GeneralFunction getDerivative(char varID) {
+	public GeneralFunction getDerivative(String varID) {
 		return new PartialDerivative(operand.getSimplifiedDerivative(varID), respectTo);
 	}
 
 	@Override
-	public double evaluate(Map<Character, Double> variableValues) {
+	public double evaluate(Map<String, Double> variableValues) {
 		return operand.getSimplifiedDerivative(respectTo).evaluate(variableValues);
 	}
 

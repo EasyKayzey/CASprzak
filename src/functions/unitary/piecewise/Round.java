@@ -21,12 +21,12 @@ public class Round extends PiecewiseFunction{
     }
 
     @Override
-    public GeneralFunction getDerivative(char varID) {
+    public GeneralFunction getDerivative(String varID) {
         throw new DerivativeDoesNotExistException(this);
     }
 
     @Override
-    public double evaluate(Map<Character, Double> variableValues) {
+    public double evaluate(Map<String, Double> variableValues) {
         return Math.round(operand.evaluate(variableValues));
     }
 }

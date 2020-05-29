@@ -28,7 +28,7 @@ public class Solver {
 	 * @return a better approximation of the root based on the value provided
 	 */
 	private static double newtonsMethod(GeneralFunction expression, double value) {
-		char var = VariableTools.getSingleVariable(expression);
+		String var = VariableTools.getSingleVariable(expression);
 		return value - expression.evaluate(Map.of(var, value)) / expression.getSimplifiedDerivative(var).evaluate(Map.of(var, value));
 	}
 
@@ -40,7 +40,7 @@ public class Solver {
 	 * @return the approximate solution for a root of the function
 	 */
 	public static double getSolutionPointNewton(GeneralFunction expression, double initialPoint, int runs) {
-		char var = VariableTools.getSingleVariable(expression);
+		String var = VariableTools.getSingleVariable(expression);
 		if (expression.evaluate(Map.of(var, initialPoint)) == 0)
 			return initialPoint;
 		if (expression instanceof Constant)
@@ -98,7 +98,7 @@ public class Solver {
 	 * @return a List of all the approximate roots found
 	 */
 	public static List<Double> getSolutionsRangeNewton(GeneralFunction expression, double lower, double upper, int runs) {
-		char var = VariableTools.getSingleVariable(expression);
+		String var = VariableTools.getSingleVariable(expression);
 		List<Double> solutions = SolverTools.createRange(upper, lower, Settings.defaultRangeSections);
 		ListIterator<Double> iter = solutions.listIterator();
 		while (iter.hasNext()) {
@@ -122,7 +122,7 @@ public class Solver {
 	 * @return a List of all the approximate roots found
 	 */
 	public static List<Double> getSolutionsRangeHalley(GeneralFunction expression, double lower, double upper) {
-		char var = VariableTools.getSingleVariable(expression);
+		String var = VariableTools.getSingleVariable(expression);
 		return getSolutionsRangeNewton(
 				(new Product(expression, new Pow(DefaultFunctions.NEGATIVE_HALF, new Abs(expression.getDerivative(var))))).simplify(),
 				lower, upper

@@ -23,7 +23,7 @@ public abstract class IntegerUnitaryFunction extends UnitaryFunction {
 	}
 
 	@Override
-	public GeneralFunction getDerivative(char varID) {
+	public GeneralFunction getDerivative(String varID) {
 		if (VariableTools.doesNotContainsVariable(this, varID))
 			return DefaultFunctions.ZERO;
 		else
@@ -31,7 +31,7 @@ public abstract class IntegerUnitaryFunction extends UnitaryFunction {
 	}
 
 	@Override
-	public double evaluate(Map<Character, Double> variableValues) {
+	public double evaluate(Map<String, Double> variableValues) {
 		if (!Settings.enforceIntegerOperations)
 			throw new IllegalStateException("IntegerUnitaryFunction cannot be used if Settings.enforceIntegerOperations is not enabled.");
 		double input = operand.evaluate(variableValues);

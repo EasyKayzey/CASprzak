@@ -1,3 +1,4 @@
+import functions.special.Variable;
 import org.junit.jupiter.api.Test;
 import parsing.FunctionParser;
 import tools.MiscTools;
@@ -6,6 +7,8 @@ import tools.helperclasses.AbstractMutablePair;
 import tools.helperclasses.AbstractPair;
 import tools.helperclasses.MutablePair;
 import tools.helperclasses.Pair;
+
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -51,5 +54,11 @@ public class MiscTest {
 	void rounding() {
 		assertTrue(ParsingTools.isAlmostInteger(-186.000000000000000001));
 		assertEquals(-186, ParsingTools.toInteger(-186.00000000000000001));
+	}
+
+	@Test
+	void multiCharVariable() {
+		assertEquals(3, new Variable("abc").evaluate(Map.of("abc", 3.0)));
+		assertEquals(3, FunctionParser.parseSimplified("\\el+1").evaluate(Map.of("\\el", 2.0)));
 	}
 }

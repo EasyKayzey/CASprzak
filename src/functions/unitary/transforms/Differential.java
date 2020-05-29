@@ -1,5 +1,6 @@
 package functions.unitary.transforms;
 
+import functions.Evaluable;
 import functions.GeneralFunction;
 import functions.special.Variable;
 import functions.unitary.UnitaryFunction;
@@ -9,7 +10,7 @@ import java.util.Map;
 
 /**
  * The {@link Differential} class is used as an intermediary for operations related to parsing derivatives and integrals.
- * Operations such as {@link #execute} and {@link #evaluate(Map)} are NOT SUPPORTED, as all instances of this class should be converted to other transforms before evaluation.
+ * Operations such as {@link #execute} and {@link Evaluable#evaluate(Map)} are NOT SUPPORTED, as all instances of this class should be converted to other transforms before evaluation.
  * If evaluation or execution of this class is ever attempted by the CAS, please raise an issue on the <a href="https://github.com/EasyKayzey/CASprzak/">GitHub repository</a>.
  */
 public class Differential extends Transformation {
@@ -18,7 +19,7 @@ public class Differential extends Transformation {
 	 * Constructs a new {@link Differential}, which is sometimes used as an intermediary for integrals and derivatives
 	 * @param respectTo the variable that the differential is with respect to
 	 */
-	public Differential(char respectTo) {
+	public Differential(String respectTo) {
 		super(null, respectTo);
 	}
 
@@ -41,8 +42,8 @@ public class Differential extends Transformation {
 	}
 
 	@Override
-	public GeneralFunction substituteVariable(char varID, GeneralFunction toReplace) {
-		if (varID == respectTo)
+	public GeneralFunction substituteVariable(String varID, GeneralFunction toReplace) {
+		if (varID.equals(respectTo))
 			throw new UnsupportedOperationException("You cannot substitute the variable you are working with respect to");
 		return this;
 	}
@@ -50,7 +51,7 @@ public class Differential extends Transformation {
 	@Override
 	public boolean equalsFunction(GeneralFunction that) {
 		if (that instanceof Differential diff)
-			return respectTo == diff.respectTo && operand.equalsSimplified(diff.operand);
+			return respectTo.equals(diff.respectTo) && operand.equalsSimplified(diff.operand);
 		else
 			return false;
 	}
@@ -58,10 +59,10 @@ public class Differential extends Transformation {
 	@Override
 	public int compareSelf(GeneralFunction that) {
 		if (that instanceof Differential diff)
-			if (respectTo == diff.respectTo)
+			if (respectTo.equals(diff.respectTo))
 				return operand.compareTo(diff.operand);
 			else
-				return respectTo - diff.respectTo;
+				return respectTo.compareTo(diff.respectTo);
 		else
 			throw new IllegalStateException("Comparing a " + this.getClass().getSimpleName() + " with a " + that.getClass().getSimpleName() + " using compareSelf");
 	}
@@ -70,9 +71,10 @@ public class Differential extends Transformation {
 	 * Evaluation is not supported by this class, as it is purely an intermediary
 	 * @return nothing, because this method will always throw an error
 	 * @throws DerivativeDoesNotExistException whenever this method is called
+	 * @param varID The variable that the function's derivative is taken with respect to
 	 */
 	@Override
-	public GeneralFunction getDerivative(char varID) {
+	public GeneralFunction getDerivative(String varID) {
 		throw new DerivativeDoesNotExistException(this);
 	}
 
@@ -80,9 +82,10 @@ public class Differential extends Transformation {
 	 * Differentiation is not supported by this class, as it is purely an intermediary
 	 * @return nothing, because this method will always throw an error
 	 * @throws UnsupportedOperationException whenever this method is called
+	 * @param variableValues The values of each variable
 	 */
 	@Override
-	public double evaluate(Map<Character, Double> variableValues) {
+	public double evaluate(Map<String, Double> variableValues) {
 		throw new UnsupportedOperationException("Cannot evaluate a differential " + this);
 	}
 

@@ -328,7 +328,7 @@ public class CASDemo {
 		if (!tryInput(s -> !"def b a".equals(s) && s.length() > 5 && "def b ".equals(s.substring(0, 6)), "Begin your input with 'def b ' to define a function as 'b'. Make sure your input isn't 'def b a'."))
 			return;
 		sleep();
-		if (VariableTools.doesNotContainsVariable(KeywordInterface.parseStored("b"), 'a')) {
+		if (VariableTools.doesNotContainsVariable(KeywordInterface.parseStored("b"), "a")) {
 			System.out.println("An issue has occurred when parsing your function for 'b'. Please report this to the developers. Defaulting to 'def b a+1'...");
 			KeywordInterface.useKeywords("def b a+1");
 		}

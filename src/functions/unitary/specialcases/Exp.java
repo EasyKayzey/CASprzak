@@ -20,12 +20,12 @@ public class Exp extends SpecialCaseBinaryFunction {
 	}
 
 	@Override
-	public double evaluate(Map<Character, Double> variableValues) {
+	public double evaluate(Map<String, Double> variableValues) {
 		return Math.exp(operand.evaluate(variableValues));
 	}
 
 	@Override
-	public GeneralFunction getDerivative(char varID) {
+	public GeneralFunction getDerivative(String varID) {
 		return new Product(this, operand.getDerivative(varID));
 	}
 

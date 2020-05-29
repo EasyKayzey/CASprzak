@@ -68,17 +68,17 @@ public class DefaultFunctions {
 	/**
 	 * A {@link Variable} with the variable ID of {@code x}
 	 */
-	public static final Variable X = new Variable('x');
+	public static final Variable X = new Variable("x");
 
 	/**
 	 * A {@link Variable} with the variable ID of {@code y}
 	 */
-	public static final Variable Y = new Variable('y');
+	public static final Variable Y = new Variable("y");
 
 	/**
 	 * A {@link Variable} with the variable ID of {@code z}
 	 */
-	public static final Variable Z = new Variable('z');
+	public static final Variable Z = new Variable("z");
 
 
 	/**

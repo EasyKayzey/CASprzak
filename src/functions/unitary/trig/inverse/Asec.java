@@ -23,7 +23,7 @@ public class Asec extends InverseTrigFunction {
 	}
 
 	@Override
-	public GeneralFunction getDerivative(char varID) {
+	public GeneralFunction getDerivative(String varID) {
 		return new Product(operand.getSimplifiedDerivative(varID), DefaultFunctions.reciprocal(new Product(new Abs(operand), DefaultFunctions.sqrt(new Sum(new Pow(DefaultFunctions.TWO, operand), DefaultFunctions.NEGATIVE_ONE)))));
 	}
 
@@ -34,7 +34,7 @@ public class Asec extends InverseTrigFunction {
 	 */
 	@SuppressWarnings({"DuplicateExpressions", "RedundantSuppression"})
 	@Override
-	public double evaluate(Map<Character, Double> variableValues) {
+	public double evaluate(Map<String, Double> variableValues) {
 		double functionEvaluated = operand.evaluate(variableValues);
 		if (functionEvaluated > 1) {
 			return Math.asin(Math.sqrt(Math.pow(functionEvaluated, 2) - 1) / functionEvaluated);

@@ -55,7 +55,7 @@ public class KeywordInterfaceTest {
 
     @SuppressWarnings("SpellCheckingInspection")
     @Test
-    void basicEvalWithNewVariable() { // Note that addvar and clearvars aren't actually things anymore, so this tests the resilience of the UI to bad commands.
+    void basicEvalWithNewVariable() { // Note that addvar and clearvars aren"t actually things anymore, so this tests the resilience of the UI to bad commands.
         KeywordInterface.useKeywords("clearvars");
         KeywordInterface.useKeywords("addvar y");
         double test = (double) KeywordInterface.useKeywords("eval y^2 y=2");

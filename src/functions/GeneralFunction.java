@@ -54,7 +54,7 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 	/**
 	 * Caches derivatives with the key corresponding to the {@code varID} of the derivative
 	 */
-	protected final Map<Character, GeneralFunction> derivatives = new HashMap<>();
+	protected final Map<String, GeneralFunction> derivatives = new HashMap<>();
 
 	/**
 	 * Returns a String representation of this {@link GeneralFunction}
@@ -69,7 +69,7 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 	public abstract GeneralFunction clone();
 
 
-	public GeneralFunction getSimplifiedDerivative(char varID) {
+	public GeneralFunction getSimplifiedDerivative(String varID) {
 		if (Settings.cacheDerivatives && derivatives.containsKey(varID))
 			return derivatives.get(varID);
 		GeneralFunction derivative = getDerivative(varID).simplify();
@@ -78,7 +78,7 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 		return derivative;
 	}
 
-	public GeneralFunction getNthDerivative(char varID, int N) {
+	public GeneralFunction getNthDerivative(String varID, int N) {
 		GeneralFunction currentFunction = this;
 		for (int i = 0; i < N; i++)
 			currentFunction = currentFunction.getSimplifiedDerivative(varID);
@@ -93,7 +93,7 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 	 * @return the value of the derivative at {@code point}
 	 */
 	@SuppressWarnings("unused")
-	public double derivativeAt(char varID, Map<Character, Double> point) {
+	public double derivativeAt(String varID, Map<String, Double> point) {
 		return getDerivative(varID).evaluate(point);
 	}
 
@@ -111,18 +111,18 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 	 * @param toReplace the {@link GeneralFunction} that will be substituted
 	 * @return the new {@link GeneralFunction} after all substitutions are preformed
 	 */
-	public GeneralFunction substituteVariable(char varID, GeneralFunction toReplace) {
-		return substituteAll(f -> (f instanceof Variable v && v.varID == varID), f -> toReplace);
+	public GeneralFunction substituteVariable(String varID, GeneralFunction toReplace) {
+		return substituteAll(f -> (f instanceof Variable v && v.varID.equals(varID)), f -> toReplace);
 	}
 
 	/**
-	 * Fixes some variables to the values given in the {@code Map<Character, Double> values} by substituting in a {@link Constant} for each of those {@link Variable}s
+	 * Fixes some variables to the values given in the {@code Map<String, Double> values} by substituting in a {@link Constant} for each of those {@link Variable}s
 	 * @param values the map defining the substitutions to be made
 	 * @return a new function with the substitutions made
 	 */
-	public GeneralFunction setVariables(Map<Character, Double> values) {
+	public GeneralFunction setVariables(Map<String, Double> values) {
 		GeneralFunction current = this;
-		for (Map.Entry<Character, Double> entry : values.entrySet())
+		for (Map.Entry<String, Double> entry : values.entrySet())
 			current = current.substituteVariable(entry.getKey(), new Constant(entry.getValue()));
 		return current;
 	}

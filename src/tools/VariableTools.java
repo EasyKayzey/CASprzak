@@ -51,7 +51,7 @@ public class VariableTools {
 	/**
 	 * Returns true if the {@link Variable} specified is NOT found in the {@link GeneralFunction}
 	 * @param function The {@link GeneralFunction} that is being searched
-	 * @param varID The variable ID of the variable that is being looked for
+	 * @param varID The String of the variable being searched for
 	 * @return true if the {@link Variable} specified is NOT found in the {@link GeneralFunction}
 	 */
 	public static boolean doesNotContainsVariable(GeneralFunction function, String varID) {

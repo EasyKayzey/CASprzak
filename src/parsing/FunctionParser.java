@@ -93,7 +93,11 @@ public class FunctionParser {
 			} else if (")".equals(token)) {
 				while (!"(".equals(operators.peek()))
 					postfix.add(operators.pop());
-				operators.pop();
+
+				if ("(".equals(operators.peek()))
+					operators.pop();
+				else
+					throw new IllegalArgumentException("Mismatched parentheses in infix; too many end parentheses. Raw infix: " + infix + ". Current parsed postfix: " + postfix + ". Remaining operators: " + operators + ".");
 			} else if (unitaryOperations.containsKey(token) || binaryOperations.containsKey(token)) {
 				operators.push(token);
 			} else {
@@ -102,7 +106,10 @@ public class FunctionParser {
 		}
 
 		while (operators.size() != 0)
-			postfix.add(operators.pop());
+			if ("(".equals(operators.peek()))
+				throw new IllegalArgumentException("Mismatched parentheses in infix; too many open parentheses. Raw infix: " + infix + ". Current parsed postfix: " + postfix + ". Remaining operators: " + operators + ".");
+			else
+				postfix.push(operators.pop());
 
 		return new ArrayList<>(postfix);
 	}

@@ -25,7 +25,7 @@ public class VariableTools {
 	}
 
 	/**
-	 * Returns a set of Strings representing the Strings of all variables used in this function
+	 * Returns a set containing the Strings of all variables used in this function
 	 * @param input the function to be tested
 	 * @return the set of variable Strings
 	 */

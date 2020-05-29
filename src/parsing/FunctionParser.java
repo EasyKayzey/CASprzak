@@ -101,8 +101,13 @@ public class FunctionParser {
 			}
 		}
 
-		while (operators.size() != 0)
-			postfix.add(operators.pop());
+		while (operators.size() != 0) {
+			String current = operators.pop();
+			if ("(".equals(current))
+				throw new IllegalArgumentException("Mismatched parentheses in infix. Raw infix: " + infix + ". Current parsed postfix: " + postfix + ". Remaining operators: " + operators + ".");
+			else
+				postfix.push(current);
+		}
 
 		return new ArrayList<>(postfix);
 	}

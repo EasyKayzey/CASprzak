@@ -27,7 +27,7 @@ public class Variable extends SpecialFunction {
 
 
 	public GeneralFunction getDerivative(String varID) {
-		return new Constant(this.varID.equals(varID) ? 1 : 0);
+		return new Constant(varID.equals(this.varID) ? 1 : 0);
 	}
 
 	public double evaluate(Map<String, Double> variableValues) {

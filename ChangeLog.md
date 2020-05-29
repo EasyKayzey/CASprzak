@@ -24,7 +24,8 @@
 ### Bugfixes
  - Improves support for carriage returns
  - Fix bug that caused CASDemo to exit on entry if it had been previously completed
- 
+ - Make TaylorSeries use SingleVariableDefault and not "x" 
+  
 ## v0.1.0
 ### Major Additions
 - Storage of functions in an artificial data type

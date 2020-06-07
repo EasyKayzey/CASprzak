@@ -92,8 +92,10 @@ public class FunctionParser {
 				operators.push(token);
 			} else if (")".equals(token)) {
 				while (!"(".equals(operators.peek()))
-					postfix.add(operators.pop());
-
+					if (operators.size() > 0)
+						postfix.add(operators.pop());
+					else
+						throw new IllegalArgumentException("Mismatched parentheses in infix; too many end parentheses. Raw infix: " + infix + ". Current parsed postfix: " + postfix + ". Remaining operators: " + operators + ".");
 				if ("(".equals(operators.peek()))
 					operators.pop();
 				else

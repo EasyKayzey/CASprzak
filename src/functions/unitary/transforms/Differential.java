@@ -31,6 +31,15 @@ public class Differential extends Transformation {
 		this(operand.varID);
 	}
 
+	/**
+	 * Constructs a new {@link Differential}, which is sometimes used as an intermediary for integrals and derivatives, assuming that the operand is a variable {@link Variable}
+	 * @param variable the variable that the differential is with respect to
+	 * @throws ClassCastException if the operand is not an instance of {@link Variable}
+	 */
+	public Differential(GeneralFunction variable) {
+		this((Variable) variable);
+	}
+
 	@Override
 	public String toString() {
 		return "d" + respectTo;

@@ -39,45 +39,45 @@ public class OperationMaps {
 	 */
 	public static final Map<String, UnitaryConstructor> unitaryOperations = new HashMap<>() {
 		{
-			put("-", DefaultFunctions::negative);
-			put("/", DefaultFunctions::reciprocal);
-			put("!", Factorial::defaultFactorial);
-			put("\\ln", Ln::new);
-			put("\\int", Integral::new);
-			put("\\log", DefaultFunctions::log10);
-			put("\\exp", Exp::new);
-			put("\\abs", Abs::new);
-			put("\\difn", function -> new Differential((Variable) function));
-			put("\\sqrt", DefaultFunctions::sqrt);
-			put("\\sign", Sign::new);
-			put("\\ceil", Ceil::new);
-			put("\\floor", Floor::new);
-			put("\\round", Round::new);
-			put("\\dirac", Dirac::new);
-			put("\\sin", Sin::new);
-			put("\\cos", Cos::new);
-			put("\\tan", Tan::new);
-			put("\\csc", Csc::new);
-			put("\\sec", Sec::new);
-			put("\\cot", Cot::new);
-			put("\\asin", Asin::new);
-			put("\\acos", Acos::new);
-			put("\\atan", Atan::new);
-			put("\\acsc", Acsc::new);
-			put("\\asec", Asec::new);
-			put("\\acot", Acot::new);
-			put("\\sinh", Sinh::new);
-			put("\\cosh", Cosh::new);
-			put("\\tanh", Tanh::new);
-			put("\\csch", Csch::new);
-			put("\\sech", Sech::new);
-			put("\\coth", Coth::new);
-			put("\\asinh", Asinh::new);
-			put("\\acosh", Acosh::new);
-			put("\\atanh", Atanh::new);
-			put("\\acsch", Acsch::new);
-			put("\\asech", Asech::new);
-			put("\\acoth", Acoth::new);
+			put("!", 		Factorial::defaultFactorial);
+			put("-", 		DefaultFunctions::negative);
+			put("/", 		DefaultFunctions::reciprocal);
+			put("\\ln", 	Ln::new);
+			put("\\int",	Integral::new);
+			put("\\log", 	DefaultFunctions::log10);
+			put("\\exp", 	Exp::new);
+			put("\\abs", 	Abs::new);
+			put("\\difn",	Differential::new);
+			put("\\sqrt", 	DefaultFunctions::sqrt);
+			put("\\sign", 	Sign::new);
+			put("\\ceil", 	Ceil::new);
+			put("\\floor", 	Floor::new);
+			put("\\round", 	Round::new);
+			put("\\dirac", 	Dirac::new);
+			put("\\sin", 	Sin::new);
+			put("\\cos", 	Cos::new);
+			put("\\tan", 	Tan::new);
+			put("\\csc", 	Csc::new);
+			put("\\sec", 	Sec::new);
+			put("\\cot", 	Cot::new);
+			put("\\asin", 	Asin::new);
+			put("\\acos", 	Acos::new);
+			put("\\atan", 	Atan::new);
+			put("\\acsc", 	Acsc::new);
+			put("\\asec", 	Asec::new);
+			put("\\acot", 	Acot::new);
+			put("\\sinh", 	Sinh::new);
+			put("\\cosh", 	Cosh::new);
+			put("\\tanh", 	Tanh::new);
+			put("\\csch", 	Csch::new);
+			put("\\sech", 	Sech::new);
+			put("\\coth", 	Coth::new);
+			put("\\asinh", 	Asinh::new);
+			put("\\acosh", 	Acosh::new);
+			put("\\atanh", 	Atanh::new);
+			put("\\acsch", 	Acsch::new);
+			put("\\asech", 	Asech::new);
+			put("\\acoth", 	Acoth::new);
 		}
 	};
 
@@ -86,19 +86,19 @@ public class OperationMaps {
 	 */
 	public static final Map<String, BinaryConstructor> binaryOperations = new HashMap<>() {
 		{
-			put("+", (first, second) -> new Sum(first, second));
-			put("*", (first, second) -> new Product(first, second));
-			put("^", (first, second) -> new Pow(second, first));
-			put("%", (first, second) -> new Modulo(second, first));
-			put("//", (first, second) -> new IntegerQuotient(second, first));
-			put("C", DefaultFunctions::choose);
-			put("P", DefaultFunctions::permute);
-			put("\\pd", (first, second) -> new PartialDerivative(second, ((Variable) first).varID));
-			put("\\logb", (first, second) -> new Logb(second, first));
-			put("\\frac", DefaultFunctions::frac);
-			put("\\rand", (first, second) -> new Rand(second, first));
-			put("\\gcd", (first, second) -> new GCD(first, second));
-			put("\\lcm", (first, second) -> new LCM(first, second));
+			put("+", 		Sum::new);
+			put("*", 		Product::new);
+			put("^", 		(first, second) -> new Pow(second, first));
+			put("%", 		(first, second) -> new Modulo(second, first));
+			put("//", 		(first, second) -> new IntegerQuotient(second, first));
+			put("C", 		DefaultFunctions::choose);
+			put("P", 		DefaultFunctions::permute);
+			put("\\pd", 	(first, second) -> new PartialDerivative(second, ((Variable) first).varID));
+			put("\\logb", 	(first, second) -> new Logb(second, first));
+			put("\\frac", 	DefaultFunctions::frac);
+			put("\\rand", 	(first, second) -> new Rand(second, first));
+			put("\\gcd", 	GCD::new);
+			put("\\lcm", 	LCM::new);
 		}
 	};
 }

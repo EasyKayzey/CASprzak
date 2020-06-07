@@ -148,4 +148,14 @@ public class DefaultFunctions {
 	public static GeneralFunction permute(GeneralFunction n, GeneralFunction r) {
 		return new Product(Factorial.defaultFactorial(n), reciprocal(Factorial.defaultFactorial(new Sum(n, negative(r)))));
 	}
+
+	/**
+	 * Returns the the function corresponding to {@code first/second}
+	 * @param first the input {@link GeneralFunction}
+	 * @param second the input {@link GeneralFunction}
+	 * @return the the function corresponding to {@code first/second}
+	 */
+	public static Product frac(GeneralFunction first, GeneralFunction second) {
+		return new Product(first, DefaultFunctions.reciprocal(second));
+	}
 }

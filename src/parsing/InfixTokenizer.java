@@ -56,7 +56,7 @@ public class InfixTokenizer {
 			"((?=[a-zA-Z\\\\(\\d])|(?=[^\\x00-\\x7F]))" 			// Followed by a digit, alphabetic char, open-parenthesis, or non-ascii character
 	);
 	private static final Pattern differential = Pattern.compile(
-			"\\\\d(?=[a-zA-Z\\x00-\\x7F])"
+			"\\\\d(?=([a-zA-Z]|[^\\x00-\\x7F])(?![a-zA-Z]|[^\\x00-\\x7F]))"
 	);
 	private static final Pattern partialDerivative = Pattern.compile("d/d");
 	private static final Pattern endPD = Pattern.compile(

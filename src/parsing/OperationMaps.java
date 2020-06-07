@@ -51,6 +51,7 @@ public class OperationMaps {
 			put("\\sign", Sign::new);
 			put("\\ceil", Ceil::new);
 			put("\\floor", Floor::new);
+			put("\\round", Round::new);
 			put("\\dirac", Dirac::new);
 			put("\\sin", Sin::new);
 			put("\\cos", Cos::new);

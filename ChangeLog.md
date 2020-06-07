@@ -1,7 +1,7 @@
 # Changelog
 # v0.2.0
 ### Major Additions 
- - Integer division (represented by double //), modulo, lcm, and gcd operations
+ - Integer division (with `//`), modulo, lcm, and gcd operations
  - Floor, ceiling, rounding, and random operations
  - Add new abstract classes for new integer operations
 

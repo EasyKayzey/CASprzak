@@ -82,4 +82,10 @@ public class DifferentialTest {
 		GeneralFunction test = parseInfix("\\int[e^\\beta]\\d\\beta");
 		assertEquals(parseInfix("e^\\beta"), test.simplify());
 	}
+
+	@Test
+	void integral3() {
+		GeneralFunction test = parseInfix("\\int[e^ϕ]\\dϕ");
+		assertEquals(parseInfix("e^ϕ"), test.simplify());
+	}
 }

@@ -3,6 +3,7 @@ package parsing;
 import functions.binary.Logb;
 import functions.binary.Pow;
 import functions.binary.Rand;
+import functions.binary.integer.IntegerQuotient;
 import functions.binary.integer.Modulo;
 import functions.commutative.Product;
 import functions.commutative.Sum;
@@ -51,6 +52,7 @@ public class OperationMaps {
 			put("\\sign", Sign::new);
 			put("\\ceil", Ceil::new);
 			put("\\floor", Floor::new);
+			put("\\round", Round::new);
 			put("\\dirac", Dirac::new);
 			put("\\sin", Sin::new);
 			put("\\cos", Cos::new);
@@ -88,6 +90,7 @@ public class OperationMaps {
 			put("*", (first, second) -> new Product(first, second));
 			put("^", (first, second) -> new Pow(second, first));
 			put("%", (first, second) -> new Modulo(second, first));
+			put("//", (first, second) -> new IntegerQuotient(second, first));
 			put("C", (first, second) -> new Product(Factorial.defaultFactorial(first), new Pow(DefaultFunctions.NEGATIVE_ONE, new Product(Factorial.defaultFactorial(second), Factorial.defaultFactorial(new Sum(first, new Product(DefaultFunctions.NEGATIVE_ONE, second)))))));
 			put("P", (first, second) -> new Product(Factorial.defaultFactorial(first), new Pow(DefaultFunctions.NEGATIVE_ONE, Factorial.defaultFactorial(new Sum(first, new Product(DefaultFunctions.NEGATIVE_ONE, second))))));
 			put("\\pd", (first, second) -> new PartialDerivative(second, ((Variable) first).varID));

@@ -168,4 +168,12 @@ public class IntegralTest {
         GeneralFunction test2 = FunctionParser.parseSimplified("x");
         assertEquals(test2, test1.execute().simplify());
     }
+
+    @Test
+    void integralNonAsciiCharacter1() throws Exception {
+        Integral test1 = new Integral(FunctionParser.parseSimplified("e^ϕ"), "ϕ");
+        GeneralFunction test2 = FunctionParser.parseSimplified("e^ϕ");
+        assertEquals(test2, test1.execute().simplify());
+    }
+
 }

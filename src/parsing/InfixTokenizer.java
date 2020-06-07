@@ -56,12 +56,13 @@ public class InfixTokenizer {
 			"((?=[a-zA-Z\\\\(\\d])|(?=[^\\x00-\\x7F]))" 			// Followed by a digit, alphabetic char, open-parenthesis, or non-ascii character
 	);
 	private static final Pattern differential = Pattern.compile(
-			"\\\\d(?=[a-zA-Z\\x00-\\x7F])"
+			"\\\\d(?=([a-zA-Z]|[^\\x00-\\x7F])(?![a-zA-Z]|[^\\x00-\\x7F]))"
 	);
 	private static final Pattern partialDerivative = Pattern.compile("d/d");
 	private static final Pattern endPD = Pattern.compile(
 			"(?<=\\\\pd\\{[a-zA-Z\\x00-\\x7F])"
 	);
+	private static final Pattern division = Pattern.compile("(?<!/)/(?!/)");
 
 	private InfixTokenizer(){}
 
@@ -80,7 +81,7 @@ public class InfixTokenizer {
 		// Insert multiplication in expressions like 2x and 7(x*y+1)sin(3y)
 		infix = adjacentMultiplier.matcher(infix).replaceAll(" * ");
 		// Turns expressions like x-y into x+-y, and turns expressions like x*y into x*/y (the '/' operator represents reciprocals)
-		infix = subtractionFinder.matcher(infix).replaceAll("+-").replace("/", "*/");
+		infix = subtractionFinder.matcher(division.matcher(infix).replaceAll("*/")).replaceAll("+-");
 		// Turns differentials like dx into \d x
 		infix = differential.matcher(infix).replaceAll("\\\\difn ");
 		// Turns expressions like xyz into x*y*z

@@ -44,11 +44,11 @@ public class OperationMaps {
 			put("!", Factorial::defaultFactorial);
 			put("\\ln", Ln::new);
 			put("\\int", Integral::new);
-			put("\\log", function -> new Logb(function, DefaultFunctions.TEN));
+			put("\\log", DefaultFunctions::logBase10);
 			put("\\exp", Exp::new);
 			put("\\abs", Abs::new);
 			put("\\difn", function -> new Differential((Variable) function));
-			put("\\sqrt", function -> new Pow(DefaultFunctions.HALF, function));
+			put("\\sqrt", DefaultFunctions::sqrt);
 			put("\\sign", Sign::new);
 			put("\\ceil", Ceil::new);
 			put("\\floor", Floor::new);

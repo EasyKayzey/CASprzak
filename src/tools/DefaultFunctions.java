@@ -125,7 +125,7 @@ public class DefaultFunctions {
 	 * @param input the input {@link GeneralFunction}
 	 * @return a {@link Logb} of {@code input} of the base {@link DefaultFunctions#TEN}
 	 */
-	public static Logb logBase10(GeneralFunction input) {
+	public static Logb log10(GeneralFunction input) {
 		return new Logb(input, DefaultFunctions.TEN);
 	}
 

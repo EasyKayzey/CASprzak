@@ -44,7 +44,7 @@ public class OperationMaps {
 			put("!", Factorial::defaultFactorial);
 			put("\\ln", Ln::new);
 			put("\\int", Integral::new);
-			put("\\log", DefaultFunctions::logBase10);
+			put("\\log", DefaultFunctions::log10);
 			put("\\exp", Exp::new);
 			put("\\abs", Abs::new);
 			put("\\difn", function -> new Differential((Variable) function));

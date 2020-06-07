@@ -130,12 +130,22 @@ public class DefaultFunctions {
 	}
 
 	/**
-	 * Returns the the function corresponding to {@code nCp}
+	 * Returns the the function corresponding to {@code nCr}
 	 * @param n the input {@link GeneralFunction}
-	 * @param p the input {@link GeneralFunction}
-	 * @return the the function corresponding to {@code nCp}
+	 * @param r the input {@link GeneralFunction}
+	 * @return the the function corresponding to {@code nCr}
 	 */
-	public static GeneralFunction choose(GeneralFunction n, GeneralFunction p) {
-		return new Product(Factorial.defaultFactorial(n), reciprocal(new Product(Factorial.defaultFactorial(p), Factorial.defaultFactorial(new Sum(n, negative(p))))));
+	public static GeneralFunction choose(GeneralFunction n, GeneralFunction r) {
+		return new Product(Factorial.defaultFactorial(n), reciprocal(new Product(Factorial.defaultFactorial(r), Factorial.defaultFactorial(new Sum(n, negative(r))))));
+	}
+
+	/**
+	 * Returns the the function corresponding to {@code nPr}
+	 * @param n the input {@link GeneralFunction}
+	 * @param r the input {@link GeneralFunction}
+	 * @return the the function corresponding to {@code nCr}
+	 */
+	public static GeneralFunction permute(GeneralFunction n, GeneralFunction r) {
+		return new Product(Factorial.defaultFactorial(n), reciprocal(Factorial.defaultFactorial(new Sum(n, negative(r)))));
 	}
 }

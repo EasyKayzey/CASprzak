@@ -85,45 +85,45 @@ public class DefaultFunctions {
 
 
 	/**
-	 * Returns a {@link Product} of {@link DefaultFunctions#NEGATIVE_ONE} and the {@code input}
+	 * Returns a {@link Product} of {@link #NEGATIVE_ONE} and the {@code input}
 	 * @param input the input {@link GeneralFunction}
-	 * @return a {@link Product} of {@link DefaultFunctions#NEGATIVE_ONE} and the {@code input}
+	 * @return a {@link Product} of {@link #NEGATIVE_ONE} and the {@code input}
 	 */
 	public static Product negative(GeneralFunction input) {
 		return new Product(NEGATIVE_ONE, input);
 	}
 
 	/**
-	 * Returns a {@link Pow} of {@code input} to the power of {@link DefaultFunctions#NEGATIVE_ONE}
+	 * Returns a {@link Pow} of {@code input} to the power of {@link #NEGATIVE_ONE}
 	 * @param input the input {@link GeneralFunction}
-	 * @return a {@link Pow} of {@code input} to the power of {@link DefaultFunctions#NEGATIVE_ONE}
+	 * @return a {@link Pow} of {@code input} to the power of {@link #NEGATIVE_ONE}
 	 */
 	public static Pow reciprocal(GeneralFunction input) {
 		return new Pow(NEGATIVE_ONE, input);
 	}
 
 	/**
-	 * Returns a {@link Pow} of {@code input} to the power of {@link DefaultFunctions#HALF}
+	 * Returns a {@link Pow} of {@code input} to the power of {@link #HALF}
 	 * @param input the input {@link GeneralFunction}
-	 * @return a {@link Pow} of {@code input} to the power of {@link DefaultFunctions#HALF}
+	 * @return a {@link Pow} of {@code input} to the power of {@link #HALF}
 	 */
 	public static Pow sqrt(GeneralFunction input) {
 		return new Pow(HALF, input);
 	}
 
 	/**
-	 * Returns a {@link Pow} of {@code input} to the power of {@link DefaultFunctions#TWO}
+	 * Returns a {@link Pow} of {@code input} to the power of {@link #TWO}
 	 * @param input the input {@link GeneralFunction}
-	 * @return a {@link Pow} of {@code input} to the power of {@link DefaultFunctions#TWO}
+	 * @return a {@link Pow} of {@code input} to the power of {@link #TWO}
 	 */
 	public static Pow square(GeneralFunction input) {
 		return new Pow(TWO, input);
 	}
 
 	/**
-	 * Returns a {@link Logb} of {@code input} of the base {@link DefaultFunctions#TEN}
+	 * Returns a {@link Logb} base {@link #TEN} of {@code input}
 	 * @param input the input {@link GeneralFunction}
-	 * @return a {@link Logb} of {@code input} of the base {@link DefaultFunctions#TEN}
+	 * @return a {@link Logb} base {@link #TEN} of {@code input}
 	 */
 	public static Logb log10(GeneralFunction input) {
 		return new Logb(input, DefaultFunctions.TEN);

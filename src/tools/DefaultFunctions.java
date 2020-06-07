@@ -1,6 +1,7 @@
 package tools;
 
 import functions.GeneralFunction;
+import functions.binary.Logb;
 import functions.binary.Pow;
 import functions.commutative.Product;
 import functions.special.Constant;
@@ -115,5 +116,14 @@ public class DefaultFunctions {
 	 */
 	public static Pow square(GeneralFunction input) {
 		return new Pow(TWO, input);
+	}
+
+	/**
+	 * Returns a {@link Logb} of {@code input} of the base {@link DefaultFunctions#TEN}
+	 * @param input the input {@link GeneralFunction}
+	 * @return a {@link Logb} of {@code input} of the base {@link DefaultFunctions#TEN}
+	 */
+	public static Logb logBase10(GeneralFunction input) {
+		return new Logb(input, DefaultFunctions.TEN);
 	}
 }

@@ -67,7 +67,7 @@ public class FunctionParser {
 		if (functionStack.size() < 1)
 			throw new IndexOutOfBoundsException("Stack is empty at end of parsing, so there is nothing to return. Parsed postfix: " + postfix + ".");
 		else if (functionStack.size() > 1)
-			throw new IndexOutOfBoundsException("Stack has more than one function at end of parsing. Parsed postfix: " + postfix + ". Current stack: " + functionStack + ".");
+			throw new IndexOutOfBoundsException("Stack has more than one function at end of parsing, likely because of mismatched open parentheses. Parsed postfix: " + postfix + ". Current stack: " + functionStack + ".");
 		else
 			return functionStack.pop();
 	}

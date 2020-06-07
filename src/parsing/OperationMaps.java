@@ -39,15 +39,15 @@ public class OperationMaps {
 	 */
 	public static final Map<String, UnitaryConstructor> unitaryOperations = new HashMap<>() {
 		{
+			put("!", Factorial::defaultFactorial);
 			put("-", DefaultFunctions::negative);
 			put("/", DefaultFunctions::reciprocal);
-			put("!", Factorial::defaultFactorial);
 			put("\\ln", Ln::new);
 			put("\\int", Integral::new);
 			put("\\log", DefaultFunctions::log10);
 			put("\\exp", Exp::new);
 			put("\\abs", Abs::new);
-			put("\\difn", function -> new Differential((Variable) function));
+			put("\\difn", Differential::new);
 			put("\\sqrt", DefaultFunctions::sqrt);
 			put("\\sign", Sign::new);
 			put("\\ceil", Ceil::new);
@@ -86,8 +86,8 @@ public class OperationMaps {
 	 */
 	public static final Map<String, BinaryConstructor> binaryOperations = new HashMap<>() {
 		{
-			put("+", (first, second) -> new Sum(first, second));
-			put("*", (first, second) -> new Product(first, second));
+			put("+", Sum::new);
+			put("*", Product::new);
 			put("^", (first, second) -> new Pow(second, first));
 			put("%", (first, second) -> new Modulo(second, first));
 			put("//", (first, second) -> new IntegerQuotient(second, first));
@@ -97,8 +97,8 @@ public class OperationMaps {
 			put("\\logb", (first, second) -> new Logb(second, first));
 			put("\\frac", DefaultFunctions::frac);
 			put("\\rand", (first, second) -> new Rand(second, first));
-			put("\\gcd", (first, second) -> new GCD(first, second));
-			put("\\lcm", (first, second) -> new LCM(first, second));
+			put("\\gcd", GCD::new);
+			put("\\lcm", LCM::new);
 		}
 	};
 }

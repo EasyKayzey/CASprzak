@@ -28,7 +28,7 @@ import java.util.Map;
 
 /**
  * {@link OperationMaps} is a centralized location for the strings of all unitary and binary operations to be stored for parsing.
- * The conversions between these strings and their {@link functions.GeneralFunction} equalsSimplifieds are stored as lambdas in their respective maps.
+ * The conversions between these strings and their {@link functions.GeneralFunction} equivalents are stored as lambdas in their respective maps.
  */
 public class OperationMaps {
 

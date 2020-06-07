@@ -95,7 +95,7 @@ public class OperationMaps {
 			put("P", DefaultFunctions::permute);
 			put("\\pd", (first, second) -> new PartialDerivative(second, ((Variable) first).varID));
 			put("\\logb", (first, second) -> new Logb(second, first));
-			put("\\frac", (first, second) -> new Product(first, DefaultFunctions.reciprocal(second)));
+			put("\\frac", DefaultFunctions::frac);
 			put("\\rand", (first, second) -> new Rand(second, first));
 			put("\\gcd", (first, second) -> new GCD(first, second));
 			put("\\lcm", (first, second) -> new LCM(first, second));

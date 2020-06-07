@@ -217,6 +217,11 @@ public class FunctionTest {
 		assertEquals(1, test.evaluate(Map.of()));
 	}
 
+	@Test void integerQuotientNoSpaces() {
+		GeneralFunction test = FunctionParser.parseSimplified("4//3");
+		assertEquals(1, test.evaluate(Map.of()));
+	}
+
 	@Test void abs() {
 		GeneralFunction test = FunctionParser.parseSimplified("|x|");
 		assertEquals(4, test.evaluate(Map.of("x", -4.0)));

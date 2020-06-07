@@ -4,8 +4,10 @@ import functions.GeneralFunction;
 import functions.binary.Logb;
 import functions.binary.Pow;
 import functions.commutative.Product;
+import functions.commutative.Sum;
 import functions.special.Constant;
 import functions.special.Variable;
+import functions.unitary.integer.combo.Factorial;
 
 /**
  * {@link DefaultFunctions} contains instances of many often-used {@link GeneralFunction}s so that they need not be re-instantiated repeatedly, as well as shortcuts for the negative and inverse of a {@link GeneralFunction}.
@@ -125,5 +127,15 @@ public class DefaultFunctions {
 	 */
 	public static Logb logBase10(GeneralFunction input) {
 		return new Logb(input, DefaultFunctions.TEN);
+	}
+
+	/**
+	 * Returns the the function corresponding to {@code nCp}
+	 * @param n the input {@link GeneralFunction}
+	 * @param p the input {@link GeneralFunction}
+	 * @return the the function corresponding to {@code nCp}
+	 */
+	public static GeneralFunction choose(GeneralFunction n, GeneralFunction p) {
+		return new Product(Factorial.defaultFactorial(n), reciprocal(new Product(Factorial.defaultFactorial(p), Factorial.defaultFactorial(new Sum(n, negative(p))))));
 	}
 }

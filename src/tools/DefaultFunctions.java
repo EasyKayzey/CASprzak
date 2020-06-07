@@ -1,10 +1,13 @@
 package tools;
 
 import functions.GeneralFunction;
+import functions.binary.Logb;
 import functions.binary.Pow;
 import functions.commutative.Product;
+import functions.commutative.Sum;
 import functions.special.Constant;
 import functions.special.Variable;
+import functions.unitary.integer.combo.Factorial;
 
 /**
  * {@link DefaultFunctions} contains instances of many often-used {@link GeneralFunction}s so that they need not be re-instantiated repeatedly, as well as shortcuts for the negative and inverse of a {@link GeneralFunction}.
@@ -82,38 +85,77 @@ public class DefaultFunctions {
 
 
 	/**
-	 * Returns a {@link Product} of {@link DefaultFunctions#NEGATIVE_ONE} and the {@code input}
+	 * Returns a {@link Product} of {@link #NEGATIVE_ONE} and the {@code input}
 	 * @param input the input {@link GeneralFunction}
-	 * @return a {@link Product} of {@link DefaultFunctions#NEGATIVE_ONE} and the {@code input}
+	 * @return a {@link Product} of {@link #NEGATIVE_ONE} and the {@code input}
 	 */
 	public static Product negative(GeneralFunction input) {
 		return new Product(NEGATIVE_ONE, input);
 	}
 
 	/**
-	 * Returns a {@link Pow} of {@code input} to the power of {@link DefaultFunctions#NEGATIVE_ONE}
+	 * Returns a {@link Pow} of {@code input} to the power of {@link #NEGATIVE_ONE}
 	 * @param input the input {@link GeneralFunction}
-	 * @return a {@link Pow} of {@code input} to the power of {@link DefaultFunctions#NEGATIVE_ONE}
+	 * @return a {@link Pow} of {@code input} to the power of {@link #NEGATIVE_ONE}
 	 */
 	public static Pow reciprocal(GeneralFunction input) {
 		return new Pow(NEGATIVE_ONE, input);
 	}
 
 	/**
-	 * Returns a {@link Pow} of {@code input} to the power of {@link DefaultFunctions#HALF}
+	 * Returns a {@link Pow} of {@code input} to the power of {@link #HALF}
 	 * @param input the input {@link GeneralFunction}
-	 * @return a {@link Pow} of {@code input} to the power of {@link DefaultFunctions#HALF}
+	 * @return a {@link Pow} of {@code input} to the power of {@link #HALF}
 	 */
 	public static Pow sqrt(GeneralFunction input) {
 		return new Pow(HALF, input);
 	}
 
 	/**
-	 * Returns a {@link Pow} of {@code input} to the power of {@link DefaultFunctions#TWO}
+	 * Returns a {@link Pow} of {@code input} to the power of {@link #TWO}
 	 * @param input the input {@link GeneralFunction}
-	 * @return a {@link Pow} of {@code input} to the power of {@link DefaultFunctions#TWO}
+	 * @return a {@link Pow} of {@code input} to the power of {@link #TWO}
 	 */
 	public static Pow square(GeneralFunction input) {
 		return new Pow(TWO, input);
+	}
+
+	/**
+	 * Returns a {@link Logb} base {@link #TEN} of {@code input}
+	 * @param input the input {@link GeneralFunction}
+	 * @return a {@link Logb} base {@link #TEN} of {@code input}
+	 */
+	public static Logb log10(GeneralFunction input) {
+		return new Logb(input, DefaultFunctions.TEN);
+	}
+
+	/**
+	 * Returns the the function corresponding to {@code nCr}
+	 * @param n the input {@link GeneralFunction}
+	 * @param r the input {@link GeneralFunction}
+	 * @return the the function corresponding to {@code nCr}
+	 */
+	public static GeneralFunction choose(GeneralFunction n, GeneralFunction r) {
+		return new Product(Factorial.defaultFactorial(n), reciprocal(new Product(Factorial.defaultFactorial(r), Factorial.defaultFactorial(new Sum(n, negative(r))))));
+	}
+
+	/**
+	 * Returns the the function corresponding to {@code nPr}
+	 * @param n the input {@link GeneralFunction}
+	 * @param r the input {@link GeneralFunction}
+	 * @return the the function corresponding to {@code nCr}
+	 */
+	public static GeneralFunction permute(GeneralFunction n, GeneralFunction r) {
+		return new Product(Factorial.defaultFactorial(n), reciprocal(Factorial.defaultFactorial(new Sum(n, negative(r)))));
+	}
+
+	/**
+	 * Returns the the function corresponding to {@code first/second}
+	 * @param first the input {@link GeneralFunction}
+	 * @param second the input {@link GeneralFunction}
+	 * @return the the function corresponding to {@code first/second}
+	 */
+	public static Product frac(GeneralFunction first, GeneralFunction second) {
+		return new Product(first, DefaultFunctions.reciprocal(second));
 	}
 }

@@ -211,4 +211,29 @@ public class FunctionTest {
 		GeneralFunction test = FunctionParser.parseSimplified("ceil(2.5)");
 		assertEquals(3, test.evaluate(Map.of()));
 	}
+
+	@Test void integerQuotient() {
+		GeneralFunction test = FunctionParser.parseSimplified("4 // 3");
+		assertEquals(1, test.evaluate(Map.of()));
+	}
+
+	@Test void abs() {
+		GeneralFunction test = FunctionParser.parseSimplified("|x|");
+		assertEquals(4, test.evaluate(Map.of("x", -4.0)));
+	}
+
+	@Test void dirac() {
+		GeneralFunction test = FunctionParser.parseSimplified("\\dirac(x)");
+		assertEquals(0, test.evaluate(Map.of("x", -4.0)));
+	}
+
+	@Test void round() {
+		GeneralFunction test = FunctionParser.parseSimplified("\\round(x)");
+		assertEquals(2, test.evaluate(Map.of("x", 1.5)));
+	}
+
+	@Test void sign() {
+		GeneralFunction test = FunctionParser.parseSimplified("\\sign(x)");
+		assertEquals(-1, test.evaluate(Map.of("x", -4.0)));
+	}
 }

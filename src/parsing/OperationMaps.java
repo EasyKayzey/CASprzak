@@ -39,8 +39,8 @@ public class OperationMaps {
 	 */
 	public static final Map<String, UnitaryConstructor> unitaryOperations = new HashMap<>() {
 		{
-			put("-", function -> new Product(DefaultFunctions.NEGATIVE_ONE, function));
-			put("/", function -> new Pow(DefaultFunctions.NEGATIVE_ONE, function));
+			put("-", DefaultFunctions::negative);
+			put("/", DefaultFunctions::reciprocal);
 			put("!", Factorial::defaultFactorial);
 			put("\\ln", Ln::new);
 			put("\\int", Integral::new);

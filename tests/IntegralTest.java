@@ -176,11 +176,4 @@ public class IntegralTest {
         assertEquals(test2, test1.execute().simplify());
     }
 
-
-    @Test
-    void integralNonAsciiCharacter2() throws Exception {
-        Integral test1 = new Integral(FunctionParser.parseSimplified("e^\\Beta"), "\\Beta");
-        GeneralFunction test2 = FunctionParser.parseSimplified("e^\\Beta");
-        assertEquals(test2, test1.execute().simplify());
-    }
 }

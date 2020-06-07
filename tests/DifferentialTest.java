@@ -76,4 +76,10 @@ public class DifferentialTest {
 		GeneralFunction test = new Integral(parseInfix("x^2"), "y");
 		assertEquals(parseInfix("y*x^2"), test.simplify());
 	}
+
+	@Test
+	void integral2() {
+		GeneralFunction test = parseInfix("\\int[e^\\beta]\\d\\beta");
+		assertEquals(parseInfix("e^\\beta"), test.simplify());
+	}
 }

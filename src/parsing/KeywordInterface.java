@@ -153,7 +153,7 @@ public class KeywordInterface {
 	}
 
 	private static String stripQuotes(String input) {
-		if (input.length() > 0 && input.charAt(0) == '"' && input.charAt(input.length() - 1) == '"') {
+		if (!input.isBlank() && input.charAt(0) == '"' && input.charAt(input.length() - 1) == '"') {
 			String stripped = input.substring(1, input.length() - 1);
 			if (!stripped.contains("\""))
 				return stripped;

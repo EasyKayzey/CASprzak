@@ -147,9 +147,13 @@ public class KeywordInterface {
 	 * @return {@code input} with all substitutions
 	 */
 	public static GeneralFunction substituteAll(GeneralFunction function) {
-		for (Map.Entry<String, GeneralFunction>  entry : storedFunctions.entrySet())
-			function = function.substituteVariable(LatexReplacer.encodeAll(entry.getKey()), entry.getValue());
-		return function;
+		//noinspection unchecked
+		return function.substituteVariable(
+					Map.ofEntries(storedFunctions.entrySet().stream()
+							.map(e -> Map.entry(LatexReplacer.encodeAll(e.getKey()), e.getValue()))
+							.toArray(Map.Entry[]::new)
+					)
+		);
 	}
 
 	private static String stripQuotes(String input) {
@@ -194,8 +198,8 @@ public class KeywordInterface {
 	}
 
 	private static GeneralFunction substitute(String input) {
-		String[] splitInput = keywordSplitter.split(input);
-		return parseStored(splitInput[0]).substituteVariable(LatexReplacer.encodeAll(splitInput[1]), parseStored(splitInput[2]));
+		String[] splitInput = keywordSplitter.split(input, 2);
+		return parseStored(splitInput[0]).substituteVariable(Arrays.stream(keywordSplitter.split(splitInput[1])).map(equals::split).collect(Collectors.toMap(e -> e[0], e -> parseStored(e[1]))));
 	}
 
 	private static Object substituteSimplify(String input) {

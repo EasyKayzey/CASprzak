@@ -95,7 +95,7 @@ public class CASDemo {
 				input = scanner.next();
 			}
 			
-			if ((input.length() > 0 && '!' == input.charAt(0)) || (input.length() >= 4 && "exit".equals(input.substring(0, 4)))) {
+			if ((!input.isBlank() && '!' == input.charAt(0)) || (input.length() >= 4 && "exit".equals(input.substring(0, 4)))) {
 				currentState = DemoState.EXIT;
 				return false;
 			} else if (input.length() >= 4 && "next".equals(input.substring(0, 4))) {

@@ -25,7 +25,7 @@ public class CommandUI {
 		while (flag) {
 			System.out.print(">>> ");
 			String input = scan.next();
-			if  (input.length() == 0)
+			if  (input.isBlank())
 				continue;
 			if ('!' == input.charAt(0) || (input.length() == 4 && "exit".equals(input.substring(0, 4))))
 				flag = false;

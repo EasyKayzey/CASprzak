@@ -1,18 +1,24 @@
 package output;
 
+import functions.GeneralFunction;
+
 import java.util.Collection;
 import java.util.Collections;
 
 public class OutputEndpoint implements OutputFunction {
 
-	protected final String string;
+	protected final GeneralFunction contained;
 
-	public OutputEndpoint(String string) {
-		this.string = string;
+	public OutputEndpoint(GeneralFunction contained) {
+		this.contained = contained;
+	}
+
+	public GeneralFunction getContained() {
+		return contained;
 	}
 
 	public String getName() {
-		return string;
+		return contained.toString();
 	}
 
 	public Collection<OutputFunction> getOperands() {
@@ -20,7 +26,7 @@ public class OutputEndpoint implements OutputFunction {
 	}
 
 	public String toAscii() {
-		return string;
+		return contained.toString();
 	}
 
 }

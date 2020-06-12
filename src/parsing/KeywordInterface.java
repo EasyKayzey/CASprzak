@@ -236,11 +236,11 @@ public class KeywordInterface {
 	private static Object defineFunction(String input, boolean simplify) {
 		String[] splitInput = spaces.split(input, 2);
 		//A try-catch used to be here and was removed
+		GeneralFunction toPut = (GeneralFunction) KeywordInterface.useKeywords(splitInput[1]);
 		if (simplify)
-			storedFunctions.put(splitInput[0], ((GeneralFunction) KeywordInterface.useKeywords(splitInput[1])).simplify());
-		else
-			storedFunctions.put(splitInput[0], (GeneralFunction) KeywordInterface.useKeywords(splitInput[1]));
-		return storedFunctions.get(splitInput[0]);
+			toPut = toPut.simplify();
+		storedFunctions.put(splitInput[0], toPut);
+		return toPut;
 	}
 
 

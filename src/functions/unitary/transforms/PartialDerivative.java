@@ -28,11 +28,12 @@ public class PartialDerivative extends Transformation {
 		return new PartialDerivative(operand.clone(), respectTo);
 	}
 
+	
 	@Override
-	public GeneralFunction substituteVariable(String varID, GeneralFunction toReplace) {
-		if (varID.equals(respectTo))
+	public GeneralFunction substituteVariable(Map<String, ? extends GeneralFunction> toSubstitute) {
+		if (toSubstitute.containsKey(respectTo))
 			throw new UnsupportedOperationException("You cannot substitute the variable you are working with respect to");
-		return new PartialDerivative(operand.substituteVariable(varID, toReplace), respectTo);
+		return new PartialDerivative(operand.substituteVariable(toSubstitute), respectTo);
 	}
 
 	@Override

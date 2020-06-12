@@ -45,10 +45,10 @@ public class Integral extends Transformation {
 	}
 
 	@Override
-	public GeneralFunction substituteVariable(String varID, GeneralFunction toReplace) {
-		if (varID.equals(respectTo))
+	public GeneralFunction substituteVariable(Map<String, ? extends GeneralFunction> toSubstitute) {
+		if (toSubstitute.containsKey(respectTo))
 			throw new UnsupportedOperationException("You cannot substitute the variable you are working with respect to");
-		return new Integral(operand.substituteVariable(varID, toReplace), respectTo);
+		return new Integral(operand.substituteVariable(toSubstitute), respectTo);
 	}
 
 	@Override

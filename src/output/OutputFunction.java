@@ -2,7 +2,7 @@ package output;
 
 import java.util.Collection;
 
-interface OutputFunction {
+public interface OutputFunction {
 
 	/**
 	 * Returns the name of this function

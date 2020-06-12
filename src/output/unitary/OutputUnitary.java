@@ -1,12 +1,14 @@
-package output;
+package output.unitary;
+
+import output.OutputFunction;
 
 import java.util.Collection;
 import java.util.List;
 
 public class OutputUnitary implements OutputFunction {
 
-	private final String functionName;
-	private final OutputFunction operand;
+	protected final String functionName;
+	protected final OutputFunction operand;
 
 	/**
 	 * Returns a new {@code OutputUnitary} function

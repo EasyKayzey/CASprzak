@@ -1,13 +1,15 @@
-package output;
+package output.binary;
+
+import output.OutputFunction;
 
 import java.util.Collection;
 import java.util.List;
 
 public class OutputBinary implements OutputFunction {
 
-	private final String functionName;
-	private final OutputFunction first;
-	private final OutputFunction second;
+	protected final String functionName;
+	protected final OutputFunction first;
+	protected final OutputFunction second;
 
 	/**
 	 * Returns a new {@code OutputBinary} function

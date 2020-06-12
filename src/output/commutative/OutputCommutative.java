@@ -1,4 +1,6 @@
-package output;
+package output.commutative;
+
+import output.OutputFunction;
 
 import java.util.Collection;
 import java.util.List;
@@ -6,8 +8,8 @@ import java.util.stream.Collectors;
 
 public class OutputCommutative implements OutputFunction {
 
-	private final String functionName;
-	private final List<OutputFunction> operands;
+	protected final String functionName;
+	protected final List<OutputFunction> operands;
 
 	/**
 	 * Returns a new {@code OutputUnitary} function

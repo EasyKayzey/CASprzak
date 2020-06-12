@@ -5,6 +5,7 @@ import config.SettingsParser;
 import functions.GeneralFunction;
 import functions.special.Constant;
 import functions.unitary.transforms.Integral;
+import tools.MiscTools;
 import tools.ParsingTools;
 import tools.exceptions.CommandNotFoundException;
 import tools.exceptions.SettingNotFoundException;
@@ -56,8 +57,8 @@ public class KeywordInterface {
 			case "pdn", "pdiffn", "partialn", "pdifferentiaten"					-> partialDiffNth(splitInput[1]);
 			case "eval", "evaluate"												-> evaluate(splitInput[1]);
 			case "simp", "simplify"												-> simplify(splitInput[1]);
-			case "sub", "substitute"											-> substitute(splitInput[1]);
-			case "subs", "substitutesimplify"									-> substituteSimplify(splitInput[1]);
+			case "sub", "substitute"											-> substitute(splitInput[1], false);
+			case "subs", "substitutesimplify"									-> substitute(splitInput[1], true);
 			case "sa", "suball"													-> substituteAllInput(splitInput[1]);
 			case "sol", "solve"													-> solve(splitInput[1]);
 			case "ext", "extrema"												-> extrema(splitInput[1]);
@@ -197,13 +198,13 @@ public class KeywordInterface {
 		return parseStored(input).simplify();
 	}
 
-	private static GeneralFunction substitute(String input) {
+	private static GeneralFunction substitute(String input, boolean simplify) {
 		String[] splitInput = keywordSplitter.split(input, 2);
-		return parseStored(splitInput[0]).substituteVariables(Arrays.stream(keywordSplitter.split(splitInput[1])).map(equals::split).collect(Collectors.toMap(e -> e[0], e -> parseStored(e[1]))));
-	}
-
-	private static Object substituteSimplify(String input) {
-		return substitute(input).simplify();
+		GeneralFunction current = parseStored(splitInput[0]).substituteVariables(Arrays.stream(keywordSplitter.split(splitInput[1])).map(equals::split).collect(Collectors.toMap(e -> e[0], e -> parseStored(e[1]))));
+		if (simplify)
+			return current.simplify();
+		else
+			return MiscTools.minimalSimplify(current);
 	}
 
 	private static GeneralFunction substituteAllInput(String input) {

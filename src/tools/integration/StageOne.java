@@ -19,7 +19,7 @@ import tools.helperclasses.Pair;
 
 /**
  * The {@link StageOne} class attempts to integrate a function using a method very similar to Stage One of the integration procedure used in <a href="http://www-inst.eecs.berkeley.edu/~cs282/sp02/readings/moses-int.pdf">SIN</a>. Firstly,
- * the program performs simplifications and slight modifications to the integrand. The integrand is simplified using {@link IntegralTools#minimalSimplify(GeneralFunction)}.
+ * the program performs simplifications and slight modifications to the integrand. The integrand is simplified using {@link MiscTools#minimalSimplify(GeneralFunction)}.
  * If the integral is an instance of {@link PartialDerivative} and {@link PartialDerivative#respectTo} is the same as the variable that is being integrated with
  * respect to, the program returns {@link PartialDerivative#operand}. Otherwise it executes the {@link PartialDerivative}. If the integrand is a {@link Sum}, then the
  * integral is distributed to each term in the {@link Sum} and returned as a {@link Sum} of {@link Integral}s. The final simplification expands {@link Sum}s to
@@ -38,7 +38,7 @@ public class StageOne {
      * @throws IntegrationFailedException if the integration did not succeed
      */
     public static GeneralFunction derivativeDivides(GeneralFunction integrand, String variableString) throws IntegrationFailedException {
-        integrand = IntegralTools.minimalSimplify(integrand);
+        integrand = MiscTools.minimalSimplify(integrand);
 
         if (integrand instanceof PartialDerivative derivative)
             if (derivative.respectTo.equals(variableString))

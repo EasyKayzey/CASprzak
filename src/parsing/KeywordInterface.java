@@ -147,9 +147,13 @@ public class KeywordInterface {
 	 * @return {@code input} with all substitutions
 	 */
 	public static GeneralFunction substituteAll(GeneralFunction function) {
-		for (Map.Entry<String, GeneralFunction>  entry : storedFunctions.entrySet())
-			function = function.substituteVariable(LatexReplacer.encodeAll(entry.getKey()), entry.getValue());
-		return function;
+		//noinspection unchecked
+		return function.substituteVariables(
+					Map.ofEntries(storedFunctions.entrySet().stream()
+							.map(e -> Map.entry(LatexReplacer.encodeAll(e.getKey()), e.getValue()))
+							.toArray(Map.Entry[]::new)
+					)
+		);
 	}
 
 	private static String stripQuotes(String input) {
@@ -194,8 +198,8 @@ public class KeywordInterface {
 	}
 
 	private static GeneralFunction substitute(String input) {
-		String[] splitInput = keywordSplitter.split(input);
-		return parseStored(splitInput[0]).substituteVariable(LatexReplacer.encodeAll(splitInput[1]), parseStored(splitInput[2]));
+		String[] splitInput = keywordSplitter.split(input, 2);
+		return parseStored(splitInput[0]).substituteVariables(Arrays.stream(keywordSplitter.split(splitInput[1])).map(equals::split).collect(Collectors.toMap(e -> e[0], e -> parseStored(e[1]))));
 	}
 
 	private static Object substituteSimplify(String input) {
@@ -333,13 +337,13 @@ public class KeywordInterface {
 			case "pdn", "pdiffn", "partialn", "pdifferentiaten"         			-> "Executes 'pd' [times] times.\n" +
 					"pdn [variable] [times] [function]";
 			case "eval", "evaluate"                                     			-> "Evaluates [function] at the values specified.\n" +
-					"eval [function] (var=val)*";
+					"eval [function] ([variable]=[value]])*";
 			case "simp", "simplify"                                     			-> "Simplifies [function].\n" +
 					"simp [function]";
 			case "sub", "substitute"                                    			-> "Substitutes [replacementfunction] into every instance of [variable] in [function].\n" +
-					"sub [function] [variable] [replacementfunction]";
+					"sub [function] ([variable]=[replacementfunction])+";
 			case "subs", "substitutesimplify"                                    	-> "Substitutes [replacementfunction] into every instance of [variable] in [function] and then simplifies.\n" +
-					"subs [function] [variable] [replacementfunction]";
+					"subs [function] ([variable]=[replacementfunction])+";
 			case "sa", "suball"														-> "Substites every pre-defined function into [function] in accordance with its name.\n" +
 					"sa [function]";
 			case "sol", "solve"                                         			-> "Solves [function] in one variable on a range.\n" +

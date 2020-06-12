@@ -11,6 +11,7 @@
  - Add new test class for integer operations
  - Change `equals` to check if two functions are exactly equal and implement `equalsSimplified` to check if they are equal when simplified
  - Add `DerivativeDoesNotExistException` for operations with no derivative
+ - Make `substitute` more powerful in the UI by allowing the substitution of multiple expressions simultaneously
  
  ### Bugfixes
  - Fix `toInteger` error message using the wrong margin from `Settings`

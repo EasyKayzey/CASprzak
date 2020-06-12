@@ -80,7 +80,7 @@ public class KeywordInterfaceTest {
     @Test
     void notSoBasicSubstitute() {
         KeywordInterface.useKeywords("def t x^2");
-        GeneralFunction test1 = (GeneralFunction) KeywordInterface.useKeywords("sa sub z+y y t");
+        GeneralFunction test1 = (GeneralFunction) KeywordInterface.useKeywords("sa sub z+y y=t");
         GeneralFunction test2 = FunctionParser.parseInfix("z+x^2");
         assertEquals(test2.simplify(), test1);
     }

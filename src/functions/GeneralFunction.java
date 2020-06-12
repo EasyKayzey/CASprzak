@@ -106,13 +106,12 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 	public abstract GeneralFunction substituteAll(Predicate<? super GeneralFunction> test, Function<? super GeneralFunction, ? extends GeneralFunction> replacer);
 
 	/**
-	 * Substitutes a new {@link GeneralFunction} into a {@link Variable}
-	 * @param varID     the variable to be substituted into
-	 * @param toReplace the {@link GeneralFunction} that will be substituted
+	 * Substitutes variables with functions as specified in a map
+	 * @param toSubstitute the map between {@link Variable} strings and {@link GeneralFunction}s
 	 * @return the new {@link GeneralFunction} after all substitutions are preformed
 	 */
-	public GeneralFunction substituteVariable(String varID, GeneralFunction toReplace) {
-		return substituteAll(f -> (f instanceof Variable v && v.varID.equals(varID)), f -> toReplace);
+	public GeneralFunction substituteVariables(Map<String, ? extends GeneralFunction> toSubstitute) {
+		return substituteAll(f -> (f instanceof Variable v && toSubstitute.containsKey(v.varID)), f -> toSubstitute.get(((Variable) f).varID));
 	}
 
 	/**
@@ -121,10 +120,13 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 	 * @return a new function with the substitutions made
 	 */
 	public GeneralFunction setVariables(Map<String, Double> values) {
-		GeneralFunction current = this;
-		for (Map.Entry<String, Double> entry : values.entrySet())
-			current = current.substituteVariable(entry.getKey(), new Constant(entry.getValue()));
-		return current;
+		//noinspection unchecked
+		return substituteVariables(
+				Map.ofEntries(values.entrySet().stream()
+						.map(e -> Map.entry(e.getKey(), new Constant(e.getValue())))
+						.toArray(Map.Entry[]::new)
+				)
+		);
 	}
 
 

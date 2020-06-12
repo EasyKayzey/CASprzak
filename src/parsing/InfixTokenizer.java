@@ -1,9 +1,7 @@
 package parsing;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 import static config.Settings.maxEscapeLength;
 
@@ -95,6 +93,6 @@ public class InfixTokenizer {
 		// Adds parentheses to lower modulo precedence below multiplication
 		infix = modulo.matcher(infix).replaceAll("))%((");
 		// Splits infix into tokens
-		return infixSplitter.splitAsStream(infix).collect(Collectors.toCollection(LinkedList::new));
+		return List.of(infixSplitter.split(infix));
 	}
 }

@@ -13,6 +13,8 @@ import tools.helperclasses.AbstractPair;
 import tools.helperclasses.Pair;
 
 import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class Product extends CommutativeFunction {
 	/**
@@ -49,19 +51,8 @@ public class Product extends CommutativeFunction {
 		return new Product(ArrayTools.deepClone(functions));
 	}
 
-	public String toString() {
-		if (functions.length < 1)
-			return "()";
-		if (functions.length == 2 && functions[0] instanceof Constant constant && constant.constant == -1.0 && !(functions[1] instanceof Constant))
-			return "-"+functions[1].toString();
-		StringBuilder string = new StringBuilder("(");
-		for (int i = 0; i < functions.length - 1; i++) {
-			string.append(functions[i].toString());
-			string.append(" * ");
-		}
-		string.append(functions[functions.length - 1].toString());
-		string.append(")");
-		return string.toString();
+	protected Collector<CharSequence, ?, String> getJoiningCollector() {
+		return Collectors.joining(" * ", "(", ")");
 	}
 
 	public int compareSelf(GeneralFunction that) {

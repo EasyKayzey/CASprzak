@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class Sum extends CommutativeFunction {
 	/**
@@ -44,17 +46,8 @@ public class Sum extends CommutativeFunction {
 		return new Sum(ArrayTools.deepClone(functions));
 	}
 
-	public String toString() {
-		if (functions.length < 1)
-			return "()";
-		StringBuilder string = new StringBuilder("(");
-		for (int i = functions.length - 1; i >= 1; i--) {
-			string.append(functions[i].toString());
-			string.append(" + ");
-		}
-		string.append(functions[0].toString());
-		string.append(")");
-		return string.toString();
+	protected Collector<CharSequence, ?, String> getJoiningCollector() {
+		return Collectors.joining(" + ", "(", ")");
 	}
 
 

@@ -5,7 +5,7 @@ import functions.commutative.Product;
 import functions.unitary.UnitaryFunction;
 import tools.ArrayTools;
 import tools.DefaultFunctions;
-import tools.IntegralTools;
+import tools.MiscTools;
 import tools.exceptions.IntegrationFailedException;
 import tools.integration.StageOne;
 import tools.singlevariable.NumericalIntegration;
@@ -93,7 +93,7 @@ public class Integral extends Transformation {
 
 	@Override
 	public Integral simplifyInternal() {
-		return new Integral(IntegralTools.minimalSimplify(operand), respectTo);
+		return new Integral(MiscTools.minimalSimplify(operand), respectTo);
 	}
 
 

@@ -292,9 +292,9 @@ public class CASDemo {
 		printWithSleep("""
 				Now, with several variables, we can begin to substitute.
 				It is probably best to explain with an example:
-				>>> sub x^y y sin(x)
+				>>> sub x^y y=sin(x)
 				""" +
-				KeywordInterface.useKeywords("sub x^y y sin(x)")
+				KeywordInterface.useKeywords("sub x^y y=sin(x)")
 				+ """
 				  
 				As you can see, this replaces all 'y's in the function with 'sin(x)'.
@@ -306,7 +306,7 @@ public class CASDemo {
 		printWithSleep("""
 				Congratulations, you have just substituted a variable for a function.
 				An important thing to remembers is that these changes are not saved in the function.
-				For example, to substitute every 'x' in 'g' with 'x^2', you would need to run 'def g sub g x x^2'.
+				For example, to substitute every 'x' in 'g' with 'x^2', you would need to run 'def g sub g x=x^2'.
 				Additionally, like 'def', if you want to substitute and simplify in one step, use 'subs' or 'substitutesimplify'.
 				Continue testing this feature, or type 'next' to continue.
 				""");
@@ -370,7 +370,7 @@ public class CASDemo {
 				To fix this, we put quotation marks around the whole simplification:
 				>>> sub x^2 x "simp y+y"
 				""" +
-				KeywordInterface.useKeywords("sub x^2 x \"simp y+y\"")
+				KeywordInterface.useKeywords("sub x^2 x=\"simp y+y\"")
 				+ """
     
 				Additionally, nested quotation marks do not work.

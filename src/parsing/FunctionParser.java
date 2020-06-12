@@ -4,6 +4,7 @@ import config.Settings;
 import functions.GeneralFunction;
 import functions.special.Constant;
 import functions.special.Variable;
+import tools.MiscTools;
 
 import java.util.*;
 
@@ -27,12 +28,12 @@ public class FunctionParser {
 	}
 
 	/**
-	 * Parses infix using {@link #parseInfix(String)}, then simplifies the output
+	 * Parses infix using {@link #parseInfix(String)}, then minimally simplifies the output
 	 * @param infix infix string
-	 * @return a {@link GeneralFunction} corresponding to the infix string, simplified
+	 * @return a {@link GeneralFunction} corresponding to the infix string, minimally simplified
 	 */
 	public static GeneralFunction parseSimplified(String infix) {
-		return parseInfix(infix).simplify();
+		return MiscTools.minimalSimplify(parseInfix(infix));
 	}
 
 	/**

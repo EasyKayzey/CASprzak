@@ -65,8 +65,8 @@ public class KeywordInterface {
 			case "tay", "taylor"												-> taylor(splitInput[1]);
 			case "intn", "intnumeric"											-> integrateNumeric(splitInput[1]);
 			case "intne", "intnumericerror"										-> integrateNumericError(splitInput[1]);
-			case "def", "deffunction"											-> defineFunction(splitInput[1]);
-			case "defs", "deffunctions", "deffunctionsimplify"					-> defineFunctionSimplify(splitInput[1]);
+			case "def", "deffunction"											-> defineFunction(splitInput[1], false);
+			case "defs", "deffunctions", "deffunctionsimplify"					-> defineFunction(splitInput[1], true);
 			case "defc", "defcon", "defconstant"								-> defineConstant(splitInput[1]);
 			case "rmf", "rmfun", "removefun", "removefunction"					-> removeFunction(splitInput[1]);
 			case "rmc", "rmconstant", "removeconstant"							-> removeConstant(splitInput[1]);
@@ -233,19 +233,16 @@ public class KeywordInterface {
 		return TaylorSeries.makeTaylorSeries(parseStored(splitInput[0]), ParsingTools.toInteger(ParsingTools.getConstant(splitInput[1])), ParsingTools.getConstant(splitInput[2]));
 	}
 
-	private static Object defineFunction(String input) {
+	private static Object defineFunction(String input, boolean simplify) {
 		String[] splitInput = spaces.split(input, 2);
-		try {
+		//A try-catch used to be here and was removed
+		if (simplify)
+			storedFunctions.put(splitInput[0], ((GeneralFunction) KeywordInterface.useKeywords(splitInput[1])).simplify());
+		else
 			storedFunctions.put(splitInput[0], (GeneralFunction) KeywordInterface.useKeywords(splitInput[1]));
-		} catch (RuntimeException e) {
-			storedFunctions.put(splitInput[0], parseStored(splitInput[1]));
-		}
 		return storedFunctions.get(splitInput[0]);
 	}
 
-	private static Object defineFunctionSimplify(String s) {
-		return ((GeneralFunction) defineFunction(s)).simplify();
-	}
 
 	private static Object defineConstant(String input) {
 		String[] splitInput = spaces.split(input, 2);

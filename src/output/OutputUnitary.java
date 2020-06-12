@@ -26,4 +26,8 @@ public class OutputUnitary implements OutputFunction {
 		return List.of(operand);
 	}
 
+	public String toAscii() {
+		return functionName + "(" + operand.toAscii() + ")";
+	}
+
 }

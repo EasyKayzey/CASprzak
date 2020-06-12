@@ -29,4 +29,8 @@ public class OutputBinary implements OutputFunction {
 		return List.of(first, second);
 	}
 
+	public String toAscii() {
+		return functionName + "(" + first.toAscii() + ", " + second.toAscii() + ")";
+	}
+
 }

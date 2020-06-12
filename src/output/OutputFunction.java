@@ -16,4 +16,10 @@ interface OutputFunction {
 	 */
 	Collection<OutputFunction> getOperands();
 
+	/**
+	 * Returns an ASCII representation of the function tree
+	 * @return an ASCII representation of the function tree
+	 */
+	String toAscii();
+
 }

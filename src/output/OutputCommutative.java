@@ -2,6 +2,7 @@ package output;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class OutputCommutative implements OutputFunction {
 
@@ -33,6 +34,14 @@ public class OutputCommutative implements OutputFunction {
 
 	public Collection<OutputFunction> getOperands() {
 		return operands;
+	}
+
+	public String toAscii() {
+		return operands.stream()
+				.map(OutputFunction::toAscii)
+				.collect(
+						Collectors.joining(", ", functionName + "(", ")")
+				);
 	}
 
 }

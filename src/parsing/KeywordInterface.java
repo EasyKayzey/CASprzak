@@ -109,7 +109,7 @@ public class KeywordInterface {
 				input = scanner.next();
 				while (!"exit".equals(input) && !"!".equals(input)) {
 					try {
-						System.out.println("PSto: " + parseStored(input));
+						System.out.println("PSto: " + parseStored(input, false));
 					} catch (Exception e) {
 						e.printStackTrace();
 					} try {
@@ -130,16 +130,19 @@ public class KeywordInterface {
 	 * @param input input string
 	 * @return a {@link GeneralFunction}
 	 */
-	public static GeneralFunction parseStored(String input) {
+	public static GeneralFunction parseStored(String input, boolean minimalSimplify) {
 		input = stripQuotes(input);
 
 		if ("_".equals(input))
 			return ParsingTools.toFunction(prev);
 
+
 		if (Constant.isSpecialConstant(input))
 			return new Constant(input);
-		else
+		else if (!minimalSimplify)
 			return (GeneralFunction) useKeywords(input);
+		else
+			return MiscTools.minimalSimplify((GeneralFunction) useKeywords(input));
 	}
 
 	/**
@@ -173,20 +176,20 @@ public class KeywordInterface {
 
 	private static GeneralFunction partialDiff(String input) {
 		String[] splitInput = spaces.split(input, 2);
-		return parseStored(splitInput[1]).getSimplifiedDerivative(LatexReplacer.encodeAll(splitInput[0]));
+		return parseStored(splitInput[1], true).getSimplifiedDerivative(LatexReplacer.encodeAll(splitInput[0]));
 	}
 
 	private static GeneralFunction partialDiffNth(String input) {
 		String[] splitInput = spaces.split(input, 3);
-		return parseStored(splitInput[2]).getNthDerivative(LatexReplacer.encodeAll(splitInput[0]), Integer.parseInt(splitInput[1]));
+		return parseStored(splitInput[2], true).getNthDerivative(LatexReplacer.encodeAll(splitInput[0]), Integer.parseInt(splitInput[1]));
 	}
 
 	private static double evaluate(String input) {
 		String[] splitInput = spaces.split(input, 2);
 		if (splitInput.length == 1)
-			return parseStored(splitInput[0]).evaluate(new HashMap<>());
+			return parseStored(splitInput[0], false).evaluate(new HashMap<>());
 		else
-			return parseStored(splitInput[0]).evaluate(
+			return parseStored(splitInput[0], false).evaluate(
 					Arrays.stream(keywordSplitter.split(splitInput[1]))
 					.map(equals::split)
 					.collect(Collectors.toMap(e -> LatexReplacer.encodeAll(e[0]), e -> ParsingTools.getConstant(e[1])))
@@ -195,12 +198,12 @@ public class KeywordInterface {
 
 
 	private static GeneralFunction simplify(String input) {
-		return parseStored(input).simplify();
+		return parseStored(input, false).simplify();
 	}
 
 	private static GeneralFunction substitute(String input, boolean simplify) {
 		String[] splitInput = keywordSplitter.split(input, 2);
-		GeneralFunction current = parseStored(splitInput[0]).substituteVariables(Arrays.stream(keywordSplitter.split(splitInput[1])).map(equals::split).collect(Collectors.toMap(e -> e[0], e -> parseStored(e[1]))));
+		GeneralFunction current = parseStored(splitInput[0], false).substituteVariables(Arrays.stream(keywordSplitter.split(splitInput[1])).map(equals::split).collect(Collectors.toMap(e -> e[0], e -> parseStored(e[1], false))));
 		if (simplify)
 			return current.simplify();
 		else
@@ -208,29 +211,29 @@ public class KeywordInterface {
 	}
 
 	private static GeneralFunction substituteAllInput(String input) {
-		return substituteAll(parseStored(input));
+		return substituteAll(parseStored(input, true));
 	}
 
 	private static List<Double> solve(String input) {
 		String[] splitInput = keywordSplitter.split(input);
-		return Solver.getSolutionsRange(parseStored(splitInput[0]), ParsingTools.getConstant(splitInput[1]), ParsingTools.getConstant(splitInput[2]));
+		return Solver.getSolutionsRange(parseStored(splitInput[0], false), ParsingTools.getConstant(splitInput[1]), ParsingTools.getConstant(splitInput[2]));
 	}
 
 	private static Object extrema(String input) {
 		String[] splitInput = keywordSplitter.split(input);
 		return switch (splitInput[0]) {
-			case "min", "minima"					-> Extrema.findLocalMinimum(parseStored(splitInput[1]), ParsingTools.getConstant(splitInput[2]), ParsingTools.getConstant(splitInput[3]));
-			case "max", "maxima"					-> Extrema.findLocalMaximum(parseStored(splitInput[1]), ParsingTools.getConstant(splitInput[2]), ParsingTools.getConstant(splitInput[3]));
-			case "anymin", "anyminima"				-> Extrema.findLocalMinima(parseStored(splitInput[1]), ParsingTools.getConstant(splitInput[2]), ParsingTools.getConstant(splitInput[3]));
-			case "anymax", "anymaxima"				-> Extrema.findLocalMaxima(parseStored(splitInput[1]), ParsingTools.getConstant(splitInput[2]), ParsingTools.getConstant(splitInput[3]));
-			case "inflect", "inflection"			-> Extrema.findInflectionPoints(parseStored(splitInput[1]), ParsingTools.getConstant(splitInput[2]), ParsingTools.getConstant(splitInput[3]));
+			case "min", "minima"					-> Extrema.findLocalMinimum(parseStored(splitInput[1], false), ParsingTools.getConstant(splitInput[2]), ParsingTools.getConstant(splitInput[3]));
+			case "max", "maxima"					-> Extrema.findLocalMaximum(parseStored(splitInput[1], false), ParsingTools.getConstant(splitInput[2]), ParsingTools.getConstant(splitInput[3]));
+			case "anymin", "anyminima"				-> Extrema.findLocalMinima(parseStored(splitInput[1], false), ParsingTools.getConstant(splitInput[2]), ParsingTools.getConstant(splitInput[3]));
+			case "anymax", "anymaxima"				-> Extrema.findLocalMaxima(parseStored(splitInput[1], false), ParsingTools.getConstant(splitInput[2]), ParsingTools.getConstant(splitInput[3]));
+			case "inflect", "inflection"			-> Extrema.findInflectionPoints(parseStored(splitInput[1], false), ParsingTools.getConstant(splitInput[2]), ParsingTools.getConstant(splitInput[3]));
 			default 								-> throw new SettingNotFoundException(splitInput[0], "extrema");
 		};
 	}
 
 	private static GeneralFunction taylor(String input) {
 		String[] splitInput = keywordSplitter.split(input);
-		return TaylorSeries.makeTaylorSeries(parseStored(splitInput[0]), ParsingTools.toInteger(ParsingTools.getConstant(splitInput[1])), ParsingTools.getConstant(splitInput[2]));
+		return TaylorSeries.makeTaylorSeries(parseStored(splitInput[0], true), ParsingTools.toInteger(ParsingTools.getConstant(splitInput[1])), ParsingTools.getConstant(splitInput[2]));
 	}
 
 	private static Object defineFunction(String input) {
@@ -238,7 +241,7 @@ public class KeywordInterface {
 		try {
 			storedFunctions.put(splitInput[0], (GeneralFunction) KeywordInterface.useKeywords(splitInput[1]));
 		} catch (RuntimeException e) {
-			storedFunctions.put(splitInput[0], parseStored(splitInput[1]));
+			storedFunctions.put(splitInput[0], parseStored(splitInput[1], true));
 		}
 		return storedFunctions.get(splitInput[0]);
 	}
@@ -252,7 +255,7 @@ public class KeywordInterface {
 		try {
 			return Constant.addSpecialConstant(splitInput[0], ((GeneralFunction) KeywordInterface.useKeywords(splitInput[1])).evaluate(null));
 		} catch (Exception e) {
-			return Constant.addSpecialConstant(splitInput[0], parseStored(splitInput[1]).evaluate(null));
+			return Constant.addSpecialConstant(splitInput[0], parseStored(splitInput[1], false).evaluate(null));
 		}
 	}
 
@@ -286,12 +289,12 @@ public class KeywordInterface {
 
 	private static double integrateNumeric(String input) {
 		String[] splitInput = keywordSplitter.split(input);
-		return NumericalIntegration.simpsonsRule(parseStored(splitInput[0]), ParsingTools.getConstant(splitInput[1]), ParsingTools.getConstant(splitInput[2]));
+		return NumericalIntegration.simpsonsRule(parseStored(splitInput[0], false), ParsingTools.getConstant(splitInput[1]), ParsingTools.getConstant(splitInput[2]));
 	}
 
 	private static double[] integrateNumericError(String input) {
 		String[] splitInput = keywordSplitter.split(input);
-		return NumericalIntegration.simpsonsRuleWithError(parseStored(splitInput[0]), ParsingTools.getConstant(splitInput[1]), ParsingTools.getConstant(splitInput[2]));
+		return NumericalIntegration.simpsonsRuleWithError(parseStored(splitInput[0], false), ParsingTools.getConstant(splitInput[1]), ParsingTools.getConstant(splitInput[2]));
 	}
 
 	private static String setSettings(String input) {
@@ -320,7 +323,7 @@ public class KeywordInterface {
 		String[] splitInput = keywordSplitter.split(input);
 		if (splitInput[1].charAt(0) != 'd')
 			throw new IllegalArgumentException(splitInput[1] + " is not a differential (does not start with d).");
-		Integral integral = new Integral(parseStored(splitInput[0]), splitInput[1].substring(1));
+		Integral integral = new Integral(parseStored(splitInput[0], false), splitInput[1].substring(1));
 		try {
 			return integral.execute();
 		} catch (TransformFailedException e) {

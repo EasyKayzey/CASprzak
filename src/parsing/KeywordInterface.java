@@ -5,6 +5,7 @@ import config.SettingsParser;
 import functions.GeneralFunction;
 import functions.special.Constant;
 import functions.unitary.transforms.Integral;
+import tools.MiscTools;
 import tools.ParsingTools;
 import tools.exceptions.CommandNotFoundException;
 import tools.exceptions.SettingNotFoundException;
@@ -88,7 +89,7 @@ public class KeywordInterface {
 				prev = Constant.getSpecialConstant(input);
 				return prev;
 			} else try {
-				 prev = FunctionParser.parseInfix(input);
+				 prev = MiscTools.minimalSimplify(FunctionParser.parseInfix(input));
 				 return prev;
 			} catch (Exception parserException) {
 				prev = parserException;

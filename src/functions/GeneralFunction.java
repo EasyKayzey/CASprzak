@@ -114,21 +114,6 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 		return substituteAll(f -> (f instanceof Variable v && toSubstitute.containsKey(v.varID)), f -> toSubstitute.get(((Variable) f).varID));
 	}
 
-	/**
-	 * Fixes some variables to the values given in the {@code Map<String, Double> values} by substituting in a {@link Constant} for each of those {@link Variable}s
-	 * @param values the map defining the substitutions to be made
-	 * @return a new function with the substitutions made
-	 */
-	public GeneralFunction setVariables(Map<String, Double> values) {
-		//noinspection unchecked
-		return substituteVariables(
-				Map.ofEntries(values.entrySet().stream()
-						.map(e -> Map.entry(e.getKey(), new Constant(e.getValue())))
-						.toArray(Map.Entry[]::new)
-				)
-		);
-	}
-
 
 	/**
 	 * Returns true when the two fully-simplified functions are equal

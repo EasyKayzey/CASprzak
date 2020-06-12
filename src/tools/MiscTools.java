@@ -145,4 +145,17 @@ public class MiscTools {
 			e.printStackTrace();
 		}
 	}
+
+	/**
+	 * Simplifies the input without executing any of the optional simplifications steps enabled and disabled in {@link Settings}
+	 * @param function the function to be minimally simplified
+	 * @return the minimally simplified version of the function
+	 */
+	public static GeneralFunction minimalSimplify(GeneralFunction function) {
+		boolean dF = Settings.distributeFunctions;
+		Settings.distributeFunctions = false;
+		GeneralFunction simplified = function.simplify();
+		Settings.distributeFunctions = dF;
+		return simplified;
+	}
 }

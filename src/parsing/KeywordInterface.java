@@ -5,6 +5,7 @@ import config.SettingsParser;
 import functions.GeneralFunction;
 import functions.special.Constant;
 import functions.unitary.transforms.Integral;
+import tools.MiscTools;
 import tools.ParsingTools;
 import tools.exceptions.CommandNotFoundException;
 import tools.exceptions.SettingNotFoundException;
@@ -56,16 +57,16 @@ public class KeywordInterface {
 			case "pdn", "pdiffn", "partialn", "pdifferentiaten"					-> partialDiffNth(splitInput[1]);
 			case "eval", "evaluate"												-> evaluate(splitInput[1]);
 			case "simp", "simplify"												-> simplify(splitInput[1]);
-			case "sub", "substitute"											-> substitute(splitInput[1]);
-			case "subs", "substitutesimplify"									-> substituteSimplify(splitInput[1]);
+			case "sub", "substitute"											-> substitute(splitInput[1], false);
+			case "subs", "substitutesimplify"									-> substitute(splitInput[1], true);
 			case "sa", "suball"													-> substituteAllInput(splitInput[1]);
 			case "sol", "solve"													-> solve(splitInput[1]);
 			case "ext", "extrema"												-> extrema(splitInput[1]);
 			case "tay", "taylor"												-> taylor(splitInput[1]);
 			case "intn", "intnumeric"											-> integrateNumeric(splitInput[1]);
 			case "intne", "intnumericerror"										-> integrateNumericError(splitInput[1]);
-			case "def", "deffunction"											-> defineFunction(splitInput[1]);
-			case "defs", "deffunctions", "deffunctionsimplify"					-> defineFunctionSimplify(splitInput[1]);
+			case "def", "deffunction"											-> defineFunction(splitInput[1], false);
+			case "defs", "deffunctions", "deffunctionsimplify"					-> defineFunction(splitInput[1], true);
 			case "defc", "defcon", "defconstant"								-> defineConstant(splitInput[1]);
 			case "rmf", "rmfun", "removefun", "removefunction"					-> removeFunction(splitInput[1]);
 			case "rmc", "rmconstant", "removeconstant"							-> removeConstant(splitInput[1]);
@@ -88,7 +89,7 @@ public class KeywordInterface {
 				prev = Constant.getSpecialConstant(input);
 				return prev;
 			} else try {
-				 prev = FunctionParser.parseInfix(input);
+				 prev = FunctionParser.parseSimplified(input);
 				 return prev;
 			} catch (Exception parserException) {
 				prev = parserException;
@@ -197,13 +198,13 @@ public class KeywordInterface {
 		return parseStored(input).simplify();
 	}
 
-	private static GeneralFunction substitute(String input) {
+	private static GeneralFunction substitute(String input, boolean simplify) {
 		String[] splitInput = keywordSplitter.split(input, 2);
-		return parseStored(splitInput[0]).substituteVariables(Arrays.stream(keywordSplitter.split(splitInput[1])).map(equals::split).collect(Collectors.toMap(e -> e[0], e -> parseStored(e[1]))));
-	}
-
-	private static Object substituteSimplify(String input) {
-		return substitute(input).simplify();
+		GeneralFunction current = parseStored(splitInput[0]).substituteVariables(Arrays.stream(keywordSplitter.split(splitInput[1])).map(equals::split).collect(Collectors.toMap(e -> e[0], e -> parseStored(e[1]))));
+		if (simplify)
+			return current.simplify();
+		else
+			return MiscTools.minimalSimplify(current);
 	}
 
 	private static GeneralFunction substituteAllInput(String input) {
@@ -232,19 +233,16 @@ public class KeywordInterface {
 		return TaylorSeries.makeTaylorSeries(parseStored(splitInput[0]), ParsingTools.toInteger(ParsingTools.getConstant(splitInput[1])), ParsingTools.getConstant(splitInput[2]));
 	}
 
-	private static Object defineFunction(String input) {
+	private static Object defineFunction(String input, boolean simplify) {
 		String[] splitInput = spaces.split(input, 2);
-		try {
-			storedFunctions.put(splitInput[0], (GeneralFunction) KeywordInterface.useKeywords(splitInput[1]));
-		} catch (RuntimeException e) {
-			storedFunctions.put(splitInput[0], parseStored(splitInput[1]));
-		}
-		return storedFunctions.get(splitInput[0]);
+		//A try-catch used to be here and was removed
+		GeneralFunction toPut = (GeneralFunction) KeywordInterface.useKeywords(splitInput[1]);
+		if (simplify)
+			toPut = toPut.simplify();
+		storedFunctions.put(splitInput[0], toPut);
+		return toPut;
 	}
 
-	private static Object defineFunctionSimplify(String s) {
-		return ((GeneralFunction) defineFunction(s)).simplify();
-	}
 
 	private static Object defineConstant(String input) {
 		String[] splitInput = spaces.split(input, 2);

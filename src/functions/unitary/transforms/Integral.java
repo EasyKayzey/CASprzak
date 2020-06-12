@@ -2,15 +2,15 @@ package functions.unitary.transforms;
 
 import functions.GeneralFunction;
 import functions.commutative.Product;
+import functions.special.Constant;
 import functions.unitary.UnitaryFunction;
 import tools.ArrayTools;
 import tools.DefaultFunctions;
-import tools.IntegralTools;
+import tools.MiscTools;
 import tools.exceptions.IntegrationFailedException;
 import tools.integration.StageOne;
 import tools.singlevariable.NumericalIntegration;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -83,17 +83,22 @@ public class Integral extends Transformation {
 	 * @param variableValues the values of the variables of the {@link GeneralFunction} at the point
 	 * @return the operand integrated numerically
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public double evaluate(Map<String, Double> variableValues) {
-		Map<String, Double> newMap = new HashMap<>(variableValues);
-		double bound = newMap.remove(respectTo);
-		return NumericalIntegration.simpsonsRule(operand.setVariables(newMap), 0, bound);
+		double bound = variableValues.get(respectTo);
+		Map<String, GeneralFunction> newMap = Map.ofEntries(variableValues.entrySet().stream()
+				.filter(e -> !e.getKey().equals(respectTo))
+				.map(e -> Map.entry(e.getKey(), new Constant(e.getValue())))
+				.toArray(Map.Entry[]::new)
+		);
+		return NumericalIntegration.simpsonsRule(operand.substituteVariables(newMap), 0, bound);
 	}
 
 
 	@Override
 	public Integral simplifyInternal() {
-		return new Integral(IntegralTools.minimalSimplify(operand), respectTo);
+		return new Integral(MiscTools.minimalSimplify(operand), respectTo);
 	}
 
 

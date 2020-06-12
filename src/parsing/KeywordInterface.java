@@ -337,13 +337,13 @@ public class KeywordInterface {
 			case "pdn", "pdiffn", "partialn", "pdifferentiaten"         			-> "Executes 'pd' [times] times.\n" +
 					"pdn [variable] [times] [function]";
 			case "eval", "evaluate"                                     			-> "Evaluates [function] at the values specified.\n" +
-					"eval [function] (var=val)*";
+					"eval [function] ([variable]=[value]])*";
 			case "simp", "simplify"                                     			-> "Simplifies [function].\n" +
 					"simp [function]";
 			case "sub", "substitute"                                    			-> "Substitutes [replacementfunction] into every instance of [variable] in [function].\n" +
-					"sub [function] [variable] [replacementfunction]";
+					"sub [function] ([variable]=[replacementfunction])+";
 			case "subs", "substitutesimplify"                                    	-> "Substitutes [replacementfunction] into every instance of [variable] in [function] and then simplifies.\n" +
-					"subs [function] [variable] [replacementfunction]";
+					"subs [function] ([variable]=[replacementfunction])+";
 			case "sa", "suball"														-> "Substites every pre-defined function into [function] in accordance with its name.\n" +
 					"sa [function]";
 			case "sol", "solve"                                         			-> "Solves [function] in one variable on a range.\n" +

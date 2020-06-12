@@ -18,7 +18,7 @@ public class SubstituteTest {
         GeneralFunction test1 = FunctionParser.parseInfix("\\sin(x)");
         GeneralFunction test2 = FunctionParser.parseInfix("y^2");
         GeneralFunction test3 = FunctionParser.parseInfix("\\sin(y^2)");
-        assertEquals(test1.substituteVariable(Map.of("x", test2)), test3);
+        assertEquals(test1.substituteVariables(Map.of("x", test2)), test3);
     }
 
     @Test
@@ -26,7 +26,7 @@ public class SubstituteTest {
         GeneralFunction test1 = FunctionParser.parseInfix("\\sin(x)");
         GeneralFunction test2 = FunctionParser.parseInfix("x^2");
         GeneralFunction test3 = FunctionParser.parseInfix("\\sin(x^2)");
-        assertEquals(test1.substituteVariable(Map.of("x", test2)), test3);
+        assertEquals(test1.substituteVariables(Map.of("x", test2)), test3);
     }
 
     @Test
@@ -34,7 +34,7 @@ public class SubstituteTest {
         GeneralFunction test1 = FunctionParser.parseInfix("\\sin(x)");
         GeneralFunction test2 = FunctionParser.parseInfix("x^2");
         GeneralFunction test3 = FunctionParser.parseInfix("\\sin(x)");
-        assertEquals(test1.substituteVariable(Map.of("y", test2)), test3);
+        assertEquals(test1.substituteVariables(Map.of("y", test2)), test3);
     }
 
     @Test

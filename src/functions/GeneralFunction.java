@@ -110,7 +110,7 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 	 * @param toSubstitute the map between {@link Variable} strings and {@link GeneralFunction}s
 	 * @return the new {@link GeneralFunction} after all substitutions are preformed
 	 */
-	public GeneralFunction substituteVariable(Map<String, ? extends GeneralFunction> toSubstitute) {
+	public GeneralFunction substituteVariables(Map<String, ? extends GeneralFunction> toSubstitute) {
 		return substituteAll(f -> (f instanceof Variable v && toSubstitute.containsKey(v.varID)), f -> toSubstitute.get(((Variable) f).varID));
 	}
 
@@ -121,7 +121,7 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 	 */
 	public GeneralFunction setVariables(Map<String, Double> values) {
 		//noinspection unchecked
-		return substituteVariable(
+		return substituteVariables(
 				Map.ofEntries(values.entrySet().stream()
 						.map(e -> Map.entry(e.getKey(), new Constant(e.getValue())))
 						.toArray(Map.Entry[]::new)

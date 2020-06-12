@@ -148,7 +148,7 @@ public class KeywordInterface {
 	 */
 	public static GeneralFunction substituteAll(GeneralFunction function) {
 		//noinspection unchecked
-		return function.substituteVariable(
+		return function.substituteVariables(
 					Map.ofEntries(storedFunctions.entrySet().stream()
 							.map(e -> Map.entry(LatexReplacer.encodeAll(e.getKey()), e.getValue()))
 							.toArray(Map.Entry[]::new)
@@ -199,7 +199,7 @@ public class KeywordInterface {
 
 	private static GeneralFunction substitute(String input) {
 		String[] splitInput = keywordSplitter.split(input, 2);
-		return parseStored(splitInput[0]).substituteVariable(Arrays.stream(keywordSplitter.split(splitInput[1])).map(equals::split).collect(Collectors.toMap(e -> e[0], e -> parseStored(e[1]))));
+		return parseStored(splitInput[0]).substituteVariables(Arrays.stream(keywordSplitter.split(splitInput[1])).map(equals::split).collect(Collectors.toMap(e -> e[0], e -> parseStored(e[1]))));
 	}
 
 	private static Object substituteSimplify(String input) {

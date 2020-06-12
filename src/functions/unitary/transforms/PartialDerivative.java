@@ -30,10 +30,10 @@ public class PartialDerivative extends Transformation {
 
 	
 	@Override
-	public GeneralFunction substituteVariable(Map<String, ? extends GeneralFunction> toSubstitute) {
+	public GeneralFunction substituteVariables(Map<String, ? extends GeneralFunction> toSubstitute) {
 		if (toSubstitute.containsKey(respectTo))
 			throw new UnsupportedOperationException("You cannot substitute the variable you are working with respect to");
-		return new PartialDerivative(operand.substituteVariable(toSubstitute), respectTo);
+		return new PartialDerivative(operand.substituteVariables(toSubstitute), respectTo);
 	}
 
 	@Override

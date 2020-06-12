@@ -51,7 +51,7 @@ public class Differential extends Transformation {
 	}
 
 	@Override
-	public GeneralFunction substituteVariable(Map<String, ? extends GeneralFunction> toSubstitute) {
+	public GeneralFunction substituteVariables(Map<String, ? extends GeneralFunction> toSubstitute) {
 		if (toSubstitute.containsKey(respectTo))
 			throw new UnsupportedOperationException("You cannot substitute the variable you are working with respect to");
 		return this;

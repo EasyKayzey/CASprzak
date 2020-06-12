@@ -41,9 +41,7 @@ public class OutputCommutative implements OutputFunction {
 	public String toAscii() {
 		return operands.stream()
 				.map(OutputFunction::toAscii)
-				.collect(
-						Collectors.joining(", ", functionName + "(", ")")
-				);
+				.collect(Collectors.joining(", ", functionName + "(", ")"));
 	}
 
 }

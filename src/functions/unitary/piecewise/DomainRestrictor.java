@@ -36,4 +36,9 @@ public class DomainRestrictor extends PiecewiseFunction{
         else
             return Double.NaN;
     }
+
+    @Override
+    public String toString() {
+        return operand.toString();
+    }
 }

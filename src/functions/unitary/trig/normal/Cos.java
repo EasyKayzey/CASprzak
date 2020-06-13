@@ -1,8 +1,10 @@
 package functions.unitary.trig.normal;
 
+import config.Settings;
 import functions.GeneralFunction;
 import functions.commutative.Product;
 import functions.unitary.UnitaryFunction;
+import functions.unitary.piecewise.DomainRestrictor;
 import functions.unitary.trig.inverse.Acos;
 import tools.DefaultFunctions;
 
@@ -44,5 +46,16 @@ public class Cos extends TrigFunction {
 
 	public GeneralFunction getElementaryIntegral() {
 		return new Sin(operand);
+	}
+
+	@Override
+	public GeneralFunction simplifyInverse() {
+		if (operand.getClass().isAssignableFrom(getInverse())) {
+			if (Settings.enforceDomainAndRange)
+				return new DomainRestrictor(((UnitaryFunction) operand).operand, a -> a > -1 && a < 1);
+			else
+				return ((UnitaryFunction) operand).operand;
+		} else
+			return this;
 	}
 }

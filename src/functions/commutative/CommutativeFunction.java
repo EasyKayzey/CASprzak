@@ -3,12 +3,15 @@ package functions.commutative;
 import functions.GeneralFunction;
 import functions.special.Constant;
 import org.jetbrains.annotations.NotNull;
+import output.OutputFunction;
+import output.commutative.OutputCommutative;
 import tools.ArrayTools;
 
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 /**
  * The abstract {@link CommutativeFunction} class represents function that are commutative. Ex: {@code addition} or {@code multiplication}
@@ -76,6 +79,16 @@ public abstract class CommutativeFunction extends GeneralFunction {
 			throw new IllegalCallerException("Illegally called CommutativeFunction.compareSelf on a non-CommutativeFunction");
 		}
 		throw new IllegalStateException("This code in CommutativeFunction.compareSelf should never run.");
+	}
+
+
+	public OutputFunction toOutputFunction() {
+		return new OutputCommutative(
+				getClass().getSimpleName().toLowerCase(),
+				Arrays.stream(functions)
+						.map(GeneralFunction::toOutputFunction)
+						.collect(Collectors.toList())
+		);
 	}
 
 	public GeneralFunction substituteAll(Predicate<? super GeneralFunction> test, Function<? super GeneralFunction, ? extends GeneralFunction> replacer) {

@@ -2,6 +2,8 @@ package functions.special;
 
 import functions.GeneralFunction;
 import org.jetbrains.annotations.NotNull;
+import output.OutputEndpoint;
+import output.OutputFunction;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -18,6 +20,10 @@ public abstract class SpecialFunction extends GeneralFunction {
 			return replacer.apply(this);
 		else
 			return this;
+	}
+
+	public OutputFunction toOutputFunction() {
+		return new OutputEndpoint(this);
 	}
 
 	public @NotNull Iterator<GeneralFunction> iterator() {

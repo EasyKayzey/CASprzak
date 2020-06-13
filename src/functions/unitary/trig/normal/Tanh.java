@@ -56,7 +56,7 @@ public class Tanh extends TrigFunction {
 		if (operand.getClass().isAssignableFrom(getInverse())) {
 			GeneralFunction insideFunction = ((UnitaryFunction) operand).operand;
 			if (Settings.enforceDomainAndRange)
-				return new DomainRestrictor(insideFunction, a -> a > -1 && a < 1);
+				return new DomainRestrictor(insideFunction, a -> a >= -1 && a <= 1);
 			else
 				return insideFunction;
 		} else

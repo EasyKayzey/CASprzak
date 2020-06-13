@@ -1,8 +1,10 @@
 package functions.unitary.trig.normal;
 
+import config.Settings;
 import functions.GeneralFunction;
 import functions.commutative.Product;
 import functions.unitary.UnitaryFunction;
+import functions.unitary.piecewise.DomainRestrictor;
 import functions.unitary.trig.inverse.Asin;
 import tools.DefaultFunctions;
 
@@ -44,5 +46,17 @@ public class Sin extends TrigFunction {
 
 	public Class<?> getInverse() {
 		return Asin.class;
+	}
+
+	@Override
+	public GeneralFunction simplifyInverse() {
+		if (operand.getClass().isAssignableFrom(getInverse())) {
+			GeneralFunction insideFunction = ((UnitaryFunction) operand).operand;
+			if (Settings.enforceDomainAndRange)
+				return new DomainRestrictor(insideFunction, a -> a > -1 && a < 1);
+			else
+				return insideFunction;
+		} else
+			return this;
 	}
 }

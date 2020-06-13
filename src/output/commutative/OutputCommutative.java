@@ -44,4 +44,15 @@ public class OutputCommutative implements OutputFunction {
 				.collect(Collectors.joining(", ", functionName + "(", ")"));
 	}
 
+	public boolean equals(Object that) {
+		if (that instanceof OutputCommutative other)
+			return functionName.equals(other.functionName) && operands.equals(other.operands);
+		else
+			return false;
+	}
+
+	public int hashCode() {
+		return operands.hashCode() + 7 * functionName.hashCode();
+	}
+
 }

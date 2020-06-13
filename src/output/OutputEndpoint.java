@@ -29,4 +29,15 @@ public class OutputEndpoint implements OutputFunction {
 		return contained.toString();
 	}
 
+	public boolean equals(Object that) {
+		if (that instanceof OutputEndpoint other)
+			return contained.equalsFunction(other.contained);
+		else
+			return false;
+	}
+
+	public int hashCode() {
+		return contained.hashCode() + 7 * getClass().hashCode();
+	}
+
 }

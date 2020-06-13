@@ -32,4 +32,15 @@ public class OutputUnitary implements OutputFunction {
 		return functionName + "(" + operand.toAscii() + ")";
 	}
 
+	public boolean equals(Object that) {
+		if (that instanceof OutputUnitary other)
+			return functionName.equals(other.functionName) && operand.equals(other.operand);
+		else
+			return false;
+	}
+
+	public int hashCode() {
+		return operand.hashCode() + 7 * functionName.hashCode();
+	}
+
 }

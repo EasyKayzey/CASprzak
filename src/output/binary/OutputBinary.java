@@ -35,4 +35,16 @@ public class OutputBinary implements OutputFunction {
 		return functionName + "(" + first.toAscii() + ", " + second.toAscii() + ")";
 	}
 
+
+	public boolean equals(Object that) {
+		if (that instanceof OutputBinary other)
+			return functionName.equals(other.functionName) && first.equals(other.first) && second.equals(other.second);
+		else
+			return false;
+	}
+
+	public int hashCode() {
+		return first.hashCode() + 7 * second.hashCode() + 31 * functionName.hashCode();
+	}
+
 }

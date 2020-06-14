@@ -30,6 +30,10 @@ public class OutputUnitary implements OutputFunction {
 		return functionName + "(" + operand.toString() + ")";
 	}
 
+	public String toLatex() {
+		return toString();
+	}
+
 	public boolean equals(Object that) {
 		if (that instanceof OutputUnitary other)
 			return functionName.equals(other.functionName) && operand.equals(other.operand);

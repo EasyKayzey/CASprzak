@@ -29,6 +29,10 @@ public class OutputEndpoint implements OutputFunction {
 		return contained.toString();
 	}
 
+	public String toLatex() {
+		return toString();
+	}
+
 	public boolean equals(Object that) {
 		if (that instanceof OutputEndpoint other)
 			return contained.equalsFunction(other.contained);

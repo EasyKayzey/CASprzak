@@ -33,6 +33,9 @@ public class OutputBinary implements OutputFunction {
 		return functionName + "(" + first.toString() + ", " + second.toString() + ")";
 	}
 
+	public String toLatex() {
+		return toString();
+	}
 
 	public boolean equals(Object that) {
 		if (that instanceof OutputBinary other)

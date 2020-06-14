@@ -45,6 +45,10 @@ public class OutputCommutative implements OutputFunction {
 				.collect(joiningCollector);
 	}
 
+	public String toLatex() {
+		return toString();
+	}
+
 	public boolean equals(Object that) {
 		if (that instanceof OutputCommutative other)
 			return functionName.equals(other.functionName) && operands.equals(other.operands);

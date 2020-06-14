@@ -22,4 +22,10 @@ public interface OutputFunction {
 	 */
 	String toString();
 
+	/**
+	 * Returns a `LaTeX` representation of the function tree
+	 * @return a `LaTeX` representation of the function tree
+	 */
+	String toLatex();
+
 }

@@ -10,8 +10,6 @@ import tools.exceptions.DerivativeDoesNotExistException;
 
 import java.util.Arrays;
 import java.util.Map;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 /**
  * {@link IntegerCommutativeFunction} provides resources for subclasses to implement mathematical functions with integer-restricted domain.
@@ -41,10 +39,6 @@ public abstract class IntegerCommutativeFunction extends CommutativeFunction {
 				.mapToInt(f -> ParsingTools.toInteger(f.evaluate(variableValues)))
 				.toArray();
 		return operateInt(toOperate);
-	}
-
-	protected Collector<CharSequence, ?, String> getJoiningCollector() {
-		return Collectors.joining(", ", this.getClass().getSimpleName().toLowerCase() + "(", ")");
 	}
 
 	public double operate(double a, double b) {

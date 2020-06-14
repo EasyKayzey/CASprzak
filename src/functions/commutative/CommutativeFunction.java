@@ -57,7 +57,9 @@ public abstract class CommutativeFunction extends GeneralFunction {
 	 * Returns a collector used to create the {@code toString} of the {@link CommutativeFunction}
 	 * @return a joining collector
 	 */
-	protected abstract Collector<CharSequence, ?, String> getJoiningCollector();
+	protected Collector<CharSequence, ?, String> getJoiningCollector() {
+		return Collectors.joining(", ", this.getClass().getSimpleName().toLowerCase() + "(", ")");
+	}
 
 	public boolean equalsFunction(GeneralFunction that) {
 		if (that instanceof CommutativeFunction function && this.getClass().equals(that.getClass()))

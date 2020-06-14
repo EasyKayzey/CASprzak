@@ -289,8 +289,8 @@ public class FunctionTest {
 		assertEquals(test.evaluate(null), -3.13737923732, 0.001);
 		test = FunctionParser.parseSimplified("\\arccosh(7)");
 		assertEquals(test.evaluate(null), 2.63391579385, 0.001);
-		test = FunctionParser.parseSimplified("\\arccosh(.5)");
-		assertEquals(test.evaluate(null), 0.549306144334, 0.001);
+		test = FunctionParser.parseSimplified("\\arccosh(1.6)");
+		assertEquals(test.evaluate(null), 1.0469679, 0.001);
 		test = FunctionParser.parseSimplified("\\arccsch(-.56)");
 		assertEquals(test.evaluate(null), -1.34348187431, 0.001);
 		test = FunctionParser.parseSimplified("\\arcsech(.4)");

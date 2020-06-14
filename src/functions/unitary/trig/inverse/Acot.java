@@ -36,11 +36,7 @@ public class Acot extends InverseTrigFunction {
 	@Override
 	public double evaluate(Map<String, Double> variableValues) {
 		double functionEvaluated = operand.evaluate(variableValues);
-		if (functionEvaluated < 0) {
-			return -0.5 * Math.PI - Math.atan(functionEvaluated);
-		} else {
-			return 0.5 * Math.PI - Math.atan(functionEvaluated);
-		}
+		return 0.5 * Math.PI - Math.atan(functionEvaluated);
 	}
 
 

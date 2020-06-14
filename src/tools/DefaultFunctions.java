@@ -168,4 +168,14 @@ public class DefaultFunctions {
 	public static Product frac(GeneralFunction first, GeneralFunction second) {
 		return new Product(first, DefaultFunctions.reciprocal(second));
 	}
+
+	/**
+	 * Returns the the function corresponding to {@code first - second}
+	 * @param first the input {@link GeneralFunction}
+	 * @param second the input {@link GeneralFunction}
+	 * @return the the function corresponding to {@code first - second}
+	 */
+	public static Sum subtract(GeneralFunction first, GeneralFunction second) {
+		return new Sum(first, DefaultFunctions.negative(second));
+	}
 }

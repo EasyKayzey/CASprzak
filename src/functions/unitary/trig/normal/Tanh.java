@@ -1,8 +1,10 @@
 package functions.unitary.trig.normal;
 
+import config.Settings;
 import functions.GeneralFunction;
 import functions.binary.Pow;
 import functions.commutative.Product;
+import functions.unitary.piecewise.DomainRestrictor;
 import functions.unitary.specialcases.Ln;
 import functions.unitary.UnitaryFunction;
 import functions.unitary.trig.inverse.Atanh;
@@ -47,5 +49,17 @@ public class Tanh extends TrigFunction {
 
 	public Class<?> getInverse() {
 		return Atanh.class;
+	}
+
+	@Override
+	public GeneralFunction simplifyInverse() {
+		if (operand.getClass().isAssignableFrom(getInverse())) {
+			GeneralFunction insideFunction = ((UnitaryFunction) operand).operand;
+			if (Settings.enforceDomainAndRange)
+				return new DomainRestrictor(insideFunction, a -> a >= -1 && a <= 1);
+			else
+				return insideFunction;
+		} else
+			return this;
 	}
 }

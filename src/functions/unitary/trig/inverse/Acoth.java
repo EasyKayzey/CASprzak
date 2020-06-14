@@ -34,7 +34,7 @@ public class Acoth extends InverseTrigFunction {
 	@Override
 	public double evaluate(Map<String, Double> variableValues) {
 		double functionEvaluated = operand.evaluate(variableValues);
-		return 0.5 * Math.log((1 + functionEvaluated) / (1 + functionEvaluated));
+		return 0.5 * Math.log((1 + functionEvaluated) / (functionEvaluated - 1));
 	}
 
 

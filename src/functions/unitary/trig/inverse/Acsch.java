@@ -34,7 +34,10 @@ public class Acsch extends InverseTrigFunction {
 	@Override
 	public double evaluate(Map<String, Double> variableValues) {
 		double functionEvaluated = operand.evaluate(variableValues);
-		return Math.log((1 + Math.sqrt(functionEvaluated * functionEvaluated + 1)) / functionEvaluated);
+		if (functionEvaluated > 0)
+			return Math.log((1 + Math.sqrt(functionEvaluated * functionEvaluated + 1)) / functionEvaluated);
+		else
+			return Math.log((1 - Math.sqrt(functionEvaluated * functionEvaluated + 1)) / functionEvaluated);
 	}
 
 

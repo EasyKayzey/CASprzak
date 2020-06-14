@@ -18,16 +18,6 @@ public class DefaultFunctions {
 	private DefaultFunctions(){}
 
 	/**
-	 * A {@link Constant} with the value of {@code π}
-	 */
-	public static final Constant PI = new Constant("π");
-
-	/**
-	 * A {@link Constant} with the value of {@code e}
-	 */
-	public static final Constant E = new Constant("e");
-
-	/**
 	 * A {@link Constant} with the value of {@code -2}
 	 */
 	public static final Constant NEGATIVE_TWO = new Constant(-2);
@@ -66,6 +56,26 @@ public class DefaultFunctions {
 	 * A {@link Constant} with the value of {@code 10}
 	 */
 	public static final Constant TEN = new Constant(10);
+
+	/**
+	 * A {@link Constant} with the value of {@code π/2}
+	 */
+	public static final Constant HALF_PI = new Constant(Math.PI/2);
+
+	/**
+	 * A {@link Constant} with the value of {@code π}
+	 */
+	public static final Constant PI = new Constant("π");
+
+	/**
+	 * A {@link Constant} with the value of {@code 2π}
+	 */
+	public static final Constant TWO_PI = new Constant(Math.PI*2);
+
+	/**
+	 * A {@link Constant} with the value of {@code e}
+	 */
+	public static final Constant E = new Constant("e");
 
 
 	/**
@@ -151,11 +161,21 @@ public class DefaultFunctions {
 
 	/**
 	 * Returns the the function corresponding to {@code first/second}
-	 * @param first the input {@link GeneralFunction}
-	 * @param second the input {@link GeneralFunction}
+	 * @param numerator the input {@link GeneralFunction}
+	 * @param denominator the input {@link GeneralFunction}
 	 * @return the the function corresponding to {@code first/second}
 	 */
-	public static Product frac(GeneralFunction first, GeneralFunction second) {
-		return new Product(first, DefaultFunctions.reciprocal(second));
+	public static Product frac(GeneralFunction numerator, GeneralFunction denominator) {
+		return new Product(numerator, DefaultFunctions.reciprocal(denominator));
+	}
+
+	/**
+	 * Returns the the function corresponding to {@code first - second}
+	 * @param first the input {@link GeneralFunction}
+	 * @param second the input {@link GeneralFunction}
+	 * @return the the function corresponding to {@code first - second}
+	 */
+	public static Sum subtract(GeneralFunction first, GeneralFunction second) {
+		return new Sum(first, DefaultFunctions.negative(second));
 	}
 }

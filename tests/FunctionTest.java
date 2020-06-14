@@ -271,4 +271,59 @@ public class FunctionTest {
 		test = FunctionParser.parseSimplified("\\arccoth(x)");
 		assertEquals(new Acoth(DefaultFunctions.X), test);
 	}
+
+	@Test void arctrigEval() {
+		GeneralFunction test = FunctionParser.parseSimplified("\\arcsin(0.7)");
+		assertEquals(0.775397496611, test.evaluate(null), 0.001);
+		test = FunctionParser.parseSimplified("\\arccos(0.7)");
+		assertEquals(0.795398830184, test.evaluate(null), 0.001);
+		test = FunctionParser.parseSimplified("\\arctan(11.5)");
+		assertEquals( 1.48405798812, test.evaluate(null), 0.001);
+		test = FunctionParser.parseSimplified("\\arccsc(11.5)");
+		assertEquals(0.0870664823474, test.evaluate(null), 0.001);
+		test = FunctionParser.parseSimplified("\\arcsec(11.5)");
+		assertEquals(1.4837294445, test.evaluate(null), 0.001);
+		test = FunctionParser.parseSimplified("\\arccot(-11.5)");
+		assertEquals(3.05485421491, test.evaluate(null), 0.001);
+		test = FunctionParser.parseSimplified("\\arcsinh(-11.5)");
+		assertEquals( -3.13737923732, test.evaluate(null), 0.001);
+		test = FunctionParser.parseSimplified("\\arccosh(7)");
+		assertEquals(2.63391579385, test.evaluate(null), 0.001);
+		test = FunctionParser.parseSimplified("\\arctanh(.6)");
+		assertEquals(0.69314, test.evaluate(null), 0.001);
+		test = FunctionParser.parseSimplified("\\arccsch(-.56)");
+		assertEquals( -1.34348187431, test.evaluate(null), 0.001);
+		test = FunctionParser.parseSimplified("\\arcsech(.4)");
+		assertEquals(1.56679923697, test.evaluate(null), 0.001);
+		test = FunctionParser.parseSimplified("\\arccoth(1.5)");
+		assertEquals(0.804718956217, test.evaluate(null), 0.001);
+	}
+
+	@Test void arcOfNormal() {
+		GeneralFunction test = FunctionParser.parseSimplified("\\arcsin(sin(43))");
+		assertEquals(-0.982297150257, test.evaluate(null), 0.001);
+		test = FunctionParser.parseSimplified("\\arccos(cos(43))");
+		assertEquals(0.9822971, test.evaluate(null), 0.001);
+		test = FunctionParser.parseSimplified("\\arctan(tan(11.5))");
+		assertEquals(-1.06637061, test.evaluate(null), 0.001);
+		test = FunctionParser.parseSimplified("\\arccsc(csc(11.5))");
+		assertEquals(-1.06637, test.evaluate(null), 0.001);
+		test = FunctionParser.parseSimplified("\\arcsec(sec(11.5))");
+		assertEquals(1.06637061, test.evaluate(null), 0.001);
+		test = FunctionParser.parseSimplified("\\arccot(cot(-11.5))");
+		assertEquals( 1.06637061, test.evaluate(null), 0.001);
+		test = FunctionParser.parseSimplified("\\arcsinh(sinh(-11.5))");
+		assertEquals( -11.5, test.evaluate(null), 0.001);
+		test = FunctionParser.parseSimplified("\\arccosh(cosh(7))");
+		assertEquals(7, test.evaluate(null),  0.001);
+		test = FunctionParser.parseSimplified("\\arctan(tan(.6))");
+		assertEquals(.6, test.evaluate(null), 0.001);
+		test = FunctionParser.parseSimplified("\\arccsch(csch(-.56))");
+		assertEquals(-.56, test.evaluate(null), 0.001);
+		test = FunctionParser.parseSimplified("\\arcsech(sech(.4))");
+		assertEquals(.4, test.evaluate(null), 0.001);
+		test = FunctionParser.parseSimplified("\\arccoth(coth(1.5))");
+		assertEquals(1.5, test.evaluate(null), 0.001);
+	}
+
 }

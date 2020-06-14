@@ -1,7 +1,9 @@
 package functions.unitary.trig.inverse;
 
+import config.Settings;
 import functions.GeneralFunction;
 import functions.binary.Pow;
+import functions.binary.integer.Modulo;
 import functions.commutative.Sum;
 import functions.commutative.Product;
 import functions.unitary.piecewise.Abs;
@@ -37,11 +39,9 @@ public class Acsc extends InverseTrigFunction {
 	public double evaluate(Map<String, Double> variableValues) {
 		double functionEvaluated = operand.evaluate(variableValues);
 		if (functionEvaluated > 1) {
-			//noinspection DuplicateExpressions
 			return Math.acos(Math.sqrt(Math.pow(functionEvaluated, 2) - 1) / functionEvaluated);
 		} else if (functionEvaluated < -1) {
-			//noinspection DuplicateExpressions
-			return -Math.acos(Math.sqrt(Math.pow(functionEvaluated, 2) - 1) / functionEvaluated);
+			return -Math.acos(-Math.sqrt(Math.pow(functionEvaluated, 2) - 1) / functionEvaluated);
 		} else {
 			return Double.NaN;
 		}
@@ -54,5 +54,17 @@ public class Acsc extends InverseTrigFunction {
 
 	public Class<?> getInverse() {
 		return Csc.class;
+	}
+
+	@Override
+	public GeneralFunction simplifyInverse() {
+		if (operand.getClass().isAssignableFrom(getInverse())) {
+			GeneralFunction insideFunction = ((UnitaryFunction) operand).operand;
+			if (Settings.enforceDomainAndRange)
+				return DefaultFunctions.subtract(new Abs(DefaultFunctions.subtract(new Modulo(DefaultFunctions.TWO_PI, DefaultFunctions.subtract(insideFunction, DefaultFunctions.HALF_PI)), DefaultFunctions.PI)), DefaultFunctions.HALF_PI);
+			else
+				return insideFunction;
+		} else
+			return this;
 	}
 }

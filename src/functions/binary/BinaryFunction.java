@@ -4,7 +4,7 @@ import functions.GeneralFunction;
 import functions.special.Constant;
 import org.jetbrains.annotations.NotNull;
 import output.OutputFunction;
-import output.binary.OutputBinary;
+import output.OutputBinary;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;

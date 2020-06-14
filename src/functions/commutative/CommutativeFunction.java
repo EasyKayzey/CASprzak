@@ -4,7 +4,7 @@ import functions.GeneralFunction;
 import functions.special.Constant;
 import org.jetbrains.annotations.NotNull;
 import output.OutputFunction;
-import output.commutative.OutputCommutative;
+import output.OutputCommutative;
 import tools.ArrayTools;
 
 import java.util.*;

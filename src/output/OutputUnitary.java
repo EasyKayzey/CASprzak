@@ -1,6 +1,4 @@
-package output.unitary;
-
-import output.OutputFunction;
+package output;
 
 import java.util.Collection;
 import java.util.List;

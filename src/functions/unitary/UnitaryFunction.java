@@ -6,7 +6,7 @@ import functions.Invertible;
 import functions.special.Constant;
 import org.jetbrains.annotations.NotNull;
 import output.OutputFunction;
-import output.unitary.OutputUnitary;
+import output.OutputUnitary;
 
 import java.lang.reflect.Constructor;
 import java.util.Iterator;

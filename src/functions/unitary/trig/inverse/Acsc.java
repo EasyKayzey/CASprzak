@@ -43,7 +43,7 @@ public class Acsc extends InverseTrigFunction {
 			return Math.acos(Math.sqrt(Math.pow(functionEvaluated, 2) - 1) / functionEvaluated);
 		} else if (functionEvaluated < -1) {
 			//noinspection DuplicateExpressions
-			return -Math.acos(Math.sqrt(Math.pow(functionEvaluated, 2) - 1) / (-1*functionEvaluated));
+			return -Math.acos(Math.sqrt(Math.pow(functionEvaluated, 2) - 1) / (-functionEvaluated));
 		} else {
 			return Double.NaN;
 		}

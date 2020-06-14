@@ -40,7 +40,7 @@ public class Settings {
 	/*
 	 * The maximum length that a LaTeX escape extends before expiring. This setting can only be changed through the config; modifying it during runtime will not do anything.
 	 */
-	public static int maxEscapeLength = 6;
+	public static int maxEscapeLength = 8;
 
 	/**
 	 * The variable to be used in {@link tools.singlevariable} when none is specified

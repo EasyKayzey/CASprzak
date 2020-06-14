@@ -1,6 +1,8 @@
 import functions.GeneralFunction;
+import functions.unitary.trig.inverse.*;
 import org.junit.jupiter.api.Test;
 import parsing.FunctionParser;
+import tools.DefaultFunctions;
 
 import java.util.Map;
 
@@ -240,5 +242,33 @@ public class FunctionTest {
 	@Test void sign() {
 		GeneralFunction test = FunctionParser.parseSimplified("\\sign(x)");
 		assertEquals(-1, test.evaluate(Map.of("x", -4.0)));
+	}
+
+
+	@Test void arctrigParsing() {
+		GeneralFunction test = FunctionParser.parseSimplified("\\arcsin(x)");
+		assertEquals(new Asin(DefaultFunctions.X), test);
+		test = FunctionParser.parseSimplified("\\arccos(x)");
+		assertEquals(new Acos(DefaultFunctions.X), test);
+		test = FunctionParser.parseSimplified("\\arctan(x)");
+		assertEquals(new Atan(DefaultFunctions.X), test);
+		test = FunctionParser.parseSimplified("\\arccsc(x)");
+		assertEquals(new Acsc(DefaultFunctions.X), test);
+		test = FunctionParser.parseSimplified("\\arcsec(x)");
+		assertEquals(new Asec(DefaultFunctions.X), test);
+		test = FunctionParser.parseSimplified("\\arccot(x)");
+		assertEquals(new Acot(DefaultFunctions.X), test);
+		test = FunctionParser.parseSimplified("\\arcsinh(x)");
+		assertEquals(new Asinh(DefaultFunctions.X), test);
+		test = FunctionParser.parseSimplified("\\arccosh(x)");
+		assertEquals(new Acosh(DefaultFunctions.X), test);
+		test = FunctionParser.parseSimplified("\\arctanh(x)");
+		assertEquals(new Atanh(DefaultFunctions.X), test);
+		test = FunctionParser.parseSimplified("\\arccsch(x)");
+		assertEquals(new Acsch(DefaultFunctions.X), test);
+		test = FunctionParser.parseSimplified("\\arcsech(x)");
+		assertEquals(new Asech(DefaultFunctions.X), test);
+		test = FunctionParser.parseSimplified("\\arccoth(x)");
+		assertEquals(new Acoth(DefaultFunctions.X), test);
 	}
 }

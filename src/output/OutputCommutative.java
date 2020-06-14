@@ -2,11 +2,13 @@ package output;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class OutputCommutative implements OutputFunction {
 
 	protected final String functionName;
+	protected final Collector<CharSequence, ?, String> joiningCollector;
 	protected final List<OutputFunction> operands;
 
 	/**
@@ -17,6 +19,7 @@ public class OutputCommutative implements OutputFunction {
 	public OutputCommutative(String functionName, List<OutputFunction> operands) {
 		this.functionName = functionName;
 		this.operands = operands;
+		this.joiningCollector =  Collectors.joining(", ", functionName + "(", ")");
 	}
 
 	/**
@@ -39,7 +42,7 @@ public class OutputCommutative implements OutputFunction {
 	public String toString() {
 		return operands.stream()
 				.map(OutputFunction::toString)
-				.collect(Collectors.joining(", ", functionName + "(", ")"));
+				.collect(joiningCollector);
 	}
 
 	public boolean equals(Object that) {

@@ -3,6 +3,8 @@ package functions.unitary.piecewise;
 import functions.GeneralFunction;
 import functions.commutative.Product;
 import functions.unitary.UnitaryFunction;
+import output.OutputFunction;
+import output.OutputUnitary;
 
 import java.util.Map;
 
@@ -29,4 +31,29 @@ public class Abs extends PiecewiseFunction {
 	public UnitaryFunction getInstance(GeneralFunction operand) {
 		return new Abs(operand);
 	}
+
+	public String toString() {
+		return "|" + operand + "|";
+	}
+
+	public OutputFunction toOutputFunction() {
+		return new OutputAbs(operand.toOutputFunction());
+	}
+
+	private static class OutputAbs extends OutputUnitary {
+
+		public OutputAbs(OutputFunction operand) {
+			super("abs", operand);
+		}
+
+		public String toString() {
+			return "|" + operand + "|";
+		}
+
+		public String toLatex() {
+			return "|" + operand.toLatex() + "|";
+		}
+
+	}
+
 }

@@ -1,10 +1,12 @@
 package functions.unitary.trig.inverse;
 
+import config.Settings;
 import functions.GeneralFunction;
 import functions.binary.Pow;
-import functions.commutative.Sum;
 import functions.commutative.Product;
+import functions.commutative.Sum;
 import functions.unitary.UnitaryFunction;
+import functions.unitary.piecewise.Abs;
 import functions.unitary.trig.normal.Cosh;
 import tools.DefaultFunctions;
 
@@ -44,5 +46,17 @@ public class Acosh extends InverseTrigFunction {
 
 	public Class<?> getInverse() {
 		return Cosh.class;
+	}
+
+	@Override
+	public GeneralFunction simplifyInverse() {
+		if (operand.getClass().isAssignableFrom(getInverse())) {
+			GeneralFunction insideFunction = ((UnitaryFunction) operand).operand;
+			if (Settings.enforceDomainAndRange)
+				return new Abs(insideFunction);
+			else
+				return insideFunction;
+		} else
+			return this;
 	}
 }

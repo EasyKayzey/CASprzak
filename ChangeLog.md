@@ -4,7 +4,7 @@
  - Integer division (with `//`), modulo, lcm, and gcd operations
  - Floor, ceiling, rounding, and random operations
  - Add new abstract classes for new integer operations
- - Add settings to enforce domain and range when simplifying trig functions
+ - Add settings to enforce functions' domain and range when simplifying trig functions
 
 ### Minor Additions
  - Make parsing errors more descriptive
@@ -18,6 +18,7 @@
  ### Bugfixes
  - Fix `toInteger` error message using the wrong margin from `Settings`
  - Fix bad rounding in `ParsingTools.toInteger` and `ParsingTools.isAlmostInteger`
+  - Fix the evaluation of several arctrig functions 
  
 ## v0.1.2
 ### Bugfixes
@@ -28,7 +29,6 @@
  - Improves support for carriage returns
  - Fix bug that caused CASDemo to exit on entry if it had been previously completed
  - Make TaylorSeries use SingleVariableDefault and not "x"
- - Fix the `evaluate` method of several arctrig functions 
   
 ## v0.1.0
 ### Major Additions

@@ -5,6 +5,7 @@ import config.SettingsParser;
 import functions.GeneralFunction;
 import functions.special.Constant;
 import functions.unitary.transforms.Integral;
+import output.OutputFunction;
 import tools.MiscTools;
 import tools.ParsingTools;
 import tools.exceptions.CommandNotFoundException;
@@ -18,6 +19,7 @@ import ui.CASDemo;
 
 import java.lang.reflect.Field;
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -102,26 +104,41 @@ public class KeywordInterface {
 
 	@SuppressWarnings("SameReturnValue")
 	private static Object debug(String input) {
-		switch (input) {
-			case "fp", "parse", "parser"  -> {
-				Scanner scanner = new Scanner(System.in);
-				scanner.useDelimiter(ParsingTools.newline);
-				input = scanner.next();
-				while (!"exit".equals(input) && !"!".equals(input)) {
-					try {
-						System.out.println("PSto: " + parseStored(input));
-					} catch (Exception e) {
-						e.printStackTrace();
-					} try {
-						System.out.println("PSim: " + FunctionParser.parseSimplified(input));
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-					input = scanner.next();
+		Scanner scanner = new Scanner(System.in);
+		Consumer<String> debug = switch (input.toLowerCase()) {
+			case "fp", "parse", "parser" -> string -> {
+				try {
+					System.out.println("PSto: " + parseStored(string));
+				} catch (Exception e) {
+					e.printStackTrace();
+				} try {
+					System.out.println("PSim: " + FunctionParser.parseSimplified(string));
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
-			}
+			};
+			case "o", "out" -> string -> {
+				GeneralFunction parsed = parseStored(string);
+				OutputFunction out = parsed.toOutputFunction();
+				try {
+					System.out.println("FTS: " + parsed);
+				} catch (Exception e) {
+					e.printStackTrace();
+				} try {
+					System.out.println("OTS: " + out);
+				} catch (Exception e) {
+					e.printStackTrace();
+				} try {
+					System.out.println("OL: " + out.toLatex());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			};
 			default -> throw new SettingNotFoundException(input, "debug");
-		}
+		};
+		while (!"exit".equals(input) && !"!".equals(input))
+			//noinspection NestedAssignment
+			debug.accept(input = scanner.nextLine());
 		return "Done.";
 	}
 

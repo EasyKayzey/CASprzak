@@ -18,7 +18,7 @@
  ### Bugfixes
  - Fix `toInteger` error message using the wrong margin from `Settings`
  - Fix bad rounding in `ParsingTools.toInteger` and `ParsingTools.isAlmostInteger`
-  - Fix the evaluation of several arctrig functions 
+ - Fix the evaluation of several arctrig functions 
  
 ## v0.1.2
 ### Bugfixes

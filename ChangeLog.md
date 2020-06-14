@@ -4,6 +4,7 @@
  - Integer division (with `//`), modulo, lcm, and gcd operations
  - Floor, ceiling, rounding, and random operations
  - Add new abstract classes for new integer operations
+ - Add new setting that enforces domain and range
 
 ### Minor Additions
  - Make parsing errors more descriptive

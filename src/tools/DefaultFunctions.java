@@ -23,6 +23,16 @@ public class DefaultFunctions {
 	public static final Constant PI = new Constant("π");
 
 	/**
+	 * A {@link Constant} with the value of {@code π/2}
+	 */
+	public static final Constant HALF_PI = new Constant(Math.PI/2);
+
+	/**
+	 * A {@link Constant} with the value of {@code 2π}
+	 */
+	public static final Constant DOUBLE_PI = new Constant(Math.PI*2);
+
+	/**
 	 * A {@link Constant} with the value of {@code e}
 	 */
 	public static final Constant E = new Constant("e");

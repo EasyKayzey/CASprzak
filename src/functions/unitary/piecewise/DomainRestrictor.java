@@ -22,7 +22,7 @@ public class DomainRestrictor extends PiecewiseFunction {
     /**
      * Constructs a new {@link DomainRestrictor}
      * @param operand The function whose output will be restricted
-     * @param domainTester the {@code BiPredicate} describing the domain of the function
+     * @param domainTester the {@code BiPredicate<Double, Map<String, Double>>} describing the domain of the function
      */
     public DomainRestrictor(GeneralFunction operand, BiPredicate<Double, Map<String, Double>> domainTester) {
         super(operand);

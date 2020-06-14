@@ -1,6 +1,5 @@
 package tools;
 
-import config.Settings;
 import functions.GeneralFunction;
 import functions.commutative.Product;
 import tools.helperclasses.Pair;

@@ -125,7 +125,7 @@ public class Settings {
 	/**
 	 * Denotes whether or not inverse simplifications conserve domain and range
 	 */
-	public static boolean enforceDomainAndRange = true;
+	public static boolean enforceDomainAndRange = false;
 
 	static {
 		//noinspection ConstantConditions

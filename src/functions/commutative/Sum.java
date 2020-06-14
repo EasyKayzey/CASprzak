@@ -15,6 +15,9 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class Sum extends CommutativeFunction {
+
+	private static final Collector<CharSequence, ?, String> joiningCollector = Collectors.joining(" + ", "(", ")");
+
 	/**
 	 * Constructs a new {@link Sum}
 	 * @param functions The terms being added together
@@ -47,7 +50,7 @@ public class Sum extends CommutativeFunction {
 	}
 
 	protected Collector<CharSequence, ?, String> getJoiningCollector() {
-		return Collectors.joining(" + ", "(", ")");
+		return joiningCollector;
 	}
 
 

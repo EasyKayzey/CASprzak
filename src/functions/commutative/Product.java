@@ -17,6 +17,9 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class Product extends CommutativeFunction {
+
+	private static final Collector<CharSequence, ?, String> joiningCollector = Collectors.joining(" * ", "(", ")");
+
 	/**
 	 * Constructs a new {@link Product}
 	 * @param functions The terms being multiplied together
@@ -52,7 +55,7 @@ public class Product extends CommutativeFunction {
 	}
 
 	protected Collector<CharSequence, ?, String> getJoiningCollector() {
-		return Collectors.joining(" * ", "(", ")");
+		return joiningCollector;
 	}
 
 	public int compareSelf(GeneralFunction that) {

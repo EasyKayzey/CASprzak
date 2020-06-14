@@ -66,6 +66,12 @@ public class OperationMaps {
 			put("\\acsc", 	Acsc::new);
 			put("\\asec", 	Asec::new);
 			put("\\acot", 	Acot::new);
+			put("\\arcsin", 	Asin::new);
+			put("\\arccos", 	Acos::new);
+			put("\\arctan", 	Atan::new);
+			put("\\arccsc", 	Acsc::new);
+			put("\\arcsec", 	Asec::new);
+			put("\\arccot", 	Acot::new);
 			put("\\sinh", 	Sinh::new);
 			put("\\cosh", 	Cosh::new);
 			put("\\tanh", 	Tanh::new);
@@ -78,6 +84,12 @@ public class OperationMaps {
 			put("\\acsch", 	Acsch::new);
 			put("\\asech", 	Asech::new);
 			put("\\acoth", 	Acoth::new);
+			put("\\arcsinh", 	Asinh::new);
+			put("\\arccosh", 	Acosh::new);
+			put("\\arctanh", 	Atanh::new);
+			put("\\arccsch", 	Acsch::new);
+			put("\\arcsech", 	Asech::new);
+			put("\\arccoth", 	Acoth::new);
 		}
 	};
 

@@ -34,7 +34,7 @@ public class OutputBinary implements OutputFunction {
 	}
 
 	public String toLatex() {
-		return toString();
+		return functionName + "\\left(" + first.toLatex() + ", " + second.toLatex() + "\\right)";
 	}
 
 	public boolean equals(Object that) {

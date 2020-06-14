@@ -46,12 +46,14 @@ public class Abs extends PiecewiseFunction {
 			super("abs", operand);
 		}
 
+		@Override
 		public String toString() {
 			return "|" + operand + "|";
 		}
 
+		@Override
 		public String toLatex() {
-			return "|" + operand.toLatex() + "|";
+			return "\\left|" + operand.toLatex() + "\\right|";
 		}
 
 	}

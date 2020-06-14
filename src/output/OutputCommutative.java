@@ -8,7 +8,8 @@ import java.util.stream.Collectors;
 public class OutputCommutative implements OutputFunction {
 
 	protected final String functionName;
-	protected final Collector<CharSequence, ?, String> joiningCollector;
+	protected final Collector<CharSequence, ?, String> normalJoiningCollector;
+	protected final Collector<CharSequence, ?, String> latexJoiningCollector;
 	protected final List<OutputFunction> operands;
 
 	/**
@@ -19,7 +20,8 @@ public class OutputCommutative implements OutputFunction {
 	public OutputCommutative(String functionName, List<OutputFunction> operands) {
 		this.functionName = functionName;
 		this.operands = operands;
-		this.joiningCollector =  Collectors.joining(", ", functionName + "(", ")");
+		this.normalJoiningCollector =  Collectors.joining(", ", functionName + "(", ")");
+		this.latexJoiningCollector =  Collectors.joining(", ", functionName + "\\left(", "\\right)");
 	}
 
 	/**
@@ -42,11 +44,13 @@ public class OutputCommutative implements OutputFunction {
 	public String toString() {
 		return operands.stream()
 				.map(OutputFunction::toString)
-				.collect(joiningCollector);
+				.collect(normalJoiningCollector);
 	}
 
 	public String toLatex() {
-		return toString();
+		return operands.stream()
+				.map(OutputFunction::toLatex)
+				.collect(latexJoiningCollector);
 	}
 
 	public boolean equals(Object that) {

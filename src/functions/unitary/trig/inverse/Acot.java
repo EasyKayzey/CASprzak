@@ -1,7 +1,9 @@
 package functions.unitary.trig.inverse;
 
+import config.Settings;
 import functions.GeneralFunction;
 import functions.binary.Pow;
+import functions.binary.integer.Modulo;
 import functions.commutative.Sum;
 import functions.commutative.Product;
 import functions.unitary.UnitaryFunction;
@@ -34,11 +36,7 @@ public class Acot extends InverseTrigFunction {
 	@Override
 	public double evaluate(Map<String, Double> variableValues) {
 		double functionEvaluated = operand.evaluate(variableValues);
-		if (functionEvaluated < 0) {
-			return -0.5 * Math.PI - Math.atan(functionEvaluated);
-		} else {
-			return 0.5 * Math.PI - Math.atan(functionEvaluated);
-		}
+		return 0.5 * Math.PI - Math.atan(functionEvaluated);
 	}
 
 
@@ -48,5 +46,17 @@ public class Acot extends InverseTrigFunction {
 
 	public Class<?> getInverse() {
 		return Cot.class;
+	}
+
+	@Override
+	public GeneralFunction simplifyInverse() {
+		if (operand.getClass().isAssignableFrom(getInverse())) {
+			GeneralFunction insideFunction = ((UnitaryFunction) operand).operand;
+			if (Settings.enforceDomainAndRange)
+				return new Modulo(DefaultFunctions.PI, insideFunction);
+			else
+				return insideFunction;
+		} else
+			return this;
 	}
 }

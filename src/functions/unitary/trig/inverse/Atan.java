@@ -1,9 +1,11 @@
 package functions.unitary.trig.inverse;
 
+import config.Settings;
 import functions.GeneralFunction;
 import functions.binary.Pow;
-import functions.commutative.Sum;
+import functions.binary.integer.Modulo;
 import functions.commutative.Product;
+import functions.commutative.Sum;
 import functions.unitary.UnitaryFunction;
 import functions.unitary.trig.normal.Tan;
 import tools.DefaultFunctions;
@@ -43,5 +45,17 @@ public class Atan extends InverseTrigFunction {
 
 	public Class<?> getInverse() {
 		return Tan.class;
+	}
+
+	@Override
+	public GeneralFunction simplifyInverse() {
+		if (operand.getClass().isAssignableFrom(getInverse())) {
+			GeneralFunction insideFunction = ((UnitaryFunction) operand).operand;
+			if (Settings.enforceDomainAndRange)
+				return DefaultFunctions.subtract(new Modulo(DefaultFunctions.PI, new Sum(insideFunction, DefaultFunctions.HALF_PI)), DefaultFunctions.HALF_PI);
+			else
+				return insideFunction;
+		} else
+			return this;
 	}
 }

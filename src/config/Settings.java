@@ -122,6 +122,11 @@ public class Settings {
 	 */
 	public static FactorialType defaultFactorial = FactorialType.RECURSIVE;
 
+	/**
+	 * Denotes whether or not inverse simplifications conserve domain and range
+	 */
+	public static boolean enforceDomainAndRange = false;
+
 	static {
 		//noinspection ConstantConditions
 		if (Settings.readProperties) {

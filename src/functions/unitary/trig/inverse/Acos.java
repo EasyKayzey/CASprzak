@@ -1,10 +1,13 @@
 package functions.unitary.trig.inverse;
 
+import config.Settings;
 import functions.GeneralFunction;
 import functions.binary.Pow;
+import functions.binary.integer.Modulo;
 import functions.commutative.Sum;
 import functions.commutative.Product;
 import functions.unitary.UnitaryFunction;
+import functions.unitary.piecewise.Abs;
 import functions.unitary.trig.normal.Cos;
 import tools.DefaultFunctions;
 
@@ -42,5 +45,17 @@ public class Acos extends InverseTrigFunction {
 
 	public Class<?> getInverse() {
 		return Cos.class;
+	}
+
+	@Override
+	public GeneralFunction simplifyInverse() {
+		if (operand.getClass().isAssignableFrom(getInverse())) {
+			GeneralFunction insideFunction = ((UnitaryFunction) operand).operand;
+			if (Settings.enforceDomainAndRange)
+				return DefaultFunctions.subtract(DefaultFunctions.PI, new Abs(DefaultFunctions.subtract(new Modulo(DefaultFunctions.TWO_PI, insideFunction), DefaultFunctions.PI)));
+			else
+				return insideFunction;
+		} else
+			return this;
 	}
 }

@@ -162,7 +162,7 @@ public class LatexReplacer {
 		for (Collection<String> ops : List.of(binaryOperations.keySet(), unitaryOperations.keySet(), List.of("\\pi")))
 			for (String op : ops)
 				if (op.charAt(0) == '\\')
-					input = input.replaceAll("(?<![\\\\a])\\s*(?=" + op.substring(1) + ")", "\\\\");
+					input = input.replaceAll("(?<!\\\\|a(rc)?)\\s*(?=" + op.substring(1) + ")", "\\\\");
 		input = dx.matcher(input).replaceAll("\\\\");
 		return input;
 	}

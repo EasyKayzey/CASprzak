@@ -4,7 +4,7 @@
  - Integer division (with `//`), modulo, lcm, and gcd operations
  - Floor, ceiling, rounding, and random operations
  - Add new abstract classes for new integer operations
- - Add settings to enforce functions' domain and range when simplifying trig functions
+ - Add settings to enforce functions' domain and range when simplifying using inverse functions
 
 ### Minor Additions
  - Make parsing errors more descriptive

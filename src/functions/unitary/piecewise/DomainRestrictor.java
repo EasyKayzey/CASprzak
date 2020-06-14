@@ -12,7 +12,7 @@ import java.util.function.DoublePredicate;
  * When {@link #domainTester} returns true, this class functions as the identity,
  * but when {@link #domainTester} returns false, {@code evaluate} returns {@code Double.NaN}.
  */
-public class DomainRestrictor extends PiecewiseFunction{
+public class DomainRestrictor extends PiecewiseFunction {
 
     /**
      * This {@code BiPredicate} describes the domain of this function given an argument and list of variable values

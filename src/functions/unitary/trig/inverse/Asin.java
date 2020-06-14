@@ -53,7 +53,7 @@ public class Asin extends InverseTrigFunction {
 		if (operand.getClass().isAssignableFrom(getInverse())) {
 			GeneralFunction insideFunction = ((UnitaryFunction) operand).operand;
 			if (Settings.enforceDomainAndRange)
-				return DefaultFunctions.subtract(new Abs(DefaultFunctions.subtract(new Modulo(DefaultFunctions.DOUBLE_PI, DefaultFunctions.subtract(insideFunction, DefaultFunctions.HALF_PI)), DefaultFunctions.PI)), DefaultFunctions.HALF_PI);
+				return DefaultFunctions.subtract(new Abs(DefaultFunctions.subtract(new Modulo(DefaultFunctions.TWO_PI, DefaultFunctions.subtract(insideFunction, DefaultFunctions.HALF_PI)), DefaultFunctions.PI)), DefaultFunctions.HALF_PI);
 			else
 				return insideFunction;
 		} else

@@ -30,7 +30,7 @@ public class DefaultFunctions {
 	/**
 	 * A {@link Constant} with the value of {@code 2π}
 	 */
-	public static final Constant DOUBLE_PI = new Constant(Math.PI*2);
+	public static final Constant TWO_PI = new Constant(Math.PI*2);
 
 	/**
 	 * A {@link Constant} with the value of {@code e}

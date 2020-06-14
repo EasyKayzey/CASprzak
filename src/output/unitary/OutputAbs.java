@@ -8,8 +8,8 @@ public class OutputAbs extends OutputUnitary {
 		super(null, operand);
 	}
 
-	public String toAscii() {
-		return "|" + operand.toAscii() + "|";
+	public String toString() {
+		return "|" + operand.toString() + "|";
 	}
 
 }

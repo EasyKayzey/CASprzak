@@ -28,8 +28,8 @@ public class OutputUnitary implements OutputFunction {
 		return List.of(operand);
 	}
 
-	public String toAscii() {
-		return functionName + "(" + operand.toAscii() + ")";
+	public String toString() {
+		return functionName + "(" + operand.toString() + ")";
 	}
 
 	public boolean equals(Object that) {

@@ -25,7 +25,7 @@ public class OutputEndpoint implements OutputFunction {
 		return Collections.emptyList();
 	}
 
-	public String toAscii() {
+	public String toString() {
 		return contained.toString();
 	}
 

@@ -136,9 +136,11 @@ public class KeywordInterface {
 			};
 			default -> throw new SettingNotFoundException(input, "debug");
 		};
-		while (!"exit".equals(input) && !"!".equals(input))
-			//noinspection NestedAssignment
-			debug.accept(input = scanner.nextLine());
+		input = scanner.nextLine();
+		while (!"exit".equals(input) && !"!".equals(input)) {
+			debug.accept(input);
+			input = scanner.nextLine();
+		}
 		return "Done.";
 	}
 

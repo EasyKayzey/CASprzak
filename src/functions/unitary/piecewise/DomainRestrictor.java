@@ -35,7 +35,7 @@ public class DomainRestrictor extends PiecewiseFunction{
      * @param domainTester the {@code DoublePredicate} describing the domain of the function
      */
     public DomainRestrictor(GeneralFunction operand, DoublePredicate domainTester) {
-        this(operand, (d, l) -> domainTester.test(d));
+        this(operand, (argument, list) -> domainTester.test(argument));
     }
 
     @Override
@@ -45,7 +45,10 @@ public class DomainRestrictor extends PiecewiseFunction{
 
     @Override
     public GeneralFunction getDerivative(String varID) {
-        return new DomainRestrictor(operand.getDerivative(varID), (d, l) -> domainTester.test(operand.evaluate(l), l));
+        return new DomainRestrictor(
+                operand.getDerivative(varID),
+                (argument, list) -> domainTester.test(operand.evaluate(list), list)
+        );
     }
 
     @Override

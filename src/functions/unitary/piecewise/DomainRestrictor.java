@@ -7,8 +7,17 @@ import java.util.Map;
 import java.util.function.BiPredicate;
 import java.util.function.DoublePredicate;
 
+/**
+ * The {@link DomainRestrictor} class allows for the restriction of domains of ranges of functions.
+ * When {@link #domainTester} returns true, this class functions as the identity,
+ * but when {@link #domainTester} returns false, {@code evaluate} returns {@code Double.NaN}.
+ */
 public class DomainRestrictor extends PiecewiseFunction{
-    BiPredicate<Double, Map<String, Double>> domainTester;
+
+    /**
+     * This {@code BiPredicate} describes the domain of this function given an argument and list of variable values
+     */
+    public final BiPredicate<Double, Map<String, Double>> domainTester;
 
     /**
      * Constructs a new {@link DomainRestrictor}

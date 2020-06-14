@@ -315,7 +315,7 @@ public class FunctionTest {
 		test = FunctionParser.parseSimplified("\\arcsinh(sinh(-11.5))");
 		assertEquals( -11.5, test.evaluate(null), 0.001);
 		test = FunctionParser.parseSimplified("\\arccosh(cosh(7))");
-		assertEquals(11.5, test.evaluate(null),  0.001);
+		assertEquals(7, test.evaluate(null),  0.001);
 		test = FunctionParser.parseSimplified("\\arctan(tan(.6))");
 		assertEquals(.6, test.evaluate(null), 0.001);
 		test = FunctionParser.parseSimplified("\\arccsch(csch(-.56))");

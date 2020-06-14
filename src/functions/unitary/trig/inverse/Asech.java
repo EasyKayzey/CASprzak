@@ -37,7 +37,7 @@ public class Asech extends InverseTrigFunction {
 	@Override
 	public double evaluate(Map<String, Double> variableValues) {
 		double functionEvaluated = operand.evaluate(variableValues);
-		return Math.log((1 + Math.sqrt(functionEvaluated * functionEvaluated - 1)) / functionEvaluated);
+		return Math.log((1 + Math.sqrt(1 - functionEvaluated * functionEvaluated)) / functionEvaluated);
 	}
 
 

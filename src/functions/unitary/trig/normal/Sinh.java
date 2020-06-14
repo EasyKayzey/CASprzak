@@ -25,7 +25,7 @@ public class Sinh extends TrigFunction {
 	 */
 	@Override
 	public double evaluate(Map<String, Double> variableValues) {
-		return Math.sin(operand.evaluate(variableValues));
+		return Math.sinh(operand.evaluate(variableValues));
 	}
 
 	@Override

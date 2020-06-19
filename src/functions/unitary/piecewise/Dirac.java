@@ -2,6 +2,8 @@ package functions.unitary.piecewise;
 
 import functions.GeneralFunction;
 import functions.unitary.UnitaryFunction;
+import output.OutputFunction;
+import output.OutputUnitary;
 import tools.exceptions.DerivativeDoesNotExistException;
 
 import java.util.Map;
@@ -31,6 +33,24 @@ public class Dirac extends PiecewiseFunction {
 
 	public UnitaryFunction getInstance(GeneralFunction operand) {
 		return new Dirac(operand);
+	}
+
+	private static class OutputDirac extends OutputUnitary {
+
+		public OutputDirac(OutputFunction operand) {
+			super("dirac", operand);
+		}
+
+		@Override
+		public String toString() {
+			return "δ(" + operand + ")";
+		}
+
+		@Override
+		public String toLatex() {
+			return "\\delta \\left(" + operand.toLatex() + "\\right)";
+		}
+
 	}
 }
 

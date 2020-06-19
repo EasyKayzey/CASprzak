@@ -4,6 +4,9 @@ import functions.GeneralFunction;
 import functions.commutative.Product;
 import functions.special.Constant;
 import functions.unitary.UnitaryFunction;
+import output.OutputBinary;
+import output.OutputFunction;
+import output.OutputString;
 import tools.ArrayTools;
 import tools.DefaultFunctions;
 import tools.MiscTools;
@@ -137,5 +140,27 @@ public class Integral extends Transformation {
 		} else {
 			return this;
 		}
+	}
+
+	public OutputFunction toOutputFunction() {
+		return new Integral.OutputIntegral(operand.toOutputFunction(), new OutputString(respectTo));
+	}
+
+	private static class OutputIntegral extends OutputBinary {
+
+		public OutputIntegral(OutputFunction operand, OutputFunction respectTo) {
+			super("integral", operand, respectTo);
+		}
+
+		@Override
+		public String toString() {
+			return "∫ [" + first + "] d" + second;
+		}
+
+		@Override
+		public String toLatex() {
+			return "\\int \\left(" + first.toLatex() + "\\right) \\, d" + second;
+		}
+
 	}
 }

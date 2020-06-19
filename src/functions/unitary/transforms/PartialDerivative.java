@@ -2,6 +2,9 @@ package functions.unitary.transforms;
 
 import functions.GeneralFunction;
 import functions.unitary.UnitaryFunction;
+import output.OutputBinary;
+import output.OutputFunction;
+import output.OutputString;
 
 import java.util.Map;
 
@@ -82,5 +85,27 @@ public class PartialDerivative extends Transformation {
 	 */
 	public GeneralFunction execute() {
 		return operand.getSimplifiedDerivative(respectTo);
+	}
+
+	public OutputFunction toOutputFunction() {
+		return new PartialDerivative.OutputPartialDerivative(operand.toOutputFunction(), new OutputString(respectTo));
+	}
+
+	private static class OutputPartialDerivative extends OutputBinary {
+
+		public OutputPartialDerivative(OutputFunction operand, OutputFunction respectTo) {
+			super("integral", operand, respectTo);
+		}
+
+		@Override
+		public String toString() {
+			return "∂_" + second + "(" + first + ")";
+		}
+
+		@Override
+		public String toLatex() {
+			return "\\frac{\\partial}{\\partial" + second.toLatex() + "} \\left(" + first.toLatex() + "\\right)";
+		}
+
 	}
 }

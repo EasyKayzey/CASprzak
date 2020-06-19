@@ -41,12 +41,12 @@ Hello, and welcome to our CAS. This is a joint project by The EasyKayzey Show st
 
 ## Contacts
 ### Group
-The EasyKayzey Show: easykayzey@googlegroups.com
+The EasyKayzey Show: easykayzey@ezkz.show
 
 ### Individuals
-Erez Israeli Miller: erez.m.israeli@gmail.com
+Erez Israeli Miller: erez@ezkz.show
 
-Michael Kasprzak: michaelkasprzak522@gmail.com
+Michael Kasprzak: michael@ezkz.show
 
 ### Site
 https://easykayzey.github.io/CASprzak/

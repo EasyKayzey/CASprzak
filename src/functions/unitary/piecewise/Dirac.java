@@ -52,7 +52,7 @@ public class Dirac extends PiecewiseFunction {
 
 		@Override
 		public String toLatex() {
-			return "\\delta \\left(" + operand.toLatex() + "\\right)";
+			return "\\delta \\left( " + operand.toLatex() + "\\right)";
 		}
 
 	}

@@ -159,7 +159,7 @@ public class Integral extends Transformation {
 
 		@Override
 		public String toLatex() {
-			return "\\int \\left(" + first.toLatex() + "\\right) \\, d" + second;
+			return "\\int \\left( " + first.toLatex() + "\\right) \\, d" + second;
 		}
 
 	}

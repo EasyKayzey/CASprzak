@@ -104,7 +104,7 @@ public class PartialDerivative extends Transformation {
 
 		@Override
 		public String toLatex() {
-			return "\\frac{\\partial}{\\partial" + second.toLatex() + "} \\left(" + first.toLatex() + "\\right)";
+			return "\\frac{\\partial}{\\partial " + second.toLatex() + "} \\left( " + first.toLatex() + " \\right)";
 		}
 
 	}

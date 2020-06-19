@@ -186,12 +186,17 @@ public class KeywordInterface {
 		String[] splitInput = spaces.split(input, 2);
 		if (splitInput.length == 1)
 			return parseStored(splitInput[0]).evaluate(new HashMap<>());
-		else
+		else {
+			Object lastPrev = prev;
 			return parseStored(splitInput[0]).evaluate(
 					Arrays.stream(keywordSplitter.split(splitInput[1]))
-					.map(equals::split)
-					.collect(Collectors.toMap(e -> LatexReplacer.encodeAll(e[0]), e -> ParsingTools.getConstant(e[1])))
+							.map(equals::split)
+							.collect(Collectors.toMap(
+									e -> LatexReplacer.encodeAll(e[0]),
+									e -> "_".equals(e[1]) ? ((GeneralFunction) lastPrev).evaluate(Map.of()) : ParsingTools.getConstant(e[1]))
+							)
 			);
+		}
 	}
 
 

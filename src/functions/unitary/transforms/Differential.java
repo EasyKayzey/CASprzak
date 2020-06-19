@@ -4,6 +4,8 @@ import functions.Evaluable;
 import functions.GeneralFunction;
 import functions.special.Variable;
 import functions.unitary.UnitaryFunction;
+import output.OutputFunction;
+import output.OutputString;
 import output.OutputUnitary;
 import tools.exceptions.DerivativeDoesNotExistException;
 
@@ -125,20 +127,24 @@ public class Differential extends Transformation {
 		throw new UnsupportedOperationException("Cannot execute a differential " + this);
 	}
 
-	private class OutputDifferential extends OutputUnitary {
+	public OutputFunction toOutputFunction() {
+		return new OutputDifferential(respectTo);
+	}
 
-		public OutputDifferential() {
-			super("differential", null);
+	private static class OutputDifferential extends OutputUnitary {
+
+		public OutputDifferential(String respectTo) {
+			super("differential", new OutputString(respectTo));
 		}
 
 		@Override
 		public String toString() {
-			return "d" + respectTo;
+			return "d" + operand;
 		}
 
 		@Override
 		public String toLatex() {
-			return "d" + respectTo;
+			return "d" + operand;
 		}
 
 	}

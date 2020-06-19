@@ -416,6 +416,7 @@ public class KeywordInterface {
 				tay, taylor:                                           takes a taylor series
 				sol, solve:                                            solves for roots
 				ext, extrema:                                          finds extrema
+				ai, index, arrayindex                                  returns a value from an array
 				def, deffunction:                                      defines a function
 				defs, deffunctions, deffeunctionsimplify               defines a simplified function
 				defcon, defconstant:                                   defines a constant

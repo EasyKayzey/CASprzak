@@ -49,4 +49,4 @@ Erez Israeli Miller: erez@ezkz.show
 Michael Kasprzak: michael@ezkz.show
 
 ### Site
-https://easykayzey.github.io/CASprzak/
+https://ezkz.show/CASprzak/

@@ -49,7 +49,7 @@ public class Floor extends PiecewiseFunction{
 
         @Override
         public String toLatex() {
-            return "\\left \\lfloor " + operand.toLatex() + "\\right \\rfloor";
+            return "\\left \\lfloor " + operand.toLatex() + " \\right \\rfloor";
         }
 
     }

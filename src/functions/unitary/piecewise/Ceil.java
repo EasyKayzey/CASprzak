@@ -49,7 +49,7 @@ public class Ceil extends PiecewiseFunction{
 
         @Override
         public String toLatex() {
-            return "\\left\\lceil" + operand.toLatex() + "\\right\\rceil";
+            return "\\left \\lceil " + operand.toLatex() + " \\right \\rceil";
         }
 
     }

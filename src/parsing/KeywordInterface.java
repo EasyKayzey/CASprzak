@@ -193,7 +193,7 @@ public class KeywordInterface {
 							.map(equals::split)
 							.collect(Collectors.toMap(
 									e -> LatexReplacer.encodeAll(e[0]),
-									e -> "_".equals(e[1]) ? ((GeneralFunction) lastPrev).evaluate(Map.of()) : ParsingTools.getConstant(e[1]))
+									e -> "_".equals(e[1]) ? (Double) lastPrev : ParsingTools.getConstant(e[1]))
 							)
 			);
 		}
@@ -332,11 +332,9 @@ public class KeywordInterface {
 		}
 	}
 
-	private static GeneralFunction arrayIndex(String input) {
+	private static Double arrayIndex(String input) {
 		if (prev instanceof List<?> list) {
-//			try {
-			return new Constant((Double) list.get(Integer.parseInt(input)));
-//			} catch (NumberFormatException e)
+			return (Double) list.get(Integer.parseInt(input));
 		} else
 			throw new IllegalArgumentException("The previous output was not a list of numbers.");
 	}

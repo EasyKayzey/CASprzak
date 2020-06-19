@@ -2,10 +2,11 @@ package functions.special;
 
 import functions.GeneralFunction;
 import org.jetbrains.annotations.NotNull;
-import output.OutputEndpoint;
 import output.OutputFunction;
 
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -13,7 +14,7 @@ import java.util.function.Predicate;
 /**
  * All classes extending {@link SpecialFunction} are endpoints of the function tree as they have no input or operands.
  */
-public abstract class SpecialFunction extends GeneralFunction {
+public abstract class SpecialFunction extends GeneralFunction implements OutputFunction {
 
 	public GeneralFunction substituteAll(Predicate<? super GeneralFunction> test, Function<? super GeneralFunction, ? extends GeneralFunction> replacer) {
 		if (test.test(this))
@@ -23,7 +24,19 @@ public abstract class SpecialFunction extends GeneralFunction {
 	}
 
 	public OutputFunction toOutputFunction() {
-		return new OutputEndpoint(this);
+		return this;
+	}
+
+	public String getName() {
+		return getClass().getSimpleName().toLowerCase();
+	}
+
+	public List<OutputFunction> getOperands() {
+		return Collections.emptyList();
+	}
+
+	public String toLatex() {
+		return toString();
 	}
 
 	public @NotNull Iterator<GeneralFunction> iterator() {

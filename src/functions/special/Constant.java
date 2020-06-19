@@ -3,6 +3,7 @@ package functions.special;
 import config.Settings;
 import functions.GeneralFunction;
 import org.jetbrains.annotations.Nullable;
+import tools.ParsingTools;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -97,6 +98,8 @@ public class Constant extends SpecialFunction {
 	public String toString() {
 		if (constantKey != null)
 			return constantKey;
+		else if (ParsingTools.isAlmostInteger(constant))
+			return String.valueOf(ParsingTools.toInteger(constant));
 		else
 			return String.valueOf(constant);
 	}

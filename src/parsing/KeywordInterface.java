@@ -76,6 +76,7 @@ public class KeywordInterface {
 			case "ss", "sset", "sets", "setsetting"								-> setSettings(splitInput[1]);
 			case "ps", "settings", "printsettings"								-> printSettings();
 			case "int", "integral"												-> integral(splitInput[1]);
+			case "ai", "index", "arrayindex"									-> arrayIndex(splitInput[1]);
 			case "debug"														-> debug(splitInput[1]);
 			case "help"															-> splitInput.length == 1 ? help() : help(splitInput[1]);
 			case "exit", "!"													-> throw new IllegalArgumentException("Exit command should never be passed directly to KeywordInterface. Please report this bug to the developers.");
@@ -185,12 +186,17 @@ public class KeywordInterface {
 		String[] splitInput = spaces.split(input, 2);
 		if (splitInput.length == 1)
 			return parseStored(splitInput[0]).evaluate(new HashMap<>());
-		else
+		else {
+			Object lastPrev = prev;
 			return parseStored(splitInput[0]).evaluate(
 					Arrays.stream(keywordSplitter.split(splitInput[1]))
-					.map(equals::split)
-					.collect(Collectors.toMap(e -> LatexReplacer.encodeAll(e[0]), e -> ParsingTools.getConstant(e[1])))
+							.map(equals::split)
+							.collect(Collectors.toMap(
+									e -> LatexReplacer.encodeAll(e[0]),
+									e -> "_".equals(e[1]) ? (Double) lastPrev : ParsingTools.getConstant(e[1]))
+							)
 			);
+		}
 	}
 
 
@@ -326,6 +332,13 @@ public class KeywordInterface {
 		}
 	}
 
+	private static Double arrayIndex(String input) {
+		if (prev instanceof List<?> list) {
+			return (Double) list.get(Integer.parseInt(input));
+		} else
+			throw new IllegalArgumentException("The previous output was not a list of numbers.");
+	}
+
 	private static String help(String input) {
 		return switch (input) {
 			case "demo"																-> "Runs the demo.\n" +
@@ -365,17 +378,19 @@ public class KeywordInterface {
 			case "rmc", "rmconstant", "removeconstant"                  			-> "Removes a defined constant.\n" +
 					"rmc [name]";
 			case "pf", "printfun", "printfunctions"                     			-> "Prints the list of functions, or the contents of one function.\n" +
-					"printfun (name)";
+					"pf (name)";
 			case "pc", "printc", "printconstants"                       			-> "Prints the list of constants.\n" +
-					"printconstants";
+					"pc";
 			case "clearfun", "clearfunctions"                           			-> "Clears the list of functions.\n" +
 					"clearfun";
 			case "ss", "sets", "setsetting"                    			 			-> "Sets a setting.\n" +
-					"setsetting [setting] [value]";
+					"ss [setting] [value]";
 			case "ps", "prints", "printsettings"                    	  			-> "Prints all settings.\n" +
-					"printsettings";
+					"ps";
 			case "int", "integral"                                      			-> "Symbolically integrates [function] with respect to [variable].\n" +
-					"integral [function] d[variable]";
+					"int [function] d[variable]";
+			case "ai", "index", "arrayindex"										-> "Assuming that the output of the previous command was a list, returns the value at index [index] in the list.\n" +
+					"ai [index]";
 			case "help"				                                      			-> "Gives more information about a command. [argument] denotes a necessary argument, (argument) denotes an optional argument, and (argument)* denotes zero or more instances of argument.\n" +
 					"help (command)";
 			case "exit", "!"														-> "Exits the program.\n" +
@@ -401,6 +416,7 @@ public class KeywordInterface {
 				tay, taylor:                                           takes a taylor series
 				sol, solve:                                            solves for roots
 				ext, extrema:                                          finds extrema
+				ai, index, arrayindex                                  returns a value from an array
 				def, deffunction:                                      defines a function
 				defs, deffunctions, deffeunctionsimplify               defines a simplified function
 				defcon, defconstant:                                   defines a constant

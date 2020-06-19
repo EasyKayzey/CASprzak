@@ -5,6 +5,7 @@
  - Floor, ceiling, rounding, and random operations
  - Add new abstract classes for new integer operations
  - Add settings to enforce functions' domain and range when simplifying using inverse functions
+ - Add array indexing to retrieve values from methods like `solve`
 
 ### Minor Additions
  - Make parsing errors more descriptive
@@ -14,6 +15,7 @@
  - Add `DerivativeDoesNotExistException` for operations with no derivative
  - Make `substitute` more powerful in the UI by allowing the substitution of multiple expressions simultaneously
  - Make `def` and `sub` in `CommandUI` now automatically perform a `minimalSimplify`
+ - Add support for `_` in `evaluate` (used as `eval x^2 x=_` when `_` is a  `Double`)
  
  ### Bugfixes
  - Fix `toInteger` error message using the wrong margin from `Settings`

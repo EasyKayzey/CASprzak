@@ -378,17 +378,19 @@ public class KeywordInterface {
 			case "rmc", "rmconstant", "removeconstant"                  			-> "Removes a defined constant.\n" +
 					"rmc [name]";
 			case "pf", "printfun", "printfunctions"                     			-> "Prints the list of functions, or the contents of one function.\n" +
-					"printfun (name)";
+					"pf (name)";
 			case "pc", "printc", "printconstants"                       			-> "Prints the list of constants.\n" +
-					"printconstants";
+					"pc";
 			case "clearfun", "clearfunctions"                           			-> "Clears the list of functions.\n" +
 					"clearfun";
 			case "ss", "sets", "setsetting"                    			 			-> "Sets a setting.\n" +
-					"setsetting [setting] [value]";
+					"ss [setting] [value]";
 			case "ps", "prints", "printsettings"                    	  			-> "Prints all settings.\n" +
-					"printsettings";
+					"ps";
 			case "int", "integral"                                      			-> "Symbolically integrates [function] with respect to [variable].\n" +
-					"integral [function] d[variable]";
+					"int [function] d[variable]";
+			case "ai", "index", "arrayindex"										-> "Assuming that the output of the previous command was a list, returns the value at index [index] in the list.\n" +
+					"ai [index]";
 			case "help"				                                      			-> "Gives more information about a command. [argument] denotes a necessary argument, (argument) denotes an optional argument, and (argument)* denotes zero or more instances of argument.\n" +
 					"help (command)";
 			case "exit", "!"														-> "Exits the program.\n" +

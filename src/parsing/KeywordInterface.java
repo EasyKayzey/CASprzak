@@ -76,6 +76,7 @@ public class KeywordInterface {
 			case "ss", "sset", "sets", "setsetting"								-> setSettings(splitInput[1]);
 			case "ps", "settings", "printsettings"								-> printSettings();
 			case "int", "integral"												-> integral(splitInput[1]);
+			case "ai", "index", "arrayindex"									-> arrayIndex(splitInput[1]);
 			case "debug"														-> debug(splitInput[1]);
 			case "help"															-> splitInput.length == 1 ? help() : help(splitInput[1]);
 			case "exit", "!"													-> throw new IllegalArgumentException("Exit command should never be passed directly to KeywordInterface. Please report this bug to the developers.");
@@ -324,6 +325,15 @@ public class KeywordInterface {
 			System.out.println("Integration failed: " + e.toString());
 			return integral;
 		}
+	}
+
+	private static GeneralFunction arrayIndex(String input) {
+		if (prev instanceof List<?> list) {
+//			try {
+			return new Constant((Double) list.get(Integer.parseInt(input)));
+//			} catch (NumberFormatException e)
+		} else
+			throw new IllegalArgumentException("The previous output was not a list of numbers.");
 	}
 
 	private static String help(String input) {

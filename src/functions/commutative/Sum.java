@@ -1,7 +1,10 @@
 package functions.commutative;
 
 import functions.GeneralFunction;
+import functions.Outputable;
 import functions.special.Constant;
+import output.OutputCommutative;
+import output.OutputFunction;
 import tools.ArrayTools;
 import tools.MiscTools;
 import tools.helperclasses.AbstractPair;
@@ -20,7 +23,7 @@ public class Sum extends CommutativeFunction {
 
 	/**
 	 * Constructs a new {@link Sum}
-	 * @param functions The terms being added together
+	 * @param functions the terms being added together
 	 */
 	public Sum(GeneralFunction... functions) {
 		super(functions);
@@ -95,5 +98,47 @@ public class Sum extends CommutativeFunction {
 
 	public double operate(double a, double b) {
 		return a + b;
+	}
+
+	public OutputFunction toOutputFunction() {
+		return new OutputSum(List.of(functions));
+	}
+
+	private static class OutputSum extends OutputCommutative {
+
+		private final List<AbstractPair<OutputFunction, Boolean>> pairedOperands;
+
+		public OutputSum(List<? extends GeneralFunction> operands) {
+			super(
+					"sum",
+					operands.stream()
+							.map(Outputable::toOutputFunction)
+							.collect(Collectors.toList()),
+					Collectors.joining(" + "),
+					Collectors.joining(" + ")
+			);
+			pairedOperands = operands.stream()
+					.map(f -> new Pair<>(f.toOutputFunction(), parenthesize(f)))
+					.collect(Collectors.toList());
+		}
+
+		@Override
+		public String toString() {
+			return pairedOperands.stream()
+					.map(e -> e.getSecond() ? "(" + e.getFirst().toString() + ")" : e.getFirst().toString())
+					.collect(normalJoiningCollector);
+		}
+
+		@Override
+		public String toLatex() {
+			return pairedOperands.stream()
+					.map(e -> e.getSecond() ? "\\left(" + e.getFirst().toLatex() + "\\right)" : e.getFirst().toLatex())
+					.collect(latexJoiningCollector);
+		}
+
+		private static boolean parenthesize(GeneralFunction function) {
+			return function instanceof Sum;
+		}
+
 	}
 }

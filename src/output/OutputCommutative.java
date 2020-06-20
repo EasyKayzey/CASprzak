@@ -16,12 +16,28 @@ public class OutputCommutative implements OutputFunction {
 	 * Returns a new {@code OutputUnitary} function
 	 * @param functionName the name of the function
 	 * @param operands the operands of the function
+	 * @param normalJoiningCollector the joining collector for basic {@link #toString()}
+	 * @param latexJoiningCollector the joining collector for {@link #toLatex()}
 	 */
-	public OutputCommutative(String functionName, List<OutputFunction> operands) {
+	public OutputCommutative(String functionName, List<OutputFunction> operands, Collector<CharSequence, ?, String> normalJoiningCollector, Collector<CharSequence, ?, String> latexJoiningCollector) {
 		this.functionName = functionName;
 		this.operands = operands;
-		this.normalJoiningCollector =  Collectors.joining(", ", functionName + "(", ")");
-		this.latexJoiningCollector =  Collectors.joining(", ", functionName + "\\left(", "\\right)");
+		this.normalJoiningCollector = normalJoiningCollector;
+		this.latexJoiningCollector = latexJoiningCollector;
+	}
+
+	/**
+	 * Returns a new {@code OutputUnitary} function
+	 * @param functionName the name of the function
+	 * @param operands the operands of the function
+	 */
+	public OutputCommutative(String functionName, List<OutputFunction> operands) {
+		this(
+				functionName,
+				operands,
+				Collectors.joining(", ", functionName + "(", ")"),
+				Collectors.joining(", ", functionName + "\\left(", "\\right)")
+		);
 	}
 
 	/**

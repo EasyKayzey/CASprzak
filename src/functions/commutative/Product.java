@@ -22,7 +22,7 @@ public class Product extends CommutativeFunction {
 
 	/**
 	 * Constructs a new {@link Product}
-	 * @param functions The terms being multiplied together
+	 * @param functions the terms being multiplied together
 	 */
 	public Product(GeneralFunction... functions) {
 		super(functions);

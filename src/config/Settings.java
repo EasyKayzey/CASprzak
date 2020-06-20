@@ -113,14 +113,14 @@ public class Settings {
 	public static boolean printStackTraces = false;
 
 	/**
-	 * Denotes whether or not multiplication should be delimited by asterisks (as in `2 * x`) or not (as in `2x`)
-	 */
-	public static boolean asteriskMultiplication = false;
-
-	/**
 	 * Denotes whether or not inverse simplifications conserve domain and range
 	 */
 	public static boolean enforceDomainAndRange = false;
+
+	/**
+	 * Denotes whether or not multiplication should be delimited by asterisks (as in `2 * x`) or not (as in `2x`)
+	 */
+	public static boolean asteriskMultiplication = false;
 
 	/**
 	 * Denotes the default method used to solve equations

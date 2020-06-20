@@ -113,6 +113,16 @@ public class Settings {
 	public static boolean printStackTraces = false;
 
 	/**
+	 * Denotes whether or not multiplication should be delimited by asterisks (as in `2 * x`) or not (as in `2x`)
+	 */
+	public static boolean asteriskMultiplication = false;
+
+	/**
+	 * Denotes whether or not inverse simplifications conserve domain and range
+	 */
+	public static boolean enforceDomainAndRange = false;
+
+	/**
 	 * Denotes the default method used to solve equations
 	 */
 	public static SolverType defaultSolverType = SolverType.NEWTON;
@@ -121,11 +131,6 @@ public class Settings {
 	 * Denotes the default implementation of {@link Factorial} to be used
 	 */
 	public static FactorialType defaultFactorial = FactorialType.RECURSIVE;
-
-	/**
-	 * Denotes whether or not inverse simplifications conserve domain and range
-	 */
-	public static boolean enforceDomainAndRange = false;
 
 	static {
 		//noinspection ConstantConditions

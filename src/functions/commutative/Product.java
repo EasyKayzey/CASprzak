@@ -2,10 +2,13 @@ package functions.commutative;
 
 import config.Settings;
 import functions.GeneralFunction;
+import functions.Outputable;
 import functions.binary.Pow;
 import functions.special.Constant;
 import functions.unitary.transforms.Differential;
 import functions.unitary.transforms.Integral;
+import output.OutputCommutative;
+import output.OutputFunction;
 import tools.ArrayTools;
 import tools.DefaultFunctions;
 import tools.PolynomialTools;
@@ -223,4 +226,52 @@ public class Product extends CommutativeFunction {
 	public double operate(double a, double b) {
 		return a * b;
 	}
+
+
+	public OutputFunction toOutputFunction() {
+		return new OutputProduct(List.of(functions));
+	}
+
+	private static class OutputProduct extends OutputCommutative {
+
+		private final List<AbstractPair<OutputFunction, GeneralFunction>> pairedOperands;
+
+		public OutputProduct(List<GeneralFunction> operands) {
+			super(
+					"sum",
+					operands.stream()
+							.map(Outputable::toOutputFunction)
+							.collect(Collectors.toList()),
+					Settings.asteriskMultiplication ? Collectors.joining(" * ") : Collectors.joining(),
+					Settings.asteriskMultiplication ? Collectors.joining(" * ") : Collectors.joining()
+			);
+			pairedOperands = operands.stream()
+					.map(f -> new Pair<>(f.toOutputFunction(), f))
+					.collect(Collectors.toList());
+		}
+
+		@Override
+		public String toString() {
+			return pairedOperands.stream()
+					.map(e -> parenthesizeNormal(e.getSecond()) ? "(" + e.getFirst().toString() + ")" : e.getFirst().toString())
+					.collect(normalJoiningCollector);
+		}
+
+		@Override
+		public String toLatex() {
+			return pairedOperands.stream()
+					.map(e -> parenthesizeLatex(e.getSecond()) ? "\\left(" + e.getFirst().toLatex() + "\\right)" : e.getFirst().toLatex())
+					.collect(latexJoiningCollector);
+		}
+
+		private static boolean parenthesizeNormal(GeneralFunction function) {
+			return function instanceof Sum;
+		}
+
+		private static boolean parenthesizeLatex(GeneralFunction function) {
+			return function instanceof Sum;
+		}
+
+	}
+
 }

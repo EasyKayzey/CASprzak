@@ -393,6 +393,8 @@ public class KeywordInterface {
 					"int [function] d[variable]";
 			case "ai", "index", "arrayindex"										-> "Assuming that the output of the previous command was a list, returns the value at index [index] in the list.\n" +
 					"ai [index]";
+			case "version"															-> "Prints the version of CASprzak which is currently being run. \n" +
+					"version";
 			case "help"				                                      			-> "Gives more information about a command. [argument] denotes a necessary argument, (argument) denotes an optional argument, and (argument)* denotes zero or more instances of argument.\n" +
 					"help (command)";
 			case "exit", "!"														-> "Exits the program.\n" +
@@ -429,6 +431,7 @@ public class KeywordInterface {
 				ss, sets, setsetting:                                  sets a setting
 				ps, prints, printsettings:                             prints all settings
 				clearfun, clearfunctions:                              clears functions
+				version:											   prints version
 				exit, !:                                               exits the interface
 				Execute `help [command]` to get more info on that command, and `help help` for more info on the help menu.
 				""";

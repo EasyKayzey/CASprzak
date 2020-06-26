@@ -94,4 +94,10 @@ public class NoEscapeTest {
 		assertEquals(DefaultFunctions.TWO, test1);
 		Settings.enforceEscapes = temp;
 	}
+
+	@Test
+	void spaceLatex() {
+		GeneralFunction test = FunctionParser.parseInfix("1 + sin(x)");
+		assertEquals(1, test.evaluate(Map.of("x", 3.0)), .3);
+	}
 }

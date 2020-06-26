@@ -21,6 +21,7 @@
  - Fix `toInteger` error message using the wrong margin from `Settings`
  - Fix bad rounding in `ParsingTools.toInteger` and `ParsingTools.isAlmostInteger`
  - Fix the evaluation of several arctrig functions 
+ - Fix parsing of non-escaped expressions with spaces such as `1 + sin(x)`
  
 ## v0.1.2
 ### Bugfixes

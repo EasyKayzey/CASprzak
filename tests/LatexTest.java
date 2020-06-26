@@ -57,4 +57,9 @@ public class LatexTest {
 		assertEquals(1, test.evaluate(Map.of("x", 10.0)), .3);
 	}
 
+	@Test
+	void spaceEscapedLatex() {
+		GeneralFunction test = FunctionParser.parseInfix("1 + \\sin(x)");
+		assertEquals(1, test.evaluate(Map.of("x", 3.0)), .3);
+	}
 }

@@ -80,6 +80,7 @@ public class KeywordInterface {
 			case "ai", "index", "arrayindex"									-> arrayIndex(splitInput[1]);
 			case "debug"														-> debug(splitInput[1]);
 			case "version"														-> version;
+			case "reset"														-> reset();
 			case "help"															-> splitInput.length == 1 ? help() : help(splitInput[1]);
 			case "exit", "!"													-> throw new IllegalArgumentException("Exit command should never be passed directly to KeywordInterface. Please report this bug to the developers.");
 			default 															-> null;
@@ -339,6 +340,14 @@ public class KeywordInterface {
 			return (Double) list.get(Integer.parseInt(input));
 		} else
 			throw new IllegalArgumentException("The previous output was not a list of numbers.");
+	}
+
+	private static String reset() {
+		clearFunctions();
+		Constant.specialConstants.clear();
+		Constant.specialConstants.put("π", Math.PI);
+		Constant.specialConstants.put("e", Math.E);
+		return "Reset done";
 	}
 
 	private static String help(String input) {

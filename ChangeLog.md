@@ -16,6 +16,7 @@
  - Make `substitute` more powerful in the UI by allowing the substitution of multiple expressions simultaneously
  - Make `def` and `sub` in `CommandUI` now automatically perform a `minimalSimplify`
  - Add support for `_` in `evaluate` (used as `eval x^2 x=_` when `_` is a  `Double`)
+ - Add `version` command to keyword interface
  
  ### Bugfixes
  - Fix `toInteger` error message using the wrong margin from `Settings`

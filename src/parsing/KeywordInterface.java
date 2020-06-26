@@ -26,6 +26,7 @@ import java.util.stream.Collectors;
  */
 @SuppressWarnings("SpellCheckingInspection")
 public class KeywordInterface {
+	private static final String version = "0.2.0-DEV";
 	private static final Pattern keywordSplitter = Pattern.compile("\\s+(?=[^\"]*(\"[^\"]*\"[^\"]*)*$)");
 	private static final Pattern spaces = Pattern.compile("\\s+");
 	private static final Pattern equals = Pattern.compile("=");
@@ -78,6 +79,7 @@ public class KeywordInterface {
 			case "int", "integral"												-> integral(splitInput[1]);
 			case "ai", "index", "arrayindex"									-> arrayIndex(splitInput[1]);
 			case "debug"														-> debug(splitInput[1]);
+			case "version"														-> version;
 			case "help"															-> splitInput.length == 1 ? help() : help(splitInput[1]);
 			case "exit", "!"													-> throw new IllegalArgumentException("Exit command should never be passed directly to KeywordInterface. Please report this bug to the developers.");
 			default 															-> null;

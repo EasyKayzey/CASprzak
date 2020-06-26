@@ -2,7 +2,9 @@ package functions.special;
 
 import functions.GeneralFunction;
 
-import java.util.*;
+import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.regex.Pattern;
 
 
 public class Variable extends SpecialFunction {
@@ -11,6 +13,11 @@ public class Variable extends SpecialFunction {
 	 * The String representing this variable
 	 */
 	public final String varID;
+
+	/**
+	 * This Pattern matches all valid variable and function names
+	 */
+	public static final Pattern validVariables = Pattern.compile("[a-zA-Z[^\\x00-\\x7F]]|\\\\[a-zA-Z[^\\x00-\\x7F]][a-zA-Z0-9[^\\x00-\\x7F]]*");
 
 	/**
 	 * Constructs a new {@link Variable}

@@ -58,7 +58,7 @@ public class InfixTokenizer {
 	);
 	private static final Pattern partialDerivative = Pattern.compile("d/d");
 	private static final Pattern endPD = Pattern.compile(
-			"(?<=\\\\pd\\{[a-zA-Z\\x00-\\x7F])"
+			"(?<=\\\\pd\\{([a-zA-Z]|[^\\x00-\\x7F]))"
 	);
 	private static final Pattern division = Pattern.compile("(?<!/)/(?!/)");
 

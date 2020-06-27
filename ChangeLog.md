@@ -25,6 +25,7 @@
  - Fix the evaluation of several arctrig functions 
  - Fix parsing of non-escaped expressions with spaces such as `1 + sin(x)`
  - Fix `defconstant` not latex escaping constant names
+ - Add an exception when user attempts to use nested quotes in `KeywordInterface`
  
 ## v0.1.2
 ### Bugfixes

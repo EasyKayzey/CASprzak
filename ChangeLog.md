@@ -13,19 +13,19 @@
  - Add new test class for integer operations
  - Change `equals` to check if two functions are exactly equal and implement `equalsSimplified` to check if they are equal when simplified
  - Add `DerivativeDoesNotExistException` for operations with no derivative
- - Make `substitute` more powerful in the UI by allowing the substitution of multiple expressions simultaneously
- - Make `def` and `sub` in `CommandUI` now automatically perform a `minimalSimplify`
+ - Make `substitute`/`sub` more powerful in the keyword interface by allowing the substitution of multiple expressions simultaneously
+ - Make `def` and `sub` in automatically perform a `minimalSimplify`
  - Add support for `_` in `evaluate` (used as `eval x^2 x=_` when `_` is a  `Double`)
- - Add `version` command to keyword interface
- - Add `reset` command to keyword interface
+ - Add `version` command
+ - Add `reset` command
  
  ### Bugfixes
  - Fix `toInteger` error message using the wrong margin from `Settings`
  - Fix bad rounding in `ParsingTools.toInteger` and `ParsingTools.isAlmostInteger`
  - Fix the evaluation of several arctrig functions 
  - Fix parsing of non-escaped expressions with spaces such as `1 + sin(x)`
- - Fix `defconstant` not latex escaping constant names
- - Add an exception when user attempts to use nested quotes in `KeywordInterface`
+ - Fix `defconstant` not LaTeX-escaping constant names
+ - Add an exception when user attempts to use nested quotes in keyword interface
  
 ## v0.1.2
 ### Bugfixes

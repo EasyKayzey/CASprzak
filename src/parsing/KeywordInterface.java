@@ -256,9 +256,9 @@ public class KeywordInterface {
 	private static Object defineConstant(String input) {
 		String[] splitInput = spaces.split(input, 2);
 		try {
-			return Constant.addSpecialConstant(splitInput[0], ((GeneralFunction) KeywordInterface.useKeywords(splitInput[1])).evaluate(null));
+			return Constant.addSpecialConstant(LatexReplacer.encodeAll(splitInput[0]), ((GeneralFunction) KeywordInterface.useKeywords(splitInput[1])).evaluate(null));
 		} catch (Exception e) {
-			return Constant.addSpecialConstant(splitInput[0], parseStored(splitInput[1]).evaluate(null));
+			return Constant.addSpecialConstant(LatexReplacer.encodeAll(splitInput[0]), parseStored(splitInput[1]).evaluate(null));
 		}
 	}
 

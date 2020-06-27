@@ -61,6 +61,7 @@ public class InfixTokenizer {
 			"(?<=\\\\pd\\{([a-zA-Z[^\\x00-\\x7F]]))"
 	);
 	private static final Pattern division = Pattern.compile("(?<!/)/(?!/)");
+	private static final Pattern logbUnderscores = Pattern.compile("logb_");
 
 	private InfixTokenizer(){}
 
@@ -86,8 +87,10 @@ public class InfixTokenizer {
 		infix = characterPairsToMultiply.matcher(infix).replaceAll(" * ");
 		// Replace curly braces parentheses
 		infix = infix.replace("{", "(").replace("}", ")");
-		// Replaces underscores with spaces
-		infix = infix.replace("_", " ").replace(",", ") (");
+		// Replaces logb underscores with spaces
+		infix = logbUnderscores.matcher(infix).replaceAll("logb ");
+		// Replaces commas with parenthesis sets
+		infix = infix.replace(",", ") (");
 		// Adds parentheses to enforce order of operations
 		infix = "((((" + times.matcher(plus.matcher(closeParen.matcher(openParen.matcher(infix).replaceAll("((((")).replaceAll("))))")).replaceAll("))+((")).replaceAll(")*(") + "))))";
 		// Adds parentheses to lower modulo precedence below multiplication

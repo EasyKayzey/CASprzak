@@ -166,6 +166,8 @@ public class KeywordInterface {
 			String stripped = input.substring(1, input.length() - 1);
 			if (!stripped.contains("\""))
 				return stripped;
+			else
+				throw new IllegalArgumentException("Nested quotes are not supported.");
 		}
 		return input;
 	}

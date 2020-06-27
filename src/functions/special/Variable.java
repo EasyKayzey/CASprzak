@@ -24,6 +24,8 @@ public class Variable extends SpecialFunction {
 	 * @param varID The variable's representative String
 	 */
 	public Variable(String varID) {
+		if (!validVariables.matcher(varID).matches())
+			throw new IllegalArgumentException("Invalid variable name '" + varID + "'. If this is not user error, it may indicate a splitting or parsing failure.");
 		this.varID = varID;
 	}
 

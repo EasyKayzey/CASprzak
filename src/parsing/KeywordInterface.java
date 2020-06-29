@@ -4,6 +4,7 @@ import config.Settings;
 import config.SettingsParser;
 import functions.GeneralFunction;
 import functions.special.Constant;
+import functions.special.Variable;
 import functions.unitary.transforms.Integral;
 import tools.MiscTools;
 import tools.ParsingTools;
@@ -241,8 +242,10 @@ public class KeywordInterface {
 
 	private static Object defineFunction(String input, boolean simplify) {
 		String[] splitInput = spaces.split(input, 2);
-		//A try-catch used to be here and was removed
+		// A try-catch used to be here and was removed
 		GeneralFunction toPut = (GeneralFunction) KeywordInterface.useKeywords(splitInput[1]);
+		if (!Variable.validVariables.matcher(splitInput[0]).matches())
+			throw new IllegalArgumentException(splitInput[0] + " is not a valid function or variable name."); // TODO figure out what this error message should actually be and edit other error as well
 		if (simplify)
 			toPut = toPut.simplify();
 		storedFunctions.put(splitInput[0], toPut);

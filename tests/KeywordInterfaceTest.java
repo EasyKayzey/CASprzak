@@ -1,11 +1,16 @@
 import config.Settings;
 import functions.GeneralFunction;
+import functions.binary.Pow;
 import functions.commutative.Product;
+import functions.commutative.Sum;
 import functions.special.Constant;
 import functions.special.Variable;
+import functions.unitary.trig.normal.Cos;
+import functions.unitary.trig.normal.Sin;
 import org.junit.jupiter.api.Test;
 import parsing.FunctionParser;
 import parsing.KeywordInterface;
+import tools.DefaultFunctions;
 
 import java.util.List;
 
@@ -159,6 +164,12 @@ public class KeywordInterfaceTest {
         test = (GeneralFunction) KeywordInterface.useKeywords("\\test");
         assertEquals(new Variable("\\test"), test);
         Settings.removeEscapes = temp;
+    }
+
+    @Test
+    void basicTrigExample() {
+        GeneralFunction test = (GeneralFunction) KeywordInterface.useKeywords("def \\trig (\\sin(\\number1 * \\theta))^2 + (\\cos(\\number2 * \\theta))^2 ");
+        assertEquals(new Sum(new Pow(DefaultFunctions.TWO, new Sin(new Product(new Variable("number1"), new Variable("\\theta")))), new Pow(DefaultFunctions.TWO, new Cos(new Product(new Variable("number2"), new Variable("\\theta"))))), test);
     }
 }
 

@@ -121,26 +121,26 @@ public class KeywordInterfaceTest {
 
     @Test
     void basicApostropheParsing() {
-        GeneralFunction test = (GeneralFunction) KeywordInterface.useKeywords("def \f' 2x");
+        GeneralFunction test = (GeneralFunction) KeywordInterface.useKeywords("def \\f' 2x");
         assertEquals(new Product(new Constant(2), new Variable("x")), test);
     }
 
     @Test
     void basicAlphaNumerics() {
-        GeneralFunction test = (GeneralFunction) KeywordInterface.useKeywords("\ts543s");
-        assertEquals(new Variable("\ts543s"), test);
+        GeneralFunction test = (GeneralFunction) KeywordInterface.useKeywords("\\ts543s");
+        assertEquals(new Variable("\\ts543s"), test);
     }
 
     @Test
     void basicUnderscoreParsing() {
-        GeneralFunction test = (GeneralFunction) KeywordInterface.useKeywords("\f2_4_5");
-        assertEquals(new Variable("\f2_4_5"), test);
+        GeneralFunction test = (GeneralFunction) KeywordInterface.useKeywords("\\f2_4_5");
+        assertEquals(new Variable("\\f2_4_5"), test);
     }
 
     @Test
     void basicVariableParsing() {
-        GeneralFunction test = (GeneralFunction) KeywordInterface.useKeywords("\test");
-        assertEquals(new Variable("\test"), test);
+        GeneralFunction test = (GeneralFunction) KeywordInterface.useKeywords("\\test");
+        assertEquals(new Variable("\\test"), test);
     }
 }
 

@@ -73,6 +73,11 @@ public class Settings {
 	public static boolean enforceEscapedFunctions = false;
 
 	/**
+	 * Denotes whether or not the regex for valid variable, function, and constant names should enforce a LaTeX escape in multi-character names. Enabling this may improve error handling.
+	 */
+	public static boolean enforceEscapedNames = true;
+
+	/**
 	 * Denotes whether functions of constants should be simplified. Ex: {@code \sin(\pi/2) -> 1}
 	 */
 	public static boolean simplifyFunctionsOfConstants = true;

@@ -42,7 +42,8 @@ public class SettingsParser {
 			case "integerMargin" 							-> Settings.integerMargin = Double.parseDouble(value);
 			case "equalsMargin" 							-> Settings.equalsMargin = Double.parseDouble(value);
 			case "defaultSleep"								-> Settings.defaultSleep = Double.parseDouble(value);
-			case "enforceEscapes"				 			-> Settings.enforceEscapedFunctions = ParsingTools.parseBoolean(value);
+			case "enforceEscapedFunctions"		 			-> Settings.enforceEscapedFunctions = ParsingTools.parseBoolean(value);
+			case "enforceEscapedNames"		 				-> Settings.enforceEscapedNames = ParsingTools.parseBoolean(value);
 			case "simplifyFunctionsOfConstants" 			-> Settings.simplifyFunctionsOfConstants = ParsingTools.parseBoolean(value);
 			case "distributeExponents" 						-> Settings.distributeExponents = ParsingTools.parseBoolean(value);
 			case "cacheDerivatives" 						-> Settings.cacheDerivatives = ParsingTools.parseBoolean(value);

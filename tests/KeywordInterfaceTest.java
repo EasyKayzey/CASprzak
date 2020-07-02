@@ -127,20 +127,38 @@ public class KeywordInterfaceTest {
 
     @Test
     void basicAlphaNumerics() {
+        boolean temp = Settings.removeEscapes;
+        Settings.removeEscapes = true;
         GeneralFunction test = (GeneralFunction) KeywordInterface.useKeywords("\\ts543s");
         assertEquals(new Variable("ts543s"), test);
+        Settings.removeEscapes = false;
+        test = (GeneralFunction) KeywordInterface.useKeywords("\\ts543s");
+        assertEquals(new Variable("\\ts543s"), test);
+        Settings.removeEscapes = temp;
     }
 
     @Test
     void basicUnderscoreParsing() {
+        boolean temp = Settings.removeEscapes;
+        Settings.removeEscapes = true;
         GeneralFunction test = (GeneralFunction) KeywordInterface.useKeywords("\\f2_4_5");
         assertEquals(new Variable("f2_4_5"), test);
+        Settings.removeEscapes = false;
+        test = (GeneralFunction) KeywordInterface.useKeywords("\\f2_4_5");
+        assertEquals(new Variable("\\f2_4_5"), test);
+        Settings.removeEscapes = temp;
     }
 
     @Test
     void basicVariableParsing() {
+        boolean temp = Settings.removeEscapes;
+        Settings.removeEscapes = true;
         GeneralFunction test = (GeneralFunction) KeywordInterface.useKeywords("\\test");
         assertEquals(new Variable("test"), test);
+        Settings.removeEscapes = false;
+        test = (GeneralFunction) KeywordInterface.useKeywords("\\test");
+        assertEquals(new Variable("\\test"), test);
+        Settings.removeEscapes = temp;
     }
 }
 

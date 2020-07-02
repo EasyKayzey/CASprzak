@@ -120,7 +120,7 @@ public class KeywordInterfaceTest {
     }
 
     @Test
-    void basicApostrapheParsing() {
+    void basicApostropheParsing() {
         GeneralFunction test = (GeneralFunction) KeywordInterface.useKeywords("def \f' 2x");
         assertEquals(new Product(new Constant(2), new Variable("x")), test);
     }

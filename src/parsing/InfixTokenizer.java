@@ -17,7 +17,7 @@ public class InfixTokenizer {
 			"(?<=\\w)\\|"											// Only matches if preceded by a word character so '*abs(' can be substituted
 	);
 	private static final Pattern adjacentMultiplier = Pattern.compile(
-			"(?<!\\\\\\w{0," + maxEscapeLength + "})" +				// Ensures that the next two lines are not LaTeX-escaped (up to Settings.maxEscapeLength characters)
+			"(?<!\\\\[\\w.']{0," + maxEscapeLength + "})" +			// Ensures that the next two lines are not LaTeX-escaped (up to Settings.maxEscapeLength characters)
 			"((?<=\\d)(?=[a-zA-Z])(?![ECP])" +						// Matches if preceded by a digit and followed by a non-ECP letter
 			"|(?<=[a-zA-Z])(?<![ECP])(?=[\\d]))" +					// Matches if preceded by a non-ECP letter and followed by a digit
 			"|(?<=\\))(?=[\\w(])" + 								// Matches if preceded by ) and followed by a word character or (
@@ -46,7 +46,7 @@ public class InfixTokenizer {
 			"|(?<=[A-Za-z(])(?=\\.))"								// Splits if preceded by a letter or open parenthesis and followed by a dot
 	);
 	private static final Pattern characterPairsToMultiply = Pattern.compile(
-			"(?<!\\\\\\w{0," + maxEscapeLength + "})" +				// Ensures that the character is not LaTeX-escaped (up to Settings.maxEscapeLength characters)
+			"(?<!\\\\[\\w.']{0," + maxEscapeLength + "})" +			// Ensures that the character is not LaTeX-escaped (up to Settings.maxEscapeLength characters)
 			"(?<![CEP])(?![CEP])" +									// Ensures the spaces before and after C, E, and P are not matched
 			"(?<!logb_\\w)" +										// Ensures not preceded by logb
 			"((?<!\\d)|(?!\\d))" +									// Ensures that spaces both preceded and followed by a digit are not matched

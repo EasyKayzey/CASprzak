@@ -18,7 +18,7 @@ public class Variable extends SpecialFunction {
 	/**
 	 * This Pattern matches all valid variable and function names
 	 */
-	public static final Pattern validVariables = Pattern.compile("[a-zA-Z[^\\x00-\\x7F]]|\\\\[a-zA-Z[^\\x00-\\x7F]][\\w[^\\x00-\\x7F]]*");
+	public static final Pattern validVariables = Pattern.compile("[a-zA-Z[^\\x00-\\x7F]]|\\\\[a-zA-Z[^\\x00-\\x7F]][\\w.'[^\\x00-\\x7F]]*");
 
 	/**
 	 * Constructs a new {@link Variable}
@@ -29,7 +29,7 @@ public class Variable extends SpecialFunction {
 			throw new IllegalArgumentException(
 					"Invalid variable name '" + varID + "'. " +
 					"If this is not user error, it may indicate a splitting or parsing failure. " +
-					"Valid variable names are a single letter character, or an escaped letter character followed by up to " + (Settings.maxEscapeLength - 2) + " letters, numbers, or underscores."
+					"Valid variable names are a single letter character, or an escaped letter character followed by up to " + (Settings.maxEscapeLength - 2) + " letters, numbers, periods, apostrophes, or underscores."
 			);
 		this.varID = varID;
 	}

@@ -252,7 +252,7 @@ public class KeywordInterface {
 		if (!Variable.validVariables.matcher(splitInput[0]).matches())
 			throw new IllegalArgumentException(
 					"Invalid function name '" + splitInput[0] + "'. " +
-					"Valid function names are a single letter character, or an escaped letter character followed by up to " + (Settings.maxEscapeLength - 2) + " letters, numbers, or underscores."
+					"Valid function names are a single letter character, or an escaped letter character followed by up to " + (Settings.maxEscapeLength - 2) + " letters, numbers, periods, apostrophes, or underscores."
 			);
 		if (simplify)
 			toPut = toPut.simplify();

@@ -250,7 +250,10 @@ public class KeywordInterface {
 		// A try-catch used to be here and was removed
 		GeneralFunction toPut = (GeneralFunction) KeywordInterface.useKeywords(splitInput[1]);
 		if (!Variable.validVariables.matcher(splitInput[0]).matches())
-			throw new IllegalArgumentException(splitInput[0] + " is not a valid function or variable name."); // TODO figure out what this error message should actually be and edit other error as well
+			throw new IllegalArgumentException(
+					"Invalid function name '" + splitInput[0] + "'. " +
+					"Valid function names are a single letter character, or an escaped letter character followed by up to " + (Settings.maxEscapeLength - 2) + " letters, numbers, or underscores."
+			);
 		if (simplify)
 			toPut = toPut.simplify();
 		storedFunctions.put(splitInput[0], toPut);

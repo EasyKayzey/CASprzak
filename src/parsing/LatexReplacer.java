@@ -81,7 +81,7 @@ public class LatexReplacer {
 	 * @return the encoded input
 	 */
 	public static String encodeAll(String input) {
-		if (!Settings.enforceEscapes)
+		if (!Settings.enforceEscapedFunctions)
 			input = LatexReplacer.addEscapes(input);
 		input = LatexReplacer.encodeGreek(input);
 		return input;

@@ -70,7 +70,7 @@ public class Settings {
 	/**
 	 * Denotes whether or not expressions like {@code sin(pi/2)} must be escaped to {@code \sin(\pi/2)}. Enabling this is strongly recommended, and may reduce bugs.
 	 */
-	public static boolean enforceEscapes = false;
+	public static boolean enforceEscapedFunctions = false;
 
 	/**
 	 * Denotes whether functions of constants should be simplified. Ex: {@code \sin(\pi/2) -> 1}

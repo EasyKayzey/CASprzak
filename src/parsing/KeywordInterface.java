@@ -445,6 +445,7 @@ public class KeywordInterface {
 				ps, prints, printsettings:                             prints all settings
 				clearfun, clearfunctions:                              clears functions
 				version:											   prints version
+				reset:												   resets
 				exit, !:                                               exits the interface
 				Execute `help [command]` to get more info on that command, and `help help` for more info on the help menu.
 				""";

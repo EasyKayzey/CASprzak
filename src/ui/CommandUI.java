@@ -57,7 +57,7 @@ public class CommandUI {
 			else
 				System.out.println(object);
 		} else {
-			System.out.println("Done");
+			System.out.println("Output is empty.");
 		}
 	}
 }

@@ -26,6 +26,7 @@ import java.util.stream.Collectors;
  */
 @SuppressWarnings("SpellCheckingInspection")
 public class KeywordInterface {
+	private static final String version = "0.2.0-DEV";
 	private static final Pattern keywordSplitter = Pattern.compile("\\s+(?=[^\"]*(\"[^\"]*\"[^\"]*)*$)");
 	private static final Pattern spaces = Pattern.compile("\\s+");
 	private static final Pattern equals = Pattern.compile("=");
@@ -78,6 +79,8 @@ public class KeywordInterface {
 			case "int", "integral"												-> integral(splitInput[1]);
 			case "ai", "index", "arrayindex"									-> arrayIndex(splitInput[1]);
 			case "debug"														-> debug(splitInput[1]);
+			case "version"														-> version;
+			case "reset"														-> reset();
 			case "help"															-> splitInput.length == 1 ? help() : help(splitInput[1]);
 			case "exit", "!"													-> throw new IllegalArgumentException("Exit command should never be passed directly to KeywordInterface. Please report this bug to the developers.");
 			default 															-> null;
@@ -163,6 +166,8 @@ public class KeywordInterface {
 			String stripped = input.substring(1, input.length() - 1);
 			if (!stripped.contains("\""))
 				return stripped;
+			else
+				throw new IllegalArgumentException("Nested quotes are not supported.");
 		}
 		return input;
 	}
@@ -253,9 +258,9 @@ public class KeywordInterface {
 	private static Object defineConstant(String input) {
 		String[] splitInput = spaces.split(input, 2);
 		try {
-			return Constant.addSpecialConstant(splitInput[0], ((GeneralFunction) KeywordInterface.useKeywords(splitInput[1])).evaluate(null));
+			return Constant.addSpecialConstant(LatexReplacer.encodeAll(splitInput[0]), ((GeneralFunction) KeywordInterface.useKeywords(splitInput[1])).evaluate(null));
 		} catch (Exception e) {
-			return Constant.addSpecialConstant(splitInput[0], parseStored(splitInput[1]).evaluate(null));
+			return Constant.addSpecialConstant(LatexReplacer.encodeAll(splitInput[0]), parseStored(splitInput[1]).evaluate(null));
 		}
 	}
 
@@ -339,6 +344,12 @@ public class KeywordInterface {
 			throw new IllegalArgumentException("The previous output was not a list of numbers.");
 	}
 
+	private static String reset() {
+		clearFunctions();
+		Constant.resetConstants();
+		return "Reset done";
+	}
+
 	private static String help(String input) {
 		return switch (input) {
 			case "demo"																-> "Runs the demo.\n" +
@@ -391,6 +402,10 @@ public class KeywordInterface {
 					"int [function] d[variable]";
 			case "ai", "index", "arrayindex"										-> "Assuming that the output of the previous command was a list, returns the value at index [index] in the list.\n" +
 					"ai [index]";
+			case "version"															-> "Prints the version of CASprzak which is currently being run. \n" +
+					"version";
+			case "reset"															-> "Resets stored functions and constants to their initial state. \n" +
+					"reset";
 			case "help"				                                      			-> "Gives more information about a command. [argument] denotes a necessary argument, (argument) denotes an optional argument, and (argument)* denotes zero or more instances of argument.\n" +
 					"help (command)";
 			case "exit", "!"														-> "Exits the program.\n" +
@@ -427,6 +442,8 @@ public class KeywordInterface {
 				ss, sets, setsetting:                                  sets a setting
 				ps, prints, printsettings:                             prints all settings
 				clearfun, clearfunctions:                              clears functions
+				version:											   prints version
+				reset:                                                 resets stored functions and constants
 				exit, !:                                               exits the interface
 				Execute `help [command]` to get more info on that command, and `help help` for more info on the help menu.
 				""";

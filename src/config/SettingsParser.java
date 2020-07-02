@@ -44,6 +44,7 @@ public class SettingsParser {
 			case "defaultSleep"								-> Settings.defaultSleep = Double.parseDouble(value);
 			case "enforceEscapedFunctions"		 			-> Settings.enforceEscapedFunctions = ParsingTools.parseBoolean(value);
 			case "enforceEscapedNames"		 				-> Settings.enforceEscapedNames = ParsingTools.parseBoolean(value);
+			case "removeEscapes"		 					-> Settings.removeEscapes = ParsingTools.parseBoolean(value);
 			case "simplifyFunctionsOfConstants" 			-> Settings.simplifyFunctionsOfConstants = ParsingTools.parseBoolean(value);
 			case "distributeExponents" 						-> Settings.distributeExponents = ParsingTools.parseBoolean(value);
 			case "cacheDerivatives" 						-> Settings.cacheDerivatives = ParsingTools.parseBoolean(value);

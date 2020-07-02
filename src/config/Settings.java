@@ -78,6 +78,11 @@ public class Settings {
 	public static boolean enforceEscapedNames = true;
 
 	/**
+	 * Denotes whether or not escapes should be removed from variable, function, and constant names. Disabling this may reduce bugs.
+	 */
+	public static boolean removeEscapes = false;
+
+	/**
 	 * Denotes whether functions of constants should be simplified. Ex: {@code \sin(\pi/2) -> 1}
 	 */
 	public static boolean simplifyFunctionsOfConstants = true;

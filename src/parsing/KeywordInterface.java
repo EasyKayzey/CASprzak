@@ -9,6 +9,7 @@ import functions.unitary.transforms.Integral;
 import tools.MiscTools;
 import tools.ParsingTools;
 import tools.exceptions.CommandNotFoundException;
+import tools.exceptions.IllegalNameException;
 import tools.exceptions.SettingNotFoundException;
 import tools.exceptions.TransformFailedException;
 import tools.singlevariable.Extrema;
@@ -250,10 +251,7 @@ public class KeywordInterface {
 		// A try-catch used to be here and was removed
 		GeneralFunction toPut = (GeneralFunction) KeywordInterface.useKeywords(splitInput[1]);
 		if (!Variable.validVariables.matcher(splitInput[0]).matches())
-			throw new IllegalArgumentException(
-					"Invalid function name '" + splitInput[0] + "'. " +
-					"Valid function names are a single letter character, or an escaped letter character followed by up to " + (Settings.maxEscapeLength - 2) + " letters, numbers, periods, apostrophes, or underscores."
-			);
+			throw new IllegalNameException(splitInput[0]);
 		if (simplify)
 			toPut = toPut.simplify();
 		storedFunctions.put(splitInput[0], toPut);

@@ -1,7 +1,7 @@
 package functions.special;
 
-import config.Settings;
 import functions.GeneralFunction;
+import tools.exceptions.IllegalNameException;
 
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -26,11 +26,9 @@ public class Variable extends SpecialFunction {
 	 */
 	public Variable(String varID) {
 		if (!validVariables.matcher(varID).matches())
-			throw new IllegalArgumentException(
-					"Invalid variable name '" + varID + "'. " +
-					"If this is not user error, it may indicate a splitting or parsing failure. " +
-					"Valid variable names are a single letter character, or an escaped letter character followed by up to " + (Settings.maxEscapeLength - 2) + " letters, numbers, periods, apostrophes, or underscores."
-			);
+			throw new IllegalNameException(varID);
+		if (varID.charAt(0) == '\\')
+			varID = varID.substring(1);
 		this.varID = varID;
 	}
 

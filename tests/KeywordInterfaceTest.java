@@ -1,5 +1,8 @@
 import config.Settings;
 import functions.GeneralFunction;
+import functions.commutative.Product;
+import functions.special.Constant;
+import functions.special.Variable;
 import org.junit.jupiter.api.Test;
 import parsing.FunctionParser;
 import parsing.KeywordInterface;
@@ -114,6 +117,12 @@ public class KeywordInterfaceTest {
     void basicNumericalIntegrationWithError() {
         double[] test = (double[]) KeywordInterface.useKeywords("intne \\sin(x) 0 \\pi");
         assertArrayEquals(new double[]{2, 0.01}, test, 0.01);
+    }
+
+    @Test
+    void basicApostrapheParsing() {
+        GeneralFunction test = (GeneralFunction) KeywordInterface.useKeywords("def \f' 2x");
+        assertEquals(new Product(new Constant(2), new Variable("x")), test);
     }
 }
 

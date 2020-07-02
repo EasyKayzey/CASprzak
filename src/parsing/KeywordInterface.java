@@ -404,7 +404,7 @@ public class KeywordInterface {
 					"ai [index]";
 			case "version"															-> "Prints the version of CASprzak which is currently being run. \n" +
 					"version";
-			case "reset"															-> "Resets functions and constants. \n" +
+			case "reset"															-> "Resets stored functions and constants to their initial state. \n" +
 					"reset";
 			case "help"				                                      			-> "Gives more information about a command. [argument] denotes a necessary argument, (argument) denotes an optional argument, and (argument)* denotes zero or more instances of argument.\n" +
 					"help (command)";

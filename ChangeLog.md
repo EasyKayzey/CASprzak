@@ -17,6 +17,9 @@
  - Make `def` and `sub` in `CommandUI` now automatically perform a `minimalSimplify`
  - Add support for `_` in `evaluate` (used as `eval x^2 x=_` when `_` is a  `Double`)
  
+ ### Changes
+ - Restricted variable and function names to the regex `[a-zA-Z[^\x00-\x7F]]|\\[a-zA-Z[^\x00-\x7F]][a-zA-Z0-9_[^\x00-\x7F]]*`
+ 
  ### Bugfixes
  - Fix `toInteger` error message using the wrong margin from `Settings`
  - Fix bad rounding in `ParsingTools.toInteger` and `ParsingTools.isAlmostInteger`

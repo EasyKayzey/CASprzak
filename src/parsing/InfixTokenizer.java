@@ -19,9 +19,10 @@ public class InfixTokenizer {
 	private static final Pattern adjacentMultiplier = Pattern.compile(
 			"(?<!\\\\[\\w.']{0," + maxEscapeLength + "})" +			// Ensures that the next two lines are not LaTeX-escaped (up to Settings.maxEscapeLength characters)
 			"((?<=\\d)(?=[a-zA-Z])(?![ECP])" +						// Matches if preceded by a digit and followed by a non-ECP letter
+			"|(?<=[a-zA-Z])(?=\\.)" +								// Matches if preceded by a letter and followed by a period
 			"|(?<=[a-zA-Z])(?<![ECP])(?=[\\d]))" +					// Matches if preceded by a non-ECP letter and followed by a digit
 			"|(?<=\\))(?=[\\w(])" + 								// Matches if preceded by ) and followed by a word character or (
-			"|(?<=[a-zA-Z)])(?=\\.)" +								// Matches if preceded by a letter or ) and followed by a dot
+			"|(?<=\\))(?=\\.)" +									// Matches if preceded by a letter or ) and followed by a period
 			"|(?<=[\\d)])(?=\\()(?<!logb_\\d)"						// Matches if preceded by [a digit not preceded by logb_] or ) and followed by (
 	);
 	private static final Pattern subtractionFinder = Pattern.compile(
@@ -39,11 +40,12 @@ public class InfixTokenizer {
 			"|(?<!\\s)(?=\\\\)" +									// Splits if followed by a LaTeX escape
 			"|(((?<=\\W)(?=[\\w-])((?<!-)|(?!\\d))" +				// Splits if preceded by non-word and followed by word and not [preceded by - and followed by a digit]
 			"|(?<=\\w)(?=\\W)((?<!E)|(?!-)))" +						// Splits if preceded by a word and followed by a non-word, unless [the word was E and the non-word was -]
+			"|(?<=[a-zA-Z])(?=\\.)" +								// Splits if preceded by a letter and followed by a period
 			"|(?<=[^\\x00-\\x7F])|(?=[^\\x00-\\x7F])" +				// Splits if preceded or followed by a non-ASCII character
 			"|(?<=[()])|(?=[()]))" +								// Splits if preceded or followed by a parenthesis
-			"(?<![ .\\\\])(?![ .])" +								// The PREVIOUS FIVE LINES ONLY WORK if not preceded or followed by a dot or space, and not preceded by a LaTeX escape
+			"(?<![ .\\\\])(?![ .])" +								// The PREVIOUS FIVE LINES ONLY WORK if not preceded or followed by a period or space, and not preceded by a LaTeX escape
 			"|(?<=[CP])|(?=[CP])" +									// Splits if preceded or followed by C or P
-			"|(?<=[A-Za-z(])(?=\\.))"								// Splits if preceded by a letter or open parenthesis and followed by a dot
+			"|(?<=\\()(?=\\.))"										// Splits if preceded by an open parenthesis and followed by a period
 	);
 	private static final Pattern characterPairsToMultiply = Pattern.compile(
 			"(?<!\\\\[\\w.']{0," + maxEscapeLength + "})" +			// Ensures that the character is not LaTeX-escaped (up to Settings.maxEscapeLength characters)

@@ -1,5 +1,6 @@
 package functions.special;
 
+import config.Settings;
 import functions.GeneralFunction;
 import tools.exceptions.IllegalNameException;
 
@@ -18,7 +19,7 @@ public class Variable extends SpecialFunction {
 	/**
 	 * This Pattern matches all valid variable and function names
 	 */
-	public static final Pattern validVariables = Pattern.compile("[a-zA-Z[^\\x00-\\x7F]]|\\\\[a-zA-Z[^\\x00-\\x7F]][\\w.'[^\\x00-\\x7F]]*");
+	public static final Pattern validVariables = Pattern.compile("[a-zA-Z[^\\x00-\\x7F]]|\\\\" + (Settings.enforceEscapedNames ? "" : "?") + "[a-zA-Z[^\\x00-\\x7F]][\\w.'[^\\x00-\\x7F]]*");
 
 	/**
 	 * Constructs a new {@link Variable}

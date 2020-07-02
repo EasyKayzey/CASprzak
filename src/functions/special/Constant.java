@@ -130,6 +130,13 @@ public class Constant extends SpecialFunction {
 		return (that instanceof Constant) && (Math.abs(constant - ((Constant) that).constant) < Settings.equalsMargin);
 	}
 
+	public static void resetConstants() {
+		specialConstants.clear();
+		specialConstants.put("π", Math.PI);
+		specialConstants.put("e", Math.E);
+	}
+
+
 	@SuppressWarnings({"VariableNotUsedInsideIf", "ConstantConditions"})
 	public int compareSelf(GeneralFunction that) {
 		if (constantKey != null && ((Constant) that).constantKey != null)

@@ -346,9 +346,7 @@ public class KeywordInterface {
 
 	private static String reset() {
 		clearFunctions();
-		Constant.specialConstants.clear();
-		Constant.specialConstants.put("π", Math.PI);
-		Constant.specialConstants.put("e", Math.E);
+		Constant.resetConstants();
 		return "Reset done";
 	}
 

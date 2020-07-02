@@ -2,6 +2,7 @@ package functions.special;
 
 import config.Settings;
 import functions.GeneralFunction;
+import tools.ParsingTools;
 import tools.exceptions.IllegalNameException;
 
 import java.util.Map;
@@ -28,8 +29,7 @@ public class Variable extends SpecialFunction {
 	public Variable(String varID) {
 		if (!validVariables.matcher(varID).matches())
 			throw new IllegalNameException(varID);
-		if (varID.charAt(0) == '\\')
-			varID = varID.substring(1);
+		varID = ParsingTools.processEscapes(varID);
 		this.varID = varID;
 	}
 

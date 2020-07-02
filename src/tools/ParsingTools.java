@@ -98,4 +98,16 @@ public class ParsingTools {
 		else
 			throw new IllegalArgumentException("Input length should be 1 for FunctionParser.toCharacter, input given was " + input);
 	}
+
+	/**
+	 * Returns the input string with LaTeX escapes removed (if they exist) if {@link Settings#removeEscapes} is enabled
+	 * @param input the possibly-escaped string
+	 * @return the input with escapes processed
+	 */
+	public static String processEscapes(String input) {
+		if (Settings.removeEscapes && input.length() > 0 && input.charAt(0) == '\\')
+			return input.substring(1);
+		else
+			return input;
+	}
 }

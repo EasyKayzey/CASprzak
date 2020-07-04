@@ -50,14 +50,14 @@ public class InfixTokenizer {
 	private static final Pattern characterPairsToMultiply = Pattern.compile(
 			"(?<!\\\\[\\w.']{0," + maxEscapeLength + "})" +			// Ensures that the character is not LaTeX-escaped (up to Settings.maxEscapeLength characters)
 			"(?<![CEP])(?![CEP])" +									// Ensures the spaces before and after C, E, and P are not matched
-			"(?<!logb_\\w)" +										// Ensures not preceded by logb
+			"(?<!logb_\\w)" +										// Ensures not preceded by \logb_{character}
 			"((?<!\\d)|(?!\\d))" +									// Ensures that spaces both preceded and followed by a digit are not matched
 			"(?<=[a-zA-Z)\\d[^\\x00-\\x7F]])" +						// Preceded by a digit, alphabetic char, or non-ascii character
 			"\\s*" + 												// Allows for spaces
 			"(?=[a-zA-Z\\\\(\\d[^\\x00-\\x7F]])" 					// Followed by a digit, alphabetic char, open-parenthesis, or non-ascii character
 	);
 	private static final Pattern differential = Pattern.compile(
-			"\\\\d(?=[a-zA-Z[^\\x00-\\x7F]](?![a-zA-Z[^\\x00-\\x7F]]))"
+			"\\\\d\\s?(?=[a-zA-Z[^\\x00-\\x7F]](?![a-zA-Z[^\\x00-\\x7F]]))"
 	);
 	private static final Pattern partialDerivative = Pattern.compile("d/d");
 	private static final Pattern endPD = Pattern.compile(
@@ -84,7 +84,7 @@ public class InfixTokenizer {
 		infix = adjacentMultiplier.matcher(infix).replaceAll(" * ");
 		// Turns expressions like x-y into x+-y, and turns expressions like x*y into x*/y (the '/' operator represents reciprocals)
 		infix = subtractionFinder.matcher(division.matcher(infix).replaceAll("*/")).replaceAll("+-");
-		// Turns differentials like dx into \d x
+		// Turns differentials like `dx` and `d x` into `\d x`
 		infix = differential.matcher(infix).replaceAll("\\\\difn ");
 		// Turns expressions like xyz into x*y*z
 		infix = characterPairsToMultiply.matcher(infix).replaceAll(" * ");

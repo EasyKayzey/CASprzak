@@ -1,7 +1,6 @@
 import functions.GeneralFunction;
 import org.junit.jupiter.api.Test;
 import parsing.FunctionParser;
-import parsing.LatexReplacer;
 
 import java.util.Map;
 
@@ -18,7 +17,7 @@ public class LatexTest {
 	@Test
 	void testVar() {
 		GeneralFunction test = FunctionParser.parseInfix("\\pi\\Gamma");
-		assertEquals(10, test.evaluate(Map.of(LatexReplacer.encodeAll("\\Gamma"), 3.2)), .3);
+		assertEquals(10, test.evaluate(Map.of("Γ", 3.2)), .3);
 	}
 
 	@Test

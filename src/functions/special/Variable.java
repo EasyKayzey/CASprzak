@@ -1,8 +1,13 @@
 package functions.special;
 
+import config.Settings;
 import functions.GeneralFunction;
+import tools.ParsingTools;
+import tools.exceptions.IllegalNameException;
 
-import java.util.*;
+import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.regex.Pattern;
 
 
 public class Variable extends SpecialFunction {
@@ -13,10 +18,18 @@ public class Variable extends SpecialFunction {
 	public final String varID;
 
 	/**
+	 * This Pattern matches all valid variable and function names
+	 */
+	public static final Pattern validVariables = Pattern.compile("[a-zA-Z[^\\x00-\\x7F]]|\\\\" + (Settings.enforceEscapedNames ? "" : "?") + "[a-zA-Z[^\\x00-\\x7F]][\\w.'[^\\x00-\\x7F]]*");
+
+	/**
 	 * Constructs a new {@link Variable}
 	 * @param varID The variable's representative String
 	 */
 	public Variable(String varID) {
+		if (!validVariables.matcher(varID).matches())
+			throw new IllegalNameException(varID);
+		varID = ParsingTools.processEscapes(varID);
 		this.varID = varID;
 	}
 

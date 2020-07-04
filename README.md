@@ -33,7 +33,7 @@ Hello, and welcome to our CAS. This is a joint project by The EasyKayzey Show st
 - If you have any feature suggestions not present in `Projects`, make a feature request in `Issues`
 - If you would like to design a better interface than the placeholder that we have now, please contact us by email
 - As noted before, to begin the demo, run `CommandUI` and input `demo`
-- All documentation can be found at: https://easykayzey.github.io/CASprzak-documentation/
+- All documentation can be found at: https://ezkz.show/CASprzak-documentation/
 - To use `cas.properties`:
    - If you are using a binary, put the file in the same directory as `CASprzak.jar`
    - If you are using the source code, leave the file in `src/config`.
@@ -41,12 +41,12 @@ Hello, and welcome to our CAS. This is a joint project by The EasyKayzey Show st
 
 ## Contacts
 ### Group
-The EasyKayzey Show: easykayzey@googlegroups.com
+The EasyKayzey Show: easykayzey@ezkz.show
 
 ### Individuals
-Erez Israeli Miller: erez.m.israeli@gmail.com
+Erez Israeli Miller: erez@ezkz.show
 
-Michael Kasprzak: michaelkasprzak522@gmail.com
+Michael Kasprzak: michael@ezkz.show
 
 ### Site
-https://easykayzey.github.io/CASprzak/
+https://ezkz.show/CASprzak/

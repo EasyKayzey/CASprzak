@@ -4,11 +4,13 @@ import config.Settings;
 import config.SettingsParser;
 import functions.GeneralFunction;
 import functions.special.Constant;
+import functions.special.Variable;
 import functions.unitary.transforms.Integral;
 import output.OutputFunction;
 import tools.MiscTools;
 import tools.ParsingTools;
 import tools.exceptions.CommandNotFoundException;
+import tools.exceptions.IllegalNameException;
 import tools.exceptions.SettingNotFoundException;
 import tools.exceptions.TransformFailedException;
 import tools.singlevariable.Extrema;
@@ -28,6 +30,7 @@ import java.util.stream.Collectors;
  */
 @SuppressWarnings("SpellCheckingInspection")
 public class KeywordInterface {
+	private static final String version = "0.2.0-DEV";
 	private static final Pattern keywordSplitter = Pattern.compile("\\s+(?=[^\"]*(\"[^\"]*\"[^\"]*)*$)");
 	private static final Pattern spaces = Pattern.compile("\\s+");
 	private static final Pattern equals = Pattern.compile("=");
@@ -78,7 +81,10 @@ public class KeywordInterface {
 			case "ss", "sset", "sets", "setsetting"								-> setSettings(splitInput[1]);
 			case "ps", "settings", "printsettings"								-> printSettings();
 			case "int", "integral"												-> integral(splitInput[1]);
+			case "ai", "index", "arrayindex"									-> arrayIndex(splitInput[1]);
 			case "debug"														-> debug(splitInput[1]);
+			case "version"														-> version;
+			case "reset"														-> reset();
 			case "help"															-> splitInput.length == 1 ? help() : help(splitInput[1]);
 			case "exit", "!"													-> throw new IllegalArgumentException("Exit command should never be passed directly to KeywordInterface. Please report this bug to the developers.");
 			default 															-> null;
@@ -169,7 +175,8 @@ public class KeywordInterface {
 	public static GeneralFunction substituteAll(GeneralFunction function) {
 		//noinspection unchecked
 		return function.substituteVariables(
-					Map.ofEntries(storedFunctions.entrySet().stream()
+					Map.ofEntries(
+							storedFunctions.entrySet().stream()
 							.map(e -> Map.entry(LatexReplacer.encodeAll(e.getKey()), e.getValue()))
 							.toArray(Map.Entry[]::new)
 					)
@@ -181,6 +188,8 @@ public class KeywordInterface {
 			String stripped = input.substring(1, input.length() - 1);
 			if (!stripped.contains("\""))
 				return stripped;
+			else
+				throw new IllegalArgumentException("Nested quotes are not supported.");
 		}
 		return input;
 	}
@@ -204,12 +213,17 @@ public class KeywordInterface {
 		String[] splitInput = spaces.split(input, 2);
 		if (splitInput.length == 1)
 			return parseStored(splitInput[0]).evaluate(new HashMap<>());
-		else
+		else {
+			Object lastPrev = prev;
 			return parseStored(splitInput[0]).evaluate(
 					Arrays.stream(keywordSplitter.split(splitInput[1]))
-					.map(equals::split)
-					.collect(Collectors.toMap(e -> LatexReplacer.encodeAll(e[0]), e -> ParsingTools.getConstant(e[1])))
+							.map(equals::split)
+							.collect(Collectors.toMap(
+									e -> LatexReplacer.encodeAll(e[0]),
+									e -> "_".equals(e[1]) ? (Double) lastPrev : ParsingTools.getConstant(e[1]))
+							)
 			);
+		}
 	}
 
 
@@ -219,7 +233,11 @@ public class KeywordInterface {
 
 	private static GeneralFunction substitute(String input, boolean simplify) {
 		String[] splitInput = keywordSplitter.split(input, 2);
-		GeneralFunction current = parseStored(splitInput[0]).substituteVariables(Arrays.stream(keywordSplitter.split(splitInput[1])).map(equals::split).collect(Collectors.toMap(e -> e[0], e -> parseStored(e[1]))));
+		GeneralFunction current = parseStored(splitInput[0]).substituteVariables(
+				Arrays.stream(keywordSplitter.split(splitInput[1]))
+						.map(equals::split)
+						.collect(Collectors.toMap(e -> e[0], e -> parseStored(e[1])))
+		);
 		if (simplify)
 			return current.simplify();
 		else
@@ -254,8 +272,10 @@ public class KeywordInterface {
 
 	private static Object defineFunction(String input, boolean simplify) {
 		String[] splitInput = spaces.split(input, 2);
-		//A try-catch used to be here and was removed
+		// A try-catch used to be here and was removed
 		GeneralFunction toPut = (GeneralFunction) KeywordInterface.useKeywords(splitInput[1]);
+		if (!Variable.validVariables.matcher(splitInput[0]).matches())
+			throw new IllegalNameException(splitInput[0]);
 		if (simplify)
 			toPut = toPut.simplify();
 		storedFunctions.put(splitInput[0], toPut);
@@ -266,9 +286,9 @@ public class KeywordInterface {
 	private static Object defineConstant(String input) {
 		String[] splitInput = spaces.split(input, 2);
 		try {
-			return Constant.addSpecialConstant(splitInput[0], ((GeneralFunction) KeywordInterface.useKeywords(splitInput[1])).evaluate(null));
+			return Constant.addSpecialConstant(LatexReplacer.encodeAll(splitInput[0]), ((GeneralFunction) KeywordInterface.useKeywords(splitInput[1])).evaluate(null));
 		} catch (Exception e) {
-			return Constant.addSpecialConstant(splitInput[0], parseStored(splitInput[1]).evaluate(null));
+			return Constant.addSpecialConstant(LatexReplacer.encodeAll(splitInput[0]), parseStored(splitInput[1]).evaluate(null));
 		}
 	}
 
@@ -345,6 +365,19 @@ public class KeywordInterface {
 		}
 	}
 
+	private static Double arrayIndex(String input) {
+		if (prev instanceof List<?> list) {
+			return (Double) list.get(Integer.parseInt(input));
+		} else
+			throw new IllegalArgumentException("The previous output was not a list of numbers.");
+	}
+
+	private static String reset() {
+		clearFunctions();
+		Constant.resetConstants();
+		return "Reset done";
+	}
+
 	private static String help(String input) {
 		return switch (input) {
 			case "demo"																-> "Runs the demo.\n" +
@@ -384,17 +417,23 @@ public class KeywordInterface {
 			case "rmc", "rmconstant", "removeconstant"                  			-> "Removes a defined constant.\n" +
 					"rmc [name]";
 			case "pf", "printfun", "printfunctions"                     			-> "Prints the list of functions, or the contents of one function.\n" +
-					"printfun (name)";
+					"pf (name)";
 			case "pc", "printc", "printconstants"                       			-> "Prints the list of constants.\n" +
-					"printconstants";
+					"pc";
 			case "clearfun", "clearfunctions"                           			-> "Clears the list of functions.\n" +
 					"clearfun";
 			case "ss", "sets", "setsetting"                    			 			-> "Sets a setting.\n" +
-					"setsetting [setting] [value]";
+					"ss [setting] [value]";
 			case "ps", "prints", "printsettings"                    	  			-> "Prints all settings.\n" +
-					"printsettings";
+					"ps";
 			case "int", "integral"                                      			-> "Symbolically integrates [function] with respect to [variable].\n" +
-					"integral [function] d[variable]";
+					"int [function] d[variable]";
+			case "ai", "index", "arrayindex"										-> "Assuming that the output of the previous command was a list, returns the value at index [index] in the list.\n" +
+					"ai [index]";
+			case "version"															-> "Prints the version of CASprzak which is currently being run. \n" +
+					"version";
+			case "reset"															-> "Resets stored functions and constants to their initial state. \n" +
+					"reset";
 			case "help"				                                      			-> "Gives more information about a command. [argument] denotes a necessary argument, (argument) denotes an optional argument, and (argument)* denotes zero or more instances of argument.\n" +
 					"help (command)";
 			case "exit", "!"														-> "Exits the program.\n" +
@@ -420,6 +459,7 @@ public class KeywordInterface {
 				tay, taylor:                                           takes a taylor series
 				sol, solve:                                            solves for roots
 				ext, extrema:                                          finds extrema
+				ai, index, arrayindex                                  returns a value from an array
 				def, deffunction:                                      defines a function
 				defs, deffunctions, deffeunctionsimplify               defines a simplified function
 				defcon, defconstant:                                   defines a constant
@@ -430,6 +470,8 @@ public class KeywordInterface {
 				ss, sets, setsetting:                                  sets a setting
 				ps, prints, printsettings:                             prints all settings
 				clearfun, clearfunctions:                              clears functions
+				version:											   prints version
+				reset:                                                 resets stored functions and constants
 				exit, !:                                               exits the interface
 				Execute `help [command]` to get more info on that command, and `help help` for more info on the help menu.
 				""";

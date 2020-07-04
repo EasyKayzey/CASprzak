@@ -88,7 +88,8 @@ public class LatexReplacer {
 	}
 
 	/**
-	 * Replaces LaTeX-escaped Greek letters in a string with their actual letter characters preceded by a space
+	 * Replaces LaTeX-escaped Greek letters in a string with their actual letter characters preceded by a space,
+	 * as long as they aren't followed by an allowed name character
 	 * @param input a LaTeX-escaped string
 	 * @return the encoded string
 	 */

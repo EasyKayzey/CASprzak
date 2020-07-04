@@ -144,14 +144,11 @@ public class KeywordInterfaceTest {
 
     @Test
     void basicUnderscoreParsing() {
-        boolean temp = Settings.removeEscapes;
-        Settings.removeEscapes = true;
         GeneralFunction test = (GeneralFunction) KeywordInterface.useKeywords("\\f2_4_5");
-        assertEquals(new Variable("f2_4_5"), test);
-        Settings.removeEscapes = false;
-        test = (GeneralFunction) KeywordInterface.useKeywords("\\f2_4_5");
-        assertEquals(new Variable("\\f2_4_5"), test);
-        Settings.removeEscapes = temp;
+        if (Settings.removeEscapes)
+            assertEquals(new Variable("f2_4_5"), test);
+        else
+            assertEquals(new Variable("\\f2_4_5"), test);
     }
 
     @Test

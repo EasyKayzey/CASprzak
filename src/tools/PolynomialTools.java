@@ -2,11 +2,12 @@ package tools;
 
 import functions.GeneralFunction;
 import functions.binary.Pow;
-import functions.commutative.Sum;
 import functions.commutative.Product;
+import functions.commutative.Sum;
 import functions.special.Constant;
 import functions.special.Variable;
 
+import java.util.Map;
 import java.util.function.DoublePredicate;
 
 /**
@@ -56,14 +57,14 @@ public class PolynomialTools {
 	}
 
 	private static boolean isGivenMonomial(GeneralFunction function, DoublePredicate test) {
-		if (function instanceof Constant || function instanceof Variable || (function instanceof Pow pow && pow.getFunction2() instanceof Variable && pow.getFunction1() instanceof Constant exp && test.test(exp.evaluate(null)))) {
+		if (function instanceof Constant || function instanceof Variable || (function instanceof Pow pow && pow.getFunction2() instanceof Variable && pow.getFunction1() instanceof Constant exp && test.test(exp.evaluate(Map.of())))) {
 			return true;
 		} else if (function instanceof Product product) {
 			GeneralFunction[] elements = product.getFunctions();
 			for (GeneralFunction element : elements) {
 				if (!(element instanceof Constant || element instanceof Variable || element instanceof Pow))
 					return false;
-				if (element instanceof Pow pow && !(pow.getFunction2() instanceof Variable && pow.getFunction1() instanceof Constant exp && test.test(exp.evaluate(null))))
+				if (element instanceof Pow pow && !(pow.getFunction2() instanceof Variable && pow.getFunction1() instanceof Constant exp && test.test(exp.evaluate(Map.of()))))
 					return false;
 			}
 			return true;

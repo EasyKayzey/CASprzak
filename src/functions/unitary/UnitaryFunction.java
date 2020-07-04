@@ -8,6 +8,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Constructor;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -50,7 +51,7 @@ public abstract class UnitaryFunction extends GeneralFunction {
 	 */
 	public GeneralFunction simplifyFOC() {
 		if (Settings.simplifyFunctionsOfConstants && operand instanceof Constant)
-			return new Constant(evaluate(null));
+			return new Constant(evaluate(Map.of()));
 		else
 			return this;
 	}

@@ -158,6 +158,15 @@ public class KeywordInterfaceTest {
     }
 
     @Test
+    void integralEscapedVariable() {
+        GeneralFunction test = (GeneralFunction) KeywordInterface.useKeywords("simp \\int(2\\test)\\d\\test");
+        if (Settings.removeEscapes)
+            assertEquals(DefaultFunctions.square(new Variable("test")), test);
+        else
+            assertEquals(DefaultFunctions.square(new Variable("\\test")), test);
+    }
+
+    @Test
     void basicTrigExample() {
         GeneralFunction test = (GeneralFunction) KeywordInterface.useKeywords("def \\trig (\\sin(\\number1 * \\theta))^2 + (\\cos(\\number2 * \\theta))^2 ");
         if (Settings.removeEscapes)

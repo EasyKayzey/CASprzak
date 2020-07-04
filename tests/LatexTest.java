@@ -11,7 +11,7 @@ public class LatexTest {
 	@Test
 	void adjMultiply() {
 		GeneralFunction test = FunctionParser.parseInfix("\\pi\\pi");
-		assertEquals(10, test.evaluate(null), .3);
+		assertEquals(10, test.evaluate(Map.of()), .3);
 	}
 
 	@Test

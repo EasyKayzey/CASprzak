@@ -5,6 +5,7 @@ import functions.special.Constant;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Iterator;
+import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -93,7 +94,7 @@ public abstract class BinaryFunction extends GeneralFunction {
 	 */
 	public GeneralFunction simplifyFOC() {
 		if (function1 instanceof Constant && function2 instanceof Constant)
-			return new Constant(this.evaluate(null)).simplify();
+			return new Constant(this.evaluate(Map.of())).simplify();
 		else
 			return this;
 	}

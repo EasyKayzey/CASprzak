@@ -46,13 +46,13 @@ public class ComboTest {
 	@Test
 	void test6C4() {
 		GeneralFunction test = FunctionParser.parseSimplified("6C4");
-		assertEquals(15, test.evaluate(null));
+		assertEquals(15, test.evaluate(Map.of()));
 	}
 
 	@Test
 	void test6P4() {
 		GeneralFunction test = FunctionParser.parseSimplified("6P4");
-		assertEquals(360, test.evaluate(null));
+		assertEquals(360, test.evaluate(Map.of()));
 	}
 
 	@Test

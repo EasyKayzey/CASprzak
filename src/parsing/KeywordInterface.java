@@ -4,10 +4,12 @@ import config.Settings;
 import config.SettingsParser;
 import functions.GeneralFunction;
 import functions.special.Constant;
+import functions.special.Variable;
 import functions.unitary.transforms.Integral;
 import tools.MiscTools;
 import tools.ParsingTools;
 import tools.exceptions.CommandNotFoundException;
+import tools.exceptions.IllegalNameException;
 import tools.exceptions.SettingNotFoundException;
 import tools.exceptions.TransformFailedException;
 import tools.singlevariable.Extrema;
@@ -154,7 +156,8 @@ public class KeywordInterface {
 	public static GeneralFunction substituteAll(GeneralFunction function) {
 		//noinspection unchecked
 		return function.substituteVariables(
-					Map.ofEntries(storedFunctions.entrySet().stream()
+					Map.ofEntries(
+							storedFunctions.entrySet().stream()
 							.map(e -> Map.entry(LatexReplacer.encodeAll(e.getKey()), e.getValue()))
 							.toArray(Map.Entry[]::new)
 					)
@@ -211,7 +214,11 @@ public class KeywordInterface {
 
 	private static GeneralFunction substitute(String input, boolean simplify) {
 		String[] splitInput = keywordSplitter.split(input, 2);
-		GeneralFunction current = parseStored(splitInput[0]).substituteVariables(Arrays.stream(keywordSplitter.split(splitInput[1])).map(equals::split).collect(Collectors.toMap(e -> e[0], e -> parseStored(e[1]))));
+		GeneralFunction current = parseStored(splitInput[0]).substituteVariables(
+				Arrays.stream(keywordSplitter.split(splitInput[1]))
+						.map(equals::split)
+						.collect(Collectors.toMap(e -> e[0], e -> parseStored(e[1])))
+		);
 		if (simplify)
 			return current.simplify();
 		else
@@ -246,8 +253,10 @@ public class KeywordInterface {
 
 	private static Object defineFunction(String input, boolean simplify) {
 		String[] splitInput = spaces.split(input, 2);
-		//A try-catch used to be here and was removed
+		// A try-catch used to be here and was removed
 		GeneralFunction toPut = (GeneralFunction) KeywordInterface.useKeywords(splitInput[1]);
+		if (!Variable.validVariables.matcher(splitInput[0]).matches())
+			throw new IllegalNameException(splitInput[0]);
 		if (simplify)
 			toPut = toPut.simplify();
 		storedFunctions.put(splitInput[0], toPut);

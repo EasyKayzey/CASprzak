@@ -3,6 +3,8 @@ package functions.special;
 import config.Settings;
 import functions.GeneralFunction;
 import org.jetbrains.annotations.Nullable;
+import tools.ParsingTools;
+import tools.exceptions.IllegalNameException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -76,6 +78,9 @@ public class Constant extends SpecialFunction {
 	 * @return the value of the constant for convenience
 	 */
 	public static double addSpecialConstant(String string, double value) {
+		if (!Variable.validVariables.matcher(string).matches())
+			throw new IllegalNameException(string);
+		string = ParsingTools.processEscapes(string);
 		specialConstants.put(string, value);
 		return value;
 	}

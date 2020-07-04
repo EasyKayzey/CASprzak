@@ -19,6 +19,9 @@
  - Add `version` command
  - Add `reset` command
  
+ ### Changes
+ - Restricted variable and function names to the regex `[a-zA-Z[^\x00-\x7F]]|\\[a-zA-Z[^\x00-\x7F]][\w.'[^\x00-\x7F]]*`
+ 
  ### Bugfixes
  - Fix `toInteger` error message using the wrong margin from `Settings`
  - Fix bad rounding in `ParsingTools.toInteger` and `ParsingTools.isAlmostInteger`

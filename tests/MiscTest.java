@@ -58,7 +58,7 @@ public class MiscTest {
 
 	@Test
 	void multiCharVariable() {
-		assertEquals(3, new Variable("abc").evaluate(Map.of("abc", 3.0)));
+		assertEquals(3, new Variable("\\abc").evaluate(Map.of("\\abc", 3.0)));
 		assertEquals(3, FunctionParser.parseSimplified("\\el+1").evaluate(Map.of("\\el", 2.0)));
 	}
 }

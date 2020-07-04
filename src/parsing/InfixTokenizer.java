@@ -17,10 +17,12 @@ public class InfixTokenizer {
 			"(?<=\\w)\\|"											// Only matches if preceded by a word character so '*abs(' can be substituted
 	);
 	private static final Pattern adjacentMultiplier = Pattern.compile(
-			"(?<=\\d)(?=[a-zA-Z])(?![ECP])" +						// Matches if preceded by a digit and followed by a non-ECP letter
-			"|(?<=[a-zA-Z])(?<![ECP])(?=[\\d])" +					// Matches if preceded by a non-ECP letter and followed by a digit
+			"(?<!\\\\[\\w.']{0," + maxEscapeLength + "})" +			// Ensures that the next two lines are not LaTeX-escaped (up to Settings.maxEscapeLength characters)
+			"((?<=\\d)(?=[a-zA-Z])(?![ECP])" +						// Matches if preceded by a digit and followed by a non-ECP letter
+			"|(?<=[a-zA-Z])(?=\\.)" +								// Matches if preceded by a letter and followed by a period
+			"|(?<=[a-zA-Z])(?<![ECP])(?=[\\d]))" +					// Matches if preceded by a non-ECP letter and followed by a digit
 			"|(?<=\\))(?=[\\w(])" + 								// Matches if preceded by ) and followed by a word character or (
-			"|(?<=[a-zA-Z)])(?=\\.)" +								// Matches if preceded by a letter or ) and followed by a dot
+			"|(?<=\\))(?=\\.)" +									// Matches if preceded by a letter or ) and followed by a period
 			"|(?<=[\\d)])(?=\\()(?<!logb_\\d)"						// Matches if preceded by [a digit not preceded by logb_] or ) and followed by (
 	);
 	private static final Pattern subtractionFinder = Pattern.compile(
@@ -38,29 +40,31 @@ public class InfixTokenizer {
 			"|(?<!\\s)(?=\\\\)" +									// Splits if followed by a LaTeX escape
 			"|(((?<=\\W)(?=[\\w-])((?<!-)|(?!\\d))" +				// Splits if preceded by non-word and followed by word and not [preceded by - and followed by a digit]
 			"|(?<=\\w)(?=\\W)((?<!E)|(?!-)))" +						// Splits if preceded by a word and followed by a non-word, unless [the word was E and the non-word was -]
-			"|(?<=[()])|(?=[()]))" +								// Splits if preceded or followed by a parenthesis
-			"(?<![ .\\\\])(?![ .])" +								// The PREVIOUS FOUR LINES ONLY WORK if not preceded or followed by a dot or space, and not preceded by a LaTeX escape
-			"|(?<=[CP])|(?=[CP])" +									// Splits if preceded or followed by C or P
+			"|(?<=[a-zA-Z])(?=\\.)" +								// Splits if preceded by a letter and followed by a period
 			"|(?<=[^\\x00-\\x7F])|(?=[^\\x00-\\x7F])" +				// Splits if preceded or followed by a non-ASCII character
-			"|(?<=[A-Za-z(])(?=\\.))"								// Splits if preceded by a letter or open parenthesis and followed by a dot
+			"|(?<=[()])|(?=[()]))" +								// Splits if preceded or followed by a parenthesis
+			"(?<![ .\\\\])(?![ .])" +								// The PREVIOUS FIVE LINES ONLY WORK if not preceded or followed by a period or space, and not preceded by a LaTeX escape
+			"|(?<=[CP])|(?=[CP])" +									// Splits if preceded or followed by C or P
+			"|(?<=\\()(?=\\.))"										// Splits if preceded by an open parenthesis and followed by a period
 	);
 	private static final Pattern characterPairsToMultiply = Pattern.compile(
-			"(?<!\\\\[a-zA-Z]{0," + maxEscapeLength + "})" +		// Ensures that the character is not LaTeX-escaped (up to Settings.maxEscapeLength characters)
+			"(?<!\\\\[\\w.']{0," + maxEscapeLength + "})" +			// Ensures that the character is not LaTeX-escaped (up to Settings.maxEscapeLength characters)
 			"(?<![CEP])(?![CEP])" +									// Ensures the spaces before and after C, E, and P are not matched
-			"(?<!logb_\\w)" +										// Ensures not preceded by logb
+			"(?<!logb_\\w)" +										// Ensures not preceded by \logb_{character}
 			"((?<!\\d)|(?!\\d))" +									// Ensures that spaces both preceded and followed by a digit are not matched
-			"((?<=[a-zA-Z)\\d])|(?<=[^\\x00-\\x7F]))" +				// Preceded by a digit, alphabetic char, or non-ascii character
+			"(?<=[a-zA-Z)\\d[^\\x00-\\x7F]])" +						// Preceded by a digit, alphabetic char, or non-ascii character
 			"\\s*" + 												// Allows for spaces
-			"((?=[a-zA-Z\\\\(\\d])|(?=[^\\x00-\\x7F]))" 			// Followed by a digit, alphabetic char, open-parenthesis, or non-ascii character
+			"(?=[a-zA-Z\\\\(\\d[^\\x00-\\x7F]])" 					// Followed by a digit, alphabetic char, open-parenthesis, or non-ascii character
 	);
 	private static final Pattern differential = Pattern.compile(
-			"\\\\d(?=([a-zA-Z]|[^\\x00-\\x7F])(?![a-zA-Z]|[^\\x00-\\x7F]))"
+			"\\\\d\\s?(?=[a-zA-Z[^\\x00-\\x7F]](?![a-zA-Z[^\\x00-\\x7F]])|\\\\)"
 	);
 	private static final Pattern partialDerivative = Pattern.compile("d/d");
 	private static final Pattern endPD = Pattern.compile(
-			"(?<=\\\\pd\\{[a-zA-Z\\x00-\\x7F])"
+			"(?<=\\\\pd\\{([a-zA-Z[^\\x00-\\x7F]]))"
 	);
 	private static final Pattern division = Pattern.compile("(?<!/)/(?!/)");
+	private static final Pattern logbUnderscores = Pattern.compile("logb_");
 
 	private InfixTokenizer(){}
 
@@ -80,14 +84,16 @@ public class InfixTokenizer {
 		infix = adjacentMultiplier.matcher(infix).replaceAll(" * ");
 		// Turns expressions like x-y into x+-y, and turns expressions like x*y into x*/y (the '/' operator represents reciprocals)
 		infix = subtractionFinder.matcher(division.matcher(infix).replaceAll("*/")).replaceAll("+-");
-		// Turns differentials like dx into \d x
+		// Turns differentials like `dx` and `d x` into `\d x`
 		infix = differential.matcher(infix).replaceAll("\\\\difn ");
 		// Turns expressions like xyz into x*y*z
 		infix = characterPairsToMultiply.matcher(infix).replaceAll(" * ");
 		// Replace curly braces parentheses
 		infix = infix.replace("{", "(").replace("}", ")");
-		// Replaces underscores with spaces
-		infix = infix.replace("_", " ").replace(",", ") (");
+		// Replaces logb underscores with spaces
+		infix = logbUnderscores.matcher(infix).replaceAll("logb ");
+		// Replaces commas with parenthesis sets
+		infix = infix.replace(",", ") (");
 		// Adds parentheses to enforce order of operations
 		infix = "((((" + times.matcher(plus.matcher(closeParen.matcher(openParen.matcher(infix).replaceAll("((((")).replaceAll("))))")).replaceAll("))+((")).replaceAll(")*(") + "))))";
 		// Adds parentheses to lower modulo precedence below multiplication

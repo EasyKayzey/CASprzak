@@ -97,7 +97,7 @@ public class PolynomialTools {
 			}
 			return sum;
 		} else {
-			throw new IllegalStateException("Monomial " + monomial + " is not a Variable, Product, or Power");
+			throw new IllegalStateException(Monomial " + monomial + " is not a Variable, Product, or Power, but does not satisfy isGeneralMonomial.");
 		}
 	}
 }

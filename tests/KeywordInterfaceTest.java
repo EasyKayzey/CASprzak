@@ -133,46 +133,31 @@ public class KeywordInterfaceTest {
     @Test
     void basicAlphaNumerics() {
         GeneralFunction test = (GeneralFunction) KeywordInterface.useKeywords("\\ts543s");
-        if (Settings.removeEscapes)
-            assertEquals(new Variable("ts543s"), test);
-        else
-            assertEquals(new Variable("\\ts543s"), test);
+        assertEquals(new Variable("\\ts543s"), test);
     }
 
     @Test
     void basicUnderscoreParsing() {
         GeneralFunction test = (GeneralFunction) KeywordInterface.useKeywords("\\f2_4_5");
-        if (Settings.removeEscapes)
-            assertEquals(new Variable("f2_4_5"), test);
-        else
-            assertEquals(new Variable("\\f2_4_5"), test);
+        assertEquals(new Variable("\\f2_4_5"), test);
     }
 
     @Test
     void basicVariableParsing() {
         GeneralFunction test = (GeneralFunction) KeywordInterface.useKeywords("\\test");
-        if (Settings.removeEscapes)
-            assertEquals(new Variable("test"), test);
-        else
-            assertEquals(new Variable("\\test"), test);
+        assertEquals(new Variable("\\test"), test);
     }
 
     @Test
     void integralEscapedVariable() {
         GeneralFunction test = (GeneralFunction) KeywordInterface.useKeywords("simp \\int(2\\test)\\d\\test");
-        if (Settings.removeEscapes)
-            assertEquals(DefaultFunctions.square(new Variable("test")), test);
-        else
-            assertEquals(DefaultFunctions.square(new Variable("\\test")), test);
+        assertEquals(DefaultFunctions.square(new Variable("\\test")), test);
     }
 
     @Test
     void basicTrigExample() {
         GeneralFunction test = (GeneralFunction) KeywordInterface.useKeywords("def \\trig (\\sin(\\number1 * \\theta))^2 + (\\cos(\\number2 * \\theta))^2 ");
-        if (Settings.removeEscapes)
-            assertEquals(new Sum(new Pow(DefaultFunctions.TWO, new Sin(new Product(new Variable("number1"), new Variable("θ")))), new Pow(DefaultFunctions.TWO, new Cos(new Product(new Variable("number2"), new Variable("θ"))))), test);
-        else
-            assertEquals(new Sum(new Pow(DefaultFunctions.TWO, new Sin(new Product(new Variable("\\number1"), new Variable("θ")))), new Pow(DefaultFunctions.TWO, new Cos(new Product(new Variable("\\number2"), new Variable("θ"))))), test);
+        assertEquals(new Sum(new Pow(DefaultFunctions.TWO, new Sin(new Product(new Variable("\\number1"), new Variable("θ")))), new Pow(DefaultFunctions.TWO, new Cos(new Product(new Variable("\\number2"), new Variable("θ"))))), test);
     }
 }
 

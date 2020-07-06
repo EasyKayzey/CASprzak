@@ -5,7 +5,10 @@ import functions.unitary.transforms.Integral;
 import org.junit.jupiter.api.Test;
 import tools.DefaultFunctions;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static parsing.FunctionParser.parseInfix;
 import static parsing.FunctionParser.parseSimplified;
 
@@ -13,19 +16,19 @@ public class DifferentialTest {
 	@Test
 	void basicDerivative1() {
 		GeneralFunction test = parseSimplified("d/dx x");
-		assertEquals(1, test.evaluate(null));
+		assertEquals(1, test.evaluate(Map.of()));
 	}
 
 	@Test
 	void basicDerivative2() {
 		GeneralFunction test = parseSimplified("d/dx{x}");
-		assertEquals(1, test.evaluate(null));
+		assertEquals(1, test.evaluate(Map.of()));
 	}
 
 	@Test
 	void basicDerivative3() {
 		GeneralFunction test = parseSimplified("d/dx(x)");
-		assertEquals(1, test.evaluate(null));
+		assertEquals(1, test.evaluate(Map.of()));
 	}
 
 	@Test

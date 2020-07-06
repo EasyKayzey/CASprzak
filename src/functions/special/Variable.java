@@ -29,13 +29,12 @@ public class Variable extends SpecialFunction {
 	public Variable(String varID) {
 		if (!validVariables.matcher(varID).matches())
 			throw new IllegalNameException(varID);
-		varID = ParsingTools.processEscapes(varID);
 		this.varID = varID;
 	}
 
 
 	public String toString() {
-		return varID;
+		return ParsingTools.processEscapes(varID);
 	}
 
 

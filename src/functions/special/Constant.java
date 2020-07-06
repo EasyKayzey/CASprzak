@@ -80,7 +80,6 @@ public class Constant extends SpecialFunction {
 	public static double addSpecialConstant(String string, double value) {
 		if (!Variable.validVariables.matcher(string).matches())
 			throw new IllegalNameException(string);
-		string = ParsingTools.processEscapes(string);
 		specialConstants.put(string, value);
 		return value;
 	}
@@ -101,7 +100,7 @@ public class Constant extends SpecialFunction {
 
 	public String toString() {
 		if (constantKey != null)
-			return constantKey;
+			return ParsingTools.processEscapes(constantKey);
 		else if (ParsingTools.isAlmostInteger(constant))
 			return String.valueOf(ParsingTools.toInteger(constant));
 		else

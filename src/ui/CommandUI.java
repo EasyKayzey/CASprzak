@@ -4,6 +4,7 @@ import config.Settings;
 import parsing.KeywordInterface;
 import tools.ParsingTools;
 import tools.exceptions.CommandNotFoundException;
+import tools.exceptions.UserExitException;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -19,26 +20,22 @@ public class CommandUI {
 	 */
 	public static void main(String[] args) {
 		System.out.println("Welcome to CASprzak. Run 'help' for a command list, or 'demo' for a tutorial.");
-		Scanner scan = new Scanner(System.in);
-		scan.useDelimiter(ParsingTools.newline);
+		Scanner scanner = new Scanner(System.in);
+		scanner.useDelimiter(ParsingTools.newline);
 		boolean flag = true;
 		while (flag) {
 			System.out.print(">>> ");
-			String input = scan.next();
+			String input = scanner.next();
 			if  (input.isBlank())
 				continue;
-			if ('!' == input.charAt(0) || (input.length() == 4 && "exit".equals(input.substring(0, 4))))
+			try {
+				output(KeywordInterface.useKeywords(input));
+			} catch (UserExitException ignored) {
 				flag = false;
-			else {
-				try {
-					output(KeywordInterface.useKeywords(input));
-				} catch (RuntimeException e) {
-					output(e);
-					if (e instanceof CommandNotFoundException) {
-						System.out.println("When parsing the input as a raw function, an exception was thrown. To see details, enter '_'.");
-//						output(KeywordInterface.prev);
-					}
-				}
+			} catch (RuntimeException e) {
+				output(e);
+				if (e instanceof CommandNotFoundException)
+					System.out.println("When parsing the input as a raw function, an exception was thrown. To see details, enter '_'.");
 			}
 		}
 	}

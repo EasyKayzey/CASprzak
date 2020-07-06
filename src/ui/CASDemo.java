@@ -4,6 +4,7 @@ import config.Settings;
 import parsing.KeywordInterface;
 import tools.ParsingTools;
 import tools.VariableTools;
+import tools.exceptions.UserExitException;
 
 import java.util.Scanner;
 import java.util.function.Predicate;
@@ -42,7 +43,7 @@ public class CASDemo {
 
 	/**
 	 * Runs the demo
-	 * @return "Exited demo"
+	 * @return "Exiting demo..."
 	 */
 	@SuppressWarnings("SameReturnValue")
 	public static String runDemo() {
@@ -50,7 +51,7 @@ public class CASDemo {
 		scanner.useDelimiter(ParsingTools.newline);
 		while (currentState != DemoState.EXIT)
 			runState();
-		return "Exited demo";
+		return "Exiting demo...";
 	}
 
 	/**
@@ -95,10 +96,7 @@ public class CASDemo {
 				input = scanner.next();
 			}
 			
-			if ((!input.isBlank() && '!' == input.charAt(0)) || (input.length() >= 4 && "exit".equals(input.substring(0, 4)))) {
-				currentState = DemoState.EXIT;
-				return false;
-			} else if (input.length() >= 4 && "next".equals(input.substring(0, 4))) {
+			if (input.length() >= 4 && "next".equals(input.substring(0, 4))) {
 				return true;
 			} else if ("toc".equals(input.toLowerCase())) {
 				currentState = DemoState.TOC;
@@ -110,6 +108,9 @@ public class CASDemo {
 				System.out.println(KeywordInterface.useKeywords(input));
 				return true;
 			}
+		} catch (UserExitException ignored) {
+			currentState = DemoState.EXIT;
+			return false;
 		} catch (Exception e) {
 			System.out.println("Your input threw exception '" + e.toString() + "', please try again.");
 			if (Settings.printStackTraces)
@@ -248,7 +249,7 @@ public class CASDemo {
 				For example:
 				>>> def d x^2*(0*ln(x)+(2*1)/x)
 				""" +
-				KeywordInterface.useKeywords("def d x^2*(0*ln(x)+(2*1)/x)")
+				KeywordInterface.safeKeywords("def d x^2*(0*ln(x)+(2*1)/x)")
 				+ """
     
 				This expression looks complicated, right?
@@ -294,7 +295,7 @@ public class CASDemo {
 				It is probably best to explain with an example:
 				>>> sub x^y y=sin(x)
 				""" +
-				KeywordInterface.useKeywords("sub x^y y=sin(x)")
+				KeywordInterface.safeKeywords("sub x^y y=sin(x)")
 				+ """
 				  
 				As you can see, this replaces all 'y's in the function with 'sin(x)'.
@@ -319,7 +320,7 @@ public class CASDemo {
 				Remember, that whenever you define a new function it gets stored in a variable.
 				>>> def a x^2
 				""" +
-				KeywordInterface.useKeywords("def a x^2")
+				KeywordInterface.safeKeywords("def a x^2")
 				+ """
     
 				Now, what happens when we define a new function 'b' using 'a' as a variable?
@@ -330,13 +331,13 @@ public class CASDemo {
 		sleep();
 		if (VariableTools.doesNotContainsVariable(KeywordInterface.parseStored("b"), "a")) {
 			System.out.println("An issue has occurred when parsing your function for 'b'. Please report this to the developers. Defaulting to 'def b a+1'...");
-			KeywordInterface.useKeywords("def b a+1");
+			KeywordInterface.safeKeywords("def b a+1");
 		}
 		printWithSleep("""
 				Notice that 'b' is a function of 'a', not of 'x', when we evaluate, we are going to have to use 'a=[value]'.
 				>>> eval b a=2
 				""" +
-				KeywordInterface.useKeywords("eval b a=2")
+				KeywordInterface.safeKeywords("eval b a=2")
 				+ """
     
 				Now, try using substitute all, type in 'sa b'.
@@ -347,7 +348,7 @@ public class CASDemo {
 		printWithSleep("""
 				>>> def b _
 				""" +
-				KeywordInterface.useKeywords("def b _")
+				KeywordInterface.safeKeywords("def b _")
 				+ """
     
 				Notice how 'b' is now a function in terms of 'x'.
@@ -370,7 +371,7 @@ public class CASDemo {
 				To fix this, we put quotation marks around the whole simplification:
 				>>> sub x^2 x "simp y+y"
 				""" +
-				KeywordInterface.useKeywords("sub x^2 x=\"simp y+y\"")
+				KeywordInterface.safeKeywords("sub x^2 x=\"simp y+y\"")
 				+ """
     
 				Additionally, nested quotation marks do not work.
@@ -387,22 +388,22 @@ public class CASDemo {
 				Some examples:
 				>>> pd x x^2
 				""" +
-				KeywordInterface.useKeywords("pd x x^2")
+				KeywordInterface.safeKeywords("pd x x^2")
 				+ """
     
 				>>> pd x e^(sin(x)+y)
 				""" +
-				KeywordInterface.useKeywords("pd x e^(sin(x)+y)")
+				KeywordInterface.safeKeywords("pd x e^(sin(x)+y)")
 				+ """
     
 				>>> pd x x^(x^(x^x))
 				""" +
-				KeywordInterface.useKeywords("pd x x^(x^(x^x))")
+				KeywordInterface.safeKeywords("pd x x^(x^(x^x))")
 				+ """
     
 				>>> pd y logb_{x^y+z}(2sin(y))
 				""" +
-				KeywordInterface.useKeywords("pd y logb_{x^y+z}(2sin(y))")
+				KeywordInterface.safeKeywords("pd y logb_{x^y+z}(2sin(y))")
 				+ """
     
 				Now try it yourself using the 'pd' command, in the syntax 'pd [variable] [function]'.
@@ -447,7 +448,7 @@ public class CASDemo {
 				An example where integration works is as follows:.
 				>>> int 3*(cos(e^x))^2*sin(e^x)*e^x dx
 				""" +
-				KeywordInterface.useKeywords("int 3*(cos(e^x))^2*sin(e^x)*e^x dx")
+				KeywordInterface.safeKeywords("int 3*(cos(e^x))^2*sin(e^x)*e^x dx")
 				+ """
     
 				Try integration for yourself using the 'int' command.
@@ -512,7 +513,7 @@ public class CASDemo {
 				For example:
 				>>> ext max 1-x^2 -2 2.
 				""" +
-				KeywordInterface.useKeywords("ext max 1-x^2 -2 2")
+				KeywordInterface.safeKeywords("ext max 1-x^2 -2 2")
 				+ """
     
 				This command found the maximum of '1-x^2' on the range (-2, 2).

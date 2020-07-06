@@ -123,6 +123,11 @@ public class Settings {
 	public static boolean printStackTraces = false;
 
 	/**
+	 * Denotes whether or not combinatorial operations should be parsed. This setting can only be changed through the config; modifying it during runtime will not do anything.
+	 */
+	public static boolean doCombinatorics = true;
+
+	/**
 	 * Denotes the default method used to solve equations
 	 */
 	public static SolverType defaultSolverType = SolverType.NEWTON;

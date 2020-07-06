@@ -125,12 +125,10 @@ public abstract class BinaryFunction extends GeneralFunction {
 		@SuppressWarnings("ValueOfIncrementOrDecrementUsed")
 		@Override
 		public GeneralFunction next() {
-			if (!hasNext())
-				throw new NoSuchElementException("Out of elements in BinaryFunction " + function2 + ", " + function1);
 			return switch(loc++) {
 				case 0 -> function2;
 				case 1 -> function1;
-				default -> throw new IllegalStateException("This code should never run in BinaryIterator");
+				default -> throw new NoSuchElementException("Out of elements in BinaryFunction " + function2 + ", " + function1);
 			};
 		}
 	}

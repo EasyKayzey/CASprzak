@@ -114,7 +114,7 @@ public class KeywordInterface {
 		try {
 			return useKeywords(input);
 		} catch (UserExitException ignored) {
-			throw new IllegalArgumentException("Exit argument was passed to safeKeywords");
+			throw new IllegalArgumentException("Exit argument was illegally passed to safeKeywords.");
 		}
 	}
 

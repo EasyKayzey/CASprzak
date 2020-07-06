@@ -191,7 +191,7 @@ public class KeywordInterface {
 	}
 
 	private static double evaluate(String input) {
-		String[] splitInput = spaces.split(input, 2);
+		String[] splitInput = keywordSplitter.split(input, 2);
 		if (splitInput.length == 1)
 			return parseStored(splitInput[0]).evaluate(new HashMap<>());
 		else {

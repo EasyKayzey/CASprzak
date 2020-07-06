@@ -101,8 +101,8 @@ public class Constant extends SpecialFunction {
 	public String toString() {
 		if (constantKey != null)
 			return ParsingTools.processEscapes(constantKey);
-		else if (ParsingTools.isAlmostInteger(constant))
-			return String.valueOf(ParsingTools.toInteger(constant));
+		else if (Settings.truncateNearIntegers && ParsingTools.isAlmostInteger(constant) && Math.abs(constant) > 0.5)
+				return String.valueOf(ParsingTools.toInteger(constant));
 		else
 			return String.valueOf(constant);
 	}

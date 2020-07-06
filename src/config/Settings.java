@@ -132,6 +132,9 @@ public class Settings {
 	 */
 	public static boolean asteriskMultiplication = false;
 
+	/**
+	 * Denotes whether or not constants close to integers are printed as integers (zero not included)
+	 */
 	public static boolean truncateNearIntegers = true;
 
 	/**

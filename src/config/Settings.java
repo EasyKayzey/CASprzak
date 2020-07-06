@@ -78,7 +78,7 @@ public class Settings {
 	public static boolean enforceEscapedNames = true;
 
 	/**
-	 * Denotes whether or not escapes should be removed from variable, function, and constant names. Disabling this may reduce bugs.
+	 * Denotes whether or not escapes should be removed from variable, function, and constant names when printing.
 	 */
 	public static boolean removeEscapes = false;
 

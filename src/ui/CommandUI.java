@@ -4,6 +4,7 @@ import config.Settings;
 import parsing.KeywordInterface;
 import tools.ParsingTools;
 import tools.exceptions.CommandNotFoundException;
+import tools.exceptions.UserExitException;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -27,17 +28,14 @@ public class CommandUI {
 			String input = scan.next();
 			if  (input.isBlank())
 				continue;
-			if ('!' == input.charAt(0) || (input.length() == 4 && "exit".equals(input.substring(0, 4))))
+			try {
+				output(KeywordInterface.useKeywords(input));
+			} catch (UserExitException ignored) {
 				flag = false;
-			else {
-				try {
-					output(KeywordInterface.useKeywords(input));
-				} catch (RuntimeException e) {
-					output(e);
-					if (e instanceof CommandNotFoundException) {
-						System.out.println("When parsing the input as a raw function, an exception was thrown. To see details, enter '_'.");
-//						output(KeywordInterface.prev);
-					}
+			} catch (RuntimeException e) {
+				output(e);
+				if (e instanceof CommandNotFoundException) {
+					System.out.println("When parsing the input as a raw function, an exception was thrown. To see details, enter '_'.");
 				}
 			}
 		}

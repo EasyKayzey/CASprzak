@@ -8,10 +8,7 @@ import functions.special.Variable;
 import functions.unitary.transforms.Integral;
 import tools.MiscTools;
 import tools.ParsingTools;
-import tools.exceptions.CommandNotFoundException;
-import tools.exceptions.IllegalNameException;
-import tools.exceptions.SettingNotFoundException;
-import tools.exceptions.TransformFailedException;
+import tools.exceptions.*;
 import tools.singlevariable.Extrema;
 import tools.singlevariable.NumericalIntegration;
 import tools.singlevariable.Solver;
@@ -45,8 +42,9 @@ public class KeywordInterface {
 	 * Takes input as a string in the format {@code "command arguments..."}
 	 * @param input a string that contains the command and arguments
 	 * @return the Object requested
+	 * @throws UserExitException if the input prompts an exit from the program
 	 */
-	public static Object useKeywords(String input) {
+	public static Object useKeywords(String input) throws UserExitException {
 		input = stripQuotes(input);
 		input = input.strip(); // Strips whitespace
 		if ("_".equals(input))
@@ -84,7 +82,7 @@ public class KeywordInterface {
 			case "version"														-> version;
 			case "reset"														-> reset();
 			case "help"															-> splitInput.length == 1 ? help() : help(splitInput[1]);
-			case "exit", "!"													-> throw new IllegalArgumentException("Exit command should never be passed directly to KeywordInterface. Please report this bug to the developers.");
+			case "exit", "!"													-> throw new UserExitException();
 			default 															-> null;
 		};
 		if (ret == null) {
@@ -104,6 +102,20 @@ public class KeywordInterface {
 		}
 		prev = ret;
 		return ret;
+	}
+
+	/**
+	 * Runs {@link #useKeywords(String)} assuming that the input is not an exit argument, removing the checked exception
+	 * @param input the input for {@link #useKeywords(String)}
+	 * @return the output of {@link #useKeywords(String)}
+	 * @throws IllegalArgumentException if the input passed throws an {@link UserExitException}
+	 */
+	public static Object safeKeywords(String input) {
+		try {
+			return useKeywords(input);
+		} catch (UserExitException ignored) {
+			throw new IllegalArgumentException("Exit argument was illegally passed to safeKeywords.");
+		}
 	}
 
 	@SuppressWarnings("SameReturnValue")
@@ -144,8 +156,11 @@ public class KeywordInterface {
 
 		if (Constant.isSpecialConstant(input))
 			return new Constant(input);
-		else
+		else try {
 			return (GeneralFunction) useKeywords(input);
+		} catch (UserExitException ignored) {
+			throw new IllegalArgumentException("The input passed to parseStored was interpreted as a call to exit, but parseStored cannot induce a program exit.");
+		}
 	}
 
 	/**
@@ -254,7 +269,7 @@ public class KeywordInterface {
 	private static Object defineFunction(String input, boolean simplify) {
 		String[] splitInput = spaces.split(input, 2);
 		// A try-catch used to be here and was removed
-		GeneralFunction toPut = (GeneralFunction) KeywordInterface.useKeywords(splitInput[1]);
+		GeneralFunction toPut = parseStored(splitInput[1]);
 		if (!Variable.validVariables.matcher(splitInput[0]).matches())
 			throw new IllegalNameException(splitInput[0]);
 		if (simplify)

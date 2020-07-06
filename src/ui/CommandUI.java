@@ -20,12 +20,12 @@ public class CommandUI {
 	 */
 	public static void main(String[] args) {
 		System.out.println("Welcome to CASprzak. Run 'help' for a command list, or 'demo' for a tutorial.");
-		Scanner scan = new Scanner(System.in);
-		scan.useDelimiter(ParsingTools.newline);
+		Scanner scanner = new Scanner(System.in);
+		scanner.useDelimiter(ParsingTools.newline);
 		boolean flag = true;
 		while (flag) {
 			System.out.print(">>> ");
-			String input = scan.next();
+			String input = scanner.next();
 			if  (input.isBlank())
 				continue;
 			try {
@@ -34,9 +34,8 @@ public class CommandUI {
 				flag = false;
 			} catch (RuntimeException e) {
 				output(e);
-				if (e instanceof CommandNotFoundException) {
+				if (e instanceof CommandNotFoundException)
 					System.out.println("When parsing the input as a raw function, an exception was thrown. To see details, enter '_'.");
-				}
 			}
 		}
 	}

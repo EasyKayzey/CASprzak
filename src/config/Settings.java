@@ -132,6 +132,8 @@ public class Settings {
 	 */
 	public static boolean asteriskMultiplication = false;
 
+	public static boolean truncateNearIntegers = true;
+
 	/**
 	 * Denotes the default method used to solve equations
 	 */

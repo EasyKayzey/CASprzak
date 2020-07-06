@@ -43,7 +43,7 @@ public class CASDemo {
 
 	/**
 	 * Runs the demo
-	 * @return "Exited demo"
+	 * @return "Exiting demo..."
 	 */
 	@SuppressWarnings("SameReturnValue")
 	public static String runDemo() {
@@ -51,7 +51,7 @@ public class CASDemo {
 		scanner.useDelimiter(ParsingTools.newline);
 		while (currentState != DemoState.EXIT)
 			runState();
-		return "Exited demo";
+		return "Exiting demo...";
 	}
 
 	/**

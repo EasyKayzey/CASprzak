@@ -1,5 +1,7 @@
 package parsing;
 
+import config.Settings;
+
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -44,10 +46,11 @@ public class InfixTokenizer {
 			"|(?<=[^\\x00-\\x7F])|(?=[^\\x00-\\x7F])" +				// Splits if preceded or followed by a non-ASCII character
 			"|(?<=[()])|(?=[()]))" +								// Splits if preceded or followed by a parenthesis
 			"(?<![ .\\\\])(?![ .])" +								// The PREVIOUS FIVE LINES ONLY WORK if not preceded or followed by a period or space, and not preceded by a LaTeX escape
-			"|(?<=[CP])|(?=[CP])" +									// Splits if preceded or followed by C or P
+			(Settings.doCombinatorics ? "|(?<=[CP])" : "") +		// Splits if preceded by a C or P and Settings.doCombinatorics is on
+			(Settings.doCombinatorics ?  "|(?=[CP])" : "") +		// Splits if followed by a C or P and Settings.doCombinatorics is on
 			"|(?<=\\()(?=\\.))"										// Splits if preceded by an open parenthesis and followed by a period
 	);
-	private static final Pattern characterPairsToMultiply = Pattern.compile(
+	private static final Pattern characterPairMultiplier = Pattern.compile(
 			"(?<!\\\\[\\w.']{0," + maxEscapeLength + "})" +			// Ensures that the character is not LaTeX-escaped (up to Settings.maxEscapeLength characters)
 			"(?<![CEP])(?![CEP])" +									// Ensures the spaces before and after C, E, and P are not matched
 			"(?<!logb_\\w)" +										// Ensures not preceded by \logb_{character}
@@ -87,7 +90,7 @@ public class InfixTokenizer {
 		// Turns differentials like `dx` and `d x` into `\d x`
 		infix = differential.matcher(infix).replaceAll("\\\\difn ");
 		// Turns expressions like xyz into x*y*z
-		infix = characterPairsToMultiply.matcher(infix).replaceAll(" * ");
+		infix = characterPairMultiplier.matcher(infix).replaceAll(" * ");
 		// Replace curly braces parentheses
 		infix = infix.replace("{", "(").replace("}", ")");
 		// Replaces logb underscores with spaces

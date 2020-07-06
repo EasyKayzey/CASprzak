@@ -104,6 +104,20 @@ public class KeywordInterface {
 		return ret;
 	}
 
+	/**
+	 * Runs {@link #useKeywords(String)} assuming that the input is not an exit argument, removing the checked exception
+	 * @param input the input for {@link #useKeywords(String)}
+	 * @return the output of {@link #useKeywords(String)}
+	 * @throws IllegalArgumentException if the input passed throws an {@link UserExitException}
+	 */
+	public static Object safeKeywords(String input) {
+		try {
+			return useKeywords(input);
+		} catch (UserExitException ignored) {
+			throw new IllegalArgumentException("Exit argument was passed to safeKeywords");
+		}
+	}
+
 	@SuppressWarnings("SameReturnValue")
 	private static Object debug(String input) {
 		switch (input) {

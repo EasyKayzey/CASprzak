@@ -83,7 +83,7 @@ public abstract class BinaryFunction extends GeneralFunction {
 			else if (!this.function2.equalsFunction(binaryFunction.function2))
 				return this.function2.compareTo(binaryFunction.function2);
 			else
-				throw new IllegalStateException("This code in BinaryFunction.compareSelf should never run");
+				throw new IllegalStateException("Called compareSelf on two equal functions: " + this + ", " + that);
 		else
 			throw new IllegalCallerException("Illegally called BinaryFunction.compareSelf on a non-BinaryFunction");
 	}
@@ -125,12 +125,10 @@ public abstract class BinaryFunction extends GeneralFunction {
 		@SuppressWarnings("ValueOfIncrementOrDecrementUsed")
 		@Override
 		public GeneralFunction next() {
-			if (!hasNext())
-				throw new NoSuchElementException("Out of elements in BinaryFunction " + function2 + ", " + function1);
 			return switch(loc++) {
 				case 0 -> function2;
 				case 1 -> function1;
-				default -> throw new IllegalStateException("This code should never run in BinaryIterator");
+				default -> throw new NoSuchElementException("Out of elements in BinaryFunction " + function2 + ", " + function1);
 			};
 		}
 	}

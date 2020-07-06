@@ -57,6 +57,7 @@ public class SettingsParser {
 			case "asteriskMultiplication"					-> Settings.asteriskMultiplication = ParsingTools.parseBoolean(value);
 			case "defaultSolverType" 						-> Settings.defaultSolverType = SolverType.valueOf(value);
 			case "defaultFactorial" 						-> Settings.defaultFactorial = FactorialType.valueOf(value);
+			case "truncateNearIntegers"						-> Settings.truncateNearIntegers = ParsingTools.parseBoolean(value);
 			default 										-> throw new IllegalStateException("Setting " + key + " does not exist in SettingsParser.");
 		}
 	}

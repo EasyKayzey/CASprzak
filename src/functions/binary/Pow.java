@@ -103,7 +103,7 @@ public class Pow extends BinaryFunction {
 				toMultiply[i] = new Pow(function1, oldFunctions[i]).simplify();
 			return new Product(toMultiply);
 		} else {
-			throw new IllegalCallerException("Method should not be called if base is not a Multiply");
+			throw new IllegalCallerException("Distribute exponents called on a non Product base");
 		}
 	}
 

@@ -43,12 +43,12 @@ public class InfixTokenizer {
 			"|(?<!\\s)(?=\\\\)" +									// Splits if followed by a LaTeX escape
 			"|(((?<=\\W)(?=[\\w-])((?<!-)|(?!\\d))" +				// Splits if preceded by non-word and followed by word and not [preceded by - and followed by a digit]
 			"|(?<=\\w)(?=\\W)((?<!E)|(?!-)))" +						// Splits if preceded by a word and followed by a non-word, unless [the word was E and the non-word was -]
-			"|(?<=[a-zA-Z])(?=\\.)" +								// Splits if preceded by a letter and followed by a period
 			"|(?<=[^\\x00-\\x7F])|(?=[^\\x00-\\x7F])" +				// Splits if preceded or followed by a non-ASCII character
 			(Settings.doCombinatorics ? "|(?<=[CP])" : "") +		// Splits if preceded by a C or P and Settings.doCombinatorics is on
 			(Settings.doCombinatorics ?  "|(?=[CP])" : "") +		// Splits if followed by a C or P and Settings.doCombinatorics is on
 			"|(?<=[()])|(?=[()]))" +								// Splits if preceded or followed by a parenthesis
 			"(?<![ .\\\\])(?![ .])" +								// The lines after "followed by LaTeX escape" ONLY WORK if not preceded or followed by a period or space, and not preceded by a LaTeX escape
+			"|(?<=\\D)(?=\\.)" +									// Splits if preceded by a non-digit and followed by a period
 			"|(?<=\\()(?=\\.))"										// Splits if preceded by an open parenthesis and followed by a period
 	);
 	private static final Pattern characterPairMultiplier = Pattern.compile(

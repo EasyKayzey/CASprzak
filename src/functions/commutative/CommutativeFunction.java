@@ -75,7 +75,7 @@ public abstract class CommutativeFunction extends GeneralFunction {
 			for (int i = 0; i < thisFunctions.length; i++)
 				if (!thisFunctions[i].equalsFunction(thatFunctions[i]))
 					return thisFunctions[i].compareTo(thatFunctions[i]);
-			throw new IllegalStateException("Called compareSelf on two equal functions: " + this + ", " + that);
+			throw new IllegalStateException("Called compareSelf on two equal functions: " + this + ", " + that + ".");
 		} else
 			throw new IllegalCallerException("Illegally called CommutativeFunction.compareSelf on a non-CommutativeFunction.");
 	}
@@ -238,7 +238,7 @@ public abstract class CommutativeFunction extends GeneralFunction {
 		@Override
 		public GeneralFunction next() {
 			if (!hasNext())
-				throw new NoSuchElementException("Out of elements in CommutativeFunction " + Arrays.toString(functions));
+				throw new NoSuchElementException("Out of elements in CommutativeFunction " + Arrays.toString(functions) + ".");
 			return functions[loc++];
 		}
 	}

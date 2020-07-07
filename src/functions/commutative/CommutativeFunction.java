@@ -75,10 +75,9 @@ public abstract class CommutativeFunction extends GeneralFunction {
 			for (int i = 0; i < thisFunctions.length; i++)
 				if (!thisFunctions[i].equalsFunction(thatFunctions[i]))
 					return thisFunctions[i].compareTo(thatFunctions[i]);
-		} else {
+			throw new IllegalStateException("Called compareSelf on two equal functions: " + this + ", " + that);
+		} else
 			throw new IllegalCallerException("Illegally called CommutativeFunction.compareSelf on a non-CommutativeFunction");
-		}
-		throw new IllegalStateException("This code in CommutativeFunction.compareSelf should never run.");
 	}
 
 	public GeneralFunction substituteAll(Predicate<? super GeneralFunction> test, Function<? super GeneralFunction, ? extends GeneralFunction> replacer) {

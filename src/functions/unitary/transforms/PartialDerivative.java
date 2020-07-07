@@ -32,7 +32,7 @@ public class PartialDerivative extends Transformation {
 	@Override
 	public GeneralFunction substituteVariables(Map<String, ? extends GeneralFunction> toSubstitute) {
 		if (toSubstitute.containsKey(respectTo))
-			throw new UnsupportedOperationException("You cannot substitute the variable you are working with respect to");
+			throw new UnsupportedOperationException("You cannot substitute the variable you are working with respect to.");
 		return new PartialDerivative(operand.substituteVariables(toSubstitute), respectTo);
 	}
 
@@ -52,7 +52,7 @@ public class PartialDerivative extends Transformation {
 			else
 				return respectTo.compareTo(pd.respectTo);
 		else
-			throw new IllegalStateException("Comparing a " + this.getClass().getSimpleName() + " with a " + that.getClass().getSimpleName() + " using compareSelf");
+			throw new IllegalStateException("Comparing a " + this.getClass().getSimpleName() + " with a " + that.getClass().getSimpleName() + " using compareSelf.");
 	}
 
 	@Override

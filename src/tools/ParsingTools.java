@@ -96,7 +96,7 @@ public class ParsingTools {
 		if (input.length() == 1)
 			return input.charAt(0);
 		else
-			throw new IllegalArgumentException("Input length should be 1 for FunctionParser.toCharacter, input given was " + input);
+			throw new IllegalArgumentException("Input length should be 1 for FunctionParser.toCharacter, input given was " + input + ".");
 	}
 
 	/**

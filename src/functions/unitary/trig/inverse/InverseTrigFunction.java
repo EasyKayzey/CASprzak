@@ -35,5 +35,11 @@ public abstract class InverseTrigFunction extends GeneralTrigFunction {
 			super("arc" + functionString, operand);
 		}
 
+		@Override
+		public String toLatex() {
+			return "\\" + functionName + "\\left(" + operand.toLatex() + "\\right)";
+		}
+
+
 	}
 }

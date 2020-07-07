@@ -37,7 +37,7 @@ public abstract class InverseTrigFunction extends GeneralTrigFunction {
 
 		@Override
 		public String toLatex() {
-			return "\\" + functionName + "\\left(" + operand.toLatex() + "\\right)";
+			return "\\" + functionName + " \\left( " + operand.toLatex() + " \\right)";
 		}
 
 

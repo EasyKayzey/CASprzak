@@ -326,9 +326,18 @@ public class FunctionTest {
 		assertEquals(1.5, test.evaluate(Map.of()), 0.001);
 	}
 
-	@Test void divideByDecimal() {
-		GeneralFunction test = FunctionParser.parseSimplified("1/.2");
+	@Test void noLeadingZero() {
+		GeneralFunction test;
+		test = FunctionParser.parseSimplified("1+.2");
+		assertEquals(1.2, test.evaluate(Map.of()), .000001);
+		test = FunctionParser.parseSimplified("1-.2");
+		assertEquals(0.8, test.evaluate(Map.of()), .000001);
+		test = FunctionParser.parseSimplified("5*.2");
+		assertEquals(1.0, test.evaluate(Map.of()), .000001);
+		test = FunctionParser.parseSimplified("1/.2");
 		assertEquals(5.0, test.evaluate(Map.of()), .000001);
+		test = FunctionParser.parseSimplified("9^.5");
+		assertEquals(3.0, test.evaluate(Map.of()), .000001);
 	}
 
 }

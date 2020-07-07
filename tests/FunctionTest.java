@@ -326,4 +326,9 @@ public class FunctionTest {
 		assertEquals(1.5, test.evaluate(Map.of()), 0.001);
 	}
 
+	@Test void divideByDecimal() {
+		GeneralFunction test = FunctionParser.parseSimplified("1/.2");
+		assertEquals(5.0, test.evaluate(Map.of()), .000001);
+	}
+
 }

@@ -11,6 +11,7 @@ import static config.Settings.maxEscapeLength;
  * {@link InfixTokenizer} modifies and tokenizes infix into a format supported by {@link FunctionParser}.
  */
 public class InfixTokenizer {
+	private static final String splitExcpt = Settings.doCombinatorics ? "ECP" : "E"; // splitterExceptions
 	private static final Pattern absoluteValueEnd = Pattern.compile(
 			"\\|(?=([^|]*\\|[^|]*\\|)*" +							// Ensures an even number of following absolute value signs
 			"[^|]*$)"												// Allows for any number of following non-bar characters and asserts EOL position
@@ -20,9 +21,9 @@ public class InfixTokenizer {
 	);
 	private static final Pattern adjacentMultiplier = Pattern.compile(
 			"(?<!\\\\[\\w.']{0," + maxEscapeLength + "})" +			// Ensures that the next two lines are not LaTeX-escaped (up to Settings.maxEscapeLength characters)
-			"((?<=\\d)(?=[a-zA-Z])(?![ECP])" +						// Matches if preceded by a digit and followed by a non-ECP letter
+			"((?<=\\d)(?=[a-zA-Z])(?![" + splitExcpt + "])" +		// Matches if preceded by a digit and followed by a non-ECP letter
 			"|(?<=[a-zA-Z])(?=\\.)" +								// Matches if preceded by a letter and followed by a period
-			"|(?<=[a-zA-Z])(?<![ECP])(?=[\\d]))" +					// Matches if preceded by a non-ECP letter and followed by a digit
+			"|(?<=[a-zA-Z])(?<![" + splitExcpt + "])(?=[\\d]))" +	// Matches if preceded by a non-ECP letter and followed by a digit
 			"|(?<=\\))(?=[\\w(])" + 								// Matches if preceded by ) and followed by a word character or (
 			"|(?<=\\))(?=\\.)" +									// Matches if preceded by a letter or ) and followed by a period
 			"|(?<=[\\d)])(?=\\()(?<!logb_\\d)"						// Matches if preceded by [a digit not preceded by logb_] or ) and followed by (
@@ -44,10 +45,10 @@ public class InfixTokenizer {
 			"|(?<=\\w)(?=\\W)((?<!E)|(?!-)))" +						// Splits if preceded by a word and followed by a non-word, unless [the word was E and the non-word was -]
 			"|(?<=[a-zA-Z])(?=\\.)" +								// Splits if preceded by a letter and followed by a period
 			"|(?<=[^\\x00-\\x7F])|(?=[^\\x00-\\x7F])" +				// Splits if preceded or followed by a non-ASCII character
-			"|(?<=[()])|(?=[()]))" +								// Splits if preceded or followed by a parenthesis
-			"(?<![ .\\\\])(?![ .])" +								// The PREVIOUS FIVE LINES ONLY WORK if not preceded or followed by a period or space, and not preceded by a LaTeX escape
 			(Settings.doCombinatorics ? "|(?<=[CP])" : "") +		// Splits if preceded by a C or P and Settings.doCombinatorics is on
 			(Settings.doCombinatorics ?  "|(?=[CP])" : "") +		// Splits if followed by a C or P and Settings.doCombinatorics is on
+			"|(?<=[()])|(?=[()]))" +								// Splits if preceded or followed by a parenthesis
+			"(?<![ .\\\\])(?![ .])" +								// The lines after "followed by LaTeX escape" ONLY WORK if not preceded or followed by a period or space, and not preceded by a LaTeX escape
 			"|(?<=\\()(?=\\.))"										// Splits if preceded by an open parenthesis and followed by a period
 	);
 	private static final Pattern characterPairMultiplier = Pattern.compile(

@@ -48,7 +48,7 @@ public class InfixTokenizer {
 			(Settings.doCombinatorics ?  "|(?=[CP])" : "") +		// Splits if followed by a C or P and Settings.doCombinatorics is on
 			"|(?<=[()])|(?=[()]))" +								// Splits if preceded or followed by a parenthesis
 			"(?<![ .\\\\])(?![ .])" +								// The lines after "followed by LaTeX escape" ONLY WORK if not preceded or followed by a period or space, and not preceded by a LaTeX escape
-			"|(?<=\\D)(?=\\.)" +									// Splits if preceded by a letter and followed by a period
+			"|(?<=\\D)(?=\\.)" +									// Splits if preceded by a non-digit and followed by a period
 			"|(?<=\\()(?=\\.))"										// Splits if preceded by an open parenthesis and followed by a period
 	);
 	private static final Pattern characterPairMultiplier = Pattern.compile(

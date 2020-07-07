@@ -31,7 +31,7 @@ public class OutputUnitary implements OutputFunction {
 	}
 
 	public String toLatex() {
-		return functionName + "\\left(" + operand.toLatex() + "\\right)";
+		return functionName + " \\left( " + operand.toLatex() + " \\right)";
 	}
 
 	public boolean equals(Object that) {

@@ -1,5 +1,6 @@
 package parsing;
 
+import config.Settings;
 import functions.binary.Logb;
 import functions.binary.Pow;
 import functions.binary.Rand;
@@ -102,9 +103,11 @@ public class OperationMaps {
 			put("*", 		Product::new);
 			put("^", 		(first, second) -> new Pow(second, first));
 			put("%", 		(first, second) -> new Modulo(second, first));
-			put("//", 		(first, second) -> new IntegerQuotient(second, first));
-			put("C", 		DefaultFunctions::choose);
-			put("P", 		DefaultFunctions::permute);
+			put("//",	 	(first, second) -> new IntegerQuotient(second, first));
+			if (Settings.doCombinatorics) {
+				put("C", 	DefaultFunctions::choose);
+				put("P", 	DefaultFunctions::permute);
+			}
 			put("\\pd", 	(first, second) -> new PartialDerivative(second, ((Variable) first).varID));
 			put("\\logb", 	(first, second) -> new Logb(second, first));
 			put("\\frac", 	DefaultFunctions::frac);

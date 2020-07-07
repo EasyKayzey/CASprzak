@@ -32,7 +32,7 @@ public abstract class SpecialFunction extends GeneralFunction {
 
 		@Override
 		public GeneralFunction next() {
-			throw new NoSuchElementException("No elements in a SpecialFunction");
+			throw new NoSuchElementException("No elements in a SpecialFunction.");
 		}
 	}
 }

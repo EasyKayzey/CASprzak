@@ -23,12 +23,12 @@ public class Settings {
 	private Settings(){}
 
 	/**
-	 * The amount of times that {@link tools.singlevariable.Solver} will run unless the exit conditions are met beforehand
+	 * The amount of times that {@link tools.singlevariable.Solver} will run unless the exit conditions are met beforehand.
 	 */
 	public static int defaultSolverIterations = 100;
 
 	/**
-	 * The amount of segments which {@link tools.singlevariable.Solver} splits a given range into
+	 * The amount of segments which {@link tools.singlevariable.Solver} splits a given range into.
 	 */
 	public static int defaultRangeSections = 29;
 
@@ -43,27 +43,27 @@ public class Settings {
 	public static int maxEscapeLength = 8;
 
 	/**
-	 * The variable to be used in {@link tools.singlevariable} when none is specified
+	 * The variable to be used in {@link tools.singlevariable} when none is specified.
 	 */
 	public static String singleVariableDefault = "x";
 
 	/**
-	 * The margin that {@link tools.singlevariable.Solver} uses to determine if a value is close enough to zero to be considered a root of a function
+	 * The margin that {@link tools.singlevariable.Solver} uses to determine if a value is close enough to zero to be considered a root of a function.
 	 */
 	public static double zeroMargin = 1E-3;
 
 	/**
-	 * The margin used in {@link ParsingTools#toInteger(double)} when deciding when a {@code double} is close enough to an integer
+	 * The margin used in {@link ParsingTools#toInteger(double)} when deciding when a {@code double} is close enough to an integer.
 	 */
 	public static double integerMargin = 1E-4;
 
 	/**
-	 * The default margin to be used when checking if two doubles are equal
+	 * The default margin to be used when checking if two doubles are equal.
 	 */
 	public static double equalsMargin = 1E-10;
 
 	/**
-	 * The default amount to be slept on newlines in {@link MiscTools#printWithSleep}
+	 * The default amount to be slept on newlines in {@link MiscTools#printWithSleep}.
 	 */
 	public static double defaultSleep = 1.5;
 
@@ -93,12 +93,12 @@ public class Settings {
 	public static boolean distributeExponents = true;
 
 	/**
-	 * Denotes whether or not the derivatives of functions should be cached when created
+	 * Denotes whether or not the derivatives of functions should be cached when created.
 	 */
 	public static boolean cacheDerivatives = true;
 
 	/**
-	 * Forces functions in {@link functions.unitary.integer} to return integers when using approximations
+	 * Forces functions in {@link functions.unitary.integer} to return integers when using approximations.
 	 */
 	public static boolean enforceIntegerOperations = true;
 
@@ -108,7 +108,7 @@ public class Settings {
 	public static boolean exitSolverOnProximity = false;
 
 	/**
-	 * Denotes whether a {@link Transformation} should execute its action when {@code simplify()} is called
+	 * Denotes whether a {@link Transformation} should execute its action when {@code simplify()} is called.
 	 */
 	public static boolean executeOnSimplify = true;
 
@@ -118,7 +118,7 @@ public class Settings {
 	public static boolean distributeFunctions = true;
 
 	/**
-	 * Denotes whether full stack traces of errors should be printed for debugging
+	 * Denotes whether full stack traces of errors should be printed for debugging.
 	 */
 	public static boolean printStackTraces = false;
 
@@ -128,17 +128,17 @@ public class Settings {
 	public static boolean doCombinatorics = true;
 
 	/**
-	 * Denotes the default method used to solve equations
+	 * Denotes the default method used to solve equations.
 	 */
 	public static SolverType defaultSolverType = SolverType.NEWTON;
 
 	/**
-	 * Denotes the default implementation of {@link Factorial} to be used
+	 * Denotes the default implementation of {@link Factorial} to be used.
 	 */
 	public static FactorialType defaultFactorial = FactorialType.RECURSIVE;
 
 	/**
-	 * Denotes whether or not inverse simplifications conserve domain and range
+	 * Denotes whether or not inverse simplifications conserve domain and range.
 	 */
 	public static boolean enforceDomainAndRange = false;
 

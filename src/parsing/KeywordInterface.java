@@ -97,7 +97,7 @@ public class KeywordInterface {
 				 return prev;
 			} catch (Exception parserException) {
 				prev = parserException;
-				throw new CommandNotFoundException(splitInput[0] + " is not a command supported by KeywordInterface, so raw-function parsing was attempted.");
+				throw new CommandNotFoundException(splitInput[0] + " is not a command supported by KeywordInterface, so raw-function parsing was attempted.", parserException);
 			}
 		}
 		prev = ret;

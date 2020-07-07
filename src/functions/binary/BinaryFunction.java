@@ -85,7 +85,7 @@ public abstract class BinaryFunction extends GeneralFunction {
 			else
 				throw new IllegalStateException("Called compareSelf on two equal functions: " + this + ", " + that);
 		else
-			throw new IllegalCallerException("Illegally called BinaryFunction.compareSelf on a non-BinaryFunction");
+			throw new IllegalCallerException("Illegally called BinaryFunction.compareSelf on a non-BinaryFunction.");
 	}
 
 	/**

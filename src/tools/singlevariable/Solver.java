@@ -85,7 +85,7 @@ public class Solver {
 		return switch (Settings.defaultSolverType) {
 			case NEWTON -> getSolutionsRangeNewton(expression, lower, upper);
 			case HALLEY -> getSolutionsRangeHalley(expression, lower, upper);
-			default -> throw new IllegalStateException("Solver type unspecified!");
+			default -> throw new IllegalStateException("Solver type unspecified.");
 		};
 	}
 

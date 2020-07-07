@@ -53,7 +53,7 @@ public class Differential extends Transformation {
 	@Override
 	public GeneralFunction substituteVariables(Map<String, ? extends GeneralFunction> toSubstitute) {
 		if (toSubstitute.containsKey(respectTo))
-			throw new UnsupportedOperationException("You cannot substitute the variable you are working with respect to");
+			throw new UnsupportedOperationException("You cannot substitute the variable you are working with respect to.");
 		return this;
 	}
 
@@ -73,7 +73,7 @@ public class Differential extends Transformation {
 			else
 				return respectTo.compareTo(diff.respectTo);
 		else
-			throw new IllegalStateException("Comparing a " + this.getClass().getSimpleName() + " with a " + that.getClass().getSimpleName() + " using compareSelf");
+			throw new IllegalStateException("Comparing a " + this.getClass().getSimpleName() + " with a " + that.getClass().getSimpleName() + " using compareSelf.");
 	}
 
 	/**

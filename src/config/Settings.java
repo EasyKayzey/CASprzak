@@ -128,6 +128,11 @@ public class Settings {
 	public static boolean doCombinatorics = true;
 
 	/**
+	 * Denotes whether or not special Constants get simplified into decimal under addition, multiplication, or exponentiation.
+	 */
+	public static boolean simplifyFunctionsOfSpecialConstants = true;
+
+	/**
 	 * Denotes the default method used to solve equations.
 	 */
 	public static SolverType defaultSolverType = SolverType.NEWTON;

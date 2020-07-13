@@ -18,7 +18,7 @@ public class ParsingTools {
 	/**
 	 * Newlines with supported carriage returns
 	 */
-	public static final Pattern newline = Pattern.compile("\\r?\\n");
+	public static final Pattern newline = Pattern.compile("\\R");
 
 	private ParsingTools(){}
 

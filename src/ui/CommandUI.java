@@ -6,6 +6,7 @@ import tools.ParsingTools;
 import tools.exceptions.CommandNotFoundException;
 import tools.exceptions.UserExitException;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -19,6 +20,11 @@ public class CommandUI {
 	 * @param args default main arguments
 	 */
 	public static void main(String[] args) {
+		if (Settings.readProperties) try {
+			Settings.parseConfig();
+		} catch (IOException e) {
+			System.out.println("Properties file not found. Using defaults...");
+		}
 		System.out.println("Welcome to CASprzak. Run 'help' for a command list, or 'demo' for a tutorial.");
 		Scanner scanner = new Scanner(System.in);
 		scanner.useDelimiter(ParsingTools.newline);

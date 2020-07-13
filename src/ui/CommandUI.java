@@ -35,7 +35,7 @@ public class CommandUI {
 			} catch (RuntimeException e) {
 				output(e);
 				if (e instanceof CommandNotFoundException)
-					System.out.println("When parsing the input as a raw function, an exception was thrown. To see details, enter '_'.");
+					System.out.println("To see details, enter 'err'.");
 			}
 		}
 	}

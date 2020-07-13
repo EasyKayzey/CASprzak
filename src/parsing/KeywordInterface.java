@@ -87,7 +87,7 @@ public class KeywordInterface {
 				case "exit", "!" -> throw new UserExitException();
 				default -> null;
 			};
-		} catch(Exception e) {
+		} catch(ArrayIndexOutOfBoundsException e) {
 			throw new MismatchedCommandArgumentsException("Command " + splitInput[0] + " expected an argument, but no argument was given.");
 		}
 		if (ret == null) {

@@ -140,7 +140,7 @@ public abstract class CommutativeFunction extends GeneralFunction {
 			ListIterator<GeneralFunction> iter = functionList.listIterator();
 			while (iter.hasNext()) {
 				if (iter.next() instanceof Constant constant) {
-					if (!constant.isSpecial() || Settings.simplifyFunctionsOfSpecialConstants) {
+					if (Settings.simplifyFunctionsOfSpecialConstants || !constant.isSpecial()) {
 						accumulator = operate(accumulator, constant.constant);
 						iter.remove();
 					}

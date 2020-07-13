@@ -7,8 +7,10 @@ import functions.commutative.Sum;
 import functions.special.Constant;
 import functions.unitary.specialcases.Exp;
 import functions.unitary.specialcases.Ln;
-import tools.ParsingTools;
+import output.OutputBinary;
+import output.OutputFunction;
 import tools.DefaultFunctions;
+import tools.ParsingTools;
 import tools.VariableTools;
 
 import java.util.Arrays;
@@ -143,5 +145,27 @@ public class Pow extends BinaryFunction {
 			return ln.operand;
 		else
 			return this;
+	}
+
+	public OutputFunction toOutputFunction() {
+		return new OutputPow(function2.toOutputFunction(), function1.toOutputFunction());
+	}
+
+	private static class OutputPow extends OutputBinary {
+
+		public OutputPow(OutputFunction base, OutputFunction power) {
+			super("pow", base, power);
+		}
+
+		@Override
+		public String toString() {
+			return first + " ^ " + second;
+		}
+
+		@Override
+		public String toLatex() {
+			return "( " + first.toLatex() + " )^( " + second.toLatex() + " )";
+		}
+
 	}
 }

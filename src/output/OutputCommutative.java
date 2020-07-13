@@ -36,7 +36,7 @@ public class OutputCommutative implements OutputFunction {
 				functionName,
 				operands,
 				Collectors.joining(", ", functionName + "(", ")"),
-				Collectors.joining(", ", functionName + "\\left(", "\\right)")
+				Collectors.joining(", ", functionName + "\\left( ", " \\right)")
 		);
 	}
 

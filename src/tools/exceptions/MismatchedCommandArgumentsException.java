@@ -6,7 +6,10 @@ public class MismatchedCommandArgumentsException extends IllegalArgumentExceptio
      * @param expectedLength the expected length of the input
      * @param actualLength the actual length of the input
      */
-    public MismatchedCommandArgumentsException(int expectedLength, int actualLength) {
+    public MismatchedCommandArgumentsException(String expectedLength, int actualLength) {
         super("Expected " + expectedLength +  " arguments and received " + actualLength + ".");
+    }
+    public MismatchedCommandArgumentsException(String message) {
+        super(message);
     }
 }

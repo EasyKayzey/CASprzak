@@ -82,6 +82,11 @@ public class Settings {
 	public static boolean enforceEscapedNames = true;
 
 	/**
+	 * Denotes whether or not variable, function, and constant names should be checked against the valid name regex {@link ParsingTools#validNames}
+	 */
+	public static boolean enforcePatternMatchingNames = true;
+
+	/**
 	 * Denotes whether or not escapes should be removed from variable, function, and constant names when printing.
 	 */
 	public static boolean removeEscapes = false;
@@ -185,6 +190,7 @@ public class Settings {
 			case "defaultSleep"								-> defaultSleep = Double.parseDouble(value);
 			case "enforceEscapedFunctions"		 			-> enforceEscapedFunctions = ParsingTools.parseBoolean(value);
 			case "enforceEscapedNames"		 				-> enforceEscapedNames = ParsingTools.parseBoolean(value);
+			case "enforcePatternMatchingNames"		 		-> enforcePatternMatchingNames = ParsingTools.parseBoolean(value);
 			case "removeEscapes"		 					-> removeEscapes = ParsingTools.parseBoolean(value);
 			case "simplifyFunctionsOfConstants" 			-> simplifyFunctionsOfConstants = ParsingTools.parseBoolean(value);
 			case "simplifyFunctionsOfSpecialConstants"		-> simplifyFunctionsOfSpecialConstants = ParsingTools.parseBoolean(value);

@@ -73,10 +73,10 @@ public class Pow extends BinaryFunction {
 	 */
 	public GeneralFunction simplifyObviousExponentsAndFOC() {
 		if (function1 instanceof Constant constant)
-				if (constant.constant == 0)
-					return DefaultFunctions.ONE;
-				else if (constant.constant == 1)
-					return function2.simplify();
+			if (constant.constant == 0)
+				return DefaultFunctions.ONE;
+			else if (constant.constant == 1)
+				return function2.simplify();
 		return simplifyFOC();
 	}
 

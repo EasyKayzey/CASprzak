@@ -50,7 +50,7 @@ public class Integral extends Transformation {
 	@Override
 	public GeneralFunction substituteVariables(Map<String, ? extends GeneralFunction> toSubstitute) {
 		if (toSubstitute.containsKey(respectTo))
-			throw new UnsupportedOperationException("You cannot substitute the variable you are working with respect to");
+			throw new UnsupportedOperationException("You cannot substitute the variable you are working with respect to.");
 		return new Integral(operand.substituteVariables(toSubstitute), respectTo);
 	}
 
@@ -70,7 +70,7 @@ public class Integral extends Transformation {
 			else
 				return respectTo.compareTo(integral.respectTo);
 		else
-			throw new IllegalStateException("Comparing a " + this.getClass().getSimpleName() + " with a " + that.getClass().getSimpleName() + " using compareSelf");
+			throw new IllegalStateException("Comparing a " + this.getClass().getSimpleName() + " with a " + that.getClass().getSimpleName() + " using compareSelf.");
 	}
 
 	@Override

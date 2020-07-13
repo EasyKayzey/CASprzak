@@ -11,11 +11,10 @@ assignees: ''
 A clear and concise description of what the bug is.
 
 **To Reproduce**
-Steps to reproduce the behavior:
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
+What steps should be executed to reproduce the bug?
+Which interface are you using?
+What constants and functions are defined in the current session?
+What settings are enabled in config, and are any changed manually during the session?
 
 **Expected behavior**
 A clear and concise description of what you expected to happen.

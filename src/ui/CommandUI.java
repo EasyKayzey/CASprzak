@@ -2,10 +2,10 @@ package ui;
 
 import config.Settings;
 import parsing.KeywordInterface;
-import tools.ParsingTools;
 import tools.exceptions.CommandNotFoundException;
 import tools.exceptions.UserExitException;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -19,13 +19,17 @@ public class CommandUI {
 	 * @param args default main arguments
 	 */
 	public static void main(String[] args) {
+		if (Settings.readProperties) try {
+			Settings.parseConfig();
+		} catch (IOException e) {
+			System.out.println("Properties file not found. Using defaults...");
+		}
 		System.out.println("Welcome to CASprzak. Run 'help' for a command list, or 'demo' for a tutorial.");
 		Scanner scanner = new Scanner(System.in);
-		scanner.useDelimiter(ParsingTools.newline);
 		boolean flag = true;
 		while (flag) {
 			System.out.print(">>> ");
-			String input = scanner.next();
+			String input = scanner.nextLine();
 			if  (input.isBlank())
 				continue;
 			try {
@@ -35,7 +39,7 @@ public class CommandUI {
 			} catch (RuntimeException e) {
 				output(e);
 				if (e instanceof CommandNotFoundException)
-					System.out.println("When parsing the input as a raw function, an exception was thrown. To see details, enter '_'.");
+					System.out.println("To see details, enter 'err'.");
 			}
 		}
 	}

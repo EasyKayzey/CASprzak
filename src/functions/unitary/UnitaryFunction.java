@@ -152,7 +152,7 @@ public abstract class UnitaryFunction extends GeneralFunction {
 		@Override
 		public GeneralFunction next() {
 			if (used)
-				throw new NoSuchElementException("Out of elements in UnitaryFunction");
+				throw new NoSuchElementException("Out of elements in UnitaryFunction.");
 			used = true;
 			return operand;
 		}

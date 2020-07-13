@@ -1,5 +1,6 @@
 package functions.commutative;
 
+import config.Settings;
 import functions.GeneralFunction;
 import functions.special.Constant;
 import org.jetbrains.annotations.NotNull;
@@ -77,10 +78,9 @@ public abstract class CommutativeFunction extends GeneralFunction {
 			for (int i = 0; i < thisFunctions.length; i++)
 				if (!thisFunctions[i].equalsFunction(thatFunctions[i]))
 					return thisFunctions[i].compareTo(thatFunctions[i]);
-		} else {
-			throw new IllegalCallerException("Illegally called CommutativeFunction.compareSelf on a non-CommutativeFunction");
-		}
-		throw new IllegalStateException("This code in CommutativeFunction.compareSelf should never run.");
+			throw new IllegalStateException("Called compareSelf on two equal functions: " + this + ", " + that + ".");
+		} else
+			throw new IllegalCallerException("Illegally called CommutativeFunction.compareSelf on a non-CommutativeFunction.");
 	}
 
 
@@ -152,8 +152,10 @@ public abstract class CommutativeFunction extends GeneralFunction {
 			ListIterator<GeneralFunction> iter = functionList.listIterator();
 			while (iter.hasNext()) {
 				if (iter.next() instanceof Constant constant) {
-					accumulator = operate(accumulator, constant.constant);
-					iter.remove();
+					if (Settings.simplifyFunctionsOfSpecialConstants || !constant.isSpecial()) {
+						accumulator = operate(accumulator, constant.constant);
+						iter.remove();
+					}
 				}
 			}
 			functionList.add(new Constant(accumulator));
@@ -251,7 +253,7 @@ public abstract class CommutativeFunction extends GeneralFunction {
 		@Override
 		public GeneralFunction next() {
 			if (!hasNext())
-				throw new NoSuchElementException("Out of elements in CommutativeFunction " + Arrays.toString(functions));
+				throw new NoSuchElementException("Out of elements in CommutativeFunction " + Arrays.toString(functions) + ".");
 			return functions[loc++];
 		}
 	}

@@ -51,7 +51,7 @@ public abstract class SpecialFunction extends GeneralFunction implements OutputF
 
 		@Override
 		public GeneralFunction next() {
-			throw new NoSuchElementException("No elements in a SpecialFunction");
+			throw new NoSuchElementException("No elements in a SpecialFunction.");
 		}
 	}
 }

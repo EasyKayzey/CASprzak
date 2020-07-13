@@ -56,7 +56,7 @@ public class Differential extends Transformation {
 	@Override
 	public GeneralFunction substituteVariables(Map<String, ? extends GeneralFunction> toSubstitute) {
 		if (toSubstitute.containsKey(respectTo))
-			throw new UnsupportedOperationException("You cannot substitute the variable you are working with respect to");
+			throw new UnsupportedOperationException("You cannot substitute the variable you are working with respect to.");
 		return this;
 	}
 
@@ -76,7 +76,7 @@ public class Differential extends Transformation {
 			else
 				return respectTo.compareTo(diff.respectTo);
 		else
-			throw new IllegalStateException("Comparing a " + this.getClass().getSimpleName() + " with a " + that.getClass().getSimpleName() + " using compareSelf");
+			throw new IllegalStateException("Comparing a " + this.getClass().getSimpleName() + " with a " + that.getClass().getSimpleName() + " using compareSelf.");
 	}
 
 	/**
@@ -98,7 +98,7 @@ public class Differential extends Transformation {
 	 */
 	@Override
 	public double evaluate(Map<String, Double> variableValues) {
-		throw new UnsupportedOperationException("Cannot evaluate a differential " + this);
+		throw new UnsupportedOperationException("Cannot evaluate a differential " + this + ".");
 	}
 
 
@@ -114,7 +114,7 @@ public class Differential extends Transformation {
 
 	public UnitaryFunction getInstance(GeneralFunction function) {
 		if (!(function instanceof Variable))
-			throw new IllegalArgumentException("Cannot create a differential with respect to non-variable function " + function);
+			throw new IllegalArgumentException("Cannot create a differential with respect to non-variable function " + function + ".");
 		return new Differential((Variable) function);
 	}
 
@@ -124,7 +124,7 @@ public class Differential extends Transformation {
 	 * @throws UnsupportedOperationException whenever this method is called
 	 */
 	public GeneralFunction execute() {
-		throw new UnsupportedOperationException("Cannot execute a differential " + this);
+		throw new UnsupportedOperationException("Cannot execute a differential " + this + ".");
 	}
 
 	public OutputFunction toOutputFunction() {

@@ -1,10 +1,8 @@
 package parsing;
 
 import config.Settings;
-import config.SettingsParser;
 import functions.GeneralFunction;
 import functions.special.Constant;
-import functions.special.Variable;
 import functions.unitary.transforms.Integral;
 import output.OutputFunction;
 import tools.MiscTools;
@@ -32,6 +30,7 @@ public class KeywordInterface {
 	private static final Pattern spaces = Pattern.compile("\\s+");
 	private static final Pattern equals = Pattern.compile("=");
 	private static final HashMap<String, GeneralFunction> storedFunctions = new HashMap<>();
+	private static RuntimeException prevException = null;
 
 	/**
 	 * The previous output of {@link #useKeywords(String)}
@@ -54,39 +53,45 @@ public class KeywordInterface {
 		if (input != null && input.isEmpty())
 			return "No input was given.";
 		String[] splitInput = spaces.split(input, 2);
-		Object ret = switch (splitInput[0]) {
-			case "demo"															-> demo();
-			case "pd", "pdiff", "partial", "pdifferentiate"						-> partialDiff(splitInput[1]);
-			case "pdn", "pdiffn", "partialn", "pdifferentiaten"					-> partialDiffNth(splitInput[1]);
-			case "eval", "evaluate"												-> evaluate(splitInput[1]);
-			case "simp", "simplify"												-> simplify(splitInput[1]);
-			case "sub", "substitute"											-> substitute(splitInput[1], false);
-			case "subs", "substitutesimplify"									-> substitute(splitInput[1], true);
-			case "sa", "suball"													-> substituteAllInput(splitInput[1]);
-			case "sol", "solve"													-> solve(splitInput[1]);
-			case "ext", "extrema"												-> extrema(splitInput[1]);
-			case "tay", "taylor"												-> taylor(splitInput[1]);
-			case "intn", "intnumeric"											-> integrateNumeric(splitInput[1]);
-			case "intne", "intnumericerror"										-> integrateNumericError(splitInput[1]);
-			case "def", "deffunction"											-> defineFunction(splitInput[1], false);
-			case "defs", "deffunctions", "deffunctionsimplify"					-> defineFunction(splitInput[1], true);
-			case "defc", "defcon", "defconstant"								-> defineConstant(splitInput[1]);
-			case "rmf", "rmfun", "removefun", "removefunction"					-> removeFunction(splitInput[1]);
-			case "rmc", "rmconstant", "removeconstant"							-> removeConstant(splitInput[1]);
-			case "pf", "printfun", "printfunction", "printfunctions"			-> splitInput.length == 1 ? getFunctions() : getFunction(splitInput[1]);
-			case "pc", "printc", "printconstants"								-> getConstants();
-			case "clearfun", "clearfunctions"									-> clearFunctions();
-			case "ss", "sset", "sets", "setsetting"								-> setSettings(splitInput[1]);
-			case "ps", "settings", "printsettings"								-> printSettings();
-			case "int", "integral"												-> integral(splitInput[1]);
-			case "ai", "index", "arrayindex"									-> arrayIndex(splitInput[1]);
-			case "debug"														-> debug(splitInput[1]);
-			case "version"														-> version;
-			case "reset"														-> reset();
-			case "help"															-> splitInput.length == 1 ? help() : help(splitInput[1]);
-			case "exit", "!"													-> throw new UserExitException();
-			default 															-> null;
-		};
+		Object ret;
+		try {
+			ret = switch (splitInput[0]) {
+				case "demo" -> demo();
+				case "pd", "pdiff", "partial", "pdifferentiate" 									-> partialDiff(splitInput[1]);
+				case "pdn", "pdiffn", "partialn", "pdifferentiaten" 								-> partialDiffNth(splitInput[1]);
+				case "eval", "evaluate" 															-> evaluate(splitInput[1]);
+				case "simp", "simplify" 															-> simplify(splitInput[1]);
+				case "sub", "substitute" 															-> substitute(splitInput[1], false);
+				case "subs", "substitutesimplify" 													-> substitute(splitInput[1], true);
+				case "sa", "suball" 																-> substituteAllInput(splitInput[1]);
+				case "sol", "solve" 																-> solve(splitInput[1]);
+				case "ext", "extrema" 																-> extrema(splitInput[1]);
+				case "tay", "taylor" 																-> taylor(splitInput[1]);
+				case "intn", "intnumeric" 															-> integrateNumeric(splitInput[1]);
+				case "intne", "intnumericerror" 													-> integrateNumericError(splitInput[1]);
+				case "def", "deffunction" 															-> defineFunction(splitInput[1], false);
+				case "defs", "deffunctions", "deffunctionsimplify" 									-> defineFunction(splitInput[1], true);
+				case "defc", "defcon", "defconstant" 												-> defineConstant(splitInput[1]);
+				case "rmf", "rmfun", "removefun", "removefunction" 									-> removeFunction(splitInput[1]);
+				case "rmc", "rmconstant", "removeconstant" 											-> removeConstant(splitInput[1]);
+				case "pf", "printfun", "printfunction", "printfunctions" 							-> splitInput.length == 1 ? getFunctions() : getFunction(splitInput[1]);
+				case "pc", "printc", "printconstants" 												-> getConstants();
+				case "clearfun", "clearfunctions" 													-> clearFunctions();
+				case "ss", "sset", "sets", "setsetting" 											-> setSettings(splitInput[1]);
+				case "ps", "settings", "printsettings" 												-> printSettings();
+				case "int", "integral" 																-> integral(splitInput[1]);
+				case "ai", "index", "arrayindex" 													-> arrayIndex(splitInput[1]);
+				case "debug" 																		-> debug(splitInput[1]);
+				case "version" 																		-> version;
+				case "reset" 																		-> reset();
+				case "err", "error" 																-> printError();
+				case "help" 																		-> splitInput.length == 1 ? help() : help(splitInput[1]);
+				case "exit", "!" 																	-> throw new UserExitException();
+				default 																			-> null;
+			};
+		} catch(ArrayIndexOutOfBoundsException e) {
+			throw new MismatchedCommandArgumentsException("Command " + splitInput[0] + " expected an argument, but no argument was given.");
+		}
 		if (ret == null) {
 			if (storedFunctions.containsKey(input)) {
 				prev = storedFunctions.get(input);
@@ -98,8 +103,8 @@ public class KeywordInterface {
 				 prev = FunctionParser.parseSimplified(input);
 				 return prev;
 			} catch (Exception parserException) {
-				prev = parserException;
-				throw new CommandNotFoundException(splitInput[0] + " is not a command supported by KeywordInterface, so raw-function parsing was attempted.");
+				prevException = new CommandNotFoundException(splitInput[0] + " is not a command supported by KeywordInterface, and raw-function parsing failed to interpret the input.", parserException);
+				throw prevException;
 			}
 		}
 		prev = ret;
@@ -216,16 +221,22 @@ public class KeywordInterface {
 
 	private static GeneralFunction partialDiff(String input) {
 		String[] splitInput = spaces.split(input, 2);
+		if (splitInput.length != 2)
+			throw new MismatchedCommandArgumentsException("2", splitInput.length);
 		return parseStored(splitInput[1]).getSimplifiedDerivative(LatexReplacer.encodeAll(splitInput[0]));
 	}
 
 	private static GeneralFunction partialDiffNth(String input) {
 		String[] splitInput = spaces.split(input, 3);
+		if (splitInput.length != 3)
+			throw new MismatchedCommandArgumentsException("3", splitInput.length);
 		return parseStored(splitInput[2]).getNthDerivative(LatexReplacer.encodeAll(splitInput[0]), Integer.parseInt(splitInput[1]));
 	}
 
 	private static double evaluate(String input) {
 		String[] splitInput = keywordSplitter.split(input, 2);
+		if (splitInput.length == 0)
+			throw new MismatchedCommandArgumentsException("1 or 2", splitInput.length);
 		if (splitInput.length == 1)
 			return parseStored(splitInput[0]).evaluate(new HashMap<>());
 		else {
@@ -287,9 +298,11 @@ public class KeywordInterface {
 
 	private static Object defineFunction(String input, boolean simplify) {
 		String[] splitInput = spaces.split(input, 2);
+		if (splitInput.length != 2)
+			throw new MismatchedCommandArgumentsException("2", splitInput.length);
 		// A try-catch used to be here and was removed
 		GeneralFunction toPut = parseStored(splitInput[1]);
-		if (!Variable.validVariables.matcher(splitInput[0]).matches())
+		if (Settings.enforcePatternMatchingNames && !ParsingTools.validNames.matcher(splitInput[0]).matches())
 			throw new IllegalNameException(splitInput[0]);
 		if (simplify)
 			toPut = toPut.simplify();
@@ -300,6 +313,8 @@ public class KeywordInterface {
 
 	private static Object defineConstant(String input) {
 		String[] splitInput = spaces.split(input, 2);
+		if (splitInput.length != 2)
+			throw new MismatchedCommandArgumentsException("2", splitInput.length);
 		try {
 			return Constant.addSpecialConstant(LatexReplacer.encodeAll(splitInput[0]), ((GeneralFunction) KeywordInterface.useKeywords(splitInput[1])).evaluate(Map.of()));
 		} catch (Exception e) {
@@ -337,17 +352,23 @@ public class KeywordInterface {
 
 	private static double integrateNumeric(String input) {
 		String[] splitInput = keywordSplitter.split(input);
+		if (splitInput.length != 3)
+			throw new MismatchedCommandArgumentsException("3", splitInput.length);
 		return NumericalIntegration.simpsonsRule(parseStored(splitInput[0]), ParsingTools.getConstant(splitInput[1]), ParsingTools.getConstant(splitInput[2]));
 	}
 
 	private static double[] integrateNumericError(String input) {
 		String[] splitInput = keywordSplitter.split(input);
+		if (splitInput.length != 3)
+			throw new MismatchedCommandArgumentsException("3", splitInput.length);
 		return NumericalIntegration.simpsonsRuleWithError(parseStored(splitInput[0]), ParsingTools.getConstant(splitInput[1]), ParsingTools.getConstant(splitInput[2]));
 	}
 
 	private static String setSettings(String input) {
 		String[] splitInput = keywordSplitter.split(input);
-		SettingsParser.parseSingleSetting(splitInput[0], splitInput[1]);
+		if (splitInput.length != 2)
+			throw new MismatchedCommandArgumentsException("2", splitInput.length);
+		Settings.parseSingleSetting(splitInput[0], splitInput[1]);
 		return splitInput[0] + " = " + splitInput[1];
 	}
 
@@ -369,6 +390,8 @@ public class KeywordInterface {
 
 	private static GeneralFunction integral(String input) {
 		String[] splitInput = keywordSplitter.split(input);
+		if (splitInput.length != 2)
+			throw new MismatchedCommandArgumentsException("2", splitInput.length);
 		if (splitInput[1].charAt(0) != 'd')
 			throw new IllegalArgumentException(splitInput[1] + " is not a differential (does not start with d).");
 		Integral integral = new Integral(parseStored(splitInput[0]), splitInput[1].substring(1));
@@ -391,6 +414,13 @@ public class KeywordInterface {
 		clearFunctions();
 		Constant.resetConstants();
 		return "Reset done";
+	}
+
+	private static String printError() {
+		if (prevException == null)
+			return "No error was found.";
+		else
+			return prevException.getCause().toString();
 	}
 
 	private static String help(String input) {
@@ -449,11 +479,13 @@ public class KeywordInterface {
 					"version";
 			case "reset"															-> "Resets stored functions and constants to their initial state. \n" +
 					"reset";
+			case "err", "error"														-> "Prints the details of the previously encountered error. \n" +
+					"err";
 			case "help"				                                      			-> "Gives more information about a command. [argument] denotes a necessary argument, (argument) denotes an optional argument, and (argument)* denotes zero or more instances of argument.\n" +
 					"help (command)";
 			case "exit", "!"														-> "Exits the program.\n" +
 					"exit";
-			default -> throw new IllegalArgumentException("Invalid command: " + input);
+			default -> throw new IllegalArgumentException("Invalid command: " + input + ".");
 		};
 	}
 
@@ -487,6 +519,7 @@ public class KeywordInterface {
 				clearfun, clearfunctions:                              clears functions
 				version:											   prints version
 				reset:                                                 resets stored functions and constants
+				err, error:                                            prints the details of the previous error
 				exit, !:                                               exits the interface
 				Execute `help [command]` to get more info on that command, and `help help` for more info on the help menu.
 				""";

@@ -12,7 +12,7 @@ public class MismatchedCommandArgumentsException extends IllegalArgumentExceptio
 
     /**
      * To be thrown when an input is not the required length in KeywordInterface
-     * @param message the error message
+     * @param message the exception message
      */
     public MismatchedCommandArgumentsException(String message) {
         super(message);

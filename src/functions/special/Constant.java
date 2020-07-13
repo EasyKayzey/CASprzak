@@ -153,9 +153,9 @@ public class Constant extends SpecialFunction {
 	public int compareSelf(GeneralFunction that) {
 		if (isSpecial() && ((Constant) that).isSpecial())
 			return this.constantKey.compareTo(((Constant) that).constantKey);
-		else if (isSpecial()) // && ((Constant) that).constantKey == null
+		else if (isSpecial())
 			return 1;
-		else if (((Constant) that).isSpecial()) // && constantKey == null
+		else if (((Constant) that).isSpecial())
 			return -1;
 		else
 			return (int) Math.signum(this.constant - ((Constant) that).constant);

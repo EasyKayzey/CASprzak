@@ -94,7 +94,7 @@ public class Settings {
 	/**
 	 * Denotes whether or not special Constants get simplified into decimal under addition, multiplication, or exponentiation.
 	 */
-	public static boolean simplifyFunctionsOfSpecialConstants = true;
+	public static boolean simplifyFunctionsOfSpecialConstants = false;
 
 	/**
 	 * Denotes whether exponents should be distributed over multiplication in {@code simplify()}. Ex: {@code (2x)^2 -> 4x^2}

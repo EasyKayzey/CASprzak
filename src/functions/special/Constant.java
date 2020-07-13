@@ -97,9 +97,17 @@ public class Constant extends SpecialFunction {
 		return constant;
 	}
 
+	/**
+	 * Returns true if the Constant is a special {@link Constant}
+	 * @return true if the Constant is a special {@link Constant}
+	 */
+	public boolean isSpecial() {
+		return constantKey != null;
+	}
+
 
 	public String toString() {
-		if (constantKey != null)
+		if (isSpecial())
 			return ParsingTools.processEscapes(constantKey);
 		else
 			return String.valueOf(constant);
@@ -110,14 +118,14 @@ public class Constant extends SpecialFunction {
 	}
 
 	public GeneralFunction clone() {
-		if (constantKey == null)
+		if (!isSpecial())
 			return new Constant(constant);
 		else
 			return new Constant(constantKey);
 	}
 
 	public GeneralFunction simplify() {
-		if (constantKey == null)
+		if (!isSpecial())
 			for (Map.Entry<String, Double> entry : specialConstants.entrySet())
 				if (Math.abs(constant - entry.getValue()) < Settings.equalsMargin)
 					return new Constant(entry.getKey());
@@ -143,11 +151,11 @@ public class Constant extends SpecialFunction {
 
 	@SuppressWarnings({"VariableNotUsedInsideIf", "ConstantConditions"})
 	public int compareSelf(GeneralFunction that) {
-		if (constantKey != null && ((Constant) that).constantKey != null)
+		if (isSpecial() && ((Constant) that).isSpecial())
 			return this.constantKey.compareTo(((Constant) that).constantKey);
-		else if (constantKey != null) // && ((Constant) that).constantKey == null
+		else if (isSpecial())
 			return 1;
-		else if (((Constant) that).constantKey != null) // && constantKey == null
+		else if (((Constant) that).isSpecial())
 			return -1;
 		else
 			return (int) Math.signum(this.constant - ((Constant) that).constant);

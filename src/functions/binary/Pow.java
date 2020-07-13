@@ -80,6 +80,14 @@ public class Pow extends BinaryFunction {
 		return simplifyFOC();
 	}
 
+	@Override
+	public GeneralFunction simplifyFOC() {
+		if (function1 instanceof Constant constant1 && function2 instanceof Constant constant2)
+			if (Settings.simplifyFunctionsOfSpecialConstants || (!constant1.isSpecial() && !constant2.isSpecial()))
+				return new Constant(this.evaluate(Map.of())).simplify();
+		return this;
+	}
+
 	/**
 	 * Simplifies instances of a power raised to a power. Example: {@code (x^2)^3 = x^6}
 	 * @return a {@link Pow} where the exponents are multiplied

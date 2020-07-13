@@ -1,5 +1,6 @@
 package functions.commutative;
 
+import config.Settings;
 import functions.GeneralFunction;
 import functions.special.Constant;
 import org.jetbrains.annotations.NotNull;
@@ -139,8 +140,10 @@ public abstract class CommutativeFunction extends GeneralFunction {
 			ListIterator<GeneralFunction> iter = functionList.listIterator();
 			while (iter.hasNext()) {
 				if (iter.next() instanceof Constant constant) {
-					accumulator = operate(accumulator, constant.constant);
-					iter.remove();
+					if (Settings.simplifyFunctionsOfSpecialConstants || !constant.isSpecial()) {
+						accumulator = operate(accumulator, constant.constant);
+						iter.remove();
+					}
 				}
 			}
 			functionList.add(new Constant(accumulator));

@@ -129,8 +129,7 @@ public class KeywordInterface {
 		switch (input) {
 			case "fp", "parse", "parser"  -> {
 				Scanner scanner = new Scanner(System.in);
-				scanner.useDelimiter(ParsingTools.newline);
-				input = scanner.next();
+				input = scanner.nextLine();
 				while (!"exit".equals(input) && !"!".equals(input)) {
 					try {
 						System.out.println("PSto: " + parseStored(input));
@@ -141,7 +140,7 @@ public class KeywordInterface {
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
-					input = scanner.next();
+					input = scanner.nextLine();
 				}
 			}
 			default -> throw new SettingNotFoundException(input, "debug");

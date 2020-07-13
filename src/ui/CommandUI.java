@@ -2,7 +2,6 @@ package ui;
 
 import config.Settings;
 import parsing.KeywordInterface;
-import tools.ParsingTools;
 import tools.exceptions.CommandNotFoundException;
 import tools.exceptions.UserExitException;
 
@@ -27,11 +26,10 @@ public class CommandUI {
 		}
 		System.out.println("Welcome to CASprzak. Run 'help' for a command list, or 'demo' for a tutorial.");
 		Scanner scanner = new Scanner(System.in);
-		scanner.useDelimiter(ParsingTools.newline);
 		boolean flag = true;
 		while (flag) {
 			System.out.print(">>> ");
-			String input = scanner.next();
+			String input = scanner.nextLine();
 			if  (input.isBlank())
 				continue;
 			try {

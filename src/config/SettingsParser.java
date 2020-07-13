@@ -55,7 +55,7 @@ public class SettingsParser {
 			case "printStackTraces"						    -> Settings.printStackTraces = ParsingTools.parseBoolean(value);
 			case "enforceDomainAndRange"					-> Settings.enforceDomainAndRange = ParsingTools.parseBoolean(value);
 			case "doCombinatorics"							-> Settings.doCombinatorics = ParsingTools.parseBoolean(value);
-			case "simplifyFunctionOfSpecialConstants"		-> Settings.simplifyFunctionsOfSpecialConstants = ParsingTools.parseBoolean(value);
+			case "simplifyFunctionsOfSpecialConstants"		-> Settings.simplifyFunctionsOfSpecialConstants = ParsingTools.parseBoolean(value);
 			case "defaultSolverType" 						-> Settings.defaultSolverType = SolverType.valueOf(value);
 			case "defaultFactorial" 						-> Settings.defaultFactorial = FactorialType.valueOf(value);
 			default 										-> throw new IllegalStateException("Setting " + key + " does not exist in SettingsParser.");

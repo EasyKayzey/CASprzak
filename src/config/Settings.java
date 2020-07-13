@@ -130,7 +130,7 @@ public class Settings {
 	/**
 	 * Denotes whether or not special Constants get simplified into decimal under addition, multiplication, or exponentiation.
 	 */
-	public static boolean simplifyFunctionsOfSpecialConstants = true;
+	public static boolean simplifyFunctionsOfSpecialConstants = false;
 
 	/**
 	 * Denotes the default method used to solve equations.

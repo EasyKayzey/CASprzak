@@ -1,7 +1,6 @@
 package parsing;
 
 import config.Settings;
-import config.SettingsParser;
 import functions.GeneralFunction;
 import functions.special.Constant;
 import functions.special.Variable;
@@ -351,7 +350,7 @@ public class KeywordInterface {
 		String[] splitInput = keywordSplitter.split(input);
 		if (splitInput.length != 2)
 			throw new MismatchedCommandArgumentsException("2", splitInput.length);
-		SettingsParser.parseSingleSetting(splitInput[0], splitInput[1]);
+		Settings.parseSingleSetting(splitInput[0], splitInput[1]);
 		return splitInput[0] + " = " + splitInput[1];
 	}
 

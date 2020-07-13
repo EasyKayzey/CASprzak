@@ -2,7 +2,6 @@ package ui;
 
 import config.Settings;
 import parsing.KeywordInterface;
-import tools.ParsingTools;
 import tools.VariableTools;
 import tools.exceptions.UserExitException;
 
@@ -48,7 +47,6 @@ public class CASDemo {
 	@SuppressWarnings("SameReturnValue")
 	public static String runDemo() {
 		scanner = new Scanner(System.in);
-		scanner.useDelimiter(ParsingTools.newline);
 		while (currentState != DemoState.EXIT)
 			runState();
 		return "Exiting demo...";
@@ -93,7 +91,7 @@ public class CASDemo {
 		try {
 			if (input == null) {
 				System.out.print(">>> ");
-				input = scanner.next();
+				input = scanner.nextLine();
 			}
 			
 			if (input.length() >= 4 && "next".equals(input.substring(0, 4))) {
@@ -121,13 +119,13 @@ public class CASDemo {
 
 	private static void runTillNext() {
 		System.out.print(">>> ");
-		String input = scanner.next();
+		String input = scanner.nextLine();
 		while (!"next".equals(input)) {
 			if (!tryInput(s -> true, null, input))
 				return;
 			else {
 				System.out.print(">>> ");
-				input = scanner.next();
+				input = scanner.nextLine();
 			}
 		}
 	}
@@ -157,7 +155,7 @@ public class CASDemo {
 				""", .25);
 		while (true) try {
 			System.out.print(">>> ");
-			currentState = DemoState.valueOf(scanner.next().toUpperCase());
+			currentState = DemoState.valueOf(scanner.nextLine().toUpperCase());
 			return;
 		} catch (IllegalArgumentException e) {
 			System.out.println("Your input was not one of the constants mentioned above. To exit, enter EXIT.");

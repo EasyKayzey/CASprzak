@@ -16,6 +16,7 @@
  - Make `substitute`/`sub` more powerful in the keyword interface by allowing the substitution of multiple expressions simultaneously
  - Make `def` and `sub` in automatically perform a `minimalSimplify`
  - Add support for `_` in `evaluate` (used as `eval x^2 x=_` when `_` is a  `Double`)
+ - Add `err` command to improve error handling
  - Add `version` command
  - Add `reset` command
  

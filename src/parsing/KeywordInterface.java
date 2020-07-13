@@ -30,6 +30,7 @@ public class KeywordInterface {
 	private static final Pattern spaces = Pattern.compile("\\s+");
 	private static final Pattern equals = Pattern.compile("=");
 	private static final HashMap<String, GeneralFunction> storedFunctions = new HashMap<>();
+	private static RuntimeException prevException = null;
 
 	/**
 	 * The previous output of {@link #useKeywords(String)}
@@ -81,6 +82,7 @@ public class KeywordInterface {
 			case "debug"														-> debug(splitInput[1]);
 			case "version"														-> version;
 			case "reset"														-> reset();
+			case "err", "error"													-> printError();
 			case "help"															-> splitInput.length == 1 ? help() : help(splitInput[1]);
 			case "exit", "!"													-> throw new UserExitException();
 			default 															-> null;
@@ -96,8 +98,8 @@ public class KeywordInterface {
 				 prev = FunctionParser.parseSimplified(input);
 				 return prev;
 			} catch (Exception parserException) {
-				prev = parserException;
-				throw new CommandNotFoundException(splitInput[0] + " is not a command supported by KeywordInterface, so raw-function parsing was attempted.");
+				prevException = new CommandNotFoundException(splitInput[0] + " is not a command supported by KeywordInterface, and raw-function parsing failed to interpret the input.", parserException);
+				throw prevException;
 			}
 		}
 		prev = ret;
@@ -374,6 +376,13 @@ public class KeywordInterface {
 		return "Reset done";
 	}
 
+	private static String printError() {
+		if (prevException == null)
+			return "No error was found.";
+		else
+			return prevException.getCause().toString();
+	}
+
 	private static String help(String input) {
 		return switch (input) {
 			case "demo"																-> "Runs the demo.\n" +
@@ -430,6 +439,8 @@ public class KeywordInterface {
 					"version";
 			case "reset"															-> "Resets stored functions and constants to their initial state. \n" +
 					"reset";
+			case "err", "error"														-> "Prints the details of the previously encountered error. \n" +
+					"err";
 			case "help"				                                      			-> "Gives more information about a command. [argument] denotes a necessary argument, (argument) denotes an optional argument, and (argument)* denotes zero or more instances of argument.\n" +
 					"help (command)";
 			case "exit", "!"														-> "Exits the program.\n" +
@@ -468,6 +479,7 @@ public class KeywordInterface {
 				clearfun, clearfunctions:                              clears functions
 				version:											   prints version
 				reset:                                                 resets stored functions and constants
+				err, error:                                            prints the details of the previous error
 				exit, !:                                               exits the interface
 				Execute `help [command]` to get more info on that command, and `help help` for more info on the help menu.
 				""";

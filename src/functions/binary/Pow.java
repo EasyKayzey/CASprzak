@@ -73,11 +73,19 @@ public class Pow extends BinaryFunction {
 	 */
 	public GeneralFunction simplifyObviousExponentsAndFOC() {
 		if (function1 instanceof Constant constant)
-			if (constant.constant == 0)
-				return DefaultFunctions.ONE;
-			else if (constant.constant == 1)
-				return function2.simplify();
+				if (constant.constant == 0)
+					return DefaultFunctions.ONE;
+				else if (constant.constant == 1)
+					return function2.simplify();
 		return simplifyFOC();
+	}
+
+	@Override
+	public GeneralFunction simplifyFOC() {
+		if (function1 instanceof Constant constant1 && function2 instanceof Constant constant2)
+			if (Settings.simplifyFunctionsOfSpecialConstants || (!constant1.isSpecial() && !constant2.isSpecial()))
+				return new Constant(this.evaluate(Map.of())).simplify();
+		return this;
 	}
 
 	/**

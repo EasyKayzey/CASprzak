@@ -78,7 +78,7 @@ public class Constant extends SpecialFunction {
 	 * @return the value of the constant for convenience
 	 */
 	public static double addSpecialConstant(String string, double value) {
-		if (!Variable.validVariables.matcher(string).matches())
+		if (!ParsingTools.validNames.matcher(string).matches())
 			throw new IllegalNameException(string);
 		specialConstants.put(string, value);
 		return value;

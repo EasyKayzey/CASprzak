@@ -16,9 +16,14 @@ import java.util.regex.Pattern;
 public class ParsingTools {
 
 	/**
-	 * Newlines with supported carriage returns
+	 * Matches newlines with supported carriage returns
 	 */
 	public static final Pattern newline = Pattern.compile("\\r?\\n");
+
+	/**
+	 * Matches all valid variable, function, and constant names
+	 */
+	public static final Pattern validNames = Pattern.compile("[a-zA-Z[^\\x00-\\x7F]]|\\\\" + (Settings.enforceEscapedNames ? "" : "?") + "[a-zA-Z[^\\x00-\\x7F]][\\w.'[^\\x00-\\x7F]]*");
 
 	private ParsingTools(){}
 

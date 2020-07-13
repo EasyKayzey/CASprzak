@@ -9,6 +9,11 @@ public class MismatchedCommandArgumentsException extends IllegalArgumentExceptio
     public MismatchedCommandArgumentsException(String expectedLength, int actualLength) {
         super("Expected " + expectedLength +  " arguments and received " + actualLength + ".");
     }
+
+    /**
+     * To be thrown when an input is not the required length in KeywordInterface
+     * @param message the error message
+     */
     public MismatchedCommandArgumentsException(String message) {
         super(message);
     }

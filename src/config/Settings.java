@@ -88,6 +88,11 @@ public class Settings {
 	public static boolean simplifyFunctionsOfConstants = true;
 
 	/**
+	 * Denotes whether or not special Constants get simplified into decimal under addition, multiplication, or exponentiation.
+	 */
+	public static boolean simplifyFunctionsOfSpecialConstants = true;
+
+	/**
 	 * Denotes whether exponents should be distributed over multiplication in {@code simplify()}. Ex: {@code (2x)^2 -> 4x^2}
 	 */
 	public static boolean distributeExponents = true;
@@ -126,11 +131,6 @@ public class Settings {
 	 * Denotes whether or not combinatorial operations should be parsed. This setting can only be changed through the config; modifying it during runtime will not do anything.
 	 */
 	public static boolean doCombinatorics = true;
-
-	/**
-	 * Denotes whether or not special Constants get simplified into decimal under addition, multiplication, or exponentiation.
-	 */
-	public static boolean simplifyFunctionsOfSpecialConstants = true;
 
 	/**
 	 * Denotes the default method used to solve equations.

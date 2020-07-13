@@ -46,6 +46,7 @@ public class SettingsParser {
 			case "enforceEscapedNames"		 				-> Settings.enforceEscapedNames = ParsingTools.parseBoolean(value);
 			case "removeEscapes"		 					-> Settings.removeEscapes = ParsingTools.parseBoolean(value);
 			case "simplifyFunctionsOfConstants" 			-> Settings.simplifyFunctionsOfConstants = ParsingTools.parseBoolean(value);
+			case "simplifyFunctionOfSpecialConstants"		-> Settings.simplifyFunctionsOfSpecialConstants = ParsingTools.parseBoolean(value);
 			case "distributeExponents" 						-> Settings.distributeExponents = ParsingTools.parseBoolean(value);
 			case "cacheDerivatives" 						-> Settings.cacheDerivatives = ParsingTools.parseBoolean(value);
 			case "enforceIntegerOperations" 				-> Settings.enforceIntegerOperations = ParsingTools.parseBoolean(value);
@@ -55,7 +56,6 @@ public class SettingsParser {
 			case "printStackTraces"						    -> Settings.printStackTraces = ParsingTools.parseBoolean(value);
 			case "enforceDomainAndRange"					-> Settings.enforceDomainAndRange = ParsingTools.parseBoolean(value);
 			case "doCombinatorics"							-> Settings.doCombinatorics = ParsingTools.parseBoolean(value);
-			case "simplifyFunctionOfSpecialConstants"		-> Settings.simplifyFunctionsOfSpecialConstants = ParsingTools.parseBoolean(value);
 			case "defaultSolverType" 						-> Settings.defaultSolverType = SolverType.valueOf(value);
 			case "defaultFactorial" 						-> Settings.defaultFactorial = FactorialType.valueOf(value);
 			default 										-> throw new IllegalStateException("Setting " + key + " does not exist in SettingsParser.");

@@ -283,7 +283,7 @@ public class KeywordInterface {
 			throw new MismatchedCommandArgumentsException("2", splitInput.length);
 		// A try-catch used to be here and was removed
 		GeneralFunction toPut = parseStored(splitInput[1]);
-		if (!ParsingTools.validNames.matcher(splitInput[0]).matches())
+		if (Settings.enforcePatternMatchingNames && !ParsingTools.validNames.matcher(splitInput[0]).matches())
 			throw new IllegalNameException(splitInput[0]);
 		if (simplify)
 			toPut = toPut.simplify();

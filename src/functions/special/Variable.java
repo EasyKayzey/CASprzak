@@ -1,5 +1,6 @@
 package functions.special;
 
+import config.Settings;
 import functions.GeneralFunction;
 import tools.ParsingTools;
 import tools.exceptions.IllegalNameException;
@@ -20,7 +21,7 @@ public class Variable extends SpecialFunction {
 	 * @param varID The variable's representative String
 	 */
 	public Variable(String varID) {
-		if (!ParsingTools.validNames.matcher(varID).matches())
+		if (Settings.enforcePatternMatchingNames && !ParsingTools.validNames.matcher(varID).matches())
 			throw new IllegalNameException(varID);
 		this.varID = varID;
 	}

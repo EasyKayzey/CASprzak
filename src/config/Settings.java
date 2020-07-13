@@ -151,16 +151,6 @@ public class Settings {
 	 */
 	public static boolean enforceDomainAndRange = false;
 
-	static {
-		//noinspection ConstantConditions
-		if (Settings.readProperties) {
-			try {
-				parseConfig();
-			} catch (IOException e) {
-				System.out.println("Properties file not found. Using defaults...");
-			}
-		}
-	}
 
 	/**
 	 * Parses the configuration file {@code cas.properties} and stores the read values in {@link Settings}
@@ -197,7 +187,7 @@ public class Settings {
 			case "enforceEscapedNames"		 				-> enforceEscapedNames = ParsingTools.parseBoolean(value);
 			case "removeEscapes"		 					-> removeEscapes = ParsingTools.parseBoolean(value);
 			case "simplifyFunctionsOfConstants" 			-> simplifyFunctionsOfConstants = ParsingTools.parseBoolean(value);
-			case "simplifyFunctionOfSpecialConstants"		-> simplifyFunctionsOfSpecialConstants = ParsingTools.parseBoolean(value);
+			case "simplifyFunctionsOfSpecialConstants"		-> simplifyFunctionsOfSpecialConstants = ParsingTools.parseBoolean(value);
 			case "distributeExponents" 						-> distributeExponents = ParsingTools.parseBoolean(value);
 			case "cacheDerivatives" 						-> cacheDerivatives = ParsingTools.parseBoolean(value);
 			case "enforceIntegerOperations" 				-> enforceIntegerOperations = ParsingTools.parseBoolean(value);

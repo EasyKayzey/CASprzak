@@ -97,6 +97,14 @@ public class Constant extends SpecialFunction {
 		return constant;
 	}
 
+	/**
+	 * Returns true if the Constant is a special {@link Constant}
+	 * @return true if the Constant is a special {@link Constant}
+	 */
+	public boolean isSpecial() {
+		return constantKey != null;
+	}
+
 
 	public String toString() {
 		if (constantKey != null)

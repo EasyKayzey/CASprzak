@@ -167,12 +167,12 @@ public class Pow extends BinaryFunction {
 
 		@Override
 		public String toString() {
-			return first + " ^ " + second;
+			return first + "^" + second;
 		}
 
 		@Override
 		public String toLatex() {
-			return "( " + first.toLatex() + " )^( " + second.toLatex() + " )";
+			return "{" + first.toLatex() + "}^{" + second.toLatex() + "}";
 		}
 
 	}

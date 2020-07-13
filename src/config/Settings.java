@@ -166,11 +166,6 @@ public class Settings {
 	 */
 	public static FactorialType defaultFactorial = FactorialType.RECURSIVE;
 
-	/**
-	 * Denotes whether or not inverse simplifications conserve domain and range.
-	 */
-	public static boolean enforceDomainAndRange = false;
-
 
 	/**
 	 * Parses the configuration file {@code cas.properties} and stores the read values in {@link Settings}
@@ -217,6 +212,8 @@ public class Settings {
 			case "distributeFunctions"					    -> distributeFunctions = ParsingTools.parseBoolean(value);
 			case "printStackTraces"						    -> printStackTraces = ParsingTools.parseBoolean(value);
 			case "enforceDomainAndRange"					-> enforceDomainAndRange = ParsingTools.parseBoolean(value);
+			case "asteriskMultiplication"					-> asteriskMultiplication = ParsingTools.parseBoolean(value);
+			case "truncateNearIntegers" 					-> truncateNearIntegers = ParsingTools.parseBoolean(value);
 			case "doCombinatorics"							-> doCombinatorics = ParsingTools.parseBoolean(value);
 			case "defaultSolverType" 						-> defaultSolverType = SolverType.valueOf(value);
 			case "defaultFactorial" 						-> defaultFactorial = FactorialType.valueOf(value);

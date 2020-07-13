@@ -17,6 +17,7 @@
  - Make `def` and `sub` in automatically perform a `minimalSimplify`
  - Add support for `_` in `evaluate` (used as `eval x^2 x=_` when `_` is a  `Double`)
  - Add better handling for ArrayIndexOutOfBoundsExceptions in CommandUI
+ - Add `err` command to improve error handling
  - Add `version` command
  - Add `reset` command
  

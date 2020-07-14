@@ -16,6 +16,8 @@ import tools.VariableTools;
 import java.util.Arrays;
 import java.util.Map;
 
+import static output.ToStringManager.maybeParenthesize;
+
 public class Pow extends BinaryFunction {
 	/**
 	 * Constructs a new {@link Pow}
@@ -156,7 +158,9 @@ public class Pow extends BinaryFunction {
 	}
 
 	public OutputFunction toOutputFunction() {
-		return new OutputPow(function2.toOutputFunction(), function1.toOutputFunction());
+		OutputFunction first = function2.toOutputFunction();
+		OutputFunction second = function1.toOutputFunction();
+		return new OutputPow(maybeParenthesize(first), maybeParenthesize(second));
 	}
 
 	private static class OutputPow extends OutputBinary {

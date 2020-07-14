@@ -1,4 +1,4 @@
-package functions.special;
+package functions.endpoint;
 
 import functions.GeneralFunction;
 import org.jetbrains.annotations.NotNull;
@@ -12,9 +12,9 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 /**
- * All classes extending {@link SpecialFunction} are endpoints of the function tree as they have no input or operands.
+ * All classes extending {@link EndpointFunction} are endpoints of the function tree as they have no input or operands.
  */
-public abstract class SpecialFunction extends GeneralFunction implements OutputFunction {
+public abstract class EndpointFunction extends GeneralFunction implements OutputFunction {
 
 	public GeneralFunction substituteAll(Predicate<? super GeneralFunction> test, Function<? super GeneralFunction, ? extends GeneralFunction> replacer) {
 		if (test.test(this))
@@ -51,7 +51,7 @@ public abstract class SpecialFunction extends GeneralFunction implements OutputF
 
 		@Override
 		public GeneralFunction next() {
-			throw new NoSuchElementException("No elements in a SpecialFunction.");
+			throw new NoSuchElementException("No elements in a EndpointFunction.");
 		}
 	}
 }

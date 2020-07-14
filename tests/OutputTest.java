@@ -1,4 +1,4 @@
-import functions.special.Constant;
+import functions.endpoint.Constant;
 import org.junit.jupiter.api.Test;
 import tools.DefaultFunctions;
 

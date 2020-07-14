@@ -2,7 +2,7 @@ package functions.unitary.transforms;
 
 import functions.Evaluable;
 import functions.GeneralFunction;
-import functions.special.Variable;
+import functions.endpoint.Variable;
 import functions.unitary.UnitaryFunction;
 import output.OutputFunction;
 import output.OutputString;

@@ -4,8 +4,8 @@ import functions.GeneralFunction;
 import functions.binary.Pow;
 import functions.commutative.Product;
 import functions.commutative.Sum;
-import functions.special.Constant;
-import functions.special.Variable;
+import functions.endpoint.Constant;
+import functions.endpoint.Variable;
 
 import java.util.Map;
 import java.util.function.DoublePredicate;

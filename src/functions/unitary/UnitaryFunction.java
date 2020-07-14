@@ -3,7 +3,7 @@ package functions.unitary;
 import config.Settings;
 import functions.GeneralFunction;
 import functions.Invertible;
-import functions.special.Constant;
+import functions.endpoint.Constant;
 import org.jetbrains.annotations.NotNull;
 import output.OutputFunction;
 import output.OutputUnitary;

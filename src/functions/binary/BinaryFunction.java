@@ -1,7 +1,7 @@
 package functions.binary;
 
 import functions.GeneralFunction;
-import functions.special.Constant;
+import functions.endpoint.Constant;
 import org.jetbrains.annotations.NotNull;
 import output.OutputFunction;
 import output.OutputBinary;
@@ -61,7 +61,7 @@ public abstract class BinaryFunction extends GeneralFunction {
 	public abstract BinaryFunction getInstance(GeneralFunction function1, GeneralFunction function2);
 
 	/**
-	 * Substitutes all {@link functions.special.Variable} in the function with a specified {@link GeneralFunction}
+	 * Substitutes all {@link functions.endpoint.Variable} in the function with a specified {@link GeneralFunction}
 	 * @param test     the variable to be substituted into
 	 * @param replacer the {@link GeneralFunction} that will be substituted
 	 * @return the function after the given substitution was made

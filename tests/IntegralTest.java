@@ -1,7 +1,7 @@
 import functions.GeneralFunction;
 import functions.commutative.Product;
 import functions.commutative.Sum;
-import functions.special.Constant;
+import functions.endpoint.Constant;
 import org.junit.jupiter.api.Test;
 import parsing.FunctionParser;
 import tools.exceptions.IntegrationFailedException;

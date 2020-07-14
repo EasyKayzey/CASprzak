@@ -1,4 +1,4 @@
-package functions.special;
+package functions.endpoint;
 
 import config.Settings;
 import functions.GeneralFunction;
@@ -12,7 +12,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 
-public class Constant extends SpecialFunction {
+public class Constant extends EndpointFunction {
 	/**
 	 * Symbols or Strings with a dedicated value. The defaults are {@code π} and {@code e}.
 	 */
@@ -151,7 +151,7 @@ public class Constant extends SpecialFunction {
 	}
 
 
-	@SuppressWarnings({"VariableNotUsedInsideIf", "ConstantConditions"})
+	@SuppressWarnings({"ConstantConditions"})
 	public int compareSelf(GeneralFunction that) {
 		if (isSpecial() && ((Constant) that).isSpecial())
 			return this.constantKey.compareTo(((Constant) that).constantKey);

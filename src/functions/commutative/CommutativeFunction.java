@@ -3,7 +3,7 @@ package functions.commutative;
 import config.Settings;
 import functions.GeneralFunction;
 import functions.Outputable;
-import functions.special.Constant;
+import functions.endpoint.Constant;
 import org.jetbrains.annotations.NotNull;
 import output.OutputCommutative;
 import output.OutputFunction;

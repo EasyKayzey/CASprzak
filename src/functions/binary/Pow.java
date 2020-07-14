@@ -4,7 +4,7 @@ import config.Settings;
 import functions.GeneralFunction;
 import functions.commutative.Product;
 import functions.commutative.Sum;
-import functions.special.Constant;
+import functions.endpoint.Constant;
 import functions.unitary.specialcases.Exp;
 import functions.unitary.specialcases.Ln;
 import output.OutputBinary;

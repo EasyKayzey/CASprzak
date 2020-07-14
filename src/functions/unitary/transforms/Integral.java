@@ -2,7 +2,7 @@ package functions.unitary.transforms;
 
 import functions.GeneralFunction;
 import functions.commutative.Product;
-import functions.special.Constant;
+import functions.endpoint.Constant;
 import functions.unitary.UnitaryFunction;
 import output.OutputBinary;
 import output.OutputFunction;

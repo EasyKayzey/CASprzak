@@ -2,7 +2,7 @@ package functions.binary.integer;
 
 import functions.GeneralFunction;
 import functions.binary.BinaryFunction;
-import functions.special.Constant;
+import functions.endpoint.Constant;
 import output.OutputBinary;
 import output.OutputFunction;
 import tools.ParsingTools;

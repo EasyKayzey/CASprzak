@@ -2,7 +2,7 @@ package tools;
 
 import config.Settings;
 import functions.GeneralFunction;
-import functions.special.Variable;
+import functions.endpoint.Variable;
 
 import java.util.HashSet;
 import java.util.Set;

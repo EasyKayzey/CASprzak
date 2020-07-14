@@ -39,6 +39,6 @@ public class OutputParenthesizer implements OutputFunction {
 	}
 
 	public int hashCode() {
-		return operand.hashCode() + 7 * "()".hashCode();
+		return operand.hashCode() + 7 * getClass().hashCode();
 	}
 }

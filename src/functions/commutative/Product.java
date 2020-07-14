@@ -4,7 +4,7 @@ import config.Settings;
 import functions.GeneralFunction;
 import functions.Outputable;
 import functions.binary.Pow;
-import functions.special.Constant;
+import functions.endpoint.Constant;
 import functions.unitary.transforms.Differential;
 import functions.unitary.transforms.Integral;
 import output.OutputCommutative;

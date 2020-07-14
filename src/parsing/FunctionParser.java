@@ -2,8 +2,8 @@ package parsing;
 
 import config.Settings;
 import functions.GeneralFunction;
-import functions.special.Constant;
-import functions.special.Variable;
+import functions.endpoint.Constant;
+import functions.endpoint.Variable;
 import tools.MiscTools;
 
 import java.util.*;

@@ -2,7 +2,7 @@ package parsing;
 
 import config.Settings;
 import functions.GeneralFunction;
-import functions.special.Constant;
+import functions.endpoint.Constant;
 import functions.unitary.transforms.Integral;
 import output.OutputFunction;
 import tools.MiscTools;
@@ -410,6 +410,7 @@ public class KeywordInterface {
 			throw new IllegalArgumentException("The previous output was not a list of numbers.");
 	}
 
+	@SuppressWarnings("SameReturnValue")
 	private static String reset() {
 		clearFunctions();
 		Constant.resetConstants();

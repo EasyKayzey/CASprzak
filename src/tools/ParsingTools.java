@@ -2,7 +2,7 @@ package tools;
 
 import config.Settings;
 import functions.GeneralFunction;
-import functions.special.Constant;
+import functions.endpoint.Constant;
 import parsing.FunctionParser;
 import parsing.LatexReplacer;
 

@@ -14,7 +14,7 @@ A clear and concise description of what the bug is.
 What steps should be executed to reproduce the bug?
 Which interface are you using?
 What constants and functions are defined in the current session?
-What settings are enabled in config, and are any changed manually during the session?
+What settings are enabled in the config, and are any changed manually during the session?
 
 **Expected behavior**
 A clear and concise description of what you expected to happen.

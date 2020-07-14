@@ -5,7 +5,7 @@ import functions.GeneralFunction;
 import functions.commutative.CommutativeFunction;
 import functions.commutative.Product;
 import functions.commutative.Sum;
-import functions.special.Constant;
+import functions.endpoint.Constant;
 import tools.helperclasses.Pair;
 
 import java.util.LinkedList;

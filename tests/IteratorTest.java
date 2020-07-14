@@ -1,7 +1,7 @@
 import functions.GeneralFunction;
 import functions.binary.Pow;
-import functions.special.Constant;
-import functions.special.Variable;
+import functions.endpoint.Constant;
+import functions.endpoint.Variable;
 import org.junit.jupiter.api.Test;
 import parsing.FunctionParser;
 

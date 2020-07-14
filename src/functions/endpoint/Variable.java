@@ -1,4 +1,4 @@
-package functions.special;
+package functions.endpoint;
 
 import config.Settings;
 import functions.GeneralFunction;
@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 
 
-public class Variable extends SpecialFunction {
+public class Variable extends EndpointFunction {
 
 	/**
 	 * The String representing this variable

@@ -4,8 +4,8 @@ import functions.binary.integer.IntegerQuotient;
 import functions.binary.integer.Modulo;
 import functions.commutative.integer.GCD;
 import functions.commutative.integer.LCM;
-import functions.special.Constant;
-import functions.special.Variable;
+import functions.endpoint.Constant;
+import functions.endpoint.Variable;
 import functions.unitary.piecewise.Ceil;
 import functions.unitary.piecewise.Floor;
 import functions.unitary.piecewise.Round;
@@ -17,7 +17,6 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-@SuppressWarnings("AssertEqualsBetweenInconvertibleTypes")
 public class IntegerTest {
     @Test
     void basicIntegerQuotient1() {

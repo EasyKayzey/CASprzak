@@ -1,4 +1,4 @@
-import functions.special.Variable;
+import functions.endpoint.Variable;
 import org.junit.jupiter.api.Test;
 import parsing.FunctionParser;
 import tools.MiscTools;

@@ -10,7 +10,7 @@ import functions.commutative.Product;
 import functions.commutative.Sum;
 import functions.commutative.integer.GCD;
 import functions.commutative.integer.LCM;
-import functions.special.Variable;
+import functions.endpoint.Variable;
 import functions.unitary.integer.combo.Factorial;
 import functions.unitary.piecewise.*;
 import functions.unitary.specialcases.Exp;

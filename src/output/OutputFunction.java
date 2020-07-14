@@ -2,6 +2,9 @@ package output;
 
 import java.util.Collection;
 
+/**
+ * The {@link OutputFunction} is the core of the system for outputting function trees in a readable way
+ */
 public interface OutputFunction {
 
 	/**

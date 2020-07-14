@@ -7,6 +7,8 @@ import output.OutputBinary;
 import output.OutputFunction;
 import tools.ParsingTools;
 
+import static output.ToStringManager.maybeParenthesize;
+
 public class Modulo extends IntegerBinaryFunction {
     /**
      * Constructs a new Modulo
@@ -45,7 +47,9 @@ public class Modulo extends IntegerBinaryFunction {
     }
 
     public OutputFunction toOutputFunction() {
-        return new OutputModulo(function2.toOutputFunction(), function1.toOutputFunction());
+        OutputFunction first = function2.toOutputFunction();
+        OutputFunction second = function1.toOutputFunction();
+        return new OutputModulo(maybeParenthesize(first), maybeParenthesize(second));
     }
 
     private static class OutputModulo extends OutputBinary {

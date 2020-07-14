@@ -12,6 +12,8 @@ import tools.DefaultFunctions;
 
 import java.util.Map;
 
+import static output.ToStringManager.maybeParenthesize;
+
 public class Logb extends BinaryFunction {
 	/**
 	 * Constructs a new Logb
@@ -90,7 +92,7 @@ public class Logb extends BinaryFunction {
 	}
 
 	public OutputFunction toOutputFunction() {
-		return new OutputLogb(function2.toOutputFunction(), function1.toOutputFunction());
+		return new OutputLogb(maybeParenthesize(function2.toOutputFunction()), function1.toOutputFunction());
 	}
 
 	private static class OutputLogb extends OutputBinary {

@@ -7,6 +7,8 @@ import output.OutputBinary;
 import output.OutputFunction;
 import tools.ParsingTools;
 
+import static output.ToStringManager.maybeParenthesize;
+
 public class IntegerQuotient extends IntegerBinaryFunction {
     /**
      * Constructs a new IntegerDivision
@@ -46,7 +48,9 @@ public class IntegerQuotient extends IntegerBinaryFunction {
     }
 
     public OutputFunction toOutputFunction() {
-        return new OutputIntegerQuotient(function2.toOutputFunction(), function1.toOutputFunction());
+        OutputFunction first = function2.toOutputFunction();
+        OutputFunction second = function1.toOutputFunction();
+        return new OutputIntegerQuotient(maybeParenthesize(first), maybeParenthesize(second));
     }
 
     private static class OutputIntegerQuotient extends OutputBinary {

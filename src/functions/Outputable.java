@@ -2,6 +2,9 @@ package functions;
 
 import output.OutputFunction;
 
+/**
+ * The {@link Outputable} interface allows objects, mainly {@link GeneralFunction}s, to be converted to an {@link OutputFunction} for processing.
+ */
 public interface Outputable {
 
 	/**

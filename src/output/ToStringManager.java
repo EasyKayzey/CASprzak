@@ -2,7 +2,7 @@ package output;
 
 public class ToStringManager {
 	/**
-	 * Adds parentheses to `function` only if it is an {@link OutputCommutative} or {@link OutputBinary}
+	 * Adds parentheses to {@code function} only if it is an {@link OutputCommutative} or {@link OutputBinary}
 	 * @param function the function to be maybe parenthesized
 	 * @return the function, possibly parenthesized
 	 */

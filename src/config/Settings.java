@@ -142,7 +142,7 @@ public class Settings {
 	public static boolean enforceDomainAndRange = false;
 
 	/**
-	 * Denotes whether or not multiplication should be delimited by asterisks (as in `2 * x`) or not (as in `2x`)
+	 * Denotes whether or not multiplication should be delimited by asterisks (as in {@code 2 * x}) or not (as in {@code 2x})
 	 */
 	public static boolean asteriskMultiplication = true;
 

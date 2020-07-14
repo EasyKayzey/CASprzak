@@ -55,7 +55,7 @@ public class Modulo extends IntegerBinaryFunction {
     private static class OutputModulo extends OutputBinary {
 
         public OutputModulo(OutputFunction first, OutputFunction second) {
-            super("modulo", first, second);
+            super("mod", first, second);
         }
 
         @Override

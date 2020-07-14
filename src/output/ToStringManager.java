@@ -1,5 +1,8 @@
 package output;
 
+/**
+ * Manages tools for {@code toString}s and {@link OutputFunction}s
+ */
 public class ToStringManager {
 	/**
 	 * Adds parentheses to {@code function} only if it is an {@link OutputCommutative} or {@link OutputBinary}

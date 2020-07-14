@@ -3,9 +3,19 @@ package output;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * Provides a parent class for all {@link OutputFunction}s of one argument
+ */
 public class OutputUnitary implements OutputFunction {
 
+	/**
+	 * The name of the function
+	 */
 	protected final String functionName;
+
+	/**
+	 * The operand of the function
+	 */
 	protected final OutputFunction operand;
 
 	/**

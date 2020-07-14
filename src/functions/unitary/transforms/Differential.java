@@ -144,7 +144,7 @@ public class Differential extends Transformation {
 
 		@Override
 		public String toLatex() {
-			return "d" + operand;
+			return " d" + operand;
 		}
 
 	}

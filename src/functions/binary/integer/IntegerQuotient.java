@@ -3,6 +3,8 @@ package functions.binary.integer;
 import functions.GeneralFunction;
 import functions.binary.BinaryFunction;
 import functions.special.Constant;
+import output.OutputBinary;
+import output.OutputFunction;
 import tools.ParsingTools;
 
 public class IntegerQuotient extends IntegerBinaryFunction {
@@ -41,5 +43,27 @@ public class IntegerQuotient extends IntegerBinaryFunction {
 
     protected int operate(int first, int second) {
         return first / second;
+    }
+
+    public OutputFunction toOutputFunction() {
+        return new OutputIntegerQuotient(function2.toOutputFunction(), function1.toOutputFunction());
+    }
+
+    private static class OutputIntegerQuotient extends OutputBinary {
+
+        public OutputIntegerQuotient(OutputFunction first, OutputFunction second) {
+            super("integer quotient", first, second);
+        }
+
+        @Override
+        public String toString() {
+            return first + " div " + second;
+        }
+
+        @Override
+        public String toLatex() {
+            return first.toLatex() + " \\text{ div } " + second.toLatex();
+        }
+
     }
 }

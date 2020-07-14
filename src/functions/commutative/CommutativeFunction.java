@@ -2,10 +2,11 @@ package functions.commutative;
 
 import config.Settings;
 import functions.GeneralFunction;
+import functions.Outputable;
 import functions.special.Constant;
 import org.jetbrains.annotations.NotNull;
-import output.OutputFunction;
 import output.OutputCommutative;
+import output.OutputFunction;
 import tools.ArrayTools;
 
 import java.util.*;
@@ -88,7 +89,7 @@ public abstract class CommutativeFunction extends GeneralFunction {
 		return new OutputCommutative(
 				getClass().getSimpleName().toLowerCase(),
 				Arrays.stream(functions)
-						.map(GeneralFunction::toOutputFunction)
+						.map(Outputable::toOutputFunction)
 						.collect(Collectors.toList())
 		);
 	}

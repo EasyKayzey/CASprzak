@@ -3,10 +3,24 @@ package output;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * Provides a parent class for all {@link OutputFunction}s of two arguments
+ */
 public class OutputBinary implements OutputFunction {
 
+	/**
+	 * The name of the function
+	 */
 	protected final String functionName;
+
+	/**
+	 * The first operand of the function
+	 */
 	protected final OutputFunction first;
+
+	/**
+	 * The second operand of the function
+	 */
 	protected final OutputFunction second;
 
 	/**

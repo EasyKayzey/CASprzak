@@ -53,7 +53,7 @@ public class Abs extends PiecewiseFunction {
 
 		@Override
 		public String toLatex() {
-			return "\\left|" + operand.toLatex() + "\\right|";
+			return " \\left| " + operand.toLatex() + " \\right| ";
 		}
 
 	}

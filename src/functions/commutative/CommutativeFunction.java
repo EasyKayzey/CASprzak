@@ -2,8 +2,11 @@ package functions.commutative;
 
 import config.Settings;
 import functions.GeneralFunction;
+import functions.Outputable;
 import functions.special.Constant;
 import org.jetbrains.annotations.NotNull;
+import output.OutputCommutative;
+import output.OutputFunction;
 import tools.ArrayTools;
 
 import java.util.*;
@@ -79,6 +82,16 @@ public abstract class CommutativeFunction extends GeneralFunction {
 			throw new IllegalStateException("Called compareSelf on two equal functions: " + this + ", " + that + ".");
 		} else
 			throw new IllegalCallerException("Illegally called CommutativeFunction.compareSelf on a non-CommutativeFunction.");
+	}
+
+
+	public OutputFunction toOutputFunction() {
+		return new OutputCommutative(
+				getClass().getSimpleName().toLowerCase(),
+				Arrays.stream(functions)
+						.map(Outputable::toOutputFunction)
+						.collect(Collectors.toList())
+		);
 	}
 
 	public GeneralFunction substituteAll(Predicate<? super GeneralFunction> test, Function<? super GeneralFunction, ? extends GeneralFunction> replacer) {

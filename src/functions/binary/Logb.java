@@ -6,9 +6,13 @@ import functions.commutative.Sum;
 import functions.special.Constant;
 import functions.unitary.specialcases.Exp;
 import functions.unitary.specialcases.Ln;
+import output.OutputBinary;
+import output.OutputFunction;
 import tools.DefaultFunctions;
 
 import java.util.Map;
+
+import static output.ToStringManager.maybeParenthesize;
 
 public class Logb extends BinaryFunction {
 	/**
@@ -85,5 +89,27 @@ public class Logb extends BinaryFunction {
 			return new Product(exp.operand, new Logb(function2, DefaultFunctions.E));
 		else
 			return this;
+	}
+
+	public OutputFunction toOutputFunction() {
+		return new OutputLogb(maybeParenthesize(function2.toOutputFunction()), function1.toOutputFunction());
+	}
+
+	private static class OutputLogb extends OutputBinary {
+
+		public OutputLogb(OutputFunction base, OutputFunction power) {
+			super("logb", base, power);
+		}
+
+		@Override
+		public String toString() {
+			return "log_{" + first + "}(" + second + ")";
+		}
+
+		@Override
+		public String toLatex() {
+			return "\\log_{ " + first.toLatex() + " }( " + second.toLatex() + " )";
+		}
+
 	}
 }

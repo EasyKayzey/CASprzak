@@ -4,6 +4,9 @@ import functions.Evaluable;
 import functions.GeneralFunction;
 import functions.special.Variable;
 import functions.unitary.UnitaryFunction;
+import output.OutputFunction;
+import output.OutputString;
+import output.OutputUnitary;
 import tools.exceptions.DerivativeDoesNotExistException;
 
 import java.util.Map;
@@ -122,5 +125,27 @@ public class Differential extends Transformation {
 	 */
 	public GeneralFunction execute() {
 		throw new UnsupportedOperationException("Cannot execute a differential " + this + ".");
+	}
+
+	public OutputFunction toOutputFunction() {
+		return new OutputDifferential(respectTo);
+	}
+
+	private static class OutputDifferential extends OutputUnitary {
+
+		public OutputDifferential(String respectTo) {
+			super("differential", new OutputString(respectTo));
+		}
+
+		@Override
+		public String toString() {
+			return "d" + operand;
+		}
+
+		@Override
+		public String toLatex() {
+			return " d" + operand;
+		}
+
 	}
 }

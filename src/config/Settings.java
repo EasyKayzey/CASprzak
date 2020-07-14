@@ -137,6 +137,21 @@ public class Settings {
 	public static boolean printStackTraces = false;
 
 	/**
+	 * Denotes whether or not inverse simplifications conserve domain and range
+	 */
+	public static boolean enforceDomainAndRange = false;
+
+	/**
+	 * Denotes whether or not multiplication should be delimited by asterisks (as in {@code 2 * x}) or not (as in {@code 2x})
+	 */
+	public static boolean asteriskMultiplication = true;
+
+	/**
+	 * Denotes whether or not constants close to integers are printed as integers (zero not included)
+	 */
+	public static boolean truncateNearIntegers = true;
+
+	/**
 	 * Denotes whether or not combinatorial operations should be parsed. This setting can only be changed through the config; modifying it during runtime will not do anything.
 	 */
 	public static boolean doCombinatorics = true;
@@ -150,11 +165,6 @@ public class Settings {
 	 * Denotes the default implementation of {@link Factorial} to be used.
 	 */
 	public static FactorialType defaultFactorial = FactorialType.RECURSIVE;
-
-	/**
-	 * Denotes whether or not inverse simplifications conserve domain and range.
-	 */
-	public static boolean enforceDomainAndRange = false;
 
 
 	/**
@@ -202,6 +212,8 @@ public class Settings {
 			case "distributeFunctions"					    -> distributeFunctions = ParsingTools.parseBoolean(value);
 			case "printStackTraces"						    -> printStackTraces = ParsingTools.parseBoolean(value);
 			case "enforceDomainAndRange"					-> enforceDomainAndRange = ParsingTools.parseBoolean(value);
+			case "asteriskMultiplication"					-> asteriskMultiplication = ParsingTools.parseBoolean(value);
+			case "truncateNearIntegers" 					-> truncateNearIntegers = ParsingTools.parseBoolean(value);
 			case "doCombinatorics"							-> doCombinatorics = ParsingTools.parseBoolean(value);
 			case "defaultSolverType" 						-> defaultSolverType = SolverType.valueOf(value);
 			case "defaultFactorial" 						-> defaultFactorial = FactorialType.valueOf(value);

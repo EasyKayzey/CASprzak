@@ -5,6 +5,8 @@ import functions.GeneralFunction;
 import functions.Invertible;
 import functions.special.Constant;
 import org.jetbrains.annotations.NotNull;
+import output.OutputFunction;
+import output.OutputUnitary;
 
 import java.lang.reflect.Constructor;
 import java.util.Iterator;
@@ -101,6 +103,10 @@ public abstract class UnitaryFunction extends GeneralFunction {
 		return (this.operand.compareTo(((UnitaryFunction) that).operand));
 	}
 
+
+	public OutputFunction toOutputFunction() {
+		return new OutputUnitary(getClass().getSimpleName().toLowerCase(),  operand.toOutputFunction());
+	}
 
 	/**
 	 * Returns a {@link UnitaryFunction} of the given type and of the given operand

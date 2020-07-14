@@ -3,6 +3,8 @@ package functions.binary;
 import functions.GeneralFunction;
 import functions.special.Constant;
 import org.jetbrains.annotations.NotNull;
+import output.OutputFunction;
+import output.OutputBinary;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -86,6 +88,10 @@ public abstract class BinaryFunction extends GeneralFunction {
 				throw new IllegalStateException("Called compareSelf on two equal functions: " + this + ", " + that + ".");
 		else
 			throw new IllegalCallerException("Illegally called BinaryFunction.compareSelf on a non-BinaryFunction.");
+	}
+
+	public OutputFunction toOutputFunction() {
+		return new OutputBinary(getClass().getSimpleName().toLowerCase(), function2.toOutputFunction(), function1.toOutputFunction());
 	}
 
 	/**

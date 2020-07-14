@@ -3,7 +3,11 @@ package functions.binary.integer;
 import functions.GeneralFunction;
 import functions.binary.BinaryFunction;
 import functions.special.Constant;
+import output.OutputBinary;
+import output.OutputFunction;
 import tools.ParsingTools;
+
+import static output.ToStringManager.maybeParenthesize;
 
 public class Modulo extends IntegerBinaryFunction {
     /**
@@ -40,5 +44,29 @@ public class Modulo extends IntegerBinaryFunction {
 
     protected int operate(int first, int second) {
         return first % second;
+    }
+
+    public OutputFunction toOutputFunction() {
+        OutputFunction first = function2.toOutputFunction();
+        OutputFunction second = function1.toOutputFunction();
+        return new OutputModulo(maybeParenthesize(first), maybeParenthesize(second));
+    }
+
+    private static class OutputModulo extends OutputBinary {
+
+        public OutputModulo(OutputFunction first, OutputFunction second) {
+            super("mod", first, second);
+        }
+
+        @Override
+        public String toString() {
+            return first + " mod " + second;
+        }
+
+        @Override
+        public String toLatex() {
+            return first.toLatex() + " \\text{ mod } " + second.toLatex();
+        }
+
     }
 }

@@ -3,7 +3,11 @@ package functions.binary.integer;
 import functions.GeneralFunction;
 import functions.binary.BinaryFunction;
 import functions.special.Constant;
+import output.OutputBinary;
+import output.OutputFunction;
 import tools.ParsingTools;
+
+import static output.ToStringManager.maybeParenthesize;
 
 public class IntegerQuotient extends IntegerBinaryFunction {
     /**
@@ -41,5 +45,29 @@ public class IntegerQuotient extends IntegerBinaryFunction {
 
     protected int operate(int first, int second) {
         return first / second;
+    }
+
+    public OutputFunction toOutputFunction() {
+        OutputFunction first = function2.toOutputFunction();
+        OutputFunction second = function1.toOutputFunction();
+        return new OutputIntegerQuotient(maybeParenthesize(first), maybeParenthesize(second));
+    }
+
+    private static class OutputIntegerQuotient extends OutputBinary {
+
+        public OutputIntegerQuotient(OutputFunction first, OutputFunction second) {
+            super("intdiv", first, second);
+        }
+
+        @Override
+        public String toString() {
+            return first + " div " + second;
+        }
+
+        @Override
+        public String toLatex() {
+            return first.toLatex() + " \\text{ div } " + second.toLatex();
+        }
+
     }
 }

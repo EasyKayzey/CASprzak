@@ -5,11 +5,29 @@ import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
+/**
+ * Provides a parent class for all {@link OutputFunction}s of any number of arguments
+ */
 public class OutputCommutative implements OutputFunction {
 
+	/**
+	 * The name of the function
+	 */
 	protected final String functionName;
+
+	/**
+	 * A {@code Collector} for generating output text strings
+	 */
 	protected final Collector<CharSequence, ?, String> normalJoiningCollector;
+
+	/**
+	 * A {@code Collector} for generating output {@code LaTeX} strings
+	 */
 	protected final Collector<CharSequence, ?, String> latexJoiningCollector;
+
+	/**
+	 * The operands of the function
+	 */
 	protected final List<OutputFunction> operands;
 
 	/**

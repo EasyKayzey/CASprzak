@@ -33,7 +33,7 @@ public class Ceil extends PiecewiseFunction{
     }
 
     public OutputFunction toOutputFunction() {
-        return new Ceil.OutputCeil(operand.toOutputFunction());
+        return new OutputCeil(operand.toOutputFunction());
     }
 
     private static class OutputCeil extends OutputUnitary {

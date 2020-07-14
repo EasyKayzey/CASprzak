@@ -33,7 +33,7 @@ public class Floor extends PiecewiseFunction{
     }
 
     public OutputFunction toOutputFunction() {
-        return new Floor.OutputFloor(operand.toOutputFunction());
+        return new OutputFloor(operand.toOutputFunction());
     }
 
     private static class OutputFloor extends OutputUnitary {

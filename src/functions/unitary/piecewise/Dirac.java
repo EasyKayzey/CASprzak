@@ -36,7 +36,7 @@ public class Dirac extends PiecewiseFunction {
 	}
 
 	public OutputFunction toOutputFunction() {
-		return new Dirac.OutputDirac(operand.toOutputFunction());
+		return new OutputDirac(operand.toOutputFunction());
 	}
 
 	private static class OutputDirac extends OutputUnitary {

@@ -144,7 +144,7 @@ public class Settings {
 	/**
 	 * Denotes whether or not multiplication should be delimited by asterisks (as in `2 * x`) or not (as in `2x`)
 	 */
-	public static boolean asteriskMultiplication = false;
+	public static boolean asteriskMultiplication = true;
 
 	/**
 	 * Denotes whether or not constants close to integers are printed as integers (zero not included)

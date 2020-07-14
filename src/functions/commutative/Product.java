@@ -242,7 +242,7 @@ public class Product extends CommutativeFunction {
 					operands.stream()
 							.map(Outputable::toOutputFunction)
 							.collect(Collectors.toList()),
-					Settings.asteriskMultiplication ? Collectors.joining(" * ") : Collectors.joining(),
+					Settings.asteriskMultiplication ? Collectors.joining( "*" ) : Collectors.joining(),
 					Settings.asteriskMultiplication ? Collectors.joining(" * ") : Collectors.joining()
 			);
 			pairedOperands = operands.stream()

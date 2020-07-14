@@ -3,26 +3,29 @@
 ### Major Additions 
  - Integer division (with `//`), modulo, lcm, and gcd operations
  - Floor, ceiling, rounding, and random operations
- - Add new abstract classes for new integer operations
- - Add settings to enforce functions' domain and range when simplifying using inverse functions
- - Add array indexing to retrieve values from methods like `solve`
+ - New abstract classes for new integer operations
+ - Settings to enforce functions' domain and range when simplifying using inverse functions
+ - Array indexing to retrieve values from methods like `solve`
 
 ### Minor Additions
  - Make parsing errors more descriptive
  - Port parsing to use operation maps rather than operation lists
- - Add new test class for integer operations
- - Change `equals` to check if two functions are exactly equal and implement `equalsSimplified` to check if they are equal when simplified
- - Add `DerivativeDoesNotExistException` for operations with no derivative
- - Make `substitute`/`sub` more powerful in the keyword interface by allowing the substitution of multiple expressions simultaneously
- - Make `def` and `sub` in automatically perform a `minimalSimplify`
- - Add support for `_` in `evaluate` (used as `eval x^2 x=_` when `_` is a  `Double`)
- - Add better handling for `ArrayIndexOutOfBoundsExceptions` in CommandUI
- - Add `err` command to improve error handling
- - Add `version` command
- - Add `reset` command
+ - New test class for integer operations
+ - Many new exceptions for improved error handling
+ - Support for `_` in `evaluate` (used as `eval x^2 x=_` when `_` is a `Double`)
+ - Better handling of `ArrayIndexOutOfBoundsExceptions` in the keyword interface
+ - `err` command to improve error reporting
+ - `version` command
+ - `reset` command
  
  ### Changes
- - Restricted variable and function names to the regex `[a-zA-Z[^\x00-\x7F]]|\\[a-zA-Z[^\x00-\x7F]][\w.'[^\x00-\x7F]]*`
+ - Restrict variable and function names to a regex of valid names to improve multi-character name support
+ - Change `equals` to check if two functions are exactly equal and implement `equalsSimplified` to check if they are equal when simplified
+ - Make `substitute`/`sub` more powerful in the keyword interface by allowing the substitution of multiple expressions simultaneously
+ - Make `def` and `sub` in automatically perform a `minimalSimplify`
+ - Move `SettingsParser` functionality directly to `Settings`
+ - Rename `SpecialFunction` to `EndpointFunction`
+ - Improve exit logic from all interfaces
  
  ### Bugfixes
  - Fix `toInteger` error message using the wrong margin from `Settings`
@@ -31,6 +34,7 @@
  - Fix parsing of non-escaped expressions with spaces such as `1 + sin(x)`
  - Fix `defconstant` not LaTeX-escaping constant names
  - Add an exception when user attempts to use nested quotes in keyword interface
+ - Fix division by decimals such as `1/.2` not working properly
  
 ## v0.1.2
 ### Bugfixes

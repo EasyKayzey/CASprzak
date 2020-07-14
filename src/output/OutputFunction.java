@@ -20,8 +20,8 @@ public interface OutputFunction {
 	Collection<OutputFunction> getOperands();
 
 	/**
-	 * Returns a string representation of the function tree
-	 * @return a string representation of the function tree
+	 * Returns a text representation of the function tree
+	 * @return a text representation of the function tree
 	 */
 	String toString();
 

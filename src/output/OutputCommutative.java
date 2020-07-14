@@ -6,7 +6,7 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 /**
- * Provides a parent class for all {@link OutputFunction}s of any number of arguments
+ * Provides a parent class for all {@link OutputFunction}s of any number of commutative arguments
  */
 public class OutputCommutative implements OutputFunction {
 

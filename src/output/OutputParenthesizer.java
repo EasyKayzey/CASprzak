@@ -3,8 +3,14 @@ package output;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * An {@link OutputFunction} that simply parenthesizes its operand
+ */
 public class OutputParenthesizer implements OutputFunction {
 
+	/**
+	 * The operand to be parenthesized
+	 */
 	protected final OutputFunction operand;
 
 	/**

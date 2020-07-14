@@ -56,7 +56,7 @@ public class IntegerQuotient extends IntegerBinaryFunction {
     private static class OutputIntegerQuotient extends OutputBinary {
 
         public OutputIntegerQuotient(OutputFunction first, OutputFunction second) {
-            super("integer quotient", first, second);
+            super("intdiv", first, second);
         }
 
         @Override

@@ -132,7 +132,7 @@ public class Sum extends CommutativeFunction {
 		@Override
 		public String toLatex() {
 			return pairedOperands.stream()
-					.map(e -> e.getSecond() ? "\\left(" + e.getFirst().toLatex() + "\\right)" : e.getFirst().toLatex())
+					.map(e -> e.getSecond() ? " \\left( " + e.getFirst().toLatex() + " \\right) " : e.getFirst().toLatex())
 					.collect(latexJoiningCollector);
 		}
 

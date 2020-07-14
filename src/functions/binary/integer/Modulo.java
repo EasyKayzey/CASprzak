@@ -3,6 +3,8 @@ package functions.binary.integer;
 import functions.GeneralFunction;
 import functions.binary.BinaryFunction;
 import functions.special.Constant;
+import output.OutputBinary;
+import output.OutputFunction;
 import tools.ParsingTools;
 
 public class Modulo extends IntegerBinaryFunction {
@@ -40,5 +42,27 @@ public class Modulo extends IntegerBinaryFunction {
 
     protected int operate(int first, int second) {
         return first % second;
+    }
+
+    public OutputFunction toOutputFunction() {
+        return new OutputModulo(function2.toOutputFunction(), function1.toOutputFunction());
+    }
+
+    private static class OutputModulo extends OutputBinary {
+
+        public OutputModulo(OutputFunction first, OutputFunction second) {
+            super("modulo", first, second);
+        }
+
+        @Override
+        public String toString() {
+            return first + " mod " + second;
+        }
+
+        @Override
+        public String toLatex() {
+            return first.toLatex() + " \\text{ mod } " + second.toLatex();
+        }
+
     }
 }

@@ -143,7 +143,7 @@ public class Integral extends Transformation {
 	}
 
 	public OutputFunction toOutputFunction() {
-		return new Integral.OutputIntegral(operand.toOutputFunction(), new OutputString(respectTo));
+		return new OutputIntegral(operand.toOutputFunction(), new OutputString(respectTo));
 	}
 
 	private static class OutputIntegral extends OutputBinary {
@@ -159,7 +159,7 @@ public class Integral extends Transformation {
 
 		@Override
 		public String toLatex() {
-			return "\\int \\left( " + first.toLatex() + "\\right) \\, d" + second;
+			return " \\int \\left( " + first.toLatex() + "\\right) \\ d" + second;
 		}
 
 	}

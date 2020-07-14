@@ -88,7 +88,7 @@ public class PartialDerivative extends Transformation {
 	}
 
 	public OutputFunction toOutputFunction() {
-		return new PartialDerivative.OutputPartialDerivative(operand.toOutputFunction(), new OutputString(respectTo));
+		return new OutputPartialDerivative(operand.toOutputFunction(), new OutputString(respectTo));
 	}
 
 	private static class OutputPartialDerivative extends OutputBinary {
@@ -104,7 +104,7 @@ public class PartialDerivative extends Transformation {
 
 		@Override
 		public String toLatex() {
-			return "\\frac{\\partial}{\\partial " + second.toLatex() + "} \\left( " + first.toLatex() + " \\right)";
+			return " \\frac{\\partial}{\\partial " + second.toLatex() + "} \\left( " + first.toLatex() + " \\right) ";
 		}
 
 	}

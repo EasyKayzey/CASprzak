@@ -16,7 +16,9 @@ public class LatexReplacer {
 
 	private LatexReplacer(){}
 
-	//TODO document
+	/**
+	 * Contains all encoding {@code Pattern}s and their replacement characters
+	 */
 	public static final Map<Pattern, String> encodings = new HashMap<>() {
 		{
 			put(Pattern.compile("\\\\Alpha"			+ "(?![\\w.'[^\\x00-\\x7F]])"), "Α");
@@ -90,17 +92,17 @@ public class LatexReplacer {
 	public static String encodeAll(String input) {
 		if (!Settings.enforceEscapedFunctions)
 			input = LatexReplacer.addEscapes(input);
-		input = LatexReplacer.encodeGreek(input);
+		input = LatexReplacer.encodeMappings(input);
 		return input;
 	}
 
 	/**
-	 * Replaces LaTeX-escaped Greek letters in a string with their actual letter characters preceded by a space,
+	 * Replaces LaTeX-escaped encodings in a string with their actual special characters,
 	 * as long as they aren't followed by an allowed name character
 	 * @param input a LaTeX-escaped string
 	 * @return the encoded string
 	 */
-	public static String encodeGreek(String input) {
+	public static String encodeMappings(String input) {
 		String[] splitInput = splitEscapes.split(input);
 		return Arrays.stream(splitInput)
 				.map(ReplacementContainer::encode)

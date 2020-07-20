@@ -139,6 +139,7 @@ public class LatexReplacer {
 		public void replace(Map.Entry<Pattern, String> entry) {
 			string = entry.getKey().matcher(string).replaceAll(entry.getValue());
 		}
+
 	}
 
 }

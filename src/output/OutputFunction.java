@@ -32,8 +32,9 @@ public interface OutputFunction {
 	String toLatex();
 
 	/**
-	 * Returns true if {@code this} equals {@code that}
-	 * @return true if {@code this} equals {@code that}
+	 * Compares two OutputFunctions
+	 * @param that the object to be compared against
+	 * @return true if they're equal
 	 */
 	boolean equals(OutputFunction that);
 

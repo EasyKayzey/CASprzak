@@ -16,7 +16,7 @@ public class LatexTest {
 
 	@Test
 	void testVar() {
-		GeneralFunction test = FunctionParser.parseInfix("\\pi\\Gamma");
+		GeneralFunction test = FunctionParser.parseInfix("\\pi \\Gamma");
 		assertEquals(10, test.evaluate(Map.of("Γ", 3.2)), .3);
 	}
 

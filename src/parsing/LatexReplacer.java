@@ -103,14 +103,7 @@ public class LatexReplacer {
 	public static String encodeGreek(String input) {
 		String[] splitInput = splitEscapes.split(input);
 		return Arrays.stream(splitInput)
-				.map(replacementContainer::new)
-				.map(
-						s -> {
-							encodings.entrySet()
-									.forEach(s::replace);
-							return s.string;
-						}
-				)
+				.map(ReplacementContainer::encode)
 				.collect(Collectors.joining());
 	}
 
@@ -128,12 +121,19 @@ public class LatexReplacer {
 		return input;
 	}
 
-	private static class replacementContainer {
+	private static class ReplacementContainer {
 
 		public String string;
 
-		public replacementContainer(String string) {
+		public ReplacementContainer(String string) {
 			this.string = string;
+		}
+
+		public static String encode(String string) {
+			ReplacementContainer container = new ReplacementContainer(string);
+			encodings.entrySet()
+					.forEach(container::replace);
+			return container.string;
 		}
 
 		public void replace(Map.Entry<Pattern, String> entry) {

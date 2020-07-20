@@ -414,7 +414,7 @@ public class KeywordInterface {
 	private static String reset() {
 		clearFunctions();
 		Constant.resetConstants();
-		return "Reset done";
+		return "Reset done.";
 	}
 
 	private static String printError() {

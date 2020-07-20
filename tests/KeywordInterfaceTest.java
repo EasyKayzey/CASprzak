@@ -159,5 +159,18 @@ public class KeywordInterfaceTest {
         GeneralFunction test = (GeneralFunction) KeywordInterface.safeKeywords("def \\trig (\\sin(\\number1 * \\theta))^2 + (\\cos(\\number2 * \\theta))^2 ");
         assertEquals(new Sum(new Pow(DefaultFunctions.TWO, new Sin(new Product(new Variable("\\number1"), new Variable("θ")))), new Pow(DefaultFunctions.TWO, new Cos(new Product(new Variable("\\number2"), new Variable("θ"))))), test);
     }
+
+    @Test
+    void gammaThing1() {
+        GeneralFunction test = (GeneralFunction) KeywordInterface.safeKeywords("d/d\\Gamma[\\Gamma]");
+        assertEquals(new Constant(1), test);
+    }
+
+    @Test
+    void gammaThing2() {
+        double test = (double) KeywordInterface.safeKeywords("eval \\Gamma \\Gamma=1");
+        assertEquals(1, test);
+    }
+
 }
 

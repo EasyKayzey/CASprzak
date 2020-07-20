@@ -1,11 +1,11 @@
 # Changelog
 # v0.2.1
 ### Minor Additions
- - Add 'v' to the version String from the `version` command
- - Add `v` as another way to call `version` in KeywordInterface
- - Add a period to the end of 'Reset done.'
+ - Add 'v' to the version string of the `version` command
+ - Add `v` alias for `version` in KeywordInterface
 ### Bugfixes
  - Fix malformed whitespace in the `help` command
+ 
 # v0.2.0
 ### Major Additions 
  - Integer division (with `//`), modulo, lcm, and gcd operations

@@ -38,4 +38,10 @@ public interface OutputFunction {
 	 */
 	boolean equals(OutputFunction that);
 
+	/**
+	 * Returns a hash code value for this object
+	 * @return a hash code value for this object
+	 */
+	int hashCode();
+
 }

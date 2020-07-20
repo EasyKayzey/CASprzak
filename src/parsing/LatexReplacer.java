@@ -2,9 +2,9 @@ package parsing;
 
 import config.Settings;
 
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import static parsing.OperationMaps.binaryOperations;
 import static parsing.OperationMaps.unitaryOperations;
@@ -16,64 +16,71 @@ public class LatexReplacer {
 
 	private LatexReplacer(){}
 
-	private static final Pattern A   = Pattern.compile("\\\\Alpha" 			+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern a   = Pattern.compile("\\\\alpha" 			+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern B   = Pattern.compile("\\\\Beta" 			+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern b   = Pattern.compile("\\\\beta" 			+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern G   = Pattern.compile("\\\\Gamma" 			+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern g   = Pattern.compile("\\\\gamma" 			+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern D   = Pattern.compile("\\\\Delta" 			+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern d   = Pattern.compile("\\\\delta" 			+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern E   = Pattern.compile("\\\\Epsilon" 		+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern e   = Pattern.compile("\\\\epsilon" 		+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern e2  = Pattern.compile("\\\\varepsilon" 	+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern Z   = Pattern.compile("\\\\Zeta" 			+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern z   = Pattern.compile("\\\\zeto" 			+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern H   = Pattern.compile("\\\\Eta" 			+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern h   = Pattern.compile("\\\\eta" 			+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern TH  = Pattern.compile("\\\\Theta" 			+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern th  = Pattern.compile("\\\\theta" 			+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern th2 = Pattern.compile("\\\\vartheta" 		+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern I   = Pattern.compile("\\\\Iota" 			+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern i   = Pattern.compile("\\\\iota" 			+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern K   = Pattern.compile("\\\\Kappa" 			+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern k   = Pattern.compile("\\\\kappa" 			+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern k2  = Pattern.compile("\\\\varkappa" 		+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern L   = Pattern.compile("\\\\Lambda" 		+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern l   = Pattern.compile("\\\\lambda" 		+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern M   = Pattern.compile("\\\\Mu" 			+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern m   = Pattern.compile("\\\\mu" 			+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern N   = Pattern.compile("\\\\Nu" 			+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern n   = Pattern.compile("\\\\nu" 			+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern CH  = Pattern.compile("\\\\Xi" 			+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern ch  = Pattern.compile("\\\\xi" 			+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern O   = Pattern.compile("\\\\Omicron" 		+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern o   = Pattern.compile("\\\\omicron" 		+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern P   = Pattern.compile("\\\\Pi" 			+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern p   = Pattern.compile("\\\\pi" 			+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern p2  = Pattern.compile("\\\\varpi" 			+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern R   = Pattern.compile("\\\\Rho" 			+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern r   = Pattern.compile("\\\\rho" 			+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern r2  = Pattern.compile("\\\\varrho" 		+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern S   = Pattern.compile("\\\\Sigma" 			+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern s   = Pattern.compile("\\\\sigma" 			+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern s2  = Pattern.compile("\\\\varsigma" 		+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern T   = Pattern.compile("\\\\Tau" 			+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern t   = Pattern.compile("\\\\tau" 			+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern U   = Pattern.compile("\\\\Upsilon" 		+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern u   = Pattern.compile("\\\\upsilon" 		+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern PH  = Pattern.compile("\\\\Phi" 			+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern ph  = Pattern.compile("\\\\phi" 			+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern ph2 = Pattern.compile("\\\\varphi" 		+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern X   = Pattern.compile("\\\\Chi" 			+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern x   = Pattern.compile("\\\\chi" 			+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern PS  = Pattern.compile("\\\\Psi" 			+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern ps  = Pattern.compile("\\\\psi" 			+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern W   = Pattern.compile("\\\\Omega" 			+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern w   = Pattern.compile("\\\\omega" 			+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern hb  = Pattern.compile("\\\\hbar" 			+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern par = Pattern.compile("\\\\par(tial)?"		+ "(?![\\w.'[^\\x00-\\x7F]])");
-	private static final Pattern dx  = Pattern.compile("(?<![\\\\/])(?=d[a-ce-zA-Z](?![a-zA-Z]))");
+	//TODO document
+	public static final Map<Pattern, String> encodings = new HashMap<>() {
+		{
+			put(Pattern.compile("\\\\Alpha"			+ "(?![\\w.'[^\\x00-\\x7F]])"), "Α");
+			put(Pattern.compile("\\\\alpha"			+ "(?![\\w.'[^\\x00-\\x7F]])"), "α");
+			put(Pattern.compile("\\\\Beta"			+ "(?![\\w.'[^\\x00-\\x7F]])"), "Β");
+			put(Pattern.compile("\\\\beta"			+ "(?![\\w.'[^\\x00-\\x7F]])"), "β");
+			put(Pattern.compile("\\\\Gamma"			+ "(?![\\w.'[^\\x00-\\x7F]])"), "Γ");
+			put(Pattern.compile("\\\\gamma"			+ "(?![\\w.'[^\\x00-\\x7F]])"), "γ");
+			put(Pattern.compile("\\\\Delta"			+ "(?![\\w.'[^\\x00-\\x7F]])"), "Δ");
+			put(Pattern.compile("\\\\delta"			+ "(?![\\w.'[^\\x00-\\x7F]])"), "δ");
+			put(Pattern.compile("\\\\Epsilon"		+ "(?![\\w.'[^\\x00-\\x7F]])"), "Ε");
+			put(Pattern.compile("\\\\epsilon"		+ "(?![\\w.'[^\\x00-\\x7F]])"), "ϵ");
+			put(Pattern.compile("\\\\varepsilon"	+ "(?![\\w.'[^\\x00-\\x7F]])"), "ε");
+			put(Pattern.compile("\\\\Zeta"			+ "(?![\\w.'[^\\x00-\\x7F]])"), "Ζ");
+			put(Pattern.compile("\\\\zeto"			+ "(?![\\w.'[^\\x00-\\x7F]])"), "ζ");
+			put(Pattern.compile("\\\\Eta"			+ "(?![\\w.'[^\\x00-\\x7F]])"), "Η");
+			put(Pattern.compile("\\\\eta"			+ "(?![\\w.'[^\\x00-\\x7F]])"), "η");
+			put(Pattern.compile("\\\\Theta"			+ "(?![\\w.'[^\\x00-\\x7F]])"), "Θ");
+			put(Pattern.compile("\\\\theta"			+ "(?![\\w.'[^\\x00-\\x7F]])"), "θ");
+			put(Pattern.compile("\\\\vartheta"		+ "(?![\\w.'[^\\x00-\\x7F]])"), "ϑ");
+			put(Pattern.compile("\\\\Iota"			+ "(?![\\w.'[^\\x00-\\x7F]])"), "Ι");
+			put(Pattern.compile("\\\\iota"			+ "(?![\\w.'[^\\x00-\\x7F]])"), "ι");
+			put(Pattern.compile("\\\\Kappa"			+ "(?![\\w.'[^\\x00-\\x7F]])"), "Κ");
+			put(Pattern.compile("\\\\kappa"			+ "(?![\\w.'[^\\x00-\\x7F]])"), "κ");
+			put(Pattern.compile("\\\\varkappa"		+ "(?![\\w.'[^\\x00-\\x7F]])"), "ϰ");
+			put(Pattern.compile("\\\\Lambda"		+ "(?![\\w.'[^\\x00-\\x7F]])"), "Λ");
+			put(Pattern.compile("\\\\lambda"		+ "(?![\\w.'[^\\x00-\\x7F]])"), "λ");
+			put(Pattern.compile("\\\\Mu"			+ "(?![\\w.'[^\\x00-\\x7F]])"), "Μ");
+			put(Pattern.compile("\\\\mu"			+ "(?![\\w.'[^\\x00-\\x7F]])"), "μ");
+			put(Pattern.compile("\\\\Nu"			+ "(?![\\w.'[^\\x00-\\x7F]])"), "Ν");
+			put(Pattern.compile("\\\\nu"			+ "(?![\\w.'[^\\x00-\\x7F]])"), "ν");
+			put(Pattern.compile("\\\\Xi"			+ "(?![\\w.'[^\\x00-\\x7F]])"), "Ξ");
+			put(Pattern.compile("\\\\xi"			+ "(?![\\w.'[^\\x00-\\x7F]])"), "ξ");
+			put(Pattern.compile("\\\\Omicron"		+ "(?![\\w.'[^\\x00-\\x7F]])"), "Ο");
+			put(Pattern.compile("\\\\omicron"		+ "(?![\\w.'[^\\x00-\\x7F]])"), "ο");
+			put(Pattern.compile("\\\\Pi"			+ "(?![\\w.'[^\\x00-\\x7F]])"), "Π");
+			put(Pattern.compile("\\\\pi"			+ "(?![\\w.'[^\\x00-\\x7F]])"), "π");
+			put(Pattern.compile("\\\\varpi"			+ "(?![\\w.'[^\\x00-\\x7F]])"), "ϖ");
+			put(Pattern.compile("\\\\Rho"			+ "(?![\\w.'[^\\x00-\\x7F]])"), "Ρ");
+			put(Pattern.compile("\\\\rho"			+ "(?![\\w.'[^\\x00-\\x7F]])"), "ρ");
+			put(Pattern.compile("\\\\varrho"		+ "(?![\\w.'[^\\x00-\\x7F]])"), "ϱ");
+			put(Pattern.compile("\\\\Sigma"			+ "(?![\\w.'[^\\x00-\\x7F]])"), "Σ");
+			put(Pattern.compile("\\\\sigma"			+ "(?![\\w.'[^\\x00-\\x7F]])"), "σ");
+			put(Pattern.compile("\\\\varsigma"		+ "(?![\\w.'[^\\x00-\\x7F]])"), "ς");
+			put(Pattern.compile("\\\\Tau"			+ "(?![\\w.'[^\\x00-\\x7F]])"), "Τ");
+			put(Pattern.compile("\\\\tau"			+ "(?![\\w.'[^\\x00-\\x7F]])"), "τ");
+			put(Pattern.compile("\\\\Upsilon"		+ "(?![\\w.'[^\\x00-\\x7F]])"), "Υ");
+			put(Pattern.compile("\\\\upsilon"		+ "(?![\\w.'[^\\x00-\\x7F]])"), "υ");
+			put(Pattern.compile("\\\\Phi"			+ "(?![\\w.'[^\\x00-\\x7F]])"), "Φ");
+			put(Pattern.compile("\\\\phi"			+ "(?![\\w.'[^\\x00-\\x7F]])"), "φ");
+			put(Pattern.compile("\\\\varphi"		+ "(?![\\w.'[^\\x00-\\x7F]])"), "ϕ");
+			put(Pattern.compile("\\\\Chi"			+ "(?![\\w.'[^\\x00-\\x7F]])"), "Χ");
+			put(Pattern.compile("\\\\chi"			+ "(?![\\w.'[^\\x00-\\x7F]])"), "χ");
+			put(Pattern.compile("\\\\Psi"			+ "(?![\\w.'[^\\x00-\\x7F]])"), "Ψ");
+			put(Pattern.compile("\\\\psi"			+ "(?![\\w.'[^\\x00-\\x7F]])"), "ψ");
+			put(Pattern.compile("\\\\Omega"			+ "(?![\\w.'[^\\x00-\\x7F]])"), "Ω");
+			put(Pattern.compile("\\\\omega"			+ "(?![\\w.'[^\\x00-\\x7F]])"), "ω");
+			put(Pattern.compile("\\\\hbar"			+ "(?![\\w.'[^\\x00-\\x7F]])"), "ħ");
+			put(Pattern.compile("\\\\par(tial)?"	+ "(?![\\w.'[^\\x00-\\x7F]])"), "∂");
+		}
+	};
+	
+	private static final Pattern dx = Pattern.compile("(?<![\\\\/])(?=d[a-ce-zA-Z](?![a-zA-Z]))");
+	private static final Pattern splitEscapes = Pattern.compile("(?=\\\\)");
 
 	/**
 	 * Performs all of the methods in this class on the input according to the settings in {@link Settings}
@@ -94,64 +101,18 @@ public class LatexReplacer {
 	 * @return the encoded string
 	 */
 	public static String encodeGreek(String input) {
-		input = A  .matcher(input).replaceAll("Α");
-		input = a  .matcher(input).replaceAll("α");
-		input = B  .matcher(input).replaceAll("Β");
-		input = b  .matcher(input).replaceAll("β");
-		input = G  .matcher(input).replaceAll("Γ");
-		input = g  .matcher(input).replaceAll("γ");
-		input = D  .matcher(input).replaceAll("Δ");
-		input = d  .matcher(input).replaceAll("δ");
-		input = E  .matcher(input).replaceAll("Ε");
-		input = e  .matcher(input).replaceAll("ϵ");
-		input = e2 .matcher(input).replaceAll("ε");
-		input = Z  .matcher(input).replaceAll("Ζ");
-		input = z  .matcher(input).replaceAll("ζ");
-		input = H  .matcher(input).replaceAll("Η");
-		input = h  .matcher(input).replaceAll("η");
-		input = TH .matcher(input).replaceAll("Θ");
-		input = th .matcher(input).replaceAll("θ");
-		input = th2.matcher(input).replaceAll("ϑ");
-		input = I  .matcher(input).replaceAll("Ι");
-		input = i  .matcher(input).replaceAll("ι");
-		input = K  .matcher(input).replaceAll("Κ");
-		input = k  .matcher(input).replaceAll("κ");
-		input = k2 .matcher(input).replaceAll("ϰ");
-		input = L  .matcher(input).replaceAll("Λ");
-		input = l  .matcher(input).replaceAll("λ");
-		input = M  .matcher(input).replaceAll("Μ");
-		input = m  .matcher(input).replaceAll("μ");
-		input = N  .matcher(input).replaceAll("Ν");
-		input = n  .matcher(input).replaceAll("ν");
-		input = CH .matcher(input).replaceAll("Ξ");
-		input = ch .matcher(input).replaceAll("ξ");
-		input = O  .matcher(input).replaceAll("Ο");
-		input = o  .matcher(input).replaceAll("ο");
-		input = P  .matcher(input).replaceAll("Π");
-		input = p  .matcher(input).replaceAll("π");
-		input = p2 .matcher(input).replaceAll("ϖ");
-		input = R  .matcher(input).replaceAll("Ρ");
-		input = r  .matcher(input).replaceAll("ρ");
-		input = r2 .matcher(input).replaceAll("ϱ");
-		input = S  .matcher(input).replaceAll("Σ");
-		input = s  .matcher(input).replaceAll("σ");
-		input = s2 .matcher(input).replaceAll("ς");
-		input = T  .matcher(input).replaceAll("Τ");
-		input = t  .matcher(input).replaceAll("τ");
-		input = U  .matcher(input).replaceAll("Υ");
-		input = u  .matcher(input).replaceAll("υ");
-		input = PH .matcher(input).replaceAll("Φ");
-		input = ph .matcher(input).replaceAll("φ");
-		input = ph2.matcher(input).replaceAll("ϕ");
-		input = X  .matcher(input).replaceAll("Χ");
-		input = x  .matcher(input).replaceAll("χ");
-		input = PS .matcher(input).replaceAll("Ψ");
-		input = ps .matcher(input).replaceAll("ψ");
-		input = W  .matcher(input).replaceAll("Ω");
-		input = w  .matcher(input).replaceAll("ω");
-		input = hb .matcher(input).replaceAll("ħ");
-		input = par.matcher(input).replaceAll("∂");
-		return input;
+		String[] splitInput = splitEscapes.split(input);
+		System.out.println(Arrays.toString(splitInput));
+		return Arrays.stream(splitInput)
+				.parallel()
+				.map(
+						s -> {
+							for (Map.Entry<Pattern, String> e : encodings.entrySet())
+								s = e.getKey().matcher(s).replaceAll(e.getValue());
+							return s;
+						}
+				)
+				.collect(Collectors.joining());
 	}
 
 	/**

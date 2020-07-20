@@ -1,7 +1,7 @@
-import functions.GeneralFunction;
+import show.ezkz.casprzak.core.functions.GeneralFunction;
 import org.junit.jupiter.api.Test;
-import parsing.FunctionParser;
-import tools.PolynomialTools;
+import show.ezkz.casprzak.parsing.FunctionParser;
+import show.ezkz.casprzak.core.tools.PolynomialTools;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;

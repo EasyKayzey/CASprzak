@@ -1,12 +1,12 @@
-import functions.endpoint.Variable;
+import show.ezkz.casprzak.core.functions.endpoint.Variable;
 import org.junit.jupiter.api.Test;
-import parsing.FunctionParser;
-import tools.MiscTools;
-import tools.ParsingTools;
-import tools.helperclasses.AbstractMutablePair;
-import tools.helperclasses.AbstractPair;
-import tools.helperclasses.MutablePair;
-import tools.helperclasses.Pair;
+import show.ezkz.casprzak.parsing.FunctionParser;
+import show.ezkz.casprzak.core.tools.MiscTools;
+import show.ezkz.casprzak.core.tools.ParsingTools;
+import show.ezkz.casprzak.core.tools.helperclasses.AbstractMutablePair;
+import show.ezkz.casprzak.core.tools.helperclasses.AbstractPair;
+import show.ezkz.casprzak.core.tools.helperclasses.MutablePair;
+import show.ezkz.casprzak.core.tools.helperclasses.Pair;
 
 import java.util.Map;
 

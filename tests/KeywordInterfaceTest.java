@@ -1,16 +1,16 @@
-import config.Settings;
-import functions.GeneralFunction;
-import functions.binary.Pow;
-import functions.commutative.Product;
-import functions.commutative.Sum;
-import functions.endpoint.Constant;
-import functions.endpoint.Variable;
-import functions.unitary.trig.normal.Cos;
-import functions.unitary.trig.normal.Sin;
+import show.ezkz.casprzak.core.config.Settings;
+import show.ezkz.casprzak.core.functions.GeneralFunction;
+import show.ezkz.casprzak.core.functions.binary.Pow;
+import show.ezkz.casprzak.core.functions.commutative.Product;
+import show.ezkz.casprzak.core.functions.commutative.Sum;
+import show.ezkz.casprzak.core.functions.endpoint.Constant;
+import show.ezkz.casprzak.core.functions.endpoint.Variable;
+import show.ezkz.casprzak.core.functions.unitary.trig.normal.Cos;
+import show.ezkz.casprzak.core.functions.unitary.trig.normal.Sin;
 import org.junit.jupiter.api.Test;
-import parsing.FunctionParser;
-import parsing.KeywordInterface;
-import tools.DefaultFunctions;
+import show.ezkz.casprzak.parsing.FunctionParser;
+import show.ezkz.casprzak.commandui.KeywordInterface;
+import show.ezkz.casprzak.core.tools.DefaultFunctions;
 
 import java.util.List;
 

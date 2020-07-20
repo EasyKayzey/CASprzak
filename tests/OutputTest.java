@@ -1,6 +1,6 @@
-import functions.endpoint.Constant;
+import show.ezkz.casprzak.core.functions.endpoint.Constant;
 import org.junit.jupiter.api.Test;
-import tools.DefaultFunctions;
+import show.ezkz.casprzak.core.tools.DefaultFunctions;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

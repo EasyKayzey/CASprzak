@@ -31,4 +31,17 @@ public interface OutputFunction {
 	 */
 	String toLatex();
 
+	/**
+	 * Checks if this {@link OutputFunction} is equal to {@code that} 
+	 * @param that the object to be compared against
+	 * @return true if they're equal
+	 */
+	boolean equals(Object that);
+
+	/**
+	 * Returns a hash code value for this object
+	 * @return a hash code value for this object
+	 */
+	int hashCode();
+
 }

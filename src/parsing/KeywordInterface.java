@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
  */
 @SuppressWarnings("SpellCheckingInspection")
 public class KeywordInterface {
-	private static final String version = "0.2.0";
+	private static final String version = "v0.2.1";
 	private static final Pattern keywordSplitter = Pattern.compile("\\s+(?=[^\"]*(\"[^\"]*\"[^\"]*)*$)");
 	private static final Pattern spaces = Pattern.compile("\\s+");
 	private static final Pattern equals = Pattern.compile("=");
@@ -82,7 +82,7 @@ public class KeywordInterface {
 				case "int", "integral" 																-> integral(splitInput[1]);
 				case "ai", "index", "arrayindex" 													-> arrayIndex(splitInput[1]);
 				case "debug" 																		-> debug(splitInput[1]);
-				case "version" 																		-> version;
+				case "version", "v" 																		-> version;
 				case "reset" 																		-> reset();
 				case "err", "error" 																-> printError();
 				case "help" 																		-> splitInput.length == 1 ? help() : help(splitInput[1]);
@@ -414,7 +414,7 @@ public class KeywordInterface {
 	private static String reset() {
 		clearFunctions();
 		Constant.resetConstants();
-		return "Reset done";
+		return "Reset done.";
 	}
 
 	private static String printError() {
@@ -476,7 +476,7 @@ public class KeywordInterface {
 					"int [function] d[variable]";
 			case "ai", "index", "arrayindex"										-> "Assuming that the output of the previous command was a list, returns the value at index [index] in the list.\n" +
 					"ai [index]";
-			case "version"															-> "Prints the version of CASprzak which is currently being run. \n" +
+			case "version", "v"														-> "Prints the version of CASprzak which is currently being run. \n" +
 					"version";
 			case "reset"															-> "Resets stored functions and constants to their initial state. \n" +
 					"reset";
@@ -518,7 +518,7 @@ public class KeywordInterface {
 				ss, sets, setsetting:                                  sets a setting
 				ps, prints, printsettings:                             prints all settings
 				clearfun, clearfunctions:                              clears functions
-				version:											   prints version
+				version, v:                                            prints version
 				reset:                                                 resets stored functions and constants
 				err, error:                                            prints the details of the previous error
 				exit, !:                                               exits the interface

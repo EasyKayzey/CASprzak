@@ -3,6 +3,8 @@ CASprzak is a Computer Algebra System (CAS) written by The EasyKayzey Show (Erez
 
 Hello, and welcome to our CAS. This is a joint project by The EasyKayzey Show started at HackBCA V, 2020. CASprzak is a computer-algebra framework mainly for storing, modifying, and applying mathematical functions and functionals, and it is written completely in native Java 14 with no external libraries (except JUnit for testing purposes only).
 
+All documentation for CASprzak can be found at: https://ezkz.show/CASprzak-documentation/
+
 ## Functionality
 ### Core
 - Storage of functions in an artificial data type
@@ -33,7 +35,6 @@ Hello, and welcome to our CAS. This is a joint project by The EasyKayzey Show st
 - If you have any feature suggestions not present in `Projects`, make a feature request in `Issues`
 - If you would like to design a better interface than the placeholder that we have now, please contact us by email
 - As noted before, to begin the demo, run `CommandUI` and input `demo`
-- All documentation can be found at: https://ezkz.show/CASprzak-documentation/
 - To use `cas.properties`:
    - If you are using a binary, put the file in the same directory as `CASprzak.jar`
    - If you are using the source code, leave the file in `src/config`.

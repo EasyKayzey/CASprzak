@@ -81,7 +81,7 @@ public class FunctionParser {
 	public static List<String> toPostfix(String infix) {
 		if (!Settings.enforceEscapedFunctions)
 			infix = LatexReplacer.addEscapes(infix);
-		infix = LatexReplacer.encodeGreek(infix);
+		infix = LatexReplacer.encodeMappings(infix);
 		List<String> tokens = InfixTokenizer.tokenizeInfix(infix);
 		Deque<String> postfix = new LinkedList<>();
 		Deque<String> operators = new LinkedList<>();

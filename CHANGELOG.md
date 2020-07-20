@@ -5,6 +5,8 @@
  - Add `v` alias for `version` in KeywordInterface
 ### Bugfixes
  - Fix malformed whitespace in the `help` command
+ - Fix expressions like `d/d\Gamma` causing parsing errors
+ - Fix evaluation using `LaTeX` replacements such as `eval 2\Gamma \Gamma=3` causing parsing errors
  
 # v0.2.0
 ### Major Additions 

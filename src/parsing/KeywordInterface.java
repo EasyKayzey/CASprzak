@@ -518,7 +518,7 @@ public class KeywordInterface {
 				ss, sets, setsetting:                                  sets a setting
 				ps, prints, printsettings:                             prints all settings
 				clearfun, clearfunctions:                              clears functions
-				version:											   prints version
+				version:                                               prints version
 				reset:                                                 resets stored functions and constants
 				err, error:                                            prints the details of the previous error
 				exit, !:                                               exits the interface

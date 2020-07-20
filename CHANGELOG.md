@@ -1,5 +1,5 @@
 # Changelog
-# v0.2.1
+## v0.2.1
 ### Minor Additions
  - Add 'v' to the version string of the `version` command
  - Add `v` alias for `version` in KeywordInterface
@@ -8,7 +8,7 @@
  - Fix expressions like `d/d\Gamma` causing parsing errors
  - Fix evaluation using `LaTeX` replacements such as `eval 2\Gamma \Gamma=3` causing parsing errors
  
-# v0.2.0
+## v0.2.0
 ### Major Additions 
  - Integer division (with `//`), modulo, lcm, and gcd operations
  - Floor, ceiling, rounding, and random operations

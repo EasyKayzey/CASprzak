@@ -6,6 +6,7 @@ import show.ezkz.casprzak.core.functions.endpoint.Constant;
 import show.ezkz.casprzak.core.functions.endpoint.Variable;
 import show.ezkz.casprzak.core.tools.MiscTools;
 
+import java.lang.reflect.MalformedParametersException;
 import java.util.*;
 
 import static show.ezkz.casprzak.parsing.OperationMaps.binaryOperations;
@@ -116,4 +117,30 @@ public class FunctionParser {
 
 		return new ArrayList<>(postfix);
 	}
+
+	/**
+	 * If the input is a {@link GeneralFunction}, returns the input. If the input is a {@code Double}, returns a new {@link Constant} of that value. If the input is a {@link String}, parses it with {@link FunctionParser#parseInfix(String)}.
+	 * @param input the input to be parsed as described above
+	 * @return the parsed input as described above
+	 */
+	public static GeneralFunction toFunction(Object input) {
+		if (input instanceof GeneralFunction f)
+			return f;
+		else if (input instanceof Double d)
+			return new Constant(d);
+		else if (input instanceof String s)
+			return parseInfix(s);
+		else
+			throw new MalformedParametersException("Cannot parse " + input + " of type " + input.getClass().getSimpleName() + ".");
+	}
+
+	/**
+	 * Evaluates infix corresponding to a constant, such as {@code pi/3}
+	 * @param infix the infix string of the constant
+	 * @return a {@code double} corresponding to the evaluated constant to be evaluated
+	 */
+	public static double getConstant(String infix) {
+		return parseInfix(infix).evaluate(new HashMap<>());
+	}
+
 }

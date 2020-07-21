@@ -177,7 +177,7 @@ public class KeywordInterface {
 		input = stripQuotes(input);
 
 		if ("_".equals(input))
-			return ParsingTools.toFunction(prev);
+			return FunctionParser.toFunction(prev);
 
 		if (Constant.isSpecialConstant(input))
 			return new Constant(input);
@@ -247,7 +247,7 @@ public class KeywordInterface {
 							.map(equals::split)
 							.collect(Collectors.toMap(
 									e -> LatexReplacer.encodeAll(e[0]),
-									e -> "_".equals(e[1]) ? (Double) lastPrev : ParsingTools.getConstant(e[1]))
+									e -> "_".equals(e[1]) ? (Double) lastPrev : FunctionParser.getConstant(e[1]))
 							)
 			);
 		}
@@ -277,24 +277,24 @@ public class KeywordInterface {
 
 	private static List<Double> solve(String input) {
 		String[] splitInput = keywordSplitter.split(input);
-		return Solver.getSolutionsRange(parseStored(splitInput[0]), ParsingTools.getConstant(splitInput[1]), ParsingTools.getConstant(splitInput[2]));
+		return Solver.getSolutionsRange(parseStored(splitInput[0]), FunctionParser.getConstant(splitInput[1]), FunctionParser.getConstant(splitInput[2]));
 	}
 
 	private static Object extrema(String input) {
 		String[] splitInput = keywordSplitter.split(input);
 		return switch (splitInput[0]) {
-			case "min", "minima"					-> Extrema.findLocalMinimum(parseStored(splitInput[1]), ParsingTools.getConstant(splitInput[2]), ParsingTools.getConstant(splitInput[3]));
-			case "max", "maxima"					-> Extrema.findLocalMaximum(parseStored(splitInput[1]), ParsingTools.getConstant(splitInput[2]), ParsingTools.getConstant(splitInput[3]));
-			case "anymin", "anyminima"				-> Extrema.findLocalMinima(parseStored(splitInput[1]), ParsingTools.getConstant(splitInput[2]), ParsingTools.getConstant(splitInput[3]));
-			case "anymax", "anymaxima"				-> Extrema.findLocalMaxima(parseStored(splitInput[1]), ParsingTools.getConstant(splitInput[2]), ParsingTools.getConstant(splitInput[3]));
-			case "inflect", "inflection"			-> Extrema.findInflectionPoints(parseStored(splitInput[1]), ParsingTools.getConstant(splitInput[2]), ParsingTools.getConstant(splitInput[3]));
+			case "min", "minima"					-> Extrema.findLocalMinimum(parseStored(splitInput[1]), FunctionParser.getConstant(splitInput[2]), FunctionParser.getConstant(splitInput[3]));
+			case "max", "maxima"					-> Extrema.findLocalMaximum(parseStored(splitInput[1]), FunctionParser.getConstant(splitInput[2]), FunctionParser.getConstant(splitInput[3]));
+			case "anymin", "anyminima"				-> Extrema.findLocalMinima(parseStored(splitInput[1]), FunctionParser.getConstant(splitInput[2]), FunctionParser.getConstant(splitInput[3]));
+			case "anymax", "anymaxima"				-> Extrema.findLocalMaxima(parseStored(splitInput[1]), FunctionParser.getConstant(splitInput[2]), FunctionParser.getConstant(splitInput[3]));
+			case "inflect", "inflection"			-> Extrema.findInflectionPoints(parseStored(splitInput[1]), FunctionParser.getConstant(splitInput[2]), FunctionParser.getConstant(splitInput[3]));
 			default 								-> throw new SettingNotFoundException(splitInput[0], "extrema");
 		};
 	}
 
 	private static GeneralFunction taylor(String input) {
 		String[] splitInput = keywordSplitter.split(input);
-		return TaylorSeries.makeTaylorSeries(parseStored(splitInput[0]), ParsingTools.toInteger(ParsingTools.getConstant(splitInput[1])), ParsingTools.getConstant(splitInput[2]));
+		return TaylorSeries.makeTaylorSeries(parseStored(splitInput[0]), ParsingTools.toInteger(FunctionParser.getConstant(splitInput[1])), FunctionParser.getConstant(splitInput[2]));
 	}
 
 	private static Object defineFunction(String input, boolean simplify) {
@@ -355,14 +355,14 @@ public class KeywordInterface {
 		String[] splitInput = keywordSplitter.split(input);
 		if (splitInput.length != 3)
 			throw new MismatchedCommandArgumentsException("3", splitInput.length);
-		return NumericalIntegration.simpsonsRule(parseStored(splitInput[0]), ParsingTools.getConstant(splitInput[1]), ParsingTools.getConstant(splitInput[2]));
+		return NumericalIntegration.simpsonsRule(parseStored(splitInput[0]), FunctionParser.getConstant(splitInput[1]), FunctionParser.getConstant(splitInput[2]));
 	}
 
 	private static double[] integrateNumericError(String input) {
 		String[] splitInput = keywordSplitter.split(input);
 		if (splitInput.length != 3)
 			throw new MismatchedCommandArgumentsException("3", splitInput.length);
-		return NumericalIntegration.simpsonsRuleWithError(parseStored(splitInput[0]), ParsingTools.getConstant(splitInput[1]), ParsingTools.getConstant(splitInput[2]));
+		return NumericalIntegration.simpsonsRuleWithError(parseStored(splitInput[0]), FunctionParser.getConstant(splitInput[1]), FunctionParser.getConstant(splitInput[2]));
 	}
 
 	private static String setSettings(String input) {

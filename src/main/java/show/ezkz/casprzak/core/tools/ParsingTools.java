@@ -1,13 +1,8 @@
 package show.ezkz.casprzak.core.tools;
 
 import show.ezkz.casprzak.core.config.Settings;
-import show.ezkz.casprzak.core.functions.GeneralFunction;
-import show.ezkz.casprzak.core.functions.endpoint.Constant;
-import show.ezkz.casprzak.parsing.FunctionParser;
-import show.ezkz.casprzak.parsing.LatexReplacer;
 
 import java.lang.reflect.MalformedParametersException;
-import java.util.HashMap;
 import java.util.regex.Pattern;
 
 /**
@@ -26,31 +21,6 @@ public class ParsingTools {
 	public static final Pattern validNames = Pattern.compile("[a-zA-Z[^\\x00-\\x7F]]|\\\\" + (Settings.enforceEscapedNames ? "" : "?") + "[a-zA-Z[^\\x00-\\x7F]][\\w.'[^\\x00-\\x7F]]*");
 
 	private ParsingTools(){}
-
-	/**
-	 * If the input is a {@link GeneralFunction}, returns the input. If the input is a {@code Double}, returns a new {@link Constant} of that value. If the input is a {@link String}, parses it with {@link FunctionParser#parseInfix(String)}.
-	 * @param input the input to be parsed as described above
-	 * @return the parsed input as described above
-	 */
-	public static GeneralFunction toFunction(Object input) {
-		if (input instanceof GeneralFunction f)
-			return f;
-		else if (input instanceof Double d)
-			return new Constant(d);
-		else if (input instanceof String s)
-			return FunctionParser.parseInfix(s);
-		else
-			throw new MalformedParametersException("Cannot parse " + input + " of type " + input.getClass().getSimpleName() + ".");
-	}
-
-	/**
-	 * Evaluates infix corresponding to a constant, such as {@code pi/3}
-	 * @param infix the infix string of the constant
-	 * @return a {@code double} corresponding to the evaluated constant to be evaluated
-	 */
-	public static double getConstant(String infix) {
-		return FunctionParser.parseInfix(infix).evaluate(new HashMap<>());
-	}
 
 	/**
 	 * Parses a string to a boolean using the following rules, ignoring case:
@@ -87,21 +57,6 @@ public class ParsingTools {
 	 */
 	public static boolean isAlmostInteger(double d) throws IllegalArgumentException{
 		return Math.abs(Math.round(d) - d) < Settings.integerMargin;
-	}
-
-	/**
-     * Converts the string to a {@code char}, supporting legitimate single-character strings like {@code "x"} and LaTeX-escaped characters like {@code "\epsilon"}
-     * @param input the string containing the character
-     * @return the character represented by the string
-     * @throws IllegalArgumentException if the input is not in one of the formats specified above
-     */
-	@SuppressWarnings("unused")
-	public static char getCharacter(String input) {
-		input = LatexReplacer.encodeAll(input);
-		if (input.length() == 1)
-			return input.charAt(0);
-		else
-			throw new IllegalArgumentException("Input length should be 1 for FunctionParser.toCharacter, input given was " + input + ".");
 	}
 
 	/**

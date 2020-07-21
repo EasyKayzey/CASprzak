@@ -7,6 +7,6 @@ public class SettingNotFoundException extends IllegalArgumentException {
 	 * @param method the method where the invalid setting was passed
 	 */
 	public SettingNotFoundException(String setting, String method) {
-		super("Setting " + setting + " not found in " + method + ".");
+		super("Setting " + setting + " not found in " + method + "");
 	}
 }

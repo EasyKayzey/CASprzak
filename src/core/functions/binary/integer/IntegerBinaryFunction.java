@@ -39,7 +39,7 @@ public abstract class IntegerBinaryFunction extends BinaryFunction {
 		double a = function1.evaluate(variableValues);
 		double b = function2.evaluate(variableValues);
 		if (!ParsingTools.isAlmostInteger(a) || !ParsingTools.isAlmostInteger(b))
-			throw new IllegalArgumentException("Tried to evaluate an IntegerBinaryFunction with non-integer operand set " + a + ", " + b + ".");
+			throw new IllegalArgumentException("Tried to evaluate an IntegerBinaryFunction with non-integer operand set " + a + ", " + b + "");
 		return operate(ParsingTools.toInteger(b), ParsingTools.toInteger(a));
 	}
 

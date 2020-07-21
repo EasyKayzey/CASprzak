@@ -36,7 +36,7 @@ public abstract class IntegerUnitaryFunction extends UnitaryFunction {
 			throw new IllegalStateException("IntegerUnitaryFunction cannot be used if Settings.enforceIntegerOperations is not enabled.");
 		double input = operand.evaluate(variableValues);
 		if (!ParsingTools.isAlmostInteger(input))
-			throw new IllegalArgumentException("Tried to evaluate an IntegerUnitaryFunction with non-integer operand " + input + ".");
+			throw new IllegalArgumentException("Tried to evaluate an IntegerUnitaryFunction with non-integer operand " + input + "");
 		return operate(ParsingTools.toInteger(input));
 	}
 

@@ -487,7 +487,7 @@ public class KeywordInterface {
 					"help (command)";
 			case "exit", "!"														-> "Exits the program.\n" +
 					"exit";
-			default -> throw new IllegalArgumentException("Invalid command: " + input + ".");
+			default -> throw new IllegalArgumentException("Invalid command: " + input + "");
 		};
 	}
 

@@ -38,7 +38,7 @@ public class Variable extends EndpointFunction {
 
 	public double evaluate(Map<String, Double> variableValues) {
 		if (!variableValues.containsKey(varID))
-			throw new NoSuchElementException("No value was assigned to variable " + varID + ".");
+			throw new NoSuchElementException("No value was assigned to variable " + varID + "");
 		else
 			return variableValues.get(varID);
 	}

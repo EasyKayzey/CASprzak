@@ -50,13 +50,13 @@ public class FunctionParser {
 				functionStack.push(new Constant(token));
 			} else if (binaryOperations.containsKey(token)) {
 				if (functionStack.size() < 2)
-					throw new NoSuchElementException("Tried to pop two elements for token '" + token + "', but not enough elements exist. Parsing postfix: " + postfix + ". Current stack: " + functionStack + ".");
+					throw new NoSuchElementException("Tried to pop two elements for token '" + token + "', but not enough elements exist. Parsing postfix: " + postfix + ". Current stack: " + functionStack + "");
 				GeneralFunction a = functionStack.pop();
 				GeneralFunction b = functionStack.pop();
 				functionStack.push(binaryOperations.get(token).construct(b, a));
 			} else if (unitaryOperations.containsKey(token)) {
 				if (functionStack.size() < 1)
-					throw new NoSuchElementException("Tried to pop an element for token '" + token + "', but the stack is empty. Parsing postfix: " + postfix + ".");
+					throw new NoSuchElementException("Tried to pop an element for token '" + token + "', but the stack is empty. Parsing postfix: " + postfix + "");
 				GeneralFunction c = functionStack.pop();
 				functionStack.push(unitaryOperations.get(token).construct(c));
 			} else try {
@@ -67,9 +67,9 @@ public class FunctionParser {
 		}
 
 		if (functionStack.size() < 1)
-			throw new IndexOutOfBoundsException("Stack is empty at end of parsing, so there is nothing to return. Parsed postfix: " + postfix + ".");
+			throw new IndexOutOfBoundsException("Stack is empty at end of parsing, so there is nothing to return. Parsed postfix: " + postfix + "");
 		else if (functionStack.size() > 1)
-			throw new IndexOutOfBoundsException("Stack has more than one function at end of parsing, likely because of mismatched open parentheses. Parsed postfix: " + postfix + ". Current stack: " + functionStack + ".");
+			throw new IndexOutOfBoundsException("Stack has more than one function at end of parsing, likely because of mismatched open parentheses. Parsed postfix: " + postfix + ". Current stack: " + functionStack + "");
 		else
 			return functionStack.pop();
 	}
@@ -97,11 +97,11 @@ public class FunctionParser {
 					if (operators.size() > 0)
 						postfix.add(operators.pop());
 					else
-						throw new IllegalArgumentException("Mismatched parentheses in infix; too many end parentheses. Raw infix: " + infix + ". Current parsed postfix: " + postfix + ". Remaining operators: " + operators + ".");
+						throw new IllegalArgumentException("Mismatched parentheses in infix; too many end parentheses. Raw infix: " + infix + ". Current parsed postfix: " + postfix + ". Remaining operators: " + operators + "");
 				if ("(".equals(operators.peek()))
 					operators.pop();
 				else
-					throw new IllegalArgumentException("Mismatched parentheses in infix; too many end parentheses. Raw infix: " + infix + ". Current parsed postfix: " + postfix + ". Remaining operators: " + operators + ".");
+					throw new IllegalArgumentException("Mismatched parentheses in infix; too many end parentheses. Raw infix: " + infix + ". Current parsed postfix: " + postfix + ". Remaining operators: " + operators + "");
 			} else if (unitaryOperations.containsKey(token) || binaryOperations.containsKey(token)) {
 				operators.push(token);
 			} else {
@@ -111,7 +111,7 @@ public class FunctionParser {
 
 		while (operators.size() != 0)
 			if ("(".equals(operators.peek()))
-				throw new IllegalArgumentException("Mismatched parentheses in infix; too many open parentheses. Raw infix: " + infix + ". Current parsed postfix: " + postfix + ". Remaining operators: " + operators + ".");
+				throw new IllegalArgumentException("Mismatched parentheses in infix; too many open parentheses. Raw infix: " + infix + ". Current parsed postfix: " + postfix + ". Remaining operators: " + operators + "");
 			else
 				postfix.push(operators.pop());
 
@@ -131,7 +131,7 @@ public class FunctionParser {
 		else if (input instanceof String s)
 			return parseInfix(s);
 		else
-			throw new MalformedParametersException("Cannot parse " + input + " of type " + input.getClass().getSimpleName() + ".");
+			throw new MalformedParametersException("Cannot parse " + input + " of type " + input.getClass().getSimpleName() + "");
 	}
 
 	/**

@@ -174,7 +174,7 @@ public class Settings {
 	public static void parseConfig() throws IOException {
 		Properties properties = new Properties();
 		try {
-			properties.load(new FileReader(".\\src\\main\\java\\show\\ezkz\\casprzak\\core\\config\\cas.properties"));
+			properties.load(new FileReader(".\\src\\core\\config\\cas.properties"));
 		} catch (IOException ignored) {
 			properties.load(new FileReader(".\\cas.properties"));
 		}

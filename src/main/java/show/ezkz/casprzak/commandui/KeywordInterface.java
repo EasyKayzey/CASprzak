@@ -375,7 +375,7 @@ public class KeywordInterface {
 
 	private static String printSettings() {
 		Field[] settings = Settings.class.getDeclaredFields();
-		StringBuilder stringBuilder = new StringBuilder(40);
+		StringBuilder stringBuilder = new StringBuilder(30 * settings.length);
 		for (Field setting : settings) {
 			stringBuilder.append(setting.getName());
 			stringBuilder.append(" = ");

@@ -106,6 +106,8 @@ public class KeywordInterface {
 				prevException = new CommandNotFoundException(splitInput[0] + " is not a command supported by KeywordInterface, and raw-function parsing failed to interpret the input.", parserException);
 				throw prevException;
 			}
+		} else if (ret instanceof Double) {
+			ret = new Constant((Double) ret);
 		}
 		prev = ret;
 		return ret;
@@ -212,6 +214,15 @@ public class KeywordInterface {
 				throw new IllegalArgumentException("Nested quotes are not supported.");
 		}
 		return input;
+	}
+
+	private static double toDouble(Object object) {
+		if (object instanceof Constant constant)
+			return constant.constant;
+		else if (object instanceof Integer integer)
+			return integer;
+		else
+			return (double) object;
 	}
 
 	private static String demo() {

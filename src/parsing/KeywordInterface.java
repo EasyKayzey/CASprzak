@@ -219,8 +219,6 @@ public class KeywordInterface {
 	private static double toDouble(Object object) {
 		if (object instanceof Constant constant)
 			return constant.constant;
-		else if (object instanceof Integer integer)
-			return integer;
 		else
 			return (double) object;
 	}
@@ -257,7 +255,7 @@ public class KeywordInterface {
 							.map(equals::split)
 							.collect(Collectors.toMap(
 									e -> LatexReplacer.encodeAll(e[0]),
-									e -> "_".equals(e[1]) ? (Double) lastPrev : ParsingTools.getConstant(e[1]))
+									e -> "_".equals(e[1]) ? toDouble(lastPrev) : ParsingTools.getConstant(e[1]))
 							)
 			);
 		}

@@ -49,7 +49,7 @@ public class ParsingTools {
 	 * @return a {@code double} corresponding to the evaluated constant to be evaluated
 	 */
 	public static double getConstant(String infix) {
-		return FunctionParser.parseInfix(infix).evaluate(new HashMap<>());
+		return FunctionParser.parseInfix(infix).evaluate();
 	}
 
 	/**

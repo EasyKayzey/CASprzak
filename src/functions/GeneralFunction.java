@@ -18,7 +18,6 @@ import functions.unitary.trig.normal.TrigFunction;
 import org.jetbrains.annotations.NotNull;
 import tools.MiscTools;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -75,7 +74,7 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 	 * @return the function evaluated with no arguments
 	 */
 	public double evaluate() {
-		return evaluate(Collections.emptyMap());
+		return evaluate(Map.of());
 	}
 
 

@@ -71,7 +71,7 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 
 
 	/**
-	 * Overloads {@link Evaluable#evaluate(Map)} with no arguments, passing a {@code Map.of()} by default
+	 * Overloads {@link Evaluable#evaluate(Map)} with no arguments, passing a {@code Collections.emptyMap()} by default
 	 * @return the function evaluated with no arguments
 	 */
 	public double evaluate() {

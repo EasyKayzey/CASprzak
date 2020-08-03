@@ -1,4 +1,5 @@
 import functions.GeneralFunction;
+import functions.commutative.Product;
 import functions.endpoint.Variable;
 import functions.unitary.trig.normal.Sin;
 import org.junit.jupiter.api.Test;
@@ -78,7 +79,7 @@ public class LatexTest {
 
 	@Test
 	void sinx() {
-		GeneralFunction test = FunctionParser.parseInfix("sinx");
-		assertEquals(new Sin(new Variable("x")), test);
+		GeneralFunction test = FunctionParser.parseSimplified("sinx");
+		assertEquals(FunctionParser.parseSimplified("s*i*n*x"), test);
 	}
 }

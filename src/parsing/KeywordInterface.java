@@ -325,9 +325,9 @@ public class KeywordInterface {
 		if (splitInput.length != 2)
 			throw new MismatchedCommandArgumentsException("2", splitInput.length);
 		try {
-			return Constant.addSpecialConstant(LatexReplacer.encodeAll(splitInput[0]), ((GeneralFunction) KeywordInterface.useKeywords(splitInput[1])).evaluate(Map.of()));
+			return Constant.addSpecialConstant(LatexReplacer.encodeAll(splitInput[0]), ((GeneralFunction) KeywordInterface.useKeywords(splitInput[1])).evaluate());
 		} catch (Exception e) {
-			return Constant.addSpecialConstant(LatexReplacer.encodeAll(splitInput[0]), parseStored(splitInput[1]).evaluate(Map.of()));
+			return Constant.addSpecialConstant(LatexReplacer.encodeAll(splitInput[0]), parseStored(splitInput[1]).evaluate());
 		}
 	}
 

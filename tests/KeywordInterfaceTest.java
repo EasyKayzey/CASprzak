@@ -13,6 +13,7 @@ import parsing.KeywordInterface;
 import tools.DefaultFunctions;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -57,25 +58,26 @@ public class KeywordInterfaceTest {
 
     @Test
     void basicEval() {
-        double test = (double) KeywordInterface.safeKeywords("eval x^2 x=2");
-        assertEquals(4, test);
+        GeneralFunction test = (GeneralFunction) KeywordInterface.safeKeywords("eval x^2 x=2");
+        assertEquals(4, test.evaluate(Map.of()));
     }
 
     @SuppressWarnings("SpellCheckingInspection")
     @Test
-    void basicEvalWithNewVariable() { // Note that addvar and clearvars aren"t actually things anymore, so this tests the resilience of the UI to bad commands.
+    void basicEvalWithNewVariable() {
+        // Note that addvar and clearvars aren"t actually things anymore, so this tests the resilience of the UI to bad commands.
         KeywordInterface.safeKeywords("clearvars");
         KeywordInterface.safeKeywords("addvar y");
-        double test = (double) KeywordInterface.safeKeywords("eval y^2 y=2");
-        assertEquals(4, test);
+        GeneralFunction test = (GeneralFunction) KeywordInterface.safeKeywords("eval y^2 y=2");
+        assertEquals(4, test.evaluate(Map.of()));
         KeywordInterface.safeKeywords("clearvars");
         KeywordInterface.safeKeywords("addvars x y z");
     }
 
     @Test
     void basicEvalWithThreeVariables() {
-        double test = (double) KeywordInterface.safeKeywords("eval y+x+z x=3 z=1 y=2");
-        assertEquals(6, test);
+        GeneralFunction test = (GeneralFunction) KeywordInterface.safeKeywords("eval y+x+z x=3 z=1 y=2");
+        assertEquals(6, test.evaluate(Map.of()));
     }
 
     @Test
@@ -101,8 +103,8 @@ public class KeywordInterfaceTest {
 
     @Test
     void basicExtremaMax() {
-        double test = (double) KeywordInterface.safeKeywords("extrema max 1-x^2 -\\pi \\pi");
-        assertEquals(0, test);
+        GeneralFunction test = (GeneralFunction) KeywordInterface.safeKeywords("extrema max 1-x^2 -\\pi \\pi");
+        assertEquals(0, test.evaluate(Map.of()));
     }
 
     @Test
@@ -114,8 +116,8 @@ public class KeywordInterfaceTest {
 
     @Test
     void basicNumericalIntegration() {
-        double test = (double) KeywordInterface.safeKeywords("intn \\sin(x) 0 \\pi");
-        assertEquals(2, test, 0.01);
+        GeneralFunction test = (GeneralFunction) KeywordInterface.safeKeywords("intn \\sin(x) 0 \\pi");
+        assertEquals(2, test.evaluate(Map.of()), 0.01);
     }
 
     @Test
@@ -168,8 +170,8 @@ public class KeywordInterfaceTest {
 
     @Test
     void gammaThing2() {
-        double test = (double) KeywordInterface.safeKeywords("eval \\Gamma \\Gamma=1");
-        assertEquals(1, test);
+        GeneralFunction test = (GeneralFunction) KeywordInterface.safeKeywords("eval \\Gamma \\Gamma=1");
+        assertEquals(1, test.evaluate(Map.of()));
     }
 
 }

@@ -1,4 +1,9 @@
 # Changelog
+## v0.3.0
+### Bugfixes
+- Fix `Differential` comparison causing `NullPointerException`s
+
+
 ## v0.2.1
 ### Minor Additions
  - Add 'v' to the version string of the `version` command

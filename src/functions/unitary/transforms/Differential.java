@@ -23,7 +23,7 @@ public class Differential extends Transformation {
 	 * @param respectTo the variable that the differential is with respect to
 	 */
 	public Differential(String respectTo) {
-		super(new Variable(respectTo), respectTo);
+		super(null, respectTo);
 	}
 
 	/**
@@ -63,7 +63,7 @@ public class Differential extends Transformation {
 	@Override
 	public boolean equalsFunction(GeneralFunction that) {
 		if (that instanceof Differential diff)
-			return respectTo.equals(diff.respectTo) && operand.equalsSimplified(diff.operand);
+			return respectTo.equals(diff.respectTo);
 		else
 			return false;
 	}
@@ -72,7 +72,7 @@ public class Differential extends Transformation {
 	public int compareSelf(GeneralFunction that) {
 		if (that instanceof Differential diff)
 			if (respectTo.equals(diff.respectTo))
-				return operand.compareTo(diff.operand);
+				return 0;
 			else
 				return respectTo.compareTo(diff.respectTo);
 		else

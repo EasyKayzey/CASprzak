@@ -1,4 +1,7 @@
 import functions.GeneralFunction;
+import functions.commutative.Product;
+import functions.endpoint.Variable;
+import functions.unitary.trig.normal.Sin;
 import org.junit.jupiter.api.Test;
 import parsing.FunctionParser;
 
@@ -72,5 +75,11 @@ public class LatexTest {
 	void adjacentWords2() {
 		GeneralFunction test = FunctionParser.parseInfix("\\epsilon\\Gamma\\epsilon\\pi");
 		assertEquals(6.3, test.evaluate(Map.of("ϵ", 1., "Γ", 2.)), .3);
+	}
+
+	@Test
+	void sinx() {
+		GeneralFunction test = FunctionParser.parseSimplified("sinx");
+		assertEquals(FunctionParser.parseSimplified("s*i*n*x"), test);
 	}
 }

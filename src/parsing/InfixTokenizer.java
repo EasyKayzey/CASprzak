@@ -26,7 +26,7 @@ public class InfixTokenizer {
 			"|(?<=[a-zA-Z])(?<![" + splitExcpt + "])(?=[\\d]))" +	// Matches if preceded by a non-ECP letter and followed by a digit
 			"|(?<=\\))(?=[\\w(])" + 								// Matches if preceded by ) and followed by a word character or (
 			"|(?<=\\))(?=\\.)" +									// Matches if preceded by a letter or ) and followed by a period
-			"|(?<=[\\d)])(?=\\()(?<!logb_\\d)"						// Matches if preceded by [a digit not preceded by logb_] or ) and followed by (
+			"|(?<=[\\d)])(?=\\()(?<!logb\\s?_\\d)"						// Matches if preceded by [a digit not preceded by logb_] or ) and followed by (
 	);
 	private static final Pattern subtractionFinder = Pattern.compile(
 			"(?<!^)(?<!E)" +										// Ensures not preceded by newline or E
@@ -54,7 +54,7 @@ public class InfixTokenizer {
 	private static final Pattern characterPairMultiplier = Pattern.compile(
 			"(?<!\\\\[\\w.']{0," + maxEscapeLength + "})" +			// Ensures that the character is not LaTeX-escaped (up to Settings.maxEscapeLength characters)
 			"(?<![CEP])(?![CEP])" +									// Ensures the spaces before and after C, E, and P are not matched
-			"(?<!logb_\\w)" +										// Ensures not preceded by \logb_{character}
+			"(?<!logb\\s?_\\w)" +										// Ensures not preceded by \logb_{character}
 			"((?<!\\d)|(?!\\d))" +									// Ensures that spaces both preceded and followed by a digit are not matched
 			"(?<=[a-zA-Z)\\d[^\\x00-\\x7F]])" +						// Preceded by a digit, alphabetic char, or non-ascii character
 			"\\s*" + 												// Allows for spaces
@@ -68,7 +68,7 @@ public class InfixTokenizer {
 			"(?<=\\\\pd\\{([a-zA-Z[^\\x00-\\x7F]]))"
 	);
 	private static final Pattern division = Pattern.compile("(?<!/)/(?!/)");
-	private static final Pattern logbUnderscores = Pattern.compile("logb_");
+	private static final Pattern logbUnderscores = Pattern.compile("logb\\s?_");
 
 	private InfixTokenizer(){}
 

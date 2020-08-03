@@ -69,6 +69,15 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 	public abstract GeneralFunction clone();
 
 
+	/**
+	 * Overloads {@link Evaluable#evaluate(Map)} with no arguments, passing a {@code Map.of()} by default
+	 * @return the function evaluated with no arguments
+	 */
+	public double evaluate() {
+		return evaluate(Map.of());
+	}
+
+
 	public GeneralFunction getSimplifiedDerivative(String varID) {
 		if (Settings.cacheDerivatives && derivatives.containsKey(varID))
 			return derivatives.get(varID);

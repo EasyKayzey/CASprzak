@@ -82,6 +82,7 @@ public class LatexReplacer {
 	};
 	
 	private static final Pattern dx = Pattern.compile("(?<![\\\\/])(?=d[a-ce-zA-Z](?![a-zA-Z]))");
+	private static final Pattern pi = Pattern.compile("(?<!\\\\)pi");
 	private static final Pattern splitEscapes = Pattern.compile("(?=\\\\)");
 
 	/**
@@ -115,10 +116,11 @@ public class LatexReplacer {
 	 * @return the input with LaTeX escapes inserted as specified above
 	 */
 	public static String addEscapes(String input) {
-		for (Collection<String> ops : List.of(binaryOperations.keySet(), unitaryOperations.keySet(), List.of("\\pi")))
+		for (Collection<String> ops : List.of(binaryOperations.keySet(), unitaryOperations.keySet()))
 			for (String op : ops)
 				if (op.charAt(0) == '\\')
-					input = input.replaceAll("(?<!\\\\|a(rc)?)(?=" + op.substring(1) + ")", "\\\\");
+					input = input.replaceAll("(?<!\\\\|a(rc)?)(?=" + op.substring(1) + "[\\s(])", "\\\\");
+		input = pi.matcher(input).replaceAll("\\\\pi");
 		input = dx.matcher(input).replaceAll("\\\\");
 		return input;
 	}

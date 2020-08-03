@@ -83,6 +83,7 @@ public class LatexReplacer {
 	
 	private static final Pattern dx = Pattern.compile("(?<![\\\\/])(?=d[a-ce-zA-Z](?![a-zA-Z]))");
 	private static final Pattern pi = Pattern.compile("(?<!\\\\)pi");
+	private static final Pattern logb = Pattern.compile("(?<!\\\\)logb_");
 	private static final Pattern splitEscapes = Pattern.compile("(?=\\\\)");
 
 	/**
@@ -122,6 +123,7 @@ public class LatexReplacer {
 					input = input.replaceAll("(?<!\\\\|a(rc)?)(?=" + op.substring(1) + "[\\s(])", "\\\\");
 		input = pi.matcher(input).replaceAll("\\\\pi");
 		input = dx.matcher(input).replaceAll("\\\\");
+		input = logb.matcher(input).replaceAll("\\\\logb _");
 		return input;
 	}
 

@@ -1,7 +1,8 @@
 # Changelog
 ## v0.3.0
 ### Bugfixes
-- Fix `Differential` comparison causing `NullPointerException`s
+ - Fix `Differential` comparison causing `NullPointerException`s
+ - Fix inputs like `sinner` being parsed to the variable `\sinner` rather than a product
 
 
 ## v0.2.1

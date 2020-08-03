@@ -1,7 +1,7 @@
 # Changelog
 ## v0.3.0
 ### Bugfixes
-- Fix `Differentials` being made with null operands, causing `NullPointerException`s
+- Fix `Differential` comparison causing `NullPointerException`s
 
 
 ## v0.2.1

@@ -23,7 +23,7 @@ public class Differential extends Transformation {
 	 * @param respectTo the variable that the differential is with respect to
 	 */
 	public Differential(String respectTo) {
-		super(null, respectTo);
+		super(new Variable(respectTo), respectTo);
 	}
 
 	/**

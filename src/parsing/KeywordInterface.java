@@ -245,9 +245,9 @@ public class KeywordInterface {
 	private static double evaluate(String input) {
 		String[] splitInput = keywordSplitter.split(input, 2);
 		if (splitInput.length == 0)
-			throw new MismatchedCommandArgumentsException("1 or 2", splitInput.length);
+			throw new MismatchedCommandArgumentsException("1 or more", splitInput.length);
 		if (splitInput.length == 1)
-			return parseStored(splitInput[0]).evaluate(new HashMap<>());
+			return parseStored(splitInput[0]).evaluate();
 		else {
 			Object lastPrev = prev;
 			return parseStored(splitInput[0]).evaluate(
@@ -325,9 +325,9 @@ public class KeywordInterface {
 		if (splitInput.length != 2)
 			throw new MismatchedCommandArgumentsException("2", splitInput.length);
 		try {
-			return Constant.addSpecialConstant(LatexReplacer.encodeAll(splitInput[0]), ((GeneralFunction) KeywordInterface.useKeywords(splitInput[1])).evaluate(Map.of()));
+			return Constant.addSpecialConstant(LatexReplacer.encodeAll(splitInput[0]), ((GeneralFunction) KeywordInterface.useKeywords(splitInput[1])).evaluate());
 		} catch (Exception e) {
-			return Constant.addSpecialConstant(LatexReplacer.encodeAll(splitInput[0]), parseStored(splitInput[1]).evaluate(Map.of()));
+			return Constant.addSpecialConstant(LatexReplacer.encodeAll(splitInput[0]), parseStored(splitInput[1]).evaluate());
 		}
 	}
 

@@ -21,39 +21,39 @@ public class IntegerTest {
     @Test
     void basicIntegerQuotient1() {
         GeneralFunction test = new IntegerQuotient(new Constant(7), new Constant(13));
-        assertEquals(1, test.evaluate(Map.of()));
+        assertEquals(1, test.evaluate());
     }
 
     @Test
     void basicIntegerQuotient2() {
         GeneralFunction test = new IntegerQuotient(new Constant(4.999999999999999999999999999999999999999999999998), new Constant(25.000000000000000000000000002));
-        assertEquals(5, test.evaluate(Map.of()));
+        assertEquals(5, test.evaluate());
     }
 
     @Test
     void basicModulo1() {
         GeneralFunction test = new Modulo(new Constant(7), new Constant(13));
-        assertEquals(6, test.evaluate(Map.of()));
+        assertEquals(6, test.evaluate());
     }
 
     @Test
     void basicModulo2() {
         GeneralFunction test = new Modulo(new Constant(7.0000000000000000000000000000000000000000000000000067), new Constant(Math.pow(2, 18)));
-        assertEquals(1, test.evaluate(Map.of()));
+        assertEquals(1, test.evaluate());
     }
 
     @Test
     void gcd() {
         assertEquals(new Constant(4), new GCD(new Constant(4), new Constant(196), new Constant(80)).simplify());
-        assertEquals(4, new GCD(new Constant(4), new Constant(196), new Constant(80)).evaluate(Map.of()));
-        assertEquals(4, new GCD(new Constant(4), new Constant(-196), new Constant(80)).evaluate(Map.of()));
+        assertEquals(4, new GCD(new Constant(4), new Constant(196), new Constant(80)).evaluate());
+        assertEquals(4, new GCD(new Constant(4), new Constant(-196), new Constant(80)).evaluate());
     }
 
     @Test
     void lcm() {
         assertEquals(new Constant(3920), new LCM(new Constant(4), new Constant(196), new Constant(80)).simplify());
-        assertEquals(3920, new LCM(new Constant(4), new Constant(196), new Constant(80)).evaluate(Map.of()));
-        assertEquals(-3920, new LCM(new Constant(4), new Constant(-196), new Constant(-80)).evaluate(Map.of()));
+        assertEquals(3920, new LCM(new Constant(4), new Constant(196), new Constant(80)).evaluate());
+        assertEquals(-3920, new LCM(new Constant(4), new Constant(-196), new Constant(-80)).evaluate());
     }
 
     @Test
@@ -77,7 +77,7 @@ public class IntegerTest {
     @Test
     void basicRand() {
         GeneralFunction test = new Rand(new Constant(0.0), new Constant(10.0));
-        assertNotEquals(test.evaluate(Map.of()), test.evaluate(Map.of()));
+        assertNotEquals(test.evaluate(), test.evaluate());
     }
 
 

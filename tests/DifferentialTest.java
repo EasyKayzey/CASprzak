@@ -16,19 +16,19 @@ public class DifferentialTest {
 	@Test
 	void basicDerivative1() {
 		GeneralFunction test = parseSimplified("d/dx x");
-		assertEquals(1, test.evaluate(Map.of()));
+		assertEquals(1, test.evaluate());
 	}
 
 	@Test
 	void basicDerivative2() {
 		GeneralFunction test = parseSimplified("d/dx{x}");
-		assertEquals(1, test.evaluate(Map.of()));
+		assertEquals(1, test.evaluate());
 	}
 
 	@Test
 	void basicDerivative3() {
 		GeneralFunction test = parseSimplified("d/dx(x)");
-		assertEquals(1, test.evaluate(Map.of()));
+		assertEquals(1, test.evaluate());
 	}
 
 	@Test

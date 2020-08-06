@@ -23,8 +23,8 @@ public class Tensor extends GeneralFunction {
 
 
 	public static void main(String[] args) {
-		Tensor zeroes = new Tensor("a", true, 7, DefaultFunctions.ZERO);
-		Tensor cov1 = newCovector(DefaultFunctions.ONE, DefaultFunctions.TEN);
+		Tensor zeroes = new Tensor("a", true, 1, 7, DefaultFunctions.ZERO);
+		Tensor cov1 = newCovector("a", DefaultFunctions.ONE, DefaultFunctions.TEN);
 		Tensor bigBoy = newTensor(new int[]{2, 2}, new String[]{"a", "b"}, new boolean[]{true, false},
 				new Object[][]{
 						{tt("cos(x)"), tt("sin(x)")},
@@ -37,8 +37,13 @@ public class Tensor extends GeneralFunction {
 		System.out.println(bigBoy.getElement(1));
 		System.out.println(bigBoy.getElement(1, 0 ));
 		System.out.println(Arrays.deepToString(bigBoy.getElementTree()));
-		System.out.println(tensorProduct(cov1, bigBoy));
 		System.out.println(tensorProduct(bigBoy, cov1));
+		System.out.println();
+//		Tensor traceTest = bigBoy.changeIndex("b", "a"); // TODO this no work because it's not a tensor anymore
+//		System.out.println(traceTest.executeInternalSums());
+		Tensor bigger = tensorProduct(cov1, bigBoy);
+		System.out.println(bigger);
+		System.out.println(bigger.executeInternalSums());
 	}
 
 	private static GeneralFunction tt(String s) {
@@ -199,6 +204,18 @@ public class Tensor extends GeneralFunction {
 		return list;
 	}
 
+	private void getDimensionsHelper(int[] dimensions) {
+		dimensions[dimensions.length - rank] = elements.length;
+		if (elements[0] instanceof Tensor tensor)
+			tensor.getDimensionsHelper(dimensions);
+	}
+
+	public int[] getDimensions() {
+		int[] list = new int[rank];
+		getDimensionsHelper(list);
+		return list;
+	}
+
 
 	public Object[] getElementTree() {
 		if (rank > 1)
@@ -239,10 +256,10 @@ public class Tensor extends GeneralFunction {
 		return modifyWith(second,
 				i -> i,
 				i -> i,
-				i -> i,
+				i -> i + first.rank,
 				i -> Tensor.tensorProduct(first, i),
 				first::scale,
-				true);
+				false);
 	}
 
 
@@ -271,17 +288,88 @@ public class Tensor extends GeneralFunction {
 	}
 
 	public Tensor executeInternalSums() {
-		String[] sourceIndices = getIndices();
-		Pair<Integer, Integer> repeatedIndex = getRepeatedIndex(sourceIndices);
+		String[] oldIndices = getIndices();
+		Pair<Integer, Integer> repeatedIndex = getRepeatedIndex(oldIndices);
 		if (repeatedIndex == null)
 			return this;
-		boolean[] sourceVariances = getVariances();
-		Object[] sourceElements = getElementTree();
+		int first = repeatedIndex.getFirst();
+		int second = repeatedIndex.getSecond();
+		boolean[] oldVariances = getVariances();
+		if (oldVariances[first] == oldVariances[second])
+			throw new IllegalArgumentException("Variances are not opposite in internal tensor sum.");
+		int[] oldDimensions = getDimensions();
+		if (oldDimensions[first] != oldDimensions[second])
+			throw new IllegalArgumentException("Mismatched dimensions of indices in internal tensor sum.");
+		int sumLength = oldDimensions[first];
 
-		return null;
+		String[] newIndices = new String[oldIndices.length - 2];
+		boolean[] newVariances = new boolean[oldVariances.length - 2];
+		int[] newDimensions = new int[oldDimensions.length - 2];
+		for (int i = 0, j = 0; i < rank - 2; i++) {
+			if (i != first && i != second) {
+				newIndices[j] = oldIndices[i];
+				newVariances[j] = oldVariances[i];
+				newDimensions[j] = oldDimensions[i];
+				j++;
+			}
+		}
+
+		int[] newIxs = new int[newDimensions.length];
+		Arrays.fill(newIxs, 0);
+
+		NestedArray oldElements = new NestedArray(getElementTree());
+		NestedArray newElements = NestedArray.createFromDimensions(newDimensions);
+		boolean flag = true;
+		while (flag) {
+			int[] oldIxs = copyToArraySkipping(newIxs, first, second);
+			GeneralFunction[] toAdd = new GeneralFunction[sumLength];
+			for (int i = 0; i < sumLength; i++) {
+				oldIxs[first] = i;
+				oldIxs[second] = i;
+				toAdd[i] = (GeneralFunction) oldElements.getObjectAtIndex(oldIxs);
+			}
+			newElements.setObjectAtIndex(sumArbitrary(toAdd), newIxs);
+		}
+		return Tensor.newTensor(
+				newDimensions,
+				newIndices,
+				newVariances,
+				newElements.array
+		);
 	}
 
-	private Pair<Integer, Integer> getRepeatedIndex(String[] sourceIndices) {
+	private static GeneralFunction sumArbitrary(GeneralFunction... elements) {
+		if (elements[0] instanceof Tensor) {
+			Tensor tensor = (Tensor) elements[0];
+			for (int i = 1; i < elements.length; i++)
+				tensor = add(tensor, (Tensor) elements[i]);
+			return tensor;
+		} else
+			return new Sum(elements);
+	}
+
+	private static int[] copyToArraySkipping(int[] oldArray, int first, int second) {
+		int[] newArray = new int[oldArray.length + 2];
+		int j = 0;
+		for (int i = 0; i < newArray.length; i++)
+			if (i != first && i != second)
+				newArray[i] = oldArray[j++];
+		return newArray;
+	}
+
+	private static boolean incrementArray(int loc, int[] indices, int[] maxes) {
+		if (loc == indices.length)
+			return true;
+		else if (indices[loc] + 1 < maxes[loc]) {
+			indices[loc]++;
+			return false;
+		} else {
+			indices[loc] = 0;
+			return incrementArray(loc + 1, indices, maxes);
+		}
+	}
+
+	private static Pair<Integer, Integer> getRepeatedIndex(String[] sourceIndices) {
 		for (int i = 1; i < sourceIndices.length; i++)
 			for (int j = 0; j < i; j++)
 				if (sourceIndices[i].equals(sourceIndices[j]))
@@ -289,7 +377,6 @@ public class Tensor extends GeneralFunction {
 		return null;
 	}
 
-	
 	@Override
 	public GeneralFunction clone() {
 		throw new NotYetImplementedException("Not implemented in Tensor.");

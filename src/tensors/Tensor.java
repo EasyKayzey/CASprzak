@@ -2,16 +2,18 @@ package tensors;
 
 import functions.GeneralFunction;
 import functions.commutative.Product;
+import functions.commutative.Sum;
 import org.jetbrains.annotations.NotNull;
 import output.OutputFunction;
 import parsing.FunctionParser;
 import tools.DefaultFunctions;
-import tools.MiscTools;
 import tools.exceptions.NotYetImplementedException;
 
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
+
+import static tools.MiscTools.minimalSimplify;
 
 public class Tensor extends GeneralFunction {
 
@@ -111,6 +113,33 @@ public class Tensor extends GeneralFunction {
 		return new Tensor(indices[loc], contravariants[loc], arr);
 	}
 
+	public static Tensor modifyWith(Tensor seed,
+									Function<String, String> indexModifier,
+									Function<Boolean, Boolean> contravarianceModifier,
+									Function<Tensor, GeneralFunction> tensorElementModifier,
+									Function<GeneralFunction, GeneralFunction> functionElementModifier,
+									boolean simplifyFunctions) {
+		if (seed.elements[0] instanceof Tensor)
+			return new Tensor(
+					indexModifier.apply(seed.index),
+					contravarianceModifier.apply(seed.isContra),
+					Arrays.stream(seed.elements)
+							.map(function -> tensorElementModifier.apply((Tensor) function))
+							.toArray(GeneralFunction[]::new)
+			);
+		else
+			return new Tensor(
+					indexModifier.apply(seed.index),
+					contravarianceModifier.apply(seed.isContra),
+					Arrays.stream(seed.elements)
+							.map(function ->
+									simplifyFunctions
+									? minimalSimplify(functionElementModifier.apply(function))
+									: functionElementModifier.apply(function))
+							.toArray(GeneralFunction[]::new)
+			);
+	}
+
 
 	private GeneralFunction getElementHelper(LinkedList<Integer> indices) {
 		int idx = indices.removeFirst();
@@ -143,6 +172,18 @@ public class Tensor extends GeneralFunction {
 		return list;
 	}
 
+	private void getVariancesHelper(List<Boolean> variances) {
+		variances.add(isContra);
+		if (elements[0] instanceof Tensor tensor)
+			tensor.getVariancesHelper(variances);
+	}
+
+	public List<Boolean> getVariances() {
+		List<Boolean> list = new LinkedList<>();
+		getVariancesHelper(list);
+		return list;
+	}
+
 
 	public Object[] getElementTree() {
 		if (elements[0] instanceof Tensor)
@@ -154,46 +195,63 @@ public class Tensor extends GeneralFunction {
 	}
 
 
+	public Tensor changeIndex(String from, String to) {
+		return modifyWith(this,
+				i -> i.equals(from) ? to : i,
+				i -> i,
+				i -> i.changeIndex(from, to),
+				i -> i, // TODO maybe substitute variables?
+				true);
+	}
+
+
 	public Tensor scale(GeneralFunction scalar) {
 		return scale(scalar, this);
 	}
 
 	public static Tensor scale(GeneralFunction scalar, Tensor tensor) {
-		if (tensor.elements[0] instanceof Tensor)
-			return new Tensor(
-					tensor.index,
-					tensor.isContra,
-					Arrays.stream(tensor.elements)
-							.map(function -> Tensor.scale(scalar, (Tensor) function))
-							.toArray(GeneralFunction[]::new)
-			);
-		else
-			return new Tensor(
-					tensor.index,
-					tensor.isContra,
-					Arrays.stream(tensor.elements)
-							.map(function -> MiscTools.minimalSimplify(new Product(scalar, function)))
-							.toArray(GeneralFunction[]::new)
-			);
+		return modifyWith(tensor,
+				i -> i,
+				i -> i,
+				i -> i.scale(scalar),
+				i -> new Product(i, scalar),
+				true);
 	}
 
 	public static Tensor tensorProduct(Tensor first, Tensor second) {
-		if (second.elements[0] instanceof Tensor)
-			return new Tensor(
-					second.index,
-					second.isContra,
-					Arrays.stream(second.elements)
-							.map(function -> Tensor.tensorProduct(first, (Tensor) function))
-							.toArray(GeneralFunction[]::new)
-			);
-		else
-			return new Tensor(
-					second.index,
-					second.isContra,
-					Arrays.stream(second.elements)
-							.map(function -> Tensor.scale(function, first))
-							.toArray(GeneralFunction[]::new)
-			);
+		return modifyWith(second,
+				i -> i,
+				i -> i,
+				i -> Tensor.tensorProduct(first, i),
+				first::scale,
+				true);
+	}
+
+
+	public static Tensor add(Tensor first, Tensor second) {
+		if (first.isContra != second.isContra)
+			throw new IllegalArgumentException("Mismatched tensor variance in addition.");
+		else if (!first.index.equals(second.index))
+			throw new IllegalArgumentException("Mismatched tensor index name in addition.");
+		else if (first.elements.length != second.elements.length)
+			throw new IllegalArgumentException("Mismatched tensor size in addition.");
+
+		if (first.elements[0] instanceof Tensor && second.elements[0] instanceof Tensor) {
+			GeneralFunction[] elementSums = new GeneralFunction[first.elements.length];
+			for (int i = 0; i < elementSums.length; i++)
+				elementSums[i] = Tensor.add((Tensor) first.elements[i], (Tensor) second.elements[i]);
+			return new Tensor(first.index, first.isContra, elementSums);
+		} else if (!(first.elements[0] instanceof Tensor || second.elements[0] instanceof Tensor)) {
+			GeneralFunction[] elementSums = new GeneralFunction[first.elements.length];
+			for (int i = 0; i < elementSums.length; i++)
+				elementSums[i] = minimalSimplify(new Sum(first.elements[i], second.elements[i]));
+			return new Tensor(first.index, first.isContra, elementSums);
+		} else
+			throw new IllegalArgumentException("Mismatched tensor dimensions in addition.");
+	}
+
+	public Tensor executeInternalSums() {
+		return null;
 	}
 
 

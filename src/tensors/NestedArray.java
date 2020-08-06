@@ -8,6 +8,19 @@ public class NestedArray {
 		this.array = array;
 	}
 
+	private static Object[] objectArrayFromDimensions(int loc, int... dimensions) {
+		if (loc == dimensions.length)
+			return null;
+		Object[] array = new Object[dimensions[loc]];
+		for (int i = 0; i < array.length; i++)
+			array[i] = objectArrayFromDimensions(loc + 1, dimensions);
+		return array;
+	}
+
+	public static NestedArray createFromDimensions(int... dimensions) {
+		return new NestedArray(objectArrayFromDimensions(0, dimensions));
+	}
+
 	private static Object getObjectAtIndexHelper(int loc, Object[] array, int[] index) {
 		if (loc < index.length - 1)
 			return getObjectAtIndexHelper(loc + 1, (Object[]) array[index[loc]], index);

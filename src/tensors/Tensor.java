@@ -24,7 +24,7 @@ public class Tensor extends GeneralFunction {
 
 	public static void main(String[] args) {
 		Tensor zeroes = new Tensor("a", true, 1, 7, DefaultFunctions.ZERO);
-		Tensor cov1 = newCovector("a", DefaultFunctions.ONE, DefaultFunctions.TEN);
+		Tensor vec1 = newVector("b", DefaultFunctions.ONE, DefaultFunctions.ONE);
 		Tensor bigBoy = newTensor(new int[]{2, 2}, new String[]{"a", "b"}, new boolean[]{true, false},
 				new Object[][]{
 						{tt("cos(x)"), tt("sin(x)")},
@@ -32,16 +32,16 @@ public class Tensor extends GeneralFunction {
 				}
 		);
 		System.out.println(zeroes);
-		System.out.println(cov1);
+		System.out.println(vec1);
 		System.out.println(bigBoy);
 		System.out.println(bigBoy.getElement(1));
 		System.out.println(bigBoy.getElement(1, 0 ));
 		System.out.println(Arrays.deepToString(bigBoy.getElementTree()));
-		System.out.println(tensorProduct(bigBoy, cov1));
+		System.out.println(tensorProduct(bigBoy, vec1));
 		System.out.println();
 //		Tensor traceTest = bigBoy.changeIndex("b", "a"); // TODO this no work because it's not a tensor anymore
 //		System.out.println(traceTest.executeInternalSums());
-		Tensor bigger = tensorProduct(cov1, bigBoy);
+		Tensor bigger = tensorProduct(vec1, bigBoy);
 		System.out.println(bigger);
 		System.out.println(bigger.executeInternalSums());
 	}
@@ -305,7 +305,7 @@ public class Tensor extends GeneralFunction {
 		String[] newIndices = new String[oldIndices.length - 2];
 		boolean[] newVariances = new boolean[oldVariances.length - 2];
 		int[] newDimensions = new int[oldDimensions.length - 2];
-		for (int i = 0, j = 0; i < rank - 2; i++) {
+		for (int i = 0, j = 0; i < rank; i++) {
 			if (i != first && i != second) {
 				newIndices[j] = oldIndices[i];
 				newVariances[j] = oldVariances[i];
@@ -329,6 +329,7 @@ public class Tensor extends GeneralFunction {
 				toAdd[i] = (GeneralFunction) oldElements.getObjectAtIndex(oldIxs);
 			}
 			newElements.setObjectAtIndex(sumArbitrary(toAdd), newIxs);
+			flag = incrementArray(0, newIxs, newDimensions);
 		}
 		return Tensor.newTensor(
 				newDimensions,
@@ -359,10 +360,10 @@ public class Tensor extends GeneralFunction {
 
 	private static boolean incrementArray(int loc, int[] indices, int[] maxes) {
 		if (loc == indices.length)
-			return true;
+			return false;
 		else if (indices[loc] + 1 < maxes[loc]) {
 			indices[loc]++;
-			return false;
+			return true;
 		} else {
 			indices[loc] = 0;
 			return incrementArray(loc + 1, indices, maxes);

@@ -19,7 +19,7 @@ import static tools.MiscTools.minimalSimplify;
 public class Tensor extends GeneralFunction {
 
 	public static final boolean assertValidity = true;
-	public static final boolean zeroIndexed = true; // TODO implement this
+	public static final boolean zeroIndexed = true;
 
 
 	public static void main(String[] args) {
@@ -44,6 +44,7 @@ public class Tensor extends GeneralFunction {
 		Tensor bigger = tensorProduct(vec1, bigBoy);
 		System.out.println(bigger);
 		System.out.println(bigger.executeInternalSums());
+		System.out.println(tensorProduct(bigBoy, vec1).executeInternalSums());
 	}
 
 	private static GeneralFunction tt(String s) {
@@ -172,7 +173,11 @@ public class Tensor extends GeneralFunction {
 	}
 
 	public GeneralFunction getElement(List<Integer> indices) {
-		return getElementHelper(new LinkedList<>(indices));
+		LinkedList<Integer> linkedIndices = new LinkedList<>(indices);
+		if (!zeroIndexed)
+			for (ListIterator<Integer> iter = linkedIndices.listIterator(); iter.hasNext();)
+				iter.set(iter.next() - 1);
+		return getElementHelper(linkedIndices);
 	}
 
 	public GeneralFunction getElement(Integer... indices) {

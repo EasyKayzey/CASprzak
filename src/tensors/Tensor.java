@@ -3,6 +3,7 @@ package tensors;
 import functions.GeneralFunction;
 import functions.commutative.Product;
 import functions.commutative.Sum;
+import functions.endpoint.Variable;
 import org.jetbrains.annotations.NotNull;
 import output.OutputFunction;
 import parsing.FunctionParser;
@@ -20,6 +21,7 @@ public class Tensor extends GeneralFunction {
 
 	public static boolean assertValidity = true;
 	public static boolean zeroIndexed = true;
+	public static boolean reindexVariableSubstitution = true;
 
 
 	public static void main(String[] args) {
@@ -123,14 +125,18 @@ public class Tensor extends GeneralFunction {
 
 	private static Tensor newTensor(int loc, int[] dimensions, String[] indices, boolean[] contravariants, Object[] elements) {
 		GeneralFunction[] arr = new GeneralFunction[dimensions[loc]];
-		if (loc == dimensions.length - 1) {
-			for (int i = 0; i < arr.length; i++)
-				arr[i] = (GeneralFunction) elements[i]; // TODO check for class cast
-			return new Tensor(indices[loc], contravariants[loc], 1, arr);
-		} else {
-			for (int i = 0; i < arr.length; i++)
-				arr[i] = newTensor(loc + 1, dimensions, indices, contravariants, (Object[]) elements[i]); // TODO check for class cast
-			return new Tensor(indices[loc], contravariants[loc], ((Tensor) arr[0]).rank + 1, arr);
+		try {
+			if (loc == dimensions.length - 1) {
+				for (int i = 0; i < arr.length; i++)
+					arr[i] = (GeneralFunction) elements[i];
+				return new Tensor(indices[loc], contravariants[loc], 1, arr);
+			} else {
+				for (int i = 0; i < arr.length; i++)
+					arr[i] = newTensor(loc + 1, dimensions, indices, contravariants, (Object[]) elements[i]);
+				return new Tensor(indices[loc], contravariants[loc], ((Tensor) arr[0]).rank + 1, arr);
+			}
+		} catch (ClassCastException e) {
+			throw new IllegalArgumentException("Array argument length (rank) does not match nested GeneralFunction array (Object[]) depth.");
 		}
 	}
 
@@ -241,7 +247,7 @@ public class Tensor extends GeneralFunction {
 				i -> i,
 				i -> i,
 				i -> i.changeIndex(from, to),
-				i -> i, // TODO maybe substitute variables?
+				reindexVariableSubstitution ? i -> i.substituteVariables(Map.of(from, new Variable(to))) : i -> i,
 				true);
 	}
 
@@ -260,7 +266,14 @@ public class Tensor extends GeneralFunction {
 				true);
 	}
 
-	public static Tensor tensorProduct(Tensor first, Tensor second) { // TODO multiple arguments
+	public static Tensor tensorProduct(Tensor... tensors) {
+		Tensor tensor = tensors[0];
+		for (int i = 1; i < tensors.length; i++)
+			tensor = tensorProduct(tensor, tensors[i]);
+		return tensor;
+	}
+
+	private static Tensor tensorProduct(Tensor first, Tensor second) { // TODO check order of resulting indices
 		return modifyWith(second,
 				i -> i,
 				i -> i,
@@ -271,7 +284,14 @@ public class Tensor extends GeneralFunction {
 	}
 
 
-	public static Tensor add(Tensor first, Tensor second) { // TODO multiple arguments
+	public static Tensor sum(Tensor... tensors) {
+		Tensor tensor = tensors[0];
+		for (int i = 1; i < tensors.length; i++)
+			tensor = addTwo(tensor, tensors[i]);
+		return tensor;
+	}
+
+	private static Tensor addTwo(Tensor first, Tensor second) {
 		if (first.isContra != second.isContra)
 			throw new IllegalArgumentException("Mismatched tensor variance in addition.");
 		if (first.rank != second.rank)
@@ -284,7 +304,7 @@ public class Tensor extends GeneralFunction {
 		if (first.elements[0] instanceof Tensor && second.elements[0] instanceof Tensor) {
 			GeneralFunction[] elementSums = new GeneralFunction[first.elements.length];
 			for (int i = 0; i < elementSums.length; i++)
-				elementSums[i] = Tensor.add((Tensor) first.elements[i], (Tensor) second.elements[i]);
+				elementSums[i] = Tensor.addTwo((Tensor) first.elements[i], (Tensor) second.elements[i]);
 			return new Tensor(first.index, first.isContra, first.rank, elementSums);
 		} else if (!(first.elements[0] instanceof Tensor || second.elements[0] instanceof Tensor)) {
 			GeneralFunction[] elementSums = new GeneralFunction[first.elements.length];
@@ -351,7 +371,7 @@ public class Tensor extends GeneralFunction {
 		if (elements[0] instanceof Tensor) {
 			Tensor tensor = (Tensor) elements[0];
 			for (int i = 1; i < elements.length; i++)
-				tensor = add(tensor, (Tensor) elements[i]);
+				tensor = addTwo(tensor, (Tensor) elements[i]);
 			return tensor;
 		} else
 			return new Sum(elements);

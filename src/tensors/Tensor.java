@@ -18,8 +18,8 @@ import static tools.MiscTools.minimalSimplify;
 
 public class Tensor extends GeneralFunction {
 
-	public static final boolean assertValidity = true;
-	public static final boolean zeroIndexed = true;
+	public static boolean assertValidity = true;
+	public static boolean zeroIndexed = true;
 
 
 	public static void main(String[] args) {
@@ -35,7 +35,10 @@ public class Tensor extends GeneralFunction {
 		System.out.println(vec1);
 		System.out.println(bigBoy);
 		System.out.println(bigBoy.getElement(1));
-		System.out.println(bigBoy.getElement(1, 0 ));
+		System.out.println(bigBoy.getElement(1, 0));
+		zeroIndexed = false;
+		System.out.println(bigBoy.getElement(2, 1));
+		zeroIndexed = true;
 		System.out.println(Arrays.deepToString(bigBoy.getElementTree()));
 		System.out.println(tensorProduct(bigBoy, vec1));
 		System.out.println();

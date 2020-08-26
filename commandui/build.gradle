@@ -1,0 +1,33 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+dependencies {
+    implementation 'org.jetbrains:annotations:16.0.2'
+
+    implementation project(':core')
+
+    implementation project(':parsing')
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ["src/java"]
+        }
+    }
+}
+
+application {
+    mainClassName = 'show.ezkz.casprzak.commandui.CommandUI'
+}
+
+tasks.withType(JavaCompile).each {
+    it.options.compilerArgs.add('--enable-preview')
+}
+
+tasks.withType(JavaExec).each {
+    it.jvmArgs(['--enable-preview'])
+    it.standardInput = System.in
+}

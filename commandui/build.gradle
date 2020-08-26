@@ -31,3 +31,9 @@ tasks.withType(JavaExec).each {
     it.jvmArgs(['--enable-preview'])
     it.standardInput = System.in
 }
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'show.ezkz.casprzak.commandui.CommandUI'
+    }
+}

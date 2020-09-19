@@ -24,6 +24,7 @@ application {
 }
 
 tasks.withType(JavaCompile).each {
+    it.options.encoding = 'UTF-8'
     it.options.compilerArgs.add('--enable-preview')
 }
 

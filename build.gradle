@@ -16,6 +16,7 @@ allprojects {
         // You can declare any Maven/Ivy/file repository here.
         jcenter()
     }
+    compileJava.options.encoding = 'UTF-8'
 }
 
 subprojects {
@@ -70,6 +71,11 @@ jar {
     }
 }
 
-tasks.withType(JavaCompile).each {
-    it.options.compilerArgs.add('--enable-preview')
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+    options.compilerArgs.add('--enable-preview')
+}
+
+tasks.withType(Test) {
+    systemProperty "file.encoding", "UTF-8"
 }

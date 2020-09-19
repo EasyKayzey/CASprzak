@@ -1,8 +1,8 @@
-import functions.GeneralFunction;
-import functions.unitary.trig.inverse.*;
+import show.ezkz.casprzak.core.functions.GeneralFunction;
+import show.ezkz.casprzak.core.functions.unitary.trig.inverse.*;
 import org.junit.jupiter.api.Test;
-import parsing.FunctionParser;
-import tools.DefaultFunctions;
+import show.ezkz.casprzak.parsing.FunctionParser;
+import show.ezkz.casprzak.core.tools.DefaultFunctions;
 
 import java.util.Map;
 

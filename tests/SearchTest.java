@@ -1,9 +1,9 @@
-import functions.GeneralFunction;
-import functions.commutative.CommutativeFunction;
+import show.ezkz.casprzak.core.functions.GeneralFunction;
+import show.ezkz.casprzak.core.functions.commutative.CommutativeFunction;
 import org.junit.jupiter.api.Test;
-import parsing.FunctionParser;
-import tools.SearchTools;
-import tools.VariableTools;
+import show.ezkz.casprzak.parsing.FunctionParser;
+import show.ezkz.casprzak.core.tools.SearchTools;
+import show.ezkz.casprzak.core.tools.VariableTools;
 
 import java.util.Set;
 

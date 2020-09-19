@@ -1,9 +1,6 @@
-import functions.GeneralFunction;
-import functions.commutative.Product;
-import functions.endpoint.Variable;
-import functions.unitary.trig.normal.Sin;
+import show.ezkz.casprzak.core.functions.GeneralFunction;
 import org.junit.jupiter.api.Test;
-import parsing.FunctionParser;
+import show.ezkz.casprzak.parsing.FunctionParser;
 
 import java.util.Map;
 

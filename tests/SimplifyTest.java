@@ -1,10 +1,10 @@
-import config.Settings;
-import functions.GeneralFunction;
-import functions.binary.Pow;
-import functions.commutative.Product;
+import show.ezkz.casprzak.core.config.Settings;
+import show.ezkz.casprzak.core.functions.GeneralFunction;
+import show.ezkz.casprzak.core.functions.binary.Pow;
+import show.ezkz.casprzak.core.functions.commutative.Product;
 import org.junit.jupiter.api.Test;
-import parsing.FunctionParser;
-import tools.DefaultFunctions;
+import show.ezkz.casprzak.parsing.FunctionParser;
+import show.ezkz.casprzak.core.tools.DefaultFunctions;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;

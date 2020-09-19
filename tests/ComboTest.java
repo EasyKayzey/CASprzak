@@ -1,10 +1,10 @@
-import functions.GeneralFunction;
+import show.ezkz.casprzak.core.functions.GeneralFunction;
 import org.junit.jupiter.api.Test;
-import parsing.FunctionParser;
+import show.ezkz.casprzak.parsing.FunctionParser;
 
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ComboTest {
 	@Test

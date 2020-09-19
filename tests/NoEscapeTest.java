@@ -1,9 +1,9 @@
-import config.Settings;
-import functions.GeneralFunction;
-import functions.commutative.Product;
+import show.ezkz.casprzak.core.config.Settings;
+import show.ezkz.casprzak.core.functions.GeneralFunction;
+import show.ezkz.casprzak.core.functions.commutative.Product;
 import org.junit.jupiter.api.Test;
-import parsing.FunctionParser;
-import tools.DefaultFunctions;
+import show.ezkz.casprzak.parsing.FunctionParser;
+import show.ezkz.casprzak.core.tools.DefaultFunctions;
 
 import java.util.Map;
 

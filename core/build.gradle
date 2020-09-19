@@ -1,0 +1,33 @@
+plugins {
+    id 'java-library'
+}
+
+dependencies {
+    // Use JUnit Jupiter API for testing.
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.2'
+
+    // Use JUnit Jupiter Engine for testing.
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.2'
+
+    implementation 'org.jetbrains:annotations:16.0.2'
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ["src/java"]
+        }
+    }
+}
+
+test {
+    // Use junit platform for unit tests
+    useJUnitPlatform()
+
+    jvmArgs(['--enable-preview'])
+}
+
+tasks.withType(JavaCompile).each {
+    it.options.encoding = 'UTF-8'
+    it.options.compilerArgs.add('--enable-preview')
+}

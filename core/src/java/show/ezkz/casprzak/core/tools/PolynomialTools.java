@@ -57,14 +57,14 @@ public class PolynomialTools {
 	}
 
 	private static boolean isGivenMonomial(GeneralFunction function, DoublePredicate test) {
-		if (function instanceof Constant || function instanceof Variable || (function instanceof Pow pow && pow.getFunction2() instanceof Variable && pow.getFunction1() instanceof Constant exp && test.test(exp.evaluate(Map.of())))) {
+		if (function instanceof Constant || function instanceof Variable || (function instanceof Pow pow && pow.getFunction2() instanceof Variable && pow.getFunction1() instanceof Constant exp && test.test(exp.evaluate()))) {
 			return true;
 		} else if (function instanceof Product product) {
 			GeneralFunction[] elements = product.getFunctions();
 			for (GeneralFunction element : elements) {
 				if (!(element instanceof Constant || element instanceof Variable || element instanceof Pow))
 					return false;
-				if (element instanceof Pow pow && !(pow.getFunction2() instanceof Variable && pow.getFunction1() instanceof Constant exp && test.test(exp.evaluate(Map.of()))))
+				if (element instanceof Pow pow && !(pow.getFunction2() instanceof Variable && pow.getFunction1() instanceof Constant exp && test.test(exp.evaluate())))
 					return false;
 			}
 			return true;

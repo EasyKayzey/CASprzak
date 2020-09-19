@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
  */
 @SuppressWarnings("SpellCheckingInspection")
 public class KeywordInterface {
-	private static final String version = "v0.2.1";
+	private static final String version = "v0.3.0-DEV";
 	private static final Pattern keywordSplitter = Pattern.compile("\\s+(?=[^\"]*(\"[^\"]*\"[^\"]*)*$)");
 	private static final Pattern spaces = Pattern.compile("\\s+");
 	private static final Pattern equals = Pattern.compile("=");
@@ -107,6 +107,8 @@ public class KeywordInterface {
 				prevException = new CommandNotFoundException(splitInput[0] + " is not a command supported by KeywordInterface, and raw-function parsing failed to interpret the input.", parserException);
 				throw prevException;
 			}
+		} else if (ret instanceof Double) {
+			ret = new Constant((Double) ret);
 		}
 		prev = ret;
 		return ret;
@@ -215,6 +217,13 @@ public class KeywordInterface {
 		return input;
 	}
 
+	private static double toDouble(Object object) {
+		if (object instanceof Constant constant)
+			return constant.constant;
+		else
+			return (double) object;
+	}
+
 	private static String demo() {
 		CASDemo.reset();
 		return CASDemo.runDemo();
@@ -237,9 +246,9 @@ public class KeywordInterface {
 	private static double evaluate(String input) {
 		String[] splitInput = keywordSplitter.split(input, 2);
 		if (splitInput.length == 0)
-			throw new MismatchedCommandArgumentsException("1 or 2", splitInput.length);
+			throw new MismatchedCommandArgumentsException("1 or more", splitInput.length);
 		if (splitInput.length == 1)
-			return parseStored(splitInput[0]).evaluate(new HashMap<>());
+			return parseStored(splitInput[0]).evaluate();
 		else {
 			Object lastPrev = prev;
 			return parseStored(splitInput[0]).evaluate(
@@ -247,7 +256,7 @@ public class KeywordInterface {
 							.map(equals::split)
 							.collect(Collectors.toMap(
 									e -> LatexReplacer.encodeAll(e[0]),
-									e -> "_".equals(e[1]) ? (Double) lastPrev : FunctionParser.getConstant(e[1]))
+									e -> "_".equals(e[1]) ? toDouble(lastPrev) : FunctionParser.getConstant(e[1]))
 							)
 			);
 		}
@@ -317,9 +326,9 @@ public class KeywordInterface {
 		if (splitInput.length != 2)
 			throw new MismatchedCommandArgumentsException("2", splitInput.length);
 		try {
-			return Constant.addSpecialConstant(LatexReplacer.encodeAll(splitInput[0]), ((GeneralFunction) KeywordInterface.useKeywords(splitInput[1])).evaluate(Map.of()));
+			return Constant.addSpecialConstant(LatexReplacer.encodeAll(splitInput[0]), ((GeneralFunction) KeywordInterface.useKeywords(splitInput[1])).evaluate());
 		} catch (Exception e) {
-			return Constant.addSpecialConstant(LatexReplacer.encodeAll(splitInput[0]), parseStored(splitInput[1]).evaluate(Map.of()));
+			return Constant.addSpecialConstant(LatexReplacer.encodeAll(splitInput[0]), parseStored(splitInput[1]).evaluate());
 		}
 	}
 

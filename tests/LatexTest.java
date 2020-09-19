@@ -11,7 +11,7 @@ public class LatexTest {
 	@Test
 	void adjMultiply() {
 		GeneralFunction test = FunctionParser.parseInfix("\\pi\\pi");
-		assertEquals(10, test.evaluate(Map.of()), .3);
+		assertEquals(10, test.evaluate(), .3);
 	}
 
 	@Test
@@ -72,5 +72,11 @@ public class LatexTest {
 	void adjacentWords2() {
 		GeneralFunction test = FunctionParser.parseInfix("\\epsilon\\Gamma\\epsilon\\pi");
 		assertEquals(6.3, test.evaluate(Map.of("ϵ", 1., "Γ", 2.)), .3);
+	}
+
+	@Test
+	void sinx() {
+		GeneralFunction test = FunctionParser.parseSimplified("sinx");
+		assertEquals(FunctionParser.parseSimplified("s*i*n*x"), test);
 	}
 }

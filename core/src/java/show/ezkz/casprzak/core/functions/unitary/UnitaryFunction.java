@@ -53,7 +53,7 @@ public abstract class UnitaryFunction extends GeneralFunction {
 	 */
 	public GeneralFunction simplifyFOC() {
 		if (Settings.simplifyFunctionsOfConstants && operand instanceof Constant)
-			return new Constant(evaluate(Map.of()));
+			return new Constant(evaluate());
 		else
 			return this;
 	}

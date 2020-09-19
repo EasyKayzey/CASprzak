@@ -18,6 +18,7 @@ import show.ezkz.casprzak.core.functions.unitary.trig.normal.TrigFunction;
 import org.jetbrains.annotations.NotNull;
 import show.ezkz.casprzak.core.tools.MiscTools;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -67,6 +68,16 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 	 * @return a clone of this function
 	 */
 	public abstract GeneralFunction clone();
+
+
+	/**
+	 * Overloads {@link Evaluable#evaluate(Map)} with no arguments, passing a {@code Collections#EMPTY_MAP} by default
+	 * @return the function evaluated with no arguments
+	 */
+	@SuppressWarnings("unchecked")
+	public double evaluate() {
+		return evaluate(Collections.EMPTY_MAP);
+	}
 
 
 	public GeneralFunction getSimplifiedDerivative(String varID) {

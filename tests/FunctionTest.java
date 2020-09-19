@@ -161,27 +161,27 @@ public class FunctionTest {
 
 	@Test void emptyMap() {
 		GeneralFunction test = FunctionParser.parseInfix("\\ln(e)");
-		assertEquals(1, test.evaluate(Map.of()));
+		assertEquals(1, test.evaluate());
 	}
 
 	@Test void nullMap() {
 		GeneralFunction test = FunctionParser.parseInfix("\\ln(e)");
-		assertEquals(1, test.evaluate(Map.of()));
+		assertEquals(1, test.evaluate());
 	}
 
 	@Test void usingEDoubles() {
 		GeneralFunction test = FunctionParser.parseInfix("16E-6*1E6");
-		assertEquals(16, test.evaluate(Map.of()));
+		assertEquals(16, test.evaluate());
 	}
 
 	@Test void negativeEscape() {
 		GeneralFunction test = FunctionParser.parseInfix("-\\sin(\\pi/2)");
-		assertEquals(-1, test.evaluate(Map.of()), .01);
+		assertEquals(-1, test.evaluate(), .01);
 	}
 
 	@Test void frac() {
 		GeneralFunction test = FunctionParser.parseInfix("-\\frac{3}{-2}");
-		assertEquals(1.5, test.evaluate(Map.of()), .01);
+		assertEquals(1.5, test.evaluate(), .01);
 	}
 
 	@Test void exp() {
@@ -191,37 +191,37 @@ public class FunctionTest {
 
 	@Test void gcd() {
 		GeneralFunction test = FunctionParser.parseSimplified("\\gcd(2, -4)");
-		assertEquals(2, test.evaluate(Map.of()));
+		assertEquals(2, test.evaluate());
 	}
 
 	@Test void lcm() {
 		GeneralFunction test = FunctionParser.parseSimplified("\\lcm(2,-4)");
-		assertEquals(-4, test.evaluate(Map.of()));
+		assertEquals(-4, test.evaluate());
 	}
 
 	@Test void mod() {
 		GeneralFunction test = FunctionParser.parseSimplified("-4%3");
-		assertEquals(-1, test.evaluate(Map.of()));
+		assertEquals(-1, test.evaluate());
 	}
 
 	@Test void floor() {
 		GeneralFunction test = FunctionParser.parseSimplified("floor(2.5)");
-		assertEquals(2, test.evaluate(Map.of()));
+		assertEquals(2, test.evaluate());
 	}
 
 	@Test void ceil() {
 		GeneralFunction test = FunctionParser.parseSimplified("ceil(2.5)");
-		assertEquals(3, test.evaluate(Map.of()));
+		assertEquals(3, test.evaluate());
 	}
 
 	@Test void integerQuotient() {
 		GeneralFunction test = FunctionParser.parseSimplified("4 // 3");
-		assertEquals(1, test.evaluate(Map.of()));
+		assertEquals(1, test.evaluate());
 	}
 
 	@Test void integerQuotientNoSpaces() {
 		GeneralFunction test = FunctionParser.parseSimplified("4//3");
-		assertEquals(1, test.evaluate(Map.of()));
+		assertEquals(1, test.evaluate());
 	}
 
 	@Test void abs() {
@@ -274,70 +274,70 @@ public class FunctionTest {
 
 	@Test void arctrigEval() {
 		GeneralFunction test = FunctionParser.parseSimplified("\\arcsin(0.7)");
-		assertEquals(0.775397496611, test.evaluate(Map.of()), 0.001);
+		assertEquals(0.775397496611, test.evaluate(), 0.001);
 		test = FunctionParser.parseSimplified("\\arccos(0.7)");
-		assertEquals(0.795398830184, test.evaluate(Map.of()), 0.001);
+		assertEquals(0.795398830184, test.evaluate(), 0.001);
 		test = FunctionParser.parseSimplified("\\arctan(11.5)");
-		assertEquals( 1.48405798812, test.evaluate(Map.of()), 0.001);
+		assertEquals( 1.48405798812, test.evaluate(), 0.001);
 		test = FunctionParser.parseSimplified("\\arccsc(11.5)");
-		assertEquals(0.0870664823474, test.evaluate(Map.of()), 0.001);
+		assertEquals(0.0870664823474, test.evaluate(), 0.001);
 		test = FunctionParser.parseSimplified("\\arcsec(11.5)");
-		assertEquals(1.4837294445, test.evaluate(Map.of()), 0.001);
+		assertEquals(1.4837294445, test.evaluate(), 0.001);
 		test = FunctionParser.parseSimplified("\\arccot(-11.5)");
-		assertEquals(3.05485421491, test.evaluate(Map.of()), 0.001);
+		assertEquals(3.05485421491, test.evaluate(), 0.001);
 		test = FunctionParser.parseSimplified("\\arcsinh(-11.5)");
-		assertEquals( -3.13737923732, test.evaluate(Map.of()), 0.001);
+		assertEquals( -3.13737923732, test.evaluate(), 0.001);
 		test = FunctionParser.parseSimplified("\\arccosh(7)");
-		assertEquals(2.63391579385, test.evaluate(Map.of()), 0.001);
+		assertEquals(2.63391579385, test.evaluate(), 0.001);
 		test = FunctionParser.parseSimplified("\\arctanh(.6)");
-		assertEquals(0.69314, test.evaluate(Map.of()), 0.001);
+		assertEquals(0.69314, test.evaluate(), 0.001);
 		test = FunctionParser.parseSimplified("\\arccsch(-.56)");
-		assertEquals( -1.34348187431, test.evaluate(Map.of()), 0.001);
+		assertEquals( -1.34348187431, test.evaluate(), 0.001);
 		test = FunctionParser.parseSimplified("\\arcsech(.4)");
-		assertEquals(1.56679923697, test.evaluate(Map.of()), 0.001);
+		assertEquals(1.56679923697, test.evaluate(), 0.001);
 		test = FunctionParser.parseSimplified("\\arccoth(1.5)");
-		assertEquals(0.804718956217, test.evaluate(Map.of()), 0.001);
+		assertEquals(0.804718956217, test.evaluate(), 0.001);
 	}
 
 	@Test void arcOfNormal() {
 		GeneralFunction test = FunctionParser.parseSimplified("\\arcsin(sin(43))");
-		assertEquals(-0.982297150257, test.evaluate(Map.of()), 0.001);
+		assertEquals(-0.982297150257, test.evaluate(), 0.001);
 		test = FunctionParser.parseSimplified("\\arccos(cos(43))");
-		assertEquals(0.9822971, test.evaluate(Map.of()), 0.001);
+		assertEquals(0.9822971, test.evaluate(), 0.001);
 		test = FunctionParser.parseSimplified("\\arctan(tan(11.5))");
-		assertEquals(-1.06637061, test.evaluate(Map.of()), 0.001);
+		assertEquals(-1.06637061, test.evaluate(), 0.001);
 		test = FunctionParser.parseSimplified("\\arccsc(csc(11.5))");
-		assertEquals(-1.06637, test.evaluate(Map.of()), 0.001);
+		assertEquals(-1.06637, test.evaluate(), 0.001);
 		test = FunctionParser.parseSimplified("\\arcsec(sec(11.5))");
-		assertEquals(1.06637061, test.evaluate(Map.of()), 0.001);
+		assertEquals(1.06637061, test.evaluate(), 0.001);
 		test = FunctionParser.parseSimplified("\\arccot(cot(-11.5))");
-		assertEquals( 1.06637061, test.evaluate(Map.of()), 0.001);
+		assertEquals( 1.06637061, test.evaluate(), 0.001);
 		test = FunctionParser.parseSimplified("\\arcsinh(sinh(-11.5))");
-		assertEquals( -11.5, test.evaluate(Map.of()), 0.001);
+		assertEquals( -11.5, test.evaluate(), 0.001);
 		test = FunctionParser.parseSimplified("\\arccosh(cosh(7))");
-		assertEquals(7, test.evaluate(Map.of()),  0.001);
+		assertEquals(7, test.evaluate(),  0.001);
 		test = FunctionParser.parseSimplified("\\arctan(tan(.6))");
-		assertEquals(.6, test.evaluate(Map.of()), 0.001);
+		assertEquals(.6, test.evaluate(), 0.001);
 		test = FunctionParser.parseSimplified("\\arccsch(csch(-.56))");
-		assertEquals(-.56, test.evaluate(Map.of()), 0.001);
+		assertEquals(-.56, test.evaluate(), 0.001);
 		test = FunctionParser.parseSimplified("\\arcsech(sech(.4))");
-		assertEquals(.4, test.evaluate(Map.of()), 0.001);
+		assertEquals(.4, test.evaluate(), 0.001);
 		test = FunctionParser.parseSimplified("\\arccoth(coth(1.5))");
-		assertEquals(1.5, test.evaluate(Map.of()), 0.001);
+		assertEquals(1.5, test.evaluate(), 0.001);
 	}
 
 	@Test void noLeadingZero() {
 		GeneralFunction test;
 		test = FunctionParser.parseSimplified("1+.2");
-		assertEquals(1.2, test.evaluate(Map.of()), .000001);
+		assertEquals(1.2, test.evaluate(), .000001);
 		test = FunctionParser.parseSimplified("1-.2");
-		assertEquals(0.8, test.evaluate(Map.of()), .000001);
+		assertEquals(0.8, test.evaluate(), .000001);
 		test = FunctionParser.parseSimplified("5*.2");
-		assertEquals(1.0, test.evaluate(Map.of()), .000001);
+		assertEquals(1.0, test.evaluate(), .000001);
 		test = FunctionParser.parseSimplified("1/.2");
-		assertEquals(5.0, test.evaluate(Map.of()), .000001);
+		assertEquals(5.0, test.evaluate(), .000001);
 		test = FunctionParser.parseSimplified("9^.5");
-		assertEquals(3.0, test.evaluate(Map.of()), .000001);
+		assertEquals(3.0, test.evaluate(), .000001);
 	}
 
 }

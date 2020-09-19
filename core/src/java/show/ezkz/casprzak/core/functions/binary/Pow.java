@@ -88,7 +88,7 @@ public class Pow extends BinaryFunction {
 	public GeneralFunction simplifyFOC() {
 		if (function1 instanceof Constant constant1 && function2 instanceof Constant constant2)
 			if (Settings.simplifyFunctionsOfSpecialConstants || (!constant1.isSpecial() && !constant2.isSpecial()))
-				return new Constant(this.evaluate(Map.of())).simplify();
+				return new Constant(this.evaluate()).simplify();
 		return this;
 	}
 

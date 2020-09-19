@@ -101,7 +101,7 @@ public abstract class BinaryFunction extends GeneralFunction {
 	 */
 	public GeneralFunction simplifyFOC() {
 		if (function1 instanceof Constant && function2 instanceof Constant)
-			return new Constant(this.evaluate(Map.of())).simplify();
+			return new Constant(this.evaluate()).simplify();
 		else
 			return this;
 	}

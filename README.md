@@ -31,7 +31,6 @@ All documentation for CASprzak can be found at: https://ezkz.show/CASprzak-docum
   - Demo command demonstrating core features
 
 ## Usage
-
 1. Download the latest release jar from the `Releases` tab
 2. Ensure you are running Java 14
 3. Launch the program in your favorite command line using `java -jar --enable-preview CASprzak.jar` 
@@ -48,13 +47,11 @@ All documentation for CASprzak can be found at: https://ezkz.show/CASprzak-docum
 ## Build and Test
 
 This project uses Gradle for building and testing. To build and test CASprzak, run this command in a terminal:
-
 ```shell
 ./gradlew build
 ```
 
 On Windows, run this in Command Prompt:
-
 ```
 gradlew.bat build
 ```
@@ -62,7 +59,6 @@ gradlew.bat build
 A combined JAR for distribution will be created in `build/libs`. JARS of individual libraries will be created in `core/build/libs`, `parsing/build/libs`, and `commandui/build/libs`.
 
 ## Contacts
-
 ### Group
 The EasyKayzey Show: easykayzey@ezkz.show
 

@@ -44,6 +44,20 @@ All documentation for CASprzak can be found at: https://ezkz.show/CASprzak-docum
    - If you are using the source code, leave the file in `src/config`
 - Binaries are available for all stable releases under the `Releases` tab
 
+## Build and Test
+
+This project uses Gradle for building and testing. To build and test CASprzak, run this command in a terminal:
+```shell
+./gradlew build
+```
+
+On Windows, run this in Command Prompt:
+```
+gradlew.bat build
+```
+
+A combined JAR for distribution will be created in `build/libs`. JARS of individual libraries will be created in `core/build/libs`, `parsing/build/libs`, and `commandui/build/libs`.
+
 ## Contacts
 ### Group
 The EasyKayzey Show: easykayzey@ezkz.show

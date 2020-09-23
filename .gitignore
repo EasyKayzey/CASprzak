@@ -169,3 +169,6 @@ hs_err_pid*
 
 # Ignore Gradle build output directory
 build
+
+# Allow gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.jar

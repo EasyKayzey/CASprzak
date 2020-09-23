@@ -58,6 +58,8 @@ gradlew.bat build
 
 A combined JAR for distribution will be created in `build/libs`. JARS of individual libraries will be created in `core/build/libs`, `parsing/build/libs`, and `commandui/build/libs`.
 
+To run the command line UI directly, use `./gradlew commandui:run` or `gradlew.bat commandui:run`.
+
 ## Contacts
 ### Group
 The EasyKayzey Show: easykayzey@ezkz.show

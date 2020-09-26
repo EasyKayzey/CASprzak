@@ -6,11 +6,11 @@ import java.lang.reflect.MalformedParametersException;
 import java.util.regex.Pattern;
 
 /**
- * The {@link ParsingTools} class contains meparsing user input, and is used heavily by the CASprzak parsing library.
+ * The {@link ParsingTools} class contains methods related to parsing user input, and is used heavily by the CASprzak parsing library.
  */
 public class ParsingTools {
 
-	/**thods related to
+	/**
 	 * Matches newlines with supported carriage returns
 	 */
 	public static final Pattern newline = Pattern.compile("\\R");

@@ -10,6 +10,7 @@ plugins {
     id 'java'
     id 'maven-publish'
     id 'signing'
+    id 'io.codearte.nexus-staging' version '0.22.0'
 }
 
 allprojects {
@@ -27,13 +28,7 @@ allprojects {
 group = 'show.ezkz.casprzak'
 
 subprojects {
-    version = '0.1'
-
-    ext {
-        artifact = 'casprzak-test'
-        name = 'CASprzak'
-        description = 'a'
-    }
+    version = '0.2.1'
 }
 
 configurations {
@@ -91,4 +86,9 @@ tasks.withType(JavaCompile) {
 
 tasks.withType(Test) {
     systemProperty "file.encoding", "UTF-8"
+}
+
+nexusStaging {
+    username findProperty("mavenUsername")
+    password findProperty("mavenPassword")
 }

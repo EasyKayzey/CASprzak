@@ -4,10 +4,6 @@ plugins {
     id 'signing'
 }
 
-ext.name = 'CASprzak Parsing'
-ext.artifact = 'casprzak-parsing'
-ext.description = 'This library does parsing stuff.'
-
 dependencies {
     // Use JUnit Jupiter API for testing.
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.2'
@@ -43,7 +39,7 @@ test {
 publishing {
     publications {
         parsing(MavenPublication) {
-            artifactId = project.ext.artifact
+            artifactId = 'casprzak-parsing'
             version = project.version
             from components.java
             versionMapping {
@@ -55,8 +51,8 @@ publishing {
                 }
             }
             pom {
-                name = project.ext.name
-                description = project.ext.description
+                name = 'CASprzak Parsing'
+                description = 'Parses mathematical input strings to CASprzak core objects and functions.'
                 url = 'https://github.com/EasyKayzey/CASprzak'
                 licenses {
                     license {

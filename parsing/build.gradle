@@ -64,6 +64,23 @@ publishing {
                         url = 'https://www.mozilla.org/MPL/2.0/'
                     }
                 }
+                developers {
+                    developer {
+                        id = 'eiis1000'
+                        name = 'Erez Israeli Miller'
+                        email = 'erez@ezkz.show'
+                    }
+                    developer {
+                        id = 'michaelk522'
+                        name = 'Michael Kasprzak'
+                        email = 'michael@ezkz.show'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:git://github.com/EasyKayzey/CASprzak.git'
+                    developerConnection = 'scm:git:https://github.com/EasyKayzey/CASprzak.git'
+                    url = 'https://github.com/EasyKayzey/CASprzak'
+                }
             }
         }
     }

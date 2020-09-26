@@ -8,6 +8,8 @@
 
 plugins {
     id 'java'
+    id 'maven-publish'
+    id 'signing'
 }
 
 allprojects {
@@ -16,11 +18,22 @@ allprojects {
         // You can declare any Maven/Ivy/file repository here.
         jcenter()
     }
+
+    group = 'show.ezkz.casprzak'
+
     compileJava.options.encoding = 'UTF-8'
 }
 
+group = 'show.ezkz.casprzak'
+
 subprojects {
-    version = '1.0-SNAPSHOT'
+    version = '0.1'
+
+    ext {
+        artifact = 'casprzak-test'
+        name = 'CASprzak'
+        description = 'a'
+    }
 }
 
 configurations {

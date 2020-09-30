@@ -3,6 +3,9 @@
 ### Bugfixes
  - Fix `Differential` comparison causing `NullPointerException`s
  - Fix inputs like `sinner` being parsed to the variable `\sinner` rather than a product
+ - Fix `enforceEscapes` not being a setting
+ - Fix inconsistent variable names in the tutorial
+ - Fix the CAS automatically simplifying expressions in the simplify section
 
 
 ## v0.2.1

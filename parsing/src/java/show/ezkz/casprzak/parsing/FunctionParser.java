@@ -80,7 +80,7 @@ public class FunctionParser {
 	 * @return an array of postfix tokens
 	 */
 	public static List<String> toPostfix(String infix) {
-		if (!Settings.enforceEscapedFunctions)
+		if (!Settings.enforceEscapes)
 			infix = LatexReplacer.addEscapes(infix);
 		infix = LatexReplacer.encodeMappings(infix);
 		List<String> tokens = InfixTokenizer.tokenizeInfix(infix);

@@ -3,6 +3,7 @@
 ### Bugfixes
  - Fix `Differential` comparison causing `NullPointerException`s
  - Fix inputs like `sinner` being parsed to the variable `\sinner` rather than a product
+ - Update emails in `CODE_OF_CONDUCT.md` and `CONTRIBUTING.md` to the 'ezkz' domain
 
 
 ## v0.2.1

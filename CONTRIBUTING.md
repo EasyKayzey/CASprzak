@@ -17,7 +17,7 @@ Responsibilities:
 - Commit early, commit often. 
 - Write extensive JUnit tests for any features you implement.
 - Create issues for features you want to add, especially for bugs you find.
-- You can always contact us at `easykaysey@googlegroups.com` if you have any questions.
+- You can always contact us at `easykayzey@ezkz.show` if you have any questions.
 
 # Getting started
 ### For significant contributions:

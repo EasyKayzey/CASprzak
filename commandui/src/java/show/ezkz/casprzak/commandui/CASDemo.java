@@ -276,7 +276,7 @@ public class CASDemo {
 		sleep();
 		printWithSleep("""
 				Now, when evaluating, you will need to specify each value, like 'eval x-y x=2 y=3'.
-				Try evaluating your multivariable function using 'eval', e.g. 'eval f x=2 y=4 q=e.
+				Try evaluating your multivariable function using 'eval', e.g. 'eval g x=2 y=4 q=e.
 				""", 2);
 		if (!tryInput(s -> s.length() > 4 && "eval ".equals(s.substring(0, 5)), "Begin your input with 'eval'"))
 			return;

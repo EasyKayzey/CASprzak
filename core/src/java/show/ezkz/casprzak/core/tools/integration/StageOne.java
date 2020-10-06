@@ -17,6 +17,9 @@ import show.ezkz.casprzak.core.tools.*;
 import show.ezkz.casprzak.core.tools.exceptions.IntegrationFailedException;
 import show.ezkz.casprzak.core.tools.helperclasses.Pair;
 
+import static show.ezkz.casprzak.core.tools.DefaultFunctions.*;
+import static show.ezkz.casprzak.core.tools.VariableTools.*;
+
 /**
  * The {@link StageOne} class attempts to integrate a function using a method very similar to Stage One of the integration procedure used in <a href="http://www-inst.eecs.berkeley.edu/~cs282/sp02/readings/moses-int.pdf">SIN</a>. Firstly,
  * the program performs simplifications and slight modifications to the integrand. The integrand is simplified using {@link MiscTools#minimalSimplify(GeneralFunction)}.
@@ -64,70 +67,70 @@ public class StageOne {
         if (function instanceof Product product){
             GeneralFunction[] productTerms = product.getFunctions();
             for (GeneralFunction term : productTerms) {
-                if (term instanceof Pow power && VariableTools.doesNotContainsVariable(power.getFunction2(), variableString)) {
+                if (term instanceof Pow power && doesNotContainsVariable(power.getFunction2(), variableString)) {
                     GeneralFunction results = derivativeDividesSearcher(product, term, power.getFunction1(), variableString);
                     if (results != null)
-                        return exponential(new Product(number, DefaultFunctions.reciprocal(results)), power.getFunction2(), power.getFunction1());
-                } else if (term instanceof Pow power && VariableTools.doesNotContainsVariable(power.getFunction1(), variableString)) {
+                        return exponential(new Product(number, reciprocal(results)), power.getFunction2(), power.getFunction1());
+                } else if (term instanceof Pow power && doesNotContainsVariable(power.getFunction1(), variableString)) {
                     GeneralFunction results = derivativeDividesSearcher(product, term, power.getFunction2(), variableString);
                     if (results != null)
-                        return power(new Product(number, DefaultFunctions.reciprocal(results)), power.getFunction1(), power.getFunction2());
+                        return power(new Product(number, reciprocal(results)), power.getFunction1(), power.getFunction2());
                 } else if (term instanceof Ln ln) {
                     GeneralFunction results = derivativeDividesSearcher(product, term, ln.operand, variableString);
                     if (results != null)
-                        return naturalLog(new Product(number, DefaultFunctions.reciprocal(results)), ln.operand);
+                        return naturalLog(new Product(number, reciprocal(results)), ln.operand);
                 } else if (term instanceof Exp exp) {
                     GeneralFunction results = derivativeDividesSearcher(product, term, exp.operand, variableString);
                     if (results != null)
-                        return naturalExponential(new Product(number, DefaultFunctions.reciprocal(results)), exp.operand);
-                } else if (term instanceof Logb logb && VariableTools.doesNotContainsVariable(logb.getFunction2(), variableString)) {
+                        return naturalExponential(new Product(number, reciprocal(results)), exp.operand);
+                } else if (term instanceof Logb logb && doesNotContainsVariable(logb.getFunction2(), variableString)) {
                     GeneralFunction results = derivativeDividesSearcher(product, term, logb.getFunction1(), variableString);
                     if (results != null)
-                        return naturalLog(new Product(number, DefaultFunctions.reciprocal(new Product(results, new Ln(logb.getFunction2())))), logb.getFunction2());
+                        return naturalLog(new Product(number, reciprocal(new Product(results, new Ln(logb.getFunction2())))), logb.getFunction2());
                 } else if (term instanceof TrigFunction trig) {
                     GeneralFunction results = derivativeDividesSearcher(product, term, trig.operand, variableString);
                     if (results != null)
-                        return new Product(new Product(number, DefaultFunctions.reciprocal(results)), trig.getElementaryIntegral());
+                        return new Product(new Product(number, reciprocal(results)), trig.getElementaryIntegral());
                 }
                 GeneralFunction results = derivativeDividesSearcher(product, term, term, variableString);
                 if (results != null)
-                    return power(new Product(number, DefaultFunctions.reciprocal(results)), DefaultFunctions.ONE, term);
+                    return power(new Product(number, reciprocal(results)), ONE, term);
             }
         } else {
-            if (function instanceof Pow power && VariableTools.doesNotContainsVariable(power.getFunction2(), variableString) && VariableTools.doesNotContainsVariable(power.getFunction1().getSimplifiedDerivative(variableString), variableString))
-                return exponential(new Product(number, DefaultFunctions.reciprocal(power.getFunction1().getSimplifiedDerivative(variableString))), power.getFunction2(), power.getFunction1());
-            else if (function instanceof Pow power && VariableTools.doesNotContainsVariable(power.getFunction1(), variableString) && VariableTools.doesNotContainsVariable(power.getFunction2().getSimplifiedDerivative(variableString), variableString))
-                return power(new Product(number, DefaultFunctions.reciprocal(power.getFunction2().getSimplifiedDerivative(variableString))), power.getFunction1(), power.getFunction2());
-            else if (function instanceof Ln log && VariableTools.doesNotContainsVariable(log.operand.getSimplifiedDerivative(variableString), variableString))
-                return naturalLog(new Product(number, DefaultFunctions.reciprocal(log.operand.getSimplifiedDerivative(variableString))), log.operand);
-            else if (function instanceof Exp exp && VariableTools.doesNotContainsVariable(exp.operand.getSimplifiedDerivative(variableString), variableString))
-                return naturalExponential(new Product(number, DefaultFunctions.reciprocal(exp.operand.getSimplifiedDerivative(variableString))), exp.operand);
-            else if (function instanceof Logb logb && VariableTools.doesNotContainsVariable(logb.getFunction2(), variableString) && VariableTools.doesNotContainsVariable(logb.getFunction1().getSimplifiedDerivative(variableString), variableString))
-                return naturalLog(new Product(number, DefaultFunctions.reciprocal(new Product(logb.getFunction1().getSimplifiedDerivative(variableString), new Ln(logb.getFunction2())))), logb.getFunction1());
-            else if (VariableTools.doesNotContainsVariable(function, variableString))
+            if (function instanceof Pow power && doesNotContainsVariable(power.getFunction2(), variableString) && doesNotContainsVariable(power.getFunction1().getSimplifiedDerivative(variableString), variableString))
+                return exponential(new Product(number, reciprocal(power.getFunction1().getSimplifiedDerivative(variableString))), power.getFunction2(), power.getFunction1());
+            else if (function instanceof Pow power && doesNotContainsVariable(power.getFunction1(), variableString) && doesNotContainsVariable(power.getFunction2().getSimplifiedDerivative(variableString), variableString))
+                return power(new Product(number, reciprocal(power.getFunction2().getSimplifiedDerivative(variableString))), power.getFunction1(), power.getFunction2());
+            else if (function instanceof Ln log && doesNotContainsVariable(log.operand.getSimplifiedDerivative(variableString), variableString))
+                return naturalLog(new Product(number, reciprocal(log.operand.getSimplifiedDerivative(variableString))), log.operand);
+            else if (function instanceof Exp exp && doesNotContainsVariable(exp.operand.getSimplifiedDerivative(variableString), variableString))
+                return naturalExponential(new Product(number, reciprocal(exp.operand.getSimplifiedDerivative(variableString))), exp.operand);
+            else if (function instanceof Logb logb && doesNotContainsVariable(logb.getFunction2(), variableString) && doesNotContainsVariable(logb.getFunction1().getSimplifiedDerivative(variableString), variableString))
+                return naturalLog(new Product(number, reciprocal(new Product(logb.getFunction1().getSimplifiedDerivative(variableString), new Ln(logb.getFunction2())))), logb.getFunction1());
+            else if (doesNotContainsVariable(function, variableString))
                 return new Product(number, function, new Variable(variableString));
             else if (function instanceof Variable variable)
-                return power(number, DefaultFunctions.ONE, variable);
-            else if (function instanceof TrigFunction unit && VariableTools.doesNotContainsVariable(unit.operand.getSimplifiedDerivative(variableString), variableString))
-                return new Product(new Product(number, DefaultFunctions.reciprocal(unit.operand.getSimplifiedDerivative(variableString))), unit.getElementaryIntegral());
+                return power(number, ONE, variable);
+            else if (function instanceof TrigFunction unit && doesNotContainsVariable(unit.operand.getSimplifiedDerivative(variableString), variableString))
+                return new Product(new Product(number, reciprocal(unit.operand.getSimplifiedDerivative(variableString))), unit.getElementaryIntegral());
         }
         throw new IntegrationFailedException(integrand);
     }
 
 
     private static GeneralFunction exponential(GeneralFunction number, GeneralFunction base, GeneralFunction exponent) {
-        return new Product(number, new Pow(DefaultFunctions.NEGATIVE_ONE, new Ln(base)), new Pow(exponent, base));
+        return new Product(number, new Pow(NEGATIVE_ONE, new Ln(base)), new Pow(exponent, base));
     }
 
     private static GeneralFunction power(GeneralFunction number, GeneralFunction exponent, GeneralFunction base) {
         if (exponent instanceof Constant constant && constant.constant == -1)
             return new Product(number, new Ln(base));
         else
-            return new Product(number, DefaultFunctions.reciprocal(new Sum(exponent, DefaultFunctions.ONE)), new Pow(new Sum(exponent, DefaultFunctions.ONE), base));
+            return new Product(number, reciprocal(new Sum(exponent, ONE)), new Pow(new Sum(exponent, ONE), base));
     }
 
     private static GeneralFunction naturalLog(GeneralFunction number, GeneralFunction operand) {
-        return new Product(number, new Sum(new Product(operand, new Ln(operand)), DefaultFunctions.negative(operand)));
+        return new Product(number, new Sum(new Product(operand, new Ln(operand)), negative(operand)));
     }
 
     private static GeneralFunction naturalExponential(GeneralFunction number, GeneralFunction operand) {
@@ -140,7 +143,7 @@ public class StageOne {
         GeneralFunction derivativeWithoutConstant = derivative.getSecond();
         GeneralFunction constantInFront = derivative.getFirst();
         Product derivativeTimesOperation = new Product(derivativeWithoutConstant, term);
-        if (!SearchTools.existsInSurfaceSubset(product, derivativeTimesOperation::equalsSimplified) || SearchTools.existsInOppositeSurfaceSubset(product, (u -> SearchTools.existsAny(u, VariableTools.isVariable(variableString))), derivativeTimesOperation::equalsSimplified))
+        if (!SearchTools.existsInSurfaceSubset(product, derivativeTimesOperation::equalsSimplified) || SearchTools.existsInOppositeSurfaceSubset(product, (u -> SearchTools.existsAny(u, isVariable(variableString))), derivativeTimesOperation::equalsSimplified))
             return null;
         else
             return constantInFront;

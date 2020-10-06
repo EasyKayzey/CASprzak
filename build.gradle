@@ -8,6 +8,9 @@
 
 plugins {
     id 'java'
+    id 'maven-publish'
+    id 'signing'
+    id 'io.codearte.nexus-staging' version '0.22.0'
 }
 
 allprojects {
@@ -16,11 +19,16 @@ allprojects {
         // You can declare any Maven/Ivy/file repository here.
         jcenter()
     }
+
+    group = 'show.ezkz.casprzak'
+
     compileJava.options.encoding = 'UTF-8'
 }
 
+group = 'show.ezkz.casprzak'
+
 subprojects {
-    version = '1.0-SNAPSHOT'
+    version = '0.2.1'
 }
 
 configurations {
@@ -78,4 +86,9 @@ tasks.withType(JavaCompile) {
 
 tasks.withType(Test) {
     systemProperty "file.encoding", "UTF-8"
+}
+
+nexusStaging {
+    username findProperty("mavenUsername")
+    password findProperty("mavenPassword")
 }

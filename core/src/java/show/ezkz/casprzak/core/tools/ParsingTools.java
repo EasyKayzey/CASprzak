@@ -6,7 +6,7 @@ import java.lang.reflect.MalformedParametersException;
 import java.util.regex.Pattern;
 
 /**
- * The {@link ParsingTools} class contains methods related to parsing user input, and is used heavily by {@link show.ezkz.casprzak.parsing}.
+ * The {@link ParsingTools} class contains methods related to parsing user input, and is used heavily by the CASprzak parsing library.
  */
 public class ParsingTools {
 

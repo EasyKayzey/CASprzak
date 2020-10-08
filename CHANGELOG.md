@@ -1,9 +1,17 @@
 # Changelog
 ## v0.3.0
+### Major Additions
+ - Add Gradle management
+ - Package CASprzak into `core`, `parsing` and `commandui`
+ - Publish to Maven central repository
+### Changes
+ - Rename various escape-related settings
+ - Update emails in `CODE_OF_CONDUCT.md` and `CONTRIBUTING.md` to the 'ezkz' domain
 ### Bugfixes
  - Fix `Differential` comparison causing `NullPointerException`s
  - Fix inputs like `sinner` being parsed to the variable `\sinner` rather than a product
- - Update emails in `CODE_OF_CONDUCT.md` and `CONTRIBUTING.md` to the 'ezkz' domain
+ - Fix inconsistent variable names in the tutorial
+ - Fix CASDemo automatically simplifying expressions in the SIMP section
 
 
 ## v0.2.1

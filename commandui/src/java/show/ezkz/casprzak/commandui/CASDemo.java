@@ -243,22 +243,21 @@ public class CASDemo {
 	private static void simp() {
 		printWithSleep("""
 				Now, one of the most important features of our CAS is its ability to simplify expressions.
-				For example:
+				For example take the expression:
+				x^2*(0*ln(x)+(2*1)/x)
+				This expression looks complicated, right?
+				Let's feed it through the CAS:
 				>>> def d x^2*(0*ln(x)+(2*1)/x)
 				""" +
 				KeywordInterface.safeKeywords("def d x^2*(0*ln(x)+(2*1)/x)")
 				+ """
-    
-				This expression looks complicated, right?
-				Try typing 'simp d' to return a simplified form of the expression.
-				""");
-		if (!tryInput(s -> s.length() > 4 && "simp ".equals(s.substring(0, 5)), "Begin your input with 'simp' to demonstrate the simplification feature of the UI."))
-			return;
-		sleep();
-		printWithSleep("""
+						
 				Wow, quite the improvement.
+				The CAS automatically simplified trivial steps like multiplication by 1 or adding 0.
 				For those who are curious, that was the general formula of the derivative of 'f(x)^g(x)' applied to 'x^2'.
+				If you want to explicitly simplify a function, use 'simp _' for example. 
 				Also, if you want to define a function and simplify it in one step, you can use the 'defs' or 'deffunctionsimplify'.
+				These explicit calls to simplify will perform extra simplifications such as distributing across addition.  
 				Continue testing this feature, or type 'next' to continue.
 				""");
 		currentState = DemoState.VAR;
@@ -276,7 +275,7 @@ public class CASDemo {
 		sleep();
 		printWithSleep("""
 				Now, when evaluating, you will need to specify each value, like 'eval x-y x=2 y=3'.
-				Try evaluating your multivariable function using 'eval', e.g. 'eval f x=2 y=4 q=e.
+				Try evaluating your multivariable function using 'eval', e.g. 'eval g x=2 y=4 q=e.
 				""", 2);
 		if (!tryInput(s -> s.length() > 4 && "eval ".equals(s.substring(0, 5)), "Begin your input with 'eval'"))
 			return;

@@ -74,12 +74,12 @@ public class Settings {
 	/**
 	 * Denotes whether or not expressions like {@code sin(pi/2)} must be escaped to {@code \sin(\pi/2)}. Enabling this is strongly recommended, and may reduce bugs.
 	 */
-	public static boolean enforceEscapedFunctions = false;
+	public static boolean enforceEscapes = false;
 
 	/**
 	 * Denotes whether or not the regex for valid variable, function, and constant names should enforce a LaTeX escape in multi-character names. Enabling this may improve error handling.
 	 */
-	public static boolean enforceEscapedNames = true;
+	public static boolean escapeNames = true;
 
 	/**
 	 * Denotes whether or not variable, function, and constant names should be checked against the valid name regex {@link ParsingTools#validNames}
@@ -198,8 +198,8 @@ public class Settings {
 			case "integerMargin" 							-> integerMargin = Double.parseDouble(value);
 			case "equalsMargin" 							-> equalsMargin = Double.parseDouble(value);
 			case "defaultSleep"								-> defaultSleep = Double.parseDouble(value);
-			case "enforceEscapedFunctions"		 			-> enforceEscapedFunctions = ParsingTools.parseBoolean(value);
-			case "enforceEscapedNames"		 				-> enforceEscapedNames = ParsingTools.parseBoolean(value);
+			case "enforceEscapes"				 			-> enforceEscapes = ParsingTools.parseBoolean(value);
+			case "escapedNames"				 				-> escapeNames = ParsingTools.parseBoolean(value);
 			case "enforcePatternMatchingNames"		 		-> enforcePatternMatchingNames = ParsingTools.parseBoolean(value);
 			case "removeEscapes"		 					-> removeEscapes = ParsingTools.parseBoolean(value);
 			case "simplifyFunctionsOfConstants" 			-> simplifyFunctionsOfConstants = ParsingTools.parseBoolean(value);

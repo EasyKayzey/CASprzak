@@ -92,7 +92,7 @@ public class LatexReplacer {
 	 * @return the encoded input
 	 */
 	public static String encodeAll(String input) {
-		if (!Settings.enforceEscapedFunctions)
+		if (!Settings.enforceEscapes)
 			input = LatexReplacer.addEscapes(input);
 		input = LatexReplacer.encodeMappings(input);
 		return input;

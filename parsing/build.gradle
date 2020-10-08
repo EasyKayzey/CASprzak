@@ -1,5 +1,7 @@
 plugins {
     id 'java-library'
+    id 'maven-publish'
+    id 'signing'
 }
 
 dependencies {
@@ -22,6 +24,11 @@ sourceSets {
     }
 }
 
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
 test {
     // Use junit platform for unit tests
     useJUnitPlatform()
@@ -29,7 +36,78 @@ test {
     jvmArgs(['--enable-preview'])
 }
 
+publishing {
+    publications {
+        parsing(MavenPublication) {
+            artifactId = 'casprzak-parsing'
+            version = project.version
+            from components.java
+            versionMapping {
+                usage('java-api') {
+                    fromResolutionOf('runtimeClasspath')
+                }
+                usage('java-runtime') {
+                    fromResolutionResult()
+                }
+            }
+            pom {
+                name = 'CASprzak Parsing'
+                description = 'Parses mathematical input strings to CASprzak core objects and functions.'
+                url = 'https://github.com/EasyKayzey/CASprzak'
+                licenses {
+                    license {
+                        name = 'Mozilla Public License 2.0'
+                        url = 'https://www.mozilla.org/MPL/2.0/'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'eiis1000'
+                        name = 'Erez Israeli Miller'
+                        email = 'erez@ezkz.show'
+                    }
+                    developer {
+                        id = 'michaelk522'
+                        name = 'Michael Kasprzak'
+                        email = 'michael@ezkz.show'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:git://github.com/EasyKayzey/CASprzak.git'
+                    developerConnection = 'scm:git:https://github.com/EasyKayzey/CASprzak.git'
+                    url = 'https://github.com/EasyKayzey/CASprzak'
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            // @edwfeng deal with it
+            def snapshotsRepoUrl = "https://oss.sonatype.org/content/repositories/snapshots"
+            def releasesRepoUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2"
+            credentials {
+                username findProperty("mavenUsername")
+                password findProperty("mavenPassword")
+            }
+            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+        }
+    }
+}
+
+signing {
+    def signingKey = findProperty("signingKey")
+    def signingPassword = findProperty("signingPassword")
+    useInMemoryPgpKeys(signingKey, signingPassword)
+    sign publishing.publications.parsing
+}
+
 tasks.withType(JavaCompile).each {
     it.options.encoding = 'UTF-8'
     it.options.compilerArgs.add('--enable-preview')
+}
+
+tasks.withType(Javadoc).each {
+    it.options.encoding = 'UTF-8'
+    it.options.addBooleanOption('-enable-preview', true)
+    it.options.addStringOption('-release', '14')
 }

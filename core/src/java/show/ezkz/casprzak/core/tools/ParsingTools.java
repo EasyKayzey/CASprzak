@@ -18,7 +18,7 @@ public class ParsingTools {
 	/**
 	 * Matches all valid variable, function, and constant names
 	 */
-	public static final Pattern validNames = Pattern.compile("[a-zA-Z[^\\x00-\\x7F]]|\\\\" + (Settings.enforceEscapedNames ? "" : "?") + "[a-zA-Z[^\\x00-\\x7F]][\\w.'[^\\x00-\\x7F]]*");
+	public static final Pattern validNames = Pattern.compile("[a-zA-Z[^\\x00-\\x7F]]|\\\\" + (Settings.escapeNames ? "" : "?") + "[a-zA-Z[^\\x00-\\x7F]][\\w.'[^\\x00-\\x7F]]*");
 
 	private ParsingTools(){}
 

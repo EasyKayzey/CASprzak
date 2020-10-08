@@ -26,7 +26,9 @@ public class LogSimplify {
         GeneralFunction operand = input.operand;
 
         if (operand instanceof Product product) {
-            GeneralFunction[] terms = (GeneralFunction[]) Arrays.stream(product.getFunctions()).map(Ln::new).toArray();
+            GeneralFunction[] terms = Arrays.stream(product.getFunctions())
+                    .map(Ln::new)
+                    .toArray(GeneralFunction[]::new);
             return new Sum(terms);
         } else
             return input;

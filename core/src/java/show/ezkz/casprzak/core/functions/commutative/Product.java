@@ -10,7 +10,7 @@ import show.ezkz.casprzak.core.functions.unitary.transforms.Integral;
 import show.ezkz.casprzak.core.output.OutputCommutative;
 import show.ezkz.casprzak.core.output.OutputFunction;
 import show.ezkz.casprzak.core.tools.ArrayTools;
-import show.ezkz.casprzak.core.tools.DefaultFunctions;
+import show.ezkz.casprzak.core.tools.defaults.DefaultFunctions;
 import show.ezkz.casprzak.core.tools.PolynomialTools;
 import show.ezkz.casprzak.core.tools.helperclasses.AbstractPair;
 import show.ezkz.casprzak.core.tools.helperclasses.Pair;

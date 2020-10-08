@@ -2,6 +2,7 @@ package show.ezkz.casprzak.core.tools;
 
 import show.ezkz.casprzak.core.functions.GeneralFunction;
 import show.ezkz.casprzak.core.functions.commutative.Product;
+import show.ezkz.casprzak.core.tools.defaults.DefaultFunctions;
 import show.ezkz.casprzak.core.tools.helperclasses.Pair;
 
 import java.util.ArrayList;

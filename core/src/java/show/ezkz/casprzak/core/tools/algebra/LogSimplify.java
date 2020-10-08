@@ -22,6 +22,11 @@ public class LogSimplify {
         return null;
     }
 
+    /**
+     * Splits a logarithm of a product into a sum of logs. Ex: {@code log(xy) = log(x) +log(y)}
+     * @param input The logarithm that is being expanded.
+     * @return The split logarithm
+     */
     public static GeneralFunction logarithmOfAProduct(Ln input) {
         GeneralFunction operand = input.operand;
 

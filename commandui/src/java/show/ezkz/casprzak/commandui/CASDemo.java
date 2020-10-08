@@ -246,11 +246,14 @@ public class CASDemo {
 				For example take the expression:
 				x^2*(0*ln(x)+(2*1)/x)
 				This expression looks complicated, right?
+				Let's feed it through the CAS:
+				>>> def d x^2*(0*ln(x)+(2*1)/x)
 				""" +
-						KeywordInterface.safeKeywords("def d x^2*(0*ln(x)+(2*1)/x)")
+				KeywordInterface.safeKeywords("def d x^2*(0*ln(x)+(2*1)/x)")
 				+ """
+						
 				Wow, quite the improvement.
-				The CAS automatically simplified the trivial steps like multiplication by 1 or adding zero.
+				The CAS automatically simplified trivial steps like multiplication by 1 or adding 0.
 				For those who are curious, that was the general formula of the derivative of 'f(x)^g(x)' applied to 'x^2'.
 				If you want to explicitly simplify a function, use 'simp _' for example. 
 				Also, if you want to define a function and simplify it in one step, you can use the 'defs' or 'deffunctionsimplify'.

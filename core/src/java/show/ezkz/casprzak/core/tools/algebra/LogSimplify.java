@@ -12,18 +12,6 @@ import java.util.Arrays;
 
 public class LogSimplify {
 
-    public static GeneralFunction expand(GeneralFunction input) {
-        if (!(input instanceof Logb) && !(input instanceof Ln))
-            throw new IllegalArgumentException("expand should not be called on a non logarithm.");
-
-
-        return null;
-    }
-
-    public static GeneralFunction simplify(GeneralFunction input) {
-        return null;
-    }
-
     /**
      * Splits a logarithm of a product into a sum of logs. Ex: {@code log(xy) = log(x) +log(y)}
      * @param input The logarithm that is being expanded.
@@ -36,7 +24,7 @@ public class LogSimplify {
             GeneralFunction[] terms = Arrays.stream(product.getFunctions())
                     .map(Ln::new)
                     .toArray(GeneralFunction[]::new);
-            return new Sum(terms);
+            return new Sum(terms).simplify();
         } else
             return input;
     }
@@ -51,9 +39,9 @@ public class LogSimplify {
         GeneralFunction operand = input.operand;
 
         if (operand instanceof Pow exponential)
-            return new Product(exponential.getFunction1(), new Ln(exponential.getFunction2()));
+            return new Product(exponential.getFunction1(), new Ln(exponential.getFunction2())).simplify();
         else if (operand instanceof Exp exponential)
-            return exponential.operand;
+            return exponential.operand.simplify();
         else
             return input;
 

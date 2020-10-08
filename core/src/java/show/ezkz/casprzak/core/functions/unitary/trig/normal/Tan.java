@@ -7,7 +7,7 @@ import show.ezkz.casprzak.core.functions.unitary.piecewise.Abs;
 import show.ezkz.casprzak.core.functions.unitary.specialcases.Ln;
 import show.ezkz.casprzak.core.functions.unitary.UnitaryFunction;
 import show.ezkz.casprzak.core.functions.unitary.trig.inverse.Atan;
-import show.ezkz.casprzak.core.tools.DefaultFunctions;
+import show.ezkz.casprzak.core.tools.defaults.DefaultFunctions;
 
 import java.util.Map;
 

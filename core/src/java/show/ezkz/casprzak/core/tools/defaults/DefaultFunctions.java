@@ -1,4 +1,4 @@
-package show.ezkz.casprzak.core.tools;
+package show.ezkz.casprzak.core.tools.defaults;
 
 import show.ezkz.casprzak.core.functions.GeneralFunction;
 import show.ezkz.casprzak.core.functions.binary.Logb;
@@ -12,7 +12,7 @@ import show.ezkz.casprzak.core.functions.unitary.integer.combo.Factorial;
 /**
  * {@link DefaultFunctions} contains instances of many often-used {@link GeneralFunction}s so that they need not be re-instantiated repeatedly, as well as shortcuts for the negative and inverse of a {@link GeneralFunction}.
  */
-@SuppressWarnings({"StaticVariableOfConcreteClass", "unused"})
+@SuppressWarnings({"StaticVariableOfConcreteClass"})
 public class DefaultFunctions {
 
 	private DefaultFunctions(){}

@@ -2,7 +2,7 @@ package show.ezkz.casprzak.core.functions.unitary.integer.combo;
 
 import show.ezkz.casprzak.core.functions.GeneralFunction;
 import show.ezkz.casprzak.core.functions.unitary.UnitaryFunction;
-import show.ezkz.casprzak.core.tools.DefaultFunctions;
+import show.ezkz.casprzak.core.tools.defaults.DefaultFunctions;
 import show.ezkz.casprzak.core.tools.MiscTools;
 import show.ezkz.casprzak.core.tools.VariableTools;
 import show.ezkz.casprzak.core.tools.exceptions.DerivativeDoesNotExistException;

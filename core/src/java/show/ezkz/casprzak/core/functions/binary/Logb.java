@@ -8,7 +8,7 @@ import show.ezkz.casprzak.core.functions.unitary.specialcases.Exp;
 import show.ezkz.casprzak.core.functions.unitary.specialcases.Ln;
 import show.ezkz.casprzak.core.output.OutputBinary;
 import show.ezkz.casprzak.core.output.OutputFunction;
-import show.ezkz.casprzak.core.tools.DefaultFunctions;
+import show.ezkz.casprzak.core.tools.defaults.DefaultFunctions;
 
 import java.util.Map;
 

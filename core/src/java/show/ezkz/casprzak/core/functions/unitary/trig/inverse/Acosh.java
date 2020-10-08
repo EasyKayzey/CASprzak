@@ -8,7 +8,7 @@ import show.ezkz.casprzak.core.functions.commutative.Sum;
 import show.ezkz.casprzak.core.functions.unitary.UnitaryFunction;
 import show.ezkz.casprzak.core.functions.unitary.piecewise.Abs;
 import show.ezkz.casprzak.core.functions.unitary.trig.normal.Cosh;
-import show.ezkz.casprzak.core.tools.DefaultFunctions;
+import show.ezkz.casprzak.core.tools.defaults.DefaultFunctions;
 
 import java.util.Map;
 

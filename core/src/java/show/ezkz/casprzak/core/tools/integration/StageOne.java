@@ -17,7 +17,7 @@ import show.ezkz.casprzak.core.tools.*;
 import show.ezkz.casprzak.core.tools.exceptions.IntegrationFailedException;
 import show.ezkz.casprzak.core.tools.helperclasses.Pair;
 
-import static show.ezkz.casprzak.core.tools.DefaultFunctions.*;
+import static show.ezkz.casprzak.core.tools.defaults.DefaultFunctions.*;
 import static show.ezkz.casprzak.core.tools.VariableTools.*;
 
 /**

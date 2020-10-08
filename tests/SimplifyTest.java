@@ -4,7 +4,7 @@ import show.ezkz.casprzak.core.functions.binary.Pow;
 import show.ezkz.casprzak.core.functions.commutative.Product;
 import org.junit.jupiter.api.Test;
 import show.ezkz.casprzak.parsing.FunctionParser;
-import show.ezkz.casprzak.core.tools.DefaultFunctions;
+import show.ezkz.casprzak.core.tools.defaults.DefaultFunctions;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;

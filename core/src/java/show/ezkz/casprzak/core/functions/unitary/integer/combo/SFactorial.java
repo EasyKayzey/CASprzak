@@ -6,7 +6,7 @@ import show.ezkz.casprzak.core.functions.binary.Pow;
 import show.ezkz.casprzak.core.functions.commutative.Product;
 import show.ezkz.casprzak.core.functions.unitary.UnitaryFunction;
 import show.ezkz.casprzak.core.tools.ParsingTools;
-import show.ezkz.casprzak.core.tools.DefaultFunctions;
+import show.ezkz.casprzak.core.tools.defaults.DefaultFunctions;
 
 import java.util.Map;
 

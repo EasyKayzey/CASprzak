@@ -2,7 +2,7 @@ import show.ezkz.casprzak.core.functions.GeneralFunction;
 import show.ezkz.casprzak.core.functions.unitary.trig.inverse.*;
 import org.junit.jupiter.api.Test;
 import show.ezkz.casprzak.parsing.FunctionParser;
-import show.ezkz.casprzak.core.tools.DefaultFunctions;
+import show.ezkz.casprzak.core.tools.defaults.DefaultFunctions;
 
 import java.util.Map;
 

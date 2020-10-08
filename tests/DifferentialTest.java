@@ -3,9 +3,7 @@ import show.ezkz.casprzak.core.functions.commutative.Product;
 import show.ezkz.casprzak.core.functions.unitary.transforms.Differential;
 import show.ezkz.casprzak.core.functions.unitary.transforms.Integral;
 import org.junit.jupiter.api.Test;
-import show.ezkz.casprzak.core.tools.DefaultFunctions;
-
-import java.util.Map;
+import show.ezkz.casprzak.core.tools.defaults.DefaultFunctions;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

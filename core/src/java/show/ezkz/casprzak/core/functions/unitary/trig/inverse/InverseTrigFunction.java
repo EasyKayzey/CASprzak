@@ -7,7 +7,7 @@ import show.ezkz.casprzak.core.functions.unitary.UnitaryFunction;
 import show.ezkz.casprzak.core.functions.unitary.trig.GeneralTrigFunction;
 import show.ezkz.casprzak.core.output.OutputFunction;
 import show.ezkz.casprzak.core.output.OutputUnitary;
-import show.ezkz.casprzak.core.tools.DefaultFunctions;
+import show.ezkz.casprzak.core.tools.defaults.DefaultFunctions;
 
 /**
  * The abstract {@link InverseTrigFunction} class represents any inverse trigonometric function.

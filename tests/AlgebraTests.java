@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.Test;
 import show.ezkz.casprzak.core.functions.GeneralFunction;
+import show.ezkz.casprzak.core.functions.binary.Pow;
 import show.ezkz.casprzak.core.functions.commutative.Product;
 import show.ezkz.casprzak.core.functions.commutative.Sum;
 import show.ezkz.casprzak.core.functions.endpoint.Variable;
@@ -16,6 +17,12 @@ public class AlgebraTests {
     void lnOfAProduct() {
         Ln test = new Ln(new Product(new Variable("x"), new Variable("y")));
         assertEquals(new Sum(new Ln(new Variable("x")), new Ln(new Variable("y"))), LogSimplify.logarithmOfAProduct(test));
+    }
+
+    @Test
+    void lnOfAnExponent() {
+        Ln test = new Ln(new Pow(new Variable("x"), new Variable("y")));
+        assertEquals(new Product(new Variable("x"), new Ln(new Variable("y"))), LogSimplify.logarithmOfAnExponent(test));
     }
 
 }

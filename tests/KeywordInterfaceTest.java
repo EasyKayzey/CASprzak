@@ -10,7 +10,7 @@ import show.ezkz.casprzak.core.functions.unitary.trig.normal.Sin;
 import org.junit.jupiter.api.Test;
 import show.ezkz.casprzak.parsing.FunctionParser;
 import show.ezkz.casprzak.commandui.KeywordInterface;
-import show.ezkz.casprzak.core.tools.DefaultFunctions;
+import show.ezkz.casprzak.core.tools.defaults.DefaultFunctions;
 
 import java.util.List;
 import java.util.Map;

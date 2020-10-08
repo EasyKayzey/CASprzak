@@ -8,7 +8,7 @@ import show.ezkz.casprzak.core.output.OutputBinary;
 import show.ezkz.casprzak.core.output.OutputFunction;
 import show.ezkz.casprzak.core.output.OutputString;
 import show.ezkz.casprzak.core.tools.ArrayTools;
-import show.ezkz.casprzak.core.tools.DefaultFunctions;
+import show.ezkz.casprzak.core.tools.defaults.DefaultFunctions;
 import show.ezkz.casprzak.core.tools.MiscTools;
 import show.ezkz.casprzak.core.tools.exceptions.IntegrationFailedException;
 import show.ezkz.casprzak.core.tools.integration.StageOne;

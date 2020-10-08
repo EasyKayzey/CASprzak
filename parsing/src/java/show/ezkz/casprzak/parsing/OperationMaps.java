@@ -20,7 +20,7 @@ import show.ezkz.casprzak.core.functions.unitary.transforms.Integral;
 import show.ezkz.casprzak.core.functions.unitary.transforms.PartialDerivative;
 import show.ezkz.casprzak.core.functions.unitary.trig.inverse.*;
 import show.ezkz.casprzak.core.functions.unitary.trig.normal.*;
-import show.ezkz.casprzak.core.tools.DefaultFunctions;
+import show.ezkz.casprzak.core.tools.defaults.DefaultFunctions;
 import show.ezkz.casprzak.core.tools.helperclasses.BinaryConstructor;
 import show.ezkz.casprzak.core.tools.helperclasses.UnitaryConstructor;
 

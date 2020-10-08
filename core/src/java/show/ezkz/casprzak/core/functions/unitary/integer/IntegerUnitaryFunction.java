@@ -3,7 +3,7 @@ package show.ezkz.casprzak.core.functions.unitary.integer;
 import show.ezkz.casprzak.core.config.Settings;
 import show.ezkz.casprzak.core.functions.GeneralFunction;
 import show.ezkz.casprzak.core.functions.unitary.UnitaryFunction;
-import show.ezkz.casprzak.core.tools.DefaultFunctions;
+import show.ezkz.casprzak.core.tools.defaults.DefaultFunctions;
 import show.ezkz.casprzak.core.tools.ParsingTools;
 import show.ezkz.casprzak.core.tools.VariableTools;
 import show.ezkz.casprzak.core.tools.exceptions.DerivativeDoesNotExistException;

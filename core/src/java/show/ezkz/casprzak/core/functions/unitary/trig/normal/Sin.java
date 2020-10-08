@@ -6,7 +6,7 @@ import show.ezkz.casprzak.core.functions.commutative.Product;
 import show.ezkz.casprzak.core.functions.unitary.UnitaryFunction;
 import show.ezkz.casprzak.core.functions.unitary.piecewise.DomainRestrictor;
 import show.ezkz.casprzak.core.functions.unitary.trig.inverse.Asin;
-import show.ezkz.casprzak.core.tools.DefaultFunctions;
+import show.ezkz.casprzak.core.tools.defaults.DefaultFunctions;
 
 import java.util.Map;
 

@@ -198,8 +198,8 @@ public class Settings {
 			case "integerMargin" 							-> integerMargin = Double.parseDouble(value);
 			case "equalsMargin" 							-> equalsMargin = Double.parseDouble(value);
 			case "defaultSleep"								-> defaultSleep = Double.parseDouble(value);
-			case "enforceEscapedFunctions"		 			-> enforceEscapes = ParsingTools.parseBoolean(value);
-			case "enforceEscapedNames"		 				-> escapeNames = ParsingTools.parseBoolean(value);
+			case "enforceEscapes"				 			-> enforceEscapes = ParsingTools.parseBoolean(value);
+			case "escapedNames"				 				-> escapeNames = ParsingTools.parseBoolean(value);
 			case "enforcePatternMatchingNames"		 		-> enforcePatternMatchingNames = ParsingTools.parseBoolean(value);
 			case "removeEscapes"		 					-> removeEscapes = ParsingTools.parseBoolean(value);
 			case "simplifyFunctionsOfConstants" 			-> simplifyFunctionsOfConstants = ParsingTools.parseBoolean(value);

@@ -7,6 +7,7 @@ import show.ezkz.casprzak.core.functions.unitary.transforms.Integral;
 import show.ezkz.casprzak.core.output.OutputFunction;
 import show.ezkz.casprzak.core.tools.MiscTools;
 import show.ezkz.casprzak.core.tools.ParsingTools;
+import show.ezkz.casprzak.core.tools.defaults.DefaultSimplificationSettings;
 import show.ezkz.casprzak.core.tools.exceptions.*;
 import show.ezkz.casprzak.core.tools.singlevariable.Extrema;
 import show.ezkz.casprzak.core.tools.singlevariable.NumericalIntegration;
@@ -20,6 +21,9 @@ import java.util.*;
 import java.util.function.Consumer;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
+import static show.ezkz.casprzak.core.tools.defaults.DefaultSimplificationSettings.minimal;
+import static show.ezkz.casprzak.core.tools.defaults.DefaultSimplificationSettings.user;
 
 /**
  * {@link KeywordInterface} is the backend for {@link CommandUI}, providing support for parsing user input to commands and functions.
@@ -264,7 +268,7 @@ public class KeywordInterface {
 
 
 	private static GeneralFunction simplify(String input) {
-		return parseStored(input).simplify(settings);
+		return parseStored(input).simplify(user);
 	}
 
 	private static GeneralFunction substitute(String input, boolean simplify) {
@@ -275,9 +279,9 @@ public class KeywordInterface {
 						.collect(Collectors.toMap(e -> e[0], e -> parseStored(e[1])))
 		);
 		if (simplify)
-			return current.simplify(settings);
+			return current.simplify(user);
 		else
-			return MiscTools.minimalSimplify(current);
+			return current.simplify(minimal);
 	}
 
 	private static GeneralFunction substituteAllInput(String input) {
@@ -315,7 +319,7 @@ public class KeywordInterface {
 		if (Settings.enforcePatternMatchingNames && !ParsingTools.validNames.matcher(splitInput[0]).matches())
 			throw new IllegalNameException(splitInput[0]);
 		if (simplify)
-			toPut = toPut.simplify(settings);
+			toPut = toPut.simplify(user);
 		storedFunctions.put(splitInput[0], toPut);
 		return toPut;
 	}

@@ -57,13 +57,13 @@ public class Logb extends BinaryFunction {
 
 	public GeneralFunction simplify(SimplificationSettings settings) {
 		Logb currentLogb = new Logb(function1.simplify(settings), function2.simplify(settings));
-		GeneralFunction current = currentLogb.simplifyPowers();
+		GeneralFunction current = currentLogb.simplifyPowers(settings);
 
 		if (current instanceof Logb logb)
-			current = logb.simplifyFOC();
+			current = logb.simplifyFOC(settings);
 
 		if (current instanceof Logb logb)
-			current = logb.simplifyIdentity();
+			current = logb.simplifyIdentity(settings);
 
 		return current;
 	}
@@ -71,8 +71,9 @@ public class Logb extends BinaryFunction {
 	/**
 	 * Returns {@link DefaultFunctions#ONE} if the base of the logarithm equals the argument
 	 * @return {@link DefaultFunctions#ONE} if the base of the logarithm equals the argument
+	 * @param settings the {@link SimplificationSettings} object describing the parameters of simplification
 	 */
-	public GeneralFunction simplifyIdentity() {
+	public GeneralFunction simplifyIdentity(SimplificationSettings settings) {
 		if (function2.equalsSimplified(function1))
 			return DefaultFunctions.ONE;
 		else
@@ -82,10 +83,11 @@ public class Logb extends BinaryFunction {
 	/**
 	 * Returns a {@link GeneralFunction} where, if the argument is a {@link Pow} or {@link Exp}, the exponent of the argument has been moved in front of the logarithm in a {@link Product}
 	 * @return a {@link GeneralFunction} where, if the argument is a {@link Pow} or {@link Exp}, the exponent of the argument has been moved in front of the logarithm in a {@link Product}
+	 * @param settings the {@link SimplificationSettings} object describing the parameters of simplification
 	 */
-	public GeneralFunction simplifyPowers() {
+	public GeneralFunction simplifyPowers(SimplificationSettings settings) {
 		if (function1 instanceof Pow power)
-			return new Product(power.function1, new Logb(power.function2, function2).simplifyIdentity());
+			return new Product(power.function1, new Logb(power.function2, function2).simplifyIdentity(settings));
 		else if (function1 instanceof Exp exp)
 			return new Product(exp.operand, new Logb(function2, DefaultFunctions.E));
 		else

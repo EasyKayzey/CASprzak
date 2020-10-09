@@ -28,14 +28,14 @@ public abstract class Transformation extends UnitaryFunction {
 	@Override
 	public GeneralFunction simplify(SimplificationSettings settings) {
 		if (Settings.executeOnSimplify) {
-			Transformation current = (Transformation) simplifyInternal();
+			Transformation current = (Transformation) simplifyInternal(settings);
 			try {
 				return current.execute().simplify(settings);
 			} catch (TransformFailedException ignored) {
 				return current;
 			}
 		} else {
-			return simplifyInternal();
+			return simplifyInternal(settings);
 		}
 	}
 
@@ -44,7 +44,6 @@ public abstract class Transformation extends UnitaryFunction {
 	 * @return the transformation of the {@link #operand}
 	 * @throws TransformFailedException if the transform did not succeed
 	 */
-	@SuppressWarnings("unused")
 	public abstract GeneralFunction execute() throws TransformFailedException;
 
 	/**

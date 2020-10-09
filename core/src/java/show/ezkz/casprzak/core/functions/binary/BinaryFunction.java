@@ -1,5 +1,6 @@
 package show.ezkz.casprzak.core.functions.binary;
 
+import show.ezkz.casprzak.core.config.SimplificationSettings;
 import show.ezkz.casprzak.core.functions.GeneralFunction;
 import show.ezkz.casprzak.core.functions.endpoint.Constant;
 import org.jetbrains.annotations.NotNull;
@@ -97,8 +98,9 @@ public abstract class BinaryFunction extends GeneralFunction {
 	/**
 	 * Returns a new {@link Constant} of the {@link BinaryFunction} evaluated if both operands are a {@link Constant}
 	 * @return a new {@link Constant} of the {@link BinaryFunction} evaluated if both operands are a {@link Constant}
+	 * @param settings the {@link SimplificationSettings} object describing the parameters of simplification
 	 */
-	public GeneralFunction simplifyFOC() {
+	public GeneralFunction simplifyFOC(SimplificationSettings settings) {
 		if (function1 instanceof Constant && function2 instanceof Constant)
 			return new Constant(this.evaluate()).simplify(settings);
 		else

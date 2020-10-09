@@ -60,15 +60,16 @@ public class Sum extends CommutativeFunction {
 
 	public Sum simplifyInternal(SimplificationSettings settings) {
 		Sum current = (Sum) super.simplifyInternal(settings);
-		current = current.combineLikeTerms();
+		current = current.combineLikeTerms(settings);
 		return current;
 	}
 
 	/**
 	 * Returns a {@link Sum} where like terms are added together. Ex: {@code 2x+x=3x}
 	 * @return a {@link Sum} where like terms are added together
+	 * @param settings the {@link SimplificationSettings} object describing the parameters of simplification
 	 */
-	public Sum combineLikeTerms() {
+	public Sum combineLikeTerms(SimplificationSettings settings) {
 		List<Pair<Double, GeneralFunction>> functionList = MiscTools.stripConstantsOfSum(this);
 		List<GeneralFunction> newFunctions = new ArrayList<>();
 
@@ -88,7 +89,7 @@ public class Sum extends CommutativeFunction {
 		}
 
 		if (combinedAny)
-			return new Sum(newFunctions.toArray(new GeneralFunction[0])).simplifyInternal();
+			return new Sum(newFunctions.toArray(new GeneralFunction[0])).simplifyInternal(settings);
 		else
 			return this;
 	}

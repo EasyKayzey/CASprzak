@@ -81,21 +81,21 @@ public class Product extends CommutativeFunction {
 	}
 
 	public GeneralFunction simplify(SimplificationSettings settings) {
-		Product currentFunction = simplifyInternal();
+		Product currentFunction = simplifyInternal(settings);
 		if (currentFunction.isTimesZero())
 			return new Constant(0);
 		else if (currentFunction.getFunctions().length <= 1)
-			return currentFunction.simplifyTrivialElement();
+			return currentFunction.simplifyTrivialElement(settings);
 		else if (Settings.distributeFunctions)
-			return currentFunction.distributeAll();
+			return currentFunction.distributeAll(settings);
 		else
 			return currentFunction;
 	}
 
 	public Product simplifyInternal(SimplificationSettings settings) {
 		Product current = (Product) super.simplifyInternal(settings);
-		current = current.fixNullIntegrals();
-		current = current.addExponents();
+		current = current.fixNullIntegrals(settings);
+		current = current.addExponents(settings);
 		return current;
 	}
 
@@ -115,8 +115,9 @@ public class Product extends CommutativeFunction {
 	/**
 	 * If {@link #functions} contains multiple functions that are equal to each other, including the bases of {@link Pow}s, then the exponents are added and the terms are combined. Ex: {@code sin(x)*(sin(x))^2} becomes {@code (sin(x))^3}
 	 * @return A new {@link Product} with exponents combined as specified above
+	 * @param settings the {@link SimplificationSettings} object describing the parameters of simplification
 	 */
-	public Product addExponents() {
+	public Product addExponents(SimplificationSettings settings) {
 		List<GeneralFunction> functionList = new LinkedList<>(List.of(functions));
 		List<GeneralFunction> newFunctions = new ArrayList<>();
 
@@ -144,7 +145,7 @@ public class Product extends CommutativeFunction {
 		}
 
 		if (combinedAny)
-			return new Product(newFunctions.toArray(new GeneralFunction[0])).simplifyInternal();
+			return new Product(newFunctions.toArray(new GeneralFunction[0])).simplifyInternal(settings);
 		else
 			return this;
 	}
@@ -152,8 +153,9 @@ public class Product extends CommutativeFunction {
 	/**
 	 * Turns constructs like a null-respect integral times {@code \dx} into an integral with respect to {@code 'x'}
 	 * @return this function with null-integrals fixed, if possible
+	 * @param settings the {@link SimplificationSettings} object describing the parameters of simplification
 	 */
-	public Product fixNullIntegrals() {
+	public Product fixNullIntegrals(SimplificationSettings settings) {
 		if (canFixNullIntegral()) {
 			List<GeneralFunction> functionList = new LinkedList<>(List.of(functions));
 			List<GeneralFunction> newFunctions = new ArrayList<>();
@@ -185,7 +187,7 @@ public class Product extends CommutativeFunction {
 				}
 			}
 
-			return new Product(newFunctions.toArray(new GeneralFunction[0])).simplifyInternal();
+			return new Product(newFunctions.toArray(new GeneralFunction[0])).simplifyInternal(settings);
 		} else {
 			return this;
 		}
@@ -206,8 +208,9 @@ public class Product extends CommutativeFunction {
 	/**
 	 * If one element of the product is a {@link Sum}, distributes the other contents of the product onto the sum. Example: {@code sin(y)*(x+2) = x*sin(y) + 2*sin(y)}
 	 * @return this function with multiplication and addition distributed if possible
+	 * @param settings the {@link SimplificationSettings} object describing the parameters of simplification
 	 */
-	public GeneralFunction distributeAll() {
+	public GeneralFunction distributeAll(SimplificationSettings settings) {
 		GeneralFunction[] multiplyTerms = getFunctions();
 		GeneralFunction[] addTerms;
 		for (int i = 0; i < multiplyTerms.length; i++) {

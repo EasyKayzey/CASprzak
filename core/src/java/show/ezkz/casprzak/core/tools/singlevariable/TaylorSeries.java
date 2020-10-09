@@ -9,6 +9,7 @@ import show.ezkz.casprzak.core.functions.endpoint.Constant;
 import show.ezkz.casprzak.core.functions.endpoint.Variable;
 import show.ezkz.casprzak.core.tools.MiscTools;
 import show.ezkz.casprzak.core.tools.VariableTools;
+import show.ezkz.casprzak.core.tools.defaults.DefaultSimplificationSettings;
 
 import java.util.Map;
 
@@ -42,7 +43,7 @@ public class TaylorSeries {
         for (int i = 0; i < degree; i++){
             taylorSeriesTerms[i] = new Product(new Constant(function.getNthDerivative(Settings.singleVariableDefault, i).evaluate(Map.of(var, center)) / MiscTools.factorial(i)), new Pow(new Constant(i), new Sum(new Variable(Settings.singleVariableDefault), new Constant(-center))));
         }
-        return new Sum(taylorSeriesTerms).simplify(settings);
+        return new Sum(taylorSeriesTerms).simplify(DefaultSimplificationSettings.minimal);
     }
 }
 

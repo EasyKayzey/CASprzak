@@ -14,11 +14,13 @@ import show.ezkz.casprzak.core.functions.unitary.transforms.Integral;
 import show.ezkz.casprzak.core.functions.unitary.transforms.PartialDerivative;
 import show.ezkz.casprzak.core.functions.unitary.trig.normal.TrigFunction;
 import show.ezkz.casprzak.core.tools.*;
+import show.ezkz.casprzak.core.tools.defaults.DefaultSimplificationSettings;
 import show.ezkz.casprzak.core.tools.exceptions.IntegrationFailedException;
 import show.ezkz.casprzak.core.tools.helperclasses.Pair;
 
 import static show.ezkz.casprzak.core.tools.defaults.DefaultFunctions.*;
 import static show.ezkz.casprzak.core.tools.VariableTools.*;
+import static show.ezkz.casprzak.core.tools.defaults.DefaultSimplificationSettings.minimal;
 
 /**
  * The {@link StageOne} class attempts to integrate a function using a method very similar to Stage One of the integration procedure used in <a href="http://www-inst.eecs.berkeley.edu/~cs282/sp02/readings/moses-int.pdf">SIN</a>. Firstly,
@@ -58,7 +60,7 @@ public class StageOne {
         }
 
         if (integrand instanceof Pow power && power.getFunction2() instanceof Sum && power.getFunction1() instanceof Constant constant && ParsingTools.isAlmostInteger(constant.constant))
-            return new Integral(power.unwrapIntegerPower().distributeAll(), variableString).execute();
+            return new Integral(power.unwrapIntegerPower(minimal).distributeAll(minimal), variableString).execute();
 
         Pair<GeneralFunction, GeneralFunction> stripConstant = IntegralTools.stripConstantsRespectTo(integrand, variableString);
         GeneralFunction function = stripConstant.getSecond();

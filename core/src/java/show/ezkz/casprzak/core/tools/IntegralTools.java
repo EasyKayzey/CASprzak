@@ -3,12 +3,15 @@ package show.ezkz.casprzak.core.tools;
 import show.ezkz.casprzak.core.functions.GeneralFunction;
 import show.ezkz.casprzak.core.functions.commutative.Product;
 import show.ezkz.casprzak.core.tools.defaults.DefaultFunctions;
+import show.ezkz.casprzak.core.tools.defaults.DefaultSimplificationSettings;
 import show.ezkz.casprzak.core.tools.helperclasses.Pair;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ListIterator;
+
+import static show.ezkz.casprzak.core.tools.defaults.DefaultSimplificationSettings.minimal;
 
 /**
  * The {@link IntegralTools} class contains miscellaneous methods used in {@link show.ezkz.casprzak.core.tools.integration}.
@@ -25,7 +28,7 @@ public class IntegralTools {
      */
     public static Pair<GeneralFunction, GeneralFunction> stripConstantsRespectTo(GeneralFunction function, String varID) {
         if (function instanceof Product multiply) {
-            GeneralFunction[] terms = multiply.simplifyConstants().getFunctions();
+            GeneralFunction[] terms = multiply.simplifyConstants(minimal).getFunctions();
             List<GeneralFunction> constants = new ArrayList<>();
             List<GeneralFunction> termsWithConstantRemoved = new ArrayList<>(Arrays.asList(terms));
             ListIterator<GeneralFunction> iter = termsWithConstantRemoved.listIterator();
@@ -36,7 +39,7 @@ public class IntegralTools {
                     iter.remove();
                 }
             }
-            return new Pair<>(new Product(constants.toArray(new GeneralFunction[0])).simplifyTrivialElement(), new Product(termsWithConstantRemoved.toArray(new GeneralFunction[0])).simplifyTrivialElement());
+            return new Pair<>(new Product(constants.toArray(new GeneralFunction[0])).simplifyTrivialElement(minimal), new Product(termsWithConstantRemoved.toArray(new GeneralFunction[0])).simplifyTrivialElement(minimal));
         } else {
             if (VariableTools.doesNotContainsVariable(function, varID))
                 return new Pair<>(function, DefaultFunctions.ONE);

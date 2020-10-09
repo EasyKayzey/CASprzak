@@ -6,11 +6,14 @@ import show.ezkz.casprzak.core.functions.commutative.CommutativeFunction;
 import show.ezkz.casprzak.core.functions.commutative.Product;
 import show.ezkz.casprzak.core.functions.commutative.Sum;
 import show.ezkz.casprzak.core.functions.endpoint.Constant;
+import show.ezkz.casprzak.core.tools.defaults.DefaultSimplificationSettings;
 import show.ezkz.casprzak.core.tools.helperclasses.Pair;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import static show.ezkz.casprzak.core.tools.defaults.DefaultSimplificationSettings.minimal;
 
 /**
  * The {@link MiscTools} class contains miscellaneous methods.
@@ -69,7 +72,7 @@ public class MiscTools {
 			if (function instanceof Product multiply) {
 				GeneralFunction[] terms = multiply.getFunctions();
 				if (terms[0] instanceof Constant constant)
-					strippedPairsArray.add(new Pair<>(constant.constant, new Product(ArrayTools.removeFunctionAt(terms, 0)).simplifyTrivialElement()));
+					strippedPairsArray.add(new Pair<>(constant.constant, new Product(ArrayTools.removeFunctionAt(terms, 0)).simplifyTrivialElement(minimal)));
 				else
 					strippedPairsArray.add(new Pair<>(1.0, multiply));
 			} else {
@@ -80,13 +83,13 @@ public class MiscTools {
 	}
 
 	/**
-	 * Executes {@link CommutativeFunction#simplifyTrivialElement()} until the function is not a {@code CommutativeFunction} or has a argument count greater than one. Ex: {@code (((2*x)))} becomes {@code 2*x}
+	 * Executes {@link CommutativeFunction#simplifyTrivialElement(show.ezkz.casprzak.core.config.SimplificationSettings)} until the function is not a {@code CommutativeFunction} or has a argument count greater than one. Ex: {@code (((2*x)))} becomes {@code 2*x}
 	 * @param function the function to be simplified
 	 * @return the function with all layers removed
 	 */
 	public static GeneralFunction toFirstNonTrivial(GeneralFunction function) {
 		while (function instanceof CommutativeFunction c && c.getFunctions().length <= 1)
-			function = c.simplifyTrivialElement();
+			function = c.simplifyTrivialElement(minimal);
 		return function;
 	}
 
@@ -154,7 +157,7 @@ public class MiscTools {
 	public static GeneralFunction minimalSimplify(GeneralFunction function) {
 		boolean dF = Settings.distributeFunctions;
 		Settings.distributeFunctions = false;
-		GeneralFunction simplified = function.simplify(settings);
+		GeneralFunction simplified = function.simplify(minimal);
 		Settings.distributeFunctions = dF;
 		return simplified;
 	}

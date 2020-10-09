@@ -63,30 +63,31 @@ public class Pow extends BinaryFunction {
 
 	public GeneralFunction simplify(SimplificationSettings settings) {
 		Pow currentPow = new Pow(function1.simplify(settings), function2.simplify(settings));
-		currentPow = currentPow.multiplyExponents();
-		GeneralFunction current = currentPow.simplifyObviousExponentsAndFOC();
+		currentPow = currentPow.multiplyExponents(settings);
+		GeneralFunction current = currentPow.simplifyObviousExponentsAndFOC(settings);
 		if (current instanceof Pow pow)
-			current = pow.simplifyLogsOfSameBase();
+			current = pow.simplifyLogsOfSameBase(settings);
 		if (current instanceof Pow pow && pow.function2 instanceof Product && Settings.distributeExponents)
-			current = pow.distributeExponents();
+			current = pow.distributeExponents(settings);
 		return current;
 	}
 
 	/**
 	 * Returns a {@link GeneralFunction} where obvious exponents (ex: {@code (x+1)^1 or (x-1)^0}) have been simplified and functions of constants (ex: {@code 2^7}) are simplified
 	 * @return a {@link GeneralFunction} where obvious exponents and functions of constants are simplified
+	 * @param settings the {@link SimplificationSettings} object describing the parameters of simplification
 	 */
-	public GeneralFunction simplifyObviousExponentsAndFOC() {
+	public GeneralFunction simplifyObviousExponentsAndFOC(SimplificationSettings settings) {
 		if (function1 instanceof Constant constant)
 			if (constant.constant == 0)
 				return DefaultFunctions.ONE;
 			else if (constant.constant == 1)
 				return function2.simplify(settings);
-		return simplifyFOC();
+		return simplifyFOC(settings);
 	}
 
 	@Override
-	public GeneralFunction simplifyFOC() {
+	public GeneralFunction simplifyFOC(SimplificationSettings settings) {
 		if (function1 instanceof Constant constant1 && function2 instanceof Constant constant2)
 			if (Settings.simplifyFunctionsOfSpecialConstants || (!constant1.isSpecial() && !constant2.isSpecial()))
 				return new Constant(this.evaluate()).simplify(settings);
@@ -96,8 +97,9 @@ public class Pow extends BinaryFunction {
 	/**
 	 * Simplifies instances of a power raised to a power. Example: {@code (x^2)^3 = x^6}
 	 * @return a {@link Pow} where the exponents are multiplied
+	 * @param settings the {@link SimplificationSettings} object describing the parameters of simplification
 	 */
-	public Pow multiplyExponents() {
+	public Pow multiplyExponents(SimplificationSettings settings) {
 		if (function2 instanceof Pow base)
 			return new Pow(new Product(base.function1, function1).simplify(settings), base.function2);
 		else
@@ -107,8 +109,9 @@ public class Pow extends BinaryFunction {
 	/**
 	 * Returns a {@link Product} where the exponent is distributed to each term. Example: {@code (xy)^2 = (x^2)(y^2) }
 	 * @return a {@link Product} with the exponent distributed
+	 * @param settings the {@link SimplificationSettings} object describing the parameters of simplification
 	 */
-	public Product distributeExponents() {
+	public Product distributeExponents(SimplificationSettings settings) {
 		if (function2 instanceof Product product) {
 			GeneralFunction[] oldFunctions = product.getFunctions();
 			GeneralFunction[] toMultiply = new GeneralFunction[oldFunctions.length];
@@ -121,12 +124,13 @@ public class Pow extends BinaryFunction {
 	}
 
 	/**
-	 * Given a {@link Pow}, checks if the exponent is a positive integer, and if so, applies {@link #unwrapIntegerPower()}
+	 * Given a {@link Pow}, checks if the exponent is a positive integer, and if so, applies {@link #unwrapIntegerPower(SimplificationSettings)}
 	 * @return {@code this} or a new unwrapped {@link Product}
+	 * @param settings the {@link SimplificationSettings} object describing the parameters of simplification
 	 */
-	public GeneralFunction unwrapIntegerPowerSafe() {
+	public GeneralFunction unwrapIntegerPowerSafe(SimplificationSettings settings) {
 		try {
-			return unwrapIntegerPower();
+			return unwrapIntegerPower(settings);
 		} catch (IllegalArgumentException ignored) {
 			return this;
 		}
@@ -136,8 +140,9 @@ public class Pow extends BinaryFunction {
 	 * Given a {@link Pow} with positive integer exponent, unwraps it into a {@link Product}
 	 * @return a new unwrapped {@link Product}
 	 * @throws RuntimeException if the exponent is not a positive integer
+	 * @param settings the {@link SimplificationSettings} object describing the parameters of simplification
 	 */
-	public Product unwrapIntegerPower() throws RuntimeException {
+	public Product unwrapIntegerPower(SimplificationSettings settings) throws RuntimeException {
 		int integerExponent = ParsingTools.toInteger(((Constant) function1).constant);
 		GeneralFunction[] toMultiply = new GeneralFunction[integerExponent];
 		Arrays.fill(toMultiply, function2);
@@ -148,8 +153,9 @@ public class Pow extends BinaryFunction {
 	/**
 	 * If the exponent is a logarithm with the same base as the {@link Pow}, it returns the argument of the logarithm
 	 * @return the argument of the logarithm in the exponent, if the exponent is a logarithm with the same base as the {@link Pow}
+	 * @param settings the {@link SimplificationSettings} object describing the parameters of simplification
 	 */
-	public GeneralFunction simplifyLogsOfSameBase() {
+	public GeneralFunction simplifyLogsOfSameBase(SimplificationSettings settings) {
 		if (function1 instanceof Logb logb && logb.getFunction2().equalsSimplified(function2))
 			return logb.getFunction1();
 		else if (function1 instanceof Ln ln && function2 instanceof Constant constant && constant.constant == Math.E)

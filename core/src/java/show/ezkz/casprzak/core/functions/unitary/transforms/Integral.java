@@ -11,6 +11,7 @@ import show.ezkz.casprzak.core.output.OutputString;
 import show.ezkz.casprzak.core.tools.ArrayTools;
 import show.ezkz.casprzak.core.tools.defaults.DefaultFunctions;
 import show.ezkz.casprzak.core.tools.MiscTools;
+import show.ezkz.casprzak.core.tools.defaults.DefaultSimplificationSettings;
 import show.ezkz.casprzak.core.tools.exceptions.IntegrationFailedException;
 import show.ezkz.casprzak.core.tools.integration.StageOne;
 import show.ezkz.casprzak.core.tools.singlevariable.NumericalIntegration;
@@ -116,18 +117,18 @@ public class Integral extends Transformation {
 	 * @throws IntegrationFailedException if the integral could not be found
 	 */
 	public GeneralFunction execute() throws IntegrationFailedException {
-		return StageOne.derivativeDivides(operand, respectTo).simplify(settings);
+		return StageOne.derivativeDivides(operand, respectTo).simplify(DefaultSimplificationSettings.user);
 	}
 
 	public GeneralFunction simplify(SimplificationSettings settings) {
 		if (respectTo == null) {
-			return simplifyInternal().fixNull();
+			return simplifyInternal(settings).fixNull(settings);
 		} else {
 			return super.simplify(settings);
 		}
 	}
 
-	private GeneralFunction fixNull() {
+	private GeneralFunction fixNull(SimplificationSettings settings) {
 		if (operand instanceof Differential diff) {
 			return new Integral(DefaultFunctions.ONE, diff.respectTo).simplify(settings);
 		} else if (operand instanceof Product product) {

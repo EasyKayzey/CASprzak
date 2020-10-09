@@ -39,20 +39,21 @@ public abstract class UnitaryFunction extends GeneralFunction {
 	}
 
 	public GeneralFunction simplify(SimplificationSettings settings) {
-		GeneralFunction newFunction = this.simplifyInternal();
+		GeneralFunction newFunction = this.simplifyInternal(settings);
 		if (newFunction instanceof UnitaryFunction unit)
-			newFunction = unit.simplifyInverse();
+			newFunction = unit.simplifyInverse(settings);
 
 		if (newFunction instanceof UnitaryFunction unit)
-			newFunction = unit.simplifyFOC();
+			newFunction = unit.simplifyFOC(settings);
 		return newFunction;
 	}
 
 	/**
 	 * Returns a new {@link Constant} of the {@link UnitaryFunction} evaluated if the {@link #operand} is a {@link Constant}
 	 * @return a new {@link Constant} of the {@link UnitaryFunction} evaluated if the {@link #operand} is a {@link Constant}
+	 * @param settings the {@link SimplificationSettings} object describing the parameters of simplification
 	 */
-	public GeneralFunction simplifyFOC() {
+	public GeneralFunction simplifyFOC(SimplificationSettings settings) {
 		if (Settings.simplifyFunctionsOfConstants && operand instanceof Constant)
 			return new Constant(evaluate());
 		else
@@ -62,8 +63,9 @@ public abstract class UnitaryFunction extends GeneralFunction {
 	/**
 	 * If {@link #operand} is an instance of the inverse of this function, returns {@code operand.operand}
 	 * @return {@code operand.operand} if {@link #operand} is an instance of the inverse, and {@code this} otherwise
+	 * @param settings the {@link SimplificationSettings} object describing the parameters of simplification
 	 */
-	public GeneralFunction simplifyInverse() {
+	public GeneralFunction simplifyInverse(SimplificationSettings settings) {
 		if (this instanceof Invertible inv && operand.getClass().isAssignableFrom(inv.getInverse()))
 			return ((UnitaryFunction) operand).operand;
 		else
@@ -84,7 +86,7 @@ public abstract class UnitaryFunction extends GeneralFunction {
 	/**
 	 * Simplifies the {@link #operand} using {@link Simplifiable#simplify(SimplificationSettings)}
 	 * @return an instance of this {@link UnitaryFunction} with the {@link #operand} simplified
-	 * @param settings
+	 * @param settings the {@link SimplificationSettings} object describing the parameters of simplification
 	 */
 	public UnitaryFunction simplifyInternal(SimplificationSettings settings) {
 		return getInstance(operand.simplify(settings));

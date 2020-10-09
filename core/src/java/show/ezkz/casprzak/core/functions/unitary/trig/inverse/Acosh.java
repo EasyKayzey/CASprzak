@@ -1,6 +1,7 @@
 package show.ezkz.casprzak.core.functions.unitary.trig.inverse;
 
 import show.ezkz.casprzak.core.config.Settings;
+import show.ezkz.casprzak.core.config.SimplificationSettings;
 import show.ezkz.casprzak.core.functions.GeneralFunction;
 import show.ezkz.casprzak.core.functions.binary.Pow;
 import show.ezkz.casprzak.core.functions.commutative.Product;
@@ -49,7 +50,7 @@ public class Acosh extends InverseTrigFunction {
 	}
 
 	@Override
-	public GeneralFunction simplifyInverse() {
+	public GeneralFunction simplifyInverse(SimplificationSettings settings) {
 		if (operand.getClass().isAssignableFrom(getInverse())) {
 			GeneralFunction insideFunction = ((UnitaryFunction) operand).operand;
 			if (Settings.enforceDomainAndRange)

@@ -1,6 +1,7 @@
 package show.ezkz.casprzak.core.functions.unitary.trig.normal;
 
 import show.ezkz.casprzak.core.config.Settings;
+import show.ezkz.casprzak.core.config.SimplificationSettings;
 import show.ezkz.casprzak.core.functions.GeneralFunction;
 import show.ezkz.casprzak.core.functions.commutative.Product;
 import show.ezkz.casprzak.core.functions.commutative.Sum;
@@ -52,7 +53,7 @@ public class Sec extends TrigFunction {
 	}
 
 	@Override
-	public GeneralFunction simplifyInverse() {
+	public GeneralFunction simplifyInverse(SimplificationSettings settings) {
 		if (operand.getClass().isAssignableFrom(getInverse())) {
 			GeneralFunction insideFunction = ((UnitaryFunction) operand).operand;
 			if (Settings.enforceDomainAndRange)

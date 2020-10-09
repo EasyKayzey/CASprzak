@@ -1,5 +1,6 @@
 package show.ezkz.casprzak.core.functions.unitary.specialcases;
 
+import show.ezkz.casprzak.core.config.SimplificationSettings;
 import show.ezkz.casprzak.core.functions.GeneralFunction;
 import show.ezkz.casprzak.core.functions.binary.BinaryFunction;
 import show.ezkz.casprzak.core.functions.binary.Logb;
@@ -44,10 +45,10 @@ public class Ln extends SpecialCaseBinaryFunction {
 
 
 	@Override
-	public GeneralFunction simplifyInverse() {
+	public GeneralFunction simplifyInverse(SimplificationSettings settings) {
 		if (operand instanceof Pow pow)
 			return new Product(pow.getFunction1(), new Ln(pow.getFunction2())).simplify(settings);
 		else
-			return super.simplifyInverse();
+			return super.simplifyInverse(settings);
 	}
 }

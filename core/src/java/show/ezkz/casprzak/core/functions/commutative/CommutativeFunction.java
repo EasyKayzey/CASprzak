@@ -106,13 +106,13 @@ public abstract class CommutativeFunction extends GeneralFunction {
 	}
 
 	public GeneralFunction simplify(SimplificationSettings settings) {
-		return this.simplifyInternal().simplifyTrivialElement();
+		return this.simplifyInternal(settings).simplifyTrivialElement(settings);
 	}
 
 	/**
 	 * Simplifies this {@link CommutativeFunction} using all methods that are guaranteed to return a {@link CommutativeFunction} of the same type
 	 * @return the simplified {@link CommutativeFunction}
-	 * @param settings
+	 * @param settings the {@link SimplificationSettings} object describing the parameters of simplification
 	 */
 	public CommutativeFunction simplifyInternal(SimplificationSettings settings) {
 		CommutativeFunction current = this;
@@ -126,7 +126,7 @@ public abstract class CommutativeFunction extends GeneralFunction {
 	/**
 	 * Simplifies each element of this {@link CommutativeFunction}
 	 * @return a new {@link CommutativeFunction} with each element of {@link #functions} simplified
-	 * @param settings
+	 * @param settings the {@link SimplificationSettings} object describing the parameters of simplification
 	 */
 	public CommutativeFunction simplifyElements(SimplificationSettings settings) {
 		GeneralFunction[] simplifiedFunctions = new GeneralFunction[functions.length];
@@ -138,7 +138,7 @@ public abstract class CommutativeFunction extends GeneralFunction {
 	/**
 	 * Removes all instances of the identity of the function from {@link #functions}
 	 * @return a new {@link CommutativeFunction} with
-	 * @param settings
+	 * @param settings the {@link SimplificationSettings} object describing the parameters of simplification
 	 */
 	public CommutativeFunction simplifyIdentity(SimplificationSettings settings) {
 		List<GeneralFunction> toPut = new ArrayList<>(Arrays.asList(functions));
@@ -149,7 +149,7 @@ public abstract class CommutativeFunction extends GeneralFunction {
 	/**
 	 * Combines all {@link Constant}s using {@link #operate(double, double)}
 	 * @return a new {@link CommutativeFunction} with the combined {@link Constant}s
-	 * @param settings
+	 * @param settings the {@link SimplificationSettings} object describing the parameters of simplification
 	 */
 	public CommutativeFunction simplifyConstants(SimplificationSettings settings) {
 		if (hasMultipleConstants()) {
@@ -165,7 +165,7 @@ public abstract class CommutativeFunction extends GeneralFunction {
 				}
 			}
 			functionList.add(new Constant(accumulator));
-			return getInstance(functionList.toArray(new GeneralFunction[0])).simplifyIdentity();
+			return getInstance(functionList.toArray(new GeneralFunction[0])).simplifyIdentity(settings);
 		} else {
 			return this;
 		}
@@ -186,12 +186,12 @@ public abstract class CommutativeFunction extends GeneralFunction {
 	/**
 	 * Composes all sub-functions of the same type. Ex: {@code (a+(b+c))} becomes {@code (a+b+c)}
 	 * @return a new {@link CommutativeFunction} with all compositions performed
-	 * @param settings
+	 * @param settings the {@link SimplificationSettings} object describing the parameters of simplification
 	 */
 	public CommutativeFunction simplifyPull(SimplificationSettings settings) {
 		for (int i = 0; i < functions.length; i++)
 			if (this.getClass().equals(functions[i].getClass()))
-				return getInstance(pullUp(functions, ((CommutativeFunction) functions[i]).getFunctions(), i)).simplifyPull();
+				return getInstance(pullUp(functions, ((CommutativeFunction) functions[i]).getFunctions(), i)).simplifyPull(settings);
 
 		return this;
 	}
@@ -209,8 +209,9 @@ public abstract class CommutativeFunction extends GeneralFunction {
 	/**
 	 * Returns identity {@link Constant} if {@link #functions} length is 0 and returns the {@link GeneralFunction} if {@link #functions} length is 1
 	 * @return identity {@link Constant} if {@link #functions} length is 0 and returns the {@link GeneralFunction} if {@link #functions} length is 1
+	 * @param settings the {@link SimplificationSettings} object describing the parameters of simplification
 	 */
-	public GeneralFunction simplifyTrivialElement() {
+	public GeneralFunction simplifyTrivialElement(SimplificationSettings settings) {
 		if (functions.length == 0)
 			return new Constant(getIdentityValue());
 		else if (functions.length == 1)

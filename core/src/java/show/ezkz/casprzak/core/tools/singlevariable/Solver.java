@@ -9,6 +9,7 @@ import show.ezkz.casprzak.core.functions.unitary.piecewise.Abs;
 import show.ezkz.casprzak.core.tools.defaults.DefaultFunctions;
 import show.ezkz.casprzak.core.tools.SolverTools;
 import show.ezkz.casprzak.core.tools.VariableTools;
+import show.ezkz.casprzak.core.tools.defaults.DefaultSimplificationSettings;
 
 import java.util.List;
 import java.util.ListIterator;
@@ -124,7 +125,7 @@ public class Solver {
 	public static List<Double> getSolutionsRangeHalley(GeneralFunction expression, double lower, double upper) {
 		String var = VariableTools.getSingleVariable(expression);
 		return getSolutionsRangeNewton(
-				(new Product(expression, new Pow(DefaultFunctions.NEGATIVE_HALF, new Abs(expression.getDerivative(var))))).simplify(settings),
+				(new Product(expression, new Pow(DefaultFunctions.NEGATIVE_HALF, new Abs(expression.getDerivative(var))))).simplify(DefaultSimplificationSettings.user),
 				lower, upper
 		);
 	}

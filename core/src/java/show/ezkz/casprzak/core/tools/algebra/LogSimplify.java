@@ -69,6 +69,11 @@ public class LogSimplify {
         return DefaultFunctions.frac(new Ln(input.argument()), new Ln(input.base())).simplify();
     }
 
+    /**
+     * Performs a "log chain rule" operation. Ex: {@code logb_a(b) * logb_b(c) = logb_a(c)}
+     * @param input A product which contains the logarithms that want to be simplified.
+     * @return A function with the simplification performed.
+     */
     public static GeneralFunction logChainRule(Product input) {
         List<GeneralFunction> functionList = new LinkedList<>(List.of(input.getFunctions()));
         List<GeneralFunction> newFunctions = new ArrayList<>();

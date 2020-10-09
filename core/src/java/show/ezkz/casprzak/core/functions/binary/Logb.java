@@ -9,12 +9,13 @@ import show.ezkz.casprzak.core.functions.unitary.specialcases.Ln;
 import show.ezkz.casprzak.core.output.OutputBinary;
 import show.ezkz.casprzak.core.output.OutputFunction;
 import show.ezkz.casprzak.core.tools.DefaultFunctions;
+import show.ezkz.casprzak.core.tools.helperclasses.LogInterface;
 
 import java.util.Map;
 
 import static show.ezkz.casprzak.core.output.ToStringManager.maybeParenthesize;
 
-public class Logb extends BinaryFunction {
+public class Logb extends BinaryFunction implements LogInterface {
 	/**
 	 * Constructs a new Logb
 	 * @param argument The argument of the logarithm
@@ -93,6 +94,21 @@ public class Logb extends BinaryFunction {
 
 	public OutputFunction toOutputFunction() {
 		return new OutputLogb(maybeParenthesize(function2.toOutputFunction()), function1.toOutputFunction());
+	}
+
+	@Override
+	public LogInterface newWith(GeneralFunction argument) {
+		return new Logb(argument, function2);
+	}
+
+	@Override
+	public GeneralFunction argument() {
+		return function1;
+	}
+
+	@Override
+	public GeneralFunction base() {
+		return function2;
 	}
 
 	private static class OutputLogb extends OutputBinary {

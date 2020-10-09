@@ -14,48 +14,47 @@ import show.ezkz.casprzak.core.tools.defaults.DefaultFunctions;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static show.ezkz.casprzak.core.tools.defaults.DefaultFunctions.*;
 
 public class AlgebraTests {
 
     @Test
     void lnOfAProduct() {
-        Ln test = new Ln(new Product(new Variable("x"), new Variable("y")));
-        assertEquals(new Sum(new Ln(new Variable("x")), new Ln(new Variable("y"))), LogSimplify.logarithmOfAProduct(test));
+        Ln test = new Ln(new Product(X, Y));
+        assertEquals(new Sum(new Ln(X), new Ln(Y)), LogSimplify.logarithmOfAProduct(test));
     }
 
     @Test
     void lnOfAnExponent() {
-        Ln test = new Ln(new Pow(new Variable("x"), new Variable("y")));
-        assertEquals(new Product(new Variable("x"), new Ln(new Variable("y"))), LogSimplify.logarithmOfAnExponent(test));
+        Ln test = new Ln(new Pow(X, Y));
+        assertEquals(new Product(X, new Ln(Y)), LogSimplify.logarithmOfAnExponent(test));
     }
 
     @Test
     void changeOfBase() {
-        Logb test = new Logb(new Variable("x"), new Constant(10));
-        assertEquals(DefaultFunctions.frac(new Ln(new Variable("x")), new Ln(new Constant(10))).simplify(), LogSimplify.changeOfBase(test));
+        Logb test = new Logb(X, new Constant(10));
+        assertEquals(DefaultFunctions.frac(new Ln(X), new Ln(new Constant(10))).simplify(), LogSimplify.changeOfBase(test));
     }
 
     @Test
     void logChainRuleBasic() {
-        Variable X = new Variable("x");
-        Variable Y = new Variable("y");
-        Variable Z = new Variable("z");
-
         Product test = new Product(new Logb(Y, X), new Logb(Z, Y));
         assertEquals(new Logb(Z, X), LogSimplify.logChainRule(test));
     }
 
     @Test
-    void logChainRuleBassdfasdfsdaic() {
-        Variable X = new Variable("x");
-        Variable Y = new Variable("y");
-        Variable Z = new Variable("z");
-        Variable A = new Variable("a");
+    void logChainRuleMany() {
+        GeneralFunction test = LogSimplify.logChainRule(new Product(new Logb(Y, X), new Logb(T, PI), new Logb(Z, Y), new Ln(Y), new Logb(PI, T)));
+        if (test.equals(new Product(new Logb(Z, X), new Ln(Y))))
+            assertEquals(new Product(new Logb(Z, X), new Ln(Y)), test);
+        else
+            assertEquals(new Product(new Logb(Y, X), new Ln(Z)), test);
+    }
 
-
-        Product test = new Product(new Pow(Y, A), new Pow(X, A), new Pow(Z, A));
-        System.out.println(test.addExponents());
-        assertEquals(new Logb(Z, X), LogSimplify.logChainRule(test));
+    @Test
+    void logChainRuleCycle() {
+        Product test = new Product(new Logb(Y, X), new Logb(Z, Y), new Logb(X, Z));
+        assertEquals(ONE, LogSimplify.logChainRule(test));
     }
 
 }

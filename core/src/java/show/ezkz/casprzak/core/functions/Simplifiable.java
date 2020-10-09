@@ -10,7 +10,7 @@ public interface Simplifiable {
 	/**
 	 * Returns this {@link GeneralFunction}, simplified
 	 * @return the simplified function
-	 * @param settings
+	 * @param settings the {@link SimplificationSettings} object describing the parameters of simplification
 	 */
 	GeneralFunction simplify(SimplificationSettings settings);
 }

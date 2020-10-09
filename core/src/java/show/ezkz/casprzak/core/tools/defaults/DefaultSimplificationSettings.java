@@ -3,6 +3,7 @@ package show.ezkz.casprzak.core.tools.defaults;
 import show.ezkz.casprzak.core.config.SimplificationSettings;
 
 public class DefaultSimplificationSettings {
+	// The settings below are the settings for `user`
 	public static boolean simplifyFunctionsOfConstants;
 	public static boolean simplifyFunctionsOfSpecialConstants;
 	public static boolean distributeExponentsOverMultiplication;
@@ -20,18 +21,80 @@ public class DefaultSimplificationSettings {
 	public static boolean trigComposition;
 
 	public static SimplificationSettings user;
-	public static SimplificationSettings minimal;
-	public static SimplificationSettings auto;
-	public static SimplificationSettings aggressive;
+	public static final SimplificationSettings minimal = new SimplificationSettings(
+			true,
+			false,
+			false,
+			true,
+			false,
+			false,
+			false,
+			true,
+			false,
+			false,
+			false,
+			false,
+			false,
+			false,
+			false
+	);
+	public static final SimplificationSettings auto = new SimplificationSettings(
+			true,
+			false,
+			true,
+			true,
+			false,
+			true,
+			false,
+			true,
+			false,
+			false,
+			false,
+			false,
+			false,
+			false,
+			false
+	);
+	public static final SimplificationSettings aggressive = new SimplificationSettings(
+			true,
+			false,
+			true,
+			true,
+			false,
+			true,
+			false,
+			true,
+			false,
+			false,
+			false,
+			false,
+			false,
+			false,
+			false
+	);
 
-	private DefaultSimplificationSettings() {}
-
-	public void generateAll() {
-
+	private DefaultSimplificationSettings() {
+		regenerateUser();
 	}
 
-	public void generateUser() {
-
+	public void regenerateUser() {
+		user = new SimplificationSettings(
+				simplifyFunctionsOfConstants,
+				simplifyFunctionsOfSpecialConstants,
+				distributeExponentsOverMultiplication,
+				addExponentsInProducts,
+				distributeMultiplicationOverAddition,
+				multiplyExponentsOfExponents,
+				executeTransformsOnSimplify,
+				enforceDomainAndRange,
+				simplifyLogAddition,
+				expandLogOfProducts,
+				extractLogExponents,
+				insertLogExponents,
+				doChangeOfBase,
+				doTrigIdentities,
+				trigComposition
+		);
 	}
 
 }

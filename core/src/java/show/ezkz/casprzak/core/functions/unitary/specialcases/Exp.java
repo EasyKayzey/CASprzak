@@ -6,11 +6,12 @@ import show.ezkz.casprzak.core.functions.binary.Pow;
 import show.ezkz.casprzak.core.functions.commutative.Product;
 import show.ezkz.casprzak.core.functions.unitary.UnitaryFunction;
 import show.ezkz.casprzak.core.tools.defaults.DefaultFunctions;
+import show.ezkz.casprzak.core.tools.helperclasses.PowInterface;
 
 import java.util.Map;
 
 
-public class Exp extends SpecialCaseBinaryFunction {
+public class Exp extends SpecialCaseBinaryFunction implements PowInterface {
 	/**
 	 * Constructs a new {@link Exp}
 	 * @param operand The function which the exponential is operating on
@@ -39,5 +40,20 @@ public class Exp extends SpecialCaseBinaryFunction {
 
 	public Class<?> getInverse() {
 		return Ln.class;
+	}
+
+	@Override
+	public PowInterface newWith(GeneralFunction exponent) {
+		return new Exp(exponent);
+	}
+
+	@Override
+	public GeneralFunction exponent() {
+		return operand;
+	}
+
+	@Override
+	public GeneralFunction base() {
+		return DefaultFunctions.E;
 	}
 }

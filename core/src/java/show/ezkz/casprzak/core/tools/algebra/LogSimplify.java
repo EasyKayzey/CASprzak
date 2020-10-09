@@ -7,6 +7,7 @@ import show.ezkz.casprzak.core.functions.commutative.Product;
 import show.ezkz.casprzak.core.functions.commutative.Sum;
 import show.ezkz.casprzak.core.functions.unitary.specialcases.Exp;
 import show.ezkz.casprzak.core.functions.unitary.specialcases.Ln;
+import show.ezkz.casprzak.core.tools.defaults.DefaultFunctions;
 import show.ezkz.casprzak.core.tools.helperclasses.LogInterface;
 
 import java.util.Arrays;
@@ -45,6 +46,25 @@ public class LogSimplify {
         else
             return (GeneralFunction) input;
 
+    }
+
+    /**
+     * Performs a change of base operation. Ex: {@code log(x) = logb_3(x)/logb_3(10)}
+     * @param input The logarithm whose base is changing
+     * @param newBase The new base
+     * @return The logarithm with a changed base
+     */
+    public static GeneralFunction changeOfBase(LogInterface input, GeneralFunction newBase) {
+        return DefaultFunctions.frac(new Logb(input.argument(), newBase), new Logb(input.base(), newBase)).simplify();
+    }
+
+    /**
+     * Performs a change of base to {@code ln}. Ex: {@code log(x) = ln(x)/ln(10)}
+     * @param input The logarithm whose base is changing
+     * @return The logarithm with a changed base
+     */
+    public static GeneralFunction changeOfBase(LogInterface input) {
+        return DefaultFunctions.frac(new Ln(input.argument()), new Ln(input.base())).simplify();
     }
 
 

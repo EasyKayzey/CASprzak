@@ -1,11 +1,15 @@
+import show.ezkz.casprzak.core.config.SimplificationSettings;
 import show.ezkz.casprzak.core.functions.GeneralFunction;
 import org.junit.jupiter.api.Test;
+import show.ezkz.casprzak.core.tools.defaults.DefaultSimplificationSettings;
 import show.ezkz.casprzak.parsing.FunctionParser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class EqualsTest {
+
+    private static final SimplificationSettings settings = DefaultSimplificationSettings.user;
 
     @Test
     void unitaryEqualsUnitary() {

@@ -1,9 +1,11 @@
+import show.ezkz.casprzak.core.config.SimplificationSettings;
 import show.ezkz.casprzak.core.functions.GeneralFunction;
 import show.ezkz.casprzak.core.functions.commutative.Product;
 import show.ezkz.casprzak.core.functions.unitary.transforms.Differential;
 import show.ezkz.casprzak.core.functions.unitary.transforms.Integral;
 import org.junit.jupiter.api.Test;
 import show.ezkz.casprzak.core.tools.defaults.DefaultFunctions;
+import show.ezkz.casprzak.core.tools.defaults.DefaultSimplificationSettings;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -11,6 +13,9 @@ import static show.ezkz.casprzak.parsing.FunctionParser.parseInfix;
 import static show.ezkz.casprzak.parsing.FunctionParser.parseSimplified;
 
 public class DifferentialTest {
+
+	private static final SimplificationSettings settings = DefaultSimplificationSettings.user;
+
 	@Test
 	void basicDerivative1() {
 		GeneralFunction test = parseSimplified("d/dx x");

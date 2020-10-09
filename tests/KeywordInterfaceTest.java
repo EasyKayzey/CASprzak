@@ -1,4 +1,5 @@
 import show.ezkz.casprzak.core.config.Settings;
+import show.ezkz.casprzak.core.config.SimplificationSettings;
 import show.ezkz.casprzak.core.functions.GeneralFunction;
 import show.ezkz.casprzak.core.functions.binary.Pow;
 import show.ezkz.casprzak.core.functions.commutative.Product;
@@ -8,6 +9,7 @@ import show.ezkz.casprzak.core.functions.endpoint.Variable;
 import show.ezkz.casprzak.core.functions.unitary.trig.normal.Cos;
 import show.ezkz.casprzak.core.functions.unitary.trig.normal.Sin;
 import org.junit.jupiter.api.Test;
+import show.ezkz.casprzak.core.tools.defaults.DefaultSimplificationSettings;
 import show.ezkz.casprzak.parsing.FunctionParser;
 import show.ezkz.casprzak.commandui.KeywordInterface;
 import show.ezkz.casprzak.core.tools.defaults.DefaultFunctions;
@@ -20,6 +22,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SuppressWarnings({"SpellCheckingInspection", "unchecked"})
 public class KeywordInterfaceTest {
+
+    private static final SimplificationSettings settings = DefaultSimplificationSettings.user;
 
     @Test
     void partialDerivatives() {

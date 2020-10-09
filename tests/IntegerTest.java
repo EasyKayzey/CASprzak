@@ -1,3 +1,4 @@
+import show.ezkz.casprzak.core.config.SimplificationSettings;
 import show.ezkz.casprzak.core.functions.GeneralFunction;
 import show.ezkz.casprzak.core.functions.binary.Rand;
 import show.ezkz.casprzak.core.functions.binary.integer.IntegerQuotient;
@@ -11,6 +12,7 @@ import show.ezkz.casprzak.core.functions.unitary.piecewise.Floor;
 import show.ezkz.casprzak.core.functions.unitary.piecewise.Round;
 import show.ezkz.casprzak.core.functions.unitary.trig.normal.Sin;
 import org.junit.jupiter.api.Test;
+import show.ezkz.casprzak.core.tools.defaults.DefaultSimplificationSettings;
 
 import java.util.Map;
 
@@ -18,6 +20,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class IntegerTest {
+
+    private static final SimplificationSettings settings = DefaultSimplificationSettings.user;
+
     @Test
     void basicIntegerQuotient1() {
         GeneralFunction test = new IntegerQuotient(new Constant(7), new Constant(13));

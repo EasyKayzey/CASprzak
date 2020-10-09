@@ -1,8 +1,10 @@
+import show.ezkz.casprzak.core.config.SimplificationSettings;
 import show.ezkz.casprzak.core.functions.GeneralFunction;
 import show.ezkz.casprzak.core.functions.commutative.Product;
 import show.ezkz.casprzak.core.functions.commutative.Sum;
 import show.ezkz.casprzak.core.functions.endpoint.Constant;
 import org.junit.jupiter.api.Test;
+import show.ezkz.casprzak.core.tools.defaults.DefaultSimplificationSettings;
 import show.ezkz.casprzak.parsing.FunctionParser;
 import show.ezkz.casprzak.core.tools.exceptions.IntegrationFailedException;
 import show.ezkz.casprzak.core.tools.helperclasses.Pair;
@@ -13,6 +15,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 public class IntegralTest {
+
+    private static final SimplificationSettings settings = DefaultSimplificationSettings.user;
 
     @Test
     void splitAdds() throws Exception {

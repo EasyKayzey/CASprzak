@@ -1,8 +1,10 @@
 import show.ezkz.casprzak.core.config.Settings;
+import show.ezkz.casprzak.core.config.SimplificationSettings;
 import show.ezkz.casprzak.core.functions.GeneralFunction;
 import show.ezkz.casprzak.core.functions.binary.Pow;
 import show.ezkz.casprzak.core.functions.commutative.Product;
 import org.junit.jupiter.api.Test;
+import show.ezkz.casprzak.core.tools.defaults.DefaultSimplificationSettings;
 import show.ezkz.casprzak.parsing.FunctionParser;
 import show.ezkz.casprzak.core.tools.defaults.DefaultFunctions;
 
@@ -10,6 +12,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class SimplifyTest {
+
+    private static final SimplificationSettings settings = DefaultSimplificationSettings.user;
 
     @Test
     void equalWhenSimplified() {
@@ -50,7 +54,7 @@ public class SimplifyTest {
     void distributeTerms() {
         GeneralFunction test1 = FunctionParser.parseInfix("\\sin(x)*(1+5x)");
         GeneralFunction test2 = FunctionParser.parseInfix("\\sin(x)+5*x*\\sin(x)");
-        assertEquals(((Product)test1).distributeAll(), test2);
+        assertEquals(((Product)test1).distributeAll(settings), test2);
     }
 
     @Test
@@ -121,14 +125,14 @@ public class SimplifyTest {
     void unwrapPowersTest() {
         GeneralFunction test1 = FunctionParser.parseInfix("(x+1)^3");
         GeneralFunction test2 = FunctionParser.parseInfix("(x+1)*(x+1)*(x+1)");
-        assertEquals(((Pow) test1).unwrapIntegerPowerSafe().simplify(settings), test2.simplify(settings));
+        assertEquals(((Pow) test1).unwrapIntegerPowerSafe(settings).simplify(settings), test2.simplify(settings));
     }
 
     @Test
     void unwrapPowersEdgeTest() {
         GeneralFunction test1 = FunctionParser.parseInfix("(x+1)^0");
         GeneralFunction test2 = FunctionParser.parseInfix("1");
-        assertEquals(((Pow) test1).unwrapIntegerPowerSafe().simplify(settings), test2);
+        assertEquals(((Pow) test1).unwrapIntegerPowerSafe(settings).simplify(settings), test2);
     }
 
     @Test

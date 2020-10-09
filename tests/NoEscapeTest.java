@@ -1,7 +1,9 @@
 import show.ezkz.casprzak.core.config.Settings;
+import show.ezkz.casprzak.core.config.SimplificationSettings;
 import show.ezkz.casprzak.core.functions.GeneralFunction;
 import show.ezkz.casprzak.core.functions.commutative.Product;
 import org.junit.jupiter.api.Test;
+import show.ezkz.casprzak.core.tools.defaults.DefaultSimplificationSettings;
 import show.ezkz.casprzak.parsing.FunctionParser;
 import show.ezkz.casprzak.core.tools.defaults.DefaultFunctions;
 
@@ -10,6 +12,8 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class NoEscapeTest {
+
+	private static final SimplificationSettings settings = DefaultSimplificationSettings.user;
 
 	@Test
 	void sinPi() {
@@ -35,7 +39,7 @@ public class NoEscapeTest {
 		Settings.enforceEscapes = false;
 		GeneralFunction test1 = FunctionParser.parseInfix("sin(x)*(1+5x)");
 		GeneralFunction test2 = FunctionParser.parseInfix("sin(x)+5*x*sin(x)");
-		assertEquals(((Product)test1).distributeAll(), test2);
+		assertEquals(((Product)test1).distributeAll(settings), test2);
 		Settings.enforceEscapes = temp;
 	}
 

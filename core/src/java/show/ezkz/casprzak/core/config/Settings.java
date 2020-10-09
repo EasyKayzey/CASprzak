@@ -92,21 +92,6 @@ public class Settings {
 	public static boolean removeEscapes = false;
 
 	/**
-	 * Denotes whether functions of constants should be simplified. Ex: {@code \sin(\pi/2) -> 1}
-	 */
-	public static boolean simplifyFunctionsOfConstants = true;
-
-	/**
-	 * Denotes whether or not special Constants get simplified into decimal under addition, multiplication, or exponentiation.
-	 */
-	public static boolean simplifyFunctionsOfSpecialConstants = false;
-
-	/**
-	 * Denotes whether exponents should be distributed over multiplication in {@code simplify(settings)}. Ex: {@code (2x)^2 -> 4x^2}
-	 */
-	public static boolean distributeExponents = true;
-
-	/**
 	 * Denotes whether or not the derivatives of functions should be cached when created.
 	 */
 	public static boolean cacheDerivatives = true;
@@ -122,24 +107,9 @@ public class Settings {
 	public static boolean exitSolverOnProximity = false;
 
 	/**
-	 * Denotes whether a {@link Transformation} should execute its action when {@code simplify(settings)} is called.
-	 */
-	public static boolean executeOnSimplify = true;
-
-	/**
-	 * Denotes whether products are distributed over addition in {@code simplify(settings)}. Ex: {@code x(y+z) -> (xy+xz)}
-	 */
-	public static boolean distributeFunctions = true;
-
-	/**
 	 * Denotes whether full stack traces of errors should be printed for debugging.
 	 */
 	public static boolean printStackTraces = false;
-
-	/**
-	 * Denotes whether or not inverse simplifications conserve domain and range
-	 */
-	public static boolean enforceDomainAndRange = false;
 
 	/**
 	 * Denotes whether or not multiplication should be delimited by asterisks (as in {@code 2 * x}) or not (as in {@code 2x})
@@ -187,7 +157,7 @@ public class Settings {
 	 * @param key the name of the setting, such as defaultSolverIterations or defaultFactorial
 	 * @param value the value of the setting, such as {@code 10000} or {@code RECURSIVE}
 	 */
-	public static void parseSingleSetting(String key, String value) {
+	public static void parseSingleSetting(String key, String value) { // TODO add new settings
 		switch (key) {
 			case "defaultSolverIterations" 					-> defaultSolverIterations = Integer.parseInt(value);
 			case "defaultRangeSections" 					-> defaultRangeSections = Integer.parseInt(value);
@@ -202,16 +172,10 @@ public class Settings {
 			case "escapedNames"				 				-> escapeNames = ParsingTools.parseBoolean(value);
 			case "enforcePatternMatchingNames"		 		-> enforcePatternMatchingNames = ParsingTools.parseBoolean(value);
 			case "removeEscapes"		 					-> removeEscapes = ParsingTools.parseBoolean(value);
-			case "simplifyFunctionsOfConstants" 			-> simplifyFunctionsOfConstants = ParsingTools.parseBoolean(value);
-			case "simplifyFunctionsOfSpecialConstants"		-> simplifyFunctionsOfSpecialConstants = ParsingTools.parseBoolean(value);
-			case "distributeExponents" 						-> distributeExponents = ParsingTools.parseBoolean(value);
 			case "cacheDerivatives" 						-> cacheDerivatives = ParsingTools.parseBoolean(value);
 			case "enforceIntegerOperations" 				-> enforceIntegerOperations = ParsingTools.parseBoolean(value);
 			case "exitSolverOnProximity" 					-> exitSolverOnProximity = ParsingTools.parseBoolean(value);
-			case "executeOnSimplify" 						-> executeOnSimplify = ParsingTools.parseBoolean(value);
-			case "distributeFunctions"					    -> distributeFunctions = ParsingTools.parseBoolean(value);
 			case "printStackTraces"						    -> printStackTraces = ParsingTools.parseBoolean(value);
-			case "enforceDomainAndRange"					-> enforceDomainAndRange = ParsingTools.parseBoolean(value);
 			case "asteriskMultiplication"					-> asteriskMultiplication = ParsingTools.parseBoolean(value);
 			case "truncateNearIntegers" 					-> truncateNearIntegers = ParsingTools.parseBoolean(value);
 			case "doCombinatorics"							-> doCombinatorics = ParsingTools.parseBoolean(value);

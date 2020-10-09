@@ -1,6 +1,7 @@
 package show.ezkz.casprzak.core.functions.commutative;
 
 import show.ezkz.casprzak.core.config.Settings;
+import show.ezkz.casprzak.core.config.SimplificationSettings;
 import show.ezkz.casprzak.core.functions.GeneralFunction;
 import show.ezkz.casprzak.core.functions.Outputable;
 import show.ezkz.casprzak.core.functions.endpoint.Constant;
@@ -104,39 +105,42 @@ public abstract class CommutativeFunction extends GeneralFunction {
 		return getInstance(newFunctions);
 	}
 
-	public GeneralFunction simplify() {
+	public GeneralFunction simplify(SimplificationSettings settings) {
 		return this.simplifyInternal().simplifyTrivialElement();
 	}
 
 	/**
 	 * Simplifies this {@link CommutativeFunction} using all methods that are guaranteed to return a {@link CommutativeFunction} of the same type
 	 * @return the simplified {@link CommutativeFunction}
+	 * @param settings
 	 */
-	public CommutativeFunction simplifyInternal() {
+	public CommutativeFunction simplifyInternal(SimplificationSettings settings) {
 		CommutativeFunction current = this;
-		current = current.simplifyElements();
-		current = current.simplifyPull();
-		current = current.simplifyIdentity();
-		current = current.simplifyConstants();
+		current = current.simplifyElements(settings);
+		current = current.simplifyPull(settings);
+		current = current.simplifyIdentity(settings);
+		current = current.simplifyConstants(settings);
 		return current;
 	}
 
 	/**
 	 * Simplifies each element of this {@link CommutativeFunction}
 	 * @return a new {@link CommutativeFunction} with each element of {@link #functions} simplified
+	 * @param settings
 	 */
-	public CommutativeFunction simplifyElements() {
+	public CommutativeFunction simplifyElements(SimplificationSettings settings) {
 		GeneralFunction[] simplifiedFunctions = new GeneralFunction[functions.length];
 		for (int i = 0; i < functions.length; i++)
-			simplifiedFunctions[i] = functions[i].simplify();
+			simplifiedFunctions[i] = functions[i].simplify(settings);
 		return getInstance(simplifiedFunctions);
 	}
 
 	/**
 	 * Removes all instances of the identity of the function from {@link #functions}
 	 * @return a new {@link CommutativeFunction} with
+	 * @param settings
 	 */
-	public CommutativeFunction simplifyIdentity() {
+	public CommutativeFunction simplifyIdentity(SimplificationSettings settings) {
 		List<GeneralFunction> toPut = new ArrayList<>(Arrays.asList(functions));
 		toPut.removeIf(generalFunction -> generalFunction instanceof Constant constant && constant.constant == getIdentityValue());
 		return getInstance(toPut.toArray(new GeneralFunction[0]));
@@ -145,8 +149,9 @@ public abstract class CommutativeFunction extends GeneralFunction {
 	/**
 	 * Combines all {@link Constant}s using {@link #operate(double, double)}
 	 * @return a new {@link CommutativeFunction} with the combined {@link Constant}s
+	 * @param settings
 	 */
-	public CommutativeFunction simplifyConstants() {
+	public CommutativeFunction simplifyConstants(SimplificationSettings settings) {
 		if (hasMultipleConstants()) {
 			double accumulator = getIdentityValue();
 			List<GeneralFunction> functionList = new LinkedList<>(List.of(functions));
@@ -181,8 +186,9 @@ public abstract class CommutativeFunction extends GeneralFunction {
 	/**
 	 * Composes all sub-functions of the same type. Ex: {@code (a+(b+c))} becomes {@code (a+b+c)}
 	 * @return a new {@link CommutativeFunction} with all compositions performed
+	 * @param settings
 	 */
-	public CommutativeFunction simplifyPull() {
+	public CommutativeFunction simplifyPull(SimplificationSettings settings) {
 		for (int i = 0; i < functions.length; i++)
 			if (this.getClass().equals(functions[i].getClass()))
 				return getInstance(pullUp(functions, ((CommutativeFunction) functions[i]).getFunctions(), i)).simplifyPull();
@@ -208,7 +214,7 @@ public abstract class CommutativeFunction extends GeneralFunction {
 		if (functions.length == 0)
 			return new Constant(getIdentityValue());
 		else if (functions.length == 1)
-			return functions[0].simplify();
+			return functions[0].simplify(settings);
 		else
 			return this;
 	}

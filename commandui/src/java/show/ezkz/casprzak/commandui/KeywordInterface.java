@@ -264,7 +264,7 @@ public class KeywordInterface {
 
 
 	private static GeneralFunction simplify(String input) {
-		return parseStored(input).simplify();
+		return parseStored(input).simplify(settings);
 	}
 
 	private static GeneralFunction substitute(String input, boolean simplify) {
@@ -275,7 +275,7 @@ public class KeywordInterface {
 						.collect(Collectors.toMap(e -> e[0], e -> parseStored(e[1])))
 		);
 		if (simplify)
-			return current.simplify();
+			return current.simplify(settings);
 		else
 			return MiscTools.minimalSimplify(current);
 	}
@@ -315,7 +315,7 @@ public class KeywordInterface {
 		if (Settings.enforcePatternMatchingNames && !ParsingTools.validNames.matcher(splitInput[0]).matches())
 			throw new IllegalNameException(splitInput[0]);
 		if (simplify)
-			toPut = toPut.simplify();
+			toPut = toPut.simplify(settings);
 		storedFunctions.put(splitInput[0], toPut);
 		return toPut;
 	}

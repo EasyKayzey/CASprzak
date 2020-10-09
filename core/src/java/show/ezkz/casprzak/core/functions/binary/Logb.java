@@ -1,5 +1,6 @@
 package show.ezkz.casprzak.core.functions.binary;
 
+import show.ezkz.casprzak.core.config.SimplificationSettings;
 import show.ezkz.casprzak.core.functions.GeneralFunction;
 import show.ezkz.casprzak.core.functions.commutative.Product;
 import show.ezkz.casprzak.core.functions.commutative.Sum;
@@ -54,8 +55,8 @@ public class Logb extends BinaryFunction {
 		return "(log_{" + function2.toString() + "}(" + function1.toString() + "))";
 	}
 
-	public GeneralFunction simplify() {
-		Logb currentLogb = new Logb(function1.simplify(), function2.simplify());
+	public GeneralFunction simplify(SimplificationSettings settings) {
+		Logb currentLogb = new Logb(function1.simplify(settings), function2.simplify(settings));
 		GeneralFunction current = currentLogb.simplifyPowers();
 
 		if (current instanceof Logb logb)

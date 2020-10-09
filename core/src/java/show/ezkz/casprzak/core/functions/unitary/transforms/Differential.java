@@ -1,5 +1,6 @@
 package show.ezkz.casprzak.core.functions.unitary.transforms;
 
+import show.ezkz.casprzak.core.config.SimplificationSettings;
 import show.ezkz.casprzak.core.functions.Evaluable;
 import show.ezkz.casprzak.core.functions.GeneralFunction;
 import show.ezkz.casprzak.core.functions.endpoint.Variable;
@@ -102,12 +103,12 @@ public class Differential extends Transformation {
 	}
 
 
-	public UnitaryFunction simplify() {
+	public UnitaryFunction simplify(SimplificationSettings settings) {
 		return this;
 	}
 
 	@Override
-	public UnitaryFunction simplifyInternal() {
+	public UnitaryFunction simplifyInternal(SimplificationSettings settings) {
 		return this;
 	}
 

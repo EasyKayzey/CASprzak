@@ -32,61 +32,61 @@ public class DifferentialTest {
 	@Test
 	void integral1() {
 		GeneralFunction test = parseInfix("\\int[2x]\\dx");
-		assertEquals(parseInfix("x^2"), test.simplify());
+		assertEquals(parseInfix("x^2"), test.simplify(settings));
 	}
 
 	@Test
 	void integralNullException() {
 		Integral test = new Integral(parseSimplified("x"));
 		assertThrows(Exception.class, test::execute);
-		test.simplify();
+		test.simplify(settings);
 	}
 
 	@Test
 	void integralDifferentialInside() {
 		Integral test = new Integral(parseInfix("x\\dx"));
-		assertEquals(parseInfix("x^2/2"), test.simplify());
+		assertEquals(parseInfix("x^2/2"), test.simplify(settings));
 	}
 
 	@Test
 	void differentialProductIntegral() {
 		GeneralFunction test = new Product(new Integral(DefaultFunctions.X), new Differential("x"));
-		assertEquals(parseInfix("x^2/2"), test.simplify());
+		assertEquals(parseInfix("x^2/2"), test.simplify(settings));
 	}
 
 	@Test
 	void differentialProductIntegral2() {
 		GeneralFunction test = new Product(DefaultFunctions.TWO, new Integral(DefaultFunctions.X), new Differential("x"));
-		assertEquals(parseInfix("x^2"), test.simplify());
+		assertEquals(parseInfix("x^2"), test.simplify(settings));
 	}
 
 	@Test
 	void differentialProductIntegralNested1() {
 		GeneralFunction test = parseInfix("\\int(\\int(2x\\dx))\\dy");
-		assertEquals(parseInfix("yx^2"), test.simplify());
+		assertEquals(parseInfix("yx^2"), test.simplify(settings));
 	}
 
 	@Test
 	void integralThatBreaks() {
 		GeneralFunction test = parseInfix("\\int(x^2\\dy)");
-		assertEquals(parseInfix("y*x^2"), test.simplify());
+		assertEquals(parseInfix("y*x^2"), test.simplify(settings));
 	}
 
 	@Test
 	void integralThatBreaksManualCreation() {
 		GeneralFunction test = new Integral(parseInfix("x^2"), "y");
-		assertEquals(parseInfix("y*x^2"), test.simplify());
+		assertEquals(parseInfix("y*x^2"), test.simplify(settings));
 	}
 
 	@Test
 	void integral2() {
 		GeneralFunction test = parseInfix("\\int[e^\\beta]\\d\\beta");
-		assertEquals(parseInfix("e^\\beta"), test.simplify());
+		assertEquals(parseInfix("e^\\beta"), test.simplify(settings));
 	}
 
 	@Test
 	void integral3() {
 		GeneralFunction test = parseInfix("\\int[e^ϕ]\\dϕ");
-		assertEquals(parseInfix("e^ϕ"), test.simplify());
+		assertEquals(parseInfix("e^ϕ"), test.simplify(settings));
 	}
 }

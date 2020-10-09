@@ -1,5 +1,6 @@
 package show.ezkz.casprzak.core.functions.unitary.transforms;
 
+import show.ezkz.casprzak.core.config.SimplificationSettings;
 import show.ezkz.casprzak.core.functions.Differentiable;
 import show.ezkz.casprzak.core.functions.GeneralFunction;
 import show.ezkz.casprzak.core.functions.unitary.UnitaryFunction;
@@ -71,8 +72,8 @@ public class PartialDerivative extends Transformation {
 
 
 	@Override
-	public UnitaryFunction simplifyInternal() {
-		return new PartialDerivative(operand.simplify(), respectTo);
+	public UnitaryFunction simplifyInternal(SimplificationSettings settings) {
+		return new PartialDerivative(operand.simplify(settings), respectTo);
 	}
 
 

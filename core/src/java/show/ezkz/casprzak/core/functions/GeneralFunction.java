@@ -17,6 +17,7 @@ import show.ezkz.casprzak.core.functions.unitary.trig.inverse.InverseTrigFunctio
 import show.ezkz.casprzak.core.functions.unitary.trig.normal.TrigFunction;
 import org.jetbrains.annotations.NotNull;
 import show.ezkz.casprzak.core.tools.MiscTools;
+import show.ezkz.casprzak.core.tools.defaults.DefaultSimplificationSettings;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -27,7 +28,7 @@ import java.util.function.Predicate;
 
 /**
  * A {@link GeneralFunction} is the generalized abstract function used throughout the CAS.
- * It is critical to note that ALL FUNCTIONS ARE IMMUTABLE: as a consequence, methods such as {@link #simplify()} return a function that has been simplified rather than simplifying the caller in place.
+ * It is critical to note that ALL FUNCTIONS ARE IMMUTABLE: as a consequence, methods such as {@link Simplifiable#simplify(show.ezkz.casprzak.core.config.SimplificationSettings)} return a function that has been simplified rather than simplifying the caller in place.
  */
 public abstract class GeneralFunction implements Evaluable, Differentiable, Simplifiable, Comparable<GeneralFunction>, Iterable<GeneralFunction>, Outputable {
 
@@ -83,7 +84,7 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 	public GeneralFunction getSimplifiedDerivative(String varID) {
 		if (Settings.cacheDerivatives && derivatives.containsKey(varID))
 			return derivatives.get(varID);
-		GeneralFunction derivative = getDerivative(varID).simplify();
+		GeneralFunction derivative = getDerivative(varID).simplify(DefaultSimplificationSettings.user);
 		if (Settings.cacheDerivatives)
 			derivatives.put(varID, derivative);
 		return derivative;
@@ -139,7 +140,7 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 	 * @return true if they're equal when simplified
 	 */
 	public boolean equalsSimplified(GeneralFunction that) {
-		return this.simplify().equalsFunction(that.simplify());
+		return this.simplify(DefaultSimplificationSettings.user).equalsFunction(that.simplify(DefaultSimplificationSettings.user));
 	}
 
 	/**

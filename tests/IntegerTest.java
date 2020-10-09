@@ -44,14 +44,14 @@ public class IntegerTest {
 
     @Test
     void gcd() {
-        assertEquals(new Constant(4), new GCD(new Constant(4), new Constant(196), new Constant(80)).simplify());
+        assertEquals(new Constant(4), new GCD(new Constant(4), new Constant(196), new Constant(80)).simplify(settings));
         assertEquals(4, new GCD(new Constant(4), new Constant(196), new Constant(80)).evaluate());
         assertEquals(4, new GCD(new Constant(4), new Constant(-196), new Constant(80)).evaluate());
     }
 
     @Test
     void lcm() {
-        assertEquals(new Constant(3920), new LCM(new Constant(4), new Constant(196), new Constant(80)).simplify());
+        assertEquals(new Constant(3920), new LCM(new Constant(4), new Constant(196), new Constant(80)).simplify(settings));
         assertEquals(3920, new LCM(new Constant(4), new Constant(196), new Constant(80)).evaluate());
         assertEquals(-3920, new LCM(new Constant(4), new Constant(-196), new Constant(-80)).evaluate());
     }

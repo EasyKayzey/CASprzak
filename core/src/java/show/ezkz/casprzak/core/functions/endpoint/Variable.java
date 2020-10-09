@@ -1,6 +1,7 @@
 package show.ezkz.casprzak.core.functions.endpoint;
 
 import show.ezkz.casprzak.core.config.Settings;
+import show.ezkz.casprzak.core.config.SimplificationSettings;
 import show.ezkz.casprzak.core.functions.GeneralFunction;
 import show.ezkz.casprzak.core.tools.ParsingTools;
 import show.ezkz.casprzak.core.tools.exceptions.IllegalNameException;
@@ -48,7 +49,7 @@ public class Variable extends EndpointFunction {
 		return new Variable(varID);
 	}
 
-	public GeneralFunction simplify() {
+	public GeneralFunction simplify(SimplificationSettings settings) {
 		return clone();
 	}
 

@@ -1,6 +1,7 @@
 package show.ezkz.casprzak.core.functions.endpoint;
 
 import show.ezkz.casprzak.core.config.Settings;
+import show.ezkz.casprzak.core.config.SimplificationSettings;
 import show.ezkz.casprzak.core.functions.GeneralFunction;
 import org.jetbrains.annotations.Nullable;
 import show.ezkz.casprzak.core.tools.ParsingTools;
@@ -126,7 +127,7 @@ public class Constant extends EndpointFunction {
 			return new Constant(constantKey);
 	}
 
-	public GeneralFunction simplify() {
+	public GeneralFunction simplify(SimplificationSettings settings) {
 		if (!isSpecial())
 			for (Map.Entry<String, Double> entry : specialConstants.entrySet())
 				if (Math.abs(constant - entry.getValue()) < Settings.equalsMargin)

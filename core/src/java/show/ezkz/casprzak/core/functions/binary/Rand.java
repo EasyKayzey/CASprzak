@@ -1,5 +1,6 @@
 package show.ezkz.casprzak.core.functions.binary;
 
+import show.ezkz.casprzak.core.config.SimplificationSettings;
 import show.ezkz.casprzak.core.functions.GeneralFunction;
 import show.ezkz.casprzak.core.tools.exceptions.DerivativeDoesNotExistException;
 
@@ -42,7 +43,7 @@ public class Rand extends BinaryFunction {
     }
 
     @Override
-    public GeneralFunction simplify() {
-        return new Rand(function1.simplify(), function2.simplify());
+    public GeneralFunction simplify(SimplificationSettings settings) {
+        return new Rand(function1.simplify(settings), function2.simplify(settings));
     }
 }

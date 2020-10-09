@@ -1,6 +1,7 @@
 package show.ezkz.casprzak.core.functions.unitary.transforms;
 
 import show.ezkz.casprzak.core.config.Settings;
+import show.ezkz.casprzak.core.config.SimplificationSettings;
 import show.ezkz.casprzak.core.functions.GeneralFunction;
 import show.ezkz.casprzak.core.functions.unitary.UnitaryFunction;
 import show.ezkz.casprzak.core.tools.exceptions.TransformFailedException;
@@ -25,11 +26,11 @@ public abstract class Transformation extends UnitaryFunction {
 	}
 
 	@Override
-	public GeneralFunction simplify() {
+	public GeneralFunction simplify(SimplificationSettings settings) {
 		if (Settings.executeOnSimplify) {
 			Transformation current = (Transformation) simplifyInternal();
 			try {
-				return current.execute().simplify();
+				return current.execute().simplify(settings);
 			} catch (TransformFailedException ignored) {
 				return current;
 			}

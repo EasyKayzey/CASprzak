@@ -1,5 +1,6 @@
 package show.ezkz.casprzak.core.functions.binary.integer;
 
+import show.ezkz.casprzak.core.config.SimplificationSettings;
 import show.ezkz.casprzak.core.functions.GeneralFunction;
 import show.ezkz.casprzak.core.functions.binary.BinaryFunction;
 import show.ezkz.casprzak.core.functions.endpoint.Constant;
@@ -36,10 +37,10 @@ public class Modulo extends IntegerBinaryFunction {
 
     @SuppressWarnings("RedundantCast")
     @Override
-    public GeneralFunction simplify() {
+    public GeneralFunction simplify(SimplificationSettings settings) {
         if (function1 instanceof Constant constant1 && function2 instanceof Constant constant2)
             return new Constant((double) (ParsingTools.toInteger(constant2.constant) % ParsingTools.toInteger(constant1.constant)));
-        return new Modulo(function1.simplify(), function2.simplify());
+        return new Modulo(function1.simplify(settings), function2.simplify(settings));
     }
 
     protected int operate(int first, int second) {

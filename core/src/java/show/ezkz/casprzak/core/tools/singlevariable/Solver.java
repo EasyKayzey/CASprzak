@@ -124,7 +124,7 @@ public class Solver {
 	public static List<Double> getSolutionsRangeHalley(GeneralFunction expression, double lower, double upper) {
 		String var = VariableTools.getSingleVariable(expression);
 		return getSolutionsRangeNewton(
-				(new Product(expression, new Pow(DefaultFunctions.NEGATIVE_HALF, new Abs(expression.getDerivative(var))))).simplify(),
+				(new Product(expression, new Pow(DefaultFunctions.NEGATIVE_HALF, new Abs(expression.getDerivative(var))))).simplify(settings),
 				lower, upper
 		);
 	}

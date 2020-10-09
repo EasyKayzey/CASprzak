@@ -8,7 +8,6 @@ import show.ezkz.casprzak.core.output.OutputBinary;
 import show.ezkz.casprzak.core.functions.endpoint.Variable;
 
 import java.util.Iterator;
-import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -38,16 +37,16 @@ public abstract class BinaryFunction extends GeneralFunction {
 
 
 	/**
-	 * Returns {@code simplify()}{@link #function1}
-	 * @return {@code simplify()}{@link #function1}
+	 * Returns {@code simplify(settings)}{@link #function1}
+	 * @return {@code simplify(settings)}{@link #function1}
 	 */
 	public GeneralFunction getFunction1() {
 		return function1;
 	}
 
 	/**
-	 * Returns {@code simplify()}{@link #function2}
-	 * @return {@code simplify()}{@link #function2}
+	 * Returns {@code simplify(settings)}{@link #function2}
+	 * @return {@code simplify(settings)}{@link #function2}
 	 */
 	public GeneralFunction getFunction2() {
 		return function2;
@@ -101,7 +100,7 @@ public abstract class BinaryFunction extends GeneralFunction {
 	 */
 	public GeneralFunction simplifyFOC() {
 		if (function1 instanceof Constant && function2 instanceof Constant)
-			return new Constant(this.evaluate()).simplify();
+			return new Constant(this.evaluate()).simplify(settings);
 		else
 			return this;
 	}

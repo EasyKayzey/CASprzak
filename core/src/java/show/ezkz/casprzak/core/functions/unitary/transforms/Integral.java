@@ -1,5 +1,6 @@
 package show.ezkz.casprzak.core.functions.unitary.transforms;
 
+import show.ezkz.casprzak.core.config.SimplificationSettings;
 import show.ezkz.casprzak.core.functions.GeneralFunction;
 import show.ezkz.casprzak.core.functions.commutative.Product;
 import show.ezkz.casprzak.core.functions.endpoint.Constant;
@@ -100,7 +101,7 @@ public class Integral extends Transformation {
 
 
 	@Override
-	public Integral simplifyInternal() {
+	public Integral simplifyInternal(SimplificationSettings settings) {
 		return new Integral(MiscTools.minimalSimplify(operand), respectTo);
 	}
 
@@ -115,25 +116,25 @@ public class Integral extends Transformation {
 	 * @throws IntegrationFailedException if the integral could not be found
 	 */
 	public GeneralFunction execute() throws IntegrationFailedException {
-		return StageOne.derivativeDivides(operand, respectTo).simplify();
+		return StageOne.derivativeDivides(operand, respectTo).simplify(settings);
 	}
 
-	public GeneralFunction simplify() {
+	public GeneralFunction simplify(SimplificationSettings settings) {
 		if (respectTo == null) {
 			return simplifyInternal().fixNull();
 		} else {
-			return super.simplify();
+			return super.simplify(settings);
 		}
 	}
 
 	private GeneralFunction fixNull() {
 		if (operand instanceof Differential diff) {
-			return new Integral(DefaultFunctions.ONE, diff.respectTo).simplify();
+			return new Integral(DefaultFunctions.ONE, diff.respectTo).simplify(settings);
 		} else if (operand instanceof Product product) {
 			GeneralFunction[] functions = product.getFunctions();
 			for (int i = 0; i < functions.length; i++) {
 				if (functions[i] instanceof Differential diff) {
-					return new Integral(new Product(ArrayTools.removeFunctionAt(functions, i)), diff.respectTo).simplify();
+					return new Integral(new Product(ArrayTools.removeFunctionAt(functions, i)), diff.respectTo).simplify(settings);
 				}
 			}
 			return this;

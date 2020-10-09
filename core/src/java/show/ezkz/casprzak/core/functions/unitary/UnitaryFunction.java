@@ -1,8 +1,10 @@
 package show.ezkz.casprzak.core.functions.unitary;
 
 import show.ezkz.casprzak.core.config.Settings;
+import show.ezkz.casprzak.core.config.SimplificationSettings;
 import show.ezkz.casprzak.core.functions.GeneralFunction;
 import show.ezkz.casprzak.core.functions.Invertible;
+import show.ezkz.casprzak.core.functions.Simplifiable;
 import show.ezkz.casprzak.core.functions.endpoint.Constant;
 import org.jetbrains.annotations.NotNull;
 import show.ezkz.casprzak.core.output.OutputFunction;
@@ -10,7 +12,6 @@ import show.ezkz.casprzak.core.output.OutputUnitary;
 
 import java.lang.reflect.Constructor;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -37,7 +38,7 @@ public abstract class UnitaryFunction extends GeneralFunction {
 		return this.getClass().getSimpleName().toLowerCase() + "(" + operand.toString() + ")";
 	}
 
-	public GeneralFunction simplify() {
+	public GeneralFunction simplify(SimplificationSettings settings) {
 		GeneralFunction newFunction = this.simplifyInternal();
 		if (newFunction instanceof UnitaryFunction unit)
 			newFunction = unit.simplifyInverse();
@@ -81,11 +82,12 @@ public abstract class UnitaryFunction extends GeneralFunction {
 	}
 
 	/**
-	 * Simplifies the {@link #operand} using {@link GeneralFunction#simplify()}
+	 * Simplifies the {@link #operand} using {@link Simplifiable#simplify(SimplificationSettings)}
 	 * @return an instance of this {@link UnitaryFunction} with the {@link #operand} simplified
+	 * @param settings
 	 */
-	public UnitaryFunction simplifyInternal() {
-		return getInstance(operand.simplify());
+	public UnitaryFunction simplifyInternal(SimplificationSettings settings) {
+		return getInstance(operand.simplify(settings));
 	}
 
 	public GeneralFunction substituteAll(Predicate<? super GeneralFunction> test, Function<? super GeneralFunction, ? extends GeneralFunction> replacer) {

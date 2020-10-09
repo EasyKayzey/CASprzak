@@ -154,7 +154,7 @@ public class MiscTools {
 	public static GeneralFunction minimalSimplify(GeneralFunction function) {
 		boolean dF = Settings.distributeFunctions;
 		Settings.distributeFunctions = false;
-		GeneralFunction simplified = function.simplify();
+		GeneralFunction simplified = function.simplify(settings);
 		Settings.distributeFunctions = dF;
 		return simplified;
 	}

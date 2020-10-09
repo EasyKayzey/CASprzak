@@ -46,7 +46,7 @@ public class Ln extends SpecialCaseBinaryFunction {
 	@Override
 	public GeneralFunction simplifyInverse() {
 		if (operand instanceof Pow pow)
-			return new Product(pow.getFunction1(), new Ln(pow.getFunction2())).simplify();
+			return new Product(pow.getFunction1(), new Ln(pow.getFunction2())).simplify(settings);
 		else
 			return super.simplifyInverse();
 	}

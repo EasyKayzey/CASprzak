@@ -25,35 +25,35 @@ public class KeywordInterfaceTest {
     void partialDerivatives() {
         GeneralFunction test1 = (GeneralFunction) KeywordInterface.safeKeywords("pd x x^2");
         GeneralFunction test2 = FunctionParser.parseInfix("2x");
-        assertEquals(test2.simplify(), test1);
+        assertEquals(test2.simplify(settings), test1);
     }
 
     @Test
     void doublePartialDerivatives() {
         GeneralFunction test1 = (GeneralFunction) KeywordInterface.safeKeywords("pd x pd x x^2");
         GeneralFunction test2 = FunctionParser.parseInfix("2");
-        assertEquals(test2.simplify(), test1);
+        assertEquals(test2.simplify(settings), test1);
     }
 
     @Test
     void partialWithRespectToVariableDoesNotExist() {
         GeneralFunction test1 = (GeneralFunction) KeywordInterface.safeKeywords("pd n x^2");
         GeneralFunction test2 = FunctionParser.parseInfix("0");
-        assertEquals(test2.simplify(), test1);
+        assertEquals(test2.simplify(settings), test1);
     }
 
     @Test
     void partialOfASimp() {
         GeneralFunction test1 = (GeneralFunction) KeywordInterface.safeKeywords("pd x simp 2x+3x");
         GeneralFunction test2 = FunctionParser.parseInfix("5");
-        assertEquals(test2.simplify(), test1);
+        assertEquals(test2.simplify(settings), test1);
     }
 
     @Test
     void partialDerivativeNTimes() {
         GeneralFunction test1 = (GeneralFunction) KeywordInterface.safeKeywords("pdn x 4 \\sin(x)");
         GeneralFunction test2 = FunctionParser.parseInfix("\\sin(x)");
-        assertEquals(test2.simplify(), test1);
+        assertEquals(test2.simplify(settings), test1);
     }
 
     @Test
@@ -84,7 +84,7 @@ public class KeywordInterfaceTest {
     void basicSimplify() {
         GeneralFunction test1 = (GeneralFunction) KeywordInterface.safeKeywords("simp 1*(x+2x+0)");
         GeneralFunction test2 = FunctionParser.parseInfix("3x");
-        assertEquals(test2.simplify(), test1);
+        assertEquals(test2.simplify(settings), test1);
     }
 
     @Test
@@ -92,7 +92,7 @@ public class KeywordInterfaceTest {
         KeywordInterface.safeKeywords("def t x^2");
         GeneralFunction test1 = (GeneralFunction) KeywordInterface.safeKeywords("sa sub z+y y=t");
         GeneralFunction test2 = FunctionParser.parseInfix("z+x^2");
-        assertEquals(test2.simplify(), test1);
+        assertEquals(test2.simplify(settings), test1);
     }
 
     @Test
@@ -111,7 +111,7 @@ public class KeywordInterfaceTest {
     void basicTaylor() {
         GeneralFunction test1 = (GeneralFunction) KeywordInterface.safeKeywords("tay \\cos(x) 1 0");
         GeneralFunction test2 = FunctionParser.parseInfix("1");
-        assertEquals(test2.simplify(), test1);
+        assertEquals(test2.simplify(settings), test1);
     }
 
     @Test

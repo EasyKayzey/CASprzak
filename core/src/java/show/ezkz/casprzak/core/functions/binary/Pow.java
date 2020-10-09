@@ -1,6 +1,7 @@
 package show.ezkz.casprzak.core.functions.binary;
 
 import show.ezkz.casprzak.core.config.Settings;
+import show.ezkz.casprzak.core.config.SimplificationSettings;
 import show.ezkz.casprzak.core.functions.GeneralFunction;
 import show.ezkz.casprzak.core.functions.commutative.Product;
 import show.ezkz.casprzak.core.functions.commutative.Sum;
@@ -60,8 +61,8 @@ public class Pow extends BinaryFunction {
 		return "(" + function2 + "^" + function1 + ")";
 	}
 
-	public GeneralFunction simplify() {
-		Pow currentPow = new Pow(function1.simplify(), function2.simplify());
+	public GeneralFunction simplify(SimplificationSettings settings) {
+		Pow currentPow = new Pow(function1.simplify(settings), function2.simplify(settings));
 		currentPow = currentPow.multiplyExponents();
 		GeneralFunction current = currentPow.simplifyObviousExponentsAndFOC();
 		if (current instanceof Pow pow)
@@ -80,7 +81,7 @@ public class Pow extends BinaryFunction {
 			if (constant.constant == 0)
 				return DefaultFunctions.ONE;
 			else if (constant.constant == 1)
-				return function2.simplify();
+				return function2.simplify(settings);
 		return simplifyFOC();
 	}
 
@@ -88,7 +89,7 @@ public class Pow extends BinaryFunction {
 	public GeneralFunction simplifyFOC() {
 		if (function1 instanceof Constant constant1 && function2 instanceof Constant constant2)
 			if (Settings.simplifyFunctionsOfSpecialConstants || (!constant1.isSpecial() && !constant2.isSpecial()))
-				return new Constant(this.evaluate()).simplify();
+				return new Constant(this.evaluate()).simplify(settings);
 		return this;
 	}
 
@@ -98,7 +99,7 @@ public class Pow extends BinaryFunction {
 	 */
 	public Pow multiplyExponents() {
 		if (function2 instanceof Pow base)
-			return new Pow(new Product(base.function1, function1).simplify(), base.function2);
+			return new Pow(new Product(base.function1, function1).simplify(settings), base.function2);
 		else
 			return this;
 	}
@@ -112,7 +113,7 @@ public class Pow extends BinaryFunction {
 			GeneralFunction[] oldFunctions = product.getFunctions();
 			GeneralFunction[] toMultiply = new GeneralFunction[oldFunctions.length];
 			for (int i = 0; i < toMultiply.length; i++)
-				toMultiply[i] = new Pow(function1, oldFunctions[i]).simplify();
+				toMultiply[i] = new Pow(function1, oldFunctions[i]).simplify(settings);
 			return new Product(toMultiply);
 		} else {
 			throw new IllegalCallerException("Distribute exponents called on a non-Product base.");

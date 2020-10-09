@@ -54,7 +54,7 @@ public class NoEscapeTest {
 		Settings.enforceEscapes = false;
 		GeneralFunction test1 = FunctionParser.parseInfix("exp(ln(x))");
 		GeneralFunction test2 = FunctionParser.parseInfix("ln(exp(x))");
-		assertEquals(test1.simplify(), test2.simplify());
+		assertEquals(test1.simplify(settings), test2.simplify(settings));
 		Settings.enforceEscapes = temp;
 	}
 
@@ -64,7 +64,7 @@ public class NoEscapeTest {
 		Settings.enforceEscapes = false;
 		GeneralFunction test1 = FunctionParser.parseInfix("asin(sin(x))");
 		GeneralFunction test2 = FunctionParser.parseInfix("cos(acos(x))");
-		assertEquals(test1.simplify(), test2.simplify());
+		assertEquals(test1.simplify(settings), test2.simplify(settings));
 		Settings.enforceEscapes = temp;
 	}
 
@@ -73,7 +73,7 @@ public class NoEscapeTest {
 		boolean temp = Settings.enforceEscapes;
 		Settings.enforceEscapes = false;
 		GeneralFunction test1 = FunctionParser.parseInfix("asin(acos(exp(ln(sec(asec(cos(sin(x))))))))");
-		assertEquals(DefaultFunctions.X, test1.simplify()); // this isn"t actually correct based on ranges, so if you add that this will break
+		assertEquals(DefaultFunctions.X, test1.simplify(settings)); // this isn"t actually correct based on ranges, so if you add that this will break
 		Settings.enforceEscapes = temp;
 	}
 

@@ -41,7 +41,7 @@ public class DerivativeTest {
 //        System.out.println("Second derivative simplified once:");
 //        System.out.println(test);
 //        System.out.println("Second derivative simplified twice:");
-//        System.out.println(test.simplify());
+//        System.out.println(test.simplify(settings));
     }
 
     @Test

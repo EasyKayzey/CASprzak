@@ -1,6 +1,7 @@
 package show.ezkz.casprzak.core.functions.commutative;
 
 import show.ezkz.casprzak.core.config.Settings;
+import show.ezkz.casprzak.core.config.SimplificationSettings;
 import show.ezkz.casprzak.core.functions.GeneralFunction;
 import show.ezkz.casprzak.core.functions.Outputable;
 import show.ezkz.casprzak.core.functions.binary.Pow;
@@ -79,7 +80,7 @@ public class Product extends CommutativeFunction {
 		}
 	}
 
-	public GeneralFunction simplify() {
+	public GeneralFunction simplify(SimplificationSettings settings) {
 		Product currentFunction = simplifyInternal();
 		if (currentFunction.isTimesZero())
 			return new Constant(0);
@@ -91,8 +92,8 @@ public class Product extends CommutativeFunction {
 			return currentFunction;
 	}
 
-	public Product simplifyInternal() {
-		Product current = (Product) super.simplifyInternal();
+	public Product simplifyInternal(SimplificationSettings settings) {
+		Product current = (Product) super.simplifyInternal(settings);
 		current = current.fixNullIntegrals();
 		current = current.addExponents();
 		return current;
@@ -164,7 +165,7 @@ public class Product extends CommutativeFunction {
 					while (iter.hasNext()) {
 						GeneralFunction cur = iter.next();
 						if (cur instanceof Differential diff) {
-							newFunctions.add(new Integral(integral.operand, diff.respectTo).simplify());
+							newFunctions.add(new Integral(integral.operand, diff.respectTo).simplify(settings));
 							iter.remove();
 							continue outer;
 						}
@@ -174,7 +175,7 @@ public class Product extends CommutativeFunction {
 					while (iter.hasNext()) {
 						GeneralFunction cur = iter.next();
 						if (cur instanceof Integral integral) {
-							newFunctions.add(new Integral(integral.operand, diff.respectTo).simplify());
+							newFunctions.add(new Integral(integral.operand, diff.respectTo).simplify(settings));
 							iter.remove();
 							continue outer;
 						}
@@ -213,7 +214,7 @@ public class Product extends CommutativeFunction {
 			if (multiplyTerms[i] instanceof Sum sum) {
 				addTerms = sum.getFunctions();
 				multiplyTerms = ArrayTools.removeFunctionAt(multiplyTerms, i);
-				return new Sum(ArrayTools.distribute(multiplyTerms, addTerms)).simplify();
+				return new Sum(ArrayTools.distribute(multiplyTerms, addTerms)).simplify(settings);
 			}
 		}
 		return this;

@@ -1,5 +1,6 @@
 package show.ezkz.casprzak.core.functions.commutative;
 
+import show.ezkz.casprzak.core.config.SimplificationSettings;
 import show.ezkz.casprzak.core.functions.GeneralFunction;
 import show.ezkz.casprzak.core.functions.Outputable;
 import show.ezkz.casprzak.core.functions.endpoint.Constant;
@@ -57,8 +58,8 @@ public class Sum extends CommutativeFunction {
 	}
 
 
-	public Sum simplifyInternal() {
-		Sum current = (Sum) super.simplifyInternal();
+	public Sum simplifyInternal(SimplificationSettings settings) {
+		Sum current = (Sum) super.simplifyInternal(settings);
 		current = current.combineLikeTerms();
 		return current;
 	}

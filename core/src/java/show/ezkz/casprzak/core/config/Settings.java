@@ -102,7 +102,7 @@ public class Settings {
 	public static boolean simplifyFunctionsOfSpecialConstants = false;
 
 	/**
-	 * Denotes whether exponents should be distributed over multiplication in {@code simplify()}. Ex: {@code (2x)^2 -> 4x^2}
+	 * Denotes whether exponents should be distributed over multiplication in {@code simplify(settings)}. Ex: {@code (2x)^2 -> 4x^2}
 	 */
 	public static boolean distributeExponents = true;
 
@@ -122,12 +122,12 @@ public class Settings {
 	public static boolean exitSolverOnProximity = false;
 
 	/**
-	 * Denotes whether a {@link Transformation} should execute its action when {@code simplify()} is called.
+	 * Denotes whether a {@link Transformation} should execute its action when {@code simplify(settings)} is called.
 	 */
 	public static boolean executeOnSimplify = true;
 
 	/**
-	 * Denotes whether products are distributed over addition in {@code simplify()}. Ex: {@code x(y+z) -> (xy+xz)}
+	 * Denotes whether products are distributed over addition in {@code simplify(settings)}. Ex: {@code x(y+z) -> (xy+xz)}
 	 */
 	public static boolean distributeFunctions = true;
 

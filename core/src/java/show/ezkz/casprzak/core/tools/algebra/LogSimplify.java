@@ -77,38 +77,42 @@ public class LogSimplify {
     public static GeneralFunction logChainRule(Product input) {
         List<GeneralFunction> functionList = new LinkedList<>(List.of(input.getFunctions()));
         List<GeneralFunction> newFunctions = new ArrayList<>();
-
+        
+        ListIterator<GeneralFunction> initialIter = functionList.listIterator();
+        while (initialIter.hasNext()) {
+            GeneralFunction cur = initialIter.next();
+            if (!(cur instanceof LogInterface)) {
+                newFunctions.add(cur);
+                initialIter.remove();
+            }
+        }
+        
         boolean combinedAny = false;
         while (functionList.size() > 0) {
-
-            GeneralFunction compare = functionList.remove(0);
-            if (compare instanceof LogInterface) {
-
+            GeneralFunction first = functionList.remove(0);
+            if (first instanceof LogInterface) {
+                LogInterface comparing = (LogInterface) first;
                 Iterator<GeneralFunction> iter = functionList.iterator();
-
                 while (iter.hasNext()) {
-                    GeneralFunction current = iter.next();
-                    if (current instanceof LogInterface log) {
-                        if (((LogInterface) current).base().equalsFunction(((LogInterface) compare).argument())) {
-                            GeneralFunction combined = new Logb(((LogInterface) current).argument(), ((LogInterface) compare).base());
+                    GeneralFunction second = iter.next();
+                    if (second instanceof LogInterface current) {
+                        if (current.base().equalsFunction(comparing.argument())) {
+                            comparing = new Logb(current.argument(), comparing.base());
                             iter.remove();
+                            iter = functionList.iterator();
                             combinedAny = true;
-                            newFunctions.add(combined);
-                        } else if (((LogInterface) current).argument().equalsFunction(((LogInterface) compare).base())) {
-                            GeneralFunction combined = new Logb(((LogInterface) compare).argument(), ((LogInterface) current).base());
+                        } else if (current.argument().equalsFunction(comparing.base())) {
+                            comparing = new Logb(comparing.argument(), current.base());
                             iter.remove();
+                            iter = functionList.iterator();
                             combinedAny = true;
-                            newFunctions.add(combined);
-                        } else {
-                            newFunctions.add(new Product(compare, current));
                         }
-                    } else {
-                        newFunctions.add(new Product(compare, current));
-                    }
+                    } else
+                        throw new IllegalStateException("Non-log detected in log simplification.");
                 }
-
+                newFunctions.add((GeneralFunction) comparing);
             } else
-                newFunctions.add(compare);
+                throw new IllegalStateException("Non-log detected in log simplification.");
         }
 
         if (combinedAny)

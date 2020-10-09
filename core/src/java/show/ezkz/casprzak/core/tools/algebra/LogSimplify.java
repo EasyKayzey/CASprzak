@@ -8,9 +8,11 @@ import show.ezkz.casprzak.core.functions.commutative.Sum;
 import show.ezkz.casprzak.core.functions.unitary.specialcases.Exp;
 import show.ezkz.casprzak.core.functions.unitary.specialcases.Ln;
 import show.ezkz.casprzak.core.tools.defaults.DefaultFunctions;
+import show.ezkz.casprzak.core.tools.helperclasses.AbstractPair;
 import show.ezkz.casprzak.core.tools.helperclasses.LogInterface;
+import show.ezkz.casprzak.core.tools.helperclasses.Pair;
 
-import java.util.Arrays;
+import java.util.*;
 
 public class LogSimplify {
 
@@ -67,7 +69,48 @@ public class LogSimplify {
         return DefaultFunctions.frac(new Ln(input.argument()), new Ln(input.base())).simplify();
     }
 
+    public static GeneralFunction logChainRule(Product input) {
+        List<GeneralFunction> functionList = new LinkedList<>(List.of(input.getFunctions()));
+        List<GeneralFunction> newFunctions = new ArrayList<>();
 
+        boolean combinedAny = false;
+        while (functionList.size() > 0) {
+
+            GeneralFunction compare = functionList.remove(0);
+            if (compare instanceof LogInterface) {
+
+                Iterator<GeneralFunction> iter = functionList.iterator();
+
+                while (iter.hasNext()) {
+                    GeneralFunction current = iter.next();
+                    if (current instanceof LogInterface log) {
+                        if (((LogInterface) current).base().equalsFunction(((LogInterface) compare).argument())) {
+                            GeneralFunction combined = new Logb(((LogInterface) current).argument(), ((LogInterface) compare).base());
+                            iter.remove();
+                            combinedAny = true;
+                            newFunctions.add(combined);
+                        } else if (((LogInterface) current).argument().equalsFunction(((LogInterface) compare).base())) {
+                            GeneralFunction combined = new Logb(((LogInterface) compare).argument(), ((LogInterface) current).base());
+                            iter.remove();
+                            combinedAny = true;
+                            newFunctions.add(combined);
+                        } else {
+                            newFunctions.add(new Product(compare, current));
+                        }
+                    } else {
+                        newFunctions.add(new Product(compare, current));
+                    }
+                }
+
+            } else
+                newFunctions.add(compare);
+        }
+
+        if (combinedAny)
+            return new Product(newFunctions.toArray(new GeneralFunction[0])).simplify();
+        else
+            return input;
+    }
 
 
 

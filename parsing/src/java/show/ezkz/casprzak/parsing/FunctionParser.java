@@ -10,6 +10,7 @@ import show.ezkz.casprzak.core.tools.defaults.DefaultSimplificationSettings;
 import java.lang.reflect.MalformedParametersException;
 import java.util.*;
 
+import static show.ezkz.casprzak.core.tools.defaults.DefaultSimplificationSettings.auto;
 import static show.ezkz.casprzak.core.tools.defaults.DefaultSimplificationSettings.minimal;
 import static show.ezkz.casprzak.parsing.OperationMaps.binaryOperations;
 import static show.ezkz.casprzak.parsing.OperationMaps.unitaryOperations;
@@ -36,7 +37,7 @@ public class FunctionParser {
 	 * @return a {@link GeneralFunction} corresponding to the infix string, minimally simplified
 	 */
 	public static GeneralFunction parseSimplified(String infix) {
-		return parseInfix(infix).simplify(minimal);
+		return parseInfix(infix).simplify(auto);
 	}
 
 	/**

@@ -57,20 +57,20 @@ public class DefaultSimplificationSettings {
 	);
 	public static final SimplificationSettings aggressive = new SimplificationSettings(
 			true,
-			false,
+			true,
+			true,
+			true,
+			true,
+			true,
+			true,
 			true,
 			true,
 			false,
 			true,
 			false,
+			false,
 			true,
-			false,
-			false,
-			false,
-			false,
-			false,
-			false,
-			false
+			true
 	);
 
 	private DefaultSimplificationSettings() {

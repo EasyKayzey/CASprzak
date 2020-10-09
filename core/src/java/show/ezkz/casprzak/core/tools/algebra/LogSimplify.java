@@ -7,6 +7,7 @@ import show.ezkz.casprzak.core.functions.commutative.Product;
 import show.ezkz.casprzak.core.functions.commutative.Sum;
 import show.ezkz.casprzak.core.functions.unitary.specialcases.Exp;
 import show.ezkz.casprzak.core.functions.unitary.specialcases.Ln;
+import show.ezkz.casprzak.core.tools.helperclasses.LogInterface;
 
 import java.util.Arrays;
 
@@ -17,8 +18,8 @@ public class LogSimplify {
      * @param input The logarithm that is being expanded.
      * @return The split logarithm
      */
-    public static GeneralFunction logarithmOfAProduct(Ln input) {
-        GeneralFunction operand = input.operand;
+    public static GeneralFunction logarithmOfAProduct(LogInterface input) {
+        GeneralFunction operand = input.argument();
 
         if (operand instanceof Product product) {
             GeneralFunction[] terms = Arrays.stream(product.getFunctions())
@@ -26,24 +27,23 @@ public class LogSimplify {
                     .toArray(GeneralFunction[]::new);
             return new Sum(terms).simplify();
         } else
-            return input;
+            return (GeneralFunction) input;
     }
-
 
     /**
      * Splits a logarithm of a exponent into a product. Ex: {@code log(x^y) = y*log(x)}
      * @param input The logarithm that is being expanded.
      * @return The expanded expression
      */
-    public static GeneralFunction logarithmOfAnExponent(Ln input) {
-        GeneralFunction operand = input.operand;
+    public static GeneralFunction logarithmOfAnExponent(LogInterface input) {
+        GeneralFunction operand = input.argument();
 
         if (operand instanceof Pow exponential)
             return new Product(exponential.getFunction1(), new Ln(exponential.getFunction2())).simplify();
         else if (operand instanceof Exp exponential)
             return exponential.operand.simplify();
         else
-            return input;
+            return (GeneralFunction) input;
 
     }
 

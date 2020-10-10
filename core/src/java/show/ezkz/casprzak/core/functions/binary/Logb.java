@@ -59,7 +59,7 @@ public class Logb extends BinaryFunction {
 		Logb currentLogb = new Logb(function1.simplify(settings), function2.simplify(settings));
 		GeneralFunction current = currentLogb.simplifyPowers(settings);
 
-		if (current instanceof Logb logb)
+		if (settings.simplifyFunctionsOfConstants && current instanceof Logb logb)
 			current = logb.simplifyFOC(settings);
 
 		if (current instanceof Logb logb)
@@ -87,9 +87,9 @@ public class Logb extends BinaryFunction {
 	 */
 	public GeneralFunction simplifyPowers(SimplificationSettings settings) {
 		if (function1 instanceof Pow power)
-			return new Product(power.function1, new Logb(power.function2, function2).simplifyIdentity(settings));
+			return new Product(power.function1, new Logb(power.function2, function2)).simplify(settings);
 		else if (function1 instanceof Exp exp)
-			return new Product(exp.operand, new Logb(function2, DefaultFunctions.E));
+			return new Product(exp.operand, new Logb(function2, DefaultFunctions.E)).simplify(settings);
 		else
 			return this;
 	}

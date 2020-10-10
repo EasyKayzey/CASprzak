@@ -19,6 +19,7 @@ public class SimplificationSettings {
 	public final boolean doChangeOfBase;
 	public final boolean doTrigIdentities;
 	public final boolean trigComposition;
+	public final boolean simplifyInverses;
 
 	public SimplificationSettings(boolean simplifyFunctionsOfConstants,
 								  boolean simplifyFunctionsOfSpecialConstants,
@@ -34,7 +35,8 @@ public class SimplificationSettings {
 								  boolean insertLogExponents,
 								  boolean doChangeOfBase,
 								  boolean doTrigIdentities,
-								  boolean trigComposition) {
+								  boolean trigComposition,
+								  boolean simplifyInverses) {
 		this.simplifyFunctionsOfConstants = simplifyFunctionsOfConstants;
 		this.simplifyFunctionsOfSpecialConstants = simplifyFunctionsOfSpecialConstants;
 		this.distributeExponentsOverMultiplication = distributeExponentsOverMultiplication;
@@ -50,6 +52,7 @@ public class SimplificationSettings {
 		this.doChangeOfBase = doChangeOfBase;
 		this.doTrigIdentities = doTrigIdentities;
 		this.trigComposition = trigComposition;
+		this.simplifyInverses = simplifyInverses;
 		assertValidity();
 	}
 

@@ -65,9 +65,9 @@ public class Pow extends BinaryFunction {
 		Pow currentPow = new Pow(function1.simplify(settings), function2.simplify(settings));
 		currentPow = currentPow.multiplyExponents(settings);
 		GeneralFunction current = currentPow.simplifyObviousExponentsAndFOC(settings);
-		if (current instanceof Pow pow)
+		if (settings.simplifyInverses && current instanceof Pow pow)
 			current = pow.simplifyLogsOfSameBase(settings);
-		if (current instanceof Pow pow && pow.function2 instanceof Product && Settings.distributeExponents)
+		if (settings.distributeExponentsOverMultiplication && current instanceof Pow pow && pow.function2 instanceof Product)
 			current = pow.distributeExponents(settings);
 		return current;
 	}
@@ -83,13 +83,16 @@ public class Pow extends BinaryFunction {
 				return DefaultFunctions.ONE;
 			else if (constant.constant == 1)
 				return function2.simplify(settings);
-		return simplifyFOC(settings);
+		if (settings.simplifyFunctionsOfConstants)
+			return simplifyFOC(settings);
+		else
+			return this;
 	}
 
 	@Override
 	public GeneralFunction simplifyFOC(SimplificationSettings settings) {
 		if (function1 instanceof Constant constant1 && function2 instanceof Constant constant2)
-			if (Settings.simplifyFunctionsOfSpecialConstants || (!constant1.isSpecial() && !constant2.isSpecial()))
+			if (settings.simplifyFunctionsOfSpecialConstants || (!constant1.isSpecial() && !constant2.isSpecial()))
 				return new Constant(this.evaluate()).simplify(settings);
 		return this;
 	}
@@ -156,7 +159,7 @@ public class Pow extends BinaryFunction {
 	 * @param settings the {@link SimplificationSettings} object describing the parameters of simplification
 	 */
 	public GeneralFunction simplifyLogsOfSameBase(SimplificationSettings settings) {
-		if (function1 instanceof Logb logb && logb.getFunction2().equalsSimplified(function2))
+		if (function1 instanceof Logb logb && logb.getFunction2().equalsSimplified(function2)) // TODO rewrite with logb interface
 			return logb.getFunction1();
 		else if (function1 instanceof Ln ln && function2 instanceof Constant constant && constant.constant == Math.E)
 			return ln.operand;

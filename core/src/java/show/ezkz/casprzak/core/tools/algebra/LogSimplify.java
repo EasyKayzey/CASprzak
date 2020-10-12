@@ -14,6 +14,8 @@ import show.ezkz.casprzak.core.tools.helperclasses.Pair;
 
 import java.util.*;
 
+import static show.ezkz.casprzak.core.tools.defaults.DefaultFunctions.NEGATIVE_ONE;
+
 public class LogSimplify {
 
     /**
@@ -70,7 +72,7 @@ public class LogSimplify {
     }
 
     /**
-     * Performs a "log chain rule" operation. Ex: {@code logb_a(b) * logb_b(c) = logb_a(c)}
+     * Performs a "log chain rule" operation and reverses change-of-base. Ex: {@code logb_a(b) * logb_b(c) * logb_x(y) / logb_x(z) = logb_a(c) * logb_z(y)}
      * @param input A product which contains the logarithms that want to be simplified.
      * @return A function with the simplification performed.
      */
@@ -81,7 +83,10 @@ public class LogSimplify {
         ListIterator<GeneralFunction> initialIter = functionList.listIterator();
         while (initialIter.hasNext()) {
             GeneralFunction cur = initialIter.next();
-            if (!(cur instanceof LogInterface)) {
+            if (cur instanceof Pow pow && pow.getFunction2() instanceof LogInterface li && pow.getFunction1().equals(NEGATIVE_ONE)) {
+                initialIter.remove();
+                initialIter.add(new Logb(li.base(), li.argument()));
+            } else if (!(cur instanceof LogInterface)) {
                 newFunctions.add(cur);
                 initialIter.remove();
             }

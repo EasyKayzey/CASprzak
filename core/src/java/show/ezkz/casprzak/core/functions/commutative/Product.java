@@ -11,6 +11,8 @@ import show.ezkz.casprzak.core.functions.unitary.transforms.Integral;
 import show.ezkz.casprzak.core.output.OutputCommutative;
 import show.ezkz.casprzak.core.output.OutputFunction;
 import show.ezkz.casprzak.core.tools.ArrayTools;
+import show.ezkz.casprzak.core.tools.SearchTools;
+import show.ezkz.casprzak.core.tools.algebra.LogSimplify;
 import show.ezkz.casprzak.core.tools.defaults.DefaultFunctions;
 import show.ezkz.casprzak.core.tools.PolynomialTools;
 import show.ezkz.casprzak.core.tools.helperclasses.AbstractPair;
@@ -86,8 +88,10 @@ public class Product extends CommutativeFunction {
 			return new Constant(0);
 		else if (currentFunction.getFunctions().length <= 1)
 			return currentFunction.simplifyTrivialElement(settings);
-		else if (Settings.distributeFunctions)
+		else if (settings.distributeMultiplicationOverAddition && SearchTools.existsSurface(this, e -> e instanceof Sum))
 			return currentFunction.distributeAll(settings);
+		else if (settings.doChangeOfBase)
+			return LogSimplify.logChainRule(currentFunction);
 		else
 			return currentFunction;
 	}
@@ -95,7 +99,8 @@ public class Product extends CommutativeFunction {
 	public Product simplifyInternal(SimplificationSettings settings) {
 		Product current = (Product) super.simplifyInternal(settings);
 		current = current.fixNullIntegrals(settings);
-		current = current.addExponents(settings);
+		if (settings.addExponentsInProducts)
+			current = current.addExponents(settings);
 		return current;
 	}
 

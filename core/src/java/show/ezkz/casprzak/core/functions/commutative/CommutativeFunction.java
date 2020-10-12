@@ -119,7 +119,8 @@ public abstract class CommutativeFunction extends GeneralFunction {
 		current = current.simplifyElements(settings);
 		current = current.simplifyPull(settings);
 		current = current.simplifyIdentity(settings);
-		current = current.simplifyConstants(settings);
+		if (settings.simplifyFunctionsOfConstants)
+			current = current.simplifyConstants(settings);
 		return current;
 	}
 
@@ -158,7 +159,7 @@ public abstract class CommutativeFunction extends GeneralFunction {
 			ListIterator<GeneralFunction> iter = functionList.listIterator();
 			while (iter.hasNext()) {
 				if (iter.next() instanceof Constant constant) {
-					if (Settings.simplifyFunctionsOfSpecialConstants || !constant.isSpecial()) {
+					if (settings.simplifyFunctionsOfSpecialConstants || !constant.isSpecial()) {
 						accumulator = operate(accumulator, constant.constant);
 						iter.remove();
 					}

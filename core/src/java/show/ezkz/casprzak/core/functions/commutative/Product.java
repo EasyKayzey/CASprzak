@@ -91,7 +91,7 @@ public class Product extends CommutativeFunction {
 		else if (settings.distributeMultiplicationOverAddition && SearchTools.existsSurface(this, e -> e instanceof Sum))
 			return currentFunction.distributeAll(settings);
 		else if (settings.doChangeOfBase)
-			return LogSimplify.logChainRule(currentFunction);
+			return LogSimplify.logChainRule(settings, currentFunction);
 		else
 			return currentFunction;
 	}

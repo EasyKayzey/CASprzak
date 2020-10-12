@@ -8,9 +8,7 @@ import show.ezkz.casprzak.core.functions.commutative.Sum;
 import show.ezkz.casprzak.core.functions.unitary.specialcases.Exp;
 import show.ezkz.casprzak.core.functions.unitary.specialcases.Ln;
 import show.ezkz.casprzak.core.tools.defaults.DefaultFunctions;
-import show.ezkz.casprzak.core.tools.helperclasses.AbstractPair;
 import show.ezkz.casprzak.core.tools.helperclasses.LogInterface;
-import show.ezkz.casprzak.core.tools.helperclasses.Pair;
 
 import java.util.*;
 
@@ -73,7 +71,7 @@ public class LogSimplify {
 
     /**
      * Performs a "log chain rule" operation and reverses change-of-base. Ex: {@code logb_a(b) * logb_b(c) * logb_x(y) / logb_x(z) = logb_a(c) * logb_z(y)}
-     * @param input A product which contains the logarithms that want to be simplified.
+     * @param input A {@link Product} which contains the logarithms that want to be simplified.
      * @return A function with the simplification performed.
      */
     public static GeneralFunction logChainRule(Product input) {
@@ -126,6 +124,51 @@ public class LogSimplify {
             return input;
     }
 
+    /**
+     * Performs sum of logs simplification. Ex: {@code log(a) + log(b) = log(ab)}
+     * @param input A {@link Sum} which contains the logarithms that want to be combined.
+     * @return A function with the simplification performed.
+     */
+    public static GeneralFunction sumOfLogs(Sum input) {
+        List<GeneralFunction> functionList = new LinkedList<>(List.of(input.getFunctions()));
+        List<GeneralFunction> newFunctions = new ArrayList<>();
 
+        ListIterator<GeneralFunction> initialIter = functionList.listIterator();
+        while (initialIter.hasNext()) {
+            GeneralFunction cur = initialIter.next();
+            if (!(cur instanceof LogInterface)) {
+                newFunctions.add(cur);
+                initialIter.remove();
+            }
+        }
+
+        boolean combinedAny = false;
+        while (functionList.size() > 0) {
+            GeneralFunction first = functionList.remove(0);
+            if (first instanceof LogInterface) {
+                LogInterface comparing = (LogInterface) first;
+                Iterator<GeneralFunction> iter = functionList.iterator();
+                while (iter.hasNext()) {
+                    GeneralFunction second = iter.next();
+                    if (second instanceof LogInterface current) {
+                        if (current.base().equalsFunction(comparing.base())) {
+                            comparing = comparing.newWith(new Product(comparing.argument(), current.argument()).simplify());
+                            iter.remove();
+                            iter = functionList.iterator();
+                            combinedAny = true;
+                        }
+                    } else
+                        throw new IllegalStateException("Non-log detected in log simplification.");
+                }
+                newFunctions.add((GeneralFunction) comparing);
+            } else
+                throw new IllegalStateException("Non-log detected in log simplification.");
+        }
+
+        if (combinedAny)
+            return new Sum(newFunctions.toArray(new GeneralFunction[0])).simplify();
+        else
+            return input;
+    }
 
 }

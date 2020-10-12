@@ -8,9 +8,11 @@ import show.ezkz.casprzak.core.output.OutputCommutative;
 import show.ezkz.casprzak.core.output.OutputFunction;
 import show.ezkz.casprzak.core.tools.ArrayTools;
 import show.ezkz.casprzak.core.tools.MiscTools;
+import show.ezkz.casprzak.core.tools.algebra.LogSimplify;
 import show.ezkz.casprzak.core.tools.helperclasses.AbstractPair;
 import show.ezkz.casprzak.core.tools.helperclasses.Pair;
 
+import javax.net.ssl.SSLContext;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -57,6 +59,14 @@ public class Sum extends CommutativeFunction {
 		return joiningCollector;
 	}
 
+
+	public GeneralFunction simplify(SimplificationSettings settings) {
+		GeneralFunction current = super.simplify(settings);
+		if (current instanceof Sum sum)
+			return LogSimplify.sumOfLogs(sum);
+		else
+			return current;
+	}
 
 	public Sum simplifyInternal(SimplificationSettings settings) {
 		Sum current = (Sum) super.simplifyInternal(settings);

@@ -12,13 +12,14 @@ import show.ezkz.casprzak.core.output.OutputFunction;
 import show.ezkz.casprzak.core.tools.defaults.DefaultFunctions;
 import show.ezkz.casprzak.core.tools.ParsingTools;
 import show.ezkz.casprzak.core.tools.VariableTools;
+import show.ezkz.casprzak.core.tools.helperclasses.PowInterface;
 
 import java.util.Arrays;
 import java.util.Map;
 
 import static show.ezkz.casprzak.core.output.ToStringManager.maybeParenthesize;
 
-public class Pow extends BinaryFunction {
+public class Pow extends BinaryFunction implements PowInterface {
 	/**
 	 * Constructs a new {@link Pow}
 	 * @param exponent The exponent
@@ -161,6 +162,21 @@ public class Pow extends BinaryFunction {
 		OutputFunction first = function2.toOutputFunction();
 		OutputFunction second = function1.toOutputFunction();
 		return new OutputPow(maybeParenthesize(first), maybeParenthesize(second));
+	}
+
+	@Override
+	public PowInterface newWith(GeneralFunction exponent) {
+		return new Pow(function2, exponent);
+	}
+
+	@Override
+	public GeneralFunction exponent() {
+		return function1;
+	}
+
+	@Override
+	public GeneralFunction base() {
+		return function2;
 	}
 
 	private static class OutputPow extends OutputBinary {

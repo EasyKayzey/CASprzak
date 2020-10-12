@@ -140,7 +140,7 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 	 * @return true if they're equal when simplified
 	 */
 	public boolean equalsSimplified(GeneralFunction that) {
-		return this.simplify(DefaultSimplificationSettings.user).equalsFunction(that.simplify(DefaultSimplificationSettings.user));
+		return this.simplify(DefaultSimplificationSettings.aggressive).equalsFunction(that.simplify(DefaultSimplificationSettings.aggressive));
 	}
 
 	/**

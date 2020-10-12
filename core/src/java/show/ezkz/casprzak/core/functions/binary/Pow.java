@@ -13,6 +13,7 @@ import show.ezkz.casprzak.core.output.OutputFunction;
 import show.ezkz.casprzak.core.tools.defaults.DefaultFunctions;
 import show.ezkz.casprzak.core.tools.ParsingTools;
 import show.ezkz.casprzak.core.tools.VariableTools;
+import show.ezkz.casprzak.core.tools.helperclasses.LogInterface;
 import show.ezkz.casprzak.core.tools.helperclasses.PowInterface;
 
 import java.util.Arrays;
@@ -160,10 +161,8 @@ public class Pow extends BinaryFunction implements PowInterface {
 	 * @param settings the {@link SimplificationSettings} object describing the parameters of simplification
 	 */
 	public GeneralFunction simplifyLogsOfSameBase(SimplificationSettings settings) {
-		if (function1 instanceof Logb logb && logb.getFunction2().equalsSimplified(function2)) // TODO rewrite with logb interface
-			return logb.getFunction1();
-		else if (function1 instanceof Ln ln && function2 instanceof Constant constant && constant.constant == Math.E)
-			return ln.operand;
+		if (function1 instanceof LogInterface log && log.base().equalsSimplified(function2))
+			return log.argument();
 		else
 			return this;
 	}

@@ -11,6 +11,7 @@ import show.ezkz.casprzak.core.output.OutputBinary;
 import show.ezkz.casprzak.core.output.OutputFunction;
 import show.ezkz.casprzak.core.tools.defaults.DefaultFunctions;
 import show.ezkz.casprzak.core.tools.helperclasses.LogInterface;
+import show.ezkz.casprzak.core.tools.helperclasses.PowInterface;
 
 import java.util.Map;
 
@@ -87,10 +88,8 @@ public class Logb extends BinaryFunction implements LogInterface {
 	 * @param settings the {@link SimplificationSettings} object describing the parameters of simplification
 	 */
 	public GeneralFunction simplifyPowers(SimplificationSettings settings) {
-		if (function1 instanceof Pow power)
-			return new Product(power.function1, new Logb(power.function2, function2)).simplify(settings);
-		else if (function1 instanceof Exp exp)
-			return new Product(exp.operand, new Logb(function2, DefaultFunctions.E)).simplify(settings);
+		if (function1 instanceof PowInterface power)
+			return new Product(power.exponent(), new Logb(power.base(), function2)).simplify(settings);
 		else
 			return this;
 	}

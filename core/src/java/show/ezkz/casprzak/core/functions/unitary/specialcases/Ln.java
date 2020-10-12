@@ -8,11 +8,12 @@ import show.ezkz.casprzak.core.functions.binary.Pow;
 import show.ezkz.casprzak.core.functions.commutative.Product;
 import show.ezkz.casprzak.core.functions.unitary.UnitaryFunction;
 import show.ezkz.casprzak.core.tools.defaults.DefaultFunctions;
+import show.ezkz.casprzak.core.tools.helperclasses.LogInterface;
 
 import java.util.Map;
 
 
-public class Ln extends SpecialCaseBinaryFunction {
+public class Ln extends SpecialCaseBinaryFunction implements LogInterface {
 	/**
 	 * Constructs a new {@link Ln}
 	 * @param operand The function which natural log is operating on
@@ -50,5 +51,20 @@ public class Ln extends SpecialCaseBinaryFunction {
 			return new Product(pow.getFunction1(), new Ln(pow.getFunction2())).simplify(settings);
 		else
 			return super.simplifyInverse(settings);
+	}
+
+	@Override
+	public LogInterface newWith(GeneralFunction argument) {
+		return new Ln(argument);
+	}
+
+	@Override
+	public GeneralFunction argument() {
+		return operand;
+	}
+
+	@Override
+	public GeneralFunction base() {
+		return DefaultFunctions.E;
 	}
 }

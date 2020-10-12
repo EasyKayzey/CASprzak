@@ -4,6 +4,9 @@
  - Add Gradle management
  - Package CASprzak into `core`, `parsing` and `commandui`
  - Publish to Maven central repository
+ - Add the ability to perform various logarithm simplifications and expansions
+### Minor Additions
+ - Add `LogInterface` and `PowInterface` to generalize `Logb, Ln` and `Pow, Exp` respectively
 ### Changes
  - Rename various escape-related settings
  - Update emails in `CODE_OF_CONDUCT.md` and `CONTRIBUTING.md` to the 'ezkz' domain

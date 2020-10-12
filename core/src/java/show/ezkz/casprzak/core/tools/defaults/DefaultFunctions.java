@@ -93,6 +93,11 @@ public class DefaultFunctions {
 	 */
 	public static final Variable Z = new Variable("z");
 
+	/**
+	 * A {@link Variable} with the variable ID of {@code t}
+	 */
+	public static final Variable T = new Variable("t");
+
 
 	/**
 	 * Returns a {@link Product} of {@link #NEGATIVE_ONE} and the {@code input}

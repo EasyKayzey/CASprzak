@@ -57,4 +57,10 @@ public class AlgebraTests {
         assertEquals(ONE, LogSimplify.logChainRule(test));
     }
 
+    @Test
+    void logChainRuleCOB() {
+        Product test = new Product(new Logb(Y, X), new Pow(NEGATIVE_ONE, new Logb(Y, Z)));
+        assertEquals(new Logb(Z, X), LogSimplify.logChainRule(test));
+    }
+
 }

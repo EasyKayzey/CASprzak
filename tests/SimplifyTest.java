@@ -10,6 +10,7 @@ import show.ezkz.casprzak.core.tools.defaults.DefaultFunctions;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static show.ezkz.casprzak.core.tools.defaults.DefaultSimplificationSettings.aggressive;
 
 public class SimplifyTest {
 
@@ -59,10 +60,9 @@ public class SimplifyTest {
 
     @Test
     void distributeExponents() {
-        Settings.distributeExponents = true;
         GeneralFunction test1 = FunctionParser.parseInfix("(2xy)^2");
         GeneralFunction test2 = FunctionParser.parseInfix("4x^2y^2");
-        assertEquals(test1.simplify(settings), test2.simplify(settings));
+        assertEquals(test1.simplify(aggressive), test2.simplify(aggressive));
     }
 
     @Test
@@ -152,13 +152,13 @@ public class SimplifyTest {
     @Test
     void inverseChain() {
         GeneralFunction test1 = FunctionParser.parseInfix("\\asin(\\acos(\\exp(\\ln(\\sec(\\asec(\\cos(\\sin(x))))))))");
-        assertEquals(DefaultFunctions.X, test1.simplify(settings)); // this isn"t actually correct based on ranges, so if you add that this will break
+        assertEquals(DefaultFunctions.X, test1.simplify(settings)); // this isn't actually correct based on ranges, so if you add that this will break
     }
 
     @Test
     void expInverses() {
         GeneralFunction test1 = FunctionParser.parseSimplified("\\ln(e^\\logb_e(\\exp(x)))");
-        assertEquals(DefaultFunctions.X, test1); // this isn"t actually correct based on ranges, so if you add that this will break
+        assertEquals(DefaultFunctions.X, test1); // this isn't actually correct based on ranges, so if you add that this will break
     }
 
     @Test

@@ -132,7 +132,7 @@ public class MiscTools {
 	 */
 	public static void sleep() {
 		try {
-			TimeUnit.MILLISECONDS.sleep((long) (Settings.defaultSleep*1000));
+			TimeUnit.MILLISECONDS.sleep((long) (Settings.defaultSleep * 1000));
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -144,7 +144,7 @@ public class MiscTools {
 	 */
 	public static void sleep(double seconds) {
 		try {
-			TimeUnit.MILLISECONDS.sleep((long) (seconds*1000));
+			TimeUnit.MILLISECONDS.sleep((long) (seconds * 1000));
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

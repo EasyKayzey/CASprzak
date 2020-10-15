@@ -52,7 +52,7 @@ public class Atan extends InverseTrigFunction {
 	public GeneralFunction simplifyInverse(SimplificationSettings settings) {
 		if (operand.getClass().isAssignableFrom(getInverse())) {
 			GeneralFunction insideFunction = ((UnitaryFunction) operand).operand;
-			if (Settings.enforceDomainAndRange)
+			if (settings.enforceDomainAndRange)
 				return DefaultFunctions.subtract(new Modulo(DefaultFunctions.PI, new Sum(insideFunction, DefaultFunctions.HALF_PI)), DefaultFunctions.HALF_PI);
 			else
 				return insideFunction;

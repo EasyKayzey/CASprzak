@@ -61,7 +61,7 @@ public class Asec extends InverseTrigFunction {
 	public GeneralFunction simplifyInverse(SimplificationSettings settings) {
 		if (operand.getClass().isAssignableFrom(getInverse())) {
 			GeneralFunction insideFunction = ((UnitaryFunction) operand).operand;
-			if (Settings.enforceDomainAndRange)
+			if (settings.enforceDomainAndRange)
 				return DefaultFunctions.subtract(DefaultFunctions.PI, new Abs(DefaultFunctions.subtract(new Modulo(DefaultFunctions.TWO_PI, insideFunction), DefaultFunctions.PI)));
 			else
 				return insideFunction;

@@ -119,7 +119,7 @@ public class Integral extends Transformation {
 	 * @throws IntegrationFailedException if the integral could not be found
 	 */
 	public GeneralFunction execute() throws IntegrationFailedException {
-		return StageOne.derivativeDivides(operand, respectTo).simplify(DefaultSimplificationSettings.auto);
+		return StageOne.derivativeDivides(operand, respectTo).simplify(DefaultSimplificationSettings.minimal);
 	}
 
 	public GeneralFunction simplify(SimplificationSettings settings) {

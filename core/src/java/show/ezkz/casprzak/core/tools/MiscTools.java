@@ -1,6 +1,7 @@
 package show.ezkz.casprzak.core.tools;
 
 import show.ezkz.casprzak.core.config.Settings;
+import show.ezkz.casprzak.core.config.SimplificationSettings;
 import show.ezkz.casprzak.core.functions.GeneralFunction;
 import show.ezkz.casprzak.core.functions.commutative.CommutativeFunction;
 import show.ezkz.casprzak.core.functions.commutative.Product;
@@ -155,10 +156,6 @@ public class MiscTools {
 	 * @return the minimally simplified version of the function
 	 */
 	public static GeneralFunction minimalSimplify(GeneralFunction function) {
-		boolean dF = Settings.distributeFunctions;
-		Settings.distributeFunctions = false;
-		GeneralFunction simplified = function.simplify(minimal);
-		Settings.distributeFunctions = dF;
-		return simplified;
+		return function.simplify(minimal);
 	}
 }

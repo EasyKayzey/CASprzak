@@ -40,11 +40,13 @@ public abstract class UnitaryFunction extends GeneralFunction {
 
 	public GeneralFunction simplify(SimplificationSettings settings) {
 		GeneralFunction newFunction = this.simplifyInternal(settings);
-		if (newFunction instanceof UnitaryFunction unit)
+
+		if (settings.simplifyInverses && newFunction instanceof UnitaryFunction unit)
 			newFunction = unit.simplifyInverse(settings);
 
-		if (newFunction instanceof UnitaryFunction unit)
+		if (settings.simplifyFunctionsOfConstants && newFunction instanceof UnitaryFunction unit)
 			newFunction = unit.simplifyFOC(settings);
+
 		return newFunction;
 	}
 
@@ -54,7 +56,7 @@ public abstract class UnitaryFunction extends GeneralFunction {
 	 * @param settings the {@link SimplificationSettings} object describing the parameters of simplification
 	 */
 	public GeneralFunction simplifyFOC(SimplificationSettings settings) {
-		if (Settings.simplifyFunctionsOfConstants && operand instanceof Constant)
+		if (operand instanceof Constant)
 			return new Constant(evaluate());
 		else
 			return this;

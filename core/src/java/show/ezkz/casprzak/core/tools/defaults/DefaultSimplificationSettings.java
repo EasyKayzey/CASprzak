@@ -70,11 +70,6 @@ public class DefaultSimplificationSettings {
 	public static boolean extractLogExponents = true;
 
 	/**
-	 *
-	 */
-	public static boolean insertLogExponents = false;
-
-	/**
 	 * Denotes whether or not {@link show.ezkz.casprzak.core.tools.algebra.LogSimplify#logChainRule(SimplificationSettings, Product)} is performed. Ex. Ex: {@code logb_a(b) * logb_b(c) * logb_x(y) / logb_x(z) = logb_a(c) * logb_z(y)}
 	 */
 	public static boolean doChangeOfBase = false;
@@ -111,7 +106,6 @@ public class DefaultSimplificationSettings {
 			false,
 			false,
 			false,
-			false,
 			false
 	);
 	public static final SimplificationSettings auto = new SimplificationSettings(
@@ -123,7 +117,6 @@ public class DefaultSimplificationSettings {
 			true,
 			false,
 			true,
-			false,
 			false,
 			false,
 			false,
@@ -144,7 +137,6 @@ public class DefaultSimplificationSettings {
 			true,
 			false,
 			true,
-			false,
 			false,
 			true,
 			true,
@@ -168,7 +160,6 @@ public class DefaultSimplificationSettings {
 				simplifyLogAddition,
 				expandLogOfProducts,
 				extractLogExponents,
-				insertLogExponents,
 				doChangeOfBase,
 				doTrigIdentities,
 				trigComposition,

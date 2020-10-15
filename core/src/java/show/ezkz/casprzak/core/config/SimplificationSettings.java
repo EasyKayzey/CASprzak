@@ -19,7 +19,6 @@ public class SimplificationSettings {
 	public final boolean simplifyLogAddition;
 	public final boolean expandLogOfProducts;
 	public final boolean extractLogExponents;
-	public final boolean insertLogExponents;
 	public final boolean doChangeOfBase;
 	public final boolean doTrigIdentities;
 	public final boolean trigComposition;
@@ -36,7 +35,6 @@ public class SimplificationSettings {
 								  boolean simplifyLogAddition,
 								  boolean expandLogOfProducts,
 								  boolean extractLogExponents,
-								  boolean insertLogExponents,
 								  boolean doChangeOfBase,
 								  boolean doTrigIdentities,
 								  boolean trigComposition,
@@ -52,7 +50,6 @@ public class SimplificationSettings {
 		this.simplifyLogAddition = simplifyLogAddition;
 		this.expandLogOfProducts = expandLogOfProducts;
 		this.extractLogExponents = extractLogExponents;
-		this.insertLogExponents = insertLogExponents;
 		this.doChangeOfBase = doChangeOfBase;
 		this.doTrigIdentities = doTrigIdentities;
 		this.trigComposition = trigComposition;
@@ -63,7 +60,5 @@ public class SimplificationSettings {
 	private void assertValidity() {
 		if (simplifyLogAddition && expandLogOfProducts)
 			throw new IncompatibleSettingsException("simplifyLogAddition", "true", "expandLogOfProducts", "true");
-		if (extractLogExponents && insertLogExponents)
-			throw new IncompatibleSettingsException("extractLogExponents", "true", "insertLogExponents", "true");
 	}
 }

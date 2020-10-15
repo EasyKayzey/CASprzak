@@ -1,10 +1,17 @@
 package show.ezkz.casprzak.core.tools.defaults;
 
+import show.ezkz.casprzak.core.config.Settings;
 import show.ezkz.casprzak.core.config.SimplificationSettings;
 import show.ezkz.casprzak.core.functions.commutative.Product;
 import show.ezkz.casprzak.core.functions.unitary.transforms.Transformation;
 
+/**
+ * The {@link DefaultSimplificationSettings} class contains the simplification settings for minimal, automatic, and aggressive simplification.
+ * It also contains the user simplification settings (as read by {@link Settings#parseConfig()} and modified at any time) as public static variables.
+ * The {@link #user} settings are regenerated each time {@link #regenerateUser()} is called, which should be done whenever the static settings are changed.
+ */
 public class DefaultSimplificationSettings {
+
 	// The settings below are the settings for `user`
 
 	/**

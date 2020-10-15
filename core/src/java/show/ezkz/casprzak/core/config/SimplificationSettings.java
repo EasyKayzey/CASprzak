@@ -122,4 +122,5 @@ public class SimplificationSettings {
 		if (simplifyLogAddition && expandLogOfProducts)
 			throw new IncompatibleSettingsException("simplifyLogAddition", "true", "expandLogOfProducts", "true");
 	}
+
 }

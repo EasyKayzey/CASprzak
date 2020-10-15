@@ -77,7 +77,7 @@ public class NoEscapeTest {
 		boolean temp = Settings.enforceEscapes;
 		Settings.enforceEscapes = false;
 		GeneralFunction test1 = FunctionParser.parseInfix("asin(acos(exp(ln(sec(asec(cos(sin(x))))))))");
-		assertEquals(DefaultFunctions.X, test1.simplify(settings)); // this isn"t actually correct based on ranges, so if you add that this will break
+		assertEquals(DefaultFunctions.X, test1.simplify(settings)); // this isn't actually correct based on ranges, so if you add that this will break
 		Settings.enforceEscapes = temp;
 	}
 

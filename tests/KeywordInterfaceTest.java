@@ -19,11 +19,12 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static show.ezkz.casprzak.core.tools.defaults.DefaultSimplificationSettings.aggressive;
 
 @SuppressWarnings({"SpellCheckingInspection", "unchecked"})
 public class KeywordInterfaceTest {
 
-    private static final SimplificationSettings settings = DefaultSimplificationSettings.aggressive;
+    private static final SimplificationSettings settings = aggressive;
 
     @Test
     void partialDerivatives() {
@@ -69,7 +70,7 @@ public class KeywordInterfaceTest {
     @SuppressWarnings("SpellCheckingInspection")
     @Test
     void basicEvalWithNewVariable() {
-        // Note that addvar and clearvars aren"t actually things anymore, so this tests the resilience of the UI to bad commands.
+        // Note that addvar and clearvars aren't actually things anymore, so this tests the resilience of the UI to bad commands.
         KeywordInterface.safeKeywords("clearvars");
         KeywordInterface.safeKeywords("addvar y");
         GeneralFunction test = (GeneralFunction) KeywordInterface.safeKeywords("eval y^2 y=2");
@@ -169,7 +170,7 @@ public class KeywordInterfaceTest {
     @Test
     void gammaThing1() {
         GeneralFunction test = (GeneralFunction) KeywordInterface.safeKeywords("d/d\\Gamma[\\Gamma]");
-        assertEquals(new Constant(1), test);
+        assertEquals(new Constant(1), test.simplify(aggressive));
     }
 
     @Test

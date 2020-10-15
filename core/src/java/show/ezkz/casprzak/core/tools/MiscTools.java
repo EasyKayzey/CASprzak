@@ -150,12 +150,4 @@ public class MiscTools {
 		}
 	}
 
-	/**
-	 * Simplifies the input without executing any of the optional simplifications steps enabled and disabled in {@link Settings}
-	 * @param function the function to be minimally simplified
-	 * @return the minimally simplified version of the function
-	 */
-	public static GeneralFunction minimalSimplify(GeneralFunction function) {
-		return function.simplify(minimal);
-	}
 }

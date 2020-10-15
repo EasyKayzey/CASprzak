@@ -18,6 +18,8 @@ import show.ezkz.casprzak.core.tools.singlevariable.NumericalIntegration;
 
 import java.util.Map;
 
+import static show.ezkz.casprzak.core.tools.defaults.DefaultSimplificationSettings.minimal;
+
 /**
  * A wrapper class used to store functions in the integration pipeline, allowing users to utilize the methods in {@link show.ezkz.casprzak.core.tools.integration}.
  */
@@ -103,7 +105,7 @@ public class Integral extends Transformation {
 
 	@Override
 	public Integral simplifyInternal(SimplificationSettings settings) {
-		return new Integral(MiscTools.minimalSimplify(operand), respectTo);
+		return new Integral(operand.simplify(minimal), respectTo);
 	}
 
 

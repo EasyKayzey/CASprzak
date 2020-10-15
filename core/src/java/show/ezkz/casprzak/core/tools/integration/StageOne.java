@@ -1,5 +1,6 @@
 package show.ezkz.casprzak.core.tools.integration;
 
+import show.ezkz.casprzak.core.config.SimplificationSettings;
 import show.ezkz.casprzak.core.functions.GeneralFunction;
 import show.ezkz.casprzak.core.functions.binary.Logb;
 import show.ezkz.casprzak.core.functions.binary.Pow;
@@ -33,6 +34,25 @@ import static show.ezkz.casprzak.core.tools.defaults.DefaultSimplificationSettin
  */
 @SuppressWarnings("ChainOfInstanceofChecks")
 public class StageOne {
+
+    private static final SimplificationSettings minimalDistribute = new SimplificationSettings(
+            minimal.simplifyFunctionsOfConstants,
+            minimal.simplifyFunctionsOfSpecialConstants,
+            minimal.distributeExponentsOverMultiplication,
+            minimal.addExponentsInProducts,
+            true,
+            minimal.multiplyExponentsOfExponents,
+            minimal.executeTransformsOnSimplify,
+            minimal.enforceDomainAndRange,
+            minimal.simplifyLogAddition,
+            minimal.expandLogOfProducts,
+            minimal.extractLogExponents,
+            minimal.doChangeOfBase,
+            minimal.doTrigIdentities,
+            minimal.trigComposition,
+            minimal.simplifyInverses
+    );
+
     private StageOne(){}
 
     /**
@@ -60,7 +80,7 @@ public class StageOne {
         }
 
         if (integrand instanceof Pow power && power.getFunction2() instanceof Sum && power.getFunction1() instanceof Constant constant && ParsingTools.isAlmostInteger(constant.constant))
-            return new Integral(power.unwrapIntegerPower(minimal).distributeAll(minimal), variableString).execute();
+            return new Integral(power.unwrapIntegerPower(minimalDistribute).distributeAll(minimalDistribute), variableString).execute();
 
         Pair<GeneralFunction, GeneralFunction> stripConstant = IntegralTools.stripConstantsRespectTo(integrand, variableString);
         GeneralFunction function = stripConstant.getSecond();

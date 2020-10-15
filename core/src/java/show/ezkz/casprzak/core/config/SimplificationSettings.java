@@ -2,7 +2,11 @@ package show.ezkz.casprzak.core.config;
 
 import show.ezkz.casprzak.core.tools.exceptions.IncompatibleSettingsException;
 
-// TODO document
+/**
+ * The {@link SimplificationSettings} object contains all of the simplification parameters to be used when a function tree is simplified.
+ * It is passed into methods such as {@link show.ezkz.casprzak.core.functions.GeneralFunction#simplify(SimplificationSettings)}.
+ * {@link show.ezkz.casprzak.core.tools.defaults.DefaultSimplificationSettings} contains often-used examples of simplification parameters.
+ */
 public class SimplificationSettings {
 	public final boolean simplifyFunctionsOfConstants;
 	public final boolean simplifyFunctionsOfSpecialConstants;

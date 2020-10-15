@@ -85,7 +85,7 @@ public class SimplificationSettings {
 	 */
 	public final boolean simplifyInverses;
 
-	public SimplificationSettings(boolean simplifyFunctionsOfConstants,
+	public SimplificationSettings(boolean simplifyFunctionsOfConstants, // TODO unwrap integer powers
 								  boolean simplifyFunctionsOfSpecialConstants,
 								  boolean distributeExponentsOverMultiplication,
 								  boolean addExponentsInProducts,

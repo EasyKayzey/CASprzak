@@ -31,6 +31,9 @@ public class DefaultSimplificationSettings {
 	public static boolean trigComposition = false;
 	public static boolean simplifyInverses = true;
 
+	static {
+		regenerateUser();
+	}
 
 	public static SimplificationSettings user;
 	public static final SimplificationSettings minimal = new SimplificationSettings(
@@ -85,11 +88,9 @@ public class DefaultSimplificationSettings {
 			true
 	);
 
-	private DefaultSimplificationSettings() {
-		regenerateUser();
-	}
+	private DefaultSimplificationSettings() {}
 
-	public void regenerateUser() {
+	public static void regenerateUser() {
 		user = new SimplificationSettings(
 				simplifyFunctionsOfConstants,
 				simplifyFunctionsOfSpecialConstants,

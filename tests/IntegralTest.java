@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class IntegralTest {
 
-    private static final SimplificationSettings settings = DefaultSimplificationSettings.user;
+    private static final SimplificationSettings settings = DefaultSimplificationSettings.aggressive;
 
     @Test
     void splitAdds() throws Exception {

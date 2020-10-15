@@ -14,7 +14,7 @@ import static show.ezkz.casprzak.parsing.FunctionParser.parseSimplified;
 
 public class DifferentialTest {
 
-	private static final SimplificationSettings settings = DefaultSimplificationSettings.user;
+	private static final SimplificationSettings settings = DefaultSimplificationSettings.aggressive;
 
 	@Test
 	void basicDerivative1() {

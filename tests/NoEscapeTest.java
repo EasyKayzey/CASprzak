@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class NoEscapeTest {
 
-	private static final SimplificationSettings settings = DefaultSimplificationSettings.user;
+	private static final SimplificationSettings settings = DefaultSimplificationSettings.aggressive;
 
 	@Test
 	void sinPi() {

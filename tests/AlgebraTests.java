@@ -25,7 +25,7 @@ public class AlgebraTests {
     private static final Variable B = new Variable("b");
     private static final Variable C = new Variable("c");
 
-    private static final SimplificationSettings settings = DefaultSimplificationSettings.aggressive;
+    private static final SimplificationSettings settings = DefaultSimplificationSettings.minimal;
 
     @Test
     void lnOfAProduct() {

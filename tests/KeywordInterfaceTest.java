@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @SuppressWarnings({"SpellCheckingInspection", "unchecked"})
 public class KeywordInterfaceTest {
 
-    private static final SimplificationSettings settings = DefaultSimplificationSettings.user;
+    private static final SimplificationSettings settings = DefaultSimplificationSettings.aggressive;
 
     @Test
     void partialDerivatives() {

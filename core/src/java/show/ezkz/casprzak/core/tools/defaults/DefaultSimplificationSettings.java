@@ -7,12 +7,12 @@ public class DefaultSimplificationSettings {
 	// The settings below are the settings for `user`
 
 	/**
-	 * Denotes whether functions of constants should be simplified. Ex: {@code \sin(\pi/2) -> 1}
+	 * Denotes whether functions of constants should be simplified. Ex: {@code 2*3^2 -> 18}
 	 */
 	public static boolean simplifyFunctionsOfConstants = true;
 
 	/**
-	 * Denotes whether or not special {@code Constant}s get simplified into decimal under addition, multiplication, or exponentiation.
+	 * Denotes whether or not special {@code Constant}s get simplified into decimal under addition, multiplication, or exponentiation. Ex: {@code \pi^2 -> 9.87}
 	 */
 	public static boolean simplifyFunctionsOfSpecialConstants = false;
 
@@ -22,7 +22,7 @@ public class DefaultSimplificationSettings {
 	public static boolean distributeExponentsOverMultiplication = true;
 
 	/**
-	 *
+	 * Denotes whether like terms in a product should have their exponents added. Ex: {@code x*x^2 -> x^3}
 	 */
 	public static boolean addExponentsInProducts = true;
 
@@ -32,27 +32,27 @@ public class DefaultSimplificationSettings {
 	public static boolean distributeMultiplicationOverAddition = true;
 
 	/**
-	 *
+	 * Denotes whether nested powers should have their exponents multiplied. Ex: {@code (x^3)^2 -> x^6}
 	 */
 	public static boolean multiplyExponentsOfExponents = true;
 
 	/**
-	 * Denotes whether a {@link Transformation} should execute its action when {@code simplify(settings)} is called.
+	 * Denotes whether a {@link Transformation} should execute its action when {@code simplify(settings)} is called. Ex: {@code d/dx[x^2] -> 2x} (without explicit execution)
 	 */
 	public static boolean executeTransformsOnSimplify = true;
 
 	/**
-	 * Denotes whether or not inverse simplifications conserve domain and range
+	 * Denotes whether or not inverse simplifications conserve domain and range. Ex: {@code asin(sin(7*\pi/2)) -> -\pi/2} (without evaluation)
 	 */
 	public static boolean enforceDomainAndRange = true;
 
 	/**
-	 *
+	 * Denotes whether sums of logs should become products of their arguments. Ex: {@code ln(x) + ln(y) -> ln(x*y)}
 	 */
 	public static boolean simplifyLogAddition = true;
 
 	/**
-	 *
+	 * Denotes whether products inside logs should become sums of logs. Ex: {@code ln(x*y) -> ln(x) + ln(y)}
 	 */
 	public static boolean expandLogOfProducts = false;
 

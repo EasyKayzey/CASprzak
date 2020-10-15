@@ -27,7 +27,7 @@ public abstract class Transformation extends UnitaryFunction {
 
 	@Override
 	public GeneralFunction simplify(SimplificationSettings settings) {
-		if (Settings.executeOnSimplify) {
+		if (settings.executeTransformsOnSimplify) {
 			Transformation current = (Transformation) simplifyInternal(settings);
 			try {
 				return current.execute().simplify(settings);

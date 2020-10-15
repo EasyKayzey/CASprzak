@@ -49,6 +49,7 @@ public class Asin extends InverseTrigFunction {
 		return Sin.class;
 	}
 
+	@SuppressWarnings("DuplicatedCode")
 	@Override
 	public GeneralFunction simplifyInverse(SimplificationSettings settings) {
 		if (operand.getClass().isAssignableFrom(getInverse())) {

@@ -9,6 +9,7 @@ import java.util.Map;
 
 
 public class Sign extends PiecewiseFunction {
+
 	/**
 	 * Constructs a new {@link Sign}
 	 * @param operand The function which signum is operating on

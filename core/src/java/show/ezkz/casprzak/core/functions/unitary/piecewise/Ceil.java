@@ -8,7 +8,7 @@ import show.ezkz.casprzak.core.tools.exceptions.DerivativeDoesNotExistException;
 
 import java.util.Map;
 
-public class Ceil extends PiecewiseFunction{
+public class Ceil extends PiecewiseFunction {
     /**
      * Constructs a new {@link Ceil}
      * @param operand The function which ceiling is operating on

@@ -8,7 +8,8 @@ import show.ezkz.casprzak.core.tools.exceptions.DerivativeDoesNotExistException;
 
 import java.util.Map;
 
-public class Floor extends PiecewiseFunction{
+public class Floor extends PiecewiseFunction {
+
     /**
      * Constructs a new {@link Floor}
      * @param operand The function which signum is operating on

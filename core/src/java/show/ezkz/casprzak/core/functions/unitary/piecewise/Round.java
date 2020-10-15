@@ -6,7 +6,8 @@ import show.ezkz.casprzak.core.tools.exceptions.DerivativeDoesNotExistException;
 
 import java.util.Map;
 
-public class Round extends PiecewiseFunction{
+public class Round extends PiecewiseFunction {
+
     /**
      * Constructs a new {@link Round}
      * @param operand The function which the round is operating on

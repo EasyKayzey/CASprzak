@@ -1,6 +1,7 @@
 package show.ezkz.casprzak.core.tools.defaults;
 
 import show.ezkz.casprzak.core.config.SimplificationSettings;
+import show.ezkz.casprzak.core.functions.commutative.Product;
 import show.ezkz.casprzak.core.functions.unitary.transforms.Transformation;
 
 public class DefaultSimplificationSettings {
@@ -57,7 +58,7 @@ public class DefaultSimplificationSettings {
 	public static boolean expandLogOfProducts = false;
 
 	/**
-	 *
+	 * Denotes whether exponents inside of logs are pulled out. Ex. {@code ln(x^x) = xln(x)}
 	 */
 	public static boolean extractLogExponents = true;
 
@@ -67,22 +68,22 @@ public class DefaultSimplificationSettings {
 	public static boolean insertLogExponents = false;
 
 	/**
-	 *
+	 * Denotes whether or not {@link show.ezkz.casprzak.core.tools.algebra.LogSimplify#logChainRule(SimplificationSettings, Product)} is performed. Ex. Ex: {@code logb_a(b) * logb_b(c) * logb_x(y) / logb_x(z) = logb_a(c) * logb_z(y)}
 	 */
 	public static boolean doChangeOfBase = false;
 
 	/**
-	 *
+	 * Denotes whether trig identities are performed. Ex. {@code sin^2(x) + cos^2(x) = 1 }
 	 */
 	public static boolean doTrigIdentities = true;
 
 	/**
-	 *
+	 * Denotes whether trig composition simplify to algebraic expressions. Ex. {@code sin(arccos(x)) = \sqrt(1-x^2)}
 	 */
 	public static boolean trigComposition = false;
 
 	/**
-	 *
+	 * Denotes whether inverse should cancel. Ex {@code ln(e^x)=x}
 	 */
 	public static boolean simplifyInverses = true;
 

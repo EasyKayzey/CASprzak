@@ -15,6 +15,23 @@ import static show.ezkz.casprzak.core.tools.defaults.DefaultSimplificationSettin
 public class SimplifyTest {
 
     private static final SimplificationSettings settings = DefaultSimplificationSettings.aggressive;
+    private static final SimplificationSettings settings1 = new SimplificationSettings(
+            settings.simplifyFunctionsOfConstants,
+            settings.simplifyFunctionsOfSpecialConstants,
+            settings.distributeExponentsOverMultiplication,
+            settings.addExponentsInProducts,
+            settings.distributeMultiplicationOverAddition,
+            settings.multiplyExponentsOfExponents,
+            settings.executeTransformsOnSimplify,
+            false,
+            settings.simplifyLogAddition,
+            settings.expandLogOfProducts,
+            settings.extractLogExponents,
+            settings.doChangeOfBase,
+            settings.doTrigIdentities,
+            settings.trigComposition,
+            settings.simplifyInverses
+    );
 
     @Test
     void equalWhenSimplified() {
@@ -146,13 +163,13 @@ public class SimplifyTest {
     void simpleInverseTrig() {
         GeneralFunction test1 = FunctionParser.parseInfix("\\asin(\\sin(x))");
         GeneralFunction test2 = FunctionParser.parseInfix("\\cos(\\acos(x))");
-        assertEquals(test1.simplify(settings), test2.simplify(settings));
+        assertEquals(test1.simplify(settings1), test2.simplify(settings1));
     }
 
     @Test
     void inverseChain() {
         GeneralFunction test1 = FunctionParser.parseInfix("\\asin(\\acos(\\exp(\\ln(\\sec(\\asec(\\cos(\\sin(x))))))))");
-        assertEquals(DefaultFunctions.X, test1.simplify(settings)); // this isn't actually correct based on ranges, so if you add that this will break
+        assertEquals(DefaultFunctions.X, test1.simplify(settings1)); // this isn't actually correct based on ranges, so if you add that this will break
     }
 
     @Test

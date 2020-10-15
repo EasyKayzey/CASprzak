@@ -382,7 +382,7 @@ public class KeywordInterface {
 		String[] splitInput = keywordSplitter.split(input);
 		if (splitInput.length != 2)
 			throw new MismatchedCommandArgumentsException("2", splitInput.length);
-		Settings.parseSingleSetting(splitInput[0], splitInput[1]);
+		Settings.parseSingleSetting(splitInput[0], splitInput[1]); // TODO make this refresh user settings
 		return splitInput[0] + " = " + splitInput[1];
 	}
 

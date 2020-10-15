@@ -62,7 +62,7 @@ public class Sum extends CommutativeFunction {
 
 	public GeneralFunction simplify(SimplificationSettings settings) {
 		GeneralFunction current = super.simplify(settings);
-		if (current instanceof Sum sum)
+		if (settings.simplifyLogAddition && current instanceof Sum sum)
 			return LogSimplify.sumOfLogs(settings, sum);
 		else
 			return current;

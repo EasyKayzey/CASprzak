@@ -386,7 +386,7 @@ public class KeywordInterface {
 		return splitInput[0] + " = " + splitInput[1];
 	}
 
-	private static String printSettings() {
+	private static String printSettings() { // TODO print simplification settings
 		Field[] settings = Settings.class.getDeclaredFields();
 		StringBuilder stringBuilder = new StringBuilder(30 * settings.length);
 		for (Field setting : settings) {

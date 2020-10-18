@@ -383,7 +383,6 @@ public class KeywordInterface {
 		if (splitInput.length != 2)
 			throw new MismatchedCommandArgumentsException("2", splitInput.length);
 		Settings.parseSingleSetting(splitInput[0], splitInput[1]);
-		DefaultSimplificationSettings.regenerateUser();
 		return splitInput[0] + " = " + splitInput[1];
 	}
 

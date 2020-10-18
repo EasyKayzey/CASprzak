@@ -35,7 +35,14 @@ public class DefaultSimplificationSettings {
 		regenerateUser();
 	}
 
+	/**
+	 * The simplification settings defined by the class's static variables, regenerated every time {@link #regenerateUser()} is called
+	 */
 	public static SimplificationSettings user;
+
+	/**
+	 * Minimal simplification settings; should be applied liberally, especially on manually-generated function trees
+	 */
 	public static final SimplificationSettings minimal = new SimplificationSettings(
 			true,
 			false,
@@ -53,6 +60,10 @@ public class DefaultSimplificationSettings {
 			false,
 			false
 	);
+
+	/**
+	 * Simplification settings to be applied after parsing input
+	 */
 	public static final SimplificationSettings auto = new SimplificationSettings(
 			true,
 			false,
@@ -70,6 +81,10 @@ public class DefaultSimplificationSettings {
 			false,
 			true
 	);
+
+	/**
+	 * Aggressive simplification, applying all non-conflicting simplifications simultaneously
+	 */
 	public static final SimplificationSettings aggressive = new SimplificationSettings(
 			true,
 			true,
@@ -90,6 +105,9 @@ public class DefaultSimplificationSettings {
 
 	private DefaultSimplificationSettings() {}
 
+	/**
+	 * Regenerates {@link #user} settings from stored static settings
+	 */
 	public static void regenerateUser() {
 		user = new SimplificationSettings(
 				simplifyFunctionsOfConstants,

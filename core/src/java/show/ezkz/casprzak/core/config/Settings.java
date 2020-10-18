@@ -5,6 +5,7 @@ import show.ezkz.casprzak.core.functions.unitary.integer.combo.Factorial;
 import show.ezkz.casprzak.core.functions.unitary.transforms.Transformation;
 import show.ezkz.casprzak.core.tools.MiscTools;
 import show.ezkz.casprzak.core.tools.ParsingTools;
+import show.ezkz.casprzak.core.tools.defaults.DefaultSimplificationSettings;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -23,6 +24,8 @@ public class Settings {
 	 * When this setting is enabled, {@link Settings} uses {@link #parseConfig()} to read {@code cas.properties} and those values are stored in this class.
 	 */
 	public static boolean readProperties = true;
+
+	private static boolean regenerateUserAfterParsing = true;
 
 	private Settings(){}
 
@@ -142,6 +145,7 @@ public class Settings {
 	 * @throws IOException if the file cannot be found
 	 */
 	public static void parseConfig() throws IOException {
+		regenerateUserAfterParsing = false;
 		Properties properties = new Properties();
 		try {
 			properties.load(new FileReader(".\\src\\core\\config\\cas.properties"));
@@ -150,10 +154,12 @@ public class Settings {
 		}
 		for (Map.Entry<Object, Object> entry : properties.entrySet())
 			parseSingleSetting((String) entry.getKey(), (String) entry.getValue());
+		regenerateUserAfterParsing = true;
+		DefaultSimplificationSettings.regenerateUser();
 	}
 
 	/**
-	 * Parses string input to a single setting to be stored in {@link Settings}
+	 * Parses string input to a single setting to be stored in {@link Settings}, then calls {@link DefaultSimplificationSettings#regenerateUser()}
 	 * @param key the name of the setting, such as defaultSolverIterations or defaultFactorial
 	 * @param value the value of the setting, such as {@code 10000} or {@code RECURSIVE}
 	 */
@@ -183,5 +189,7 @@ public class Settings {
 			case "defaultFactorial" 						-> defaultFactorial = FactorialType.valueOf(value);
 			default 										-> throw new IllegalStateException("Setting " + key + " does not exist in settings parser.");
 		}
+		if (regenerateUserAfterParsing)
+			DefaultSimplificationSettings.regenerateUser();
 	}
 }

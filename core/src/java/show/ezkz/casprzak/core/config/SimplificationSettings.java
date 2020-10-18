@@ -61,27 +61,27 @@ public class SimplificationSettings {
 	public final boolean expandLogOfProducts;
 
 	/**
-	 * Denotes whether exponents inside of logs are pulled out. Ex. {@code ln(x^x) = xln(x)}
+	 * Denotes whether exponents inside of logs are pulled out. Ex. {@code ln(x^x) -> xln(x)}
 	 */
 	public final boolean extractLogExponents;
 
 	/**
-	 * Denotes whether or not {@link show.ezkz.casprzak.core.tools.algebra.LogSimplify#logChainRule(SimplificationSettings, Product)} is performed. Ex: {@code logb_a(b) * logb_b(c) * logb_x(y) / logb_x(z) = logb_a(c) * logb_z(y)}
+	 * Denotes whether or not {@link show.ezkz.casprzak.core.tools.algebra.LogSimplify#logChainRule(SimplificationSettings, Product)} is performed. Ex: {@code logb_a(b) * logb_b(c) * logb_x(y) / logb_x(z) -> logb_a(c) * logb_z(y)}
 	 */
 	public final boolean doChangeOfBase;
 
 	/**
-	 * Denotes whether trig identities are performed. Ex. {@code sin^2(x) + cos^2(x) = 1 }
+	 * Denotes whether trig identities are performed. Ex. {@code sin^2(x) + cos^2(x) -> 1 }
 	 */
 	public final boolean doTrigIdentities;
 
 	/**
-	 * Denotes whether trig composition simplify to algebraic expressions. Ex. {@code sin(arccos(x)) = \sqrt(1-x^2)}
+	 * Denotes whether trig composition simplify to algebraic expressions. Ex. {@code sin(arccos(x)) -> \sqrt(1-x^2)}
 	 */
 	public final boolean trigComposition;
 
 	/**
-	 * Denotes whether inverse should cancel. Ex {@code ln(e^x)=x}
+	 * Denotes whether inverse should cancel. Ex {@code ln(e^x) -> x}
 	 */
 	public final boolean simplifyInverses;
 

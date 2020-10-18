@@ -19,6 +19,7 @@ public class DefaultSimplificationSettings {
 	public static boolean simplifyFunctionsOfSpecialConstants = false;
 	public static boolean distributeExponentsOverMultiplication = true;
 	public static boolean addExponentsInProducts = true;
+	public static boolean unwrapIntegerPowers = false;
 	public static boolean distributeMultiplicationOverAddition = true;
 	public static boolean multiplyExponentsOfExponents = true;
 	public static boolean executeTransformsOnSimplify = true;
@@ -51,6 +52,7 @@ public class DefaultSimplificationSettings {
 			false,
 			false,
 			false,
+			false,
 			true,
 			false,
 			false,
@@ -69,6 +71,7 @@ public class DefaultSimplificationSettings {
 			false,
 			true,
 			true,
+			false,
 			false,
 			true,
 			false,
@@ -90,6 +93,7 @@ public class DefaultSimplificationSettings {
 			true,
 			true,
 			true,
+			false,
 			true,
 			true,
 			true,
@@ -114,6 +118,7 @@ public class DefaultSimplificationSettings {
 				simplifyFunctionsOfSpecialConstants,
 				distributeExponentsOverMultiplication,
 				addExponentsInProducts,
+				unwrapIntegerPowers,
 				distributeMultiplicationOverAddition,
 				multiplyExponentsOfExponents,
 				executeTransformsOnSimplify,

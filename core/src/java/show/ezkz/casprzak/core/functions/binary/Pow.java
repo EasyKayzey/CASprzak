@@ -71,6 +71,8 @@ public class Pow extends BinaryFunction implements PowInterface {
 			current = pow.simplifyLogsOfSameBase(settings);
 		if (settings.distributeExponentsOverMultiplication && current instanceof Pow pow && pow.function2 instanceof Product)
 			current = pow.distributeExponents(settings);
+		if (settings.unwrapIntegerPowers && current instanceof Pow pow)
+			return pow.unwrapIntegerPowerSafe(settings);
 		return current;
 	}
 

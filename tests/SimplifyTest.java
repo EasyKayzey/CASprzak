@@ -20,6 +20,7 @@ public class SimplifyTest {
             settings.simplifyFunctionsOfSpecialConstants,
             settings.distributeExponentsOverMultiplication,
             settings.addExponentsInProducts,
+            settings.unwrapIntegerPowers,
             settings.distributeMultiplicationOverAddition,
             settings.multiplyExponentsOfExponents,
             settings.executeTransformsOnSimplify,

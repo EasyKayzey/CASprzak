@@ -31,6 +31,11 @@ public class SimplificationSettings {
 	public final boolean addExponentsInProducts;
 
 	/**
+	 * Denotes whether integer powers should be unwrapped into products. Ex {@code (x+1)^3 -> (x+1)*(x+1)*(x+1)}
+	 */
+	public final boolean unwrapIntegerPowers;
+
+	/**
 	 * Denotes whether products are distributed over addition in {@code simplify(settings)}. Ex: {@code x(y+z) -> (xy+xz)}
 	 */
 	public final boolean distributeMultiplicationOverAddition;
@@ -85,10 +90,15 @@ public class SimplificationSettings {
 	 */
 	public final boolean simplifyInverses;
 
-	public SimplificationSettings(boolean simplifyFunctionsOfConstants, // TODO unwrap integer powers
+
+	/**
+	 * Constructs a class containing a set of simplification settings to be passed to simplification operations
+	 */
+	public SimplificationSettings(boolean simplifyFunctionsOfConstants,
 								  boolean simplifyFunctionsOfSpecialConstants,
 								  boolean distributeExponentsOverMultiplication,
 								  boolean addExponentsInProducts,
+								  boolean unwrapIntegerPowers,
 								  boolean distributeMultiplicationOverAddition,
 								  boolean multiplyExponentsOfExponents,
 								  boolean executeTransformsOnSimplify,
@@ -104,6 +114,7 @@ public class SimplificationSettings {
 		this.simplifyFunctionsOfSpecialConstants = simplifyFunctionsOfSpecialConstants;
 		this.distributeExponentsOverMultiplication = distributeExponentsOverMultiplication;
 		this.addExponentsInProducts = addExponentsInProducts;
+		this.unwrapIntegerPowers = unwrapIntegerPowers;
 		this.distributeMultiplicationOverAddition = distributeMultiplicationOverAddition;
 		this.multiplyExponentsOfExponents = multiplyExponentsOfExponents;
 		this.executeTransformsOnSimplify = executeTransformsOnSimplify;
@@ -121,6 +132,8 @@ public class SimplificationSettings {
 	private void assertValidity() {
 		if (simplifyLogAddition && expandLogOfProducts)
 			throw new IncompatibleSettingsException("simplifyLogAddition", "true", "expandLogOfProducts", "true");
+		if (addExponentsInProducts && unwrapIntegerPowers)
+			throw new IncompatibleSettingsException("addExponentsInProducts", "true", "unwrapIntegerPowers", "true");
 	}
 
 }

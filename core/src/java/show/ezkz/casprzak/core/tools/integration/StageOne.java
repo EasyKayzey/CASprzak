@@ -40,6 +40,7 @@ public class StageOne {
             minimal.simplifyFunctionsOfSpecialConstants,
             minimal.distributeExponentsOverMultiplication,
             minimal.addExponentsInProducts,
+            minimal.unwrapIntegerPowers,
             true,
             minimal.multiplyExponentsOfExponents,
             minimal.executeTransformsOnSimplify,

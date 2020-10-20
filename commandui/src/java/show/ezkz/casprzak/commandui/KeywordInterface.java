@@ -386,20 +386,30 @@ public class KeywordInterface {
 		return splitInput[0] + " = " + splitInput[1];
 	}
 
-	private static String printSettings() { // TODO print simplification settings
-		Field[] settings = Settings.class.getDeclaredFields();
-		StringBuilder stringBuilder = new StringBuilder(30 * settings.length);
-		for (Field setting : settings) {
-			stringBuilder.append(setting.getName());
-			stringBuilder.append(" = ");
-			try {
-				stringBuilder.append(setting.get(null));
-			} catch (IllegalAccessException e) {
-				stringBuilder.append(e.toString());
-			}
-			stringBuilder.append("\n");
-		}
+	private static String printSettings() {
+		Field[] globalSettings = Settings.class.getDeclaredFields();
+		Field[] userSimpSettings = user.getClass().getDeclaredFields();
+		StringBuilder stringBuilder = new StringBuilder(30 * (globalSettings.length + userSimpSettings.length));
+		stringBuilder.append("\nGlobal Settings:\n");
+		addFields(stringBuilder, globalSettings, null);
+		stringBuilder.append("\nUser Simplification Settings:\n");
+		addFields(stringBuilder, userSimpSettings, user);
 		return stringBuilder.toString();
+	}
+
+	private static void addFields(StringBuilder stringBuilder, Field[] fields, Object accessor) {
+		for (Field setting : fields) {
+			if (setting.canAccess(accessor)) {
+				stringBuilder.append(setting.getName());
+				stringBuilder.append(" = ");
+				try {
+					stringBuilder.append(setting.get(accessor));
+				} catch (IllegalAccessException e) {
+					stringBuilder.append(e.toString());
+				}
+				stringBuilder.append("\n");
+			}
+		}
 	}
 
 	private static GeneralFunction integral(String input) {

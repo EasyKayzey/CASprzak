@@ -21,7 +21,7 @@ import java.util.Properties;
 public class Settings {
 
 	/**
-	 * When this setting is enabled, {@link Settings} uses {@link #parseConfig()} to read {@code cas.properties} and those values are stored in this class.
+	 * When this setting is enabled, {@link Settings} uses {@link #parseConfig()} to read {@code cas.properties} and stores those values in this class.
 	 */
 	public static boolean readProperties = true;
 

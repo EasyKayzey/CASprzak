@@ -55,20 +55,24 @@ public class Constant extends EndpointFunction {
 
 	/**
 	 * Returns true if string is a special {@link Constant}
-	 * @param string The string that is being checked if it is a special constant
+	 * @param constantString The string that is being checked if it is a special constant
 	 * @return true if string is a special {@link Constant}
 	 */
-	public static boolean isSpecialConstant(String string) {
-		return specialConstants.containsKey(string);
+	public static boolean isSpecialConstant(String constantString) {
+		return specialConstants.containsKey(constantString);
 	}
 
 	/**
 	 * Returns the value of a special constant
-	 * @param string name of constant
+	 * @param constantString name of constant
 	 * @return the value of the constant
+	 * @throws IllegalArgumentException if the constant is not a special constant
 	 */
-	public static double getSpecialConstant(String string) {
-		return specialConstants.get(string);
+	public static double getSpecialConstant(String constantString) {
+		if (specialConstants.containsKey(constantString))
+			return specialConstants.get(constantString);
+		else
+			throw new IllegalArgumentException(constantString + " is not a defined special constant.");
 	}
 
 	/**

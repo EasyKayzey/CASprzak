@@ -13,10 +13,11 @@ import java.util.function.Predicate;
 
 
 public class Constant extends EndpointFunction {
+
 	/**
-	 * Symbols or Strings with a dedicated value. The defaults are {@code π} and {@code e}.
-	 */
-	public static final HashMap<String, Double> specialConstants = new HashMap<>() {
+	 * The default values in {@link #specialConstants}, which are reset every time {@link #resetConstants()} is called
+ 	 */
+	public static final Map<String, Double> defaultSpecialConstants = new HashMap<>() {
 		{
 			put("π", Math.PI);
 			put("e", Math.E);
@@ -24,11 +25,18 @@ public class Constant extends EndpointFunction {
 	};
 
 	/**
+	 * Strings with a pre-set value such as {@code π} and {@code e}
+	 */
+	public static Map<String, Double> specialConstants = new HashMap<>(defaultSpecialConstants);
+
+
+	/**
 	 * The numerical value of the constant
 	 */
 	public final double constant;
+
 	/**
-	 * The string relating to this special constant (null if normal constant)
+	 * The String relating to this special constant (null if normal constant)
 	 */
 	public final @Nullable String constantKey;
 
@@ -43,7 +51,7 @@ public class Constant extends EndpointFunction {
 
 	/**
 	 * Constructs a new special {@link Constant} from its String
-	 * @param constantKey The string of the special {@link Constant}
+	 * @param constantKey The String of the special {@link Constant}
 	 */
 	@SuppressWarnings("NullableProblems")
 	public Constant(String constantKey) {
@@ -148,10 +156,12 @@ public class Constant extends EndpointFunction {
 		return (that instanceof Constant) && (Math.abs(constant - ((Constant) that).constant) < Settings.equalsMargin);
 	}
 
+	/**
+	 * Resets {@link #specialConstants} to {@link #defaultSpecialConstants}
+	 */
 	public static void resetConstants() {
 		specialConstants.clear();
-		specialConstants.put("π", Math.PI);
-		specialConstants.put("e", Math.E);
+		specialConstants = new HashMap<>(defaultSpecialConstants);
 	}
 
 

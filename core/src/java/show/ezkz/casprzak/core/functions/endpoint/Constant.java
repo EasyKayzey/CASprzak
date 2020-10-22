@@ -14,10 +14,11 @@ import java.util.function.Predicate;
 
 
 public class Constant extends EndpointFunction {
+
 	/**
-	 * Symbols or Strings with a dedicated value. The defaults are {@code π} and {@code e}.
-	 */
-	public static final HashMap<String, Double> specialConstants = new HashMap<>() {
+	 * The default values in {@link #specialConstants}, which are reset every time {@link #resetConstants()} is called
+ 	 */
+	public static final Map<String, Double> defaultSpecialConstants = new HashMap<>() {
 		{
 			put("π", Math.PI);
 			put("e", Math.E);
@@ -25,11 +26,18 @@ public class Constant extends EndpointFunction {
 	};
 
 	/**
+	 * Strings with a pre-set value such as {@code π} and {@code e}
+	 */
+	public static Map<String, Double> specialConstants = new HashMap<>(defaultSpecialConstants);
+
+
+	/**
 	 * The numerical value of the constant
 	 */
 	public final double constant;
+
 	/**
-	 * The string relating to this special constant (null if normal constant)
+	 * The String relating to this special constant (null if normal constant)
 	 */
 	public final @Nullable String constantKey;
 
@@ -44,7 +52,7 @@ public class Constant extends EndpointFunction {
 
 	/**
 	 * Constructs a new special {@link Constant} from its String
-	 * @param constantKey The string of the special {@link Constant}
+	 * @param constantKey The String of the special {@link Constant}
 	 */
 	@SuppressWarnings("NullableProblems")
 	public Constant(String constantKey) {
@@ -56,20 +64,24 @@ public class Constant extends EndpointFunction {
 
 	/**
 	 * Returns true if string is a special {@link Constant}
-	 * @param string The string that is being checked if it is a special constant
+	 * @param constantString The string that is being checked if it is a special constant
 	 * @return true if string is a special {@link Constant}
 	 */
-	public static boolean isSpecialConstant(String string) {
-		return specialConstants.containsKey(string);
+	public static boolean isSpecialConstant(String constantString) {
+		return specialConstants.containsKey(constantString);
 	}
 
 	/**
 	 * Returns the value of a special constant
-	 * @param string name of constant
+	 * @param constantString name of constant
 	 * @return the value of the constant
+	 * @throws IllegalArgumentException if the constant is not a special constant
 	 */
-	public static double getSpecialConstant(String string) {
-		return specialConstants.get(string);
+	public static double getSpecialConstant(String constantString) {
+		if (specialConstants.containsKey(constantString))
+			return specialConstants.get(constantString);
+		else
+			throw new IllegalArgumentException(constantString + " is not a defined special constant.");
 	}
 
 	/**
@@ -145,10 +157,12 @@ public class Constant extends EndpointFunction {
 		return (that instanceof Constant) && (Math.abs(constant - ((Constant) that).constant) < Settings.equalsMargin);
 	}
 
+	/**
+	 * Resets {@link #specialConstants} to {@link #defaultSpecialConstants}
+	 */
 	public static void resetConstants() {
 		specialConstants.clear();
-		specialConstants.put("π", Math.PI);
-		specialConstants.put("e", Math.E);
+		specialConstants = new HashMap<>(defaultSpecialConstants);
 	}
 
 

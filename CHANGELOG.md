@@ -15,6 +15,7 @@
  - Fix inputs like `sinner` being parsed to the variable `\sinner` rather than a product
  - Fix inconsistent variable names in the tutorial
  - Fix CASDemo automatically simplifying expressions in the SIMP section
+ - Fix `reset` in `KeywordInterface` not clearing the stored error `prevException`
 
 
 ## v0.2.1

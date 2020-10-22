@@ -5,16 +5,20 @@
  - Package CASprzak into `core`, `parsing` and `commandui`
  - Publish to Maven central repository
  - Add the ability to perform various logarithm simplifications and expansions
+ - Add methods for simplification of various logarithm operations
 ### Minor Additions
  - Add `LogInterface` and `PowInterface` to generalize `Logb, Ln` and `Pow, Exp` respectively
 ### Changes
  - Rename various escape-related settings
  - Update emails in `CODE_OF_CONDUCT.md` and `CONTRIBUTING.md` to the 'ezkz' domain
+ - New `defaults` subpackage created for `defaultFunctions` and other defaults
+ - Default special constants are now stored in `Constant` through the private map `defaultSpecialConstants`
 ### Bugfixes
  - Fix `Differential` comparison causing `NullPointerException`s
  - Fix inputs like `sinner` being parsed to the variable `\sinner` rather than a product
  - Fix inconsistent variable names in the tutorial
  - Fix CASDemo automatically simplifying expressions in the SIMP section
+ - Fix `NullPointerException` caused by calling `getSpecialConstant` on a non-special string
  - Fix `reset` in `KeywordInterface` not clearing the stored error `prevException`
 
 

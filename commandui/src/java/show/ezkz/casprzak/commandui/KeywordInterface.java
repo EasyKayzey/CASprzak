@@ -424,6 +424,8 @@ public class KeywordInterface {
 	private static String reset() {
 		clearFunctions();
 		Constant.resetConstants();
+		prevException = null;
+		// `prev` does not need to be reset because it is set to "Reset done" by the return value
 		return "Reset done.";
 	}
 

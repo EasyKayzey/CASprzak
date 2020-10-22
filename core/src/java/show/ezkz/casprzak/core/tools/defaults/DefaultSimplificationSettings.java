@@ -107,7 +107,7 @@ public class DefaultSimplificationSettings {
 			true
 	);
 
-	private DefaultSimplificationSettings() {}
+	private DefaultSimplificationSettings(){}
 
 	/**
 	 * Regenerates {@link #user} settings from stored static settings

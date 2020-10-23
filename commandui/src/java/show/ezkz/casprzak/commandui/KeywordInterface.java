@@ -1,13 +1,12 @@
 package show.ezkz.casprzak.commandui;
 
+import show.ezkz.casprzak.core.config.CoreSettingsParser;
 import show.ezkz.casprzak.core.config.Settings;
 import show.ezkz.casprzak.core.functions.GeneralFunction;
 import show.ezkz.casprzak.core.functions.endpoint.Constant;
 import show.ezkz.casprzak.core.functions.unitary.transforms.Integral;
 import show.ezkz.casprzak.core.output.OutputFunction;
-import show.ezkz.casprzak.core.tools.MiscTools;
 import show.ezkz.casprzak.core.tools.ParsingTools;
-import show.ezkz.casprzak.core.tools.defaults.DefaultSimplificationSettings;
 import show.ezkz.casprzak.core.tools.exceptions.*;
 import show.ezkz.casprzak.core.tools.singlevariable.Extrema;
 import show.ezkz.casprzak.core.tools.singlevariable.NumericalIntegration;
@@ -382,7 +381,7 @@ public class KeywordInterface {
 		String[] splitInput = keywordSplitter.split(input);
 		if (splitInput.length != 2)
 			throw new MismatchedCommandArgumentsException("2", splitInput.length);
-		Settings.parseSingleSetting(splitInput[0], splitInput[1]);
+		CoreSettingsParser.parseSingleGlobalSetting(splitInput[0], splitInput[1]);
 		return splitInput[0] + " = " + splitInput[1];
 	}
 

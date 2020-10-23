@@ -1,9 +1,11 @@
 package show.ezkz.casprzak.commandui;
 
+import show.ezkz.casprzak.core.config.CoreSettingsParser;
 import show.ezkz.casprzak.core.config.Settings;
 import show.ezkz.casprzak.core.tools.exceptions.CommandNotFoundException;
 import show.ezkz.casprzak.core.tools.exceptions.UserExitException;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -19,7 +21,7 @@ public class CommandUI {
 	 */
 	public static void main(String[] args) {
 		if (Settings.readProperties) try {
-			Settings.parseConfig();
+			CoreSettingsParser.parseGlobalProperties(new File("cas.properties")); // TODO find real file
 		} catch (IOException e) {
 			System.out.println("Properties file not found. Using defaults...");
 		}

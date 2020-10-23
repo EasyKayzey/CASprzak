@@ -8,15 +8,15 @@ import show.ezkz.casprzak.core.tools.ParsingTools;
 import java.io.File;
 
 /**
- * The {@link Settings} class stores global settings as static variables. These settings are read from {@code cas.properties} by {@link CoreSettingsParser#parseGlobalProperties(File)} on launch, and can be modified dynamically during runtime.
- * Settings that are modified during runtime do NOT get written into the properties file. To save a settings profile, write it into {@code cas.properties} so it is read on launch.
+ * The {@link Settings} class stores global settings as static variables. These settings are read from {@code global.properties} by {@link CoreSettingsParser#parseGlobalConfig(File)} on launch, and can be modified dynamically during runtime.
+ * Settings that are modified during runtime do NOT get written into the properties file. To save a settings profile, write it into {@code global.properties} so it is read on launch.
  * The class also contains tools for parsing settings from files and user input, then storing those settings for use by package methods.
  */
 @SuppressWarnings("CanBeFinal")
 public class Settings {
 
 	/**
-	 * When this setting is enabled, {@link Settings} uses {@link CoreSettingsParser#parseGlobalProperties(File)} to read {@code cas.properties} and stores those values in this class.
+	 * When this setting is enabled, {@link Settings} uses {@link CoreSettingsParser#parseGlobalConfig(File)} to read {@code global.properties} and stores those values in this class.
 	 */
 	public static boolean readProperties = true;
 

@@ -21,7 +21,7 @@ public class CommandUI {
 	 */
 	public static void main(String[] args) {
 		if (Settings.readProperties) try {
-			CoreSettingsParser.parseGlobalProperties(new File("cas.properties")); // TODO find real file
+			CoreSettingsParser.parseGlobalConfig(new File("global.properties")); // TODO find real file
 		} catch (IOException e) {
 			System.out.println("Properties file not found. Using defaults...");
 		}

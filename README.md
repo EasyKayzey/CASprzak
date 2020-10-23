@@ -39,7 +39,7 @@ All documentation for CASprzak can be found at: https://ezkz.show/CASprzak-docum
 - If you find a problem with the CAS, please report the bug in `Issues` so we can fix it
 - If you have any feature suggestions not present in `Projects`, make a feature request in `Issues`
 - If you would like to design a better interface than the placeholder that we have now, please contact us by email
-- To use `cas.properties`:
+- To use `global.properties`:
    - If you are using the jar, put the file in the same directory as `CASprzak.jar`
    - If you are using the source code, leave the file in `src/config`
 - Binaries are available for all stable releases under the `Releases` tab

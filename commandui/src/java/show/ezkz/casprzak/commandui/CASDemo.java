@@ -536,7 +536,7 @@ public class CASDemo {
 				These are all the current settings.
 				If you want to change a setting, use 'setsetting [setting] [value]', or the shortcut 'ss'.
 				As you saw, there are a lot of settings. If you want to learn what a setting does, we recommend reading our documentation.
-				Default settings are read from 'config/cas.properties' on launch. This file also contains documentation regarding the effects of various settings.
+				Default settings are read from 'config/global.properties' on launch. This file also contains documentation regarding the effects of various settings.
 				Continue testing this feature, or type 'next' to continue.
 				""");
 		currentState = DemoState.LATEX;
@@ -547,7 +547,7 @@ public class CASDemo {
 		printWithSleep("""
 				The custom parser used by this CAS internally operates on a system with formatting modeled after LaTeX.
 				In some edge cases, the parser may have difficulty converting raw input to this LaTeX-like form, resulting in an 'unsupported' error.
-				If you are familiar with LaTeX, it is highly recommended you enable the setting 'enforceEscapes' both in the runtime settings (with 'ss') and in 'config/cas.properties'.
+				If you are familiar with LaTeX, it is highly recommended you enable the setting 'enforceEscapes' both in the runtime settings (with 'ss') and in 'config/global.properties'.
 				This setting will disable the raw-to-LaTeX conversion, increasing both performance and consistency.
 				Using this feature requires all input to be LaTeX-escaped, so expressions like 'sin(pi*x)' should be written '\\sin(\\pi*x)'.
 				If you would like to enable this feature now, do so using 'ss enforceEscapes true' and then test the new functionality. Type 'next' to continue.

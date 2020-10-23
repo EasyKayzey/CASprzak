@@ -9,6 +9,7 @@ import show.ezkz.casprzak.core.functions.unitary.specialcases.Exp;
 import show.ezkz.casprzak.core.functions.unitary.specialcases.Ln;
 import show.ezkz.casprzak.core.tools.defaults.DefaultFunctions;
 import show.ezkz.casprzak.core.tools.helperclasses.LogInterface;
+import show.ezkz.casprzak.core.tools.helperclasses.PowInterface;
 
 import java.util.*;
 
@@ -26,7 +27,8 @@ public class LogSimplify {
 
         if (operand instanceof Product product) {
             GeneralFunction[] terms = Arrays.stream(product.getFunctions())
-                    .map(Ln::new)
+                    .map(input::newWith)
+                    .map(i -> (GeneralFunction) i)
                     .toArray(GeneralFunction[]::new);
             return new Sum(terms).simplify();
         } else
@@ -41,10 +43,8 @@ public class LogSimplify {
     public static GeneralFunction logarithmOfAnExponent(LogInterface input) {
         GeneralFunction operand = input.argument();
 
-        if (operand instanceof Pow exponential)
-            return new Product(exponential.getFunction1(), new Ln(exponential.getFunction2())).simplify();
-        else if (operand instanceof Exp exponential)
-            return exponential.operand.simplify();
+        if (operand instanceof PowInterface powInterface)
+            return new Product(powInterface.exponent(), (GeneralFunction) input.newWith(powInterface.base())).simplify();
         else
             return (GeneralFunction) input;
 

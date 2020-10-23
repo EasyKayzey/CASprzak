@@ -22,7 +22,7 @@ public class CommandUI {
 	public static void main(String[] args) {
 		if (Settings.readProperties) try {
 			CoreSettingsParser.parseGlobalConfig(new File("global.properties")); // TODO find real file
-		} catch (IOException e) {
+		} catch (IOException ignored) {
 			System.out.println("Properties file not found. Using defaults...");
 		}
 		System.out.println("Welcome to CASprzak. Run 'help' for a command list, or 'demo' for a tutorial.");

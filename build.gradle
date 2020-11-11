@@ -91,4 +91,5 @@ tasks.withType(Test) {
 nexusStaging {
     username findProperty("mavenUsername")
     password findProperty("mavenPassword")
+    packageGroup 'show.ezkz'
 }

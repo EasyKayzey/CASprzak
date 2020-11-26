@@ -95,7 +95,7 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 			currentFunction = currentFunction.getSimplifiedDerivative(varID);
 
 		return currentFunction;
-}
+	}
 
 	/**
 	 * Returns the value of the derivative at {@code point}

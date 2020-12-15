@@ -1,5 +1,6 @@
 import show.ezkz.casprzak.core.functions.endpoint.Variable;
 import org.junit.jupiter.api.Test;
+import show.ezkz.casprzak.core.tools.exceptions.IllegalNameException;
 import show.ezkz.casprzak.parsing.FunctionParser;
 import show.ezkz.casprzak.core.tools.MiscTools;
 import show.ezkz.casprzak.core.tools.ParsingTools;
@@ -60,5 +61,12 @@ public class MiscTest {
 	void multiCharVariable() {
 		assertEquals(3, new Variable("\\abc").evaluate(Map.of("\\abc", 3.0)));
 		assertEquals(3, FunctionParser.parseSimplified("\\el+1").evaluate(Map.of("\\el", 2.0)));
+	}
+
+	@Test
+	void whitespaceNames() {
+		assertThrows(IllegalNameException.class, () -> new Variable("\u200B"));
+		assertThrows(IllegalNameException.class, () -> new Variable("\\\u2028"));
+		assertThrows(IllegalNameException.class, () -> new Variable("\\A\u2028"));
 	}
 }

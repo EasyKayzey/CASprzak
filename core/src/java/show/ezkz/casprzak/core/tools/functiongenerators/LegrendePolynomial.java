@@ -1,6 +1,7 @@
 package show.ezkz.casprzak.core.tools.functiongenerators;
 
 import show.ezkz.casprzak.core.functions.GeneralFunction;
+import show.ezkz.casprzak.core.functions.endpoint.Constant;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,11 +26,11 @@ public class LegrendePolynomial {
 	}
 
 	public GeneralFunction normalizingConstant(int n) {
-		return null;
+		return new Constant(normalizingConstantDouble(n));
 	}
 
 	private double normalizingConstantDouble(int n) {
-		return 0;
+		return 1 / sqrt(0.5 * (2*n+1));
 	}
 
 }

@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 import show.ezkz.casprzak.core.functions.commutative.Product;
 import show.ezkz.casprzak.core.functions.endpoint.Constant;
 import show.ezkz.casprzak.core.functions.endpoint.Variable;
+import show.ezkz.casprzak.core.tools.defaults.DefaultFunctions;
+import show.ezkz.casprzak.core.tools.functiongenerators.HermitePolynomial;
 import show.ezkz.casprzak.core.tools.functiongenerators.LegrendePolynomial;
 import show.ezkz.casprzak.parsing.FunctionParser;
 import show.ezkz.casprzak.core.tools.PolynomialTools;
@@ -69,6 +71,18 @@ public class PolynomialTest {
 		assertEquals(new Constant(1/Math.sqrt(2)), LegrendePolynomial.normalLegrendePolynomial(0));
 		assertEquals(new Product(new Constant(Math.sqrt(3/2.)), new Variable("t")), LegrendePolynomial.normalLegrendePolynomial(1, "t"));
 		assertEquals(new Constant(Math.sqrt(2/5.)), LegrendePolynomial.normalizingConstant(2));
+
+	}
+
+	@Test
+	void hermitePolynomial() {
+		Variable test1 = new Variable(Settings.singleVariableDefault);
+		assertEquals(new Product(DefaultFunctions.TWO, test1), HermitePolynomial.hermitePolynomial(1));
+		test1 = new Variable("j");
+		assertEquals(new Product(DefaultFunctions.TWO, test1), HermitePolynomial.hermitePolynomial(1, "j"));
+		assertEquals(new Constant(1/Math.sqrt(Math.sqrt(Math.PI))), HermitePolynomial.normalHermitePolynomial(0));
+		assertEquals(new Product(new Constant(Math.sqrt(2)/Math.sqrt(Math.sqrt(Math.PI))), new Variable("t")), HermitePolynomial.normalHermitePolynomial(1, "t"));
+		assertEquals(new Constant(1/Math.sqrt(Math.sqrt(Math.PI))), HermitePolynomial.normalizingConstant(0));
 
 	}
 

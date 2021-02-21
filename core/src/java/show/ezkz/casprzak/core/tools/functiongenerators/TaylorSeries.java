@@ -38,17 +38,21 @@ public class TaylorSeries {
 	 * @return a Maclaurin series of the specified function
 	 */
 	public static GeneralFunction makeTaylorSeries(GeneralFunction function, int degree, String variable) {
-		GeneralFunction taylorSeries = makeTaylorSeries(function, degree);
 		if (Settings.singleVariableDefault.equals(variable))
-			return taylorSeries;
-		else {
-			Map<String, Variable> substitution = new HashMap<>() {
-				{
-					put(Settings.singleVariableDefault, new Variable(variable));
-				}
-			};
-			return taylorSeries.substituteVariables(substitution);
-		}
+			return makeTaylorSeries(function, degree);
+
+		Map<String, Variable> reverseSubstitution = new HashMap<>() {
+			{
+				put(variable, new Variable(Settings.singleVariableDefault));
+			}
+		};
+		GeneralFunction taylorSeries = makeTaylorSeries(function.substituteVariables(reverseSubstitution), degree);
+		Map<String, Variable> substitution = new HashMap<>() {
+			{
+				put(Settings.singleVariableDefault, new Variable(variable));
+			}
+		};
+		return taylorSeries.substituteVariables(substitution);
 	}
 
 	/**
@@ -60,17 +64,21 @@ public class TaylorSeries {
 	 * @return a Taylor series of the specified function
 	 */
 	public static GeneralFunction makeTaylorSeries(GeneralFunction function, int degree, double center, String variable) {
-		GeneralFunction taylorSeries = makeTaylorSeries(function, degree, center);
 		if (Settings.singleVariableDefault.equals(variable))
-			return taylorSeries;
-		else {
-			Map<String, Variable> substitution = new HashMap<>() {
-				{
-					put(Settings.singleVariableDefault, new Variable(variable));
-				}
-			};
-			return taylorSeries.substituteVariables(substitution);
-		}
+			return makeTaylorSeries(function, degree, center);
+
+		Map<String, Variable> reverseSubstitution = new HashMap<>() {
+			{
+				put(variable, new Variable(Settings.singleVariableDefault));
+			}
+		};
+		GeneralFunction taylorSeries = makeTaylorSeries(function.substituteVariables(reverseSubstitution), degree, center);
+		Map<String, Variable> substitution = new HashMap<>() {
+			{
+				put(Settings.singleVariableDefault, new Variable(variable));
+			}
+		};
+		return taylorSeries.substituteVariables(substitution);
 	}
 
     /**
@@ -81,13 +89,19 @@ public class TaylorSeries {
      * @return a Taylor series of the specified function
      */
     public static GeneralFunction makeTaylorSeries(GeneralFunction function, int degree, double center) {
-        GeneralFunction[] taylorSeriesTerms = new GeneralFunction[degree+1];
-        String var = VariableTools.getSingleVariable(function);
-        for (int i = 0; i <= degree; i++){
-            taylorSeriesTerms[i] = new Product(new Constant(function.getNthDerivative(Settings.singleVariableDefault, i).evaluate(Map.of(var, center)) / MiscTools.factorial(i)), new Pow(new Constant(i), new Sum(new Variable(Settings.singleVariableDefault), new Constant(-center))));
-        }
-        return new Sum(taylorSeriesTerms).simplify();
-    }
+		GeneralFunction[] taylorSeriesTerms = new GeneralFunction[degree + 1];
+		String var = VariableTools.getSingleVariable(function);
+		for (int i = 0; i <= degree; i++) {
+			taylorSeriesTerms[i] = new Product(
+					new Constant(function.getNthDerivative(Settings.singleVariableDefault, i).evaluate(Map.of(var, center)) / MiscTools.factorial(i)),
+					new Pow(
+							new Constant(i),
+							new Sum(new Variable(Settings.singleVariableDefault), new Constant(-center))
+					)
+			);
+		}
+		return new Sum(taylorSeriesTerms).simplify();
+	}
 }
 
 

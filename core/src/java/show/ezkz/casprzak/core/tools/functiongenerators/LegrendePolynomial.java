@@ -33,7 +33,7 @@ public class LegrendePolynomial {
 		int p = n % 2 == 0 ? n / 2 : (n + 1) / 2;
 		GeneralFunction[] sum = new GeneralFunction[n - p + 1];
 		for (int m = p; m <= n; m++) {
-			sum[m - p] = new Product(new Constant(((n - m) % 2 == 0 ? 1 : -1) * constant(n, m)), new Pow(new Constant(2 * m - n), new Variable(Settings.singleVariableDefault))).simplify();
+			sum[m - p] = new Product(new Constant(constant(n, m)), new Pow(new Constant(2 * m - n), new Variable(Settings.singleVariableDefault))).simplify();
 		}
 		GeneralFunction polynomial = new Sum(sum).simplify();
 		cache.put(n, polynomial);
@@ -100,6 +100,7 @@ public class LegrendePolynomial {
 		}
 		mult /= factorial(m);
 		mult /= factorial(n - m);
+		mult *= ((n - m) % 2 == 0 ? 1 : -1);
 		return mult;
 	}
 

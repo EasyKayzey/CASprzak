@@ -34,7 +34,7 @@ public class HermitePolynomial {
 
 		GeneralFunction[] sum = new GeneralFunction[(int) floor(n / 2.) + 1];
 		for (int m = 0; m <= (int) Math.floor(n / 2.); m++) {
-			sum[m] = new Product(new Constant(pow(-1, m) * constant(n, m)), new Pow(new Constant(n - 2 * m), new Variable(Settings.singleVariableDefault))).simplify();
+			sum[m] = new Product(new Constant(constant(n, m)), new Pow(new Constant(n - 2 * m), new Variable(Settings.singleVariableDefault))).simplify();
 		}
 		GeneralFunction polynomial = new Sum(sum).simplify();
 		cache.put(n, polynomial);
@@ -98,6 +98,7 @@ public class HermitePolynomial {
 		for (int i = 0; i < n - 2 * m; i++) {
 			mult *= 2. / (n - 2 * m - i);
 		}
+		mult *= (1 - 2 * (m % 2));
 		return mult;
 	}
 

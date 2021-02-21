@@ -30,7 +30,7 @@ public class LegrendePolynomial {
 		if (Settings.cacheDerivatives && cache.containsKey(n))
 			return cache.get(n);
 
-		int p = n % 2 == 0 ? n / 2 : (n + 1) / 2;
+		int p = (n + 1) / 2;
 		GeneralFunction[] sum = new GeneralFunction[n - p + 1];
 		for (int m = p; m <= n; m++) {
 			sum[m - p] = new Product(new Constant(constant(n, m)), new Pow(new Constant(2 * m - n), new Variable(Settings.singleVariableDefault))).simplify();

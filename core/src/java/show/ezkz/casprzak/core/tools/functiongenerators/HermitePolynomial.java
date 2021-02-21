@@ -22,6 +22,21 @@ import static show.ezkz.casprzak.core.tools.defaults.DefaultFunctions.*;
 public class HermitePolynomial {
 
 	private static final Map<Integer, GeneralFunction> cache = new HashMap<>();
+	private static final String defaultVariable = "\\var";
+
+	private static GeneralFunction makeHermitePolynomial(int n) {
+		if (cache.containsKey(n))
+			return cache.get(n);
+
+		GeneralFunction[] sum = new GeneralFunction[n/2 + 1];
+		for (int m = 0; m <= n/2; m++) {
+			sum[m] = new Product(new Constant(constant(n, m)), new Pow(new Constant(n - 2 * m), new Variable(defaultVariable))).simplify();
+		}
+		GeneralFunction polynomial = new Sum(sum).simplify();
+		if (Settings.cacheHermitePolynomials)
+			cache.put(n, polynomial);
+		return polynomial;
+	}
 
 	/**
 	 * Returns the nth Hermite polynomial with the default variable defined with {@link Settings#singleVariableDefault}
@@ -29,17 +44,9 @@ public class HermitePolynomial {
 	 * @return nth Hermite polynomial
 	 */
 	public static GeneralFunction hermitePolynomial(int n) {
-		if (cache.containsKey(n))
-			return cache.get(n);
-
-		GeneralFunction[] sum = new GeneralFunction[n/2 + 1];
-		for (int m = 0; m <= n/2; m++) {
-			sum[m] = new Product(new Constant(constant(n, m)), new Pow(new Constant(n - 2 * m), new Variable(Settings.singleVariableDefault))).simplify();
-		}
-		GeneralFunction polynomial = new Sum(sum).simplify();
-		if (Settings.cacheHermitePolynomials)
-			cache.put(n, polynomial);
-		return polynomial;
+		Map<String, Variable> substitution = new HashMap<>();
+		substitution.put(defaultVariable, new Variable(Settings.singleVariableDefault));
+		return makeHermitePolynomial(n).substituteVariables(substitution);
 	}
 
 	/**
@@ -49,14 +56,9 @@ public class HermitePolynomial {
 	 * @return nth Hermite polynomial
 	 */
 	public static GeneralFunction hermitePolynomial(int n, String variable) {
-		GeneralFunction polynomial = hermitePolynomial(n);
-		if (Settings.singleVariableDefault.equals(variable))
-			return polynomial;
-		else {
-			Map<String, Variable> substitution = new HashMap<>();
-			substitution.put(Settings.singleVariableDefault, new Variable(variable));
-			return polynomial.substituteVariables(substitution);
-		}
+		Map<String, Variable> substitution = new HashMap<>();
+		substitution.put(defaultVariable, new Variable(variable));
+		return makeHermitePolynomial(n).substituteVariables(substitution);
 	}
 
 	/**

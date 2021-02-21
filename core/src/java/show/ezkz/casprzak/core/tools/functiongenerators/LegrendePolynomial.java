@@ -20,20 +20,16 @@ import static show.ezkz.casprzak.core.tools.MiscTools.*;
 public class LegrendePolynomial {
 
 	private static final Map<Integer, GeneralFunction> cache = new HashMap<>();
+	private static final String defaultVariable = "\\var";
 
-	/**
-	 * Returns the nth Legrende polynomial with the default variable defined with {@link Settings#singleVariableDefault}
-	 * @param n the nth polynomial
-	 * @return nth Legrende polynomial
-	 */
-	public static GeneralFunction legrendePolynomial(int n) {
+	private static GeneralFunction makeLegrendePolynomial(int n) {
 		if (cache.containsKey(n))
 			return cache.get(n);
 
 		int p = (n + 1) / 2;
 		GeneralFunction[] sum = new GeneralFunction[n - p + 1];
 		for (int m = p; m <= n; m++) {
-			sum[m - p] = new Product(new Constant(constant(n, m)), new Pow(new Constant(2 * m - n), new Variable(Settings.singleVariableDefault))).simplify();
+			sum[m - p] = new Product(new Constant(constant(n, m)), new Pow(new Constant(2 * m - n), new Variable(defaultVariable))).simplify();
 		}
 		GeneralFunction polynomial = new Sum(sum).simplify();
 
@@ -43,20 +39,26 @@ public class LegrendePolynomial {
 	}
 
 	/**
+	 * Returns the nth Legrende polynomial with the default variable defined with {@link Settings#singleVariableDefault}
+	 * @param n the nth polynomial
+	 * @return nth Legrende polynomial
+	 */
+	public static GeneralFunction legrendePolynomial(int n) {
+		Map<String, Variable> substitution = new HashMap<>();
+		substitution.put(defaultVariable, new Variable(Settings.singleVariableDefault));
+		return makeLegrendePolynomial(n).substituteVariables(substitution);
+	}
+
+	/**
 	 * Returns the nth Legrende polynomial with a variable of the specified String
 	 * @param n the nth polynomial
 	 * @param variable the String of the {@link Variable} of the polynomial
 	 * @return nth Legrende polynomial
 	 */
 	public static GeneralFunction legrendePolynomial(int n, String variable) {
-		GeneralFunction polynomial = legrendePolynomial(n);
-		if (Settings.singleVariableDefault.equals(variable))
-			return polynomial;
-		else {
-			Map<String, Variable> substitution = new HashMap<>();
-			substitution.put(Settings.singleVariableDefault, new Variable(variable));
-			return polynomial.substituteVariables(substitution);
-		}
+		Map<String, Variable> substitution = new HashMap<>();
+		substitution.put(defaultVariable, new Variable(variable));
+		return makeLegrendePolynomial(n).substituteVariables(substitution);
 	}
 
 	/**

@@ -19,19 +19,15 @@ import static show.ezkz.casprzak.core.tools.MiscTools.factorial;
 public class LaguerrePolynomial {
 
 	private static final Map<Integer, GeneralFunction> cache = new HashMap<>();
+	private static final String defaultVariable = "\\var";
 
-	/**
-	 * Returns the nth Laguerre polynomial with the default variable defined with {@link Settings#singleVariableDefault}
-	 * @param n the nth polynomial
-	 * @return nth Laguerre polynomial
-	 */
-	public static GeneralFunction laguerrePolynomial(int n) {
+	private static GeneralFunction makeLaguerrePolynomial(int n) {
 		if (cache.containsKey(n))
 			return cache.get(n);
 
 		GeneralFunction[] sum = new GeneralFunction[n+1];
 		for (int k = 0; k <= n; k++) {
-			sum[k] = new Product(new Constant(constant(n, k)), new Pow(new Constant(k), new Variable(Settings.singleVariableDefault))).simplify();
+			sum[k] = new Product(new Constant(constant(n, k)), new Pow(new Constant(k), new Variable(defaultVariable))).simplify();
 		}
 		GeneralFunction polynomial = new Sum(sum).simplify();
 
@@ -41,20 +37,26 @@ public class LaguerrePolynomial {
 	}
 
 	/**
+	 * Returns the nth Laguerre polynomial with the default variable defined with {@link Settings#singleVariableDefault}
+	 * @param n the nth polynomial
+	 * @return nth Laguerre polynomial
+	 */
+	public static GeneralFunction laguerrePolynomial(int n) {
+		Map<String, Variable> substitution = new HashMap<>();
+		substitution.put(defaultVariable, new Variable(Settings.singleVariableDefault));
+		return makeLaguerrePolynomial(n).substituteVariables(substitution);
+	}
+
+	/**
 	 * Returns the nth Laguerre polynomial with a variable of the specified String
 	 * @param n the nth polynomial
 	 * @param variable the String of the {@link Variable} of the polynomial
 	 * @return nth Laguerre polynomial
 	 */
 	public static GeneralFunction laguerrePolynomial(int n, String variable) {
-		GeneralFunction polynomial = laguerrePolynomial(n);
-		if (Settings.singleVariableDefault.equals(variable))
-			return polynomial;
-		else {
-			Map<String, Variable> substitution = new HashMap<>();
-			substitution.put(Settings.singleVariableDefault, new Variable(variable));
-			return polynomial.substituteVariables(substitution);
-		}
+		Map<String, Variable> substitution = new HashMap<>();
+		substitution.put(defaultVariable, new Variable(variable));
+		return makeLaguerrePolynomial(n).substituteVariables(substitution);
 	}
 
 	private static double constant(int n, int k) {

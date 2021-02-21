@@ -97,7 +97,7 @@ public class LegrendePolynomial {
 		}
 		mult /= factorial(m);
 		mult /= factorial(n - m);
-		mult *= ((n - m) % 2 == 0 ? 1 : -1);
+		mult *= 1 - 2 * ((n - m) % 2); // (-1)^(n-m)
 		return mult;
 	}
 

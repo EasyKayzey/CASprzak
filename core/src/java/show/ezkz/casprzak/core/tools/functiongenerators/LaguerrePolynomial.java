@@ -57,11 +57,11 @@ public class LaguerrePolynomial {
 
 	private static double constant(int n, int k) {
 		double mult = 1;
-		for (int i = 0; i < n-k; i++) {
+		for (int i = 0; i < n - k; i++) {
 			mult *= n - i;
 		}
 		mult /= factorial(k);
-		mult /= factorial(n-k);
+		mult /= factorial(n - k);
 		mult *= (1 - 2 * (k % 2)); // (-1)^k
 		return mult;
 	}

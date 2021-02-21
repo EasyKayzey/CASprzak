@@ -6,10 +6,12 @@ import show.ezkz.casprzak.core.functions.commutative.Product;
 import show.ezkz.casprzak.core.functions.commutative.Sum;
 import show.ezkz.casprzak.core.functions.endpoint.Constant;
 import show.ezkz.casprzak.core.functions.endpoint.Variable;
+import show.ezkz.casprzak.core.functions.unitary.specialcases.Exp;
 import show.ezkz.casprzak.core.tools.defaults.DefaultFunctions;
 import show.ezkz.casprzak.core.tools.functiongenerators.HermitePolynomial;
 import show.ezkz.casprzak.core.tools.functiongenerators.LaguerrePolynomial;
 import show.ezkz.casprzak.core.tools.functiongenerators.LegrendePolynomial;
+import show.ezkz.casprzak.core.tools.functiongenerators.TaylorSeries;
 import show.ezkz.casprzak.parsing.FunctionParser;
 import show.ezkz.casprzak.core.tools.PolynomialTools;
 
@@ -100,8 +102,14 @@ public class PolynomialTest {
 		assertEquals(FunctionParser.parseSimplified("(1/2 x^2-2x+1)"), LaguerrePolynomial.laguerrePolynomial(2));
 		assertEquals(FunctionParser.parseSimplified("(-1/6 x^3+ 3/2 x^2-3x+1)"), LaguerrePolynomial.laguerrePolynomial(3));
 
+	}
 
-
+	@Test
+	void taylorSeriesVariable1() {
+		Variable test1 = new Variable(Settings.singleVariableDefault);
+		assertEquals(new Sum(ONE, test1), TaylorSeries.makeTaylorSeries(new Exp(test1), 1));
+		test1 = new Variable("j");
+		assertEquals(new Sum(ONE, test1), TaylorSeries.makeTaylorSeries(new Exp(test1), 1, "j"));
 	}
 
 }

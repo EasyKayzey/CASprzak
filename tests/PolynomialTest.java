@@ -112,4 +112,12 @@ public class PolynomialTest {
 		assertEquals(new Sum(ONE, test1), TaylorSeries.makeTaylorSeries(new Exp(test1), 1, "j"));
 	}
 
+	@Test
+	void taylorSeriesVariable2() {
+		Variable x = new Variable(Settings.singleVariableDefault);
+		Variable y = new Variable("y");
+		assertThrows(UnsupportedOperationException.class, () -> TaylorSeries.makeTaylorSeries(new Exp(new Sum(x, y)), 1));
+		assertThrows(UnsupportedOperationException.class, () -> TaylorSeries.makeTaylorSeries(new Exp(new Sum(x, y)), 1, "y"));
+	}
+
 }

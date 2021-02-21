@@ -81,9 +81,9 @@ public class TaylorSeries {
      * @return a Taylor series of the specified function
      */
     public static GeneralFunction makeTaylorSeries(GeneralFunction function, int degree, double center) {
-        GeneralFunction[] taylorSeriesTerms = new GeneralFunction[degree];
+        GeneralFunction[] taylorSeriesTerms = new GeneralFunction[degree+1];
         String var = VariableTools.getSingleVariable(function);
-        for (int i = 0; i < degree; i++){
+        for (int i = 0; i <= degree; i++){
             taylorSeriesTerms[i] = new Product(new Constant(function.getNthDerivative(Settings.singleVariableDefault, i).evaluate(Map.of(var, center)) / MiscTools.factorial(i)), new Pow(new Constant(i), new Sum(new Variable(Settings.singleVariableDefault), new Constant(-center))));
         }
         return new Sum(taylorSeriesTerms).simplify();

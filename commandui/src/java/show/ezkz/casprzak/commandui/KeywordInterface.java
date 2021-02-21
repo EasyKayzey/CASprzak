@@ -8,6 +8,9 @@ import show.ezkz.casprzak.core.output.OutputFunction;
 import show.ezkz.casprzak.core.tools.MiscTools;
 import show.ezkz.casprzak.core.tools.ParsingTools;
 import show.ezkz.casprzak.core.tools.exceptions.*;
+import show.ezkz.casprzak.core.tools.functiongenerators.HermitePolynomial;
+import show.ezkz.casprzak.core.tools.functiongenerators.LaguerrePolynomial;
+import show.ezkz.casprzak.core.tools.functiongenerators.LegrendePolynomial;
 import show.ezkz.casprzak.core.tools.singlevariable.Extrema;
 import show.ezkz.casprzak.core.tools.singlevariable.NumericalIntegration;
 import show.ezkz.casprzak.core.tools.singlevariable.Solver;
@@ -68,6 +71,9 @@ public class KeywordInterface {
 				case "sol", "solve" 																-> solve(splitInput[1]);
 				case "ext", "extrema" 																-> extrema(splitInput[1]);
 				case "tay", "taylor" 																-> taylor(splitInput[1]);
+				case "legendre"																		-> legrende(splitInput[1]);
+				case "hermite"																		-> hermite(splitInput[1]);
+				case "laguerre"																		-> laguerre(splitInput[1]);
 				case "intn", "intnumeric" 															-> integrateNumeric(splitInput[1]);
 				case "intne", "intnumericerror" 													-> integrateNumericError(splitInput[1]);
 				case "def", "deffunction" 															-> defineFunction(splitInput[1], false);
@@ -83,7 +89,7 @@ public class KeywordInterface {
 				case "int", "integral" 																-> integral(splitInput[1]);
 				case "ai", "index", "arrayindex" 													-> arrayIndex(splitInput[1]);
 				case "debug" 																		-> debug(splitInput[1]);
-				case "version", "v" 																		-> version;
+				case "version", "v" 																-> version;
 				case "reset" 																		-> reset();
 				case "err", "error" 																-> printError();
 				case "help" 																		-> splitInput.length == 1 ? help() : help(splitInput[1]);
@@ -304,6 +310,21 @@ public class KeywordInterface {
 	private static GeneralFunction taylor(String input) {
 		String[] splitInput = keywordSplitter.split(input);
 		return TaylorSeries.makeTaylorSeries(parseStored(splitInput[0]), ParsingTools.toInteger(FunctionParser.getConstant(splitInput[1])), FunctionParser.getConstant(splitInput[2]));
+	}
+
+	private static GeneralFunction legrende(String input) {
+		int n = ParsingTools.toInteger(FunctionParser.getConstant(input));
+		return LegrendePolynomial.legrendePolynomial(n);
+	}
+
+	private static GeneralFunction hermite(String input) {
+		int n = ParsingTools.toInteger(FunctionParser.getConstant(input));
+		return HermitePolynomial.hermitePolynomial(n);
+	}
+
+	private static GeneralFunction laguerre(String input) {
+		int n = ParsingTools.toInteger(FunctionParser.getConstant(input));
+		return LaguerrePolynomial.laguerrePolynomial(n);
 	}
 
 	private static Object defineFunction(String input, boolean simplify) {

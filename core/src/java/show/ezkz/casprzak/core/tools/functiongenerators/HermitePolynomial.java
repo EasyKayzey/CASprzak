@@ -32,8 +32,8 @@ public class HermitePolynomial {
 		if (Settings.cacheDerivatives && cache.containsKey(n))
 			return cache.get(n);
 
-		GeneralFunction[] sum = new GeneralFunction[(int) floor(n / 2.) + 1];
-		for (int m = 0; m <= (int) Math.floor(n / 2.); m++) {
+		GeneralFunction[] sum = new GeneralFunction[n/2 + 1];
+		for (int m = 0; m <= n/2; m++) {
 			sum[m] = new Product(new Constant(constant(n, m)), new Pow(new Constant(n - 2 * m), new Variable(Settings.singleVariableDefault))).simplify();
 		}
 		GeneralFunction polynomial = new Sum(sum).simplify();

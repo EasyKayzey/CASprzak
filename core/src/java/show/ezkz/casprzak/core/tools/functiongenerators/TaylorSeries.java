@@ -31,59 +31,6 @@ public class TaylorSeries {
         return makeTaylorSeries(function, degree, 0);
     }
 
-	/**
-	 * Returns a Maclaurin series of the specified function of a given degree
-	 * @param function the function whose Maclaurin series is being found
-	 * @param degree the degree of the Maclaurin polynomial
-	 * @param variable the String of the {@link Variable} of the polynomial
-	 * @return a Maclaurin series of the specified function
-	 */
-	public static GeneralFunction makeTaylorSeries(GeneralFunction function, int degree, String variable) {
-		Set<String> variables = VariableTools.getAllVariables(function);
-		if (variables.size() > 1)
-			throw new UnsupportedOperationException("Cannot perform Taylor series with a function of more than 1 variable.");
-
-		if (Settings.singleVariableDefault.equals(variable))
-			return makeTaylorSeries(function, degree);
-
-		Map<String, Variable> reverseSubstitution = new HashMap<>();
-		reverseSubstitution.put(variable, new Variable(Settings.singleVariableDefault));
-
-		GeneralFunction taylorSeries = makeTaylorSeries(function.substituteVariables(reverseSubstitution), degree);
-
-		Map<String, Variable> substitution = new HashMap<>();
-		substitution.put(Settings.singleVariableDefault, new Variable(variable));
-
-		return taylorSeries.substituteVariables(substitution);
-	}
-
-	/**
-	 * Returns a Taylor series of the specified function at the specified center of a given degree
-	 * @param function the function whose Taylor series is being found
-	 * @param degree the degree of the Taylor polynomial
-	 * @param center where the Taylor series is centered
-	 * @param variable the String of the {@link Variable} of the polynomial
-	 * @return a Taylor series of the specified function
-	 */
-	public static GeneralFunction makeTaylorSeries(GeneralFunction function, int degree, double center, String variable) {
-		Set<String> variables = VariableTools.getAllVariables(function);
-		if (variables.size() > 1)
-			throw new UnsupportedOperationException("Cannot perform Taylor series with a function of more than 1 variable.");
-
-		if (Settings.singleVariableDefault.equals(variable))
-			return makeTaylorSeries(function, degree, center);
-
-		Map<String, Variable> reverseSubstitution = new HashMap<>();
-		reverseSubstitution.put(variable, new Variable(Settings.singleVariableDefault));
-
-		GeneralFunction taylorSeries = makeTaylorSeries(function.substituteVariables(reverseSubstitution), degree, center);
-
-		Map<String, Variable> substitution = new HashMap<>();
-		substitution.put(Settings.singleVariableDefault, new Variable(variable));
-
-		return taylorSeries.substituteVariables(substitution);
-	}
-
     /**
      * Returns a Taylor series of the specified function at the specified center of a given degree
      * @param function the function whose Taylor series is being found
@@ -100,10 +47,10 @@ public class TaylorSeries {
 		String var = VariableTools.getSingleVariable(function);
 		for (int i = 0; i <= degree; i++) {
 			taylorSeriesTerms[i] = new Product(
-					new Constant(function.getNthDerivative(Settings.singleVariableDefault, i).evaluate(Map.of(var, center)) / MiscTools.factorial(i)),
+					new Constant(function.getNthDerivative(var, i).evaluate(Map.of(var, center)) / MiscTools.factorial(i)),
 					new Pow(
 							new Constant(i),
-							new Sum(new Variable(Settings.singleVariableDefault), new Constant(-center))
+							new Sum(new Variable(var), new Constant(-center))
 					)
 			);
 		}

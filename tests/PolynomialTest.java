@@ -1,10 +1,15 @@
+import show.ezkz.casprzak.core.config.Settings;
 import show.ezkz.casprzak.core.functions.GeneralFunction;
 import org.junit.jupiter.api.Test;
+import show.ezkz.casprzak.core.functions.commutative.Product;
+import show.ezkz.casprzak.core.functions.endpoint.Constant;
+import show.ezkz.casprzak.core.functions.endpoint.Variable;
+import show.ezkz.casprzak.core.tools.functiongenerators.LegrendePolynomial;
 import show.ezkz.casprzak.parsing.FunctionParser;
 import show.ezkz.casprzak.core.tools.PolynomialTools;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PolynomialTest {
     @Test
@@ -54,5 +59,17 @@ public class PolynomialTest {
         GeneralFunction test = FunctionParser.parseSimplified("5x^3+x^2+5x+3269485");
         assertTrue(PolynomialTools.isPolynomial(test));
     }
+
+    @Test
+	void legendrePolynomial() {
+    	Variable test1 = new Variable(Settings.singleVariableDefault);
+    	assertEquals(test1, LegrendePolynomial.legrendePolynomial(1));
+		test1 = new Variable("j");
+		assertEquals(test1, LegrendePolynomial.legrendePolynomial(1, "j"));
+		assertEquals(new Constant(1/Math.sqrt(2)), LegrendePolynomial.normalLegrendePolynomial(0));
+		assertEquals(new Product(new Constant(Math.sqrt(3/2.)), new Variable("t")), LegrendePolynomial.normalLegrendePolynomial(1, "t"));
+		assertEquals(new Constant(Math.sqrt(2/5.)), LegrendePolynomial.normalizingConstant(2));
+
+	}
 
 }

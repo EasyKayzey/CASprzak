@@ -21,6 +21,11 @@ public class LegrendePolynomial {
 
 	private static final Map<Integer, GeneralFunction> cache = new HashMap<>();
 
+	/**
+	 * Returns the nth Legrende polynomial with the default variable defined with {@link Settings#singleVariableDefault}
+	 * @param n the nth polynomial
+	 * @return nth Legrende polynomial
+	 */
 	public static GeneralFunction legrendePolynomial(int n) {
 		if (Settings.cacheDerivatives && cache.containsKey(n))
 			return cache.get(n);
@@ -35,6 +40,12 @@ public class LegrendePolynomial {
 		return polynomial;
 	}
 
+	/**
+	 * Returns the nth Legrende polynomial with a variable of the specified String
+	 * @param n the nth polynomial
+	 * @param variable the String of the {@link Variable} of the polynomial
+	 * @return nth Legrende polynomial
+	 */
 	public static GeneralFunction legrendePolynomial(int n, String variable) {
 		GeneralFunction polynomial = legrendePolynomial(n);
 		if (Settings.singleVariableDefault.equals(variable))
@@ -49,14 +60,31 @@ public class LegrendePolynomial {
 		}
 	}
 
+	/**
+	 * Returns the nth normalized Legrende polynomial with the default variable defined with {@link Settings#singleVariableDefault}
+	 * @param n the nth polynomial
+	 * @return nth normalized Legrende polynomial
+	 */
 	public static GeneralFunction normalLegrendePolynomial(int n) {
 		return new Product(new Constant(1/normalizingConstantDouble(n)), legrendePolynomial(n)).simplify();
 	}
 
+	/**
+	 * Returns the nth normalized Legrende polynomial with a variable of the specified String
+	 * @param n the nth polynomial
+	 * @param variable the String of the {@link Variable} of the polynomial
+	 * @return nth normalized Legrende polynomial
+	 */
 	public static GeneralFunction normalLegrendePolynomial(int n, String variable) {
 		return new Product(new Constant(1/normalizingConstantDouble(n)), legrendePolynomial(n, variable)).simplify();
 	}
 
+	/**
+	 * The normalizing constant of the nth Legrende polynomial
+	 * ie If you wanted to normalize, you would do {@code 1/N * L_n}
+	 * @param n the nth polynomial
+	 * @return normalizing constant of the nth Legrende polynomial
+	 */
 	public static GeneralFunction normalizingConstant(int n) {
 		return new Constant(normalizingConstantDouble(n));
 	}

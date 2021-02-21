@@ -21,6 +21,7 @@
  - Fix CASDemo automatically simplifying expressions in the SIMP section
  - Fix `NullPointerException` caused by calling `getSpecialConstant` on a non-special string
  - Fix `reset` in `KeywordInterface` not clearing the stored error `prevException`
+ - Fix `TaylorSeries` returning polynomials of wrong degree specified
 
 
 ## v0.2.1

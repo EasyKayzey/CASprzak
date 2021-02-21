@@ -62,7 +62,7 @@ public class LaguerrePolynomial {
 		}
 		mult /= factorial(k);
 		mult /= factorial(n-k);
-		mult *= (1 - 2 * (k % 2));
+		mult *= (1 - 2 * (k % 2)); // (-1)^k
 		return mult;
 	}
 

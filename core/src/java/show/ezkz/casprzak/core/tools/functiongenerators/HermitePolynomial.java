@@ -29,7 +29,7 @@ public class HermitePolynomial {
 	 * @return nth Hermite polynomial
 	 */
 	public static GeneralFunction hermitePolynomial(int n) {
-		if (Settings.cacheDerivatives && cache.containsKey(n))
+		if (cache.containsKey(n))
 			return cache.get(n);
 
 		GeneralFunction[] sum = new GeneralFunction[n/2 + 1];
@@ -37,7 +37,8 @@ public class HermitePolynomial {
 			sum[m] = new Product(new Constant(constant(n, m)), new Pow(new Constant(n - 2 * m), new Variable(Settings.singleVariableDefault))).simplify();
 		}
 		GeneralFunction polynomial = new Sum(sum).simplify();
-		cache.put(n, polynomial);
+		if (Settings.cacheHermitePolynomials)
+			cache.put(n, polynomial);
 		return polynomial;
 	}
 

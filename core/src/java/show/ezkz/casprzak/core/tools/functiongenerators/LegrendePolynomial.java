@@ -27,7 +27,7 @@ public class LegrendePolynomial {
 	 * @return nth Legrende polynomial
 	 */
 	public static GeneralFunction legrendePolynomial(int n) {
-		if (Settings.cacheDerivatives && cache.containsKey(n))
+		if (cache.containsKey(n))
 			return cache.get(n);
 
 		int p = (n + 1) / 2;
@@ -36,7 +36,9 @@ public class LegrendePolynomial {
 			sum[m - p] = new Product(new Constant(constant(n, m)), new Pow(new Constant(2 * m - n), new Variable(Settings.singleVariableDefault))).simplify();
 		}
 		GeneralFunction polynomial = new Sum(sum).simplify();
-		cache.put(n, polynomial);
+
+		if (Settings.cacheLegrendePolynomials)
+			cache.put(n, polynomial);
 		return polynomial;
 	}
 

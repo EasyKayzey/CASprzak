@@ -26,7 +26,7 @@ public class LaguerrePolynomial {
 	 * @return nth Laguerre polynomial
 	 */
 	public static GeneralFunction laguerrePolynomial(int n) {
-		if (Settings.cacheDerivatives && cache.containsKey(n))
+		if (cache.containsKey(n))
 			return cache.get(n);
 
 		GeneralFunction[] sum = new GeneralFunction[n+1];
@@ -34,7 +34,9 @@ public class LaguerrePolynomial {
 			sum[k] = new Product(new Constant(constant(n, k)), new Pow(new Constant(k), new Variable(Settings.singleVariableDefault))).simplify();
 		}
 		GeneralFunction polynomial = new Sum(sum).simplify();
-		cache.put(n, polynomial);
+
+		if (Settings.cacheLaguerrePolynomials)
+			cache.put(n, polynomial);
 		return polynomial;
 	}
 

@@ -71,7 +71,7 @@ public class KeywordInterface {
 				case "sol", "solve" 																-> solve(splitInput[1]);
 				case "ext", "extrema" 																-> extrema(splitInput[1]);
 				case "tay", "taylor" 																-> taylor(splitInput[1]);
-				case "legendre"																		-> legrende(splitInput[1]);
+				case "legrende"																		-> legrende(splitInput[1]);
 				case "hermite"																		-> hermite(splitInput[1]);
 				case "laguerre"																		-> laguerre(splitInput[1]);
 				case "intn", "intnumeric" 															-> integrateNumeric(splitInput[1]);
@@ -481,6 +481,12 @@ public class KeywordInterface {
 					"ext ['min(ima)'/'max(ima)'/'anymin(ima)'/'anymax(ima)'/'inflect(ion)'] [function] [startrange] [endrange]";
 			case "tay", "taylor"                                        			-> "Finds the [degree]-degree taylor series of [function] around [center].\n" +
 					"tay [function] [degree] [center]";
+			case "legrende"															-> "Returns the nth legrende polynomial.\n" +
+					"legrende [n]";
+			case "hermite"															-> "Returns the nth hermite polynomial.\n" +
+					"hermite [n]";
+			case "laguerre"															-> "Returns the nth laguerre polynomial.\n" +
+					"laguerre [n]";
 			case "intn", "intnumeric"                                   			-> "Integrates [function] numerically on a range.\n" +
 					"intn [function] [startvalue] [endvalue]";
 			case "intne", "intnumericerror"                             			-> "Integrates [function] numerically on a range, returning an array whose first value is the result, and whose second value is the maximum error of the approximation.\n" +
@@ -538,6 +544,9 @@ public class KeywordInterface {
 				intn, intnumeric:                                      performs numerical integration
 				intne, intnumericerror:                                performs numerical integration with error
 				tay, taylor:                                           takes a taylor series
+				legrende                                               returns legrende polynomial
+				hermite                                                returns hermite polynomial												
+				laguerre                                               returns laguerre polynomial
 				sol, solve:                                            solves for roots
 				ext, extrema:                                          finds extrema
 				ai, index, arrayindex                                  returns a value from an array

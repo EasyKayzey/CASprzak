@@ -2,10 +2,10 @@ package show.ezkz.casprzak.core.tools.functiongenerators;
 
 import show.ezkz.casprzak.core.config.Settings;
 import show.ezkz.casprzak.core.functions.GeneralFunction;
+import show.ezkz.casprzak.core.functions.binary.Pow;
 import show.ezkz.casprzak.core.functions.commutative.Product;
 import show.ezkz.casprzak.core.functions.endpoint.Constant;
 import show.ezkz.casprzak.core.functions.endpoint.Variable;
-import show.ezkz.casprzak.core.functions.unitary.specialcases.Exp;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,8 +32,8 @@ public class HermitePolynomial {
 
 		GeneralFunction polynomial = new Product(
 				new Constant(pow(-1, n)),
-				new Exp(square(new Variable(Settings.singleVariableDefault))),
-				new Exp(negative(square(new Variable(Settings.singleVariableDefault))))
+				new Pow(square(new Variable(Settings.singleVariableDefault)), E),
+				new Pow(negative(square(new Variable(Settings.singleVariableDefault))), E)
 						.simplify()
 						.getNthDerivative(Settings.singleVariableDefault, n)).simplify();
 		cache.put(n, polynomial);

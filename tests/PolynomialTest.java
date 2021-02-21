@@ -1,6 +1,7 @@
 import show.ezkz.casprzak.core.config.Settings;
 import show.ezkz.casprzak.core.functions.GeneralFunction;
 import org.junit.jupiter.api.Test;
+import show.ezkz.casprzak.core.functions.binary.Pow;
 import show.ezkz.casprzak.core.functions.commutative.Product;
 import show.ezkz.casprzak.core.functions.endpoint.Constant;
 import show.ezkz.casprzak.core.functions.endpoint.Variable;
@@ -80,9 +81,9 @@ public class PolynomialTest {
 		assertEquals(new Product(DefaultFunctions.TWO, test1), HermitePolynomial.hermitePolynomial(1));
 		test1 = new Variable("j");
 		assertEquals(new Product(DefaultFunctions.TWO, test1), HermitePolynomial.hermitePolynomial(1, "j"));
-		assertEquals(new Constant(1/Math.sqrt(Math.sqrt(Math.PI))), HermitePolynomial.normalHermitePolynomial(0));
-		assertEquals(new Product(new Constant(Math.sqrt(2)/Math.sqrt(Math.sqrt(Math.PI))), new Variable("t")), HermitePolynomial.normalHermitePolynomial(1, "t"));
-		assertEquals(new Constant(1/Math.sqrt(Math.sqrt(Math.PI))), HermitePolynomial.normalizingConstant(0));
+		assertEquals(new Pow(new Constant(-.25), DefaultFunctions.PI), HermitePolynomial.normalHermitePolynomial(0));
+		assertEquals(new Product(new Constant(Math.sqrt(2)), new Pow(new Constant(-.25), DefaultFunctions.PI), new Variable("t")), HermitePolynomial.normalHermitePolynomial(1, "t"));
+		assertEquals(new Pow(new Constant(.25), DefaultFunctions.PI), HermitePolynomial.normalizingConstant(0));
 
 	}
 

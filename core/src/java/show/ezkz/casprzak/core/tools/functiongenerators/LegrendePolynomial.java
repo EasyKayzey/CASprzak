@@ -51,11 +51,8 @@ public class LegrendePolynomial {
 		if (Settings.singleVariableDefault.equals(variable))
 			return polynomial;
 		else {
-			Map<String, Variable> substitution = new HashMap<>() {
-				{
-					put(Settings.singleVariableDefault, new Variable(variable));
-				}
-			};
+			Map<String, Variable> substitution = new HashMap<>();
+			substitution.put(Settings.singleVariableDefault, new Variable(variable));
 			return polynomial.substituteVariables(substitution);
 		}
 	}

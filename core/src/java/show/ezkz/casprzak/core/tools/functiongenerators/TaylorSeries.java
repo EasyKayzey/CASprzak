@@ -46,17 +46,14 @@ public class TaylorSeries {
 		if (Settings.singleVariableDefault.equals(variable))
 			return makeTaylorSeries(function, degree);
 
-		Map<String, Variable> reverseSubstitution = new HashMap<>() {
-			{
-				put(variable, new Variable(Settings.singleVariableDefault));
-			}
-		};
+		Map<String, Variable> reverseSubstitution = new HashMap<>();
+		reverseSubstitution.put(variable, new Variable(Settings.singleVariableDefault));
+
 		GeneralFunction taylorSeries = makeTaylorSeries(function.substituteVariables(reverseSubstitution), degree);
-		Map<String, Variable> substitution = new HashMap<>() {
-			{
-				put(Settings.singleVariableDefault, new Variable(variable));
-			}
-		};
+
+		Map<String, Variable> substitution = new HashMap<>();
+		substitution.put(Settings.singleVariableDefault, new Variable(variable));
+
 		return taylorSeries.substituteVariables(substitution);
 	}
 
@@ -76,17 +73,14 @@ public class TaylorSeries {
 		if (Settings.singleVariableDefault.equals(variable))
 			return makeTaylorSeries(function, degree, center);
 
-		Map<String, Variable> reverseSubstitution = new HashMap<>() {
-			{
-				put(variable, new Variable(Settings.singleVariableDefault));
-			}
-		};
+		Map<String, Variable> reverseSubstitution = new HashMap<>();
+		reverseSubstitution.put(variable, new Variable(Settings.singleVariableDefault));
+
 		GeneralFunction taylorSeries = makeTaylorSeries(function.substituteVariables(reverseSubstitution), degree, center);
-		Map<String, Variable> substitution = new HashMap<>() {
-			{
-				put(Settings.singleVariableDefault, new Variable(variable));
-			}
-		};
+
+		Map<String, Variable> substitution = new HashMap<>();
+		substitution.put(Settings.singleVariableDefault, new Variable(variable));
+
 		return taylorSeries.substituteVariables(substitution);
 	}
 

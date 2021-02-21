@@ -6,7 +6,7 @@
  - Publish to Maven central repository
  - Add the ability to perform various logarithm simplifications and expansions
  - Add methods for simplification of various logarithm operations
- - Add legrende, hermite, and laguerre polynomials
+ - Add Legrende, Hermite, and Laguerre polynomials
 ### Minor Additions
  - Add `LogInterface` and `PowInterface` to generalize `Logb, Ln` and `Pow, Exp` respectively
 ### Changes

@@ -95,7 +95,7 @@ public class HermitePolynomial {
 		for (int i = 0; i < n - 2 * m; i++) {
 			mult *= 2. / (n - 2 * m - i);
 		}
-		mult *= (1 - 2 * (m % 2));
+		mult *= (1 - 2 * (m % 2)); // (-1)^m
 		return mult;
 	}
 

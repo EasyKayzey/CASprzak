@@ -4,12 +4,14 @@ import show.ezkz.casprzak.core.config.Settings;
 import show.ezkz.casprzak.core.functions.GeneralFunction;
 import show.ezkz.casprzak.core.functions.binary.Pow;
 import show.ezkz.casprzak.core.functions.commutative.Product;
+import show.ezkz.casprzak.core.functions.commutative.Sum;
 import show.ezkz.casprzak.core.functions.endpoint.Constant;
 import show.ezkz.casprzak.core.functions.endpoint.Variable;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import static java.lang.Math.floor;
 import static java.lang.Math.pow;
 import static show.ezkz.casprzak.core.tools.MiscTools.factorial;
 import static show.ezkz.casprzak.core.tools.defaults.DefaultFunctions.*;
@@ -30,12 +32,11 @@ public class HermitePolynomial {
 		if (Settings.cacheDerivatives && cache.containsKey(n))
 			return cache.get(n);
 
-		GeneralFunction polynomial = new Product(
-				new Constant(pow(-1, n)),
-				new Pow(square(new Variable(Settings.singleVariableDefault)), E),
-				new Pow(negative(square(new Variable(Settings.singleVariableDefault))), E)
-						.simplify()
-						.getNthDerivative(Settings.singleVariableDefault, n)).simplify();
+		GeneralFunction[] sum = new GeneralFunction[(int)floor(n/2.)+1];
+		for (int m = 0; m <= (int)Math.floor(n/2.); m++) {
+			sum[m] = new Product(new Constant(pow(-1, m)*constant(n,m)), new Pow(new Constant(n-2*m), new Variable(Settings.singleVariableDefault))).simplify();
+		}
+		GeneralFunction polynomial = new Sum(sum).simplify();
 		cache.put(n, polynomial);
 		return polynomial;
 	}
@@ -88,6 +89,17 @@ public class HermitePolynomial {
 	public static GeneralFunction normalizingConstant(int n) {
 		return sqrt(new Product(new Constant(pow(2,n)*factorial(n)), sqrt(PI))).simplify();
 	}
+
+	private static double constant(int n, int m) {
+		double mult = 1;
+		for (int i = 0; i < n-m; i++) {
+			mult *= n-i;
+		}
+		for (int i = 0; i < n-2*m; i++) {
+			mult *= 2./(n-2*m-i);
+		}
+		return mult;
+		}
 
 
 }

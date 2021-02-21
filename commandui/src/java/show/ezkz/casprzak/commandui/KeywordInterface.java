@@ -11,7 +11,7 @@ import show.ezkz.casprzak.core.tools.exceptions.*;
 import show.ezkz.casprzak.core.tools.singlevariable.Extrema;
 import show.ezkz.casprzak.core.tools.singlevariable.NumericalIntegration;
 import show.ezkz.casprzak.core.tools.singlevariable.Solver;
-import show.ezkz.casprzak.core.tools.singlevariable.TaylorSeries;
+import show.ezkz.casprzak.core.tools.functiongenerators.TaylorSeries;
 import show.ezkz.casprzak.parsing.FunctionParser;
 import show.ezkz.casprzak.parsing.LatexReplacer;
 

@@ -1,4 +1,4 @@
-package show.ezkz.casprzak.core.tools.singlevariable;
+package show.ezkz.casprzak.core.tools.functiongenerators;
 
 import show.ezkz.casprzak.core.config.Settings;
 import show.ezkz.casprzak.core.functions.GeneralFunction;

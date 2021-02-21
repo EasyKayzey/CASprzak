@@ -30,10 +30,10 @@ public class LegrendePolynomial {
 		if (Settings.cacheDerivatives && cache.containsKey(n))
 			return cache.get(n);
 
-		int p = n % 2 == 0 ? n/2 : (n+1)/2;
-		GeneralFunction[] sum = new GeneralFunction[n-p+1];
-		for (int m = p; m <= n ; m++) {
-			sum[m-p] = new Product(new Constant(((n-m) % 2 == 0 ? 1 : -1) * constant(n,m)), new Pow(new Constant(2*m-n), new Variable(Settings.singleVariableDefault))).simplify();
+		int p = n % 2 == 0 ? n / 2 : (n + 1) / 2;
+		GeneralFunction[] sum = new GeneralFunction[n - p + 1];
+		for (int m = p; m <= n; m++) {
+			sum[m - p] = new Product(new Constant(((n - m) % 2 == 0 ? 1 : -1) * constant(n, m)), new Pow(new Constant(2 * m - n), new Variable(Settings.singleVariableDefault))).simplify();
 		}
 		GeneralFunction polynomial = new Sum(sum).simplify();
 		cache.put(n, polynomial);
@@ -66,7 +66,7 @@ public class LegrendePolynomial {
 	 * @return nth normalized Legrende polynomial
 	 */
 	public static GeneralFunction normalLegrendePolynomial(int n) {
-		return new Product(new Constant(1/normalizingConstantDouble(n)), legrendePolynomial(n)).simplify();
+		return new Product(new Constant(1 / normalizingConstantDouble(n)), legrendePolynomial(n)).simplify();
 	}
 
 	/**
@@ -76,7 +76,7 @@ public class LegrendePolynomial {
 	 * @return nth normalized Legrende polynomial
 	 */
 	public static GeneralFunction normalLegrendePolynomial(int n, String variable) {
-		return new Product(new Constant(1/normalizingConstantDouble(n)), legrendePolynomial(n, variable)).simplify();
+		return new Product(new Constant(1 / normalizingConstantDouble(n)), legrendePolynomial(n, variable)).simplify();
 	}
 
 	/**
@@ -90,16 +90,16 @@ public class LegrendePolynomial {
 	}
 
 	private static double normalizingConstantDouble(int n) {
-		return 1 / sqrt(0.5 * (2*n+1));
+		return 1 / sqrt(0.5 * (2 * n + 1));
 	}
 
 	private static double constant(int n, int m) {
 		double mult = 1;
 		for (int i = 0; i < n; i++) {
-			mult *= ((2*m - i)/2.);
+			mult *= ((2 * m - i) / 2.);
 		}
 		mult /= factorial(m);
-		mult /= factorial(n-m);
+		mult /= factorial(n - m);
 		return mult;
 	}
 

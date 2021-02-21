@@ -32,9 +32,9 @@ public class HermitePolynomial {
 		if (Settings.cacheDerivatives && cache.containsKey(n))
 			return cache.get(n);
 
-		GeneralFunction[] sum = new GeneralFunction[(int)floor(n/2.)+1];
-		for (int m = 0; m <= (int)Math.floor(n/2.); m++) {
-			sum[m] = new Product(new Constant(pow(-1, m)*constant(n,m)), new Pow(new Constant(n-2*m), new Variable(Settings.singleVariableDefault))).simplify();
+		GeneralFunction[] sum = new GeneralFunction[(int) floor(n / 2.) + 1];
+		for (int m = 0; m <= (int) Math.floor(n / 2.); m++) {
+			sum[m] = new Product(new Constant(pow(-1, m) * constant(n, m)), new Pow(new Constant(n - 2 * m), new Variable(Settings.singleVariableDefault))).simplify();
 		}
 		GeneralFunction polynomial = new Sum(sum).simplify();
 		cache.put(n, polynomial);
@@ -87,19 +87,19 @@ public class HermitePolynomial {
 	 * @return normalizing constant of the nth Hermite polynomial
 	 */
 	public static GeneralFunction normalizingConstant(int n) {
-		return sqrt(new Product(new Constant(pow(2,n)*factorial(n)), sqrt(PI))).simplify();
+		return sqrt(new Product(new Constant(pow(2, n) * factorial(n)), sqrt(PI))).simplify();
 	}
 
 	private static double constant(int n, int m) {
 		double mult = 1;
-		for (int i = 0; i < n-m; i++) {
-			mult *= n-i;
+		for (int i = 0; i < n - m; i++) {
+			mult *= n - i;
 		}
-		for (int i = 0; i < n-2*m; i++) {
-			mult *= 2./(n-2*m-i);
+		for (int i = 0; i < n - 2 * m; i++) {
+			mult *= 2. / (n - 2 * m - i);
 		}
 		return mult;
-		}
+	}
 
 
 }

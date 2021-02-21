@@ -41,7 +41,7 @@ public class TaylorSeries {
 	public static GeneralFunction makeTaylorSeries(GeneralFunction function, int degree, String variable) {
 		Set<String> variables = VariableTools.getAllVariables(function);
 		if (variables.size() > 1)
-			throw new UnsupportedOperationException("Cannot perform taylor series with a function of more than 1 variable.");
+			throw new UnsupportedOperationException("Cannot perform Taylor series with a function of more than 1 variable.");
 
 		if (Settings.singleVariableDefault.equals(variable))
 			return makeTaylorSeries(function, degree);
@@ -68,7 +68,7 @@ public class TaylorSeries {
 	public static GeneralFunction makeTaylorSeries(GeneralFunction function, int degree, double center, String variable) {
 		Set<String> variables = VariableTools.getAllVariables(function);
 		if (variables.size() > 1)
-			throw new UnsupportedOperationException("Cannot perform taylor series with a function of more than 1 variable.");
+			throw new UnsupportedOperationException("Cannot perform Taylor series with a function of more than 1 variable.");
 
 		if (Settings.singleVariableDefault.equals(variable))
 			return makeTaylorSeries(function, degree, center);
@@ -94,7 +94,7 @@ public class TaylorSeries {
     public static GeneralFunction makeTaylorSeries(GeneralFunction function, int degree, double center) {
 		Set<String> variables = VariableTools.getAllVariables(function);
 		if (variables.size() > 1)
-			throw new UnsupportedOperationException("Cannot perform taylor series with a function of more than 1 variable.");
+			throw new UnsupportedOperationException("Cannot perform Taylor series with a function of more than 1 variable.");
 
 		GeneralFunction[] taylorSeriesTerms = new GeneralFunction[degree + 1];
 		String var = VariableTools.getSingleVariable(function);

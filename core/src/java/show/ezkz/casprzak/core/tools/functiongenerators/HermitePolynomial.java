@@ -17,7 +17,7 @@ import static show.ezkz.casprzak.core.tools.MiscTools.factorial;
 import static show.ezkz.casprzak.core.tools.defaults.DefaultFunctions.*;
 
 /**
- * The methods in {@link HermitePolynomial} deal with <a href="https://en.wikipedia.org/wiki/Hermite_polynomials#Hermite_functions">Hermite Polynomials</a>.
+ * The methods in {@link HermitePolynomial} deal with <a href="https://en.wikipedia.org/wiki/Hermite_polynomials">Hermite Polynomials</a>.
  */
 public class HermitePolynomial {
 

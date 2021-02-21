@@ -112,17 +112,17 @@ public class Settings {
 	public static boolean cacheDerivatives = true;
 
 	/**
-	 * Denotes whether or not to cache legrende polynomials
+	 * Denotes whether or not to cache Legrende polynomials
 	 */
 	public static boolean cacheLegrendePolynomials = true;
 
 	/**
-	 * Denotes whether or not to cache hermite polynomials
+	 * Denotes whether or not to cache Hermite polynomials
 	 */
 	public static boolean cacheHermitePolynomials = true;
 
 	/**
-	 * Denotes whether or not to cache laguerre polynomials
+	 * Denotes whether or not to cache Laguerre polynomials
 	 */
 	public static boolean cacheLaguerrePolynomials = true;
 

@@ -481,11 +481,11 @@ public class KeywordInterface {
 					"ext ['min(ima)'/'max(ima)'/'anymin(ima)'/'anymax(ima)'/'inflect(ion)'] [function] [startrange] [endrange]";
 			case "tay", "taylor"                                        			-> "Finds the [degree]-degree taylor series of [function] around [center].\n" +
 					"tay [function] [degree] [center]";
-			case "legrende"															-> "Returns the nth legrende polynomial.\n" +
+			case "legrende"															-> "Returns the nth Legrende polynomial.\n" +
 					"legrende [n]";
-			case "hermite"															-> "Returns the nth hermite polynomial.\n" +
+			case "hermite"															-> "Returns the nth Hermite polynomial.\n" +
 					"hermite [n]";
-			case "laguerre"															-> "Returns the nth laguerre polynomial.\n" +
+			case "laguerre"															-> "Returns the nth Laguerre polynomial.\n" +
 					"laguerre [n]";
 			case "intn", "intnumeric"                                   			-> "Integrates [function] numerically on a range.\n" +
 					"intn [function] [startvalue] [endvalue]";
@@ -544,9 +544,9 @@ public class KeywordInterface {
 				intn, intnumeric:                                      performs numerical integration
 				intne, intnumericerror:                                performs numerical integration with error
 				tay, taylor:                                           takes a taylor series
-				legrende                                               returns legrende polynomial
-				hermite                                                returns hermite polynomial												
-				laguerre                                               returns laguerre polynomial
+				legrende                                               returns Legrende polynomial
+				hermite                                                returns Hermite polynomial												
+				laguerre                                               returns Laguerre polynomial
 				sol, solve:                                            solves for roots
 				ext, extrema:                                          finds extrema
 				ai, index, arrayindex                                  returns a value from an array

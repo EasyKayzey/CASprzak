@@ -6,6 +6,7 @@
  - Publish to Maven central repository
  - Add the ability to perform various logarithm simplifications and expansions
  - Add methods for simplification of various logarithm operations
+ - Add Legrende, Hermite, and Laguerre polynomials
 ### Minor Additions
  - Add `LogInterface` and `PowInterface` to generalize `Logb, Ln` and `Pow, Exp` respectively
 ### Changes
@@ -20,6 +21,7 @@
  - Fix CASDemo automatically simplifying expressions in the SIMP section
  - Fix `NullPointerException` caused by calling `getSpecialConstant` on a non-special string
  - Fix `reset` in `KeywordInterface` not clearing the stored error `prevException`
+ - Fix `TaylorSeries` returning polynomials of wrong degree specified
 
 
 ## v0.2.1

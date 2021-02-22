@@ -8,10 +8,13 @@ import show.ezkz.casprzak.core.output.OutputFunction;
 import show.ezkz.casprzak.core.tools.MiscTools;
 import show.ezkz.casprzak.core.tools.ParsingTools;
 import show.ezkz.casprzak.core.tools.exceptions.*;
+import show.ezkz.casprzak.core.tools.functiongenerators.HermitePolynomial;
+import show.ezkz.casprzak.core.tools.functiongenerators.LaguerrePolynomial;
+import show.ezkz.casprzak.core.tools.functiongenerators.LegrendePolynomial;
 import show.ezkz.casprzak.core.tools.singlevariable.Extrema;
 import show.ezkz.casprzak.core.tools.singlevariable.NumericalIntegration;
 import show.ezkz.casprzak.core.tools.singlevariable.Solver;
-import show.ezkz.casprzak.core.tools.singlevariable.TaylorSeries;
+import show.ezkz.casprzak.core.tools.functiongenerators.TaylorSeries;
 import show.ezkz.casprzak.parsing.FunctionParser;
 import show.ezkz.casprzak.parsing.LatexReplacer;
 
@@ -68,6 +71,9 @@ public class KeywordInterface {
 				case "sol", "solve" 																-> solve(splitInput[1]);
 				case "ext", "extrema" 																-> extrema(splitInput[1]);
 				case "tay", "taylor" 																-> taylor(splitInput[1]);
+				case "legrende"																		-> legrende(splitInput[1]);
+				case "hermite"																		-> hermite(splitInput[1]);
+				case "laguerre"																		-> laguerre(splitInput[1]);
 				case "intn", "intnumeric" 															-> integrateNumeric(splitInput[1]);
 				case "intne", "intnumericerror" 													-> integrateNumericError(splitInput[1]);
 				case "def", "deffunction" 															-> defineFunction(splitInput[1], false);
@@ -83,7 +89,7 @@ public class KeywordInterface {
 				case "int", "integral" 																-> integral(splitInput[1]);
 				case "ai", "index", "arrayindex" 													-> arrayIndex(splitInput[1]);
 				case "debug" 																		-> debug(splitInput[1]);
-				case "version", "v" 																		-> version;
+				case "version", "v" 																-> version;
 				case "reset" 																		-> reset();
 				case "err", "error" 																-> printError();
 				case "help" 																		-> splitInput.length == 1 ? help() : help(splitInput[1]);
@@ -306,6 +312,21 @@ public class KeywordInterface {
 		return TaylorSeries.makeTaylorSeries(parseStored(splitInput[0]), ParsingTools.toInteger(FunctionParser.getConstant(splitInput[1])), FunctionParser.getConstant(splitInput[2]));
 	}
 
+	private static GeneralFunction legrende(String input) {
+		int n = ParsingTools.toInteger(FunctionParser.getConstant(input));
+		return LegrendePolynomial.legrendePolynomial(n);
+	}
+
+	private static GeneralFunction hermite(String input) {
+		int n = ParsingTools.toInteger(FunctionParser.getConstant(input));
+		return HermitePolynomial.hermitePolynomial(n);
+	}
+
+	private static GeneralFunction laguerre(String input) {
+		int n = ParsingTools.toInteger(FunctionParser.getConstant(input));
+		return LaguerrePolynomial.laguerrePolynomial(n);
+	}
+
 	private static Object defineFunction(String input, boolean simplify) {
 		String[] splitInput = spaces.split(input, 2);
 		if (splitInput.length != 2)
@@ -460,6 +481,12 @@ public class KeywordInterface {
 					"ext ['min(ima)'/'max(ima)'/'anymin(ima)'/'anymax(ima)'/'inflect(ion)'] [function] [startrange] [endrange]";
 			case "tay", "taylor"                                        			-> "Finds the [degree]-degree taylor series of [function] around [center].\n" +
 					"tay [function] [degree] [center]";
+			case "legrende"															-> "Returns the nth Legrende polynomial.\n" +
+					"legrende [n]";
+			case "hermite"															-> "Returns the nth Hermite polynomial.\n" +
+					"hermite [n]";
+			case "laguerre"															-> "Returns the nth Laguerre polynomial.\n" +
+					"laguerre [n]";
 			case "intn", "intnumeric"                                   			-> "Integrates [function] numerically on a range.\n" +
 					"intn [function] [startvalue] [endvalue]";
 			case "intne", "intnumericerror"                             			-> "Integrates [function] numerically on a range, returning an array whose first value is the result, and whose second value is the maximum error of the approximation.\n" +
@@ -517,6 +544,9 @@ public class KeywordInterface {
 				intn, intnumeric:                                      performs numerical integration
 				intne, intnumericerror:                                performs numerical integration with error
 				tay, taylor:                                           takes a taylor series
+				legrende                                               returns Legrende polynomial
+				hermite                                                returns Hermite polynomial												
+				laguerre                                               returns Laguerre polynomial
 				sol, solve:                                            solves for roots
 				ext, extrema:                                          finds extrema
 				ai, index, arrayindex                                  returns a value from an array

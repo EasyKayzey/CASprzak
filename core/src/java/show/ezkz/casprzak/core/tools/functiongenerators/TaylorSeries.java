@@ -1,4 +1,4 @@
-package show.ezkz.casprzak.core.tools.singlevariable;
+package show.ezkz.casprzak.core.tools.functiongenerators;
 
 import show.ezkz.casprzak.core.config.Settings;
 import show.ezkz.casprzak.core.functions.GeneralFunction;
@@ -10,7 +10,9 @@ import show.ezkz.casprzak.core.functions.endpoint.Variable;
 import show.ezkz.casprzak.core.tools.MiscTools;
 import show.ezkz.casprzak.core.tools.VariableTools;
 
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * The methods in {@link TaylorSeries} produce Taylor Series for functions.
@@ -37,13 +39,23 @@ public class TaylorSeries {
      * @return a Taylor series of the specified function
      */
     public static GeneralFunction makeTaylorSeries(GeneralFunction function, int degree, double center) {
-        GeneralFunction[] taylorSeriesTerms = new GeneralFunction[degree];
-        String var = VariableTools.getSingleVariable(function);
-        for (int i = 0; i < degree; i++){
-            taylorSeriesTerms[i] = new Product(new Constant(function.getNthDerivative(Settings.singleVariableDefault, i).evaluate(Map.of(var, center)) / MiscTools.factorial(i)), new Pow(new Constant(i), new Sum(new Variable(Settings.singleVariableDefault), new Constant(-center))));
-        }
-        return new Sum(taylorSeriesTerms).simplify();
-    }
+		Set<String> variables = VariableTools.getAllVariables(function);
+		if (variables.size() > 1)
+			throw new UnsupportedOperationException("Cannot perform Taylor series with a function of more than 1 variable.");
+
+		GeneralFunction[] taylorSeriesTerms = new GeneralFunction[degree + 1];
+		String var = VariableTools.getSingleVariable(function);
+		for (int i = 0; i <= degree; i++) {
+			taylorSeriesTerms[i] = new Product(
+					new Constant(function.getNthDerivative(var, i).evaluate(Map.of(var, center)) / MiscTools.factorial(i)),
+					new Pow(
+							new Constant(i),
+							new Sum(new Variable(var), new Constant(-center))
+					)
+			);
+		}
+		return new Sum(taylorSeriesTerms).simplify();
+	}
 }
 
 

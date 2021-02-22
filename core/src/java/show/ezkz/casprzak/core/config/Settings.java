@@ -112,6 +112,22 @@ public class Settings {
 	public static boolean cacheDerivatives = true;
 
 	/**
+	 * Denotes whether or not to cache Legrende polynomials
+	 */
+	public static boolean cacheLegrendePolynomials = true;
+
+	/**
+	 * Denotes whether or not to cache Hermite polynomials
+	 */
+	public static boolean cacheHermitePolynomials = true;
+
+	/**
+	 * Denotes whether or not to cache Laguerre polynomials
+	 */
+	public static boolean cacheLaguerrePolynomials = true;
+
+
+	/**
 	 * Forces functions in {@link show.ezkz.casprzak.core.functions.unitary.integer} to return integers when using approximations.
 	 */
 	public static boolean enforceIntegerOperations = true;
@@ -206,6 +222,9 @@ public class Settings {
 			case "simplifyFunctionsOfSpecialConstants"		-> simplifyFunctionsOfSpecialConstants = ParsingTools.parseBoolean(value);
 			case "distributeExponents" 						-> distributeExponents = ParsingTools.parseBoolean(value);
 			case "cacheDerivatives" 						-> cacheDerivatives = ParsingTools.parseBoolean(value);
+			case "cacheLegrendePolynomials" 				-> cacheLegrendePolynomials = ParsingTools.parseBoolean(value);
+			case "cacheHermitePolynomials" 					-> cacheHermitePolynomials = ParsingTools.parseBoolean(value);
+			case "cacheLaguerrePolynomials" 				-> cacheLaguerrePolynomials = ParsingTools.parseBoolean(value);
 			case "enforceIntegerOperations" 				-> enforceIntegerOperations = ParsingTools.parseBoolean(value);
 			case "exitSolverOnProximity" 					-> exitSolverOnProximity = ParsingTools.parseBoolean(value);
 			case "executeOnSimplify" 						-> executeOnSimplify = ParsingTools.parseBoolean(value);

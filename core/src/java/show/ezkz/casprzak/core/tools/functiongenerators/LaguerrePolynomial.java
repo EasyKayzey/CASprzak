@@ -42,9 +42,7 @@ public class LaguerrePolynomial {
 	 * @return nth Laguerre polynomial
 	 */
 	public static GeneralFunction laguerrePolynomial(int n) {
-		Map<String, Variable> substitution = new HashMap<>();
-		substitution.put(defaultVariable, new Variable(Settings.singleVariableDefault));
-		return makeLaguerrePolynomial(n).substituteVariables(substitution);
+		return laguerrePolynomial(n, Settings.singleVariableDefault);
 	}
 
 	/**

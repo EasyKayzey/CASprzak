@@ -44,9 +44,7 @@ public class HermitePolynomial {
 	 * @return nth Hermite polynomial
 	 */
 	public static GeneralFunction hermitePolynomial(int n) {
-		Map<String, Variable> substitution = new HashMap<>();
-		substitution.put(defaultVariable, new Variable(Settings.singleVariableDefault));
-		return makeHermitePolynomial(n).substituteVariables(substitution);
+		return hermitePolynomial(n, Settings.singleVariableDefault);
 	}
 
 	/**

@@ -44,9 +44,7 @@ public class LegrendePolynomial {
 	 * @return nth Legrende polynomial
 	 */
 	public static GeneralFunction legrendePolynomial(int n) {
-		Map<String, Variable> substitution = new HashMap<>();
-		substitution.put(defaultVariable, new Variable(Settings.singleVariableDefault));
-		return makeLegrendePolynomial(n).substituteVariables(substitution);
+		return legrendePolynomial(n, Settings.singleVariableDefault);
 	}
 
 	/**

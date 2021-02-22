@@ -25,7 +25,7 @@ public class LaguerrePolynomial {
 		if (cache.containsKey(n))
 			return cache.get(n);
 
-		GeneralFunction[] sum = new GeneralFunction[n+1];
+		GeneralFunction[] sum = new GeneralFunction[n + 1];
 		for (int k = 0; k <= n; k++) {
 			sum[k] = new Product(new Constant(constant(n, k)), new Pow(new Constant(k), new Variable(defaultVariable))).simplify();
 		}

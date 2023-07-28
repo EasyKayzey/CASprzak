@@ -4,7 +4,6 @@ import show.ezkz.casprzak.core.config.Settings;
 import show.ezkz.casprzak.core.functions.GeneralFunction;
 import show.ezkz.casprzak.core.functions.Invertible;
 import show.ezkz.casprzak.core.functions.endpoint.Constant;
-import org.jetbrains.annotations.NotNull;
 import show.ezkz.casprzak.core.output.OutputFunction;
 import show.ezkz.casprzak.core.output.OutputUnitary;
 
@@ -133,7 +132,7 @@ public abstract class UnitaryFunction extends GeneralFunction {
 		return code;
 	}
 
-	public @NotNull Iterator<GeneralFunction> iterator() {
+	public Iterator<GeneralFunction> iterator() {
 		return new UnitaryIterator();
 	}
 

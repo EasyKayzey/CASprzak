@@ -15,7 +15,6 @@ import show.ezkz.casprzak.core.functions.unitary.specialcases.SpecialCaseBinaryF
 import show.ezkz.casprzak.core.functions.unitary.transforms.Transformation;
 import show.ezkz.casprzak.core.functions.unitary.trig.inverse.InverseTrigFunction;
 import show.ezkz.casprzak.core.functions.unitary.trig.normal.TrigFunction;
-import org.jetbrains.annotations.NotNull;
 import show.ezkz.casprzak.core.tools.MiscTools;
 
 import java.util.Collections;
@@ -165,7 +164,7 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 	 * @param that the {@link GeneralFunction} that this is compared against
 	 * @return the comparison
 	 */
-	public int compareTo(@NotNull GeneralFunction that) {
+	public int compareTo(GeneralFunction that) {
 		if (this.equalsFunction(that))
 			return 0;
 		else if (this.getClass().equals(that.getClass()))
@@ -189,5 +188,5 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 	 * Returns an iterator over the operands of this {@link GeneralFunction}
 	 * @return an iterator over the operands of this {@link GeneralFunction}
 	 */
-	public abstract @NotNull Iterator<GeneralFunction> iterator();
+	public abstract Iterator<GeneralFunction> iterator();
 }

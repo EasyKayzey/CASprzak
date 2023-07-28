@@ -4,7 +4,6 @@ import show.ezkz.casprzak.core.config.Settings;
 import show.ezkz.casprzak.core.functions.GeneralFunction;
 import show.ezkz.casprzak.core.functions.Outputable;
 import show.ezkz.casprzak.core.functions.endpoint.Constant;
-import org.jetbrains.annotations.NotNull;
 import show.ezkz.casprzak.core.output.OutputCommutative;
 import show.ezkz.casprzak.core.output.OutputFunction;
 import show.ezkz.casprzak.core.tools.ArrayTools;
@@ -234,7 +233,7 @@ public abstract class CommutativeFunction extends GeneralFunction {
 		return code;
 	}
 
-	public @NotNull Iterator<GeneralFunction> iterator() {
+	public Iterator<GeneralFunction> iterator() {
 		return new CommutativeIterator();
 	}
 

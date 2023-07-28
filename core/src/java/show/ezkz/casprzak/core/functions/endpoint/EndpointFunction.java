@@ -1,7 +1,6 @@
 package show.ezkz.casprzak.core.functions.endpoint;
 
 import show.ezkz.casprzak.core.functions.GeneralFunction;
-import org.jetbrains.annotations.NotNull;
 import show.ezkz.casprzak.core.output.OutputFunction;
 
 import java.util.Collections;
@@ -39,7 +38,7 @@ public abstract class EndpointFunction extends GeneralFunction implements Output
 		return toString();
 	}
 
-	public @NotNull Iterator<GeneralFunction> iterator() {
+	public Iterator<GeneralFunction> iterator() {
 		return new SpecialIterator();
 	}
 

@@ -2,7 +2,6 @@ package show.ezkz.casprzak.core.functions.binary;
 
 import show.ezkz.casprzak.core.functions.GeneralFunction;
 import show.ezkz.casprzak.core.functions.endpoint.Constant;
-import org.jetbrains.annotations.NotNull;
 import show.ezkz.casprzak.core.output.OutputFunction;
 import show.ezkz.casprzak.core.output.OutputBinary;
 import show.ezkz.casprzak.core.functions.endpoint.Variable;
@@ -113,7 +112,7 @@ public abstract class BinaryFunction extends GeneralFunction {
 		return code;
 	}
 
-	public @NotNull Iterator<GeneralFunction> iterator() {
+	public Iterator<GeneralFunction> iterator() {
 		return new BinaryIterator();
 	}
 

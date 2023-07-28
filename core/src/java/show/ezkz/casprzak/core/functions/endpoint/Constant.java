@@ -2,7 +2,6 @@ package show.ezkz.casprzak.core.functions.endpoint;
 
 import show.ezkz.casprzak.core.config.Settings;
 import show.ezkz.casprzak.core.functions.GeneralFunction;
-import org.jetbrains.annotations.Nullable;
 import show.ezkz.casprzak.core.tools.ParsingTools;
 import show.ezkz.casprzak.core.tools.exceptions.IllegalNameException;
 
@@ -38,7 +37,7 @@ public class Constant extends EndpointFunction {
 	/**
 	 * The String relating to this special constant (null if normal constant)
 	 */
-	public final @Nullable String constantKey;
+	public final String constantKey;
 
 	/**
 	 * Constructs a new {@link Constant} from the specified numerical value

@@ -6,6 +6,7 @@ import core.functions.unitary.transforms.Transformation;
 import core.tools.MiscTools;
 import core.tools.ParsingTools;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Map;
@@ -189,10 +190,11 @@ public class Settings {
 	 */
 	public static void parseConfig() throws IOException {
 		Properties properties = new Properties();
+		String sep = File.separator;
 		try {
-			properties.load(new FileReader(".\\src\\core\\config\\cas.properties"));
+			properties.load(new FileReader(String.join(sep, ".", "src", "core", "config", "cas.properties")));
 		} catch (IOException ignored) {
-			properties.load(new FileReader(".\\cas.properties"));
+			properties.load(new FileReader(String.join(sep, ".", "cas.properties")));
 		}
 		for (Map.Entry<Object, Object> entry : properties.entrySet())
 			parseSingleSetting((String) entry.getKey(), (String) entry.getValue());

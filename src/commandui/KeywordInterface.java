@@ -93,7 +93,7 @@ public class KeywordInterface {
 				case "reset" 																		-> reset();
 				case "err", "error" 																-> printError();
 				case "help" 																		-> splitInput.length == 1 ? help() : help(splitInput[1]);
-				case "exit", "!" 																	-> throw new UserExitException();
+				case "exit", "exit()", "!" 															-> throw new UserExitException();
 				default 																			-> null;
 			};
 		} catch(ArrayIndexOutOfBoundsException e) {

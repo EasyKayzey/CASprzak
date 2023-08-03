@@ -201,11 +201,11 @@ public class KeywordInterface {
 	 * @param function the function to be substituted into
 	 * @return {@code input} with all substitutions
 	 */
+	@SuppressWarnings("unchecked")
 	public static GeneralFunction substituteAll(GeneralFunction function) {
 		//noinspection unchecked
 		return function.substituteVariables(
 					Map.ofEntries(
-							// (Map.Entry<String, GeneralFunction>[])
 							storedFunctions.entrySet().stream()
 							.map(e -> Map.entry(LatexReplacer.encodeAll(e.getKey()), e.getValue()))
 							.toArray(Map.Entry[]::new)

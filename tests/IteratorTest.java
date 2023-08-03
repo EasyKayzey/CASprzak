@@ -1,9 +1,9 @@
-import show.ezkz.casprzak.core.functions.GeneralFunction;
-import show.ezkz.casprzak.core.functions.binary.Pow;
-import show.ezkz.casprzak.core.functions.endpoint.Constant;
-import show.ezkz.casprzak.core.functions.endpoint.Variable;
+import core.functions.GeneralFunction;
+import core.functions.binary.Pow;
+import core.functions.endpoint.Constant;
+import core.functions.endpoint.Variable;
 import org.junit.jupiter.api.Test;
-import show.ezkz.casprzak.parsing.FunctionParser;
+import parsing.FunctionParser;
 
 import static org.junit.jupiter.api.Assertions.*;
 

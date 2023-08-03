@@ -1,23 +1,23 @@
-import show.ezkz.casprzak.core.config.Settings;
-import show.ezkz.casprzak.core.functions.GeneralFunction;
+import core.config.Settings;
+import core.functions.GeneralFunction;
 import org.junit.jupiter.api.Test;
-import show.ezkz.casprzak.core.functions.binary.Pow;
-import show.ezkz.casprzak.core.functions.commutative.Product;
-import show.ezkz.casprzak.core.functions.commutative.Sum;
-import show.ezkz.casprzak.core.functions.endpoint.Constant;
-import show.ezkz.casprzak.core.functions.endpoint.Variable;
-import show.ezkz.casprzak.core.functions.unitary.specialcases.Exp;
-import show.ezkz.casprzak.core.tools.defaults.DefaultFunctions;
-import show.ezkz.casprzak.core.tools.functiongenerators.HermitePolynomial;
-import show.ezkz.casprzak.core.tools.functiongenerators.LaguerrePolynomial;
-import show.ezkz.casprzak.core.tools.functiongenerators.LegrendePolynomial;
-import show.ezkz.casprzak.core.tools.functiongenerators.TaylorSeries;
-import show.ezkz.casprzak.parsing.FunctionParser;
-import show.ezkz.casprzak.core.tools.PolynomialTools;
+import core.functions.binary.Pow;
+import core.functions.commutative.Product;
+import core.functions.commutative.Sum;
+import core.functions.endpoint.Constant;
+import core.functions.endpoint.Variable;
+import core.functions.unitary.specialcases.Exp;
+import core.tools.defaults.DefaultFunctions;
+import core.tools.functiongenerators.HermitePolynomial;
+import core.tools.functiongenerators.LaguerrePolynomial;
+import core.tools.functiongenerators.LegrendePolynomial;
+import core.tools.functiongenerators.TaylorSeries;
+import parsing.FunctionParser;
+import core.tools.PolynomialTools;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static show.ezkz.casprzak.core.tools.defaults.DefaultFunctions.*;
+import static core.tools.defaults.DefaultFunctions.*;
 
 public class PolynomialTest {
     @Test

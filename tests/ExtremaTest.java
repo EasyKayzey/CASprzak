@@ -1,8 +1,8 @@
-import show.ezkz.casprzak.core.config.Settings;
-import show.ezkz.casprzak.core.functions.GeneralFunction;
+import core.config.Settings;
+import core.functions.GeneralFunction;
 import org.junit.jupiter.api.Test;
-import show.ezkz.casprzak.parsing.FunctionParser;
-import show.ezkz.casprzak.core.tools.singlevariable.Extrema;
+import parsing.FunctionParser;
+import core.tools.singlevariable.Extrema;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;

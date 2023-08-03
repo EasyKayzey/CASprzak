@@ -1,7 +1,7 @@
-import show.ezkz.casprzak.core.functions.GeneralFunction;
+import core.functions.GeneralFunction;
 import org.junit.jupiter.api.Test;
-import show.ezkz.casprzak.parsing.FunctionParser;
-import show.ezkz.casprzak.commandui.KeywordInterface;
+import parsing.FunctionParser;
+import commandui.KeywordInterface;
 
 import java.util.Map;
 

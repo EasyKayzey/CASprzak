@@ -1,13 +1,13 @@
-import show.ezkz.casprzak.core.functions.GeneralFunction;
-import show.ezkz.casprzak.core.functions.commutative.Product;
-import show.ezkz.casprzak.core.functions.commutative.Sum;
-import show.ezkz.casprzak.core.functions.endpoint.Constant;
+import core.functions.GeneralFunction;
+import core.functions.commutative.Product;
+import core.functions.commutative.Sum;
+import core.functions.endpoint.Constant;
 import org.junit.jupiter.api.Test;
-import show.ezkz.casprzak.parsing.FunctionParser;
-import show.ezkz.casprzak.core.tools.exceptions.IntegrationFailedException;
-import show.ezkz.casprzak.core.tools.helperclasses.Pair;
-import show.ezkz.casprzak.core.functions.unitary.transforms.Integral;
-import show.ezkz.casprzak.core.tools.IntegralTools;
+import parsing.FunctionParser;
+import core.tools.exceptions.IntegrationFailedException;
+import core.tools.helperclasses.Pair;
+import core.functions.unitary.transforms.Integral;
+import core.tools.IntegralTools;
 
 import static org.junit.jupiter.api.Assertions.*;
 

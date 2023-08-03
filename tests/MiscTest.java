@@ -1,13 +1,13 @@
-import show.ezkz.casprzak.core.functions.endpoint.Variable;
+import core.functions.endpoint.Variable;
 import org.junit.jupiter.api.Test;
-import show.ezkz.casprzak.core.tools.exceptions.IllegalNameException;
-import show.ezkz.casprzak.parsing.FunctionParser;
-import show.ezkz.casprzak.core.tools.MiscTools;
-import show.ezkz.casprzak.core.tools.ParsingTools;
-import show.ezkz.casprzak.core.tools.helperclasses.AbstractMutablePair;
-import show.ezkz.casprzak.core.tools.helperclasses.AbstractPair;
-import show.ezkz.casprzak.core.tools.helperclasses.MutablePair;
-import show.ezkz.casprzak.core.tools.helperclasses.Pair;
+import core.tools.exceptions.IllegalNameException;
+import parsing.FunctionParser;
+import core.tools.MiscTools;
+import core.tools.ParsingTools;
+import core.tools.helperclasses.AbstractMutablePair;
+import core.tools.helperclasses.AbstractPair;
+import core.tools.helperclasses.MutablePair;
+import core.tools.helperclasses.Pair;
 
 import java.util.Map;
 

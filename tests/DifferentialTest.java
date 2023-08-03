@@ -1,14 +1,14 @@
-import show.ezkz.casprzak.core.functions.GeneralFunction;
-import show.ezkz.casprzak.core.functions.commutative.Product;
-import show.ezkz.casprzak.core.functions.unitary.transforms.Differential;
-import show.ezkz.casprzak.core.functions.unitary.transforms.Integral;
+import core.functions.GeneralFunction;
+import core.functions.commutative.Product;
+import core.functions.unitary.transforms.Differential;
+import core.functions.unitary.transforms.Integral;
 import org.junit.jupiter.api.Test;
-import show.ezkz.casprzak.core.tools.defaults.DefaultFunctions;
+import core.tools.defaults.DefaultFunctions;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static show.ezkz.casprzak.parsing.FunctionParser.parseInfix;
-import static show.ezkz.casprzak.parsing.FunctionParser.parseSimplified;
+import static parsing.FunctionParser.parseInfix;
+import static parsing.FunctionParser.parseSimplified;
 
 public class DifferentialTest {
 	@Test

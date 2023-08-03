@@ -1,15 +1,15 @@
-import show.ezkz.casprzak.core.functions.GeneralFunction;
-import show.ezkz.casprzak.core.functions.binary.Rand;
-import show.ezkz.casprzak.core.functions.binary.integer.IntegerQuotient;
-import show.ezkz.casprzak.core.functions.binary.integer.Modulo;
-import show.ezkz.casprzak.core.functions.commutative.integer.GCD;
-import show.ezkz.casprzak.core.functions.commutative.integer.LCM;
-import show.ezkz.casprzak.core.functions.endpoint.Constant;
-import show.ezkz.casprzak.core.functions.endpoint.Variable;
-import show.ezkz.casprzak.core.functions.unitary.piecewise.Ceil;
-import show.ezkz.casprzak.core.functions.unitary.piecewise.Floor;
-import show.ezkz.casprzak.core.functions.unitary.piecewise.Round;
-import show.ezkz.casprzak.core.functions.unitary.trig.normal.Sin;
+import core.functions.GeneralFunction;
+import core.functions.binary.Rand;
+import core.functions.binary.integer.IntegerQuotient;
+import core.functions.binary.integer.Modulo;
+import core.functions.commutative.integer.GCD;
+import core.functions.commutative.integer.LCM;
+import core.functions.endpoint.Constant;
+import core.functions.endpoint.Variable;
+import core.functions.unitary.piecewise.Ceil;
+import core.functions.unitary.piecewise.Floor;
+import core.functions.unitary.piecewise.Round;
+import core.functions.unitary.trig.normal.Sin;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;

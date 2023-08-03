@@ -1,7 +1,7 @@
-import show.ezkz.casprzak.core.functions.GeneralFunction;
+import core.functions.GeneralFunction;
 import org.junit.jupiter.api.Test;
-import show.ezkz.casprzak.parsing.FunctionParser;
-import show.ezkz.casprzak.core.tools.singlevariable.NumericalIntegration;
+import parsing.FunctionParser;
+import core.tools.singlevariable.NumericalIntegration;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;

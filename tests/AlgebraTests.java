@@ -1,20 +1,20 @@
 import org.junit.jupiter.api.Test;
-import show.ezkz.casprzak.core.functions.GeneralFunction;
-import show.ezkz.casprzak.core.functions.binary.Logb;
-import show.ezkz.casprzak.core.functions.binary.Pow;
-import show.ezkz.casprzak.core.functions.commutative.Product;
-import show.ezkz.casprzak.core.functions.commutative.Sum;
-import show.ezkz.casprzak.core.functions.endpoint.Constant;
-import show.ezkz.casprzak.core.functions.endpoint.Variable;
-import show.ezkz.casprzak.core.functions.unitary.specialcases.Exp;
-import show.ezkz.casprzak.core.functions.unitary.specialcases.Ln;
-import show.ezkz.casprzak.core.tools.algebra.LogSimplify;
-import show.ezkz.casprzak.core.tools.defaults.DefaultFunctions;
+import core.functions.GeneralFunction;
+import core.functions.binary.Logb;
+import core.functions.binary.Pow;
+import core.functions.commutative.Product;
+import core.functions.commutative.Sum;
+import core.functions.endpoint.Constant;
+import core.functions.endpoint.Variable;
+import core.functions.unitary.specialcases.Exp;
+import core.functions.unitary.specialcases.Ln;
+import core.tools.algebra.LogSimplify;
+import core.tools.defaults.DefaultFunctions;
 
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static show.ezkz.casprzak.core.tools.defaults.DefaultFunctions.*;
+import static core.tools.defaults.DefaultFunctions.*;
 
 public class AlgebraTests {
 

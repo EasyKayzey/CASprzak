@@ -1,0 +1,2 @@
+Main-Class: commandui.CommandUI
+Class-Path core parsing

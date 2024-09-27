@@ -1,5 +1,5 @@
 # CASprzak
-CASprzak is a Computer Algebra System (CAS) written by The EasyKayzey Show (Erez Israeli Miller and Michael Kasprzak)
+CASprzak is a Computer Algebra System (CAS) written by The EasyKayzey Show (Erez Abrams and Michael Kasprzak)
 
 Hello, and welcome to our CAS. This is a joint project by The EasyKayzey Show started at HackBCA V, 2020. CASprzak is a computer algebra and calculus framework mainly for storing, modifying, and applying mathematical functions and functionals, and it is written completely in native Java 14 with no external libraries (except JUnit for testing purposes only).
 

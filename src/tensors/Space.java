@@ -6,6 +6,7 @@ import core.functions.endpoint.Constant;
 import core.functions.unitary.transforms.PartialDerivative;
 import core.tools.defaults.DefaultFunctions;
 import tensors.elementoperations.ElementAccessor;
+import tensors.elementoperations.ElementContractor;
 import tensors.elementoperations.ElementProduct;
 import tensors.elementoperations.ElementSum;
 import tensors.elementoperations.ElementWrapper;
@@ -21,14 +22,28 @@ public class Space {
 	public final int dimension;
 	public final Tensor metric;
 	public final Tensor inverseMetric;
+	public final Tensor delta;
 	public final DirectedNested<?, GeneralFunction> christoffel;
+	public final Tensor riemannTensor;
+	public final Tensor ricciTensor;
+	public final Tensor ricciScalar;
 
 	public Space(String[] variableStrings, Tensor metric, Tensor inverseMetric) {
 		this.variableStrings = variableStrings;
 		this.dimension = variableStrings.length;
 		this.metric = metric;
 		this.inverseMetric = inverseMetric;
+		this.delta = TensorTools.identityTensor(dimension);
 		christoffel = calculateChristoffel();
+		riemannTensor = calculateRiemannTensor();
+		ricciTensor = ArrayTensor
+				.tensor(createFrom(List.of("\\beta", "\\delta"), new boolean[] { false, false }, dimension,
+						new ElementContractor(
+								riemannTensor.index("\\gamma", "\\beta", "\\gamma", "\\delta"), "\\gamma")));
+		ricciScalar = ArrayTensor.tensor(createFrom(List.of(), new boolean[] {}, dimension,
+				new ElementContractor(
+						product(ricciTensor.index("\\alpha", "\\beta"), inverseMetric.index("\\gamma", "\\beta")),
+						"\\alpha", "\\gamma")));
 	}
 
 	public static Space fromDiagonalMetric(String[] variableStrings, GeneralFunction... diagonal) {
@@ -58,6 +73,7 @@ public class Space {
 	}
 
 	private DirectedNested<?, GeneralFunction> calculateChristoffel() {
+		// note we're down up down
 		return createFrom(
 				List.of("\\mu", "\\sigma", "\\nu"),
 				new boolean[] { false, true, false },
@@ -69,6 +85,27 @@ public class Space {
 								partial("\\mu", metric.index("\\nu", "\\rho")),
 								partial("\\nu", metric.index("\\rho", "\\mu")),
 								negative(partial("\\rho", metric.index("\\mu", "\\nu"))))));
+	}
+
+	private Tensor calculateRiemannTensor() {
+		// note the factor of 1/2 in this convention
+		return ArrayTensor.tensor(createFrom(
+				List.of("\\alpha", "\\beta", "\\gamma", "\\delta"),
+				new boolean[] { false, false, true, false },
+				dimension,
+				product(
+						wrap(HALF),
+						sum(
+								partial("\\alpha",
+										TensorTools.indexTensor(christoffel, "\\beta", "\\gamma", "\\delta")),
+								product(
+										TensorTools.indexTensor(christoffel, "\\alpha", "\\gamma", "\\sigma"),
+										TensorTools.indexTensor(christoffel, "\\beta", "\\sigma", "\\delta")),
+								negative(partial("\\beta",
+										TensorTools.indexTensor(christoffel, "\\alpha", "\\gamma", "\\delta"))),
+								negative(product(
+										TensorTools.indexTensor(christoffel, "\\beta", "\\gamma", "\\sigma"),
+										TensorTools.indexTensor(christoffel, "\\alpha", "\\sigma", "\\delta")))))));
 	}
 
 	public Tensor covariantDerivative(String respectTo, Tensor tensor, String... tensorIndices) {

@@ -1,4 +1,4 @@
-package commandui;
+﻿package commandui;
 
 import core.functions.GeneralFunction;
 import core.functions.binary.Pow;
@@ -24,8 +24,12 @@ import static tensors.TensorTools.indexTensor;
 public class curtest {
     public static void main(String[] args) {
         System.out.println("hi");
-        DefaultSpaces.initialize();
-        String[] vars = { "t", "r", "θ", "φ", "ψ" };
+
+        Space.fromDiagonalMetric(new String[] { "x", "y" },
+                ONE,
+                NEGATIVE_TWO);
+
+        String[] vars = { "t", "r", "h", "f", "s" };
         ArrayList<GeneralFunction> diag = new ArrayList<>() {
             {
                 add(NEGATIVE_ONE);
@@ -41,7 +45,9 @@ public class curtest {
 
         Space space = Space.fromDiagonalMetric(vars, diag.stream().toArray(GeneralFunction[]::new));
 
-        System.err.println(space.christoffel.modifyWith(GeneralFunction::simplify));
+        System.out
+                .println(
+                        TensorTools.prettyString(space.christoffel, space, new String[] { "u", "d", "e" }));
 
     }
     /**

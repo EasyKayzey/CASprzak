@@ -3,13 +3,15 @@ package tensors;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class DirectedNestedArray<I extends DirectedNested<I, T>, T> extends NestedArray<I, T> implements DirectedNested<I, T> {
+public class DirectedNestedArray<I extends DirectedNested<I, T>, T> extends NestedArray<I, T>
+		implements DirectedNested<I, T> {
 
 	private final boolean isUpper;
 	private final boolean[] directions;
 
-	@SuppressWarnings({"unchecked"})
-	public static <I extends DirectedNested<I, T>, T> DirectedNested<I, T> direct(Nested<?, T> nestedArray, boolean... directions) {
+	@SuppressWarnings({ "unchecked" })
+	public static <I extends DirectedNested<I, T>, T> DirectedNested<I, T> direct(Nested<?, T> nestedArray,
+			boolean... directions) {
 		if (nestedArray instanceof NestedEndpoint)
 			return new DirectedEndpoint<>(((NestedEndpoint<?, T>) nestedArray).contained);
 		else if (nestedArray.getElements().get(0) instanceof NestedEndpoint)
@@ -18,18 +20,17 @@ public class DirectedNestedArray<I extends DirectedNested<I, T>, T> extends Nest
 					nestedArray.getElements().stream()
 							.map(e -> (NestedEndpoint<I, T>) e)
 							.map(e -> (I) new DirectedEndpoint<I, T>(e.contained))
-							.collect(Collectors.toList())
-			);
+							.collect(Collectors.toList()));
 		else
 			return new DirectedNestedArray<>(
 					directions[directions.length - nestedArray.getRank()],
 					nestedArray.getElements().stream()
 							.map(e -> (I) direct(e, directions))
-							.collect(Collectors.toList())
-			);
+							.collect(Collectors.toList()));
 	}
 
-	public static <I extends DirectedNested<I, T>, T> DirectedNested<I, T> direct(Object[] elements, boolean... directions) {
+	public static <I extends DirectedNested<I, T>, T> DirectedNested<I, T> direct(Object[] elements,
+			boolean... directions) {
 		return direct(nest(elements), directions);
 	}
 
@@ -61,13 +62,13 @@ public class DirectedNestedArray<I extends DirectedNested<I, T>, T> extends Nest
 		return directions;
 	}
 
-
 	@Override
 	public String toString() {
 		return (isUpper ? "v" : "c") + super.toString();
 	}
 
-	public static class DirectedEndpoint<I extends DirectedNested<I, T>, T> extends NestedEndpoint<I, T> implements DirectedNested<I, T> {
+	public static class DirectedEndpoint<I extends DirectedNested<I, T>, T> extends NestedEndpoint<I, T>
+			implements DirectedNested<I, T> {
 
 		public DirectedEndpoint(T contained) {
 			super(contained);

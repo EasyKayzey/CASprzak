@@ -5,6 +5,7 @@ import core.functions.endpoint.Constant;
 import core.tools.defaults.DefaultFunctions;
 import tensors.elementoperations.*;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -87,6 +88,66 @@ public class TensorTools {
 			return dimensions[0];
 		else
 			throw new IllegalArgumentException("Cannot get the dimension of a non-square array.");
+	}
+
+	public static Tensor identityTensor(int dimension) {
+		GeneralFunction[][] delta = new GeneralFunction[dimension][dimension];
+		for (GeneralFunction[] row : delta)
+			Arrays.fill(row, DefaultFunctions.ZERO);
+
+		for (int i = 0; i < dimension; i++) {
+			delta[i][i] = DefaultFunctions.ONE;
+		}
+		return ArrayTensor.tensor(delta, true, false);
+	}
+
+	public static String prettyString(DirectedNested<?, GeneralFunction> tensor, Space space,
+			String[] indexLabels) {
+		String[] coords = space.variableStrings;
+		int dims = coords.length;
+		boolean[] directions = tensor.getDirections();
+		int depth = directions.length;
+		if (indexLabels.length != depth) {
+			throw new IllegalArgumentException("indexLabels length " + indexLabels.length + " and depth " + depth
+					+ " do not match.");
+		}
+		StringBuilder sb = new StringBuilder();
+		sb.append("Directions are ");
+		for (int i = 0; i < depth; i++) {
+			sb.append(directions[i] ? "upper" : "lower");
+			if (i != depth - 1)
+				sb.append(", ");
+		}
+		sb.append("\n");
+		prettyStringHelper(sb, tensor.getDimensions(), depth, new int[depth], 0, coords, directions, indexLabels,
+				tensor);
+		return sb.toString();
+	}
+
+	public static void prettyStringHelper(StringBuilder sb, int[] dimensions, int depth, int[] currentIndex,
+			int currentDepth, String[] coords, boolean[] directions, String[] indexLabels,
+			DirectedNested<?, GeneralFunction> tensor) {
+		if (currentDepth == depth) {
+			GeneralFunction cur = tensor.getAtIndex(currentIndex);
+			if (cur.equals(DefaultFunctions.ZERO))
+				return;
+			for (int i = 0; i < currentIndex.length; i++) {
+				sb.append(indexLabels[i]);
+				sb.append("=");
+				sb.append(coords[currentIndex[i]]);
+				if (i != currentIndex.length - 1)
+					sb.append(", ");
+			}
+			sb.append(": ");
+			sb.append(cur.toString());
+			sb.append("\n");
+			return;
+		}
+		for (int i = 0; i < dimensions[currentDepth]; i++) {
+			currentIndex[currentDepth] = i;
+			prettyStringHelper(sb, dimensions, depth, currentIndex, currentDepth + 1, coords, directions, indexLabels,
+					tensor);
+		}
 	}
 
 }

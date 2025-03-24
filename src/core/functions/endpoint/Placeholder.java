@@ -19,7 +19,7 @@ public class Placeholder extends EndpointFunction {
 		if (label == null || label.isEmpty())
 			throw new IllegalNameException("Placeholder label cannot be null or empty");
 		if (variables == null || variables.length == 0)
-			throw new IllegalNameException("Placeholder variables cannot be null or empty");
+			throw new IllegalArgumentException("Placeholder variables cannot be null or empty");
 		this.label = label;
 		this.variables = variables;
 	}

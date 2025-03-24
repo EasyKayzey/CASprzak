@@ -6,7 +6,6 @@ import core.functions.endpoint.Constant;
 import core.functions.unitary.transforms.PartialDerivative;
 import core.tools.defaults.DefaultFunctions;
 import tensors.elementoperations.ElementAccessor;
-import tensors.elementoperations.ElementContractor;
 import tensors.elementoperations.ElementProduct;
 import tensors.elementoperations.ElementSum;
 import tensors.elementoperations.ElementWrapper;
@@ -14,6 +13,7 @@ import tensors.elementoperations.ElementWrapper;
 import java.util.*;
 
 import static tensors.TensorTools.*;
+import static tensors.TensorTools.negative;
 import static core.tools.defaults.DefaultFunctions.*;
 
 public class Space {
@@ -38,12 +38,9 @@ public class Space {
 		riemannTensor = calculateRiemannTensor();
 		ricciTensor = ArrayTensor
 				.tensor(createFrom(List.of("\\beta", "\\delta"), new boolean[] { false, false }, dimension,
-						new ElementContractor(
-								riemannTensor.index("\\gamma", "\\beta", "\\gamma", "\\delta"), "\\gamma")));
+						riemannTensor.index("\\gamma", "\\beta", "\\gamma", "\\delta")));
 		ricciScalar = ArrayTensor.tensor(createFrom(List.of(), new boolean[] {}, dimension,
-				new ElementContractor(
-						product(ricciTensor.index("\\alpha", "\\beta"), inverseMetric.index("\\gamma", "\\beta")),
-						"\\alpha", "\\gamma")));
+				product(ricciTensor.index("\\alpha", "\\beta"), inverseMetric.index("\\alpha", "\\beta"))));
 	}
 
 	public static Space fromDiagonalMetric(String[] variableStrings, GeneralFunction... diagonal) {
@@ -160,33 +157,22 @@ public class Space {
 		@Override
 		public GeneralFunction getValueAt(Map<String, Integer> indexValues, Map<String, GeneralFunction> toSubstitute,
 				int dimension) {
-			Set<String> entries = indexValues.keySet();
-			Set<String> operandSet = new HashSet<>();
-			operand.getIndices(operandSet);
-
-			if (!entries.contains(index) && operandSet.contains(index)) {
-				Map<String, Integer> newIndices = new HashMap<>(indexValues);
-				Map<String, GeneralFunction> newSubstitutions = new HashMap<>(toSubstitute);
-				GeneralFunction[] toAdd = new PartialDerivative[dimension];
-
-				for (int i = 0; i < dimension; i++) {
-					newIndices.put(index, i);
-					newSubstitutions.put(index, new Constant(i));
-					toAdd[i] = new PartialDerivative(operand.getValueAt(newIndices, newSubstitutions, dimension),
-							variableStrings[i]);
-				}
-
-				return new Sum(toAdd);
-			}
-
 			return new PartialDerivative(operand.getValueAt(indexValues, toSubstitute, dimension),
 					variableStrings[indexValues.get(index)]);
 		}
 
 		@Override
-		public void getIndices(Set<String> set) {
-			set.add(index);
-			operand.getIndices(set);
+		public void getIndices(Map<String, IndexStructure> indexStructure) {
+			if (indexStructure.containsKey(index)) {
+				if (indexStructure.get(index) == IndexStructure.UP)
+					indexStructure.put(index, IndexStructure.CONTRACTED);
+				else if (indexStructure.get(index) == IndexStructure.DOWN
+						|| indexStructure.get(index) == IndexStructure.CONTRACTED)
+					indexStructure.put(index, IndexStructure.TWODOWN);
+			} else {
+				indexStructure.put(index, IndexStructure.DOWN);
+			}
+			operand.getIndices(indexStructure);
 		}
 
 	}

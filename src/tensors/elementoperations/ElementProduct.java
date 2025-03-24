@@ -19,38 +19,14 @@ public class ElementProduct implements ElementAccessor {
 
 	public GeneralFunction getValueAt(Map<String, Integer> indexValues, Map<String, GeneralFunction> toSubstitute,
 			int dimension) {
-		Set<String> entries = indexValues.keySet();
-		Set<String> firstSet = new HashSet<>();
-		first.getIndices(firstSet);
-		Set<String> secondSet = new HashSet<>();
-		second.getIndices(secondSet);
-
-		for (String index : firstSet) {
-			if (!entries.contains(index) && secondSet.contains(index)) {
-				Map<String, Integer> newIndices = new HashMap<>(indexValues);
-				Map<String, GeneralFunction> newSubstitutions = new HashMap<>(toSubstitute);
-				GeneralFunction[] toAdd = new Product[dimension];
-
-				for (int i = 0; i < dimension; i++) {
-					newIndices.put(index, i);
-					newSubstitutions.put(index, new Constant(i));
-					toAdd[i] = new Product(
-							first.getValueAt(newIndices, newSubstitutions, dimension),
-							second.getValueAt(newIndices, newSubstitutions, dimension));
-				}
-
-				return new Sum(toAdd);
-			}
-		}
-
 		return new Product(
 				first.getValueAt(indexValues, toSubstitute, dimension),
 				second.getValueAt(indexValues, toSubstitute, dimension));
 	}
 
-	public void getIndices(Set<String> set) {
-		first.getIndices(set);
-		second.getIndices(set);
+	public void getIndices(Map<String, IndexStructure> indexStructure) {
+		first.getIndices(indexStructure);
+		second.getIndices(indexStructure);
 	}
 
 }

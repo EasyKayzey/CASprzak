@@ -1,14 +1,20 @@
 package tensors;
 
 import core.functions.GeneralFunction;
+import core.functions.commutative.Sum;
 import core.functions.endpoint.Constant;
 import core.tools.defaults.DefaultFunctions;
 import tensors.elementoperations.*;
+import tensors.elementoperations.ElementAccessor.IndexStructure;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class TensorTools {
 
@@ -19,10 +25,46 @@ public class TensorTools {
 	public static DirectedNested<?, GeneralFunction> createFrom(List<String> freeIndices, boolean[] directions,
 			int dimension, ElementAccessor formula) {
 		Nested<?, GeneralFunction> array = NestedArray.createSquare(freeIndices.size(), dimension, null);
-		int[] freeValues = new int[freeIndices.size()];
 		Map<String, Integer> indexValues = new HashMap<>();
 		Map<String, GeneralFunction> toSubstitute = new HashMap<>();
 
+		Map<String, IndexStructure> formulaStructure = new HashMap<>();
+		formula.getIndices(formulaStructure);
+		Set<String> toContract = new HashSet<>();
+		Set<String> uncontracted = new HashSet<>();
+		for (Map.Entry<String, IndexStructure> entry : formulaStructure.entrySet()) {
+			String index = entry.getKey();
+			IndexStructure structure = entry.getValue();
+			if (structure == IndexStructure.CONTRACTED)
+				toContract.add(index);
+			else if (structure == IndexStructure.TWODOWN)
+				throw new IllegalArgumentException("Index " + index + " is repeated down twice.");
+			else if (structure == IndexStructure.TWOUP)
+				throw new IllegalArgumentException("Index " + index + " is repeated up twice.");
+			else
+				uncontracted.add(index);
+
+		}
+		if (!Set.copyOf(freeIndices).equals(uncontracted))
+			throw new IllegalArgumentException("The free indices " + freeIndices + " do not match the uncontracted "
+					+ uncontracted);
+
+		List<Map<String, Integer>> contractedIndexValuesList = new ArrayList<>();
+		contractedIndexValuesList.add(new HashMap<>());
+		for (String index : toContract) {
+			List<Map<String, Integer>> newCIVL = new ArrayList<>();
+			for (Map<String, Integer> contractedIndexValues : contractedIndexValuesList) {
+				for (int i = 0; i < dimension; i++) {
+					Map<String, Integer> newContractedIndexValues = new HashMap<>(contractedIndexValues);
+					newContractedIndexValues.put(index, i);
+					newCIVL.add(newContractedIndexValues);
+				}
+			}
+			contractedIndexValuesList = newCIVL;
+		}
+		assert contractedIndexValuesList.size() == Math.pow(dimension, toContract.size());
+
+		int[] freeValues = new int[freeIndices.size()];
 		do {
 			for (int i = 0; i < freeValues.length; i++) {
 				indexValues.put(freeIndices.get(i), freeValues[i]);
@@ -30,7 +72,17 @@ public class TensorTools {
 																					// replacing the loop with stuff in
 																					// incrementArray
 			}
-			array.setAtIndex(formula.getValueAt(indexValues, toSubstitute, dimension).simplify(), freeValues);
+			GeneralFunction[] toAdd = new GeneralFunction[contractedIndexValuesList.size()];
+			for (int i = 0; i < contractedIndexValuesList.size(); i++) {
+				HashMap<String, Integer> curIndexValues = new HashMap<>(indexValues);
+				HashMap<String, GeneralFunction> curToSubstitute = new HashMap<>(toSubstitute);
+				curIndexValues.putAll(contractedIndexValuesList.get(i));
+				curToSubstitute.putAll(contractedIndexValuesList.get(i).entrySet().stream()
+						.collect(Collectors.toMap(Map.Entry::getKey, e -> new Constant(e.getValue()))));
+
+				toAdd[i] = formula.getValueAt(curIndexValues, curToSubstitute, dimension);
+			}
+			array.setAtIndex(new Sum(toAdd).simplify(), freeValues);
 		} while (directions.length != 0 && incrementArray(freeValues, dimension, 0));
 
 		return DirectedNestedArray.direct(array, directions);

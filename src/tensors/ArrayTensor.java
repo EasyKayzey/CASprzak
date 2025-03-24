@@ -3,7 +3,6 @@ package tensors;
 import core.functions.GeneralFunction;
 
 import java.util.List;
-import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 
 public class ArrayTensor extends DirectedNestedArray<Tensor, GeneralFunction> implements Tensor {

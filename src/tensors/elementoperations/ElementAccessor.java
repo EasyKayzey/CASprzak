@@ -10,6 +10,10 @@ public interface ElementAccessor {
 	GeneralFunction getValueAt(Map<String, Integer> indexValues, Map<String, GeneralFunction> toSubstitute,
 			int dimension);
 
-	void getIndices(Set<String> set);
+	void getIndices(Map<String, IndexStructure> indexStructure);
+
+	public static enum IndexStructure {
+		UP, DOWN, CONTRACTED, TWODOWN, TWOUP
+	}
 
 }

@@ -58,6 +58,9 @@ public class curtest {
                 .println(TensorTools.prettyString(space.ricciTensor.modifyWithTensor(MiscTools::trigForSinners), space,
                         new String[] { "a", "b" }));
 
+        System.out
+                .println((space.ricciScalar.modifyWithTensor(MiscTools::trigForSinners)));
+
         // var curt = DefaultSpaces.s3.ricciTensor;
         // var curtm = curt.modifyWithTensor(MiscTools::trigForSinners);
         // System.out.println(

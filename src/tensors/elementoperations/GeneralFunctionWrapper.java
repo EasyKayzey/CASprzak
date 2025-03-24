@@ -19,7 +19,7 @@ public class GeneralFunctionWrapper implements ElementAccessor {
 		return contained.substituteVariables(toSubstitute);
 	}
 
-	public void getIndices(Set<String> set) {
+	public void getIndices(Map<String, IndexStructure> indexStructure) {
 		// Do nothing
 	}
 

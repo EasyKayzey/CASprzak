@@ -6,7 +6,10 @@ import core.functions.commutative.CommutativeFunction;
 import core.functions.commutative.Product;
 import core.functions.commutative.Sum;
 import core.functions.endpoint.Constant;
+import core.functions.unitary.trig.normal.*;
+import core.functions.binary.Pow;
 import core.tools.helperclasses.Pair;
+import core.tools.defaults.DefaultFunctions;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -17,10 +20,12 @@ import java.util.concurrent.TimeUnit;
  */
 public class MiscTools {
 
-	private MiscTools(){}
+	private MiscTools() {
+	}
 
 	/**
 	 * Returns n factorial (n!)
+	 * 
 	 * @param n the number
 	 * @return n!
 	 */
@@ -34,7 +39,9 @@ public class MiscTools {
 	}
 
 	/**
-	 * Computes the GCD of the inputs. It is preferred to input {@code a > b}, but this is not explicitly necessary.
+	 * Computes the GCD of the inputs. It is preferred to input {@code a > b}, but
+	 * this is not explicitly necessary.
+	 * 
 	 * @param a the first input
 	 * @param b the second input
 	 * @return the GCD of the inputs
@@ -44,7 +51,9 @@ public class MiscTools {
 	}
 
 	/**
-	 * Returns the location of a {@link GeneralFunction} in its class-based sort order (see {@link GeneralFunction#sortOrder})
+	 * Returns the location of a {@link GeneralFunction} in its class-based sort
+	 * order (see {@link GeneralFunction#sortOrder})
+	 * 
 	 * @param function the function whose location in the class order is to be found
 	 * @return location in {@link GeneralFunction#sortOrder}
 	 */
@@ -58,18 +67,22 @@ public class MiscTools {
 	}
 
 	/**
-	 * Returns a list of the elements in this {@link Sum} with the constants stripped as a pair. Ex: {@code x^2+2sin(x)} becomes {@code [<1.0, x^2>, <2.0, sin(x)>]}
+	 * Returns a list of the elements in this {@link Sum} with the constants
+	 * stripped as a pair. Ex: {@code x^2+2sin(x)} becomes
+	 * {@code [<1.0, x^2>, <2.0, sin(x)>]}
+	 * 
 	 * @param sum the sum whose constants should be stripped
 	 * @return the list of pairs as specified above
 	 */
 	public static List<Pair<Double, GeneralFunction>> stripConstantsOfSum(Sum sum) {
 		GeneralFunction[] sumArray = sum.getFunctions();
 		List<Pair<Double, GeneralFunction>> strippedPairsArray = new LinkedList<>();
-		for (GeneralFunction function: sumArray) {
+		for (GeneralFunction function : sumArray) {
 			if (function instanceof Product multiply) {
 				GeneralFunction[] terms = multiply.getFunctions();
 				if (terms[0] instanceof Constant constant)
-					strippedPairsArray.add(new Pair<>(constant.constant, new Product(ArrayTools.removeFunctionAt(terms, 0)).simplifyTrivialElement()));
+					strippedPairsArray.add(new Pair<>(constant.constant,
+							new Product(ArrayTools.removeFunctionAt(terms, 0)).simplifyTrivialElement()));
 				else
 					strippedPairsArray.add(new Pair<>(1.0, multiply));
 			} else {
@@ -80,7 +93,10 @@ public class MiscTools {
 	}
 
 	/**
-	 * Executes {@link CommutativeFunction#simplifyTrivialElement()} until the function is not a {@code CommutativeFunction} or has a argument count greater than one. Ex: {@code (((2*x)))} becomes {@code 2*x}
+	 * Executes {@link CommutativeFunction#simplifyTrivialElement()} until the
+	 * function is not a {@code CommutativeFunction} or has a argument count greater
+	 * than one. Ex: {@code (((2*x)))} becomes {@code 2*x}
+	 * 
 	 * @param function the function to be simplified
 	 * @return the function with all layers removed
 	 */
@@ -91,7 +107,9 @@ public class MiscTools {
 	}
 
 	/**
-	 * Prints a message, sleeping for {@link Settings#defaultSleep} between newlines, but not at the end
+	 * Prints a message, sleeping for {@link Settings#defaultSleep} between
+	 * newlines, but not at the end
+	 * 
 	 * @param message the message to print
 	 */
 	public static void printWithSleep(String message) {
@@ -99,9 +117,11 @@ public class MiscTools {
 	}
 
 	/**
-	 * Prints a message, sleeping for {@code time} seconds between newlines, but not at the end
+	 * Prints a message, sleeping for {@code time} seconds between newlines, but not
+	 * at the end
+	 * 
 	 * @param message the message to print
-	 * @param time amount of seconds to sleep
+	 * @param time    amount of seconds to sleep
 	 */
 	public static void printWithSleep(String message, double time) {
 		String[] lines = ParsingTools.newline.split(message);
@@ -113,9 +133,13 @@ public class MiscTools {
 	}
 
 	/**
-	 * Prints a message, sleeping for {@link Settings#defaultSleep} between newlines, then sleeps that same amount at the end if {@code sleepAtEnd} is true.
-	 * @param message the message to print
-	 * @param sleepAtEnd denotes whether the message should end with a {@code sleep()}
+	 * Prints a message, sleeping for {@link Settings#defaultSleep} between
+	 * newlines, then sleeps that same amount at the end if {@code sleepAtEnd} is
+	 * true.
+	 * 
+	 * @param message    the message to print
+	 * @param sleepAtEnd denotes whether the message should end with a
+	 *                   {@code sleep()}
 	 */
 	public static void printWithSleep(String message, boolean sleepAtEnd) {
 		printWithSleep(message, Settings.defaultSleep);
@@ -128,7 +152,7 @@ public class MiscTools {
 	 */
 	public static void sleep() {
 		try {
-			TimeUnit.MILLISECONDS.sleep((long) (Settings.defaultSleep*1000));
+			TimeUnit.MILLISECONDS.sleep((long) (Settings.defaultSleep * 1000));
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -136,18 +160,21 @@ public class MiscTools {
 
 	/**
 	 * Sleeps for {@code seconds} seconds
+	 * 
 	 * @param seconds the amount of seconds to sleep for
 	 */
 	public static void sleep(double seconds) {
 		try {
-			TimeUnit.MILLISECONDS.sleep((long) (seconds*1000));
+			TimeUnit.MILLISECONDS.sleep((long) (seconds * 1000));
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
 
 	/**
-	 * Simplifies the input without executing any of the optional simplifications steps enabled and disabled in {@link Settings}
+	 * Simplifies the input without executing any of the optional simplifications
+	 * steps enabled and disabled in {@link Settings}
+	 * 
 	 * @param function the function to be minimally simplified
 	 * @return the minimally simplified version of the function
 	 */
@@ -157,5 +184,46 @@ public class MiscTools {
 		GeneralFunction simplified = function.simplify();
 		Settings.distributeFunctions = dF;
 		return simplified;
+	}
+
+	public static GeneralFunction trigForSinners(GeneralFunction function) {
+		return function.substituteAll(f -> f instanceof TrigFunction,
+				f -> {
+					if (f instanceof Cos c)
+						return DefaultFunctions
+								.sqrt(DefaultFunctions.subtract(DefaultFunctions.ONE,
+										DefaultFunctions.square(new Sin(c.operand))));
+					else if (f instanceof Tan t)
+						return DefaultFunctions.frac(new Sin(t.operand), DefaultFunctions
+								.sqrt(DefaultFunctions.subtract(DefaultFunctions.ONE,
+										DefaultFunctions.square(new Sin(t.operand)))));
+					else if (f instanceof Cot c)
+						return DefaultFunctions.frac(DefaultFunctions
+								.sqrt(DefaultFunctions.subtract(DefaultFunctions.ONE,
+										DefaultFunctions.square(new Sin(c.operand)))),
+								new Sin(c.operand));
+					else if (f instanceof Sec s)
+						return DefaultFunctions.reciprocal(DefaultFunctions
+								.sqrt(DefaultFunctions.subtract(DefaultFunctions.ONE,
+										DefaultFunctions.square(new Sin(s.operand)))));
+					else if (f instanceof Cosh c)
+						return DefaultFunctions.sqrt(new Sum(DefaultFunctions.ONE,
+								DefaultFunctions.square(new Sinh(c.operand))));
+					else if (f instanceof Tanh t)
+						return DefaultFunctions.frac(new Sinh(t.operand), DefaultFunctions
+								.sqrt(new Sum(DefaultFunctions.ONE,
+										DefaultFunctions.square(new Sinh(t.operand)))));
+					else if (f instanceof Coth c)
+						return DefaultFunctions.frac(DefaultFunctions
+								.sqrt(new Sum(DefaultFunctions.ONE,
+										DefaultFunctions.square(new Sinh(c.operand)))),
+								new Sinh(c.operand));
+					else if (f instanceof Sech s)
+						return DefaultFunctions.reciprocal(DefaultFunctions
+								.sqrt(new Sum(DefaultFunctions.ONE,
+										DefaultFunctions.square(new Sinh(s.operand)))));
+					else
+						return f;
+				}).simplify();
 	}
 }

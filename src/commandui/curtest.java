@@ -10,6 +10,7 @@ import core.functions.endpoint.Variable;
 import core.functions.unitary.trig.normal.Cos;
 import core.functions.unitary.trig.normal.Sin;
 import core.functions.unitary.trig.normal.Sinh;
+import core.tools.MiscTools;
 import tensors.*;
 import tensors.elementoperations.ElementProduct;
 import tensors.elementoperations.ElementSum;
@@ -48,11 +49,21 @@ public class curtest {
 
         Space space = Space.fromDiagonalMetric(vars, diag.stream().toArray(GeneralFunction[]::new));
 
-        System.out
-                .println(
-                        TensorTools.prettyString(space.christoffel, space, new String[] { "u", "d", "e" }));
+        // System.out
+        // .println(
+        // TensorTools.prettyString(space.christoffel, space, new String[] { "u", "d",
+        // "e" }));
 
-        System.out.println(TensorTools.prettyString(space.ricciTensor, space, new String[] { "a", "b" }));
+        System.out
+                .println(TensorTools.prettyString(space.ricciTensor.modifyWithTensor(MiscTools::trigForSinners), space,
+                        new String[] { "a", "b" }));
+
+        // var curt = DefaultSpaces.s3.ricciTensor;
+        // var curtm = curt.modifyWithTensor(MiscTools::trigForSinners);
+        // System.out.println(
+        // TensorTools.prettyString(curtm,
+        // DefaultSpaces.s3, new String[] { "a", "b" }));
+
     }
     /**
      * @BeforeAll

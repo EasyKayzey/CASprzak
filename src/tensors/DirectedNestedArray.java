@@ -1,6 +1,7 @@
 package tensors;
 
 import java.util.List;
+import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 
 public class DirectedNestedArray<I extends DirectedNested<I, T>, T> extends NestedArray<I, T>

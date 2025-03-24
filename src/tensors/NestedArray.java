@@ -14,21 +14,18 @@ public class NestedArray<I extends Nested<I, T>, T> implements Nested<I, T> {
 	protected final List<I> elements;
 	private final int[] dimensions;
 
-
-	@SuppressWarnings({"unchecked"})
+	@SuppressWarnings({ "unchecked" })
 	public static <I extends Nested<I, T>, T> NestedArray<I, T> nest(Object[] elements) {
 		if (elements[0] instanceof Object[])
 			return new NestedArray<>(
 					Arrays.stream(elements)
 							.map(e -> (I) nest((Object[]) e))
-							.collect(Collectors.toList())
-			);
+							.collect(Collectors.toList()));
 		else
 			return new NestedArray<>(
 					Arrays.stream(elements)
 							.map(e -> (I) new NestedEndpoint<>((T) e))
-							.collect(Collectors.toList())
-			);
+							.collect(Collectors.toList()));
 	}
 
 	@SuppressWarnings("unchecked")
@@ -39,8 +36,7 @@ public class NestedArray<I extends Nested<I, T>, T> implements Nested<I, T> {
 			return new NestedArray<>(
 					IntStream.range(0, dimension)
 							.mapToObj(t -> (I) createSquare(rank - 1, dimension, fill))
-							.collect(Collectors.toList())
-			);
+							.collect(Collectors.toList()));
 	}
 
 	protected NestedArray(List<I> elements) {
@@ -75,18 +71,15 @@ public class NestedArray<I extends Nested<I, T>, T> implements Nested<I, T> {
 		return elements.size();
 	}
 
-
 	@Override
 	public T getAtIndex(int... index) { // maybe there should be a check both here and below for length
 		return elements.get(index[index.length - rank] + indexOffset).getAtIndex(index);
 	}
 
-
 	@Override
 	public void setAtIndex(T toSet, int... index) {
 		elements.get(index[index.length - rank] + indexOffset).setAtIndex(toSet, index);
 	}
-
 
 	private int[] calculateDimensions() {
 		int[] lowerDimensions = elements.get(0).getDimensions();
@@ -101,28 +94,23 @@ public class NestedArray<I extends Nested<I, T>, T> implements Nested<I, T> {
 		return dimensions;
 	}
 
-
 	public boolean matches(Nested<I, T> other) {
 		return elements.size() == other.getElements().size();
 	}
-
 
 	public List<I> getElements() {
 		return elements;
 	}
 
-
 	@SuppressWarnings("unchecked")
 	public Nested<I, T> modifyWith(UnaryOperator<I> elementModifier,
-								   UnaryOperator<T> endpointModifier) {
+			UnaryOperator<T> endpointModifier) {
 		return new NestedArray<>(
 				elements.stream()
 						.map(e -> (I) e.modifyWith(elementModifier, endpointModifier))
 						.map(elementModifier)
-						.collect(Collectors.toList())
-		);
+						.collect(Collectors.toList()));
 	}
-
 
 	public String toString() {
 		return elements.toString();

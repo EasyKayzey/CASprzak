@@ -5,6 +5,7 @@ import core.functions.binary.Pow;
 import core.functions.unitary.specialcases.Exp;
 import core.functions.commutative.Product;
 import core.functions.endpoint.Constant;
+import core.functions.endpoint.Placeholder;
 import core.functions.endpoint.Variable;
 import core.functions.unitary.trig.normal.Cos;
 import core.functions.unitary.trig.normal.Sin;
@@ -29,11 +30,13 @@ public class curtest {
                 ONE,
                 NEGATIVE_TWO);
 
+        DefaultSpaces.initialize();
+
         String[] vars = { "t", "r", "h", "f", "s" };
         ArrayList<GeneralFunction> diag = new ArrayList<>() {
             {
                 add(NEGATIVE_ONE);
-                add(new Exp(new Product(TWO_PI, new Variable(vars[0])))); // using a=exp[pi t] for easy recovery
+                add(new Pow(TWO, new Placeholder("a(t)", "t")));
                 add(new Pow(TWO, new Sinh(new Variable(vars[1]))));
                 add(new Pow(TWO, new Sin(new Variable(vars[2]))));
                 add(new Pow(TWO, new Sin(new Variable(vars[3]))));
@@ -49,6 +52,7 @@ public class curtest {
                 .println(
                         TensorTools.prettyString(space.christoffel, space, new String[] { "u", "d", "e" }));
 
+        System.out.println(TensorTools.prettyString(space.ricciTensor, space, new String[] { "a", "b" }));
     }
     /**
      * @BeforeAll

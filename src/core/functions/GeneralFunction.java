@@ -8,6 +8,7 @@ import core.functions.commutative.Product;
 import core.functions.commutative.Sum;
 import core.functions.commutative.integer.IntegerCommutativeFunction;
 import core.functions.endpoint.Constant;
+import core.functions.endpoint.Placeholder;
 import core.functions.endpoint.Variable;
 import core.functions.unitary.integer.IntegerUnitaryFunction;
 import core.functions.unitary.piecewise.PiecewiseFunction;
@@ -25,18 +26,24 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 /**
- * A {@link GeneralFunction} is the generalized abstract function used throughout the CAS.
- * It is critical to note that ALL FUNCTIONS ARE IMMUTABLE: as a consequence, methods such as {@link #simplify()} return a function that has been simplified rather than simplifying the caller in place.
+ * A {@link GeneralFunction} is the generalized abstract function used
+ * throughout the CAS.
+ * It is critical to note that ALL FUNCTIONS ARE IMMUTABLE: as a consequence,
+ * methods such as {@link #simplify()} return a function that has been
+ * simplified rather than simplifying the caller in place.
  */
-public abstract class GeneralFunction implements Evaluable, Differentiable, Simplifiable, Comparable<GeneralFunction>, Iterable<GeneralFunction>, Outputable {
+public abstract class GeneralFunction implements Evaluable, Differentiable, Simplifiable, Comparable<GeneralFunction>,
+		Iterable<GeneralFunction>, Outputable {
 
 	/**
-	 * Describes the order that a {@link GeneralFunction} should appear in a sorted array (used in {@link #compareTo(GeneralFunction)})
+	 * Describes the order that a {@link GeneralFunction} should appear in a sorted
+	 * array (used in {@link #compareTo(GeneralFunction)})
 	 */
 	@SuppressWarnings("ClassReferencesSubclass")
 	public static final Class<?>[] sortOrder = {
 			Constant.class, // Must always be first
 			Variable.class,
+			Placeholder.class,
 			Product.class,
 			Pow.class,
 			Logb.class,
@@ -52,32 +59,35 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 	};
 
 	/**
-	 * Caches derivatives with the key corresponding to the {@code varID} of the derivative
+	 * Caches derivatives with the key corresponding to the {@code varID} of the
+	 * derivative
 	 */
 	protected final Map<String, GeneralFunction> derivatives = new HashMap<>();
 
 	/**
 	 * Returns a String representation of this {@link GeneralFunction}
+	 * 
 	 * @return String representation of this function
 	 */
 	public abstract String toString();
 
 	/**
 	 * Returns a clone of this {@link GeneralFunction}
+	 * 
 	 * @return a clone of this function
 	 */
 	public abstract GeneralFunction clone();
 
-
 	/**
-	 * Overloads {@link Evaluable#evaluate(Map)} with no arguments, passing a {@code Collections#EMPTY_MAP} by default
+	 * Overloads {@link Evaluable#evaluate(Map)} with no arguments, passing a
+	 * {@code Collections#EMPTY_MAP} by default
+	 * 
 	 * @return the function evaluated with no arguments
 	 */
 	@SuppressWarnings("unchecked")
 	public double evaluate() {
 		return evaluate(Collections.EMPTY_MAP);
 	}
-
 
 	public GeneralFunction getSimplifiedDerivative(String varID) {
 		if (Settings.cacheDerivatives && derivatives.containsKey(varID))
@@ -98,6 +108,7 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 
 	/**
 	 * Returns the value of the derivative at {@code point}
+	 * 
 	 * @param varID the variable being differentiated against
 	 * @param point the point to find the derivative at
 	 * @return the value of the derivative at {@code point}
@@ -108,32 +119,41 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 	}
 
 	/**
-	 * Replaces every {@link GeneralFunction} that satisfies the {@code test} using the action specified by {@code replacer}
-	 * @param test checks if the function should be replaced
+	 * Replaces every {@link GeneralFunction} that satisfies the {@code test} using
+	 * the action specified by {@code replacer}
+	 * 
+	 * @param test     checks if the function should be replaced
 	 * @param replacer replaces the function
 	 * @return a new {@link GeneralFunction} with all replacements made
 	 */
-	public abstract GeneralFunction substituteAll(Predicate<? super GeneralFunction> test, Function<? super GeneralFunction, ? extends GeneralFunction> replacer);
+	public abstract GeneralFunction substituteAll(Predicate<? super GeneralFunction> test,
+			Function<? super GeneralFunction, ? extends GeneralFunction> replacer);
 
 	/**
 	 * Substitutes variables with functions as specified in a map
-	 * @param toSubstitute the map between {@link Variable} strings and {@link GeneralFunction}s
+	 * 
+	 * @param toSubstitute the map between {@link Variable} strings and
+	 *                     {@link GeneralFunction}s
 	 * @return the new {@link GeneralFunction} after all substitutions are preformed
 	 */
 	public GeneralFunction substituteVariables(Map<String, ? extends GeneralFunction> toSubstitute) {
-		return substituteAll(f -> (f instanceof Variable v && toSubstitute.containsKey(v.varID)), f -> toSubstitute.get(((Variable) f).varID));
+		return substituteAll(f -> (f instanceof Variable v && toSubstitute.containsKey(v.varID)),
+				f -> toSubstitute.get(((Variable) f).varID));
 	}
-
 
 	/**
 	 * Returns true when the two fully-simplified functions are equal
-	 * @param that The {@link GeneralFunction} that the current function is being checked against
+	 * 
+	 * @param that The {@link GeneralFunction} that the current function is being
+	 *             checked against
 	 * @return true if the two functions are equal
 	 */
 	public abstract boolean equalsFunction(GeneralFunction that);
 
 	/**
-	 * Simplifies the two functions, then compares them with {@link #equalsFunction(GeneralFunction)}
+	 * Simplifies the two functions, then compares them with
+	 * {@link #equalsFunction(GeneralFunction)}
+	 * 
 	 * @param that the function to be compared against
 	 * @return true if they're equal when simplified
 	 */
@@ -143,6 +163,7 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 
 	/**
 	 * Compares two functions with {@link #equalsFunction(GeneralFunction)}
+	 * 
 	 * @param that the object to be compared against
 	 * @return true if they're equal
 	 */
@@ -154,13 +175,18 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 
 	/**
 	 * Used internally for comparing two functions of <b>the same exact type</b>
+	 * 
 	 * @param that the {@link GeneralFunction} that this is compared against
 	 * @return the comparison
 	 */
 	protected abstract int compareSelf(GeneralFunction that);
 
 	/**
-	 * {@link GeneralFunction}s of different types are sorted according to {@link #sortOrder} and {@link MiscTools#findClassValue(GeneralFunction)}, and functions of the same exact type are sorted using {@link #compareSelf(GeneralFunction)}
+	 * {@link GeneralFunction}s of different types are sorted according to
+	 * {@link #sortOrder} and {@link MiscTools#findClassValue(GeneralFunction)}, and
+	 * functions of the same exact type are sorted using
+	 * {@link #compareSelf(GeneralFunction)}
+	 * 
 	 * @param that the {@link GeneralFunction} that this is compared against
 	 * @return the comparison
 	 */
@@ -180,12 +206,14 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 
 	/**
 	 * Returns a hash code value for this object
+	 * 
 	 * @return a hash code value for this object
 	 */
 	public abstract int hashCode();
 
 	/**
 	 * Returns an iterator over the operands of this {@link GeneralFunction}
+	 * 
 	 * @return an iterator over the operands of this {@link GeneralFunction}
 	 */
 	public abstract Iterator<GeneralFunction> iterator();

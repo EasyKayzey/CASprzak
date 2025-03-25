@@ -202,4 +202,29 @@ public class TensorTools {
 		}
 	}
 
+	public static void addIndexStructure(String index, boolean direction, Map<String, IndexStructure> indexStructure) {
+		// direction=false is down
+		if (direction) {
+			if (indexStructure.containsKey(index)) {
+				if (indexStructure.get(index) == IndexStructure.DOWN)
+					indexStructure.put(index, IndexStructure.CONTRACTED);
+				else if (indexStructure.get(index) == IndexStructure.UP
+						|| indexStructure.get(index) == IndexStructure.CONTRACTED)
+					indexStructure.put(index, IndexStructure.TWOUP);
+			} else {
+				indexStructure.put(index, IndexStructure.UP);
+			}
+		} else {
+			if (indexStructure.containsKey(index)) {
+				if (indexStructure.get(index) == IndexStructure.UP)
+					indexStructure.put(index, IndexStructure.CONTRACTED);
+				else if (indexStructure.get(index) == IndexStructure.DOWN
+						|| indexStructure.get(index) == IndexStructure.CONTRACTED)
+					indexStructure.put(index, IndexStructure.TWODOWN);
+			} else {
+				indexStructure.put(index, IndexStructure.DOWN);
+			}
+		}
+	}
+
 }

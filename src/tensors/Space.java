@@ -163,15 +163,7 @@ public class Space {
 
 		@Override
 		public void getIndices(Map<String, IndexStructure> indexStructure) {
-			if (indexStructure.containsKey(index)) {
-				if (indexStructure.get(index) == IndexStructure.UP)
-					indexStructure.put(index, IndexStructure.CONTRACTED);
-				else if (indexStructure.get(index) == IndexStructure.DOWN
-						|| indexStructure.get(index) == IndexStructure.CONTRACTED)
-					indexStructure.put(index, IndexStructure.TWODOWN);
-			} else {
-				indexStructure.put(index, IndexStructure.DOWN);
-			}
+			TensorTools.addIndexStructure(index, false, indexStructure);
 			operand.getIndices(indexStructure);
 		}
 

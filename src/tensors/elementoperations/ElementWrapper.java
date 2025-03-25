@@ -2,6 +2,7 @@ package tensors.elementoperations;
 
 import core.functions.GeneralFunction;
 import tensors.DirectedNested;
+import tensors.TensorTools;
 
 import java.util.Arrays;
 import java.util.List;
@@ -33,27 +34,7 @@ public class ElementWrapper implements ElementAccessor {
 		var directions = contained.getDirections();
 		assert directions.length == indices.length;
 		for (int i = 0; i < indices.length; i++) {
-			if (directions[i]) {
-				if (indexStructure.containsKey(indices[i])) {
-					if (indexStructure.get(indices[i]) == IndexStructure.DOWN)
-						indexStructure.put(indices[i], IndexStructure.CONTRACTED);
-					else if (indexStructure.get(indices[i]) == IndexStructure.UP
-							|| indexStructure.get(indices[i]) == IndexStructure.CONTRACTED)
-						indexStructure.put(indices[i], IndexStructure.TWOUP);
-				} else {
-					indexStructure.put(indices[i], IndexStructure.UP);
-				}
-			} else {
-				if (indexStructure.containsKey(indices[i])) {
-					if (indexStructure.get(indices[i]) == IndexStructure.UP)
-						indexStructure.put(indices[i], IndexStructure.CONTRACTED);
-					else if (indexStructure.get(indices[i]) == IndexStructure.DOWN
-							|| indexStructure.get(indices[i]) == IndexStructure.CONTRACTED)
-						indexStructure.put(indices[i], IndexStructure.TWODOWN);
-				} else {
-					indexStructure.put(indices[i], IndexStructure.DOWN);
-				}
-			}
+			TensorTools.addIndexStructure(indices[i], directions[i], indexStructure);
 		}
 	}
 

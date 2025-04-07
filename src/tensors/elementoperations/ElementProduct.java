@@ -17,16 +17,26 @@ public class ElementProduct implements ElementAccessor {
 		this.second = second;
 	}
 
-	public GeneralFunction getValueAt(Map<String, Integer> indexValues, Map<String, GeneralFunction> toSubstitute,
-			int dimension) {
+	public GeneralFunction getValueAt(Map<String, Integer> indexValues, Map<String, GeneralFunction> toSubstitute) {
 		return new Product(
-				first.getValueAt(indexValues, toSubstitute, dimension),
-				second.getValueAt(indexValues, toSubstitute, dimension));
+				first.getValueAt(indexValues, toSubstitute),
+				second.getValueAt(indexValues, toSubstitute));
 	}
 
 	public void getIndices(Map<String, IndexStructure> indexStructure) {
 		first.getIndices(indexStructure);
 		second.getIndices(indexStructure);
+	}
+
+	public int getDimension() {
+		int firstDimension = first.getDimension();
+		int secondDimension = second.getDimension();
+		if (firstDimension == -1 || secondDimension == -1) {
+			return Math.max(firstDimension, secondDimension);
+		} else {
+			assert firstDimension == secondDimension;
+			return firstDimension;
+		}
 	}
 
 }

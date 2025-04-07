@@ -27,6 +27,7 @@ public class ArrayTensor extends DirectedNestedArray<Tensor, GeneralFunction> im
 	}
 
 	public static Tensor tensor(Nested<?, GeneralFunction> nestedArray, boolean... directions) {
+		assert directions.length == nestedArray.getRank() + 1;
 		return tensor(direct(nestedArray, directions));
 	}
 

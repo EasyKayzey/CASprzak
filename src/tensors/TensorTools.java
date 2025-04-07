@@ -3,6 +3,7 @@ package tensors;
 import core.functions.GeneralFunction;
 import core.functions.commutative.Sum;
 import core.functions.endpoint.Constant;
+import core.tools.MiscTools;
 import core.tools.defaults.DefaultFunctions;
 import tensors.elementoperations.*;
 import tensors.elementoperations.ElementAccessor.IndexStructure;
@@ -23,7 +24,8 @@ public class TensorTools {
 	public static final GeneralFunctionWrapper WRAPPED_NEGATIVE_ONE = wrap(DefaultFunctions.NEGATIVE_ONE);
 
 	public static DirectedNested<?, GeneralFunction> createFrom(List<String> freeIndices, boolean[] directions,
-			int dimension, ElementAccessor formula) {
+			ElementAccessor formula) {
+		int dimension = formula.getDimension();
 		Nested<?, GeneralFunction> array = NestedArray.createSquare(freeIndices.size(), dimension, null);
 		Map<String, Integer> indexValues = new HashMap<>();
 		Map<String, GeneralFunction> toSubstitute = new HashMap<>();
@@ -80,7 +82,7 @@ public class TensorTools {
 				curToSubstitute.putAll(contractedIndexValuesList.get(i).entrySet().stream()
 						.collect(Collectors.toMap(Map.Entry::getKey, e -> new Constant(e.getValue()))));
 
-				toAdd[i] = formula.getValueAt(curIndexValues, curToSubstitute, dimension);
+				toAdd[i] = formula.getValueAt(curIndexValues, curToSubstitute);
 			}
 			array.setAtIndex(new Sum(toAdd).simplify(), freeValues);
 		} while (directions.length != 0 && incrementArray(freeValues, dimension, 0));
@@ -125,21 +127,6 @@ public class TensorTools {
 
 	public static ElementAccessor negative(ElementAccessor elementAccessor) {
 		return new ElementProduct(WRAPPED_NEGATIVE_ONE, elementAccessor);
-	}
-
-	public static boolean isSquare(int[] dimensions) {
-		int dimension = dimensions[0];
-		for (int i = 1; i < dimensions.length; i++)
-			if (dimension != dimensions[i])
-				return false;
-		return true;
-	}
-
-	public static int getDimension(int[] dimensions) {
-		if (isSquare(dimensions))
-			return dimensions[0];
-		else
-			throw new IllegalArgumentException("Cannot get the dimension of a non-square array.");
 	}
 
 	public static Tensor identityTensor(int dimension) {
@@ -225,6 +212,37 @@ public class TensorTools {
 				indexStructure.put(index, IndexStructure.DOWN);
 			}
 		}
+	}
+
+	public static Tensor magicTensor(ElementAccessor formula) {
+		Map<String, IndexStructure> indexStructure = new HashMap<>();
+		formula.getIndices(indexStructure);
+		List<String> freeIndices = new ArrayList<>();
+		List<Boolean> directionsList = new ArrayList<>();
+		for (var entry : indexStructure.entrySet()) {
+			String index = entry.getKey();
+			IndexStructure structure = entry.getValue();
+			if (structure == IndexStructure.UP) {
+				freeIndices.add(index);
+				directionsList.add(true);
+			} else if (structure == IndexStructure.DOWN) {
+				freeIndices.add(index);
+				directionsList.add(false);
+			}
+		}
+		// convert directions list to array
+		boolean[] directions = new boolean[directionsList.size()];
+		for (int i = 0; i < directionsList.size(); i++) {
+			directions[i] = directionsList.get(i);
+		}
+		DirectedNested<?, GeneralFunction> tensor = createFrom(freeIndices, directions, formula);
+
+		return ArrayTensor.tensor(tensor).modifyWithTensor(MiscTools::trigForSinners);
+	}
+
+	public static GeneralFunction unwrap(DirectedNested<?, GeneralFunction> tensor) {
+		assert tensor.getRank() == 0 : "Tensor is not a scalar: " + tensor.getDimensions();
+		return tensor.getAtIndex();
 	}
 
 }

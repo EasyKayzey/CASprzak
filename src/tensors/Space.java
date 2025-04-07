@@ -26,7 +26,8 @@ public class Space {
 	public final DirectedNested<?, GeneralFunction> christoffel;
 	public final Tensor riemannTensor;
 	public final Tensor ricciTensor;
-	public final Tensor ricciScalar;
+	public final GeneralFunction ricciScalar;
+	public final Tensor einsteinTensor;
 
 	public Space(String[] variableStrings, Tensor metric, Tensor inverseMetric) {
 		this.variableStrings = variableStrings;
@@ -37,10 +38,13 @@ public class Space {
 		christoffel = calculateChristoffel();
 		riemannTensor = calculateRiemannTensor();
 		ricciTensor = ArrayTensor
-				.tensor(createFrom(List.of("\\beta", "\\delta"), new boolean[] { false, false }, dimension,
+				.tensor(createFrom(List.of("\\beta", "\\delta"), new boolean[] { false, false },
 						riemannTensor.index("\\gamma", "\\beta", "\\gamma", "\\delta")));
-		ricciScalar = ArrayTensor.tensor(createFrom(List.of(), new boolean[] {}, dimension,
-				product(ricciTensor.index("\\alpha", "\\beta"), inverseMetric.index("\\alpha", "\\beta"))));
+		ricciScalar = TensorTools.unwrap(ArrayTensor.tensor(createFrom(List.of(), new boolean[] {},
+				product(ricciTensor.index("\\alpha", "\\beta"), inverseMetric.index("\\alpha", "\\beta")))));
+		einsteinTensor = TensorTools.magicTensor(
+				sum(ricciTensor.index("\\alpha", "\\beta"),
+						product(wrap(NEGATIVE_HALF), wrap(ricciScalar), metric.index("\\alpha", "\\beta"))));
 	}
 
 	public static Space fromDiagonalMetric(String[] variableStrings, GeneralFunction... diagonal) {
@@ -74,7 +78,6 @@ public class Space {
 		return createFrom(
 				List.of("\\mu", "\\sigma", "\\nu"),
 				new boolean[] { false, true, false },
-				dimension,
 				product(
 						wrap(HALF),
 						inverseMetric.index("\\sigma", "\\rho"),
@@ -89,7 +92,6 @@ public class Space {
 		return ArrayTensor.tensor(createFrom(
 				List.of("\\alpha", "\\beta", "\\gamma", "\\delta"),
 				new boolean[] { false, false, true, false },
-				dimension,
 				product(
 						wrap(HALF),
 						sum(
@@ -111,7 +113,7 @@ public class Space {
 		int oldRank = tensor.getRank();
 		boolean[] oldDirections = tensor.getDirections();
 		ElementAccessor[] toAdd = new ElementAccessor[oldRank + 1];
-		int dimension = TensorTools.getDimension(tensor.getDimensions());
+		int dimension = new ElementWrapper(tensor, tensorIndices).getDimension();
 
 		String[] currentTensorIndices = tensorIndices.clone();
 		String current;
@@ -140,7 +142,6 @@ public class Space {
 				createFrom(
 						newIndices,
 						newDirections,
-						dimension,
 						new ElementSum(toAdd)));
 	}
 
@@ -155,9 +156,8 @@ public class Space {
 		}
 
 		@Override
-		public GeneralFunction getValueAt(Map<String, Integer> indexValues, Map<String, GeneralFunction> toSubstitute,
-				int dimension) {
-			return new PartialDerivative(operand.getValueAt(indexValues, toSubstitute, dimension),
+		public GeneralFunction getValueAt(Map<String, Integer> indexValues, Map<String, GeneralFunction> toSubstitute) {
+			return new PartialDerivative(operand.getValueAt(indexValues, toSubstitute),
 					variableStrings[indexValues.get(index)]);
 		}
 
@@ -165,6 +165,11 @@ public class Space {
 		public void getIndices(Map<String, IndexStructure> indexStructure) {
 			TensorTools.addIndexStructure(index, false, indexStructure);
 			operand.getIndices(indexStructure);
+		}
+
+		@Override
+		public int getDimension() {
+			return operand.getDimension();
 		}
 
 	}

@@ -22,7 +22,7 @@ public class ElementSum implements ElementAccessor {
 	}
 
 	public GeneralFunction wrapSubContraction(ElementAccessor formula, Map<String, Integer> indexValues,
-			Map<String, GeneralFunction> toSubstitute, int dimension) {
+			Map<String, GeneralFunction> toSubstitute) {
 		// this is basically all a hack to handle different parts of the sum
 		// having different numbers of contracted indices. we just won't report any!
 		Map<String, IndexStructure> formulaStructure = new HashMap<>();
@@ -44,9 +44,10 @@ public class ElementSum implements ElementAccessor {
 		}
 
 		if (toContract.size() == 0) {
-			return formula.getValueAt(indexValues, toSubstitute, dimension);
+			return formula.getValueAt(indexValues, toSubstitute);
 		}
 
+		int dimension = getDimension();
 		List<Map<String, Integer>> contractedIndexValuesList = new ArrayList<>();
 		contractedIndexValuesList.add(new HashMap<>());
 		for (String index : toContract) {
@@ -69,20 +70,19 @@ public class ElementSum implements ElementAccessor {
 			curToSubstitute.putAll(contractedIndexValuesList.get(i).entrySet().stream()
 					.collect(Collectors.toMap(Map.Entry::getKey, e -> new Constant(e.getValue()))));
 
-			toAdd[i] = formula.getValueAt(curIndexValues, curToSubstitute, dimension);
+			toAdd[i] = formula.getValueAt(curIndexValues, curToSubstitute);
 		}
 		return new Sum(toAdd).simplify();
 	}
 
 	@Override
-	public GeneralFunction getValueAt(Map<String, Integer> indexValues, Map<String, GeneralFunction> toSubstitute,
-			int dimension) {
+	public GeneralFunction getValueAt(Map<String, Integer> indexValues, Map<String, GeneralFunction> toSubstitute) {
 		// this is basically all a hack to handle different parts of the sum
 		// having different numbers of contracted indices. we just won't report any!
 
 		return new Sum(
 				Arrays.stream(elements)
-						.map(e -> wrapSubContraction(e, indexValues, toSubstitute, dimension))
+						.map(e -> wrapSubContraction(e, indexValues, toSubstitute))
 						.toArray(GeneralFunction[]::new));
 	}
 
@@ -120,6 +120,18 @@ public class ElementSum implements ElementAccessor {
 		for (String c : newContractions) {
 			indexStructure.remove(c);
 		}
+	}
+
+	public int getDimension() {
+		int dimension = -1;
+		for (int i = 1; i < elements.length; i++) {
+			int cur_dim = elements[i].getDimension();
+			if (dimension == -1)
+				dimension = cur_dim;
+			else if (cur_dim != -1)
+				assert cur_dim == dimension;
+		}
+		return dimension;
 	}
 
 }

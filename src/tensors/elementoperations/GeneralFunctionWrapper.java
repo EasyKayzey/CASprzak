@@ -14,13 +14,16 @@ public class GeneralFunctionWrapper implements ElementAccessor {
 	}
 
 	@Override
-	public GeneralFunction getValueAt(Map<String, Integer> indexValues, Map<String, GeneralFunction> toSubstitute,
-			int dimension) {
+	public GeneralFunction getValueAt(Map<String, Integer> indexValues, Map<String, GeneralFunction> toSubstitute) {
 		return contained.substituteVariables(toSubstitute);
 	}
 
 	public void getIndices(Map<String, IndexStructure> indexStructure) {
 		// Do nothing
+	}
+
+	public int getDimension() {
+		return -1;
 	}
 
 }

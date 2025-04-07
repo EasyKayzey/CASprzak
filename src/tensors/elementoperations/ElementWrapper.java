@@ -19,8 +19,7 @@ public class ElementWrapper implements ElementAccessor {
 		this.indices = indices;
 	}
 
-	public GeneralFunction getValueAt(Map<String, Integer> indexValues, Map<String, GeneralFunction> toSubstitute,
-			int dimension) {
+	public GeneralFunction getValueAt(Map<String, Integer> indexValues, Map<String, GeneralFunction> toSubstitute) {
 		if (!indexValues.keySet().containsAll(List.of(indices)))
 			throw new IllegalStateException("Calling getValueAt with incomplete indexValues and/or toSubstitute, has "
 					+ indexValues + " but expected values for " + Arrays.toString(indices));
@@ -36,6 +35,15 @@ public class ElementWrapper implements ElementAccessor {
 		for (int i = 0; i < indices.length; i++) {
 			TensorTools.addIndexStructure(indices[i], directions[i], indexStructure);
 		}
+	}
+
+	public int getDimension() {
+		int[] dimensions = contained.getDimensions();
+		int dimension = dimensions[0];
+		for (int i = 1; i < dimensions.length; i++) {
+			assert dimensions[i] == dimension : "Tensor is not square: " + Arrays.toString(dimensions);
+		}
+		return dimension;
 	}
 
 }

@@ -40,8 +40,8 @@ public class Space {
 		ricciTensor = ArrayTensor
 				.tensor(createFrom(List.of("\\beta", "\\delta"), new boolean[] { false, false },
 						riemannTensor.index("\\gamma", "\\beta", "\\gamma", "\\delta")));
-		ricciScalar = TensorTools.unwrap(ArrayTensor.tensor(createFrom(List.of(), new boolean[] {},
-				product(ricciTensor.index("\\alpha", "\\beta"), inverseMetric.index("\\alpha", "\\beta")))));
+		ricciScalar = TensorTools.unwrap(TensorTools.magicTensor(
+				product(ricciTensor.index("\\alpha", "\\beta"), inverseMetric.index("\\alpha", "\\beta"))));
 		einsteinTensor = TensorTools.magicTensor(
 				sum(ricciTensor.index("\\alpha", "\\beta"),
 						product(wrap(NEGATIVE_HALF), wrap(ricciScalar), metric.index("\\alpha", "\\beta"))));

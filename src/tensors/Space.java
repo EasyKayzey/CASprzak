@@ -37,9 +37,8 @@ public class Space {
 		this.delta = TensorTools.identityTensor(dimension);
 		christoffel = calculateChristoffel();
 		riemannTensor = calculateRiemannTensor();
-		ricciTensor = ArrayTensor
-				.tensor(createFrom(List.of("\\beta", "\\delta"), new boolean[] { false, false },
-						riemannTensor.index("\\gamma", "\\beta", "\\gamma", "\\delta")));
+		ricciTensor = TensorTools.magicTensor(
+				riemannTensor.index("\\gamma", "\\beta", "\\gamma", "\\delta"));
 		ricciScalar = TensorTools.unwrap(TensorTools.magicTensor(
 				product(ricciTensor.index("\\alpha", "\\beta"), inverseMetric.index("\\alpha", "\\beta"))));
 		einsteinTensor = TensorTools.magicTensor(

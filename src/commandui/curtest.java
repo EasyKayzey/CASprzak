@@ -29,53 +29,39 @@ public class curtest {
     public static void main(String[] args) {
         System.out.println("hi");
 
-        // Space.fromDiagonalMetric(new String[] { "x", "y" },
-        // ONE,
-        // NEGATIVE_TWO);
+        {
+            String[] vars = { "t", "r", "h", "f", "s" };
+            GeneralFunction[] diag = {
+                    NEGATIVE_ONE,
+                    new Pow(TWO, new Placeholder("a", "t")),
+                    new Pow(TWO, new Sinh(new Variable(vars[1]))),
+                    new Pow(TWO, new Sin(new Variable(vars[2]))),
+                    new Pow(TWO, new Sin(new Variable(vars[3]))),
 
-        // DefaultSpaces.initialize();
-
-        // String[] vars = { "t", "r", "h", "f", "s" };
-        // ArrayList<GeneralFunction> diag = new ArrayList<>() {
-        // {
-        // add(NEGATIVE_ONE);
-        // add(new Pow(TWO, new Placeholder("a(t)", "t")));
-        // add(new Pow(TWO, new Sinh(new Variable(vars[1]))));
-        // add(new Pow(TWO, new Sin(new Variable(vars[2]))));
-        // add(new Pow(TWO, new Sin(new Variable(vars[3]))));
-        // }
-        // };
-        // for (int i = 2; i < diag.size(); ++i) {
-        // diag.set(i, new Product(diag.get(i), diag.get(i - 1)).simplifyPull());
-        // }
-
-        String[] vars = { "t", "r", "h", "f" };
-        Variable[] variables = Arrays.stream(vars).map(Variable::new).toArray(Variable[]::new);
-        // var radial = new Placeholder("Y", "t", "r");
-        var radial = new Variable("r");
-        ArrayList<GeneralFunction> diag = new ArrayList<>() {
-            {
-                add(negative(reciprocal(square(new Placeholder("F", "t", "r")))));
-                add(square(new Placeholder("X", "t", "r")));
-                add(square(radial));
-                add(new Product(square(radial), square(new Sin(new Variable(vars[2])))));
+            };
+            for (int i = 2; i < diag.length; ++i) {
+                diag[i] = new Product(diag[i], diag[i]).simplifyPull();
             }
-        };
 
-        Space space = Space.fromDiagonalMetric(vars, diag.stream().toArray(GeneralFunction[]::new));
+            System.out.println(Space.fromDiagonalMetric(vars, diag).ricciScalar);
+        }
 
-        // System.out
-        // .println(
-        // TensorTools.prettyString(space.christoffel, space, new String[] { "u", "d",
-        // "e" }));
+        {
+            String[] vars = { "t", "r", "h", "f" };
+            // Variable[] variables =
+            // Arrays.stream(vars).map(Variable::new).toArray(Variable[]::new);
+            var radial = new Variable("r");
+            GeneralFunction[] diag = {
+                    negative(reciprocal(square(new Placeholder("F", "t", "r")))),
+                    square(new Placeholder("X", "t", "r")),
+                    square(radial),
+                    new Product(square(radial), square(new Sin(new Variable(vars[2]))))
+            };
 
-        // System.out
-        // .println(TensorTools.prettyString(space.ricciTensor.modifyWithTensor(MiscTools::trigForSinners),
-        // space,
-        // new String[] { "a", "b" }));
+            Space space = Space.fromDiagonalMetric(vars, diag);
 
-        System.out.println(prettyString(space.einsteinTensor, space, new String[] { "a", "b" }));
-
+            System.out.println(prettyString(space.einsteinTensor, space, new String[] { "a", "b" }));
+        }
         // var curt = DefaultSpaces.s3.ricciTensor;
         // var curtm = curt.modifyWithTensor(MiscTools::trigForSinners);
         // System.out.println(

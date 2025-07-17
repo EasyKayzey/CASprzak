@@ -40,7 +40,12 @@ public class Placeholder extends EndpointFunction {
 		StringBuilder sb = new StringBuilder();
 		sb.append(label);
 		if (Arrays.stream(derivatives).sum() > 0) {
-			sb.append("_{");
+			if (sb.charAt(sb.length() - 1) == '}') {
+				sb.deleteCharAt(sb.length() - 1);
+				sb.append(",");
+			} else {
+				sb.append("_{");
+			}
 			for (int i = 0; i < variables.length; i++) {
 				for (int j = 0; j < derivatives[i]; j++) {
 					sb.append(variables[i]);

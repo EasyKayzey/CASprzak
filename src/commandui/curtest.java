@@ -1,67 +1,105 @@
-﻿package commandui;
+package commandui;
 
 import core.functions.GeneralFunction;
-import core.functions.binary.Pow;
-import core.functions.unitary.specialcases.Exp;
-import core.functions.commutative.Product;
-import core.functions.endpoint.Constant;
 import core.functions.endpoint.Placeholder;
-import core.functions.endpoint.Variable;
-import core.functions.unitary.trig.normal.Cos;
-import core.functions.unitary.trig.normal.Sin;
-import core.functions.unitary.trig.normal.Sinh;
-import core.tools.MiscTools;
-import tensors.*;
-import tensors.elementoperations.ElementProduct;
-import tensors.elementoperations.ElementSum;
-import tensors.elementoperations.ElementWrapper;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
+import core.functions.unitary.specialcases.Exp;
 import static core.tools.defaults.DefaultFunctions.*;
-import static tensors.TensorTools.createFrom;
-import static tensors.TensorTools.indexTensor;
+import tensors.*;
 import static tensors.TensorTools.prettyString;
+import static tensors.TensorTools.product;
+import static tensors.TensorTools.wrap;
 
 public class curtest {
     public static void main(String[] args) {
         System.out.println("hi");
+        String[] genericVariables = new String[10];
+        for (int i = 0; i < 3; ++i) {
+            genericVariables[i] = ((char) ('x' + i)) + "";
+        }
+        for (int i = 3; i < genericVariables.length; ++i) {
+            genericVariables[i] = ((char) ('z' - i)) + "";
+        }
 
         {
-            String[] vars = { "t", "r", "h", "f", "s" };
-            GeneralFunction[] diag = {
-                    NEGATIVE_ONE,
-                    new Pow(TWO, new Placeholder("a", "t")),
-                    new Pow(TWO, new Sinh(new Variable(vars[1]))),
-                    new Pow(TWO, new Sin(new Variable(vars[2]))),
-                    new Pow(TWO, new Sin(new Variable(vars[3]))),
-
-            };
-            for (int i = 2; i < diag.length; ++i) {
-                diag[i] = new Product(diag[i], diag[i]).simplifyPull();
+            String[] vars = new String[2];
+            for (int i = 0; i < vars.length; ++i) {
+                vars[i] = genericVariables[i];
             }
-
-            System.out.println(Space.fromDiagonalMetric(vars, diag).ricciScalar);
+            // var genericMetrics = TensorTools.placeholderMetrics(vars);
+            var genericMetrics = TensorTools.placeholderDiagonalMetrics(vars);
+            Tensor genericMetric = genericMetrics.getFirst();
+            Tensor genericInverseMetric = genericMetrics.getSecond();
+            // GeneralFunction conformalScale = new Placeholder("M", vars);
+            GeneralFunction conformalScale = new Exp(new Placeholder("w", vars));
+            Tensor conformalMetric = TensorTools
+                    .magicTensor(product(wrap(conformalScale), genericMetric.index("a", "b")));
+            Tensor conformalInverseMetric = TensorTools
+                    .magicTensor(product(wrap(reciprocal(conformalScale)), genericInverseMetric.index("a", "b")));
+            Space conformalSpace = new Space(vars, conformalMetric, conformalInverseMetric);
+            System.out.println("Conformal Space: " + conformalSpace
+                    + "\nConformal Metric: " + prettyString(conformalMetric, conformalSpace, "a", "b")
+                    + "\nConformal Inverse Metric: " + prettyString(conformalInverseMetric, conformalSpace, "a", "b"));
+            System.out.println("Conformal Christoffel: "
+                    + prettyString(conformalSpace.christoffel, conformalSpace, "a", "b", "c"));
+            // System.out.println("Conformal Riemann Tensor: "
+            // + prettyString(conformalSpace.riemannTensor, conformalSpace, vars));
+            System.out.println("Conformal Ricci Tensor: "
+                    + prettyString(conformalSpace.ricciTensor, conformalSpace, "a", "b"));
+            // System.out.println("Conformal Ricci Scalar: "
+            // + prettyString(conformalSpace.ricciScalar, conformalSpace, vars));
         }
+        // {
+        // String[] vars = { "t", "r", "h", "f", "s" };
+        // GeneralFunction[] diag = {
+        // NEGATIVE_ONE,
+        // new Pow(TWO, new Placeholder("a", "t")),
+        // new Pow(TWO, new Sinh(new Variable(vars[1]))),
+        // new Pow(TWO, new Sin(new Variable(vars[2]))),
+        // new Pow(TWO, new Sin(new Variable(vars[3]))),
 
-        {
-            String[] vars = { "t", "r", "h", "f" };
-            // Variable[] variables =
-            // Arrays.stream(vars).map(Variable::new).toArray(Variable[]::new);
-            var radial = new Variable("r");
-            GeneralFunction[] diag = {
-                    negative(reciprocal(square(new Placeholder("F", "t", "r")))),
-                    square(new Placeholder("X", "t", "r")),
-                    square(radial),
-                    new Product(square(radial), square(new Sin(new Variable(vars[2]))))
-            };
+        // };
+        // for (int i = 2; i < diag.length; ++i) {
+        // diag[i] = new Product(diag[i], diag[i]).simplifyPull();
+        // }
 
-            Space space = Space.fromDiagonalMetric(vars, diag);
+        // System.out.println(Space.fromDiagonalMetric(vars, diag).ricciScalar);
+        // }
 
-            System.out.println(prettyString(space.einsteinTensor, space, new String[] { "a", "b" }));
-        }
+        // // {
+        // String[] vars = { "t", "r", "h", "f" };
+        // Variable[] variables =
+        // Arrays.stream(vars).map(Variable::new).toArray(Variable[]::new);
+        // var radial = new Variable("r");
+        // // var integration_constant = new Variable("C");
+        // // var placeholder_f = new Placeholder("f", "r");
+        // var integration_constant = ONE;
+        // var mass = new Variable("M");
+        // var charge = new Variable("q");
+        // var placeholder_f = new Sum(ONE, new Product(NEGATIVE_TWO, mass,
+        // reciprocal(radial)),
+        // square(new Product(charge, reciprocal(radial))));
+        // GeneralFunction[] diag = {
+        // negative(placeholder_f),
+        // new Product(integration_constant, reciprocal(placeholder_f)),
+        // square(radial),
+        // new Product(square(radial), square(new Sin(new Variable(vars[2]))))
+        // };
+
+        // Space space = Space.fromDiagonalMetric(vars, diag);
+        // System.out.println(prettyString(space.christoffel, space, new String[] { "a",
+        // "b", "c" }));
+        // // System.out.println(prettyString(space.riemannTensor, space, new String[] {
+        // // "a", "b", "c", "d" }));
+        // // System.out.println(prettyString(space.einsteinTensor, space, new String[]
+        // {
+        // // "a", "b" }));
+        // Tensor einsteinDownUp = magicTensor(
+        // product(space.einsteinTensor.index("\\alpha", "\\beta"),
+        // space.inverseMetric.index("\\gamma", "\\beta")));
+        // System.out.println(prettyString(einsteinDownUp, space, new String[] {
+        // "a", "b" }));
+        // // }
+
         // var curt = DefaultSpaces.s3.ricciTensor;
         // var curtm = curt.modifyWithTensor(MiscTools::trigForSinners);
         // System.out.println(

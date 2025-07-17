@@ -1,12 +1,8 @@
 package core.functions.endpoint;
 
-import core.config.Settings;
 import core.functions.GeneralFunction;
-import core.tools.ParsingTools;
 import core.tools.exceptions.IllegalNameException;
-
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -16,17 +12,23 @@ public class Placeholder extends EndpointFunction {
 	public final String label;
 	public final String[] variables;
 	public final int[] derivatives;
+	public final boolean printVariables;
 
 	public Placeholder(String label, String... variables) {
-		this(label, variables, new int[variables.length]);
+		this(label, true, variables, new int[variables.length]);
 	}
 
-	public Placeholder(String label, String[] variables, int[] derivatives) {
+	public Placeholder(String label, boolean printVariables, String... variables) {
+		this(label, printVariables, variables, new int[variables.length]);
+	}
+
+	public Placeholder(String label, boolean printVariables, String[] variables, int[] derivatives) {
 		if (label == null || label.isEmpty())
 			throw new IllegalNameException("Placeholder label cannot be null or empty");
 		if (variables == null || variables.length == 0)
 			throw new IllegalArgumentException("Placeholder variables cannot be null or empty");
 		this.label = label;
+		this.printVariables = printVariables;
 		this.variables = variables;
 		this.derivatives = derivatives;
 	}
@@ -53,20 +55,22 @@ public class Placeholder extends EndpointFunction {
 			}
 			sb.append("}");
 		}
-		sb.append("(");
-		for (int i = 0; i < variables.length; i++) {
-			sb.append(variables[i]);
-			if (i != variables.length - 1)
-				sb.append(", ");
+		if (printVariables && variables.length > 0) {
+			sb.append("(");
+			for (int i = 0; i < variables.length; i++) {
+				sb.append(variables[i]);
+				if (i != variables.length - 1)
+					sb.append(", ");
+			}
+			sb.append(")");
 		}
-		sb.append(")");
 		return sb.toString();
 	}
 
 	public Placeholder incrementDerivative(int index) {
 		int[] newDerivatives = Arrays.copyOf(derivatives, derivatives.length);
 		newDerivatives[index]++;
-		return new Placeholder(label, variables, newDerivatives);
+		return new Placeholder(label, printVariables, variables, newDerivatives);
 	}
 
 	public GeneralFunction getDerivative(String varID) {
@@ -79,7 +83,7 @@ public class Placeholder extends EndpointFunction {
 	}
 
 	public GeneralFunction clone() {
-		return new Placeholder(label, variables, derivatives);
+		return new Placeholder(label, printVariables, variables, derivatives);
 	}
 
 	public GeneralFunction simplify() {
@@ -87,15 +91,15 @@ public class Placeholder extends EndpointFunction {
 	}
 
 	public GeneralFunction substituteAll(Predicate<? super GeneralFunction> test,
-			Function<? super GeneralFunction, ? extends GeneralFunction> replacer) {
+	        Function<? super GeneralFunction, ? extends GeneralFunction> replacer) {
 		return this;
 	}
 
 	public boolean equalsFunction(GeneralFunction that) {
 		if (that instanceof Placeholder other) {
 			return this.label.equals(other.label)
-					&& Arrays.equals(this.variables, other.variables)
-					&& Arrays.equals(this.derivatives, other.derivatives);
+			        && Arrays.equals(this.variables, other.variables)
+			        && Arrays.equals(this.derivatives, other.derivatives);
 		}
 		return false;
 	}
@@ -104,7 +108,7 @@ public class Placeholder extends EndpointFunction {
 	public int compareSelf(GeneralFunction that) {
 		if (that instanceof Placeholder other)
 			return (this.label + this.variables.toString() + this.derivatives.toString())
-					.compareTo(other.label + other.variables.toString() + other.derivatives.toString());
+			        .compareTo(other.label + other.variables.toString() + other.derivatives.toString());
 		return -1;
 	}
 

@@ -3,11 +3,11 @@ package tensors;
 import core.functions.GeneralFunction;
 import core.functions.commutative.Sum;
 import core.functions.endpoint.Constant;
+import core.functions.endpoint.Placeholder;
 import core.tools.MiscTools;
 import core.tools.defaults.DefaultFunctions;
-import tensors.elementoperations.*;
-import tensors.elementoperations.ElementAccessor.IndexStructure;
-
+import static core.tools.defaults.DefaultFunctions.reciprocal;
+import core.tools.helperclasses.Pair;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
+import tensors.elementoperations.*;
+import tensors.elementoperations.ElementAccessor.IndexStructure;
 
 public class TensorTools {
 
@@ -24,7 +26,7 @@ public class TensorTools {
 	public static final GeneralFunctionWrapper WRAPPED_NEGATIVE_ONE = wrap(DefaultFunctions.NEGATIVE_ONE);
 
 	public static DirectedNested<?, GeneralFunction> createFrom(List<String> freeIndices, boolean[] directions,
-			ElementAccessor formula) {
+	        ElementAccessor formula) {
 		int dimension = formula.getDimension();
 		Nested<?, GeneralFunction> array = NestedArray.createSquare(freeIndices.size(), dimension, null);
 		Map<String, Integer> indexValues = new HashMap<>();
@@ -49,7 +51,7 @@ public class TensorTools {
 		}
 		if (!Set.copyOf(freeIndices).equals(uncontracted))
 			throw new IllegalArgumentException("The free indices " + freeIndices + " do not match the uncontracted "
-					+ uncontracted);
+			        + uncontracted);
 
 		List<Map<String, Integer>> contractedIndexValuesList = new ArrayList<>();
 		contractedIndexValuesList.add(new HashMap<>());
@@ -71,8 +73,8 @@ public class TensorTools {
 			for (int i = 0; i < freeValues.length; i++) {
 				indexValues.put(freeIndices.get(i), freeValues[i]);
 				toSubstitute.put(freeIndices.get(i), new Constant(freeValues[i])); // TODO make this more efficient by
-																					// replacing the loop with stuff in
-																					// incrementArray
+				                                                                   // replacing the loop with stuff in
+				                                                                   // incrementArray
 			}
 			GeneralFunction[] toAdd = new GeneralFunction[contractedIndexValuesList.size()];
 			for (int i = 0; i < contractedIndexValuesList.size(); i++) {
@@ -80,7 +82,7 @@ public class TensorTools {
 				HashMap<String, GeneralFunction> curToSubstitute = new HashMap<>(toSubstitute);
 				curIndexValues.putAll(contractedIndexValuesList.get(i));
 				curToSubstitute.putAll(contractedIndexValuesList.get(i).entrySet().stream()
-						.collect(Collectors.toMap(Map.Entry::getKey, e -> new Constant(e.getValue()))));
+				        .collect(Collectors.toMap(Map.Entry::getKey, e -> new Constant(e.getValue()))));
 
 				toAdd[i] = formula.getValueAt(curIndexValues, curToSubstitute);
 			}
@@ -140,15 +142,54 @@ public class TensorTools {
 		return ArrayTensor.tensor(delta, true, false);
 	}
 
+	public static Pair<Tensor, Tensor> placeholderMetrics(String... variables) {
+		int dimension = variables.length;
+		GeneralFunction[][] elements = new GeneralFunction[dimension][dimension];
+		GeneralFunction[][] inverseElements = new GeneralFunction[dimension][dimension];
+		for (int i = 0; i < dimension; i++) {
+			for (int j = 0; j < dimension; j++) {
+				int i_ = Math.min(i, j);
+				int j_ = Math.max(i, j);
+				String element_suffix = variables[i_] + variables[j_] + "}";
+				elements[i][j] = new Placeholder("g_{" + element_suffix, false, variables);
+				inverseElements[i][j] = new Placeholder("g^{" + element_suffix, false, variables);
+			}
+		}
+		Tensor metric = ArrayTensor.tensor(elements, false, false);
+		Tensor inverseMetric = ArrayTensor.tensor(inverseElements, true, true);
+		return new Pair<>(metric, inverseMetric);
+	}
+
+	public static Pair<Tensor, Tensor> placeholderDiagonalMetrics(String... variables) {
+		int dimension = variables.length;
+		GeneralFunction[][] elements = new GeneralFunction[dimension][dimension];
+		GeneralFunction[][] inverseElements = new GeneralFunction[dimension][dimension];
+		for (int i = 0; i < dimension; i++) {
+			for (int j = 0; j < dimension; j++) {
+				if (i != j) {
+					elements[i][j] = DefaultFunctions.ZERO;
+					inverseElements[i][j] = DefaultFunctions.ZERO;
+				} else {
+					String element_string = "g_{" + variables[i] + variables[i] + "}";
+					elements[i][i] = new Placeholder(element_string, false, variables);
+					inverseElements[i][i] = reciprocal(elements[i][i]);
+				}
+			}
+		}
+		Tensor metric = ArrayTensor.tensor(elements, false, false);
+		Tensor inverseMetric = ArrayTensor.tensor(inverseElements, true, true);
+		return new Pair<>(metric, inverseMetric);
+	}
+
 	public static String prettyString(DirectedNested<?, GeneralFunction> tensor, Space space,
-			String[] indexLabels) {
+	        String... indexLabels) {
 		String[] coords = space.variableStrings;
 		int dims = coords.length;
 		boolean[] directions = tensor.getDirections();
 		int depth = directions.length;
 		if (indexLabels.length != depth) {
 			throw new IllegalArgumentException("indexLabels length " + indexLabels.length + " and depth " + depth
-					+ " do not match.");
+			        + " do not match.");
 		}
 		StringBuilder sb = new StringBuilder();
 		sb.append("Directions are ");
@@ -159,13 +200,13 @@ public class TensorTools {
 		}
 		sb.append("\n");
 		prettyStringHelper(sb, tensor.getDimensions(), depth, new int[depth], 0, coords, directions, indexLabels,
-				tensor);
+		        tensor);
 		return sb.toString();
 	}
 
 	public static void prettyStringHelper(StringBuilder sb, int[] dimensions, int depth, int[] currentIndex,
-			int currentDepth, String[] coords, boolean[] directions, String[] indexLabels,
-			DirectedNested<?, GeneralFunction> tensor) {
+	        int currentDepth, String[] coords, boolean[] directions, String[] indexLabels,
+	        DirectedNested<?, GeneralFunction> tensor) {
 		if (currentDepth == depth) {
 			GeneralFunction cur = tensor.getAtIndex(currentIndex);
 			if (cur.equals(DefaultFunctions.ZERO))
@@ -185,7 +226,7 @@ public class TensorTools {
 		for (int i = 0; i < dimensions[currentDepth]; i++) {
 			currentIndex[currentDepth] = i;
 			prettyStringHelper(sb, dimensions, depth, currentIndex, currentDepth + 1, coords, directions, indexLabels,
-					tensor);
+			        tensor);
 		}
 	}
 
@@ -196,7 +237,7 @@ public class TensorTools {
 				if (indexStructure.get(index) == IndexStructure.DOWN)
 					indexStructure.put(index, IndexStructure.CONTRACTED);
 				else if (indexStructure.get(index) == IndexStructure.UP
-						|| indexStructure.get(index) == IndexStructure.CONTRACTED)
+				        || indexStructure.get(index) == IndexStructure.CONTRACTED)
 					indexStructure.put(index, IndexStructure.TWOUP);
 			} else {
 				indexStructure.put(index, IndexStructure.UP);
@@ -206,7 +247,7 @@ public class TensorTools {
 				if (indexStructure.get(index) == IndexStructure.UP)
 					indexStructure.put(index, IndexStructure.CONTRACTED);
 				else if (indexStructure.get(index) == IndexStructure.DOWN
-						|| indexStructure.get(index) == IndexStructure.CONTRACTED)
+				        || indexStructure.get(index) == IndexStructure.CONTRACTED)
 					indexStructure.put(index, IndexStructure.TWODOWN);
 			} else {
 				indexStructure.put(index, IndexStructure.DOWN);

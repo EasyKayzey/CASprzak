@@ -86,7 +86,7 @@ public class InfixTokenizer {
 		infix = infix.replace("[", "(").replace("]", ")");
 		// Insert multiplication in expressions like 2x and 7(x*y+1)sin(3y)
 		infix = adjacentMultiplier.matcher(infix).replaceAll(" * ");
-		// Turns expressions like x-y into x+-y, and turns expressions like x*y into x*/y (the '/' operator represents reciprocals)
+		// Turns expressions like x-y into x+-y, and turns expressions like x/y into x*/y (the '/' operator represents reciprocals)
 		infix = subtractionFinder.matcher(division.matcher(infix).replaceAll("*/")).replaceAll("+-");
 		// Turns differentials like `dx` and `d x` into `\d x`
 		infix = differential.matcher(infix).replaceAll("\\\\difn ");

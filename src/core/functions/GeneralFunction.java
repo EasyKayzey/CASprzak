@@ -19,6 +19,7 @@ import core.tools.MiscTools;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.function.Function;
@@ -52,9 +53,13 @@ public abstract class GeneralFunction implements Evaluable, Differentiable, Simp
 	};
 
 	/**
-	 * Caches derivatives with the key corresponding to the {@code varID} of the derivative
+	 * Caches derivatives with the key corresponding to the {@code varID} of the derivative.
+	 * <p><b>Thread-Safety:</b> Using {@link java.util.concurrent.ConcurrentHashMap} to allow
+	 * concurrent get() and put() operations without explicit locking. Required for parallel
+	 * Jacobian construction (e.g. {@code IntStream.parallel()} in CMDSolver).
+	 * A plain {@code HashMap} would cause race conditions under concurrent access.
 	 */
-	protected final Map<String, GeneralFunction> derivatives = new HashMap<>();
+	protected final Map<String, GeneralFunction> derivatives = new ConcurrentHashMap<>();
 
 	/**
 	 * Returns a String representation of this {@link GeneralFunction}

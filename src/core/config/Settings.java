@@ -113,7 +113,10 @@ public class Settings {
 	public static boolean cacheDerivatives = true;
 
 	/**
-	 * Denotes whether or not to cache Legrende polynomials
+	 * Denotes whether or not to cache Legendre polynomials.
+	 * <p><b>Note:</b> The field name "cacheLegrendePolynomials" contains a historical typo
+	 * (correct spelling: "cacheLegendrePolynomials"). The name is kept unchanged for
+	 * API and configuration file compatibility.
 	 */
 	public static boolean cacheLegrendePolynomials = true;
 

@@ -10,16 +10,25 @@ import core.functions.endpoint.Variable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import static java.lang.Math.*;
 import static core.tools.MiscTools.*;
 
 /**
- * The methods in {@link LegrendePolynomial} deal with <a href="https://en.wikipedia.org/wiki/Legendre_polynomials">Legrende Polynomials</a>.
+ * The methods in {@link LegrendePolynomial} deal with
+ * <a href="https://en.wikipedia.org/wiki/Legendre_polynomials">Legendre Polynomials</a>.
+ * <p><b>Note:</b> The class name "LegrendePolynomial" contains a historical typo
+ * (correct spelling: "LegendrePolynomial"). The name is kept unchanged for API compatibility.
 */
 public class LegrendePolynomial {
 
-	private static final Map<Integer, GeneralFunction> cache = new HashMap<>();
+	/**
+	 * Thread-safe cache using ConcurrentHashMap.
+	 * A plain HashMap would cause race conditions under concurrent access
+	 * (multiple threads calling makeLegrendePolynomial() simultaneously).
+	 */
+	private static final Map<Integer, GeneralFunction> cache = new ConcurrentHashMap<>();
 	private static final String defaultVariable = "\\var";
 
 	private static GeneralFunction makeLegrendePolynomial(int n) {

@@ -33,7 +33,7 @@ public class LatexReplacer {
 			put(Pattern.compile("\\\\epsilon"		+ "(?![\\w.'[^\\x00-\\x7F]])"), "ϵ");
 			put(Pattern.compile("\\\\varepsilon"	+ "(?![\\w.'[^\\x00-\\x7F]])"), "ε");
 			put(Pattern.compile("\\\\Zeta"			+ "(?![\\w.'[^\\x00-\\x7F]])"), "Ζ");
-			put(Pattern.compile("\\\\zeto"			+ "(?![\\w.'[^\\x00-\\x7F]])"), "ζ");
+			put(Pattern.compile("\\\\zeta"			+ "(?![\\w.'[^\\x00-\\x7F]])"), "ζ"); // Fix: was "\\zeto" (typo)
 			put(Pattern.compile("\\\\Eta"			+ "(?![\\w.'[^\\x00-\\x7F]])"), "Η");
 			put(Pattern.compile("\\\\eta"			+ "(?![\\w.'[^\\x00-\\x7F]])"), "η");
 			put(Pattern.compile("\\\\Theta"			+ "(?![\\w.'[^\\x00-\\x7F]])"), "Θ");
